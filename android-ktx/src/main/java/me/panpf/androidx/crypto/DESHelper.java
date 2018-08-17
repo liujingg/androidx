@@ -21,9 +21,6 @@ import javax.crypto.spec.IvParameterSpec;
 
 /**
  * DES 对称加密、解密工具
- * <p>
- * <p>
- * DES 不支持 NoPadding、PKCS1Padding
  */
 @SuppressWarnings("unused")
 public class DESHelper {
