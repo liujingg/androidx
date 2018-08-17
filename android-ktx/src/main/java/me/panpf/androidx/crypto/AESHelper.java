@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Base64;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.nio.charset.Charset;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -114,8 +112,8 @@ public class AESHelper {
      *
      * @param key 秘钥
      */
-    @NotNull
-    public static AESHelper.Builder makeBuilder(@NotNull Key key) {
+    @NonNull
+    public static AESHelper.Builder makeBuilder(@NonNull Key key) {
         return new Builder(key);
     }
 
@@ -312,43 +310,43 @@ public class AESHelper {
             return this;
         }
 
-        @NotNull
+        @NonNull
         public Builder noPadding() {
             padding = PADDING_NO;
             return this;
         }
 
-//        @NotNull
+//        @NonNull
 //        public Builder pkcs1Padding() {
 //            padding = PADDING_PKCS1;
 //            return this;
 //        }
 
-        @NotNull
+        @NonNull
         public Builder pkcs5Padding() {
             padding = PADDING_PKCS5;
             return this;
         }
 
-        @NotNull
+        @NonNull
         public Builder pkcs7Padding() {
             padding = PADDING_PKCS7;
             return this;
         }
 
-        @NotNull
+        @NonNull
         public Builder iso10126Padding() {
             padding = PADDING_ISO10126;
             return this;
         }
 
-//        @NotNull
+//        @NonNull
 //        public Builder oaepPadding() {
 //            padding = PADDING_OAEP;
 //            return this;
 //        }
 
-//        @NotNull
+//        @NonNull
 //        public Builder ssl3Padding() {
 //            padding = PADDING_SSL3;
 //            return this;
