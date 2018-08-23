@@ -1,22 +1,14 @@
 @file:Suppress("unused")
 
-package me.panpf.androidx.app
+package me.panpf.androidx.os
 
 import android.app.ActivityManager
 import android.content.Context
-import android.os.Looper
 
 /*
- * Process and thread related extension methods or properties
+ * Process related extension methods or properties
  */
 
-
-/**
- * Is it the main thread?
- */
-fun isMainThread(): Boolean {
-    return Looper.getMainLooper().thread === Thread.currentThread()
-}
 
 /**
  * Is in the main process?
