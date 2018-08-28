@@ -21,7 +21,7 @@ import java.io.File
 import java.util.*
 
 /*
- * APP Package 相关的扩展方法或属性
+ * APP Package related extension methods or properties
  */
 
 @Parcelize
@@ -30,9 +30,9 @@ class AppPackage(val name: String, val packageName: String, val versionCode: Int
                  val systemApp: Boolean, val enabled: Boolean) : Parcelable
 
 /**
- * 是否已安装指定包名的 app
+ * Whether the app with the specified package name is installed
  *
- * @param packageName app 包名
+ * @param packageName App package name
  */
 fun Context.isPackageInstalled(packageName: String): Boolean = try {
     packageManager.getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES)
@@ -42,10 +42,10 @@ fun Context.isPackageInstalled(packageName: String): Boolean = try {
 }
 
 /**
- * 获取已安装版本号
+ * Get the version number of the installed APP
  *
- * @param packageName app 包名
- * @return -1: 未安装
+ * @param packageName App package name
+ * @return -1: Not Installed
  */
 fun Context.getPackageVersionCode(packageName: String): Int {
     val packageManager = packageManager
@@ -60,9 +60,9 @@ fun Context.getPackageVersionCode(packageName: String): Int {
 }
 
 /**
- * 获取已安装版本名称
+ * Get the version name of the installed APP
  *
- * @param packageName app 包名
+ * @param packageName App package name
  */
 fun Context.getPackageVersionName(packageName: String): String? {
     val packageManager = packageManager
@@ -77,10 +77,10 @@ fun Context.getPackageVersionName(packageName: String): String? {
 }
 
 /**
- * 获取已安装的指定包名 app 的信息
+ * Get information of the installed APP
  *
- * @param packageName app 包名
- * @return null：未安装
+ * @param packageName App package name
+ * @return null：Not Installed
  */
 fun Context.getPackage(packageName: String): AppPackage? {
     val packageManager = packageManager
@@ -92,18 +92,6 @@ fun Context.getPackage(packageName: String): AppPackage? {
     }
 
     return assembleAppPackage(packageManager, packageInfo)
-}
-
-/**
- * 获取已安装的指定包名 app 的信息
- *
- * @param excludeSystemApp 是否排除系统应用
- * @param excludeSelf      是否排除自己
- * @return null：未安装
- */
-fun Context.getOnePackage(excludeSystemApp: Boolean, excludeSelf: Boolean): AppPackage? {
-    val appPackageList = getAllApp(excludeSystemApp, excludeSelf, 1)
-    return if (appPackageList != null && appPackageList.size >= 1) appPackageList[0] else null
 }
 
 /**
@@ -126,27 +114,27 @@ fun ApplicationInfo.isSystemApp(): Boolean {
  * 判断指定包名的已安装 app 是否是系统 app
  *
  * @param packageName    app 包名
- * @return false: 未安装或不是系统 app
+ * @return null: 未安装
  */
-fun PackageManager.isSystemApp(packageName: String): Boolean {
+fun PackageManager.isSystemApp(packageName: String): Boolean? {
     val applicationInfo: ApplicationInfo
     try {
         applicationInfo = getApplicationInfo(packageName, PackageManager.GET_META_DATA)
     } catch (e: NameNotFoundException) {
-        e.printStackTrace()
-        return false
+        return null
     }
 
     return applicationInfo.isSystemApp()
 }
 
+
 /**
  * 判断指定包名的已安装 app 是否是系统 app
  *
  * @param packageName app 包名
- * @return false: 未安装或不是系统 app
+ * @return null: 未安装
  */
-fun Context.isSystemApp(packageName: String): Boolean {
+fun Context.isSystemApp(packageName: String): Boolean? {
     return packageManager.isSystemApp(packageName)
 }
 
@@ -260,12 +248,12 @@ fun Context.getAllAppId(excludeSystemApp: Boolean, excludeSelf: Boolean): Set<St
 }
 
 /**
- * 获取所有已安装 app
+ * Get all installed apps
  *
- * @param excludeSystemApp 是否排除系统应用
- * @param excludeSelf      是否排除自己
+ * @param excludeSystemApp Exclude system apps
+ * @param excludeSelf      Exclude yourself
  * @param size             最多取多少个应用
- * @return 所有已安装 app 列表
+ * @return Installed app list
  */
 @WorkerThread
 fun Context.getAllApp(excludeSystemApp: Boolean, excludeSelf: Boolean, size: Int): List<AppPackage>? {
@@ -298,7 +286,7 @@ fun Context.getAllApp(excludeSystemApp: Boolean, excludeSelf: Boolean, size: Int
             packageArrayList.add(appPackage)
             index++
         }
-        if (size > 0 && index >= size) {
+        if (size in 1..index) {
             break
         }
     }
@@ -306,15 +294,27 @@ fun Context.getAllApp(excludeSystemApp: Boolean, excludeSelf: Boolean, size: Int
 }
 
 /**
- * 获取所有已安装 app
+ * Get all installed apps
  *
- * @param excludeSystemApp 是否排除系统应用
- * @param excludeSelf      是否排除自己
- * @return 所有已安装 app 列表
+ * @param excludeSystemApp Exclude system applications
+ * @param excludeSelf      Exclude yourself
+ * @return Installed app list
  */
 @WorkerThread
 fun Context.getAllApp(excludeSystemApp: Boolean, excludeSelf: Boolean): List<AppPackage>? {
     return getAllApp(excludeSystemApp, excludeSelf, -1)
+}
+
+/**
+ * Get information about an APP
+ *
+ * @param excludeSystemApp Exclude system applications
+ * @param excludeSelf      Exclude yourself
+ * @return null：Not Installed
+ */
+fun Context.getOnePackage(excludeSystemApp: Boolean, excludeSelf: Boolean): AppPackage? {
+    val appPackageList = getAllApp(excludeSystemApp, excludeSelf, 1)
+    return if (appPackageList != null && appPackageList.isNotEmpty()) appPackageList[0] else null
 }
 
 /**
@@ -399,7 +399,7 @@ fun Context.getAppPackageFile(packageName: String): File? {
 fun Context.getAppSignatureBytes(packageName: String): ByteArray? {
     return try {
         val packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
-        if (packageInfo.signatures != null && packageInfo.signatures.size > 0) {
+        if (packageInfo.signatures != null && packageInfo.signatures.isNotEmpty()) {
             packageInfo.signatures[0].toByteArray()
         } else {
             null

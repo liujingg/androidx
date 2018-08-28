@@ -23,4 +23,5 @@ android {
 dependencies {
     api "com.android.support:support-fragment:${SUPPORT_VERSION}"
     api "com.android.support:support-compat:${SUPPORT_VERSION}"
+    api "me.panpf:javax-kt:0.3"
 }
