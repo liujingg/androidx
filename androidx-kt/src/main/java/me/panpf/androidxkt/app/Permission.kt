@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.app
 
 import android.content.Context

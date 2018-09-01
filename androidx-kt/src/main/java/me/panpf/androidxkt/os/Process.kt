@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.os
 
 import android.app.ActivityManager
@@ -9,11 +7,6 @@ import android.content.Context
  * Process related extension methods or properties
  */
 
-
-/**
- * Is in the main process?
- */
-fun Context.isMainProcess(): Boolean = packageName == getInProcessName()
 
 /**
  * Get the name of the current process
@@ -32,3 +25,8 @@ fun Context.getInProcessNameSuffix(): String? {
     val lastIndex = processName.lastIndexOf(packageName)
     return if (lastIndex != -1) processName.substring(lastIndex + packageName.length) else null
 }
+
+/**
+ * Is in the main process?
+ */
+fun Context.isMainProcess(): Boolean = packageName == getInProcessName()

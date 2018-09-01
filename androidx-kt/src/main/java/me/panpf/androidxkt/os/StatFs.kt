@@ -4,7 +4,7 @@ import android.os.Build
 import android.os.StatFs
 
 /*
- * StatFs 相关的扩展方法或属性
+ * StatFs related extension methods or properties
  */
 
 val StatFs.compatAvailableBytes: Long

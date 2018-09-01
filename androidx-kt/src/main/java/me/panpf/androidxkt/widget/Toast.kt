@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.widget
 
 import android.content.Context
@@ -10,173 +8,195 @@ import android.app.Fragment as OriginFragment
 import android.support.v4.app.Fragment as SupportFragment
 
 /*
- * Toast 相关的扩展方法或属性
+ * Toast related extension method
  */
 
 /* ************************************* Context ***************************************** */
 
-fun Context?.toastL(message: String) {
-    val context = this ?: return
+fun Context.showLongToast(message: String) {
+    val context = this
     Toast.makeText(context, message, Toast.LENGTH_LONG).show()
 }
 
-fun Context?.toastL(message: String, vararg params: Any) {
-    val context = this ?: return
+fun Context.showLongToast(message: String, vararg params: Any) {
+    val context = this
     Toast.makeText(context, message.format(params), Toast.LENGTH_LONG).show()
 }
 
-fun Context?.toastL(@StringRes messageResId: Int) {
-    val context = this ?: return
+fun Context.showLongToast(@StringRes messageResId: Int) {
+    val context = this
     Toast.makeText(context, messageResId, Toast.LENGTH_LONG).show()
 }
 
-fun Context?.toastL(@StringRes messageResId: Int, vararg params: Any) {
-    val context = this ?: return
+fun Context.showLongToast(@StringRes messageResId: Int, vararg params: Any) {
+    val context = this
     Toast.makeText(context, context.getString(messageResId, params), Toast.LENGTH_LONG).show()
 }
 
-fun Context?.toastS(message: String) {
-    val context = this ?: return
+fun Context.showShortToast(message: String) {
+    val context = this
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 
-fun Context?.toastS(message: String, vararg params: Any) {
-    val context = this ?: return
+fun Context.showShortToast(message: String, vararg params: Any) {
+    val context = this
     Toast.makeText(context, message.format(params), Toast.LENGTH_SHORT).show()
 }
 
-fun Context?.toastS(@StringRes messageResId: Int) {
-    val context = this ?: return
+fun Context.showShortToast(@StringRes messageResId: Int) {
+    val context = this
     Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show()
 }
 
-fun Context?.toastS(@StringRes messageResId: Int, vararg params: Any) {
-    val context = this ?: return
+fun Context.showShortToast(@StringRes messageResId: Int, vararg params: Any) {
+    val context = this
     Toast.makeText(context, context.getString(messageResId, params), Toast.LENGTH_SHORT).show()
 }
 
 /* ************************************* SupportFragment ***************************************** */
 
-fun SupportFragment?.toastL(message: String) {
-    val context = this?.context ?: return
+fun SupportFragment.showLongToast(message: String) {
+    val context = this.context ?: return
     Toast.makeText(context, message, Toast.LENGTH_LONG).show()
 }
 
-fun SupportFragment?.toastL(message: String, vararg params: Any) {
-    val context = this?.context ?: return
+fun SupportFragment.showLongToast(message: String, vararg params: Any) {
+    val context = this.context ?: return
     Toast.makeText(context, message.format(params), Toast.LENGTH_LONG).show()
 }
 
-fun SupportFragment?.toastL(@StringRes messageResId: Int) {
-    val context = this?.context ?: return
+fun SupportFragment.showLongToast(@StringRes messageResId: Int) {
+    val context = this.context ?: return
     Toast.makeText(context, messageResId, Toast.LENGTH_LONG).show()
 }
 
-fun SupportFragment?.toastL(@StringRes messageResId: Int, vararg params: Any) {
-    val context = this?.context ?: return
+fun SupportFragment.showLongToast(@StringRes messageResId: Int, vararg params: Any) {
+    val context = this.context ?: return
     Toast.makeText(context, context.getString(messageResId, params), Toast.LENGTH_LONG).show()
 }
 
-fun SupportFragment?.toastS(message: String) {
-    val context = this?.context ?: return
+fun SupportFragment.showShortToast(message: String) {
+    val context = this.context ?: return
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 
-fun SupportFragment?.toastS(message: String, vararg params: Any) {
-    val context = this?.context ?: return
+fun SupportFragment.showShortToast(message: String, vararg params: Any) {
+    val context = this.context ?: return
     Toast.makeText(context, message.format(params), Toast.LENGTH_SHORT).show()
 }
 
-fun SupportFragment?.toastS(@StringRes messageResId: Int) {
-    val context = this?.context ?: return
+fun SupportFragment.showShortToast(@StringRes messageResId: Int) {
+    val context = this.context ?: return
     Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show()
 }
 
-fun SupportFragment?.toastS(@StringRes messageResId: Int, vararg params: Any) {
-    val context = this?.context ?: return
+fun SupportFragment.showShortToast(@StringRes messageResId: Int, vararg params: Any) {
+    val context = this.context ?: return
     Toast.makeText(context, context.getString(messageResId, params), Toast.LENGTH_SHORT).show()
 }
 
 /* ************************************* OriginFragment ***************************************** */
 
-fun OriginFragment?.toastL(message: String) {
-    val context = this?.activity ?: return
+fun OriginFragment.showLongToast(message: String) {
+    val context = this.activity ?: return
     Toast.makeText(context, message, Toast.LENGTH_LONG).show()
 }
 
-fun OriginFragment?.toastL(message: String, vararg params: Any) {
-    val context = this?.activity ?: return
+fun OriginFragment.showLongToast(message: String, vararg params: Any) {
+    val context = this.activity ?: return
     Toast.makeText(context, message.format(params), Toast.LENGTH_LONG).show()
 }
 
-fun OriginFragment?.toastL(@StringRes messageResId: Int) {
-    val context = this?.activity ?: return
+fun OriginFragment.showLongToast(@StringRes messageResId: Int) {
+    val context = this.activity ?: return
     Toast.makeText(context, messageResId, Toast.LENGTH_LONG).show()
 }
 
-fun OriginFragment?.toastL(@StringRes messageResId: Int, vararg params: Any) {
-    val context = this?.activity ?: return
+fun OriginFragment.showLongToast(@StringRes messageResId: Int, vararg params: Any) {
+    val context = this.activity ?: return
     Toast.makeText(context, context.getString(messageResId, params), Toast.LENGTH_LONG).show()
 }
 
-fun OriginFragment?.toastS(message: String) {
-    val context = this?.activity ?: return
+fun OriginFragment.showShortToast(message: String) {
+    val context = this.activity ?: return
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 
-fun OriginFragment?.toastS(message: String, vararg params: Any) {
-    val context = this?.activity ?: return
+fun OriginFragment.showShortToast(message: String, vararg params: Any) {
+    val context = this.activity ?: return
     Toast.makeText(context, message.format(params), Toast.LENGTH_SHORT).show()
 }
 
-fun OriginFragment?.toastS(@StringRes messageResId: Int) {
-    val context = this?.activity ?: return
+fun OriginFragment.showShortToast(@StringRes messageResId: Int) {
+    val context = this.activity ?: return
     Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show()
 }
 
-fun OriginFragment?.toastS(@StringRes messageResId: Int, vararg params: Any) {
-    val context = this?.activity ?: return
+fun OriginFragment.showShortToast(@StringRes messageResId: Int, vararg params: Any) {
+    val context = this.activity ?: return
     Toast.makeText(context, context.getString(messageResId, params), Toast.LENGTH_SHORT).show()
 }
 
 /* ************************************* View ***************************************** */
 
-fun View?.toastL(message: String) {
-    val context = this?.context ?: return
+fun View.showLongToast(message: String) {
+    val context = this.context ?: return
     Toast.makeText(context, message, Toast.LENGTH_LONG).show()
 }
 
-fun View?.toastL(message: String, vararg params: Any) {
-    val context = this?.context ?: return
+fun View.showLongToast(message: String, vararg params: Any) {
+    val context = this.context ?: return
     Toast.makeText(context, message.format(params), Toast.LENGTH_LONG).show()
 }
 
-fun View?.toastL(@StringRes messageResId: Int) {
-    val context = this?.context ?: return
+fun View.showLongToast(@StringRes messageResId: Int) {
+    val context = this.context ?: return
     Toast.makeText(context, messageResId, Toast.LENGTH_LONG).show()
 }
 
-fun View?.toastL(@StringRes messageResId: Int, vararg params: Any) {
-    val context = this?.context ?: return
+fun View.showLongToast(@StringRes messageResId: Int, vararg params: Any) {
+    val context = this.context ?: return
     Toast.makeText(context, context.getString(messageResId, params), Toast.LENGTH_LONG).show()
 }
 
-fun View?.toastS(message: String) {
-    val context = this?.context ?: return
+fun View.showShortToast(message: String) {
+    val context = this.context ?: return
     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
 }
 
-fun View?.toastS(message: String, vararg params: Any) {
-    val context = this?.context ?: return
+fun View.showShortToast(message: String, vararg params: Any) {
+    val context = this.context ?: return
     Toast.makeText(context, message.format(params), Toast.LENGTH_SHORT).show()
 }
 
-fun View?.toastS(@StringRes messageResId: Int) {
-    val context = this?.context ?: return
+fun View.showShortToast(@StringRes messageResId: Int) {
+    val context = this.context ?: return
     Toast.makeText(context, messageResId, Toast.LENGTH_SHORT).show()
 }
 
-fun View?.toastS(@StringRes messageResId: Int, vararg params: Any) {
-    val context = this?.context ?: return
+fun View.showShortToast(@StringRes messageResId: Int, vararg params: Any) {
+    val context = this.context ?: return
     Toast.makeText(context, context.getString(messageResId, params), Toast.LENGTH_SHORT).show()
+}
+
+/* ************************************* Show View ***************************************** */
+
+fun View.showLongToast() {
+    val context = this.context
+    if (context != null) {
+        val toast = Toast(context)
+        toast.view = this
+        toast.duration = Toast.LENGTH_LONG
+        toast.show()
+    }
+}
+
+fun View.showShortToast() {
+    val context = this.context
+    if (context != null) {
+        val toast = Toast(context)
+        toast.view = this
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
+    }
 }

@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.util
 
 import org.json.JSONArray
@@ -8,57 +6,118 @@ import org.json.JSONObject
 import java.util.*
 
 /*
- * JSON 相关的扩展方法或属性
+ * JSON related extension methods
  */
 
 
-fun String.isEmptyJson(): Boolean = this.trim().let { "" == it || "null".equals(it, ignoreCase = true) || "{}".equals(it, ignoreCase = true) || "[]" == it }
+fun String?.isEmptyJson(): Boolean = this == null || this.trim().let { "" == it || "null".equals(it, ignoreCase = true) || "{}".equals(it, ignoreCase = true) || "[]" == it }
 
-fun String.isNotEmptyJson(): Boolean = !isEmptyJson()
+fun String?.isNotEmptyJson(): Boolean = !isEmptyJson()
 
 
 fun List<String>.toJsonArray(): JSONArray = JSONArray().apply { for (item in this@toJsonArray) put(item) }
 
 fun List<String>.toJson(): String = this.toJsonArray().toString()
 
-
 fun IntArray.toJsonArray(): JSONArray = JSONArray().apply { for (item in this@toJsonArray) put(item) }
 
 fun IntArray.toJson(): String = this.toJsonArray().toString()
 
 
-fun JSONArray.parseToStringList(): List<String> = (0 until this.length()).map { this.getString(it) }
+fun JSONArray.toStringList(): List<String> = (0 until this.length()).map { this.getString(it) }
 
-fun JSONArray.parseToStringArray(): Array<String> = Array(this.length()) { "" }.apply {
-    (0 until this@parseToStringArray.length()).forEach { index -> this[index] = this@parseToStringArray.getString(index) }
-}
+@Throws(JSONException::class)
+fun String.jsonToStringList(): List<String>? = if (this.isNotEmptyJson()) JSONArray(this).toStringList() else null
 
-fun JSONArray.parseToIntArray(): IntArray = IntArray(this.length()).apply {
-    (0 until this@parseToIntArray.length()).forEach { index -> this[index] = this@parseToIntArray.getInt(index) }
+fun JSONArray.toStringArray(): Array<String> = Array(this.length()) { "" }.apply {
+    (0 until this@toStringArray.length()).forEach { index -> this[index] = this@toStringArray.getString(index) }
 }
 
 @Throws(JSONException::class)
-fun <Bean> JSONArray.parseToBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bean> = ArrayList<Bean>(this.length()).apply {
-    (0 until this@parseToBeanList.length()).forEach { index ->
-        beanParser(this@parseToBeanList.getJSONObject(index))?.let { this += it }
+fun String.jsonToStringArray(): Array<String>? = if (this.isNotEmptyJson()) JSONArray(this).toStringArray() else null
+
+fun JSONArray.toIntArray(): IntArray = IntArray(this.length()).apply {
+    (0 until this@toIntArray.length()).forEach { index -> this[index] = this@toIntArray.getInt(index) }
+}
+
+@Throws(JSONException::class)
+fun String.jsonToIntArray(): IntArray? = if (this.isNotEmptyJson()) JSONArray(this).toIntArray() else null
+
+@Throws(JSONException::class)
+fun <Bean> JSONArray.toBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bean> = ArrayList<Bean>(this.length()).apply {
+    (0 until this@toBeanList.length()).forEach { index ->
+        beanParser(this@toBeanList.getJSONObject(index))?.let { this += it }
     }
 }
 
 @Throws(JSONException::class)
-fun <Bean> JSONObject.parseToBean(beanParser: (JSONObject) -> Bean): Bean = beanParser(this)
-
-
-@Throws(JSONException::class)
-fun String.parseJsonToStringList(): List<String>? = if (this.isNotEmptyJson()) JSONArray(this).parseToStringList() else null
+fun <Bean> String.jsonToBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bean>? = if (this.isNotEmptyJson()) JSONArray(this).toBeanList(beanParser) else null
 
 @Throws(JSONException::class)
-fun String.parseJsonToStringArray(): Array<String>? = if (this.isNotEmptyJson()) JSONArray(this).parseToStringArray() else null
+fun <Bean> JSONObject.toBean(beanParser: (JSONObject) -> Bean): Bean = beanParser(this)
 
 @Throws(JSONException::class)
-fun String.parseJsonToIntArray(): IntArray? = if (this.isNotEmptyJson()) JSONArray(this).parseToIntArray() else null
+fun <Bean> String.jsonToBean(beanParser: (JSONObject) -> Bean): Bean? = if (this.isNotEmptyJson()) JSONObject(this).toBean(beanParser) else null
 
-@Throws(JSONException::class)
-fun <Bean> String.parseToBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bean>? = if (this.isNotEmptyJson()) JSONArray(this).parseToBeanList(beanParser) else null
 
-@Throws(JSONException::class)
-fun <Bean> String.parseToBean(beanParser: (JSONObject) -> Bean): Bean? = if (this.isNotEmptyJson()) JSONObject(this).parseToBean(beanParser) else null
+private fun Any?.toInteger(): Int? {
+    when (this) {
+        is Int -> return this
+        is Number -> return this.toInt()
+        is String -> try {
+            return java.lang.Double.parseDouble((this as String?)!!).toInt()
+        } catch (ignored: NumberFormatException) {
+        }
+    }
+    return null
+}
+
+private fun Any?.toLong(): Long? {
+    when (this) {
+        is Long -> return this
+        is Number -> return this.toLong()
+        is String -> try {
+            return java.lang.Double.parseDouble((this as String?)!!).toLong()
+        } catch (ignored: NumberFormatException) {
+        }
+    }
+    return null
+}
+
+fun JSONObject.optString(keys: Array<String>, defaultValue: String = ""): String? {
+    var value: Any?
+    for (key in keys) {
+        value = this.opt(key)
+        if (value !== null && value !== JSONObject.NULL) {
+            return value.toString()
+        }
+    }
+
+    return defaultValue
+}
+
+fun JSONObject.optInt(keys: Array<String>, defaultValue: Int = 0): Int {
+    var value: Any?
+    for (key in keys) {
+        value = this.opt(key)
+        if (value !== null && value !== JSONObject.NULL) {
+
+            return value.toInteger()!!
+        }
+    }
+
+    return defaultValue
+}
+
+fun JSONObject.optLong(keys: Array<String>, defaultValue: Long = 0L): Long {
+    var value: Any?
+    for (key in keys) {
+        value = this.opt(key)
+        if (value !== null && value !== JSONObject.NULL) {
+
+            return value.toLong()!!
+        }
+    }
+
+    return defaultValue
+}

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.panpf.androidxkt.widget;
+package me.panpf.androidx.widget;
 
 import android.annotation.TargetApi;
 import android.os.Build;

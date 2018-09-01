@@ -1,4 +1,4 @@
-@file:Suppress("RedundantVisibilityModifier", "unused")
+@file:Suppress("RedundantVisibilityModifier")
 
 package me.panpf.androidxkt.arch
 

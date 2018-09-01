@@ -1,8 +1,8 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.graphics
 
+import android.content.res.Resources
 import android.graphics.*
+import android.util.TypedValue
 import java.io.*
 
 /*
@@ -45,6 +45,13 @@ fun Bitmap.tint(color: Int): Bitmap {
     return newBitmap
 }
 
+fun makeBitmapByColor(color: Int, width: Int, height: Int): Bitmap {
+    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    canvas.drawColor(color)
+    return bitmap
+}
+
 fun Bitmap.toByteArray(format: Bitmap.CompressFormat, quality: Int): ByteArray {
     val outputStream = ByteArrayOutputStream()
     this.compress(format, quality, outputStream)
@@ -61,3 +68,43 @@ fun Bitmap.writeToFile(file: File, format: Bitmap.CompressFormat, quality: Int) 
 }
 
 fun File.readBitmap(options: BitmapFactory.Options? = null): Bitmap = BitmapFactory.decodeFile(this.path, options)
+
+fun readBitmap(file: File): Bitmap? {
+    return BitmapFactory.decodeFile(file.path)
+}
+
+fun InputStream.readBitmap(outPadding: Rect?, options: BitmapFactory.Options?): Bitmap? {
+    return BitmapFactory.decodeStream(this, outPadding, options)
+}
+
+fun InputStream.readBitmap(): Bitmap? {
+    return BitmapFactory.decodeStream(this)
+}
+
+fun ByteArray.readBitmap(offset: Int, length: Int, options: BitmapFactory.Options?): Bitmap? {
+    return BitmapFactory.decodeByteArray(this, offset, length, options)
+}
+
+fun ByteArray.readBitmap(offset: Int, length: Int): Bitmap? {
+    return BitmapFactory.decodeByteArray(this, offset, length)
+}
+
+fun FileDescriptor.readBitmap(outPadding: Rect?, options: BitmapFactory.Options?): Bitmap? {
+    return BitmapFactory.decodeFileDescriptor(this, outPadding, options)
+}
+
+fun FileDescriptor.readBitmap(): Bitmap? {
+    return BitmapFactory.decodeFileDescriptor(this)
+}
+
+fun Resources.readBitmap(resId: Int, options: BitmapFactory.Options?): Bitmap? {
+    return BitmapFactory.decodeResource(this, resId, options)
+}
+
+fun Resources.readBitmap(resId: Int): Bitmap? {
+    return BitmapFactory.decodeResource(this, resId)
+}
+
+fun Resources.readBitmap(value: TypedValue?, `is`: InputStream?, pad: Rect?, options: BitmapFactory.Options?): Bitmap? {
+    return BitmapFactory.decodeResourceStream(this, value, `is`, pad, options)
+}

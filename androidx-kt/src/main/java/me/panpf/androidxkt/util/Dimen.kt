@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.util
 
 import android.content.Context
@@ -15,135 +13,136 @@ import android.support.v4.app.Fragment as SupportFragment
 
 /* ************************************* Context ***************************************** */
 
-fun Context?.dp2px(dpValue: Float): Int =
-        if (this != null) (dpValue * this.resources.displayMetrics.density + 0.5).toInt() else 0
+fun Context.dp2px(dpValue: Float): Int =
+        (dpValue * this.resources.displayMetrics.density + 0.5).toInt()
 
-fun Context?.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
-
-
-fun Context?.px2dp(px: Float): Float =
-        if (this != null) px / this.resources.displayMetrics.density + 0.5f else 0f
-
-fun Context?.px2dp(px: Int): Float = px2dp(px.toFloat())
+fun Context.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
 
 
-fun Context?.sp2px(dpValue: Float): Int =
-        if (this != null) (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt() else 0
+fun Context.px2dp(px: Float): Float =
+        px / this.resources.displayMetrics.density + 0.5f
 
-fun Context?.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
-
-
-fun Context?.px2sp(px: Float): Float =
-        if (this != null) px / this.resources.displayMetrics.scaledDensity + 0.5f else 0f
-
-fun Context?.px2sp(px: Int): Float = px2sp(px.toFloat())
+fun Context.px2dp(px: Int): Float = px2dp(px.toFloat())
 
 
-fun Context?.unit2px(@Unit unit: Int, value: Float): Float =
-        if (this != null) TypedValue.applyDimension(unit, value, this.resources.displayMetrics) else 0f
+fun Context.sp2px(dpValue: Float): Int =
+        (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt()
 
-fun Context?.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+fun Context.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
+
+
+fun Context.px2sp(px: Float): Float =
+        px / this.resources.displayMetrics.scaledDensity + 0.5f
+
+fun Context.px2sp(px: Int): Float = px2sp(px.toFloat())
+
+
+fun Context.unit2px(@Unit unit: Int, value: Float): Float =
+        TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
+
+fun Context.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
 
 
 /* ************************************* OriginFragment ***************************************** */
 
 
-fun OriginFragment?.dp2px(dpValue: Float): Int =
-        if (this != null) (dpValue * this.resources.displayMetrics.density + 0.5).toInt() else 0
+fun OriginFragment.dp2px(dpValue: Float): Int =
+        (dpValue * this.resources.displayMetrics.density + 0.5).toInt()
 
-fun OriginFragment?.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
-
-
-fun OriginFragment?.px2dp(px: Float): Float =
-        if (this != null) px / this.resources.displayMetrics.density + 0.5f else 0f
-
-fun OriginFragment?.px2dp(px: Int): Float = px2dp(px.toFloat())
+fun OriginFragment.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
 
 
-fun OriginFragment?.sp2px(dpValue: Float): Int =
-        if (this != null) (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt() else 0
+fun OriginFragment.px2dp(px: Float): Float =
+        px / this.resources.displayMetrics.density + 0.5f
 
-fun OriginFragment?.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
-
-
-fun OriginFragment?.px2sp(px: Float): Float =
-        if (this != null) px / this.resources.displayMetrics.scaledDensity + 0.5f else 0f
-
-fun OriginFragment?.px2sp(px: Int): Float = px2sp(px.toFloat())
+fun OriginFragment.px2dp(px: Int): Float = px2dp(px.toFloat())
 
 
-fun OriginFragment?.unit2px(@Unit unit: Int, value: Float): Float =
-        if (this != null) TypedValue.applyDimension(unit, value, this.resources.displayMetrics) else 0f
+fun OriginFragment.sp2px(dpValue: Float): Int =
+        (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt()
 
-fun OriginFragment?.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+fun OriginFragment.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
+
+
+fun OriginFragment.px2sp(px: Float): Float =
+        px / this.resources.displayMetrics.scaledDensity + 0.5f
+
+fun OriginFragment.px2sp(px: Int): Float = px2sp(px.toFloat())
+
+
+fun OriginFragment.unit2px(@Unit unit: Int, value: Float): Float =
+        TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
+
+fun OriginFragment.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
 
 
 /* ************************************* SupportFragment ***************************************** */
 
 
-fun SupportFragment?.dp2px(dpValue: Float): Int =
-        if (this != null) (dpValue * this.resources.displayMetrics.density + 0.5).toInt() else 0
+fun SupportFragment.dp2px(dpValue: Float): Int =
+        (dpValue * this.resources.displayMetrics.density + 0.5).toInt()
 
-fun SupportFragment?.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
-
-
-fun SupportFragment?.px2dp(px: Float): Float =
-        if (this != null) px / this.resources.displayMetrics.density + 0.5f else 0f
-
-fun SupportFragment?.px2dp(px: Int): Float = px2dp(px.toFloat())
+fun SupportFragment.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
 
 
-fun SupportFragment?.sp2px(dpValue: Float): Int =
-        if (this != null) (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt() else 0
+fun SupportFragment.px2dp(px: Float): Float =
+        px / this.resources.displayMetrics.density + 0.5f
 
-fun SupportFragment?.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
-
-
-fun SupportFragment?.px2sp(px: Float): Float =
-        if (this != null) px / this.resources.displayMetrics.scaledDensity + 0.5f else 0f
-
-fun SupportFragment?.px2sp(px: Int): Float = px2sp(px.toFloat())
+fun SupportFragment.px2dp(px: Int): Float = px2dp(px.toFloat())
 
 
-fun SupportFragment?.unit2px(@Unit unit: Int, value: Float): Float =
-        if (this != null) TypedValue.applyDimension(unit, value, this.resources.displayMetrics) else 0f
+fun SupportFragment.sp2px(dpValue: Float): Int =
+        (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt()
 
-fun SupportFragment?.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+fun SupportFragment.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
+
+
+fun SupportFragment.px2sp(px: Float): Float =
+        px / this.resources.displayMetrics.scaledDensity + 0.5f
+
+fun SupportFragment.px2sp(px: Int): Float = px2sp(px.toFloat())
+
+
+fun SupportFragment.unit2px(@Unit unit: Int, value: Float): Float =
+        TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
+
+fun SupportFragment.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
 
 
 /* ************************************* View ***************************************** */
 
 
-fun View?.dp2px(dpValue: Float): Int =
-        if (this != null) (dpValue * this.resources.displayMetrics.density + 0.5).toInt() else 0
+fun View.dp2px(dpValue: Float): Int =
+        (dpValue * this.resources.displayMetrics.density + 0.5).toInt()
 
-fun View?.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
-
-
-fun View?.px2dp(px: Float): Float =
-        if (this != null) px / this.resources.displayMetrics.density + 0.5f else 0f
-
-fun View?.px2dp(px: Int): Float = px2dp(px.toFloat())
+fun View.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
 
 
-fun View?.sp2px(dpValue: Float): Int =
-        if (this != null) (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt() else 0
+fun View.px2dp(px: Float): Float =
+        px / this.resources.displayMetrics.density + 0.5f
 
-fun View?.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
-
-
-fun View?.px2sp(px: Float): Float =
-        if (this != null) px / this.resources.displayMetrics.scaledDensity + 0.5f else 0f
-
-fun View?.px2sp(px: Int): Float = px2sp(px.toFloat())
+fun View.px2dp(px: Int): Float = px2dp(px.toFloat())
 
 
-fun View?.unit2px(@Unit unit: Int, value: Float): Float =
-        if (this != null) TypedValue.applyDimension(unit, value, this.resources.displayMetrics) else 0f
+fun View.sp2px(dpValue: Float): Int =
+        (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt()
 
-fun View?.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+fun View.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
+
+
+fun View.px2sp(px: Float): Float =
+        px / this.resources.displayMetrics.scaledDensity + 0.5f
+
+fun View.px2sp(px: Int): Float = px2sp(px.toFloat())
+
+
+fun View.unit2px(@Unit unit: Int, value: Float): Float =
+        TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
+
+fun View.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
 
 @IntDef(TypedValue.COMPLEX_UNIT_SP, TypedValue.COMPLEX_UNIT_DIP, TypedValue.COMPLEX_UNIT_PX,
         TypedValue.COMPLEX_UNIT_PT, TypedValue.COMPLEX_UNIT_IN, TypedValue.COMPLEX_UNIT_MM)
 @Target(AnnotationTarget.PROPERTY, AnnotationTarget.FIELD, AnnotationTarget.VALUE_PARAMETER)
+@Retention(AnnotationRetention.RUNTIME)
 annotation class Unit

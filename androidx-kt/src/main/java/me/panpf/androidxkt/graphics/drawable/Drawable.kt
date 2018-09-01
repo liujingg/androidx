@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.graphics.drawable
 
 import android.graphics.Bitmap

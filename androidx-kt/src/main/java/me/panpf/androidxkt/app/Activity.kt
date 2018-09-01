@@ -1,10 +1,9 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.app
 
 import android.app.Activity
 import android.app.ActivityOptions
 import android.os.Build
+import me.panpf.javaxkt.lang.callMethod
 
 /**
  * Convert a translucent themed Activity
@@ -19,13 +18,7 @@ import android.os.Build
  * with the [android.R.attr.windowIsFloating] attribute.
  */
 fun Activity.convertActivityFromTranslucent() {
-    try {
-        val method = Activity::class.java.getDeclaredMethod("convertFromTranslucent")
-        method.isAccessible = true
-        method.invoke(this)
-    } catch (t: Throwable) {
-        t.printStackTrace()
-    }
+    this.callMethod("convertFromTranslucent")
 }
 
 /**
@@ -45,9 +38,7 @@ fun Activity.convertActivityFromTranslucent() {
 fun Activity.convertActivityToTranslucent() {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
         try {
-            val getActivityOptions = Activity::class.java.getDeclaredMethod("getActivityOptions")
-            getActivityOptions.isAccessible = true
-            val options = getActivityOptions.invoke(this)
+            val options = this.callMethod("getActivityOptions")
 
             val classes = Activity::class.java.declaredClasses
             var translucentConversionListenerClazz: Class<*>? = null
@@ -56,10 +47,9 @@ fun Activity.convertActivityToTranslucent() {
                     translucentConversionListenerClazz = clazz
                 }
             }
-            val convertToTranslucent = Activity::class.java.getDeclaredMethod("convertToTranslucent",
+            val method = Activity::class.java.getDeclaredMethod("convertToTranslucent",
                     translucentConversionListenerClazz, ActivityOptions::class.java)
-            convertToTranslucent.isAccessible = true
-            convertToTranslucent.invoke(this, null, options)
+            this.callMethod(method, arrayOf(null, options))
         } catch (t: Throwable) {
             t.printStackTrace()
         }
@@ -72,12 +62,26 @@ fun Activity.convertActivityToTranslucent() {
                     translucentConversionListenerClazz = clazz
                 }
             }
-            val method = Activity::class.java.getDeclaredMethod("convertToTranslucent",
-                    translucentConversionListenerClazz)
-            method.isAccessible = true
-            method.invoke(this, arrayOf<Any?>(null))
+            val method = Activity::class.java.getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz)
+            this.callMethod(method, arrayOf<Any?>(null))
         } catch (t: Throwable) {
             t.printStackTrace()
         }
     }
+}
+
+/**
+ * If the own or parent activity implements the specified [clazz], it returns its implementation.
+ */
+fun <T> Activity.getImplWithParent(clazz: Class<T>): T? {
+    var parent: Activity? = this
+    while (parent != null) {
+        if (clazz.isAssignableFrom(parent.javaClass)) {
+            @Suppress("UNCHECKED_CAST")
+            return clazz as T
+        } else {
+            parent = parent.parent
+        }
+    }
+    return null
 }

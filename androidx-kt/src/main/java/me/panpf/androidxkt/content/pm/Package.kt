@@ -1,9 +1,8 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.content.pm
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
@@ -12,8 +11,11 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.net.Uri
+import android.os.Build
 import android.os.Parcelable
 import android.support.annotation.WorkerThread
+import android.support.v4.content.FileProvider
 import android.support.v4.util.ArrayMap
 import android.support.v4.util.ArraySet
 import kotlinx.android.parcel.Parcelize

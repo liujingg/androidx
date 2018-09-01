@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.view.inputmethod
 
 import android.app.Activity
@@ -17,17 +15,17 @@ import android.support.v4.app.Fragment as SupportFragment
 fun EditText.showSoftInput(moveCursorToEnd: Boolean = false) {
     this.requestFocus()
 
-    val inputMethodManager = this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val inputMethodManager = (this.context.getSystemService(Context.INPUT_METHOD_SERVICE)
+            ?: throw IllegalStateException("InputMethodManager not found")) as InputMethodManager
     inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
 
-    if (moveCursorToEnd) {
-        this.moveCursorToEnd()
-    }
+    if (moveCursorToEnd) this.moveCursorToEnd()
 }
 
 fun Activity.hideSoftInput() {
     val currentFocusView = this.currentFocus ?: return
-    val inputMethodManager = this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    val inputMethodManager = (this.getSystemService(Context.INPUT_METHOD_SERVICE)
+            ?: throw IllegalStateException("InputMethodManager not found")) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, 0)
 }
 
@@ -41,8 +39,9 @@ fun SupportFragment.hideSoftInput() {
 
 fun EditText.hideSoftInput() {
     this.windowToken ?: return
-    val imm = this.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    imm.hideSoftInputFromWindow(this.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    val inputMethodManager = (this.context.getSystemService(Context.INPUT_METHOD_SERVICE)
+            ?: throw IllegalStateException("InputMethodManager not found")) as InputMethodManager
+    inputMethodManager.hideSoftInputFromWindow(this.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
 }
 
 fun EditText.moveCursorToEnd() {

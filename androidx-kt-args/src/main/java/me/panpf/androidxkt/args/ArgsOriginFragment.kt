@@ -1,10 +1,8 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.args
 
-import android.app.Fragment as OriginFragment
 import android.os.Bundle
 import android.os.Parcelable
+import android.app.Fragment as OriginFragment
 
 abstract class ArgsOriginFragment<Args : Parcelable> : OriginFragment() {
     val args: Args by bindParcelableArg("args")

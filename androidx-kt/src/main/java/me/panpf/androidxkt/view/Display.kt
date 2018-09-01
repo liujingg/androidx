@@ -1,5 +1,3 @@
-@file:Suppress("unused")
-
 package me.panpf.androidxkt.view
 
 import android.app.Activity
@@ -12,7 +10,7 @@ import android.app.Fragment as OriginFragment
 import android.support.v4.app.Fragment as SupportFragment
 
 /*
- * 和屏幕显示相关的扩展方法或属性
+ * Extension method related to screen display
  */
 
 val Context.screenSize: Point get() = Point().apply { (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getSize(this) }
@@ -29,6 +27,8 @@ val Context.screenDensityDpi: Int get() = this.resources.displayMetrics.densityD
 
 
 fun Context.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+
+fun android.app.Fragment.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
 fun android.support.v4.app.Fragment.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
