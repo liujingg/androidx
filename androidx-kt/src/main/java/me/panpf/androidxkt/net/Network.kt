@@ -54,7 +54,7 @@ fun Context.isWifiEnabled(): Boolean {
 /**
  * Turn Wi-Fi on or off
  */
-@RequiresPermission(allOf = [(Manifest.permission.ACCESS_WIFI_STATE), (Manifest.permission.CHANGE_WIFI_STATE)])
+@RequiresPermission(anyOf = [(Manifest.permission.ACCESS_WIFI_STATE), (Manifest.permission.CHANGE_WIFI_STATE)])
 fun Context.setWifiEnabled(enable: Boolean): Boolean {
     val manager = (this.applicationContext.getSystemService(Context.WIFI_SERVICE)
             ?: throw IllegalStateException("WifiManager not found")) as WifiManager

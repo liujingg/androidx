@@ -117,10 +117,10 @@ compile "me.panpf:android-kt:$lastVersion"
 [min_api_link]: https://android-arsenal.com/api?level=14
 [license_image]: https://img.shields.io/badge/License-Apache%202-blue.svg
 [license_link]: https://www.apache.org/licenses/LICENSE-2.0
-[VersionBadgeIcon]: https://api.bintray.com/packages/panpf/maven/android/images/download.svg
-[VersionBadgeLink]:https://bintray.com/panpf/maven/android/_latestVersion
-[KTVersionBadgeIcon]: https://api.bintray.com/packages/panpf/maven/android-kt/images/download.svg
-[KTVersionBadgeLink]:https://bintray.com/panpf/maven/android-kt/_latestVersion
+[VersionBadgeIcon]: https://api.bintray.com/packages/panpf/maven/androidx/images/download.svg
+[VersionBadgeLink]:https://bintray.com/panpf/maven/androidx/_latestVersion
+[KTVersionBadgeIcon]: https://api.bintray.com/packages/panpf/maven/androidx-kt/images/download.svg
+[KTVersionBadgeLink]:https://bintray.com/panpf/maven/androidx-kt/_latestVersion
 [CHANGELOG.md]: CHANGELOG.md
 [javax]: https://github.com/panpf/javax
 

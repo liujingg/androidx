@@ -71,8 +71,8 @@ public class Hardwarex {
         }
     }
 
-    @SuppressLint({"HardwareIds", "MissingPermission"})
-    @RequiresPermission(allOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
+    @SuppressLint({"HardwareIds"})
+    @RequiresPermission(anyOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
     public static String getPhoneNumber(@NonNull Context context) {
         try {
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);

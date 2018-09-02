@@ -33,8 +33,8 @@ fun getSupportedAbis(): Array<out String> {
     }
 }
 
-@SuppressLint("HardwareIds", "MissingPermission")
-@RequiresPermission(allOf = [Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS])
+@SuppressLint("HardwareIds")
+@RequiresPermission(anyOf = [(Manifest.permission.READ_PHONE_STATE), (Manifest.permission.READ_SMS), (Manifest.permission.READ_PHONE_NUMBERS)])
 fun Context.getPhoneNumber(): String = try {
     (getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager).line1Number
 } catch (e: Throwable) {
