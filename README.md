@@ -8,7 +8,7 @@
 
 ### 导入
 
-Java 版：
+#### Java 版：
 ```grovvy
 compile "me.panpf:android:$lastVersion"
 ```
@@ -16,10 +16,10 @@ compile "me.panpf:android:$lastVersion"
 请自行替换 `$lastVersion` 为最新的版本 [![Download][VersionBadgeIcon]][VersionBadgeLink]
 
 依赖：
-* [javax]:0.4
-* support-fragment:27.1.1
+* [javax][javax]: 0.4
+* support-fragment: 27.1.1
 
-Kotlin 版：
+#### Kotlin 版：
 
 ```grovvy
 compile "me.panpf:android-kt:$lastVersion"
