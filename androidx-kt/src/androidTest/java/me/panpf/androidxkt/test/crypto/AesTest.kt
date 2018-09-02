@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package me.panpf.androidxkt.crypto
+package me.panpf.androidxkt.test.crypto
 
 import me.panpf.javaxkt.crypto.*
 import org.junit.Assert

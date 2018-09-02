@@ -1,4 +1,4 @@
-package me.panpf.androidx.app;
+package me.panpf.androidx.test.app;
 
 import android.Manifest;
 import android.content.Context;
@@ -9,10 +9,12 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import me.panpf.androidx.app.Permissionx;
 import me.panpf.androidx.os.Buildx;
 
 @RunWith(AndroidJUnit4.class)
 public final class PermissionTest {
+
     @Test
     public final void testSinglePermission() {
         Context context = InstrumentationRegistry.getContext();

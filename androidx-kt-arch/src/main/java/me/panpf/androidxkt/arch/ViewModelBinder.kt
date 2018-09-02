@@ -3,6 +3,7 @@
 package me.panpf.androidxkt.arch
 
 import android.arch.lifecycle.ViewModel
+import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
@@ -11,11 +12,19 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 public fun <V : ViewModel> Fragment.bindViewModel(clazz: KClass<V>): ReadOnlyProperty<Fragment, V> {
-    return ViewModelLazy { ref, _: KProperty<*> -> ViewModelProviders.of(ref).get(clazz.java) }
+    return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this).get(clazz.java) }
+}
+
+public fun <V : ViewModel> Fragment.bindViewModel(clazz: KClass<V>, factory: ViewModelProvider.Factory): ReadOnlyProperty<Fragment, V> {
+    return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this, factory).get(clazz.java) }
 }
 
 public fun <V : ViewModel> FragmentActivity.bindViewModel(clazz: KClass<V>): ReadOnlyProperty<FragmentActivity, V> {
-    return ViewModelLazy { ref, _: KProperty<*> -> ViewModelProviders.of(ref).get(clazz.java) }
+    return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this).get(clazz.java) }
+}
+
+public fun <V : ViewModel> FragmentActivity.bindViewModel(clazz: KClass<V>, factory: ViewModelProvider.Factory): ReadOnlyProperty<FragmentActivity, V> {
+    return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this, factory).get(clazz.java) }
 }
 
 private class ViewModelLazy<in REF, out OUT>(val initializer: (REF, KProperty<*>) -> OUT) : ReadOnlyProperty<REF, OUT> {

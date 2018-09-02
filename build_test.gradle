@@ -6,8 +6,8 @@ android {
 
 sourceSets {
     androidTest {
-        java.srcDirs = ['src/androidTest/java']
-        resources.srcDirs = ['src/androidTest/res'] // 识别 androidTest 目录下的 res 资源
+        java.srcDirs = ['src/androidTest/src']
+        resources.srcDirs = ['src/androidTest/src'] // 识别 androidTest 目录下的 res 资源
     }
 }
 

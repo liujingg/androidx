@@ -1,8 +1,10 @@
-package me.panpf.androidxkt.app
+package me.panpf.androidxkt.test.app
 
 import android.Manifest
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidxkt.app.isGrantPermission
+import me.panpf.androidxkt.app.isGrantPermissions
 import me.panpf.androidxkt.os.isAtLeastM
 import org.junit.Assert
 import org.junit.Test

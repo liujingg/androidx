@@ -1,4 +1,4 @@
-package me.panpf.androidx.hardware;
+package me.panpf.androidx.test.hardware;
 
 import android.Manifest;
 import android.content.Context;

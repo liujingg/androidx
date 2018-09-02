@@ -14,17 +14,15 @@
  * limitations under the License.
  */
 
-package me.panpf.androidxkt.crypto
+package me.panpf.androidxkt.test.crypto
 
 import me.panpf.javaxkt.crypto.*
-
 import org.junit.Assert
 import org.junit.Test
-
-import javax.crypto.BadPaddingException
-import javax.crypto.IllegalBlockSizeException
 import java.security.InvalidKeyException
 import java.security.SignatureException
+import javax.crypto.BadPaddingException
+import javax.crypto.IllegalBlockSizeException
 
 class RsaTest {
 

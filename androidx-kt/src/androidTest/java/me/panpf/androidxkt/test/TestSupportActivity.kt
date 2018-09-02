@@ -8,8 +8,8 @@ class TestSupportActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.at_test)
+        setContentView(me.panpf.androidxkt.test.R.layout.at_test)
 
-        supportFragmentManager.beginTransaction().replace(R.id.testAt_frame, Fragment()).commit()
+        supportFragmentManager.beginTransaction().replace(me.panpf.androidxkt.test.R.id.testAt_frame, Fragment()).commit()
     }
 }

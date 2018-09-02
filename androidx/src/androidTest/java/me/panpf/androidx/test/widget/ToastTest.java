@@ -1,4 +1,4 @@
-package me.panpf.androidx.widget;
+package me.panpf.androidx.test.widget;
 
 import android.app.Activity;
 import android.support.annotation.NonNull;
@@ -15,6 +15,7 @@ import org.junit.runner.RunWith;
 import me.panpf.androidx.test.R;
 import me.panpf.androidx.test.TestSupportActivity;
 import me.panpf.androidx.view.Viewx;
+import me.panpf.androidx.widget.Toastx;
 
 @RunWith(AndroidJUnit4.class)
 public class ToastTest {
