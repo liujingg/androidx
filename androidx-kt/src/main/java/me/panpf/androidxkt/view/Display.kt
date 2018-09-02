@@ -6,7 +6,6 @@ import android.content.res.Configuration
 import android.graphics.Point
 import android.util.DisplayMetrics
 import android.view.WindowManager
-import android.app.Fragment as OriginFragment
 import android.support.v4.app.Fragment as SupportFragment
 
 /*
@@ -27,8 +26,6 @@ val Context.screenDensityDpi: Int get() = this.resources.displayMetrics.densityD
 
 
 fun Context.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-
-fun android.app.Fragment.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 
 fun android.support.v4.app.Fragment.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
 

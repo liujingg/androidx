@@ -5,7 +5,6 @@ import android.content.Context
 import android.text.Selection
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.app.Fragment as OriginFragment
 import android.support.v4.app.Fragment as SupportFragment
 
 /*
@@ -27,10 +26,6 @@ fun Activity.hideSoftInput() {
     val inputMethodManager = (this.getSystemService(Context.INPUT_METHOD_SERVICE)
             ?: throw IllegalStateException("InputMethodManager not found")) as InputMethodManager
     inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, 0)
-}
-
-fun OriginFragment.hideSoftInput() {
-    activity?.hideSoftInput()
 }
 
 fun SupportFragment.hideSoftInput() {

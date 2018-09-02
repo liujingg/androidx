@@ -55,10 +55,6 @@ public class Displayx {
         return context.getResources().getConfiguration().orientation == 1;
     }
 
-    public static boolean isPortraitOrientation(@NotNull android.app.Fragment fragment) {
-        return fragment.getResources().getConfiguration().orientation == 1;
-    }
-
     public static boolean isPortraitOrientation(@NotNull android.support.v4.app.Fragment fragment) {
         return fragment.getResources().getConfiguration().orientation == 1;
     }

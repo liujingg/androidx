@@ -16,14 +16,18 @@
 
 package me.panpf.androidx.view;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.support.annotation.LayoutRes;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import me.panpf.androidx.widget.Toastx;
 
@@ -165,5 +169,20 @@ public class Viewx {
     @NotNull
     public static Bitmap toBitmapByMaxHeight(@NotNull View view, @NotNull Bitmap.Config config, int maxHeight) {
         return toBitmap(view, config, Math.min((float) maxHeight / (float) view.getHeight(), 1.0F));
+    }
+
+    @NotNull
+    public static View inflateLayout(@NotNull Context context, @LayoutRes int id, @Nullable ViewGroup parent, boolean attachToRoot) {
+        return LayoutInflater.from(context).inflate(id, parent, attachToRoot);
+    }
+
+    @NotNull
+    public static View inflateLayout(@NotNull Context context, @LayoutRes int id, @Nullable ViewGroup parent) {
+        return LayoutInflater.from(context).inflate(id, parent, false);
+    }
+
+    @NotNull
+    public static View inflateLayout(@NotNull Context context, @LayoutRes int id) {
+        return LayoutInflater.from(context).inflate(id, null, false);
     }
 }

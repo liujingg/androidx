@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.panpf.androidxkt.test">
+    package="me.panpf.androidx.test">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
@@ -7,6 +7,6 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application>
-        <activity android:name="me.panpf.androidxkt.test.TestSupportActivity" />
+        <activity android:name="me.panpf.androidx.test.TestSupportActivity" />
     </application>
 </manifest>

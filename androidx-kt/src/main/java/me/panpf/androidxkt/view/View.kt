@@ -1,8 +1,11 @@
 package me.panpf.androidxkt.view
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Matrix
+import android.support.annotation.LayoutRes
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import me.panpf.androidxkt.widget.showShortToast
@@ -138,4 +141,12 @@ fun View.toBitmapByMaxWidth(config: Bitmap.Config, maxWidth: Int): Bitmap {
 
 fun View.toBitmapByMaxHeight(config: Bitmap.Config, maxHeight: Int): Bitmap {
     return toBitmap(config, Math.min(maxHeight.toFloat() / this.height, 1.0f))
+}
+
+fun Context.inflateLayout(@LayoutRes id: Int, parent: ViewGroup? = null, attachToRoot: Boolean = false): View {
+    return LayoutInflater.from(this).inflate(id, parent, attachToRoot)
+}
+
+fun Context.inflateLayout(@LayoutRes id: Int, parent: ViewGroup? = null): View {
+    return LayoutInflater.from(this).inflate(id, parent, false)
 }

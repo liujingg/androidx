@@ -4,7 +4,6 @@ import android.content.Context
 import android.support.annotation.IntDef
 import android.util.TypedValue
 import android.view.View
-import android.app.Fragment as OriginFragment
 import android.support.v4.app.Fragment as SupportFragment
 
 /*
@@ -37,43 +36,10 @@ fun Context.px2sp(px: Float): Float =
 fun Context.px2sp(px: Int): Float = px2sp(px.toFloat())
 
 
-fun Context.unit2px(@Unit unit: Int, value: Float): Float =
+fun Context.unit2px(@DimenUnit unit: Int, value: Float): Float =
         TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
 
-fun Context.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
-
-
-/* ************************************* OriginFragment ***************************************** */
-
-
-fun OriginFragment.dp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.density + 0.5).toInt()
-
-fun OriginFragment.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
-
-
-fun OriginFragment.px2dp(px: Float): Float =
-        px / this.resources.displayMetrics.density + 0.5f
-
-fun OriginFragment.px2dp(px: Int): Float = px2dp(px.toFloat())
-
-
-fun OriginFragment.sp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt()
-
-fun OriginFragment.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
-
-
-fun OriginFragment.px2sp(px: Float): Float =
-        px / this.resources.displayMetrics.scaledDensity + 0.5f
-
-fun OriginFragment.px2sp(px: Int): Float = px2sp(px.toFloat())
-
-
-fun OriginFragment.unit2px(@Unit unit: Int, value: Float): Float =
-        TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
-
-fun OriginFragment.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+fun Context.unit2px(@DimenUnit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
 
 
 /* ************************************* SupportFragment ***************************************** */
@@ -103,10 +69,10 @@ fun SupportFragment.px2sp(px: Float): Float =
 fun SupportFragment.px2sp(px: Int): Float = px2sp(px.toFloat())
 
 
-fun SupportFragment.unit2px(@Unit unit: Int, value: Float): Float =
+fun SupportFragment.unit2px(@DimenUnit unit: Int, value: Float): Float =
         TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
 
-fun SupportFragment.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+fun SupportFragment.unit2px(@DimenUnit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
 
 
 /* ************************************* View ***************************************** */
@@ -136,13 +102,13 @@ fun View.px2sp(px: Float): Float =
 fun View.px2sp(px: Int): Float = px2sp(px.toFloat())
 
 
-fun View.unit2px(@Unit unit: Int, value: Float): Float =
+fun View.unit2px(@DimenUnit unit: Int, value: Float): Float =
         TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
 
-fun View.unit2px(@Unit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+fun View.unit2px(@DimenUnit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
 
 @IntDef(TypedValue.COMPLEX_UNIT_SP, TypedValue.COMPLEX_UNIT_DIP, TypedValue.COMPLEX_UNIT_PX,
         TypedValue.COMPLEX_UNIT_PT, TypedValue.COMPLEX_UNIT_IN, TypedValue.COMPLEX_UNIT_MM)
 @Target(AnnotationTarget.PROPERTY, AnnotationTarget.FIELD, AnnotationTarget.VALUE_PARAMETER)
 @Retention(AnnotationRetention.RUNTIME)
-annotation class Unit
+annotation class DimenUnit

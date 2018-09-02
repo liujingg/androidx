@@ -28,14 +28,6 @@ fun <Args : Parcelable> Fragment.startArgsActivity(clazz: KClass<ArgsActivity<Ar
     })
 }
 
-fun <Args : Parcelable> android.app.Fragment.startArgsActivity(clazz: KClass<ArgsActivity<Args>>, args: Args) {
-    val localContext = this.activity.baseContext ?: return
-    startActivity(Intent(localContext, clazz::class.java).apply {
-        if (localContext !is Activity) addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        putExtra("args", args)
-    })
-}
-
 fun <Args : Parcelable> View.startArgsActivity(clazz: KClass<ArgsActivity<Args>>, args: Args) {
     val localContext = this.context ?: return
     localContext.startActivity(Intent(localContext, clazz::class.java).apply {
