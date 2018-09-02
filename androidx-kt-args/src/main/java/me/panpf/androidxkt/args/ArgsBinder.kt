@@ -17,460 +17,460 @@ import android.support.v4.app.Fragment as SupportFragment
 
 // Boolean
 fun SupportFragment.bindBooleanArg(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<SupportFragment, Boolean> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getBoolean(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getBoolean(argName, defaultValue) }
 
 fun SupportFragment.bindOptionalBooleanArg(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<SupportFragment, Boolean?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getBoolean(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getBoolean(argName, defaultValue) }
 
 // BooleanArray
 fun SupportFragment.bindBooleanArrayArg(argName: String): ReadOnlyProperty<SupportFragment, BooleanArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getBooleanArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getBooleanArray(argName) }
 
 fun SupportFragment.bindOptionalBooleanArrayArg(argName: String): ReadOnlyProperty<SupportFragment, BooleanArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getBooleanArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getBooleanArray(argName) }
 
 
 // Byte
 fun SupportFragment.bindByteArg(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<SupportFragment, Byte> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getByte(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getByte(argName, defaultValue) }
 
 fun SupportFragment.bindOptionalByteArg(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<SupportFragment, Byte?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getByte(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getByte(argName, defaultValue) }
 
 // ByteArray
 fun SupportFragment.bindByteArrayArg(argName: String): ReadOnlyProperty<SupportFragment, ByteArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getByteArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getByteArray(argName) }
 
 fun SupportFragment.bindOptionalByteArrayArg(argName: String): ReadOnlyProperty<SupportFragment, ByteArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getByteArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getByteArray(argName) }
 
 
 // Char
 fun SupportFragment.bindCharArg(argName: String, defaultValue: Char = 0.toChar()): ReadOnlyProperty<SupportFragment, Char> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getChar(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getChar(argName, defaultValue) }
 
 fun SupportFragment.bindOptionalCharArg(argName: String, defaultValue: Char = 0.toChar()): ReadOnlyProperty<SupportFragment, Char?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getChar(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getChar(argName, defaultValue) }
 
 // CharArray
 fun SupportFragment.bindCharArrayArg(argName: String): ReadOnlyProperty<SupportFragment, CharArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getCharArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getCharArray(argName) }
 
 fun SupportFragment.bindOptionalCharArrayArg(argName: String): ReadOnlyProperty<SupportFragment, CharArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getCharArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getCharArray(argName) }
 
 
 // Short
 fun SupportFragment.bindShortArg(argName: String, defaultValue: Short = 0): ReadOnlyProperty<SupportFragment, Short> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getShort(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getShort(argName, defaultValue) }
 
 fun SupportFragment.bindOptionalShortArg(argName: String, defaultValue: Short = 0): ReadOnlyProperty<SupportFragment, Short?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getShort(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getShort(argName, defaultValue) }
 
 // ShortArray
 fun SupportFragment.bindShortArrayArg(argName: String): ReadOnlyProperty<SupportFragment, ShortArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getShortArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getShortArray(argName) }
 
 fun SupportFragment.bindOptionalShortArrayArg(argName: String): ReadOnlyProperty<SupportFragment, ShortArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getShortArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getShortArray(argName) }
 
 
 // Float
 fun SupportFragment.bindFloatArg(argName: String, defaultValue: Float = 0f): ReadOnlyProperty<SupportFragment, Float> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getFloat(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getFloat(argName, defaultValue) }
 
 fun SupportFragment.bindOptionalFloatArg(argName: String, defaultValue: Float = 0f): ReadOnlyProperty<SupportFragment, Float?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getFloat(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getFloat(argName, defaultValue) }
 
 // FloatArray
 fun SupportFragment.bindFloatArrayArg(argName: String): ReadOnlyProperty<SupportFragment, FloatArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getFloatArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getFloatArray(argName) }
 
 fun SupportFragment.bindOptionalFloatArrayArg(argName: String): ReadOnlyProperty<SupportFragment, FloatArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getFloatArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getFloatArray(argName) }
 
 
 // Int
 fun SupportFragment.bindIntArg(argName: String, defaultValue: Int = 0): ReadOnlyProperty<SupportFragment, Int> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getInt(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getInt(argName, defaultValue) }
 
 fun SupportFragment.bindOptionalIntArg(argName: String, defaultValue: Int = 0): ReadOnlyProperty<SupportFragment, Int?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getInt(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getInt(argName, defaultValue) }
 
 // IntArray
 fun SupportFragment.bindIntArrayArg(argName: String): ReadOnlyProperty<SupportFragment, IntArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getIntArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getIntArray(argName) }
 
 fun SupportFragment.bindOptionalIntArrayArg(argName: String): ReadOnlyProperty<SupportFragment, IntArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getIntArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getIntArray(argName) }
 
 // ArrayList<Int>
 fun SupportFragment.bindIntArrayListArg(argName: String): ReadOnlyProperty<SupportFragment, ArrayList<Int>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getIntegerArrayList(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getIntegerArrayList(argName) }
 
 fun SupportFragment.bindOptionalIntArrayListArg(argName: String): ReadOnlyProperty<SupportFragment, ArrayList<Int>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getIntegerArrayList(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getIntegerArrayList(argName) }
 
 
 // Double
 fun SupportFragment.bindDoubleArg(argName: String, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<SupportFragment, Double> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getDouble(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getDouble(argName, defaultValue) }
 
 fun SupportFragment.bindOptionalDoubleArg(argName: String, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<SupportFragment, Double?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getDouble(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getDouble(argName, defaultValue) }
 
 // DoubleArray
 fun SupportFragment.bindDoubleArrayArg(argName: String): ReadOnlyProperty<SupportFragment, DoubleArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getDoubleArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getDoubleArray(argName) }
 
 fun SupportFragment.bindOptionalDoubleArrayArg(argName: String): ReadOnlyProperty<SupportFragment, DoubleArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getDoubleArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getDoubleArray(argName) }
 
 
 // Long
 fun SupportFragment.bindLongArg(argName: String, defaultValue: Long = 0L): ReadOnlyProperty<SupportFragment, Long> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getLong(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getLong(argName, defaultValue) }
 
 fun SupportFragment.bindOptionalLongArg(argName: String, defaultValue: Long = 0L): ReadOnlyProperty<SupportFragment, Long?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getLong(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getLong(argName, defaultValue) }
 
 // LongArray
 fun SupportFragment.bindLongArrayArg(argName: String): ReadOnlyProperty<SupportFragment, LongArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getLongArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getLongArray(argName) }
 
 fun SupportFragment.bindOptionalLongArrayArg(argName: String): ReadOnlyProperty<SupportFragment, LongArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getLongArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getLongArray(argName) }
 
 
 // CharSequence
 fun SupportFragment.bindCharSequenceArg(argName: String, defaultValue: CharSequence? = null): ReadOnlyProperty<SupportFragment, CharSequence> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getCharSequence(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getCharSequence(argName, defaultValue) }
 
 fun SupportFragment.bindOptionalCharSequenceArg(argName: String, defaultValue: CharSequence? = null): ReadOnlyProperty<SupportFragment, CharSequence?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getCharSequence(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getCharSequence(argName, defaultValue) }
 
 // Array<CharSequence>
 fun SupportFragment.bindCharSequenceArrayArg(argName: String): ReadOnlyProperty<SupportFragment, Array<CharSequence>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getCharSequenceArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getCharSequenceArray(argName) }
 
 fun SupportFragment.bindOptionalCharSequenceArrayArg(argName: String): ReadOnlyProperty<SupportFragment, Array<CharSequence>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getCharSequenceArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getCharSequenceArray(argName) }
 
 
 // String
 fun SupportFragment.bindStringArg(argName: String): ReadOnlyProperty<SupportFragment, String> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getString(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getString(argName) }
 
 fun SupportFragment.bindOptionalStringArg(argName: String): ReadOnlyProperty<SupportFragment, String?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getString(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getString(argName) }
 
 // Array<String>
 fun SupportFragment.bindStringArrayArg(argName: String): ReadOnlyProperty<SupportFragment, Array<String>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getStringArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getStringArray(argName) }
 
 fun SupportFragment.bindOptionalStringArrayArg(argName: String): ReadOnlyProperty<SupportFragment, Array<String>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getStringArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getStringArray(argName) }
 
 // ArrayList<String>
 fun SupportFragment.bindStringArrayListArg(argName: String): ReadOnlyProperty<SupportFragment, ArrayList<String>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getStringArrayList(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getStringArrayList(argName) }
 
 fun SupportFragment.bindOptionalStringArrayListArg(argName: String): ReadOnlyProperty<SupportFragment, ArrayList<String>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getStringArrayList(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getStringArrayList(argName) }
 
 
 // Parcelable
 fun <V : Parcelable> SupportFragment.bindParcelableArg(argName: String): ReadOnlyProperty<SupportFragment, V> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments.setAppClassLoader(), { "arguments is null" }).getParcelable(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments.setAppClassLoader()) { "arguments is null" }.getParcelable(argName) }
 
 fun <V : Parcelable> SupportFragment.bindOptionalParcelableArg(argName: String): ReadOnlyProperty<SupportFragment, V?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments.setAppClassLoader()?.getParcelable(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments.setAppClassLoader()?.getParcelable(argName) }
 
 // Array<Parcelable>
 @Suppress("UNCHECKED_CAST")
 fun <V : Parcelable> SupportFragment.bindParcelableArrayArg(argName: String): ReadOnlyProperty<SupportFragment, Array<V>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments.setAppClassLoader(), { "arguments is null" }).getParcelableArray(argName) as Array<V> }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments.setAppClassLoader()) { "arguments is null" }.getParcelableArray(argName) as Array<V> }
 
 @Suppress("UNCHECKED_CAST")
 fun <V : Parcelable> SupportFragment.bindOptionalParcelableArrayArg(argName: String): ReadOnlyProperty<SupportFragment, Array<V>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments.setAppClassLoader()?.getParcelableArray(argName) as Array<V>? }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments.setAppClassLoader()?.getParcelableArray(argName) as Array<V>? }
 
 // ArrayList<Parcelable>
 fun <V : Parcelable> SupportFragment.bindParcelableArrayListArg(argName: String): ReadOnlyProperty<SupportFragment, ArrayList<V>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments.setAppClassLoader(), { "arguments is null" }).getParcelableArrayList(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments.setAppClassLoader()) { "arguments is null" }.getParcelableArrayList(argName) }
 
 fun <V : Parcelable> SupportFragment.bindOptionalParcelableArrayListArg(argName: String): ReadOnlyProperty<SupportFragment, ArrayList<V>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments.setAppClassLoader()?.getParcelableArrayList(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments.setAppClassLoader()?.getParcelableArrayList(argName) }
 
 // SparseArray<Parcelable>
 fun <V : Parcelable> SupportFragment.bindSparseParcelableArrayArg(argName: String): ReadOnlyProperty<SupportFragment, SparseArray<V>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments.setAppClassLoader(), { "arguments is null" }).getSparseParcelableArray(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments.setAppClassLoader()) { "arguments is null" }.getSparseParcelableArray(argName) }
 
 fun <V : Parcelable> SupportFragment.bindOptionalSparseParcelableArrayArg(argName: String): ReadOnlyProperty<SupportFragment, SparseArray<V>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments.setAppClassLoader()?.getSparseParcelableArray(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments.setAppClassLoader()?.getSparseParcelableArray(argName) }
 
 // Serializable
 @Suppress("UNCHECKED_CAST")
 fun <V : java.io.Serializable> SupportFragment.bindSerializableArg(argName: String): ReadOnlyProperty<SupportFragment, V> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getSerializable(argName) as V }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getSerializable(argName) as V }
 
 @Suppress("UNCHECKED_CAST")
 fun <V : java.io.Serializable> SupportFragment.bindOptionalSerializableArg(argName: String): ReadOnlyProperty<SupportFragment, V?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getSerializable(argName) as V? }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getSerializable(argName) as V? }
 
 
 // IBinder
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 fun SupportFragment.bindBinderArg(argName: String): ReadOnlyProperty<SupportFragment, IBinder> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getBinder(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getBinder(argName) }
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
 fun SupportFragment.bindOptionalBinderArg(argName: String): ReadOnlyProperty<SupportFragment, IBinder?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getBinder(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getBinder(argName) }
 
 
 // Bundle
 fun SupportFragment.bindBundleArg(argName: String): ReadOnlyProperty<SupportFragment, Bundle> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getBundle(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getBundle(argName) }
 
 fun SupportFragment.bindOptionalBundleArg(argName: String): ReadOnlyProperty<SupportFragment, Bundle?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getBundle(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getBundle(argName) }
 
 
 // Size
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 fun SupportFragment.bindSizeArg(argName: String): ReadOnlyProperty<SupportFragment, Size> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getSize(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getSize(argName) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 fun SupportFragment.bindOptionalSizeArg(argName: String): ReadOnlyProperty<SupportFragment, Size?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getSize(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getSize(argName) }
 
 
 // SizeF
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 fun SupportFragment.bindSizeFArg(argName: String): ReadOnlyProperty<SupportFragment, SizeF> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> requireNotNull(ref.arguments, { "arguments is null" }).getSizeF(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getSizeF(argName) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
 fun SupportFragment.bindOptionalSizeFArg(argName: String): ReadOnlyProperty<SupportFragment, SizeF?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.arguments?.getSizeF(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getSizeF(argName) }
 
 
 /* ************************************* Activity ***************************************** */
 
 // Boolean
 fun Activity.bindBooleanArg(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<Activity, Boolean> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getBooleanExtra(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getBooleanExtra(argName, defaultValue) }
 
 fun Activity.bindOptionalBooleanArg(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<Activity, Boolean?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getBooleanExtra(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getBooleanExtra(argName, defaultValue) }
 
 // BooleanArray
 fun Activity.bindBooleanArrayArg(argName: String): ReadOnlyProperty<Activity, BooleanArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getBooleanArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getBooleanArrayExtra(argName) }
 
 fun Activity.bindOptionalBooleanArrayArg(argName: String): ReadOnlyProperty<Activity, BooleanArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getBooleanArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getBooleanArrayExtra(argName) }
 
 
 // Byte
 fun Activity.bindByteArg(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<Activity, Byte> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getByteExtra(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getByteExtra(argName, defaultValue) }
 
 fun Activity.bindOptionalByteArg(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<Activity, Byte?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getByteExtra(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getByteExtra(argName, defaultValue) }
 
 // ByteArray
 fun Activity.bindByteArrayArg(argName: String): ReadOnlyProperty<Activity, ByteArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getByteArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getByteArrayExtra(argName) }
 
 fun Activity.bindOptionalByteArrayArg(argName: String): ReadOnlyProperty<Activity, ByteArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getByteArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getByteArrayExtra(argName) }
 
 
 // Char
 fun Activity.bindCharArg(argName: String, defaultValue: Char = 0.toChar()): ReadOnlyProperty<Activity, Char> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getCharExtra(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getCharExtra(argName, defaultValue) }
 
 fun Activity.bindOptionalCharArg(argName: String, defaultValue: Char = 0.toChar()): ReadOnlyProperty<Activity, Char?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getCharExtra(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getCharExtra(argName, defaultValue) }
 
 // CharArray
 fun Activity.bindCharArrayArg(argName: String): ReadOnlyProperty<Activity, CharArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getCharArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getCharArrayExtra(argName) }
 
 fun Activity.bindOptionalCharArrayArg(argName: String): ReadOnlyProperty<Activity, CharArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getCharArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getCharArrayExtra(argName) }
 
 
 // Short
 fun Activity.bindShortArg(argName: String, defaultValue: Short = 0): ReadOnlyProperty<Activity, Short> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getShortExtra(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getShortExtra(argName, defaultValue) }
 
 fun Activity.bindOptionalShortArg(argName: String, defaultValue: Short = 0): ReadOnlyProperty<Activity, Short?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getShortExtra(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getShortExtra(argName, defaultValue) }
 
 // ShortArray
 fun Activity.bindShortArrayArg(argName: String): ReadOnlyProperty<Activity, ShortArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getShortArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getShortArrayExtra(argName) }
 
 fun Activity.bindOptionalShortArrayArg(argName: String): ReadOnlyProperty<Activity, ShortArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getShortArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getShortArrayExtra(argName) }
 
 
 // Float
 fun Activity.bindFloatArg(argName: String, defaultValue: Float = 0f): ReadOnlyProperty<Activity, Float> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getFloatExtra(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getFloatExtra(argName, defaultValue) }
 
 fun Activity.bindOptionalFloatArg(argName: String, defaultValue: Float = 0f): ReadOnlyProperty<Activity, Float?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getFloatExtra(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getFloatExtra(argName, defaultValue) }
 
 // FloatArray
 fun Activity.bindFloatArrayArg(argName: String): ReadOnlyProperty<Activity, FloatArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getFloatArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getFloatArrayExtra(argName) }
 
 fun Activity.bindOptionalFloatArrayArg(argName: String): ReadOnlyProperty<Activity, FloatArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getFloatArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getFloatArrayExtra(argName) }
 
 
 // Int
 fun Activity.bindIntArg(argName: String, defaultValue: Int = 0): ReadOnlyProperty<Activity, Int> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getIntExtra(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getIntExtra(argName, defaultValue) }
 
 fun Activity.bindOptionalIntArg(argName: String, defaultValue: Int = 0): ReadOnlyProperty<Activity, Int?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getIntExtra(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getIntExtra(argName, defaultValue) }
 
 // IntArray
 fun Activity.bindIntArrayArg(argName: String): ReadOnlyProperty<Activity, IntArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getIntArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getIntArrayExtra(argName) }
 
 fun Activity.bindOptionalIntArrayArg(argName: String): ReadOnlyProperty<Activity, IntArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getIntArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getIntArrayExtra(argName) }
 
 // ArrayList<Int>
 fun Activity.bindIntArrayListArg(argName: String): ReadOnlyProperty<Activity, ArrayList<Int>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getIntegerArrayListExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getIntegerArrayListExtra(argName) }
 
 fun Activity.bindOptionalIntArrayListArg(argName: String): ReadOnlyProperty<Activity, ArrayList<Int>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getIntegerArrayListExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getIntegerArrayListExtra(argName) }
 
 
 // Double
 fun Activity.bindDoubleArg(argName: String, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<Activity, Double> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getDoubleExtra(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getDoubleExtra(argName, defaultValue) }
 
 fun Activity.bindOptionalDoubleArg(argName: String, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<Activity, Double?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getDoubleExtra(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getDoubleExtra(argName, defaultValue) }
 
 // DoubleArray
 fun Activity.bindDoubleArrayArg(argName: String): ReadOnlyProperty<Activity, DoubleArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getDoubleArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getDoubleArrayExtra(argName) }
 
 fun Activity.bindOptionalDoubleArrayArg(argName: String): ReadOnlyProperty<Activity, DoubleArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getDoubleArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getDoubleArrayExtra(argName) }
 
 
 // Long
 fun Activity.bindLongArg(argName: String, defaultValue: Long = 0L): ReadOnlyProperty<Activity, Long> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getLongExtra(argName, defaultValue) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getLongExtra(argName, defaultValue) }
 
 fun Activity.bindOptionalLongArg(argName: String, defaultValue: Long = 0L): ReadOnlyProperty<Activity, Long?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getLongExtra(argName, defaultValue) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getLongExtra(argName, defaultValue) }
 
 // LongArray
 fun Activity.bindLongArrayArg(argName: String): ReadOnlyProperty<Activity, LongArray> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getLongArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getLongArrayExtra(argName) }
 
 fun Activity.bindOptionalLongArrayArg(argName: String): ReadOnlyProperty<Activity, LongArray?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getLongArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getLongArrayExtra(argName) }
 
 
 // CharSequence
 fun Activity.bindCharSequenceArg(argName: String): ReadOnlyProperty<Activity, CharSequence> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getCharSequenceExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getCharSequenceExtra(argName) }
 
 fun Activity.bindOptionalCharSequenceArg(argName: String): ReadOnlyProperty<Activity, CharSequence?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getCharSequenceExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getCharSequenceExtra(argName) }
 
 // Array<CharSequence>
 fun Activity.bindCharSequenceArrayArg(argName: String): ReadOnlyProperty<Activity, Array<CharSequence>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getCharSequenceArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getCharSequenceArrayExtra(argName) }
 
 fun Activity.bindOptionalCharSequenceArrayArg(argName: String): ReadOnlyProperty<Activity, Array<CharSequence>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getCharSequenceArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getCharSequenceArrayExtra(argName) }
 
 
 // String
 fun Activity.bindStringArg(argName: String): ReadOnlyProperty<Activity, String> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getStringExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getStringExtra(argName) }
 
 fun Activity.bindOptionalStringArg(argName: String): ReadOnlyProperty<Activity, String?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getStringExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getStringExtra(argName) }
 
 // Array<String>
 fun Activity.bindStringArrayArg(argName: String): ReadOnlyProperty<Activity, Array<String>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getStringArrayExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getStringArrayExtra(argName) }
 
 fun Activity.bindOptionalStringArrayArg(argName: String): ReadOnlyProperty<Activity, Array<String>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getStringArrayExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getStringArrayExtra(argName) }
 
 // ArrayList<String>
 fun Activity.bindStringArrayListArg(argName: String): ReadOnlyProperty<Activity, ArrayList<String>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getStringArrayListExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getStringArrayListExtra(argName) }
 
 fun Activity.bindOptionalStringArrayListArg(argName: String): ReadOnlyProperty<Activity, ArrayList<String>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getStringArrayListExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getStringArrayListExtra(argName) }
 
 
 // Parcelable
 fun <V : Parcelable> Activity.bindParcelableArg(argName: String): ReadOnlyProperty<Activity, V> =
-        ArgLazy(argName) { ref, _: KProperty<*> ->
-            ref.intent.getParcelableExtra(argName)
+        ArgLazy(argName) { _, _: KProperty<*> ->
+            this.intent.getParcelableExtra(argName)
         }
 
 fun <V : Parcelable> Activity.bindOptionalParcelableArg(argName: String): ReadOnlyProperty<Activity, V?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getParcelableExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getParcelableExtra(argName) }
 
 // Array<Parcelable>
 @Suppress("UNCHECKED_CAST")
 fun <V : Parcelable> Activity.bindParcelableArrayArg(argName: String): ReadOnlyProperty<Activity, Array<V>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getParcelableArrayExtra(argName) as Array<V> }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getParcelableArrayExtra(argName) as Array<V> }
 
 @Suppress("UNCHECKED_CAST")
 fun <V : Parcelable> Activity.bindOptionalParcelableArrayArg(argName: String): ReadOnlyProperty<Activity, Array<V>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getParcelableArrayExtra(argName) as Array<V>? }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getParcelableArrayExtra(argName) as Array<V>? }
 
 // ArrayList<Parcelable>
 fun <V : Parcelable> Activity.bindParcelableArrayListArg(argName: String): ReadOnlyProperty<Activity, ArrayList<V>> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getParcelableArrayListExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getParcelableArrayListExtra(argName) }
 
 fun <V : Parcelable> Activity.bindOptionalParcelableArrayListArg(argName: String): ReadOnlyProperty<Activity, ArrayList<V>?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getParcelableArrayListExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getParcelableArrayListExtra(argName) }
 
 // Serializable
 @Suppress("UNCHECKED_CAST")
 fun <V : java.io.Serializable> Activity.bindSerializableArg(argName: String): ReadOnlyProperty<Activity, V> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getSerializableExtra(argName) as V }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getSerializableExtra(argName) as V }
 
 @Suppress("UNCHECKED_CAST")
 fun <V : java.io.Serializable> Activity.bindOptionalSerializableArg(argName: String): ReadOnlyProperty<Activity, V?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getSerializableExtra(argName) as V? }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getSerializableExtra(argName) as V? }
 
 
 // Bundle
 fun Activity.bindBundleArg(argName: String): ReadOnlyProperty<Activity, Bundle> =
-        ArgLazy(argName) { ref, _: KProperty<*> -> ref.intent.getBundleExtra(argName) }
+        ArgLazy(argName) { _, _: KProperty<*> -> this.intent.getBundleExtra(argName) }
 
 fun Activity.bindOptionalBundleArg(argName: String): ReadOnlyProperty<Activity, Bundle?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.getBundleExtra(argName) }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.getBundleExtra(argName) }
 
 // Extras Bundle
 fun Activity.bindExtrasArg(): ReadOnlyProperty<Activity, Bundle> =
-        ArgLazy("extras") { ref, _: KProperty<*> -> ref.intent.extras }
+        ArgLazy("extras") { _, _: KProperty<*> -> this.intent.extras }
 
 fun Activity.bindOptionalExtrasArg(): ReadOnlyProperty<Activity, Bundle?> =
-        OptionalArgLazy { ref, _: KProperty<*> -> ref.intent.extras }
+        OptionalArgLazy { _, _: KProperty<*> -> this.intent.extras }
 
 
 private class ArgLazy<in REF, out OUT : Any>(val argName: String, val initializer: (REF, KProperty<*>) -> OUT?) : ReadOnlyProperty<REF, OUT> {
@@ -480,7 +480,7 @@ private class ArgLazy<in REF, out OUT : Any>(val argName: String, val initialize
 
     override fun getValue(thisRef: REF, property: KProperty<*>): OUT {
         if (arg == EMPTY) {
-            arg = requireNotNull(initializer(thisRef, property), { "Not found arg '$argName' from arguments. 2" })
+            arg = requireNotNull(initializer(thisRef, property)) { "Not found arg '$argName' from arguments. 2" }
         }
         @Suppress("UNCHECKED_CAST")
         return arg as OUT

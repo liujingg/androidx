@@ -4,35 +4,29 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
+import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.view.View
-import kotlin.reflect.KClass
-import android.support.v4.app.Fragment as SupportFragment
 
 abstract class ArgsFragmentActivity<out Args : Parcelable> : FragmentActivity() {
     val args: Args by bindParcelableArg("args")
 }
 
-fun <Args : Parcelable> Context.startArgsActivity(clazz: KClass<ArgsFragmentActivity<Args>>, args: Args) {
+fun <Args : Parcelable> Context.buildArgsIntent(clazz: Class<Activity>, args: Args): Intent {
+    return Intent(this, clazz).apply { putExtra("args", args) }
+}
+
+fun <Args : Parcelable> Context.startArgsActivity(clazz: Class<Activity>, args: Args) {
     val localContext = this
-    startActivity(Intent(localContext, clazz::class.java).apply {
-        if (localContext !is Activity) addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        putExtra("args", args)
-    })
+    startActivity(localContext.buildArgsIntent(clazz, args).apply { if (localContext !is Activity) addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
 }
 
-fun <Args : Parcelable> SupportFragment.startArgsActivity(clazz: KClass<ArgsFragmentActivity<Args>>, args: Args) {
+fun <Args : Parcelable> Fragment.startArgsActivity(clazz: Class<Activity>, args: Args) {
     val localContext = this.context ?: return
-    startActivity(Intent(localContext, clazz::class.java).apply {
-        if (localContext !is Activity) addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        putExtra("args", args)
-    })
+    startActivity(localContext.buildArgsIntent(clazz, args).apply { if (localContext !is Activity) addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
 }
 
-fun <Args : Parcelable> View.startArgsActivity(clazz: KClass<ArgsFragmentActivity<Args>>, args: Args) {
+fun <Args : Parcelable> View.startArgsActivity(clazz: Class<Activity>, args: Args) {
     val localContext = this.context ?: return
-    localContext.startActivity(Intent(localContext, clazz::class.java).apply {
-        if (localContext !is Activity) addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-        putExtra("args", args)
-    })
+    localContext.startActivity(localContext.buildArgsIntent(clazz, args).apply { if (localContext !is Activity) addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) })
 }
