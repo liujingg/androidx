@@ -1,8 +1,7 @@
 package me.panpf.androidx.os;
 
 import android.os.Build.VERSION;
-
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 /**
  * Tool methods related to Android builds
@@ -189,7 +188,7 @@ public class Buildx {
         return VERSION.SDK_INT >= 28;
     }
 
-    @NotNull
+    @NonNull
     public static String getSdkVersionName(int sdkVersion) {
         String name;
         switch (sdkVersion) {

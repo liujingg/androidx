@@ -23,8 +23,7 @@ import android.opengl.EGL14;
 import android.opengl.GLES10;
 import android.opengl.GLES20;
 import android.os.Build;
-
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
@@ -37,8 +36,8 @@ public class OpenGlx {
     /**
      * Get the version of OpenGL
      */
-    @NotNull
-    public static String getVersion(@NotNull Context context) {
+    @NonNull
+    public static String getVersion(@NonNull Context context) {
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         if (am == null) {
             throw new IllegalStateException("No ActivityManager");

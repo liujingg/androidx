@@ -17,8 +17,7 @@
 package me.panpf.androidx.graphics;
 
 import android.graphics.Matrix;
-
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 public class Matrixx {
     private static final float[] matrixValues = new float[9];
@@ -30,7 +29,7 @@ public class Matrixx {
      * @param whichValue - Which value from Matrix.M* to return
      * @return float - returned value
      */
-    public static float getValue(@NotNull Matrix matrix, int whichValue) {
+    public static float getValue(@NonNull Matrix matrix, int whichValue) {
         synchronized (matrixValues) {
             matrix.getValues(matrixValues);
             return matrixValues[whichValue];
@@ -40,7 +39,7 @@ public class Matrixx {
     /**
      * Get scale ratio
      */
-    public static float getScale(@NotNull Matrix matrix) {
+    public static float getScale(@NonNull Matrix matrix) {
         synchronized (matrixValues) {
             matrix.getValues(matrixValues);
             float scaleX = matrixValues[Matrix.MSCALE_X];

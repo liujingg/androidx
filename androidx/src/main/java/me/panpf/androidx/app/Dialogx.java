@@ -19,10 +19,9 @@ package me.panpf.androidx.app;
 import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import me.panpf.javax.lang.Classx;
 
@@ -32,7 +31,7 @@ public class Dialogx {
     /**
      * Whether to automatically close the dialog box when setting the click button
      */
-    public static void setClickButtonClosable(@NotNull Dialog dialog, boolean close) {
+    public static void setClickButtonClosable(@NonNull Dialog dialog, boolean close) {
         try {
             Classx.setFieldValue(dialog, "mShowing", close);
         } catch (NoSuchFieldException e) {
@@ -43,8 +42,8 @@ public class Dialogx {
     /**
      * Display a progress dialog
      */
-    @NotNull
-    public static ProgressDialog showProgressDialog(@NotNull Activity activity, @NotNull String message) {
+    @NonNull
+    public static ProgressDialog showProgressDialog(@NonNull Activity activity, @NonNull String message) {
         ProgressDialog newDialog = new ProgressDialog(activity);
         newDialog.setTitle(null);
         newDialog.setMessage(message);
@@ -59,8 +58,8 @@ public class Dialogx {
     /**
      * Display a progress dialog
      */
-    @NotNull
-    public static ProgressDialog showProgressDialog(@NotNull Activity activity, int messageId) {
+    @NonNull
+    public static ProgressDialog showProgressDialog(@NonNull Activity activity, int messageId) {
         return showProgressDialog(activity, activity.getString(messageId));
     }
 
@@ -68,7 +67,7 @@ public class Dialogx {
      * Display a progress dialog
      */
     @Nullable
-    public static ProgressDialog showProgressDialog(@NotNull Fragment fragment, @NotNull String message) {
+    public static ProgressDialog showProgressDialog(@NonNull Fragment fragment, @NonNull String message) {
         Activity activity = fragment.getActivity();
         return activity != null ? showProgressDialog(activity, message) : null;
     }
@@ -77,7 +76,7 @@ public class Dialogx {
      * Display a progress dialog
      */
     @Nullable
-    public static ProgressDialog showProgressDialog(@NotNull Fragment fragment, int messageId) {
+    public static ProgressDialog showProgressDialog(@NonNull Fragment fragment, int messageId) {
         Activity activity = fragment.getActivity();
         return activity != null ? showProgressDialog(activity, messageId) : null;
     }

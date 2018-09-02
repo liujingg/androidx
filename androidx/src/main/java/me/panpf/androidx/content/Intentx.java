@@ -27,10 +27,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -43,7 +42,7 @@ public class Intentx {
     /**
      * Create an Intent that opens the recording page
      */
-    @NotNull
+    @NonNull
     public static Intent makeRecordingIntent() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("audio/amr");
@@ -55,9 +54,9 @@ public class Intentx {
      *
      * @param phoneNumber Target phone number
      */
-    @NotNull
+    @NonNull
     @RequiresPermission(Manifest.permission.CALL_PHONE)
-    public static Intent makeLaunchDialingIntent(@NotNull String phoneNumber) {
+    public static Intent makeLaunchDialingIntent(@NonNull String phoneNumber) {
         return new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
     }
 
@@ -66,9 +65,9 @@ public class Intentx {
      *
      * @param phoneNumber Target phone number
      */
-    @NotNull
+    @NonNull
     @RequiresPermission(Manifest.permission.CALL_PHONE)
-    public static Intent makeCallPhoneIntent(@NotNull String phoneNumber) {
+    public static Intent makeCallPhoneIntent(@NonNull String phoneNumber) {
         return new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
     }
 
@@ -78,8 +77,8 @@ public class Intentx {
      * @param phoneNumber    Target phone number
      * @param messageContent SMS content
      */
-    @NotNull
-    public static Intent makeLaunchSendSmsIntent(@NotNull String phoneNumber, String messageContent) {
+    @NonNull
+    public static Intent makeLaunchSendSmsIntent(@NonNull String phoneNumber, String messageContent) {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumber));
         intent.putExtra("sms_body", messageContent);
         return intent;
@@ -90,7 +89,7 @@ public class Intentx {
      *
      * @param url Web page url
      */
-    @NotNull
+    @NonNull
     public static Intent makeLaunchWebBrowserIntent(String url) {
         return new Intent(Intent.ACTION_VIEW, Uri.parse(url));
     }
@@ -98,7 +97,7 @@ public class Intentx {
     /**
      * Create a broadcast Intent that lets System Explorer scan the specified file
      */
-    @NotNull
+    @NonNull
     public static Intent makeScanFileBroadcastIntent(Uri fileUri) {
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, fileUri);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
@@ -111,8 +110,8 @@ public class Intentx {
      *
      * @param apkFileUri APK file uri
      */
-    @NotNull
-    public static Intent makeInstallAppIntent(@NotNull Uri apkFileUri) {
+    @NonNull
+    public static Intent makeInstallAppIntent(@NonNull Uri apkFileUri) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setDataAndType(apkFileUri, "application/vnd.android.package-archive");
@@ -126,8 +125,8 @@ public class Intentx {
      *
      * @param packageName App package name
      */
-    @NotNull
-    public static Intent makeUninstallAppIntent(@NotNull String packageName) {
+    @NonNull
+    public static Intent makeUninstallAppIntent(@NonNull String packageName) {
         return new Intent(Intent.ACTION_DELETE, Uri.parse("package: " + packageName));
     }
 
@@ -137,7 +136,7 @@ public class Intentx {
      * @param packageName App package name
      */
     @Nullable
-    public static Intent makeLaunchAppIntent(@NotNull Context context, @NotNull String packageName) {
+    public static Intent makeLaunchAppIntent(@NonNull Context context, @NonNull String packageName) {
         try {
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             if (intent != null) {
@@ -167,8 +166,8 @@ public class Intentx {
      *
      * @param packageName App package name
      */
-    @NotNull
-    public static Intent makeAppDetailInSystemIntent(@NotNull String packageName) {
+    @NonNull
+    public static Intent makeAppDetailInSystemIntent(@NonNull String packageName) {
         Intent intent = new Intent();
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", packageName, null);
@@ -179,8 +178,8 @@ public class Intentx {
     /**
      * Create an Intent based on the source Intent and the ResolveInfo found with it
      */
-    @NotNull
-    public static Intent makeActivityIntentByResolveInfo(@NotNull Intent sourceIntent, @NotNull ResolveInfo resolveInfo) {
+    @NonNull
+    public static Intent makeActivityIntentByResolveInfo(@NonNull Intent sourceIntent, @NonNull ResolveInfo resolveInfo) {
         Intent resolveIntent = new Intent();
         resolveIntent.setClassName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name);
         resolveIntent.setAction(sourceIntent.getAction());
@@ -196,7 +195,7 @@ public class Intentx {
     /**
      * Test if you can start Activity
      */
-    public static boolean canStartActivity(@NotNull Context context, @NotNull Intent intent) {
+    public static boolean canStartActivity(@NonNull Context context, @NonNull Intent intent) {
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
@@ -208,7 +207,7 @@ public class Intentx {
     /**
      * Safely launch an Activity, catch ActivityNotFoundException and return false
      */
-    public static boolean safeStartActivity(@NotNull Context context, @NotNull Intent intent) {
+    public static boolean safeStartActivity(@NonNull Context context, @NonNull Intent intent) {
         if (!(context instanceof Activity)) {
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         }
@@ -228,7 +227,7 @@ public class Intentx {
      * @param saveFileUri Save the image to the specified uri, If null, get the image from the returned Intent at onActivityResult,
      *                    for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
      */
-    @NotNull
+    @NonNull
     public static Intent makeTakePhotoIntent(@Nullable Uri saveFileUri) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (saveFileUri != null) {
@@ -242,7 +241,7 @@ public class Intentx {
      * Create an Intent that selects a picture from the system album, And then get the image uri from the returned Intent at onActivityResult,
      * for example: Uri imageUri = (Bitmap) intent.getData()
      */
-    @NotNull
+    @NonNull
     public static Intent makePickImageIntent() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
@@ -258,8 +257,8 @@ public class Intentx {
      * @param saveFileUri   Save the image to the specified uri, If null, get the image from the returned Intent at onActivityResult,
      *                      for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
      */
-    @NotNull
-    public static Intent makeCropImageIntent(@NotNull Uri sourceFileUri, int targetWidth, int targetHeight, @Nullable Uri saveFileUri) {
+    @NonNull
+    public static Intent makeCropImageIntent(@NonNull Uri sourceFileUri, int targetWidth, int targetHeight, @Nullable Uri saveFileUri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(sourceFileUri, "image/*");
         intent.putExtra("crop", true);

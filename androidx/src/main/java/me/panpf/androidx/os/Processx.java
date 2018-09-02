@@ -2,9 +2,8 @@ package me.panpf.androidx.os;
 
 import android.app.ActivityManager;
 import android.content.Context;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Collectionx;
@@ -20,12 +19,12 @@ public class Processx {
      * Get the name of the current process
      */
     @Nullable
-    public static String getInProcessName(@NotNull Context context) {
+    public static String getInProcessName(@NonNull Context context) {
         final int myPid = android.os.Process.myPid();
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.RunningAppProcessInfo info = activityManager != null ? Collectionx.find(activityManager.getRunningAppProcesses(), new Predicate<ActivityManager.RunningAppProcessInfo>() {
             @Override
-            public boolean predicate(@NotNull ActivityManager.RunningAppProcessInfo runningAppProcessInfo) {
+            public boolean predicate(@NonNull ActivityManager.RunningAppProcessInfo runningAppProcessInfo) {
                 return runningAppProcessInfo.pid == myPid;
             }
         }) : null;
@@ -36,7 +35,7 @@ public class Processx {
      * Get the suffix of the current process name, for example, the process name is 'com.my.app:push', then the suffix is ​​':push'
      */
     @Nullable
-    public static String getInProcessNameSuffix(@NotNull Context $receiver) {
+    public static String getInProcessNameSuffix(@NonNull Context $receiver) {
         String processName = getInProcessName($receiver);
         if (processName == null) return null;
         String packageName = $receiver.getPackageName();
@@ -47,7 +46,7 @@ public class Processx {
     /**
      * Is in the main process?
      */
-    public static boolean isMainProcess(@NotNull Context context) {
+    public static boolean isMainProcess(@NonNull Context context) {
         return context.getPackageName().equals(getInProcessName(context));
     }
 }

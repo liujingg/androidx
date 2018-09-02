@@ -21,20 +21,19 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import me.panpf.androidx.widget.Toastx;
 
 @SuppressWarnings("WeakerAccess")
 public class Viewx {
 
-    public static void setLongClickToastHint(@NotNull final View view, final String hintContent) {
+    public static void setLongClickToastHint(@NonNull final View view, final String hintContent) {
         view.setOnLongClickListener(new OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -44,12 +43,12 @@ public class Viewx {
         });
     }
 
-    public static void setLongClickToastHint(@NotNull View view, final int hintContentId) {
+    public static void setLongClickToastHint(@NonNull View view, final int hintContentId) {
         setLongClickToastHint(view, view.getResources().getString(hintContentId));
     }
 
 
-    public static void setLayoutWidth(@NotNull View view, int newWidth, int initHeight) {
+    public static void setLayoutWidth(@NonNull View view, int newWidth, int initHeight) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams == null) {
             layoutParams = new ViewGroup.LayoutParams(newWidth, initHeight);
@@ -59,7 +58,7 @@ public class Viewx {
         view.setLayoutParams(layoutParams);
     }
 
-    public static void setLayoutWidth(@NotNull View view, int newWidth) {
+    public static void setLayoutWidth(@NonNull View view, int newWidth) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null) {
             layoutParams.width = newWidth;
@@ -67,7 +66,7 @@ public class Viewx {
         }
     }
 
-    public static void setLayoutHeight(@NotNull View view, int newHeight, int initWidth) {
+    public static void setLayoutHeight(@NonNull View view, int newHeight, int initWidth) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams == null) {
             layoutParams = new ViewGroup.LayoutParams(initWidth, newHeight);
@@ -77,7 +76,7 @@ public class Viewx {
         view.setLayoutParams(layoutParams);
     }
 
-    public static void setLayoutHeight(@NotNull View view, int newHeight) {
+    public static void setLayoutHeight(@NonNull View view, int newHeight) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null) {
             layoutParams.height = newHeight;
@@ -85,7 +84,7 @@ public class Viewx {
         }
     }
 
-    public static void setLayoutSize(@NotNull View view, int width, int height) {
+    public static void setLayoutSize(@NonNull View view, int width, int height) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams == null) {
             layoutParams = new ViewGroup.LayoutParams(width, height);
@@ -96,7 +95,7 @@ public class Viewx {
         view.setLayoutParams(layoutParams);
     }
 
-    public static void setLayoutMarginTop(@NotNull View view, int newMarinTop) {
+    public static void setLayoutMarginTop(@NonNull View view, int newMarinTop) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null && layoutParams instanceof ViewGroup.MarginLayoutParams) {
             ((ViewGroup.MarginLayoutParams) layoutParams).topMargin = newMarinTop;
@@ -105,7 +104,7 @@ public class Viewx {
     }
 
 
-    public static void addLayoutHeight(@NotNull View view, int addHeight) {
+    public static void addLayoutHeight(@NonNull View view, int addHeight) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null) {
             layoutParams.height += addHeight;
@@ -113,7 +112,7 @@ public class Viewx {
         }
     }
 
-    public static void addLayoutWidth(@NotNull View view, int addWidth) {
+    public static void addLayoutWidth(@NonNull View view, int addWidth) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null) {
             layoutParams.width += addWidth;
@@ -121,7 +120,7 @@ public class Viewx {
         }
     }
 
-    public static void addLayoutSize(@NotNull View view, int addWidth, int addHeight) {
+    public static void addLayoutSize(@NonNull View view, int addWidth, int addHeight) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null) {
             layoutParams.width += addWidth;
@@ -130,7 +129,7 @@ public class Viewx {
         }
     }
 
-    public static void addLayoutMarginTop(@NotNull View view, int addMarinTop) {
+    public static void addLayoutMarginTop(@NonNull View view, int addMarinTop) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null && layoutParams instanceof ViewGroup.MarginLayoutParams) {
             ((ViewGroup.MarginLayoutParams) layoutParams).topMargin += addMarinTop;
@@ -138,8 +137,8 @@ public class Viewx {
         }
     }
 
-    @NotNull
-    public static Bitmap toBitmap(@NotNull View view, @NotNull Bitmap.Config config, float scale) {
+    @NonNull
+    public static Bitmap toBitmap(@NonNull View view, @NonNull Bitmap.Config config, float scale) {
         int bitmapWidth = view.getWidth();
         int bitmapHeight = view.getHeight();
         Matrix matrix = new Matrix();
@@ -156,33 +155,33 @@ public class Viewx {
         return bitmap;
     }
 
-    @NotNull
-    public static Bitmap toBitmap(@NotNull View view, @NotNull Bitmap.Config config) {
+    @NonNull
+    public static Bitmap toBitmap(@NonNull View view, @NonNull Bitmap.Config config) {
         return toBitmap(view, config, 1.0f);
     }
 
-    @NotNull
-    public static Bitmap toBitmapByMaxWidth(@NotNull View view, @NotNull Bitmap.Config config, int maxWidth) {
+    @NonNull
+    public static Bitmap toBitmapByMaxWidth(@NonNull View view, @NonNull Bitmap.Config config, int maxWidth) {
         return toBitmap(view, config, Math.min((float) maxWidth / (float) view.getWidth(), 1.0F));
     }
 
-    @NotNull
-    public static Bitmap toBitmapByMaxHeight(@NotNull View view, @NotNull Bitmap.Config config, int maxHeight) {
+    @NonNull
+    public static Bitmap toBitmapByMaxHeight(@NonNull View view, @NonNull Bitmap.Config config, int maxHeight) {
         return toBitmap(view, config, Math.min((float) maxHeight / (float) view.getHeight(), 1.0F));
     }
 
-    @NotNull
-    public static View inflateLayout(@NotNull Context context, @LayoutRes int id, @Nullable ViewGroup parent, boolean attachToRoot) {
+    @NonNull
+    public static View inflateLayout(@NonNull Context context, @LayoutRes int id, @Nullable ViewGroup parent, boolean attachToRoot) {
         return LayoutInflater.from(context).inflate(id, parent, attachToRoot);
     }
 
-    @NotNull
-    public static View inflateLayout(@NotNull Context context, @LayoutRes int id, @Nullable ViewGroup parent) {
+    @NonNull
+    public static View inflateLayout(@NonNull Context context, @LayoutRes int id, @Nullable ViewGroup parent) {
         return LayoutInflater.from(context).inflate(id, parent, false);
     }
 
-    @NotNull
-    public static View inflateLayout(@NotNull Context context, @LayoutRes int id) {
+    @NonNull
+    public static View inflateLayout(@NonNull Context context, @LayoutRes int id) {
         return LayoutInflater.from(context).inflate(id, null, false);
     }
 }

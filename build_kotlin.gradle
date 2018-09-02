@@ -7,5 +7,4 @@ androidExtensions {
 
 dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    api "androidx.core:core-ktx:0.3"
 }

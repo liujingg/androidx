@@ -19,8 +19,7 @@ package me.panpf.androidx.graphics;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.Rect;
-
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 @SuppressWarnings("WeakerAccess")
 public class Paintx {
@@ -31,7 +30,7 @@ public class Paintx {
      * @param textSize 文字大小
      * @return 给定文字的宽度
      */
-    public static float getTextWidth(@NotNull String text, float textSize) {
+    public static float getTextWidth(@NonNull String text, float textSize) {
         Paint paint = new Paint();
         paint.setTextSize(textSize);
         return paint.measureText(text);
@@ -44,7 +43,7 @@ public class Paintx {
      * @param text  指定的文字
      * @return 当给定的文字使用给定的画笔绘制时的宽度
      */
-    public static float getTextWidth(@NotNull String text, @NotNull Paint paint) {
+    public static float getTextWidth(@NonNull String text, @NonNull Paint paint) {
         return paint.measureText(text);
     }
 
@@ -67,7 +66,7 @@ public class Paintx {
      * @param paint 给定的画笔
      * @return 文字的高度
      */
-    public static float getTextHeight(@NotNull Paint paint) {
+    public static float getTextHeight(@NonNull Paint paint) {
         FontMetrics fm = paint.getFontMetrics();
         return fm.descent - fm.ascent;
     }
@@ -79,7 +78,7 @@ public class Paintx {
      * @param textSize 文字大小
      * @return 文字的宽度
      */
-    public static int getTextWidthByBounds(@NotNull String text, float textSize) {
+    public static int getTextWidthByBounds(@NonNull String text, float textSize) {
         Paint paint = new Paint();
         Rect bounds = new Rect();
         paint.setTextSize(textSize);
@@ -94,7 +93,7 @@ public class Paintx {
      * @param textSize 文字大小
      * @return 文字的高度
      */
-    public static int getTextHeightByBounds(@NotNull String text, float textSize) {
+    public static int getTextHeightByBounds(@NonNull String text, float textSize) {
         Paint paint = new Paint();
         Rect bounds = new Rect();
         paint.setTextSize(textSize);
@@ -107,7 +106,7 @@ public class Paintx {
      *
      * @return 返回指定笔离文字顶部的基准距离
      */
-    public static float getTextLeading(@NotNull Paint paint) {
+    public static float getTextLeading(@NonNull Paint paint) {
         FontMetrics fm = paint.getFontMetrics();
         return fm.leading - fm.ascent;
     }

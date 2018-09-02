@@ -3,9 +3,8 @@ package me.panpf.androidx.app;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.os.Build;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.lang.reflect.Method;
 
@@ -25,7 +24,7 @@ public class Activityx {
      * This call has no effect on non-translucent activities or on activities
      * with the [android.R.attr.windowIsFloating] attribute.
      */
-    public static void convertActivityFromTranslucent(@NotNull Activity activity) {
+    public static void convertActivityFromTranslucent(@NonNull Activity activity) {
         try {
             Classx.callMethod(activity, "convertFromTranslucent");
         } catch (NoSuchMethodException e) {
@@ -47,7 +46,7 @@ public class Activityx {
      * This call has no effect on non-translucent activities or on activities
      * with the [android.R.attr.windowIsFloating] attribute.
      */
-    public static void convertActivityToTranslucent(@NotNull Activity activity) {
+    public static void convertActivityToTranslucent(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             try {
                 ActivityOptions options = (ActivityOptions) Classx.callMethod(activity, "getActivityOptions");
@@ -85,7 +84,7 @@ public class Activityx {
      * If the own or parent activity implements the specified [clazz], it returns its implementation.
      */
     @Nullable
-    public <T> T getImplWithParent(@NotNull Activity activity, @NotNull Class<T> clazz) {
+    public <T> T getImplWithParent(@NonNull Activity activity, @NonNull Class<T> clazz) {
         Activity parent = activity;
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {

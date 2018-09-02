@@ -1,9 +1,8 @@
 package me.panpf.androidx.util;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,8 +24,8 @@ public class Jsonx {
     }
 
 
-    @NotNull
-    public static JSONArray toJsonArray(@NotNull List<String> stringList) {
+    @NonNull
+    public static JSONArray toJsonArray(@NonNull List<String> stringList) {
         JSONArray jsonArray = new JSONArray();
         //noinspection ConstantConditions
         if (stringList != null) {
@@ -37,13 +36,13 @@ public class Jsonx {
         return jsonArray;
     }
 
-    @NotNull
-    public static String toJson(@NotNull List<String> stringList) {
+    @NonNull
+    public static String toJson(@NonNull List<String> stringList) {
         return toJsonArray(stringList).toString();
     }
 
-    @NotNull
-    public static JSONArray toJsonArray(@NotNull int[] ints) {
+    @NonNull
+    public static JSONArray toJsonArray(@NonNull int[] ints) {
         JSONArray jsonArray = new JSONArray();
         //noinspection ConstantConditions
         if (ints != null) {
@@ -54,8 +53,8 @@ public class Jsonx {
         return jsonArray;
     }
 
-    @NotNull
-    public static String toJson(@NotNull int[] ints) {
+    @NonNull
+    public static String toJson(@NonNull int[] ints) {
         return toJsonArray(ints).toString();
     }
 
@@ -157,7 +156,7 @@ public class Jsonx {
 
 
     @Nullable
-    public static String optString(@NonNull JSONObject jsonObject, @NotNull String[] keys, @NotNull String defaultValue) {
+    public static String optString(@NonNull JSONObject jsonObject, @NonNull String[] keys, @NonNull String defaultValue) {
         Object value;
         for (String key : keys) {
             value = jsonObject.opt(key);
@@ -171,11 +170,11 @@ public class Jsonx {
     }
 
     @Nullable
-    public static String optString(@NonNull JSONObject jsonObject, @NotNull String[] keys) {
+    public static String optString(@NonNull JSONObject jsonObject, @NonNull String[] keys) {
         return optString(jsonObject, keys, "");
     }
 
-    public static int optInt(@NonNull JSONObject jsonObject, @NotNull String[] keys, int defaultValue) {
+    public static int optInt(@NonNull JSONObject jsonObject, @NonNull String[] keys, int defaultValue) {
         Object value;
         for (String key : keys) {
             value = jsonObject.opt(key);
@@ -188,11 +187,11 @@ public class Jsonx {
         return defaultValue;
     }
 
-    public static int optInt(@NonNull JSONObject jsonObject, @NotNull String[] keys) {
+    public static int optInt(@NonNull JSONObject jsonObject, @NonNull String[] keys) {
         return optInt(jsonObject, keys, 0);
     }
 
-    public static long optLong(@NonNull JSONObject jsonObject, @NotNull String[] keys, long defaultValue) {
+    public static long optLong(@NonNull JSONObject jsonObject, @NonNull String[] keys, long defaultValue) {
         Object value;
         for (String key : keys) {
             value = jsonObject.opt(key);
@@ -205,7 +204,7 @@ public class Jsonx {
         return defaultValue;
     }
 
-    public static long optLong(@NonNull JSONObject jsonObject, @NotNull String[] keys) {
+    public static long optLong(@NonNull JSONObject jsonObject, @NonNull String[] keys) {
         return optLong(jsonObject, keys, 0L);
     }
 
@@ -241,6 +240,6 @@ public class Jsonx {
 
     public interface BeanParser<T> {
         @Nullable
-        T parse(@NotNull JSONObject itemJsonObject) throws JSONException;
+        T parse(@NonNull JSONObject itemJsonObject) throws JSONException;
     }
 }

@@ -21,9 +21,8 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -45,7 +44,7 @@ public class Networkx {
      * @return The value is one of WIFI_STATE_ENABLED, WIFI_STATE_ENABLING, WIFI_STATE_DISABLED, WIFI_STATE_DISABLING, WIFI_STATE_UNKNOWN in WifiManager.
      */
     @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-    public static int getWifiState(@NotNull Context context) {
+    public static int getWifiState(@NonNull Context context) {
         WifiManager manager = ((WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE));
         if (manager == null) throw new IllegalStateException("WifiManager not found");
         return manager.getWifiState();
@@ -55,7 +54,7 @@ public class Networkx {
      * Return true if Wi-Fi is turned on
      */
     @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-    public static boolean isWifiEnabled(@NotNull Context context) {
+    public static boolean isWifiEnabled(@NonNull Context context) {
         int state = getWifiState(context);
         return state == WifiManager.WIFI_STATE_ENABLED || state == WifiManager.WIFI_STATE_ENABLING;
     }
@@ -64,7 +63,7 @@ public class Networkx {
      * Turn Wi-Fi on or off
      */
     @RequiresPermission(allOf = {Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.CHANGE_WIFI_STATE})
-    public static boolean setWifiEnabled(@NotNull Context context, boolean enable) {
+    public static boolean setWifiEnabled(@NonNull Context context, boolean enable) {
         WifiManager manager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
         if (manager == null) throw new IllegalStateException("WifiManager not found");
         return manager.setWifiEnabled(enable);
@@ -74,7 +73,7 @@ public class Networkx {
      * Return true if mobile network is turned on
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static boolean isMobileEnabled(@NotNull Context context) {
+    public static boolean isMobileEnabled(@NonNull Context context) {
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (manager == null) throw new IllegalStateException("ConnectivityManager not found");
         NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);

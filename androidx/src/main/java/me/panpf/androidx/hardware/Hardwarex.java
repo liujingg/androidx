@@ -23,10 +23,9 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.net.NetworkInterface;
 import java.util.Collections;
@@ -61,7 +60,7 @@ public class Hardwarex {
             } else {
                 return Collectionx.filter(Collectionx.listOf(Build.CPU_ABI, Build.CPU_ABI2), new Predicate<String>() {
                     @Override
-                    public boolean predicate(@NotNull String s) {
+                    public boolean predicate(@NonNull String s) {
                         return Stringx.isNotEmpty(s) && !"unknown".equals(s);
                     }
                 }).toArray(new String[0]);
@@ -74,7 +73,7 @@ public class Hardwarex {
 
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(allOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
-    public static String getPhoneNumber(@NotNull Context context) {
+    public static String getPhoneNumber(@NonNull Context context) {
         try {
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             return Stringx.orEmpty(manager != null ? manager.getLine1Number() : null);
@@ -86,7 +85,7 @@ public class Hardwarex {
 
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getDeviceId(@NotNull Context context) {
+    public static String getDeviceId(@NonNull Context context) {
         try {
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             return Stringx.orEmpty(manager != null ? (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? manager.getImei() : manager.getDeviceId()) : null);
@@ -97,7 +96,7 @@ public class Hardwarex {
     }
 
     @SuppressLint("HardwareIds")
-    public static String getAndroidId(@NotNull Context context) {
+    public static String getAndroidId(@NonNull Context context) {
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
@@ -106,7 +105,7 @@ public class Hardwarex {
      */
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getSubscriberId(@NotNull Context context) {
+    public static String getSubscriberId(@NonNull Context context) {
         try {
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             return Stringx.orEmpty(manager != null ? manager.getSubscriberId() : null);
@@ -121,7 +120,7 @@ public class Hardwarex {
      */
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getSimSerialNumber(@NotNull Context context) {
+    public static String getSimSerialNumber(@NonNull Context context) {
         try {
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             return Stringx.orEmpty(manager != null ? manager.getSimSerialNumber() : null);
@@ -151,7 +150,7 @@ public class Hardwarex {
      */
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getIMEI(@NotNull Context context) {
+    public static String getIMEI(@NonNull Context context) {
         return getDeviceId(context);
     }
 
@@ -160,7 +159,7 @@ public class Hardwarex {
      */
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getIMSI(@NotNull Context context) {
+    public static String getIMSI(@NonNull Context context) {
         return getSubscriberId(context);
     }
 
@@ -169,7 +168,7 @@ public class Hardwarex {
      */
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-    public static String getMacAddress(@NotNull Context context) {
+    public static String getMacAddress(@NonNull Context context) {
         String macAddress = null;
         try {
             WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -179,7 +178,7 @@ public class Hardwarex {
                 if (nis != null && nis.size() > 0) {
                     NetworkInterface networkInterface = Collectionx.find(nis, new Predicate<NetworkInterface>() {
                         @Override
-                        public boolean predicate(@NotNull NetworkInterface networkInterface) {
+                        public boolean predicate(@NonNull NetworkInterface networkInterface) {
                             return networkInterface.getName().equalsIgnoreCase("wlan0");
                         }
                     });
@@ -190,9 +189,9 @@ public class Hardwarex {
                             byteList.add(by);
                         }
                         macAddress = Collectionx.joinToString(byteList, ":", null, null, -1, null, new Transformer<Byte, CharSequence>() {
-                            @NotNull
+                            @NonNull
                             @Override
-                            public CharSequence transform(@NotNull Byte by) {
+                            public CharSequence transform(@NonNull Byte by) {
                                 return Integer.toHexString(by & 0xFF);
                             }
                         });

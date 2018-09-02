@@ -21,10 +21,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 import android.os.storage.StorageManager;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -51,21 +50,21 @@ public class Storagex {
     /**
      * Get the number of free bytes remaining in the current directory
      */
-    public static long getDirFreeBytes(@NotNull File $receiver) {
+    public static long getDirFreeBytes(@NonNull File $receiver) {
         return StatFsx.getCompatFreeBytes(new StatFs($receiver.getPath()));
     }
 
     /**
      * Get the number of total bytes in the current directory
      */
-    public static long getDirTotalBytes(@NotNull File $receiver) {
+    public static long getDirTotalBytes(@NonNull File $receiver) {
         return StatFsx.getCompatTotalBytes(new StatFs($receiver.getPath()));
     }
 
     /**
      * Get the number of bytes remaining in the current directory that are available for the current application
      */
-    public static long getDirAvailableBytes(@NotNull File $receiver) {
+    public static long getDirAvailableBytes(@NonNull File $receiver) {
         return StatFsx.getCompatAvailableBytes(new StatFs($receiver.getPath()));
     }
 
@@ -100,7 +99,7 @@ public class Storagex {
     /**
      * Get the path to the SD card
      */
-    @NotNull
+    @NonNull
     public static String getSdcardPath() {
         return Environment.getExternalStorageDirectory().getPath();
     }
@@ -108,7 +107,7 @@ public class Storagex {
     /**
      * Get the file to the SD card
      */
-    @NotNull
+    @NonNull
     public static File getSdcardFile() {
         return Environment.getExternalStorageDirectory();
     }
@@ -119,8 +118,8 @@ public class Storagex {
      * @param ignorePrimary Ignore the main sdcard
      */
     // todo 测试是否兼容 android 9
-    @NotNull
-    public static String[] getAllSdcardPath(@NotNull Context context, final boolean ignorePrimary) {
+    @NonNull
+    public static String[] getAllSdcardPath(@NonNull Context context, final boolean ignorePrimary) {
         final StorageManager manager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
         if (manager == null) throw new IllegalStateException("StorageManager not found");
 
@@ -142,7 +141,7 @@ public class Storagex {
 
         return Collectionx.filter(paths, new Predicate<String>() {
             @Override
-            public boolean predicate(@NotNull String s) {
+            public boolean predicate(@NonNull String s) {
                 if (ignorePrimary && primarySdcardPath.equals(s)) {
                     return false;
                 } else {
@@ -163,12 +162,12 @@ public class Storagex {
      *
      * @param ignorePrimary Ignore the main sdcard
      */
-    @NotNull
-    public static File[] getAllSdcardFile(@NotNull Context context, boolean ignorePrimary) {
+    @NonNull
+    public static File[] getAllSdcardFile(@NonNull Context context, boolean ignorePrimary) {
         return Arrayx.map(getAllSdcardPath(context, ignorePrimary), new Transformer<String, File>() {
-            @NotNull
+            @NonNull
             @Override
-            public File transform(@NotNull String s) {
+            public File transform(@NonNull String s) {
                 return new File(s);
             }
         }).toArray(new File[0]);
@@ -179,12 +178,12 @@ public class Storagex {
      *
      * @param ignorePrimary Ignore the main sdcard
      */
-    @NotNull
-    public static File[] getAllSdcardWithPathFile(@NotNull Context context, @NotNull final String childPath, boolean ignorePrimary) {
+    @NonNull
+    public static File[] getAllSdcardWithPathFile(@NonNull Context context, @NonNull final String childPath, boolean ignorePrimary) {
         return Arrayx.map(getAllSdcardPath(context, ignorePrimary), new Transformer<String, File>() {
-            @NotNull
+            @NonNull
             @Override
-            public File transform(@NotNull String s) {
+            public File transform(@NonNull String s) {
                 return new File(s, childPath);
             }
         }).toArray(new File[0]);
@@ -198,11 +197,11 @@ public class Storagex {
      * @param ignorePrimary Ignore the main sdcard
      */
     @Nullable
-    public static File findSdcardBySpace(@NotNull Context context, final long minBytes, @Nullable String childPath, boolean ignorePrimary) {
+    public static File findSdcardBySpace(@NonNull Context context, final long minBytes, @Nullable String childPath, boolean ignorePrimary) {
         File[] allDir = childPath != null ? getAllSdcardWithPathFile(context, childPath, ignorePrimary) : getAllSdcardFile(context, ignorePrimary);
         return Collectionx.find(Arrays.asList(allDir), new Predicate<File>() {
             @Override
-            public boolean predicate(@NotNull File file) {
+            public boolean predicate(@NonNull File file) {
                 return getDirAvailableBytes(file) >= minBytes;
             }
         });
@@ -220,7 +219,7 @@ public class Storagex {
     public static File getChildFileBySpaceFromDirs(File[] dirs, final String childFileName, final long minBytes, final boolean deleteFile) {
         File dir = Collectionx.find(Arrays.asList(dirs), new Predicate<File>() {
             @Override
-            public boolean predicate(@NotNull File file) {
+            public boolean predicate(@NonNull File file) {
                 if (file.isDirectory()) {
                     Filex.mkdirsWith(file);
                     if (deleteFile) Filex.deleteRecursively(new File(file, childFileName));
@@ -236,8 +235,8 @@ public class Storagex {
     /**
      * Get all app cache directories
      */
-    @NotNull
-    public static File[] getAllAppCacheDirs(@NotNull Context context, boolean ignoreInternal) {
+    @NonNull
+    public static File[] getAllAppCacheDirs(@NonNull Context context, boolean ignoreInternal) {
         List<File> fileList = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= 19) {
             Collections.addAll(fileList, context.getExternalCacheDirs());
@@ -256,8 +255,8 @@ public class Storagex {
     /**
      * Get all app file directories
      */
-    @NotNull
-    public static File[] getAllAppFilesDirs(@NotNull Context context, boolean ignoreInternal) {
+    @NonNull
+    public static File[] getAllAppFilesDirs(@NonNull Context context, boolean ignoreInternal) {
         List<File> fileList = new ArrayList<>();
         if (Build.VERSION.SDK_INT >= 19) {
             Collections.addAll(fileList, context.getExternalFilesDirs(null));
@@ -276,16 +275,16 @@ public class Storagex {
     /**
      * Get a file from the APP cache directory, external storage takes precedence
      */
-    @NotNull
-    public static File getFileFromAppCacheDirs(@NotNull Context context, @NotNull String fileName) {
+    @NonNull
+    public static File getFileFromAppCacheDirs(@NonNull Context context, @NonNull String fileName) {
         return new File(getAllAppCacheDirs(context, false)[0], fileName);
     }
 
     /**
      * Get a file from the APP files directory, external storage takes precedence
      */
-    @NotNull
-    public static File getFileFromAppFilesDirs(@NotNull Context context, @NotNull String fileName) {
+    @NonNull
+    public static File getFileFromAppFilesDirs(@NonNull Context context, @NonNull String fileName) {
         return new File(getAllAppFilesDirs(context, false)[0], fileName);
     }
 
@@ -293,7 +292,7 @@ public class Storagex {
      * Get a file from the app's cache directory and check the remaining space
      */
     @Nullable
-    public static File getFileFromAppCacheDirsBySpace(@NotNull Context context, @NotNull String fileName, long minBytes) {
+    public static File getFileFromAppCacheDirsBySpace(@NonNull Context context, @NonNull String fileName, long minBytes) {
         return getChildFileBySpaceFromDirs(getAllAppCacheDirs(context, false), fileName, minBytes, false);
     }
 
@@ -301,14 +300,14 @@ public class Storagex {
      * Get a file from the app's files directory and check the remaining space
      */
     @Nullable
-    public static File getFileFromAppFilesDirsBySpace(@NotNull Context context, @NotNull String fileName, long minBytes) {
+    public static File getFileFromAppFilesDirsBySpace(@NonNull Context context, @NonNull String fileName, long minBytes) {
         return getChildFileBySpaceFromDirs(getAllAppFilesDirs(context, false), fileName, minBytes, false);
     }
 
     /**
      * Clean up all app cache directories
      */
-    public static void cleanAppCacheDirs(@NotNull Context context) {
+    public static void cleanAppCacheDirs(@NonNull Context context) {
         for (File a$receiver$iv : getAllAppCacheDirs(context, false)) {
             Filex.cleanDir(a$receiver$iv);
         }
@@ -318,7 +317,7 @@ public class Storagex {
      * Count the size of all APP cache directories
      */
     @WorkerThread
-    public static long lengthAppCacheDirs(@NotNull Context context) {
+    public static long lengthAppCacheDirs(@NonNull Context context) {
         long sum = 0;
         for (File file : getAllAppFilesDirs(context, false)) {
             sum += Filex.lengthRecursively(file);
@@ -330,7 +329,7 @@ public class Storagex {
      * Count the size of all APP files directories
      */
     @WorkerThread
-    public static long lengthAppFilesDirs(@NotNull Context context) {
+    public static long lengthAppFilesDirs(@NonNull Context context) {
         long sum = 0;
         for (File file : getAllAppCacheDirs(context, false)) {
             sum += Filex.lengthRecursively(file);
@@ -343,8 +342,8 @@ public class Storagex {
      *
      * @param packageName App package name
      */
-    @NotNull
-    public static File getAppObbDir(@NotNull String packageName) {
+    @NonNull
+    public static File getAppObbDir(@NonNull String packageName) {
         return new File(Environment.getExternalStorageDirectory(), "Android/obb/" + packageName);
     }
 
@@ -353,8 +352,8 @@ public class Storagex {
      *
      * @param packageName App package name
      */
-    @NotNull
-    public static File getAppDataDir(@NotNull String packageName) {
+    @NonNull
+    public static File getAppDataDir(@NonNull String packageName) {
         return new File(Environment.getExternalStorageDirectory(), "Android/data/" + packageName);
     }
 }

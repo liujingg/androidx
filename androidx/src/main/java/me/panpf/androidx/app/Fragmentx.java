@@ -2,10 +2,9 @@ package me.panpf.androidx.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import me.panpf.androidx.content.Intentx;
 
@@ -15,7 +14,7 @@ public class Fragmentx {
      * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
      */
     @Nullable
-    public <T> T getImplWithParent(@NotNull Fragment fragment, @NotNull Class<T> clazz) {
+    public <T> T getImplWithParent(@NonNull Fragment fragment, @NonNull Class<T> clazz) {
         Fragment parent = fragment;
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {
@@ -40,7 +39,7 @@ public class Fragmentx {
     /**
      * Test if you can start Activity
      */
-    public static boolean canStartActivity(@NotNull Fragment fragment, @NotNull Intent intent) {
+    public static boolean canStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
         Activity activity = fragment.getActivity();
         if (activity == null) {
             throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
@@ -52,7 +51,7 @@ public class Fragmentx {
     /**
      * Safely launch an Activity, catch ActivityNotFoundException and return false
      */
-    public static boolean safeStartActivity(@NotNull Fragment fragment, @NotNull Intent intent) {
+    public static boolean safeStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
         Activity activity = fragment.getActivity();
         if (activity == null) {
             throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");

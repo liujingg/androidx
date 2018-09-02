@@ -18,18 +18,17 @@ package me.panpf.androidx.view.inputmethod;
 
 import android.app.Activity;
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.text.Selection;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import org.jetbrains.annotations.NotNull;
-
 @SuppressWarnings("WeakerAccess")
 public class InputMethodx {
 
-    public static void showSoftInput(@NotNull EditText editText, boolean moveCursorToEnd) {
+    public static void showSoftInput(@NonNull EditText editText, boolean moveCursorToEnd) {
         editText.requestFocus();
 
         InputMethodManager imm = (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -39,11 +38,11 @@ public class InputMethodx {
         if (moveCursorToEnd) moveCursorToEnd(editText);
     }
 
-    public static void showSoftInput(@NotNull EditText editText) {
+    public static void showSoftInput(@NonNull EditText editText) {
         showSoftInput(editText, false);
     }
 
-    public static void hideSoftInput(@NotNull Activity activity) {
+    public static void hideSoftInput(@NonNull Activity activity) {
         View currentFocusView = activity.getCurrentFocus();
         if (currentFocusView == null) return;
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -51,27 +50,27 @@ public class InputMethodx {
         imm.hideSoftInputFromWindow(currentFocusView.getWindowToken(), 0);
     }
 
-    public static void hideSoftInput(@NotNull Fragment fragment) {
+    public static void hideSoftInput(@NonNull Fragment fragment) {
         Activity activity = fragment.getActivity();
         if (activity != null) hideSoftInput(activity);
     }
 
-    public static void hideSoftInput(@NotNull EditText editText) {
+    public static void hideSoftInput(@NonNull EditText editText) {
         if (editText.getWindowToken() == null) return;
         InputMethodManager imm = (InputMethodManager) editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         if (imm == null) throw new IllegalStateException("InputMethodManager not found");
         imm.hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
-    public static void moveCursorToEnd(@NotNull EditText editText) {
+    public static void moveCursorToEnd(@NonNull EditText editText) {
         Selection.setSelection(editText.getEditableText(), editText.length());
     }
 
-    public static void moveCursorToStart(@NotNull EditText editText) {
+    public static void moveCursorToStart(@NonNull EditText editText) {
         Selection.setSelection(editText.getEditableText(), 0);
     }
 
-    public static void moveCursorTo(@NotNull EditText editText, int index) {
+    public static void moveCursorTo(@NonNull EditText editText, int index) {
         Selection.setSelection(editText.getEditableText(), index);
     }
 }

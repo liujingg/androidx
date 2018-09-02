@@ -3,9 +3,8 @@ package me.panpf.androidx.util;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import me.panpf.androidx.graphics.Paintx;
 
@@ -21,8 +20,8 @@ public class Textx {
      * @param leftBitmap 可以在文字的左边放置一张图片
      * @return 文字位图
      */
-    @NotNull
-    public static Bitmap textToBitmap(@NotNull String text, int textColor, float textSize, @Nullable Bitmap leftBitmap) {
+    @NonNull
+    public static Bitmap textToBitmap(@NonNull String text, int textColor, float textSize, @Nullable Bitmap leftBitmap) {
         // 创建并初始化画笔
         Paint paint = new Paint();
         paint.setColor(textColor);
@@ -64,8 +63,8 @@ public class Textx {
      * @param textSize  文字大小
      * @return 文字位图
      */
-    @NotNull
-    public static Bitmap textToBitmap(@NotNull String text, int textColor, float textSize) {
+    @NonNull
+    public static Bitmap textToBitmap(@NonNull String text, int textColor, float textSize) {
         return textToBitmap(text, textColor, textSize, null);
     }
 
@@ -82,7 +81,7 @@ public class Textx {
      * @param sourceString 给定的字符串
      * @param keyword      给定的关键字
      */
-    public static String keywordMadeRedByHtml(@NotNull String sourceString, @NotNull String keyword) {
+    public static String keywordMadeRedByHtml(@NonNull String sourceString, @NonNull String keyword) {
         return sourceString.replaceAll(keyword, "<font color=\"red\">" + keyword + "</font>");
     }
 }

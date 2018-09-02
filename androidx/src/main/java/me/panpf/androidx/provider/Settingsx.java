@@ -24,11 +24,10 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 import android.view.Window;
 import android.view.WindowManager;
-
-import org.jetbrains.annotations.NotNull;
 
 /**
  * System setup tool method
@@ -40,7 +39,7 @@ public class Settingsx {
      * Return true if screen brightness auto mode is on
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean isScreenBrightnessModeAutomatic(@NotNull Context context) {
+    public static boolean isScreenBrightnessModeAutomatic(@NonNull Context context) {
         try {
             return Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE) == Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC;
         } catch (Settings.SettingNotFoundException e) {
@@ -52,7 +51,7 @@ public class Settingsx {
      * Turn on or off the screen brightness auto mode
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setScreenBrightnessModeAutomatic(@NotNull Context context, boolean automatic) {
+    public static boolean setScreenBrightnessModeAutomatic(@NonNull Context context, boolean automatic) {
         int newValue = automatic ? Settings.System.SCREEN_BRIGHTNESS_MODE_AUTOMATIC : Settings.System.SCREEN_BRIGHTNESS_MODE_MANUAL;
         return Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS_MODE, newValue);
     }
@@ -61,7 +60,7 @@ public class Settingsx {
      * Get system brightness, the range is 0-255
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static int getScreenBrightness(@NotNull Context context) {
+    public static int getScreenBrightness(@NonNull Context context) {
         try {
             return Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS);
         } catch (Settings.SettingNotFoundException e) {
@@ -84,7 +83,7 @@ public class Settingsx {
      *
      * @param brightness Brightness, the range is 0-255
      */
-    public static void setWindowBrightness(@NotNull Activity activity, float brightness) {
+    public static void setWindowBrightness(@NonNull Activity activity, float brightness) {
         Window window = activity.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.screenBrightness = brightness;
@@ -95,7 +94,7 @@ public class Settingsx {
      * Get screen off timeout in milliseconds
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static int getScreenOffTimeout(@NotNull Context context) {
+    public static int getScreenOffTimeout(@NonNull Context context) {
         try {
             return Settings.System.getInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT);
         } catch (Settings.SettingNotFoundException e) {
@@ -107,7 +106,7 @@ public class Settingsx {
      * Set screen off timeout in milliseconds
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setScreenOffTimeout(@NotNull Context context, int millis) {
+    public static boolean setScreenOffTimeout(@NonNull Context context, int millis) {
         return Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, millis);
     }
 
@@ -115,7 +114,7 @@ public class Settingsx {
      * Return true if airplane mode is on
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean isAirplaneModeOn(@NotNull Context context) {
+    public static boolean isAirplaneModeOn(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             return Settings.Global.getInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
         } else {
@@ -127,7 +126,7 @@ public class Settingsx {
      * Turn airplane mode on or off
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setAirplaneModeOn(@NotNull Context context, boolean enabled) {
+    public static boolean setAirplaneModeOn(@NonNull Context context, boolean enabled) {
         boolean result;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             result = Settings.Global.putInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, enabled ? 1 : 0);
@@ -167,7 +166,7 @@ public class Settingsx {
      * Get the media volume, the value range is 0-15
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static int getMediaVolume(@NotNull Context context) {
+    public static int getMediaVolume(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             if (audioManager == null) throw new IllegalStateException("AudioManager not found");
@@ -185,7 +184,7 @@ public class Settingsx {
      * Set the media volume, the value range is 0-15
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setMediaVolume(@NotNull Context context, int mediaVolume) {
+    public static boolean setMediaVolume(@NonNull Context context, int mediaVolume) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             if (audioManager == null) throw new IllegalStateException("AudioManager not found");
@@ -200,7 +199,7 @@ public class Settingsx {
      * Get the ringer volume, the range is 0-7
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static int getRingVolume(@NotNull Context context) {
+    public static int getRingVolume(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             if (audioManager == null) throw new IllegalStateException("AudioManager not found");
@@ -218,7 +217,7 @@ public class Settingsx {
      * Set the ringer volume, the range is 0-7
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setRingVolume(@NotNull Context context, int ringVolume) {
+    public static boolean setRingVolume(@NonNull Context context, int ringVolume) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             if (audioManager == null) throw new IllegalStateException("AudioManager not found");

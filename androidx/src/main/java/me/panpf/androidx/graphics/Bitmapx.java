@@ -26,10 +26,9 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.TypedValue;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -114,57 +113,57 @@ public class Bitmapx {
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull File file, @Nullable BitmapFactory.Options options) {
+    public static Bitmap readBitmap(@NonNull File file, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeFile(file.getPath(), options);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull File file) {
+    public static Bitmap readBitmap(@NonNull File file) {
         return BitmapFactory.decodeFile(file.getPath());
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull InputStream inputStream, @Nullable Rect outPadding, @Nullable BitmapFactory.Options options) {
+    public static Bitmap readBitmap(@NonNull InputStream inputStream, @Nullable Rect outPadding, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeStream(inputStream, outPadding, options);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull InputStream inputStream) {
+    public static Bitmap readBitmap(@NonNull InputStream inputStream) {
         return BitmapFactory.decodeStream(inputStream);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull byte[] data, int offset, int length, @Nullable BitmapFactory.Options options) {
+    public static Bitmap readBitmap(@NonNull byte[] data, int offset, int length, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeByteArray(data, offset, length, options);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull byte[] data, int offset, int length) {
+    public static Bitmap readBitmap(@NonNull byte[] data, int offset, int length) {
         return BitmapFactory.decodeByteArray(data, offset, length);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull FileDescriptor fileDescriptor, @Nullable Rect outPadding, @Nullable BitmapFactory.Options options) {
+    public static Bitmap readBitmap(@NonNull FileDescriptor fileDescriptor, @Nullable Rect outPadding, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeFileDescriptor(fileDescriptor, outPadding, options);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull FileDescriptor fileDescriptor) {
+    public static Bitmap readBitmap(@NonNull FileDescriptor fileDescriptor) {
         return BitmapFactory.decodeFileDescriptor(fileDescriptor);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull Resources resources, int resId, @Nullable BitmapFactory.Options options) {
+    public static Bitmap readBitmap(@NonNull Resources resources, int resId, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeResource(resources, resId, options);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull Resources resources, int resId) {
+    public static Bitmap readBitmap(@NonNull Resources resources, int resId) {
         return BitmapFactory.decodeResource(resources, resId);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NotNull Resources res, @Nullable TypedValue value, @Nullable InputStream is, @Nullable Rect pad, @Nullable BitmapFactory.Options options) {
+    public static Bitmap readBitmap(@NonNull Resources res, @Nullable TypedValue value, @Nullable InputStream is, @Nullable Rect pad, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeResourceStream(res, value, is, pad, options);
     }
 }

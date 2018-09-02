@@ -2,8 +2,7 @@ package me.panpf.androidx;
 
 import android.os.Handler;
 import android.os.Looper;
-
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 import me.panpf.androidx.os.Threadx;
 
@@ -11,7 +10,7 @@ import me.panpf.androidx.os.Threadx;
 public class Androidx {
     private static volatile Handler mainHandler = null;
 
-    @NotNull
+    @NonNull
     public static Handler getMainHandler() {
         if (mainHandler == null) {
             synchronized (Androidx.class) {
@@ -23,7 +22,7 @@ public class Androidx {
         return mainHandler;
     }
 
-    public static void runInUI(@NotNull Runnable runnable) {
+    public static void runInUI(@NonNull Runnable runnable) {
         if (Threadx.isMainThread()) {
             runnable.run();
         } else {
