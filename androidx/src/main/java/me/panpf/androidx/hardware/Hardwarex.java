@@ -42,31 +42,32 @@ import me.panpf.javax.util.Transformer;
 @SuppressWarnings("WeakerAccess")
 public class Hardwarex {
 
-    public static String deviceModel() {
+    public static String getDeviceModel() {
         return Stringx.orEmpty(Build.MODEL);
     }
 
-    public static String deviceName() {
+    public static String getDeviceName() {
         return Stringx.orEmpty(Build.DEVICE);
     }
 
-    public static String hardware() {
+    public static String getHardware() {
         return Build.HARDWARE;
     }
 
-    public static String[] supportedAbis() {
+    public static String[] getSupportedAbis() {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 return Build.SUPPORTED_ABIS;
             } else {
-                return (String[]) Collectionx.filter(Collectionx.listOf(Build.CPU_ABI, Build.CPU_ABI2), new Predicate<String>() {
+                return Collectionx.filter(Collectionx.listOf(Build.CPU_ABI, Build.CPU_ABI2), new Predicate<String>() {
                     @Override
                     public boolean predicate(@NotNull String s) {
-                        return Stringx.isNotEmpty(s);
+                        return Stringx.isNotEmpty(s) && !"unknown".equals(s);
                     }
-                }).toArray();
+                }).toArray(new String[0]);
             }
         } catch (Throwable e) {
+            e.printStackTrace();
             return new String[0];
         }
     }

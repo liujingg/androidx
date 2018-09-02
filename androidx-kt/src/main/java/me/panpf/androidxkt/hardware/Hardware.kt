@@ -15,21 +15,21 @@ import java.net.NetworkInterface
  */
 
 
-val deviceModel: String by lazy { Build.MODEL.orEmpty() }
+fun getDeviceModel(): String = Build.MODEL.orEmpty()
 
-val deviceName: String by lazy { Build.DEVICE.orEmpty() }
+fun getDeviceName(): String = Build.DEVICE.orEmpty()
 
-val hardware: String by lazy { Build.HARDWARE }
+fun getHardware(): String = Build.HARDWARE
 
-val supportedAbis: Array<out String> by lazy {
-    try {
+fun getSupportedAbis(): Array<out String> {
+    return try {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Build.SUPPORTED_ABIS
         } else {
-            arrayListOf<String>(Build.CPU_ABI, Build.CPU_ABI2).filter { it.isNotEmpty() }.toTypedArray()
+            arrayListOf<String>(Build.CPU_ABI, Build.CPU_ABI2).filter { it.isNotEmpty() && it != "unknown" }.toTypedArray()
         }
     } catch (err: Throwable) {
-        arrayOf<String>()
+        arrayOf()
     }
 }
 
@@ -40,7 +40,7 @@ fun Context.getPhoneNumber(): String = try {
 } catch (e: Throwable) {
     e.printStackTrace()
     if (e is SecurityException) "PermissionDenied" else null
-} ?: ""
+}.orEmpty()
 
 @SuppressLint("HardwareIds", "MissingPermission")
 @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
@@ -51,7 +51,7 @@ fun Context.getDeviceId(): String = try {
 } catch (e: Throwable) {
     e.printStackTrace()
     if (e is SecurityException) "PermissionDenied" else null
-} ?: ""
+}.orEmpty()
 
 @SuppressLint("HardwareIds")
 fun Context.getAndroidId(): String = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
@@ -66,7 +66,7 @@ fun Context.getSubscriberId(): String = try {
 } catch (e: Throwable) {
     e.printStackTrace()
     if (e is SecurityException) "PermissionDenied" else null
-} ?: ""
+}.orEmpty()
 
 /**
  * 获取 SIM 卡序列号
@@ -78,7 +78,7 @@ fun Context.getSimSerialNumber(): String = try {
 } catch (e: Throwable) {
     e.printStackTrace()
     if (e is SecurityException) "PermissionDenied" else null
-} ?: ""
+}.orEmpty()
 
 @SuppressLint("MissingPermission", "HardwareIds")
 @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
@@ -91,7 +91,7 @@ fun getSerial(): String = try {
 } catch (e: Throwable) {
     e.printStackTrace()
     if (e is SecurityException) "PermissionDenied" else null
-} ?: ""
+}.orEmpty()
 
 /**
  * 获取国际移动设备身份码

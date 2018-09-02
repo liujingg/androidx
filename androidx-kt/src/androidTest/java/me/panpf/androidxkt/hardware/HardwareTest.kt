@@ -1,7 +1,11 @@
 package me.panpf.androidxkt.hardware
 
+import android.Manifest
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidxkt.app.isGrantPermission
+import me.panpf.androidxkt.os.isAtLeastP
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -9,16 +13,88 @@ import org.junit.runner.RunWith
 class HardwareTest {
 
     @Test
-    fun test() {
-        println("HardwareTest -> deviceModel: $deviceModel")
-        println("HardwareTest -> deviceName: $deviceName")
-        println("HardwareTest -> hardware: $hardware")
-        println("HardwareTest -> supportedAbis: ${supportedAbis.joinToString()}")
-        println("HardwareTest -> deviceId: ${InstrumentationRegistry.getContext().getDeviceId()}")
-        println("HardwareTest -> androidId: ${InstrumentationRegistry.getContext().getAndroidId()}")
-        println("HardwareTest -> subscriberId: ${InstrumentationRegistry.getContext().getSubscriberId()}")
-        println("HardwareTest -> simSerialNumber: ${InstrumentationRegistry.getContext().getSimSerialNumber()}")
-        println("HardwareTest -> serialNumber: ${getSerial()}")
-        println("HardwareTest -> macAddress: ${InstrumentationRegistry.getContext().getMacAddress()}")
+    fun testDeviceModel() {
+        Assert.assertTrue(getDeviceModel().isNotEmpty())
+    }
+
+    @Test
+    fun testDeviceName() {
+        Assert.assertTrue(getDeviceName().isNotEmpty())
+    }
+
+    @Test
+    fun testHardware() {
+        Assert.assertTrue(getHardware().isNotEmpty())
+    }
+
+    @Test
+    fun testSupportedAbis() {
+        Assert.assertTrue(getSupportedAbis().isNotEmpty())
+    }
+
+    @Test
+    fun testDeviceId() {
+        val context = InstrumentationRegistry.getContext()
+
+        if (context.isGrantPermission(Manifest.permission.READ_PHONE_STATE)) {
+            Assert.assertTrue(context.getDeviceId().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+        } else {
+            Assert.assertTrue(context.getDeviceId() == "PermissionDenied")
+        }
+    }
+
+    @Test
+    fun testAndroidId() {
+        val context = InstrumentationRegistry.getContext()
+
+        Assert.assertTrue(context.getAndroidId().isNotEmpty())
+    }
+
+    @Test
+    fun testSubscriberId() {
+        val context = InstrumentationRegistry.getContext()
+
+        if (context.isGrantPermission(Manifest.permission.READ_PHONE_STATE)) {
+            Assert.assertTrue(context.getSubscriberId().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+        } else {
+            Assert.assertTrue(context.getSubscriberId() == "PermissionDenied")
+        }
+    }
+
+    @Test
+    fun testSimSerialNumber() {
+        val context = InstrumentationRegistry.getContext()
+
+        if (context.isGrantPermission(Manifest.permission.READ_PHONE_STATE)) {
+            Assert.assertTrue(context.getSimSerialNumber().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+        } else {
+            Assert.assertTrue(context.getSimSerialNumber() == "PermissionDenied")
+        }
+    }
+
+    @Test
+    fun testSerial() {
+        if (isAtLeastP()) {
+            val context = InstrumentationRegistry.getContext()
+
+            if (context.isGrantPermission(Manifest.permission.READ_PHONE_STATE)) {
+                Assert.assertTrue(getSerial().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+            } else {
+                Assert.assertTrue(getSerial() == "PermissionDenied")
+            }
+        } else {
+            Assert.assertTrue(getSerial().isNotEmpty())
+        }
+    }
+
+    @Test
+    fun testMacAddress() {
+        val context = InstrumentationRegistry.getContext()
+
+        if (context.isGrantPermission(Manifest.permission.ACCESS_WIFI_STATE)) {
+            Assert.assertTrue(context.getMacAddress().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+        } else {
+            Assert.assertTrue(context.getMacAddress() == "PermissionDenied")
+        }
     }
 }

@@ -13,29 +13,36 @@ class PermissionTest {
 
     @Test
     fun testSinglePermission() {
-        Assert.assertTrue(InstrumentationRegistry.getContext().isGrantPermission(Manifest.permission.INTERNET))
+        val context = InstrumentationRegistry.getContext()
+        Assert.assertTrue(context.isGrantPermission(Manifest.permission.INTERNET))
     }
 
     @Test
     fun testSingleNoPermission() {
+        val context = InstrumentationRegistry.getContext()
         if (isAtLeastM()) {
-            Assert.assertFalse(InstrumentationRegistry.getContext().isGrantPermission(Manifest.permission.READ_PHONE_STATE))
+            Assert.assertFalse(context.isGrantPermission(Manifest.permission.READ_PHONE_STATE))
         } else {
-            Assert.assertTrue(InstrumentationRegistry.getContext().isGrantPermission(Manifest.permission.READ_PHONE_STATE))
+            Assert.assertTrue(context.isGrantPermission(Manifest.permission.READ_PHONE_STATE))
         }
     }
 
     @Test
     fun testMultiPermission() {
-        Assert.assertTrue(InstrumentationRegistry.getContext().isGrantPermissions(Manifest.permission.INTERNET, Manifest.permission.VIBRATE))
+        val context = InstrumentationRegistry.getContext()
+        Assert.assertTrue(context.isGrantPermissions(
+                Manifest.permission.INTERNET, Manifest.permission.VIBRATE))
     }
 
     @Test
     fun testMultiNoPermission() {
+        val context = InstrumentationRegistry.getContext()
         if (isAtLeastM()) {
-            Assert.assertFalse(InstrumentationRegistry.getContext().isGrantPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA))
+            Assert.assertFalse(context.isGrantPermissions(
+                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA))
         } else {
-            Assert.assertTrue(InstrumentationRegistry.getContext().isGrantPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA))
+            Assert.assertTrue(context.isGrantPermissions(
+                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA))
         }
     }
 }
