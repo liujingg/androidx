@@ -2,7 +2,11 @@ package me.panpf.androidxkt.util
 
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Color
 import android.graphics.Paint
+import android.text.Spannable
+import android.text.SpannableStringBuilder
+import android.text.style.ForegroundColorSpan
 import me.panpf.androidxkt.graphics.getTextHeight
 import me.panpf.androidxkt.graphics.getTextLeading
 import me.panpf.androidxkt.graphics.getTextWidth
@@ -15,37 +19,32 @@ import me.panpf.androidxkt.graphics.getTextWidth
  * @param textColor  文字颜色
  * @param textSize   文字大小
  * @param leftBitmap 可以在文字的左边放置一张图片
- * @return 文字位图
  */
-@JvmOverloads
 fun textToBitmap(text: String, textColor: Int, textSize: Float, leftBitmap: Bitmap? = null): Bitmap {
-    // 创建并初始化画笔
     val paint = Paint()
     paint.color = textColor
     paint.textSize = textSize
-    paint.isAntiAlias = true   //  去除锯齿
-    paint.isFilterBitmap = true    //  对文字进行滤波处理，增强绘制效果
+    paint.isAntiAlias = true
+    paint.isFilterBitmap = true
 
-    // 计算要绘制的文字的宽和高
     val textWidth = text.getTextWidth(paint)
     val textHeight = paint.getTextHeight()
 
-    // 计算图片的宽高
-    var newBimapWidth = if (textWidth % 1 == 0f) textWidth.toInt() else textWidth.toInt() + 1
-    var newBimapHeight = if (textHeight % 1 == 0f) textHeight.toInt() else textHeight.toInt() + 1
+    var newBitmapWidth = if (textWidth % 1 == 0f) textWidth.toInt() else textWidth.toInt() + 1
+    var newBitmapHeight = if (textHeight % 1 == 0f) textHeight.toInt() else textHeight.toInt() + 1
 
     if (leftBitmap != null) {
-        newBimapWidth += leftBitmap.width
-        newBimapHeight = if (leftBitmap.height > newBimapHeight) leftBitmap.height else newBimapHeight
+        newBitmapWidth += leftBitmap.width
+        newBitmapHeight = if (leftBitmap.height > newBitmapHeight) leftBitmap.height else newBitmapHeight
     }
 
-    val bitmap = Bitmap.createBitmap(newBimapWidth, newBimapHeight, Bitmap.Config.ARGB_8888)
+    val bitmap = Bitmap.createBitmap(newBitmapWidth, newBitmapHeight, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
     if (leftBitmap != null) {
-        canvas.drawBitmap(leftBitmap, 0f, ((newBimapHeight - leftBitmap.height) / 2).toFloat(), paint)
-        canvas.drawText(text, leftBitmap.width.toFloat(), (newBimapHeight - textHeight) / 2 + paint.getTextLeading(), paint)
+        canvas.drawBitmap(leftBitmap, 0f, ((newBitmapHeight - leftBitmap.height) / 2).toFloat(), paint)
+        canvas.drawText(text, leftBitmap.width.toFloat(), (newBitmapHeight - textHeight) / 2 + paint.getTextLeading(), paint)
     } else {
-        canvas.drawText(text, 0f, (newBimapHeight - textHeight) / 2 + paint.getTextLeading(), paint)
+        canvas.drawText(text, 0f, (newBitmapHeight - textHeight) / 2 + paint.getTextLeading(), paint)
     }
     canvas.save()
 
@@ -53,18 +52,71 @@ fun textToBitmap(text: String, textColor: Int, textSize: Float, leftBitmap: Bitm
 }
 
 /**
- * 使用 Html 的方式给字符串添加红色标记
+ * 使用 Html 的方式给字符串添加颜色标记
  */
-fun String.toHtmlRedFlag(): String {
-    return "<font color=\"red\">$this</font>"
+fun String.toHtmlColorFlag(color: String): String {
+    return "<font color=\"$color\">$this</font>"
 }
 
 /**
- * 使用 Html 的方式将给定的字符串中所有给定的关键字标红
+ * 使用 Html 的方式给字符串添加红色标记
+ */
+fun String.toHtmlRedFlag(): String {
+    return this.toHtmlColorFlag("red")
+}
+
+/**
+ * 使用 Html 的方式将字符串中所有关键字标记颜色
  *
- * @receiver 给定的字符串
- * @param keyword      给定的关键字
+ * @receiver 字符串
+ * @param keyword      关键字
+ * @param color        html 支持的颜色
+ */
+fun String.keywordMadeColorByHtml(keyword: String, color: String): String {
+    return this.replace(keyword.toRegex(), "<font color=\"$color\">$keyword</font>")
+}
+
+/**
+ * 使用 Html 的方式将字符串中所有关键字标记成红色
+ *
+ * @receiver 字符串
+ * @param keyword      关键字
  */
 fun String.keywordMadeRedByHtml(keyword: String): String {
-    return this.replace(keyword.toRegex(), "<font color=\"red\">$keyword</font>")
+    return this.keywordMadeColorByHtml(keyword, "red")
+}
+
+/**
+ * 使用 Spannable 的方式将字符串中所有的关键字标记颜色
+ *
+ * @receiver 字符串
+ * @param keyword      关键字
+ * @param color        颜色
+ */
+fun String.keywordMadeColorBySpannable(keyword: String, color: Int): SpannableStringBuilder {
+    val builder = SpannableStringBuilder(this)
+
+    var fromIndex = 0
+    while (fromIndex < this.length) {
+        val index = this.indexOf(keyword, fromIndex)
+        if (index != -1) {
+            val endIndex = index + keyword.length
+            builder.setSpan(ForegroundColorSpan(color), index, endIndex, Spannable.SPAN_EXCLUSIVE_INCLUSIVE)
+            fromIndex = endIndex
+        } else {
+            break
+        }
+    }
+
+    return builder
+}
+
+/**
+ * 使用 Spannable 的方式将字符串中所有的关键字标记成红色
+ *
+ * @receiver 字符串
+ * @param keyword      关键字
+ */
+fun String.keywordMadeRedBySpannable(keyword: String): SpannableStringBuilder {
+    return this.keywordMadeColorBySpannable(keyword, Color.RED)
 }
