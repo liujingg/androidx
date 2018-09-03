@@ -19,24 +19,27 @@ package me.panpf.androidxkt.graphics
 import android.graphics.Color
 import android.graphics.ColorMatrix
 import android.graphics.ColorMatrixColorFilter
+import android.support.annotation.ColorInt
+import android.support.annotation.FloatRange
+import android.support.annotation.IntRange
 
 /**
- * 白色
+ * White
  */
 const val WHITE = -0x1
 
 /**
- * 白色 - 半透明
+ * White - translucent
  */
 const val WHITE_TRANSLUCENT = -0x7f000001
 
 /**
- * 黑色
+ * Black
  */
 const val BLACK = -0x1000000
 
 /**
- * 黑色 - 半透明
+ * Black - translucent
  */
 const val BLACK_TRANSLUCENT = -0x80000000
 
@@ -365,52 +368,155 @@ const val HIGH_LIGHT = 0x33ffffff
  */
 const val LOW_LIGHT = 0x33000000
 
+
 /**
- * 设置透明度
+ * Get color alpha value
  *
- * @param alpha 透明度，0到255
- * @return 新的颜色
+ * @receiver rgb color value
  */
-fun Int.setColorAlpha(alpha: Int): Int {
-    val hsv = FloatArray(3)
-    Color.colorToHSV(this, hsv)
-    return Color.HSVToColor(alpha, hsv)
+@IntRange(from = 0, to = 255)
+fun Int.getColorAlpha(): Int {
+    return Color.alpha(this)
 }
 
 /**
- * 修改饱和度
+ * Modify color alpha value, Return a new RGB color value
  *
- * @param rate  饱和度比例，0到1
- * @return 新的颜色
+ * @receiver rgb color value
+ * @param newAlpha New alpha value (0...255)
  */
-fun Int.setColorSaturation(rate: Float): Int {
+@ColorInt
+fun Int.setColorAlpha(@IntRange(from = 0, to = 255) newAlpha: Int): Int {
     val hsv = FloatArray(3)
     Color.colorToHSV(this, hsv)
-    hsv[1] = hsv[1] * rate
+    return Color.HSVToColor(newAlpha, hsv)
+}
+
+/**
+ * Multiply [addRate] based on the color original alpha value to return the new RGB color value
+ *
+ * @receiver rgb color value
+ * @param addRate Add the ratio (0...1)
+ */
+@ColorInt
+fun Int.addColorAlpha(@FloatRange(from = 0.0, to = 1.0) addRate: Float): Int {
+    val hsv = FloatArray(3)
+    Color.colorToHSV(this, hsv)
+    val newAlpha = (Color.alpha(this) * addRate).toInt()
+    return Color.HSVToColor(newAlpha, hsv)
+}
+
+/**
+ * Get color HSV hue value
+ *
+ * @receiver rgb color value
+ */
+@FloatRange(from = 0.0, to = 360.0)
+fun Int.getColorHSVHue(): Float {
+    val hsv = FloatArray(3)
+    Color.colorToHSV(this, hsv)
+    return hsv[0]
+}
+
+/**
+ * Modify color HSV hue value, Return a new RGB color value
+ *
+ * @receiver rgb color value
+ * @param newHue New HSV hue value (0...360)
+ */
+@ColorInt
+fun Int.setColorHSVHue(@FloatRange(from = 0.0, to = 360.0) newHue: Float): Int {
+    val hsv = FloatArray(3)
+    Color.colorToHSV(this, hsv)
+    hsv[0] = newHue
     return Color.HSVToColor(hsv)
 }
 
 /**
- * 让颜色深一点
+ * Get color HSV saturation value
  *
- * @param rate  深的比例，0到1
- * @return 新的颜色
+ * @receiver rgb color value
  */
-@JvmOverloads
-fun Int.setColorDarken(rate: Float = 0.8f): Int {
+@FloatRange(from = 0.0, to = 1.0)
+fun Int.getColorHSVSaturation(): Float {
     val hsv = FloatArray(3)
     Color.colorToHSV(this, hsv)
-    hsv[2] = hsv[2] * rate
+    return hsv[1]
+}
+
+/**
+ * Modify color HSV saturation value, Return a new RGB color value
+ *
+ * @receiver rgb color value
+ * @param newSaturation New HSV saturation value (0...1)
+ */
+@ColorInt
+fun Int.setColorHSVSaturation(@FloatRange(from = 0.0, to = 1.0) newSaturation: Float): Int {
+    val hsv = FloatArray(3)
+    Color.colorToHSV(this, hsv)
+    hsv[1] = newSaturation
     return Color.HSVToColor(hsv)
 }
 
 /**
- * 判断颜色属于亮色或者暗色，用于防止背景色与文字颜色接近造成文字看不清
- * http://codepen.io/znak/pen/aOvMOd
+ * Multiply [addRate] based on the color original HSV saturation value to return the new RGB color value
  *
- * @return boolean 是否亮色
+ * @receiver rgb color value
+ * @param addRate Add the ratio (0...1)
  */
-@Suppress("LocalVariableName")
+@ColorInt
+fun Int.addColorHSVSaturation(@FloatRange(from = 0.0, to = 1.0) addRate: Float): Int {
+    val hsv = FloatArray(3)
+    Color.colorToHSV(this, hsv)
+    hsv[1] *= addRate
+    return Color.HSVToColor(hsv)
+}
+
+/**
+ * Get color HSV 'value' value
+ *
+ * @receiver rgb color value
+ */
+@FloatRange(from = 0.0, to = 1.0)
+fun Int.getColorHSVValue(): Float {
+    val hsv = FloatArray(3)
+    Color.colorToHSV(this, hsv)
+    return hsv[2]
+}
+
+/**
+ * Modify color HSV 'value' value, Return a new RGB color value
+ *
+ * @receiver rgb color value
+ * @param newValue New HSV 'value' value (0...1)
+ */
+@ColorInt
+fun Int.setColorHSVValue(@FloatRange(from = 0.0, to = 1.0) newValue: Float): Int {
+    val hsv = FloatArray(3)
+    Color.colorToHSV(this, hsv)
+    hsv[2] = newValue
+    return Color.HSVToColor(hsv)
+}
+
+/**
+ * Multiply [addRate] based on the color original HSV 'value' value to return the new RGB color value
+ *
+ * @receiver rgb color value
+ * @param addRate Add the ratio (0...1)
+ */
+@ColorInt
+fun Int.addColorHSVValue(@FloatRange(from = 0.0, to = 1.0) addRate: Float): Int {
+    val hsv = FloatArray(3)
+    Color.colorToHSV(this, hsv)
+    hsv[2] *= addRate
+    return Color.HSVToColor(hsv)
+}
+
+/**
+ * Returns true if the color is a bright color, used to prevent the background color from being close to the text color, causing the text to be invisible
+ *
+ * @receiver rgb color value
+ */
 fun Int.isLightColor(): Boolean {
     val R = Color.red(this) / 255f
     val G = Color.green(this) / 255f
@@ -430,11 +536,11 @@ fun Int.isLightColor(): Boolean {
 }
 
 /**
- * 创建一个可以改变颜色的 ColorFilter
+ * Create a ColorMatrixColorFilter that can be used to change the color of the Drawable
  *
- * @return ColorMatrixColorFilter
+ * @receiver rgb color value (alpha value is useless)
  */
-fun Int.makeColorFilter(): ColorMatrixColorFilter {
+fun Int.makeMatrixColorFilter(): ColorMatrixColorFilter {
     val mRed = Color.red(this).toFloat()
     val mGreen = Color.green(this).toFloat()
     val mBlue = Color.blue(this).toFloat()

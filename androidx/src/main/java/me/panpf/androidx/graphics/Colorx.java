@@ -1,12 +1,12 @@
 /*
  * Copyright (C) 2017 Peng fei Pan <sky@panpf.me>
- * 
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * 
+ *
  *   http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,26 +19,29 @@ package me.panpf.androidx.graphics;
 import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
+import android.support.annotation.ColorInt;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
 
 @SuppressWarnings("WeakerAccess")
 public class Colorx {
     /**
-     * 白色
+     * White
      */
     public static final int WHITE = 0xffffffff;
 
     /**
-     * 白色 - 半透明
+     * White - translucent
      */
     public static final int WHITE_TRANSLUCENT = 0x80ffffff;
 
     /**
-     * 黑色
+     * Black
      */
     public static final int BLACK = 0xff000000;
 
     /**
-     * 黑色 - 半透明
+     * Black - translucent
      */
     public static final int BLACK_TRANSLUCENT = 0x80000000;
 
@@ -368,67 +371,140 @@ public class Colorx {
     public static final int LOW_LIGHT = 0x33000000;
 
     /**
-     * 修改透明度
-     *
-     * @param color 原始颜色
-     * @param alpha 透明度，0到255
-     * @return 新的颜色
+     * Get color alpha value
      */
-    public static int setAlpha(int color, int alpha) {
-        float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        return Color.HSVToColor(alpha, hsv);
+    @IntRange(from = 0, to = 255)
+    public static int getAlpha(@ColorInt int rgbColor) {
+        return Color.alpha(rgbColor);
     }
 
     /**
-     * 修改饱和度
+     * Modify color alpha value, Return a new RGB color value
      *
-     * @param color 原始颜色
-     * @param rate  饱和度比例，0到1
-     * @return 新的颜色
+     * @param newAlpha New alpha value (0...255)
      */
-    public static int setSaturation(int color, float rate) {
+    @ColorInt
+    public static int setAlpha(@ColorInt int rgbColor, @IntRange(from = 0, to = 255) int newAlpha) {
         float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[1] = hsv[1] * rate;
+        Color.colorToHSV(rgbColor, hsv);
+        return Color.HSVToColor(newAlpha, hsv);
+    }
+
+    /**
+     * Multiply [addRate] based on the color original alpha value to return the new RGB color value
+     *
+     * @param addRate Add the ratio (0...1)
+     */
+    @ColorInt
+    public static int addAlpha(@ColorInt int rgbColor, @FloatRange(from = 0, to = 1) float addRate) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(rgbColor, hsv);
+        int newAlpha = (int) (Color.alpha(rgbColor) * addRate);
+        return Color.HSVToColor(newAlpha, hsv);
+    }
+
+    /**
+     * Get color HSV hue value
+     */
+    @FloatRange(from = 0, to = 360)
+    public static float getHSVHue(@ColorInt int rgbColor) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(rgbColor, hsv);
+        return hsv[0];
+    }
+
+    /**
+     * Modify color HSV hue value, Return a new RGB color value
+     *
+     * @param newHue New HSV hue value (0...360)
+     */
+    @ColorInt
+    public static int setHSVHue(@ColorInt int rgbColor, @FloatRange(from = 0, to = 360) float newHue) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(rgbColor, hsv);
+        hsv[0] = newHue;
         return Color.HSVToColor(hsv);
     }
 
     /**
-     * 让颜色深一点
-     *
-     * @param color 原始颜色
-     * @param rate  深的比例，0到1
-     * @return 新的颜色
+     * Get color HSV saturation value
      */
-    public static int setDarken(int color, float rate) {
+    @FloatRange(from = 0, to = 1)
+    public static float getHSVSaturation(@ColorInt int rgbColor) {
         float[] hsv = new float[3];
-        Color.colorToHSV(color, hsv);
-        hsv[2] = hsv[2] * rate;
+        Color.colorToHSV(rgbColor, hsv);
+        return hsv[1];
+    }
+
+    /**
+     * Modify color HSV saturation value, Return a new RGB color value
+     *
+     * @param newSaturation New HSV saturation value (0...1)
+     */
+    @ColorInt
+    public static int setHSVSaturation(@ColorInt int rgbColor, @FloatRange(from = 0, to = 1) float newSaturation) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(rgbColor, hsv);
+        hsv[1] = newSaturation;
         return Color.HSVToColor(hsv);
     }
 
     /**
-     * 让颜色深一点儿，0.8
+     * Multiply [addRate] based on the color original HSV saturation value to return the new RGB color value
      *
-     * @param color 原始颜色
-     * @return 新的颜色
+     * @param addRate Add the ratio (0...1)
      */
-    public static int setDarken(int color) {
-        return setDarken(color, 0.8f);
+    @ColorInt
+    public static int addHSVSaturation(@ColorInt int rgbColor, @FloatRange(from = 0, to = 1) float addRate) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(rgbColor, hsv);
+        hsv[1] *= addRate;
+        return Color.HSVToColor(hsv);
     }
 
     /**
-     * 判断颜色属于亮色或者暗色，用于防止背景色与文字颜色接近造成文字看不清
-     * http://codepen.io/znak/pen/aOvMOd
-     *
-     * @param color 原始颜色
-     * @return boolean 是否亮色
+     * Get color HSV 'value' value
      */
-    public static boolean isLight(int color) {
-        float R = Color.red(color) / 255f;
-        float G = Color.green(color) / 255f;
-        float B = Color.blue(color) / 255f;
+    @FloatRange(from = 0, to = 1)
+    public static float getHSVValue(@ColorInt int rgbColor) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(rgbColor, hsv);
+        return hsv[2];
+    }
+
+    /**
+     * Modify color HSV 'value' value, Return a new RGB color value
+     *
+     * @param newValue New HSV 'value' value (0...1)
+     */
+    @ColorInt
+    public static int setHSVValue(@ColorInt int rgbColor, @FloatRange(from = 0, to = 1) float newValue) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(rgbColor, hsv);
+        hsv[2] = newValue;
+        return Color.HSVToColor(hsv);
+    }
+
+    /**
+     * Multiply [addRate] based on the color original HSV 'value' value to return the new RGB color value
+     *
+     * @param addRate Add the ratio (0...1)
+     */
+    @ColorInt
+    public static int addHSVValue(@ColorInt int rgbColor, @FloatRange(from = 0, to = 1) float addRate) {
+        float[] hsv = new float[3];
+        Color.colorToHSV(rgbColor, hsv);
+        hsv[2] *= addRate;
+        return Color.HSVToColor(hsv);
+    }
+
+    /**
+     * Returns true if the color is a bright color, used to prevent the background color from being close to the text color, causing the text to be invisible
+     */
+    public static boolean isLight(@ColorInt int rgbColor) {
+        float R = Color.red(rgbColor) / 255f;
+        float G = Color.green(rgbColor) / 255f;
+        float B = Color.blue(rgbColor) / 255f;
         float[] components = new float[]{R, G, B};
 
         for (int i = 0; i < components.length; i++) {
@@ -444,15 +520,14 @@ public class Colorx {
     }
 
     /**
-     * 创建一个可以改变颜色的 ColorFilter
+     * Create a ColorMatrixColorFilter that can be used to change the color of the Drawable
      *
-     * @param color 透明度是没有用的
-     * @return ColorMatrixColorFilter
+     * @param noAlphaRgbColor RGB color value (alpha value is useless)
      */
-    public static ColorMatrixColorFilter makeResetColorFilter(int color) {
-        float mRed = Color.red(color);
-        float mGreen = Color.green(color);
-        float mBlue = Color.blue(color);
+    public static ColorMatrixColorFilter makeMatrixColorFilter(@ColorInt int noAlphaRgbColor) {
+        float mRed = Color.red(noAlphaRgbColor);
+        float mGreen = Color.green(noAlphaRgbColor);
+        float mBlue = Color.blue(noAlphaRgbColor);
         float[] src = new float[]{
                 0, 0, 0, 0, mRed,
                 0, 0, 0, 0, mGreen,

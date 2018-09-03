@@ -54,13 +54,13 @@ compile "me.panpf:android-kt:$lastVersion"
 #### graphics
 * Drawable: [Drawablex.java] | [Drawable.kt]
 * Bitmap: [Bitmapx.java] | [Bitmap.kt]
-* Color: [Colorx.java] | [Color.kt]
+* Color: [Colorx.java] ([Test][ColorTest.java]) | [Color.kt] ([Test][ColorTest.kt])
 * Matrix: [Matrixx.java] | [Matrix.kt]
 * OpenGl: [OpenGlx.java] | [OpenGl.kt]
 * Paint: [Paintx.java] | [Paint.kt]
 
 #### hardware
-* Hardware: [Hardwarex.java] ([Test][HardwareTest.java]) | [Hardware.kt] ([Test][HardwareTest.java])
+* Hardware: [Hardwarex.java] ([Test][HardwareTest.java]) | [Hardware.kt] ([Test][HardwareTest.kt])
 
 #### net
 * NetworkState: [NetworkState.java] | [NetworkState.kt]
