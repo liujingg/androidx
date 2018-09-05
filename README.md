@@ -17,7 +17,7 @@ compile "me.panpf:android:$lastVersion"
 
 依赖：
 * com.android.support:support-fragment: 27.1.1
-* me.panpf:[javax][javax]: 0.4
+* me.panpf:[javax][javax]: 0.6
 
 #### Kotlin 版：
 
@@ -30,7 +30,7 @@ compile "me.panpf:android-kt:$lastVersion"
 依赖：
 * org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.50
 * com.android.support:support-fragment: 27.1.1
-* me.panpf:[javax-kt][javax]: 0.4
+* me.panpf:[javax-kt][javax]: 0.6
 
 你可以根据需要选择一个版本导入，如果你的项目是 Java 加 Kotlin 混合开发的那么两个版本都可以导入，因为两个版本采用了不同的包名所以不会有类重复问题
 

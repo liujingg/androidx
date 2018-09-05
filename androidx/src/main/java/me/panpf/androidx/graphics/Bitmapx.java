@@ -95,7 +95,7 @@ public class Bitmapx {
     }
 
     public static void writeToFile(Bitmap bm, File file, Bitmap.CompressFormat format, int quality) throws IOException {
-        Filex.createNewFileWithThrow(file);
+        Filex.createNewFileOrThrow(file);
         BufferedOutputStream bos;
         try {
             bos = new BufferedOutputStream(new FileOutputStream(file));

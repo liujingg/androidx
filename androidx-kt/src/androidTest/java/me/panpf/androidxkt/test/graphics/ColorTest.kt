@@ -3,6 +3,7 @@ package me.panpf.androidxkt.test.graphics
 import android.graphics.Color
 import android.support.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.graphics.*
+import me.panpf.javaxkt.lang.scale
 
 import org.junit.Assert
 import org.junit.Test
@@ -30,16 +31,16 @@ class ColorTest {
 
     @Test
     fun testSaturation() {
-        Assert.assertEquals(((COLOR.getColorHSVSaturation() * 100).toInt()).toLong(), 89)
-        Assert.assertEquals(((COLOR.setColorHSVSaturation(0.34f).getColorHSVSaturation() * 100).toInt()).toLong(), 34)
-        Assert.assertEquals(((COLOR.addColorHSVSaturation(0.34f).getColorHSVSaturation() * 100).toInt()).toLong(), 31)
+        Assert.assertEquals(COLOR.getColorHSVSaturation().scale(2), 0.9f, 0f)
+        Assert.assertEquals(COLOR.setColorHSVSaturation(0.34f).getColorHSVSaturation().scale(2), 0.34f, 0f)
+        Assert.assertEquals(COLOR.addColorHSVSaturation(0.34f).getColorHSVSaturation().scale(2), 0.31f, 0f)
     }
 
     @Test
     fun testHSVValue() {
-        Assert.assertEquals(((COLOR.getColorHSVValue() * 100).toInt()).toLong(), 73)
-        Assert.assertEquals(((COLOR.setColorHSVValue(0.21f).getColorHSVValue() * 100).toInt()).toLong(), 20)
-        Assert.assertEquals(((COLOR.addColorHSVValue(0.21f).getColorHSVValue() * 100).toInt()).toLong(), 15)
+        Assert.assertEquals(COLOR.getColorHSVValue().scale(2), 0.73f, 0f)
+        Assert.assertEquals(COLOR.setColorHSVValue(0.21f).getColorHSVValue().scale(2), 0.21f, 0f)
+        Assert.assertEquals(COLOR.addColorHSVValue(0.21f).getColorHSVValue().scale(2), 0.15f, 0f)
     }
 
     @Test

@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import me.panpf.androidx.graphics.Colorx;
+import me.panpf.javax.lang.Numberx;
 
 @RunWith(AndroidJUnit4.class)
 public class ColorTest {
@@ -29,16 +30,16 @@ public class ColorTest {
 
     @Test
     public void testSaturation() {
-        Assert.assertEquals((int) (Colorx.getHSVSaturation(COLOR) * 100), 89);
-        Assert.assertEquals((int) (Colorx.getHSVSaturation(Colorx.setHSVSaturation(COLOR, 0.34f)) * 100), 34);
-        Assert.assertEquals((int) (Colorx.getHSVSaturation(Colorx.addHSVSaturation(COLOR, 0.34f)) * 100), 31);
+        Assert.assertEquals(Numberx.scale(Colorx.getHSVSaturation(COLOR), 2), 0.9f, 0f);
+        Assert.assertEquals(Numberx.scale(Colorx.getHSVSaturation(Colorx.setHSVSaturation(COLOR, 0.34f)), 2), 0.34f, 0f);
+        Assert.assertEquals(Numberx.scale(Colorx.getHSVSaturation(Colorx.addHSVSaturation(COLOR, 0.34f)), 2), 0.31f, 0f);
     }
 
     @Test
     public void testHSVValue() {
-        Assert.assertEquals((int) (Colorx.getHSVValue(COLOR) * 100), 73);
-        Assert.assertEquals((int) (Colorx.getHSVValue(Colorx.setHSVValue(COLOR, 0.21f)) * 100), 20);
-        Assert.assertEquals((int) (Colorx.getHSVValue(Colorx.addHSVValue(COLOR, 0.21f)) * 100), 15);
+        Assert.assertEquals(Numberx.scale(Colorx.getHSVValue(COLOR), 2), 0.73f, 0f);
+        Assert.assertEquals(Numberx.scale(Colorx.getHSVValue(Colorx.setHSVValue(COLOR, 0.21f)), 2), 0.21f, 0f);
+        Assert.assertEquals(Numberx.scale(Colorx.getHSVValue(Colorx.addHSVValue(COLOR, 0.21f)), 2), 0.15f, 0f);
     }
 
     @Test

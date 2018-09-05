@@ -40,7 +40,7 @@ class HardwareTest {
         if (context.isGrantPermission(Manifest.permission.READ_PHONE_STATE)) {
             Assert.assertTrue(context.getDeviceId().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
         } else {
-            Assert.assertTrue(context.getDeviceId() == "PermissionDenied")
+            Assert.assertEquals(context.getDeviceId(), "PermissionDenied")
         }
     }
 
@@ -58,7 +58,7 @@ class HardwareTest {
         if (context.isGrantPermission(Manifest.permission.READ_PHONE_STATE)) {
             Assert.assertTrue(context.getSubscriberId().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
         } else {
-            Assert.assertTrue(context.getSubscriberId() == "PermissionDenied")
+            Assert.assertEquals(context.getSubscriberId(), "PermissionDenied")
         }
     }
 
@@ -69,7 +69,7 @@ class HardwareTest {
         if (context.isGrantPermission(Manifest.permission.READ_PHONE_STATE)) {
             Assert.assertTrue(context.getSimSerialNumber().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
         } else {
-            Assert.assertTrue(context.getSimSerialNumber() == "PermissionDenied")
+            Assert.assertEquals(context.getSimSerialNumber(), "PermissionDenied")
         }
     }
 
@@ -81,7 +81,7 @@ class HardwareTest {
             if (context.isGrantPermission(Manifest.permission.READ_PHONE_STATE)) {
                 Assert.assertTrue(getSerial().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
             } else {
-                Assert.assertTrue(getSerial() == "PermissionDenied")
+                Assert.assertEquals(getSerial(), "PermissionDenied")
             }
         } else {
             Assert.assertTrue(getSerial().isNotEmpty())
@@ -95,7 +95,7 @@ class HardwareTest {
         if (context.isGrantPermission(Manifest.permission.ACCESS_WIFI_STATE)) {
             Assert.assertTrue(context.getMacAddress().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
         } else {
-            Assert.assertTrue(context.getMacAddress() == "PermissionDenied")
+            Assert.assertEquals(context.getMacAddress(), "PermissionDenied")
         }
     }
 }

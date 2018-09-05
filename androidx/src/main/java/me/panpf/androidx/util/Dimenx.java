@@ -62,11 +62,11 @@ public class Dimenx {
         return px2sp(context, (float) px);
     }
 
-    public static float unit2px(@NonNull Context context, @Unit int unit, float value) {
+    public static float unit2px(@NonNull Context context, @DimenUnit int unit, float value) {
         return TypedValue.applyDimension(unit, value, context.getResources().getDisplayMetrics());
     }
 
-    public static float unit2px(@NonNull Context context, @Unit int unit, int value) {
+    public static float unit2px(@NonNull Context context, @DimenUnit int unit, int value) {
         return unit2px(context, unit, (float) value);
     }
 
@@ -102,11 +102,11 @@ public class Dimenx {
         return px2sp(fragment, (float) px);
     }
 
-    public static float unit2px(@NonNull android.support.v4.app.Fragment fragment, @Unit int unit, float value) {
+    public static float unit2px(@NonNull android.support.v4.app.Fragment fragment, @DimenUnit int unit, float value) {
         return TypedValue.applyDimension(unit, value, fragment.getResources().getDisplayMetrics());
     }
 
-    public static float unit2px(@NonNull android.support.v4.app.Fragment fragment, @Unit int unit, int value) {
+    public static float unit2px(@NonNull android.support.v4.app.Fragment fragment, @DimenUnit int unit, int value) {
         return unit2px(fragment, unit, (float) value);
     }
 
@@ -142,19 +142,19 @@ public class Dimenx {
         return px2sp(view, (float) px);
     }
 
-    public static float unit2px(@NonNull View view, @Unit int unit, float value) {
+    public static float unit2px(@NonNull View view, @DimenUnit int unit, float value) {
         return TypedValue.applyDimension(unit, value, view.getResources().getDisplayMetrics());
     }
 
-    public static float unit2px(@NonNull View view, @Unit int unit, int value) {
+    public static float unit2px(@NonNull View view, @DimenUnit int unit, int value) {
         return unit2px(view, unit, (float) value);
     }
 
     @IntDef({TypedValue.COMPLEX_UNIT_SP, TypedValue.COMPLEX_UNIT_DIP, TypedValue.COMPLEX_UNIT_PX,
             TypedValue.COMPLEX_UNIT_PT, TypedValue.COMPLEX_UNIT_IN, TypedValue.COMPLEX_UNIT_MM})
     @Target({ElementType.FIELD, ElementType.PARAMETER, ElementType.LOCAL_VARIABLE})
-    @Retention(RetentionPolicy.RUNTIME)
-    public @interface Unit {
+    @Retention(RetentionPolicy.CLASS)
+    public @interface DimenUnit {
 
     }
 }

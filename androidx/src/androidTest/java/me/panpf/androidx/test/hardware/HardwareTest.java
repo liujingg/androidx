@@ -45,9 +45,8 @@ public class HardwareTest {
             String deviceId = Hardwarex.getDeviceId(context);
             Assert.assertTrue(deviceId.length() > 0 && !Premisex.areEqual(deviceId, "unknown") && !Premisex.areEqual(deviceId, "PermissionDenied"));
         } else {
-            Assert.assertTrue(Premisex.areEqual(Hardwarex.getDeviceId(context), "PermissionDenied"));
+            Assert.assertEquals(Hardwarex.getDeviceId(context), "PermissionDenied");
         }
-
     }
 
     @Test
@@ -62,7 +61,7 @@ public class HardwareTest {
             String subscriberId = Hardwarex.getSubscriberId(context);
             Assert.assertTrue(subscriberId.length() > 0 && !Premisex.areEqual(subscriberId, "unknown") && !Premisex.areEqual(subscriberId, "PermissionDenied"));
         } else {
-            Assert.assertTrue(Premisex.areEqual(Hardwarex.getSubscriberId(context), "PermissionDenied"));
+            Assert.assertEquals(Hardwarex.getSubscriberId(context), "PermissionDenied");
         }
 
     }
@@ -74,9 +73,8 @@ public class HardwareTest {
             String simSerialNumber = Hardwarex.getSimSerialNumber(context);
             Assert.assertTrue(simSerialNumber.length() > 0 && !Premisex.areEqual(simSerialNumber, "unknown") && !Premisex.areEqual(simSerialNumber, "PermissionDenied"));
         } else {
-            Assert.assertTrue(Premisex.areEqual(Hardwarex.getSimSerialNumber(context), "PermissionDenied"));
+            Assert.assertEquals(Hardwarex.getSimSerialNumber(context), "PermissionDenied");
         }
-
     }
 
     @Test
@@ -87,12 +85,11 @@ public class HardwareTest {
                 String serial = Hardwarex.getSerial();
                 Assert.assertTrue(serial.length() > 0 && !Premisex.areEqual(serial, "unknown") && !Premisex.areEqual(serial, "PermissionDenied"));
             } else {
-                Assert.assertTrue(Premisex.areEqual(Hardwarex.getSerial(), "PermissionDenied"));
+                Assert.assertEquals(Hardwarex.getSerial(), "PermissionDenied");
             }
         } else {
             Assert.assertTrue(Hardwarex.getSerial().length() > 0);
         }
-
     }
 
     @Test
@@ -102,8 +99,7 @@ public class HardwareTest {
             String macAddress = Hardwarex.getMacAddress(context);
             Assert.assertTrue(macAddress.length() > 0 && !Premisex.areEqual(macAddress, "unknown") && !Premisex.areEqual(macAddress, "PermissionDenied"));
         } else {
-            Assert.assertTrue(Premisex.areEqual(Hardwarex.getMacAddress(context), "PermissionDenied"));
+            Assert.assertEquals(Hardwarex.getMacAddress(context), "PermissionDenied");
         }
-
     }
 }

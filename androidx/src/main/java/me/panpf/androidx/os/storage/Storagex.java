@@ -221,7 +221,7 @@ public class Storagex {
             @Override
             public boolean predicate(@NonNull File file) {
                 if (file.isDirectory()) {
-                    Filex.mkdirsWith(file);
+                    Filex.mkdirsCheck(file);
                     if (deleteFile) Filex.deleteRecursively(new File(file, childFileName));
                     return getDirAvailableBytes(file) >= minBytes;
                 } else {

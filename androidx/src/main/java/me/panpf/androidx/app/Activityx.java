@@ -73,7 +73,7 @@ public class Activityx {
                     }
                 }
                 Method method = activity.getClass().getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz);
-                Classx.callMethod(activity, method, null);
+                Classx.callMethod(activity, method, new Object[]{null});
             } catch (Throwable e) {
                 e.printStackTrace();
             }
