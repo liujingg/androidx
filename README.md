@@ -68,11 +68,7 @@ compile "me.panpf:android-kt:$lastVersion"
 
 #### os
 * Storage: [Storagex.java] | [Storage.kt]
-* Build: [Buildx.java] | [Build.kt]
-* Process: [Processx.java] | [Process.kt]
 * StatFs: [StatFsx.java] | [StatFs.kt]
-* System: [Systemx.java] | [System.kt]
-* Thread: [Threadx.java] | [Thread.kt]
 
 #### provider
 * Settings: [Settingsx.java] | [Settings.kt]
@@ -225,30 +221,10 @@ compile "me.panpf:android-kt:$lastVersion"
 [Storage.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/os/storage/Storage.kt
 [StorageTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/storage/StorageTest.kt
 
-[Buildx.java]: https://github.com/panpf/androidx/blob/master/androidx/src/main/java/me/panpf/androidx/os/Buildx.java
-[BuildTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/os/BuildTest.java
-[Build.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/os/Build.kt
-[BuildTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/BuildTest.kt
-
-[Processx.java]: https://github.com/panpf/androidx/blob/master/androidx/src/main/java/me/panpf/androidx/os/Processx.java
-[ProcessTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/os/ProcessTest.java
-[Process.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/os/Process.kt
-[ProcessTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/ProcessTest.kt
-
 [StatFsx.java]: https://github.com/panpf/androidx/blob/master/androidx/src/main/java/me/panpf/androidx/os/StatFsx.java
 [StatFsTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/os/StatFsTest.java
 [StatFs.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/os/StatFs.kt
 [StatFsTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/StatFsTest.kt
-
-[Systemx.java]: https://github.com/panpf/androidx/blob/master/androidx/src/main/java/me/panpf/androidx/os/Systemx.java
-[SystemTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/os/SystemTest.java
-[System.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/os/System.kt
-[SystemTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/SystemTest.kt
-
-[Threadx.java]: https://github.com/panpf/androidx/blob/master/androidx/src/main/java/me/panpf/androidx/os/Threadx.java
-[ThreadTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/os/ThreadTest.java
-[Thread.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/os/Thread.kt
-[ThreadTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/ThreadTest.kt
 
 [Settingsx.java]: https://github.com/panpf/androidx/blob/master/androidx/src/main/java/me/panpf/androidx/provider/Settingsx.java
 [SettingsTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/provider/SettingsTest.java

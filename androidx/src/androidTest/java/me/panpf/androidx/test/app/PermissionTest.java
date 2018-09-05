@@ -25,8 +25,8 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Permissionx;
-import me.panpf.androidx.os.Buildx;
 
 @RunWith(AndroidJUnit4.class)
 public final class PermissionTest {
@@ -40,7 +40,7 @@ public final class PermissionTest {
     @Test
     public final void testSingleNoPermission() {
         Context context = InstrumentationRegistry.getContext();
-        if (Buildx.isAtLeastM()) {
+        if (Androidx.isAtLeastM()) {
             Assert.assertFalse(Permissionx.isGrantPermission(context, Manifest.permission.READ_PHONE_STATE));
         } else {
             Assert.assertTrue(Permissionx.isGrantPermission(context, Manifest.permission.READ_PHONE_STATE));
@@ -57,7 +57,7 @@ public final class PermissionTest {
     @Test
     public final void testMultiNoPermission() {
         Context context = InstrumentationRegistry.getContext();
-        if (Buildx.isAtLeastM()) {
+        if (Androidx.isAtLeastM()) {
             Assert.assertFalse(Permissionx.isGrantPermissions(context,
                     Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA));
         } else {

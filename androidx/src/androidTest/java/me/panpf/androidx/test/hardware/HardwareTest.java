@@ -25,9 +25,9 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Permissionx;
 import me.panpf.androidx.hardware.Hardwarex;
-import me.panpf.androidx.os.Buildx;
 import me.panpf.javax.util.Premisex;
 
 
@@ -95,7 +95,7 @@ public class HardwareTest {
 
     @Test
     public final void testSerial() {
-        if (Buildx.isAtLeastP()) {
+        if (Androidx.isAtLeastP()) {
             Context context = InstrumentationRegistry.getContext();
             if (Permissionx.isGrantPermission(context, Manifest.permission.READ_PHONE_STATE)) {
                 String serial = Hardwarex.getSerial();

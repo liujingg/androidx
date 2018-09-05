@@ -14,19 +14,7 @@
  * limitations under the License.
  */
 
-package me.panpf.androidx.os;
+package me.panpf.androidx.content;
 
-import android.support.annotation.AnyThread;
-
-import java.io.File;
-
-public class Systemx {
-    /**
-     * Return true if ROOT is already
-     */
-    @AnyThread
-    public static boolean isRooted() {
-        return new File("/system/bin/su").exists() || new File("/system/xbin/su").exists()
-                || new File("/sbin/su").exists() || new File("/su").exists();
-    }
+public class Clipboardx {
 }
