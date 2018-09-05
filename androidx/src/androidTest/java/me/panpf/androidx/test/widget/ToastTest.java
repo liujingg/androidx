@@ -13,14 +13,14 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import me.panpf.androidx.test.R;
-import me.panpf.androidx.test.TestSupportActivity;
 import me.panpf.androidx.view.Viewx;
 import me.panpf.androidx.widget.Toastx;
 
 @RunWith(AndroidJUnit4.class)
 public class ToastTest {
+
     @NonNull
-    private final ActivityTestRule<TestSupportActivity> supportFragmentRule = new ActivityTestRule<TestSupportActivity>(TestSupportActivity.class);
+    private final ActivityTestRule<ToastTestActivity> supportFragmentRule = new ActivityTestRule<ToastTestActivity>(ToastTestActivity.class);
 
     @Rule
     @NonNull

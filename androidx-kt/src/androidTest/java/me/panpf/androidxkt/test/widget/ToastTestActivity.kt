@@ -1,10 +1,11 @@
-package me.panpf.androidxkt.test
+package me.panpf.androidxkt.test.widget
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
+import me.panpf.androidxkt.test.R
 
-class TestSupportActivity : FragmentActivity() {
+class ToastTestActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

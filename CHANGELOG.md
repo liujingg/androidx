@@ -3,6 +3,7 @@
 * 重构 Color
 * 升级 Javax 依赖
 * Color 增加 argbEvaluate 方法
+* 增加 WeakAsyncTask
 
 ## v0.1
 * 初次发布

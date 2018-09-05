@@ -81,6 +81,7 @@ compile "me.panpf:android-kt:$lastVersion"
 * Dimen: [Dimenx.java] | [Dimen.kt]
 * Json: [Jsonx.java] | [Json.kt]
 * Text: [Textx.java] | [Text.kt]
+* WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java]) | [WeakAsyncTask.kt] ([Test][WeakAsyncTaskTest.kt])
 
 #### view
 * InputMethod: [InputMethodx.java] | [InputMethod.kt]
@@ -298,6 +299,11 @@ compile "me.panpf:android-kt:$lastVersion"
 [ToastTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/widget/ToastTest.java
 [Toast.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/widget/Toast.kt
 [ToastTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/widget/ToastTest.kt
+
+[WeakAsyncTask.java]: https://github.com/panpf/androidx/blob/master/androidx/src/main/java/me/panpf/androidx/util/WeakAsyncTask.java
+[WeakAsyncTaskTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/util/WeakAsyncTaskTest.java
+[WeakAsyncTask.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/util/WeakAsyncTask.kt
+[WeakAsyncTaskTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/WeakAsyncTaskTest.kt
 
 
 

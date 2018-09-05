@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application>
-        <activity android:name="me.panpf.androidx.test.TestSupportActivity" />
+        <activity android:name="me.panpf.androidx.test.widget.ToastTestActivity" />
+        <activity android:name="me.panpf.androidx.test.util.WeakAsyncTaskTestActivity" />
     </application>
 </manifest>
