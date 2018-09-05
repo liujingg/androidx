@@ -51,4 +51,9 @@ class ColorTest {
 
         Assert.assertFalse(Color.parseColor("#000000").isLightColor())
     }
+
+    @Test
+    fun testArgbEvaluate() {
+        Assert.assertEquals(Color.RED.colorArgbEvaluate(Color.GREEN, 0.6f).toLong(), -10053376)
+    }
 }

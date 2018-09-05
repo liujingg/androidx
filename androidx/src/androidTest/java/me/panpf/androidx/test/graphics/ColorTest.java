@@ -50,4 +50,9 @@ public class ColorTest {
 
         Assert.assertFalse(Colorx.isLight(Color.parseColor("#000000")));
     }
+
+    @Test
+    public void testArgbEvaluate(){
+        Assert.assertEquals(Colorx.argbEvaluate(Color.RED, Color.GREEN, 0.6f), -10053376);
+    }
 }
