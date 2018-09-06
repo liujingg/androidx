@@ -17,7 +17,7 @@ compile "me.panpf:android:$lastVersion"
 
 依赖：
 * com.android.support:support-fragment: 27.1.1
-* me.panpf:[javax][javax]: 0.6
+* me.panpf:[javax][javax]: 0.6.1
 
 #### Kotlin 版：
 
@@ -30,7 +30,7 @@ compile "me.panpf:android-kt:$lastVersion"
 依赖：
 * org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.50
 * com.android.support:support-fragment: 27.1.1
-* me.panpf:[javax-kt][javax]: 0.6
+* me.panpf:[javax-kt][javax]: 0.6.1
 
 你可以根据需要选择一个版本导入，如果你的项目是 Java 加 Kotlin 混合开发的那么两个版本都可以导入，因为两个版本采用了不同的包名所以不会有类重复问题
 
@@ -47,6 +47,7 @@ compile "me.panpf:android-kt:$lastVersion"
 #### content
 * Package: [Packagex.java] | [Package.kt]
 * Asset: [Assetx.java] | [Asset.kt]
+* Clipboard: [Clipboardx.java] ([Test][ClipboardTest.java]) | [Clipboard.kt] ([Test][ClipboardTest.kt])
 * Content: [Contentx.java] | [Content.kt]
 * Intent: [Intentx.java] | [Intent.kt]
 * Preference: [Preferencex.java] | [Preference.kt]
@@ -160,6 +161,11 @@ compile "me.panpf:android-kt:$lastVersion"
 [ContentTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/content/ContentTest.java
 [Content.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/content/Content.kt
 [ContentTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ContentTest.kt
+
+[Clipboardx.java]: https://github.com/panpf/androidx/blob/master/androidx/src/main/java/me/panpf/androidx/content/Clipboardx.java
+[ClipboardTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/content/ClipboardTest.java
+[Clipboard.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/content/Clipboard.kt
+[ClipboardTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ClipboardTest.kt
 
 [Intentx.java]: https://github.com/panpf/androidx/blob/master/androidx/src/main/java/me/panpf/androidx/content/Intentx.java
 [IntentTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/content/IntentTest.java

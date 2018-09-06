@@ -5,6 +5,7 @@
 * Color 增加 argbEvaluate 方法
 * 增加 WeakAsyncTask
 * Build、Process、System、Thread 合并到 Android 中
+* 增加 Clipboard
 
 ## v0.1
 * 初次发布
