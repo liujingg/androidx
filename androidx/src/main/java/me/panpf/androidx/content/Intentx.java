@@ -30,6 +30,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
+import android.support.v4.app.Fragment;
 
 import java.util.List;
 
@@ -205,6 +206,18 @@ public class Intentx {
     }
 
     /**
+     * Test if you can start Activity
+     */
+    public static boolean canStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
+        Activity activity = fragment.getActivity();
+        if (activity == null) {
+            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
+        }
+
+        return Intentx.canStartActivity(activity, intent);
+    }
+
+    /**
      * Safely launch an Activity, catch ActivityNotFoundException and return false
      */
     public static boolean safeStartActivity(@NonNull Context context, @NonNull Intent intent) {
@@ -219,6 +232,18 @@ public class Intentx {
             e.printStackTrace();
             return false;
         }
+    }
+
+    /**
+     * Safely launch an Activity, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
+        Activity activity = fragment.getActivity();
+        if (activity == null) {
+            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
+        }
+
+        return Intentx.safeStartActivity(activity, intent);
     }
 
     /**

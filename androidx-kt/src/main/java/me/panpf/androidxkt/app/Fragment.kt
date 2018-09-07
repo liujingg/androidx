@@ -49,26 +49,6 @@ fun <T> Fragment.getImplWithParent(clazz: Class<T>): T? {
 }
 
 /**
- * Test if you can start Activity
- */
-fun Fragment.canStartActivity(intent: Intent): Boolean {
-    val activity = this.activity
-            ?: throw IllegalStateException("Fragment $this not attached to Activity")
-
-    return activity.canStartActivity(intent)
-}
-
-/**
- * Safely launch an Activity, catch ActivityNotFoundException and return false
- */
-fun Fragment.safeStartActivity(intent: Intent): Boolean {
-    val activity = this.activity
-            ?: throw IllegalStateException("Fragment $this not attached to Activity")
-
-    return activity.safeStartActivity(intent)
-}
-
-/**
  * Instantiate a Fragment and set arguments
  */
 fun Class<out Fragment>.instance(arguments: Bundle? = null): Fragment {

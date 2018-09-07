@@ -17,15 +17,12 @@
 package me.panpf.androidx.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import org.jetbrains.annotations.NotNull;
-
-import me.panpf.androidx.content.Intentx;
 
 public class Fragmentx {
 
@@ -53,30 +50,6 @@ public class Fragmentx {
             }
         }
         return null;
-    }
-
-    /**
-     * Test if you can start Activity
-     */
-    public static boolean canStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
-        Activity activity = fragment.getActivity();
-        if (activity == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
-        }
-
-        return Intentx.canStartActivity(activity, intent);
-    }
-
-    /**
-     * Safely launch an Activity, catch ActivityNotFoundException and return false
-     */
-    public static boolean safeStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
-        Activity activity = fragment.getActivity();
-        if (activity == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
-        }
-
-        return Intentx.safeStartActivity(activity, intent);
     }
 
     /**

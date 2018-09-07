@@ -12,6 +12,7 @@
 * Json 增加 format 方法
 * Window 增加 hasNavigationBar getStatusBarHeight getNavigationBarWidth 方法
 * Permission 增加 filterDeniedPermissions
+* Fragment 里的 canStartActivity 和 safeStartActivity 移动到 Intent 中
 
 ## v0.1
 * 初次发布
