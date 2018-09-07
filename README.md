@@ -53,7 +53,7 @@ compile "me.panpf:android-kt:$lastVersion"
 * Preference: [Preferencex.java] | [Preference.kt]
 
 #### graphics
-* Drawable: [Drawablex.java] | [Drawable.kt]
+* Drawable: [Drawablex.java] ([Test][DrawableTest.java])  | [Drawable.kt] ([Test][DrawableTest.kt])
 * Bitmap: [Bitmapx.java] | [Bitmap.kt]
 * Color: [Colorx.java] ([Test][ColorTest.java]) | [Color.kt] ([Test][ColorTest.kt])
 * Matrix: [Matrixx.java] | [Matrix.kt]

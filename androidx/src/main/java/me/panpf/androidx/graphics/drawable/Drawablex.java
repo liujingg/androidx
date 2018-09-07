@@ -16,20 +16,166 @@
 
 package me.panpf.androidx.graphics.drawable;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-public class Drawablex {
-    public static Bitmap toBitmap(@NonNull Drawable drawable, @Nullable Bitmap.Config config, @Nullable Bitmap reuseBitmap) {
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
+import org.jetbrains.annotations.NotNull;
 
-        if (config == null) config = Bitmap.Config.ARGB_8888;
-        Bitmap bitmap = reuseBitmap != null ? reuseBitmap : Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), config);
+import me.panpf.androidx.graphics.Colorx;
+import me.panpf.javax.util.Premisex;
+
+@SuppressWarnings("WeakerAccess")
+public class Drawablex {
+
+    /**
+     * Convert Drawable to bitmap, use intrinsic size as the size of the new bitmap
+     *
+     * @param drawable    Source Drawable
+     * @param config      Bitmap configuration, default value Bitmap.Config.ARGB_8888
+     * @param reuseBitmap Reusable Bitmap
+     */
+    @NotNull
+    public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config, @Nullable Bitmap reuseBitmap) {
+        final int intrinsicWidth = drawable.getIntrinsicWidth();
+        final int intrinsicHeight = drawable.getIntrinsicHeight();
+        Premisex.require(intrinsicWidth > 0 && intrinsicHeight > 0, "Both drawable intrinsicWidth and intrinsicHeight must be greater than 0");
+
+        Rect originBounds = new Rect(drawable.getBounds());
+
+        drawable.setBounds(0, 0, intrinsicWidth, intrinsicHeight);
+
+        Bitmap bitmap = reuseBitmap;
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, config != null ? config : Bitmap.Config.ARGB_8888);
+        }
         Canvas canvas = new Canvas(bitmap);
         drawable.draw(canvas);
+
+        // Restore bounds
+        drawable.setBounds(originBounds);
         return bitmap;
+    }
+
+    /**
+     * Convert Drawable to bitmap, use intrinsic size as the size of the new bitmap
+     *
+     * @param drawable Source Drawable
+     * @param config   Bitmap configuration, default value Bitmap.Config.ARGB_8888
+     */
+    @NotNull
+    public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config) {
+        return toBitmapWithIntrinsicSize(drawable, config, null);
+    }
+
+    /**
+     * Convert Drawable to bitmap, use intrinsic size as the size of the new bitmap
+     *
+     * @param drawable    Source Drawable
+     * @param reuseBitmap Reusable Bitmap
+     */
+    @NotNull
+    public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable, @Nullable Bitmap reuseBitmap) {
+        return toBitmapWithIntrinsicSize(drawable, null, reuseBitmap);
+    }
+
+    /**
+     * Convert Drawable to bitmap, use intrinsic size as the size of the new bitmap
+     *
+     * @param drawable Source Drawable
+     */
+    @NotNull
+    public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable) {
+        return toBitmapWithIntrinsicSize(drawable, null, null);
+    }
+
+
+    /**
+     * Convert Drawable to bitmap, use bounds size as the size of the new bitmap
+     *
+     * @param drawable    Source Drawable
+     * @param config      Bitmap configuration, default value Bitmap.Config.ARGB_8888
+     * @param reuseBitmap Reusable Bitmap
+     */
+    @NotNull
+    public static Bitmap toBitmapWithBoundsSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config, @Nullable Bitmap reuseBitmap) {
+        Rect originBounds = new Rect(drawable.getBounds());
+        if (originBounds.isEmpty()) throw new IllegalStateException("drawable bounds is empty");
+
+        Bitmap bitmap = reuseBitmap;
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(originBounds.width(), originBounds.height(), config != null ? config : Bitmap.Config.ARGB_8888);
+        }
+        if (originBounds.left != 0 || originBounds.top != 0) {
+            drawable.setBounds(0, 0, originBounds.width(), originBounds.height());
+        }
+        Canvas canvas = new Canvas(bitmap);
+        drawable.draw(canvas);
+
+        // Restore bounds
+        if (originBounds.left != 0 || originBounds.top != 0) {
+            drawable.setBounds(originBounds);
+        }
+        return bitmap;
+    }
+
+    /**
+     * Convert Drawable to bitmap, use bounds size as the size of the new bitmap
+     *
+     * @param drawable Source Drawable
+     * @param config   Bitmap configuration, default value Bitmap.Config.ARGB_8888
+     */
+    @NotNull
+    public static Bitmap toBitmapWithBoundsSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config) {
+        return toBitmapWithBoundsSize(drawable, config, null);
+    }
+
+    /**
+     * Convert Drawable to bitmap, use bounds size as the size of the new bitmap
+     *
+     * @param drawable    Source Drawable
+     * @param reuseBitmap Reusable Bitmap
+     */
+    @NotNull
+    public static Bitmap toBitmapWithBoundsSize(@NonNull Drawable drawable, @Nullable Bitmap reuseBitmap) {
+        return toBitmapWithBoundsSize(drawable, null, reuseBitmap);
+    }
+
+    /**
+     * Convert Drawable to bitmap, use bounds size as the size of the new bitmap
+     *
+     * @param drawable Source Drawable
+     */
+    @NotNull
+    public static Bitmap toBitmapWithBoundsSize(@NonNull Drawable drawable) {
+        return toBitmapWithBoundsSize(drawable, null, null);
+    }
+
+
+    /**
+     * Change the color of the drawable
+     */
+    @NotNull
+    public static <T extends Drawable> T toDrawableByColor(@NotNull T drawable, @ColorInt int color) {
+        //noinspection unchecked
+        T newDrawable = (T) drawable.mutate();
+        newDrawable.setColorFilter(Colorx.makeMatrixColorFilter(color));
+        return drawable;
+    }
+
+    /**
+     * Change the color of the resource drawable
+     *
+     * @param resId Drawable resource id
+     */
+    @NotNull
+    public static Drawable toDrawableByColorFromDrawableRes(@NotNull Context context, @DrawableRes int resId, @ColorInt int color) {
+        return toDrawableByColor(context.getResources().getDrawable(resId), color);
     }
 }

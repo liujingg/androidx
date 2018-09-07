@@ -18,6 +18,8 @@ package me.panpf.androidxkt.graphics
 
 import android.content.res.Resources
 import android.graphics.*
+import android.graphics.drawable.BitmapDrawable
+import android.support.annotation.ColorInt
 import android.util.TypedValue
 import java.io.*
 
@@ -61,7 +63,7 @@ fun Bitmap.tint(color: Int): Bitmap {
     return newBitmap
 }
 
-fun makeBitmapByColor(color: Int, width: Int, height: Int): Bitmap {
+fun createBitmapByColor(width: Int, height: Int, @ColorInt color: Int): Bitmap {
     val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
     canvas.drawColor(color)
@@ -123,4 +125,19 @@ fun Resources.readBitmap(resId: Int): Bitmap? {
 
 fun Resources.readBitmap(value: TypedValue?, `is`: InputStream?, pad: Rect?, options: BitmapFactory.Options?): Bitmap? {
     return BitmapFactory.decodeResourceStream(this, value, `is`, pad, options)
+}
+
+/**
+ * Change the color of the bitmap
+ *
+ * @receiver Source bitmap
+ * @param resources setting initial target density based on the display metrics of the resources.
+ */
+fun Bitmap.toDrawableByColor(@ColorInt color: Int, resources: Resources? = null): BitmapDrawable {
+    val bitmapDrawable = BitmapDrawable(resources, this)
+    if (resources == null) {
+        bitmapDrawable.setTargetDensity(this.density)
+    }
+    bitmapDrawable.colorFilter = color.makeMatrixColorFilter()
+    return bitmapDrawable
 }

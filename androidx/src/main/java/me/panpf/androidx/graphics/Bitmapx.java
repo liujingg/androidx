@@ -26,9 +26,13 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
+import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.TypedValue;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -41,6 +45,7 @@ import java.io.InputStream;
 import me.panpf.javax.io.Filex;
 import me.panpf.javax.io.IOStreamx;
 
+@SuppressWarnings("WeakerAccess")
 public class Bitmapx {
 
     public static Bitmap centerCrop(Bitmap srcBitmap, int outWidth, int outHeight, Bitmap.Config outConfig) {
@@ -81,11 +86,15 @@ public class Bitmapx {
         return newBitmap;
     }
 
-    public static Bitmap makeBitmapByColor(int color, int width, int height) {
-        Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+    public static Bitmap createByColor(int width, int height, @ColorInt int color, Bitmap.Config config) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, config);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(color);
         return bitmap;
+    }
+
+    public static Bitmap createByColor(int width, int height, @ColorInt int color) {
+        return createByColor(width, height, color, Bitmap.Config.ARGB_8888);
     }
 
     public static byte[] toByteArray(Bitmap bitmap, Bitmap.CompressFormat format, int quality) {
@@ -165,5 +174,31 @@ public class Bitmapx {
     @Nullable
     public static Bitmap readBitmap(@NonNull Resources res, @Nullable TypedValue value, @Nullable InputStream is, @Nullable Rect pad, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeResourceStream(res, value, is, pad, options);
+    }
+
+    /**
+     * Change the color of the bitmap
+     *
+     * @param bitmap    Source bitmap
+     * @param resources setting initial target density based on the display metrics of the resources.
+     */
+    @NotNull
+    public static BitmapDrawable toDrawableByColor(@NotNull Bitmap bitmap, @ColorInt int color, @Nullable Resources resources) {
+        BitmapDrawable bitmapDrawable = new BitmapDrawable(resources, bitmap);
+        if (resources == null) {
+            bitmapDrawable.setTargetDensity(bitmap.getDensity());
+        }
+        bitmapDrawable.setColorFilter(Colorx.makeMatrixColorFilter(color));
+        return bitmapDrawable;
+    }
+
+    /**
+     * Change the color of the bitmap
+     *
+     * @param bitmap Source bitmap
+     */
+    @NotNull
+    public static BitmapDrawable toDrawableByColor(@NotNull Bitmap bitmap, @ColorInt int color) {
+        return toDrawableByColor(bitmap, color, null);
     }
 }

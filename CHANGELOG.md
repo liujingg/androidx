@@ -6,6 +6,8 @@
 * 增加 WeakAsyncTask
 * Build、Process、System、Thread 合并到 Android 中
 * 增加 Clipboard
+* Bitmap makeBitmapByColor 方法重命名为 create
+* Drawable 重构
 
 ## v0.1
 * 初次发布
