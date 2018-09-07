@@ -9,6 +9,7 @@
 * Bitmap makeBitmapByColor 方法重命名为 create
 * Drawable 重构
 * Fragment add instance method
+* Json 增加 format 方法
 
 ## v0.1
 * 初次发布

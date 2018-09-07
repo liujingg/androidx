@@ -19,15 +19,20 @@ package me.panpf.androidx.util;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 @SuppressWarnings("WeakerAccess")
 public class Jsonx {
+
+    private static final String INDENTATION = "    ";
+
 
     public static boolean isEmpty(@Nullable String json) {
         if (json == null) return true;
@@ -41,9 +46,8 @@ public class Jsonx {
 
 
     @NonNull
-    public static JSONArray toJsonArray(@NonNull List<String> stringList) {
+    public static JSONArray toJsonArray(@Nullable List<String> stringList) {
         JSONArray jsonArray = new JSONArray();
-        //noinspection ConstantConditions
         if (stringList != null) {
             for (String item : stringList) {
                 jsonArray.put(item);
@@ -53,14 +57,8 @@ public class Jsonx {
     }
 
     @NonNull
-    public static String toJson(@NonNull List<String> stringList) {
-        return toJsonArray(stringList).toString();
-    }
-
-    @NonNull
-    public static JSONArray toJsonArray(@NonNull int[] ints) {
+    public static JSONArray toJsonArray(@Nullable int[] ints) {
         JSONArray jsonArray = new JSONArray();
-        //noinspection ConstantConditions
         if (ints != null) {
             for (int item : ints) {
                 jsonArray.put(item);
@@ -69,14 +67,20 @@ public class Jsonx {
         return jsonArray;
     }
 
+
     @NonNull
-    public static String toJson(@NonNull int[] ints) {
+    public static String toJson(@Nullable List<String> stringList) {
+        return toJsonArray(stringList).toString();
+    }
+
+    @NonNull
+    public static String toJson(@Nullable int[] ints) {
         return toJsonArray(ints).toString();
     }
 
 
     @Nullable
-    public static ArrayList<String> toStringList(@Nullable JSONArray jsonArray) throws JSONException {
+    public static List<String> toStringList(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() <= 0) {
             return null;
         }
@@ -90,9 +94,10 @@ public class Jsonx {
     }
 
     @Nullable
-    public static ArrayList<String> toStringList(@Nullable String json) throws JSONException {
+    public static List<String> toStringList(@Nullable String json) throws JSONException {
         return !isEmpty(json) ? toStringList(new JSONArray(json)) : null;
     }
+
 
     @Nullable
     public static String[] toStringArray(@Nullable JSONArray jsonArray) throws JSONException {
@@ -113,6 +118,7 @@ public class Jsonx {
         return !isEmpty(json) ? toStringArray(new JSONArray(json)) : null;
     }
 
+
     @Nullable
     public static int[] toIntArray(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
@@ -131,6 +137,7 @@ public class Jsonx {
     public static int[] toIntArray(@Nullable String json) throws JSONException {
         return !isEmpty(json) ? toIntArray(new JSONArray(json)) : null;
     }
+
 
     @Nullable
     public static <Bean> ArrayList<Bean> toBeanList(@Nullable JSONArray jsonArray, @NonNull BeanParser<Bean> parser) throws JSONException {
@@ -157,6 +164,7 @@ public class Jsonx {
         if (isEmpty(jsonArrayString)) return null;
         return toBeanList(new JSONArray(jsonArrayString), parser);
     }
+
 
     @Nullable
     public static <Bean> Bean toBean(@Nullable JSONObject jsonObject, @NonNull BeanParser<Bean> parser) throws JSONException {
@@ -252,6 +260,123 @@ public class Jsonx {
             }
         }
         return null;
+    }
+
+    @NotNull
+    public static String format(@Nullable JSONObject jsonObject) {
+        if (jsonObject == null) return "{}";
+        return appendJsonObject(new StringBuilder(), jsonObject, 0).toString();
+    }
+
+    @NotNull
+    public static String format(@Nullable JSONArray jsonArray) {
+        if (jsonArray == null || jsonArray.length() <= 0) return "[]";
+        return appendJsonArray(new StringBuilder(), jsonArray, 0).toString();
+    }
+
+    @NotNull
+    public static String format(@Nullable String json) {
+        if (isEmpty(json)) {
+            return "{}";
+        }
+
+        try {
+            return format(new JSONObject(json));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            return format(new JSONArray(json));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        throw new IllegalArgumentException("Invalid json: " + json);
+    }
+
+    private static StringBuilder appendJsonObject(StringBuilder builder, JSONObject jsonObject, int indentationCount) {
+        builder.append("{");
+
+        int newIndentationCount = indentationCount + 1;
+        boolean hasData = false;
+
+        Iterator keyIterator = jsonObject.keys();
+        while (keyIterator.hasNext()) {
+            hasData = true;
+            String key = (String) keyIterator.next();
+            Object value = jsonObject.opt(key);
+
+            builder.append("\n");
+            appendIndentation(builder, newIndentationCount);
+
+            builder.append("\"").append(key).append("\"").append(":");
+
+            if (value instanceof JSONArray) {
+                appendJsonArray(builder, (JSONArray) value, newIndentationCount);
+            } else if (value instanceof JSONObject) {
+                appendJsonObject(builder, (JSONObject) value, newIndentationCount);
+            } else if (value instanceof String) {
+                builder.append("\"").append(value.toString()).append("\"");
+            } else if (value != null) {
+                builder.append(value.toString());
+            }
+
+            if (keyIterator.hasNext()) {
+                builder.append(",");
+            }
+        }
+
+        if (hasData) {
+            builder.append("\n");
+        }
+        appendIndentation(builder, indentationCount);
+        builder.append("}");
+
+        return builder;
+    }
+
+    private static StringBuilder appendJsonArray(StringBuilder builder, JSONArray jsonArray, int indentationCount) {
+        builder.append("[");
+
+        int newIndentationCount = indentationCount + 1;
+        boolean hasData = false;
+
+        for (int w = 0, size = jsonArray.length(); w < size; w++) {
+            hasData = true;
+            Object item = jsonArray.opt(w);
+
+            builder.append("\n");
+            appendIndentation(builder, newIndentationCount);
+
+            if (item instanceof JSONArray) {
+                appendJsonArray(builder, (JSONArray) item, newIndentationCount);
+            } else if (item instanceof JSONObject) {
+                appendJsonObject(builder, (JSONObject) item, newIndentationCount);
+            } else if (item instanceof String) {
+                builder.append("\"").append(item.toString()).append("\"");
+            } else if (item != null) {
+                builder.append(item.toString());
+            }
+
+            if (w < size - 1) {
+                builder.append(",");
+            }
+        }
+
+        if (hasData) {
+            builder.append("\n");
+        }
+        appendIndentation(builder, indentationCount);
+        builder.append("]");
+
+        return builder;
+    }
+
+    private static void appendIndentation(StringBuilder builder, int indentationCount) {
+        for (int w = 0; w < indentationCount; w++) {
+            builder.append(INDENTATION);
+        }
     }
 
     public interface BeanParser<T> {

@@ -31,33 +31,37 @@ fun String?.isEmptyJson(): Boolean = this == null || this.trim().let { "" == it 
 fun String?.isNotEmptyJson(): Boolean = !isEmptyJson()
 
 
-fun List<String>.toJsonArray(): JSONArray = JSONArray().apply { for (item in this@toJsonArray) put(item) }
+fun List<String>?.toJsonArray(): JSONArray = JSONArray().apply { this@toJsonArray?.let { for (item in it) put(item) } }
 
-fun List<String>.toJson(): String = this.toJsonArray().toString()
+fun IntArray?.toJsonArray(): JSONArray = JSONArray().apply { this@toJsonArray?.let { for (item in it) put(item) } }
 
-fun IntArray.toJsonArray(): JSONArray = JSONArray().apply { for (item in this@toJsonArray) put(item) }
 
-fun IntArray.toJson(): String = this.toJsonArray().toString()
+fun List<String>?.toJson(): String = this.toJsonArray().toString()
+
+fun IntArray?.toJson(): String = this.toJsonArray().toString()
 
 
 fun JSONArray.toStringList(): List<String> = (0 until this.length()).map { this.getString(it) }
 
 @Throws(JSONException::class)
-fun String.jsonToStringList(): List<String>? = if (this.isNotEmptyJson()) JSONArray(this).toStringList() else null
+fun String?.jsonToStringList(): List<String>? = if (this.isNotEmptyJson()) JSONArray(this).toStringList() else null
+
 
 fun JSONArray.toStringArray(): Array<String> = Array(this.length()) { "" }.apply {
     (0 until this@toStringArray.length()).forEach { index -> this[index] = this@toStringArray.getString(index) }
 }
 
 @Throws(JSONException::class)
-fun String.jsonToStringArray(): Array<String>? = if (this.isNotEmptyJson()) JSONArray(this).toStringArray() else null
+fun String?.jsonToStringArray(): Array<String>? = if (this.isNotEmptyJson()) JSONArray(this).toStringArray() else null
+
 
 fun JSONArray.toIntArray(): IntArray = IntArray(this.length()).apply {
     (0 until this@toIntArray.length()).forEach { index -> this[index] = this@toIntArray.getInt(index) }
 }
 
 @Throws(JSONException::class)
-fun String.jsonToIntArray(): IntArray? = if (this.isNotEmptyJson()) JSONArray(this).toIntArray() else null
+fun String?.jsonToIntArray(): IntArray? = if (this.isNotEmptyJson()) JSONArray(this).toIntArray() else null
+
 
 @Throws(JSONException::class)
 fun <Bean> JSONArray.toBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bean> = ArrayList<Bean>(this.length()).apply {
@@ -67,13 +71,18 @@ fun <Bean> JSONArray.toBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bea
 }
 
 @Throws(JSONException::class)
-fun <Bean> String.jsonToBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bean>? = if (this.isNotEmptyJson()) JSONArray(this).toBeanList(beanParser) else null
+fun <Bean> String?.jsonToBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bean>? {
+    return if (this.isNotEmptyJson()) JSONArray(this).toBeanList(beanParser) else null
+}
+
 
 @Throws(JSONException::class)
 fun <Bean> JSONObject.toBean(beanParser: (JSONObject) -> Bean): Bean = beanParser(this)
 
 @Throws(JSONException::class)
-fun <Bean> String.jsonToBean(beanParser: (JSONObject) -> Bean): Bean? = if (this.isNotEmptyJson()) JSONObject(this).toBean(beanParser) else null
+fun <Bean> String?.jsonToBean(beanParser: (JSONObject) -> Bean): Bean? {
+    return if (this.isNotEmptyJson()) JSONObject(this).toBean(beanParser) else null
+}
 
 
 private fun Any?.toInteger(): Int? {
@@ -99,6 +108,7 @@ private fun Any?.toLong(): Long? {
     }
     return null
 }
+
 
 fun JSONObject.optString(keys: Array<String>, defaultValue: String = ""): String? {
     var value: Any?
@@ -136,4 +146,124 @@ fun JSONObject.optLong(keys: Array<String>, defaultValue: Long = 0L): Long {
     }
 
     return defaultValue
+}
+
+
+private const val INDENTATION = "    "
+
+fun JSONObject?.format(): String {
+    this ?: return "{}"
+    return appendJsonObject(StringBuilder(), this, 0).toString()
+}
+
+fun JSONArray?.format(): String {
+    this ?: return "[]"
+    return appendJsonArray(StringBuilder(), this, 0).toString()
+}
+
+fun String?.format(): String {
+    if (this.isEmptyJson()) {
+        return "{}"
+    }
+
+    try {
+        return JSONObject(this).format()
+    } catch (e: JSONException) {
+        e.printStackTrace()
+    }
+
+    try {
+        return JSONArray(this).format()
+    } catch (e: JSONException) {
+        e.printStackTrace()
+    }
+
+    throw IllegalArgumentException("Invalid json: " + this)
+}
+
+private fun appendJsonObject(builder: StringBuilder, jsonObject: JSONObject, indentationCount: Int): StringBuilder {
+    builder.append("{")
+
+    val newIndentationCount = indentationCount + 1
+    var hasData = false
+
+    val keyIterator = jsonObject.keys()
+    while (keyIterator.hasNext()) {
+        hasData = true
+        val key = keyIterator.next() as String
+        val value = jsonObject.opt(key)
+
+        builder.append("\n")
+        appendIndentation(builder, newIndentationCount)
+
+        builder.append("\"").append(key).append("\"").append(":")
+
+        if (value is JSONArray) {
+            appendJsonArray(builder, value, newIndentationCount)
+        } else if (value is JSONObject) {
+            appendJsonObject(builder, value, newIndentationCount)
+        } else if (value is String) {
+            builder.append("\"").append(value.toString()).append("\"")
+        } else if (value != null) {
+            builder.append(value.toString())
+        }
+
+        if (keyIterator.hasNext()) {
+            builder.append(",")
+        }
+    }
+
+    if (hasData) {
+        builder.append("\n")
+    }
+    appendIndentation(builder, indentationCount)
+    builder.append("}")
+
+    return builder
+}
+
+private fun appendJsonArray(builder: StringBuilder, jsonArray: JSONArray, indentationCount: Int): StringBuilder {
+    builder.append("[")
+
+    val newIndentationCount = indentationCount + 1
+    var hasData = false
+
+    var w = 0
+    val size = jsonArray.length()
+    while (w < size) {
+        hasData = true
+        val item = jsonArray.opt(w)
+
+        builder.append("\n")
+        appendIndentation(builder, newIndentationCount)
+
+        if (item is JSONArray) {
+            appendJsonArray(builder, item, newIndentationCount)
+        } else if (item is JSONObject) {
+            appendJsonObject(builder, item, newIndentationCount)
+        } else if (item is String) {
+            builder.append("\"").append(item.toString()).append("\"")
+        } else if (item != null) {
+            builder.append(item.toString())
+        }
+
+        if (w < size - 1) {
+            builder.append(",")
+        }
+        w++
+    }
+
+    if (hasData) {
+        builder.append("\n")
+    }
+    appendIndentation(builder, indentationCount)
+    builder.append("]")
+
+    return builder
+}
+
+private fun appendIndentation(builder: StringBuilder, indentationCount: Int) {
+    for (w in 0 until indentationCount) {
+        builder.append(INDENTATION)
+    }
 }
