@@ -10,6 +10,7 @@
 * Drawable 重构
 * Fragment add instance method
 * Json 增加 format 方法
+* Window 增加 hasNavigationBar getStatusBarHeight getNavigationBarWidth 方法
 
 ## v0.1
 * 初次发布
