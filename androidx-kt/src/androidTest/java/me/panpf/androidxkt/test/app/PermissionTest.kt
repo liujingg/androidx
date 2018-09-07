@@ -19,7 +19,7 @@ package me.panpf.androidxkt.test.app
 import android.Manifest
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import me.panpf.androidxkt.app.isGrantPermission
+import me.panpf.androidxkt.app.filterDeniedPermissions
 import me.panpf.androidxkt.app.isGrantPermissions
 import me.panpf.androidxkt.isAtLeastM
 import org.junit.Assert
@@ -32,24 +32,23 @@ class PermissionTest {
     @Test
     fun testSinglePermission() {
         val context = InstrumentationRegistry.getContext()
-        Assert.assertTrue(context.isGrantPermission(Manifest.permission.INTERNET))
+        Assert.assertTrue(context.isGrantPermissions(Manifest.permission.INTERNET))
     }
 
     @Test
     fun testSingleNoPermission() {
         val context = InstrumentationRegistry.getContext()
         if (isAtLeastM()) {
-            Assert.assertFalse(context.isGrantPermission(Manifest.permission.READ_PHONE_STATE))
+            Assert.assertFalse(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE))
         } else {
-            Assert.assertTrue(context.isGrantPermission(Manifest.permission.READ_PHONE_STATE))
+            Assert.assertTrue(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE))
         }
     }
 
     @Test
     fun testMultiPermission() {
         val context = InstrumentationRegistry.getContext()
-        Assert.assertTrue(context.isGrantPermissions(
-                Manifest.permission.INTERNET, Manifest.permission.VIBRATE))
+        Assert.assertTrue(context.filterDeniedPermissions(Manifest.permission.INTERNET, Manifest.permission.VIBRATE).isEmpty())
     }
 
     @Test

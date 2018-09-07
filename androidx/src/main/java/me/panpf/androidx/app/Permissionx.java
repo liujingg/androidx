@@ -21,17 +21,16 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
+import org.jetbrains.annotations.NotNull;
+
+import me.panpf.javax.util.Arrayx;
+import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.util.Predicate;
+
 /**
  * Permission related tool methods
  */
 public class Permissionx {
-    /**
-     * Return true if specified permissions have been granted, false otherwise
-     */
-    public static boolean isGrantPermission(@NonNull Context context, @NonNull String permission) {
-        return ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED;
-    }
-
     /**
      * Return true if all specified permissions have been granted, false otherwise
      */
@@ -42,5 +41,17 @@ public class Permissionx {
             }
         }
         return true;
+    }
+
+    /**
+     * Filter all denied permissions
+     */
+    public static String[] filterDeniedPermissions(@NonNull final Context context, @NonNull String... permissions) {
+        return Collectionx.filter(Arrayx.toList(permissions), new Predicate<String>() {
+            @Override
+            public boolean predicate(@NotNull String permission) {
+                return ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_DENIED;
+            }
+        }).toArray(new String[0]);
     }
 }

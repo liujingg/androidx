@@ -34,24 +34,23 @@ public final class PermissionTest {
     @Test
     public final void testSinglePermission() {
         Context context = InstrumentationRegistry.getContext();
-        Assert.assertTrue(Permissionx.isGrantPermission(context, Manifest.permission.INTERNET));
+        Assert.assertTrue(Permissionx.isGrantPermissions(context, Manifest.permission.INTERNET));
     }
 
     @Test
     public final void testSingleNoPermission() {
         Context context = InstrumentationRegistry.getContext();
         if (Androidx.isAtLeastM()) {
-            Assert.assertFalse(Permissionx.isGrantPermission(context, Manifest.permission.READ_PHONE_STATE));
+            Assert.assertFalse(Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE));
         } else {
-            Assert.assertTrue(Permissionx.isGrantPermission(context, Manifest.permission.READ_PHONE_STATE));
+            Assert.assertTrue(Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE));
         }
     }
 
     @Test
     public final void testMultiPermission() {
         Context context = InstrumentationRegistry.getContext();
-        Assert.assertTrue(Permissionx.isGrantPermissions(context,
-                Manifest.permission.INTERNET, Manifest.permission.VIBRATE));
+        Assert.assertTrue(Permissionx.filterDeniedPermissions(context, Manifest.permission.INTERNET, Manifest.permission.VIBRATE).length == 0);
     }
 
     @Test

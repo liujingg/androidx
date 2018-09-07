@@ -25,17 +25,19 @@ import android.support.v4.app.ActivityCompat
  */
 
 /**
- * Return true if specified permissions have been granted, false otherwise
- */
-fun Context.isGrantPermission(permission: String): Boolean {
-    return ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
-}
-
-/**
  * Return true if all specified permissions have been granted, false otherwise
  */
 fun Context.isGrantPermissions(vararg permissions: String): Boolean {
     return permissions.asSequence()
             .map { ActivityCompat.checkSelfPermission(this, it) }
             .find { it == PackageManager.PERMISSION_DENIED } == null
+}
+
+/**
+ * Filter all denied permissions
+ */
+fun Context.filterDeniedPermissions(vararg permissions: String): Array<String> {
+    return permissions.filter { permission ->
+        ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED
+    }.toTypedArray()
 }
