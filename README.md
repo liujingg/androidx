@@ -6,35 +6,40 @@
 
 对 Android 标准库和支持库的扩展
 
-### 导入
+### Getting Started
 
-#### Java 版：
+#### Java version:
+
+Add the following to your `build.gradle` file
+
 ```grovvy
-compile "me.panpf:android:$lastVersion"
+implementation "me.panpf:android:$lastVersion"
 ```
 
-请自行替换 `$lastVersion` 为最新的版本 [![Download][VersionBadgeIcon]][VersionBadgeLink]
+Please replace `$lastVersion` with the latest version by yourself. [![Download][VersionBadgeIcon]][VersionBadgeLink]
 
-依赖：
+Dependencies:
 * com.android.support:support-fragment: 27.1.1
 * me.panpf:[javax][javax]: 0.6.1
 
-#### Kotlin 版：
+#### Kotlin version:
+
+Add the following to your `build.gradle` file
 
 ```grovvy
-compile "me.panpf:android-kt:$lastVersion"
+implementation "me.panpf:android-kt:$lastVersion"
 ```
 
-请自行替换 `$lastVersion` 为最新的版本 [![Download][KTVersionBadgeIcon]][KTVersionBadgeLink]
+Please replace `$lastVersion` with the latest version by yourself. [![Download][KTVersionBadgeIcon]][KTVersionBadgeLink]
 
-依赖：
+Dependencies:
 * org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.50
 * com.android.support:support-fragment: 27.1.1
 * me.panpf:[javax-kt][javax]: 0.6.1
 
-你可以根据需要选择一个版本导入，如果你的项目是 Java 加 Kotlin 混合开发的那么两个版本都可以导入，因为两个版本采用了不同的包名所以不会有类重复问题
+`You can add Java or Kotlin versions to your project as needed. If your project is Java and Kotlin mixed development, then both versions can be imported, because there are different package names, so there will be no class duplicates.`
 
-### 索引
+### Index
 
 * Android: [Androidx.java] | [Android.kt]
 
@@ -90,9 +95,9 @@ compile "me.panpf:android-kt:$lastVersion"
 #### widget
 * Toast: [Toastx.java] ([Test][ToastTest.java]) | [Toast.kt] ([Test][ToastTest.java])
 
-### 更新日志
+### Change log
 
-请查看 [CHANGELOG.md] 文件
+Please view the [CHANGELOG.md] file
 
 
 ### License
@@ -286,6 +291,3 @@ compile "me.panpf:android-kt:$lastVersion"
 [WeakAsyncTaskTest.java]: https://github.com/panpf/androidx/blob/master/androidx/src/androidTest/java/me/panpf/androidx/test/util/WeakAsyncTaskTest.java
 [WeakAsyncTask.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/main/java/me/panpf/androidxkt/util/WeakAsyncTask.kt
 [WeakAsyncTaskTest.kt]: https://github.com/panpf/androidx/blob/master/androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/WeakAsyncTaskTest.kt
-
-
-
