@@ -194,59 +194,6 @@ public class Intentx {
     }
 
     /**
-     * Test if you can start Activity
-     */
-    public static boolean canStartActivity(@NonNull Context context, @NonNull Intent intent) {
-        if (!(context instanceof Activity)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-
-        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(intent, 0);
-        return resolveInfoList != null && resolveInfoList.size() > 0;
-    }
-
-    /**
-     * Test if you can start Activity
-     */
-    public static boolean canStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
-        Activity activity = fragment.getActivity();
-        if (activity == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
-        }
-
-        return Intentx.canStartActivity(activity, intent);
-    }
-
-    /**
-     * Safely launch an Activity, catch ActivityNotFoundException and return false
-     */
-    public static boolean safeStartActivity(@NonNull Context context, @NonNull Intent intent) {
-        if (!(context instanceof Activity)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-
-        try {
-            context.startActivity(intent);
-            return true;
-        } catch (ActivityNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * Safely launch an Activity, catch ActivityNotFoundException and return false
-     */
-    public static boolean safeStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
-        Activity activity = fragment.getActivity();
-        if (activity == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
-        }
-
-        return Intentx.safeStartActivity(activity, intent);
-    }
-
-    /**
      * Create an Intent to take a photo with your camera
      *
      * @param saveFileUri Save the image to the specified uri, If null, get the image from the returned Intent at onActivityResult,
@@ -303,5 +250,58 @@ public class Intentx {
 
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
         return intent;
+    }
+
+    /**
+     * Test if you can start Activity
+     */
+    public static boolean canStartActivity(@NonNull Context context, @NonNull Intent intent) {
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
+        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(intent, 0);
+        return resolveInfoList != null && resolveInfoList.size() > 0;
+    }
+
+    /**
+     * Test if you can start Activity
+     */
+    public static boolean canStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
+        Activity activity = fragment.getActivity();
+        if (activity == null) {
+            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
+        }
+
+        return Intentx.canStartActivity(activity, intent);
+    }
+
+    /**
+     * Safely launch an Activity, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStartActivity(@NonNull Context context, @NonNull Intent intent) {
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
+        try {
+            context.startActivity(intent);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Safely launch an Activity, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
+        Activity activity = fragment.getActivity();
+        if (activity == null) {
+            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
+        }
+
+        return Intentx.safeStartActivity(activity, intent);
     }
 }

@@ -108,8 +108,7 @@ public class Packagex {
      * @return null：未安装
      */
     @Nullable
-    @SuppressWarnings("WeakerAccess")
-    public static AppPackage get(@NonNull Context context, @NonNull String packageName) {
+    public static AppPackage getPackage(@NonNull Context context, @NonNull String packageName) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo;
         try {

@@ -173,55 +173,6 @@ fun makeActivityIntentByResolveInfo(sourceIntent: Intent, resolveInfo: ResolveIn
 }
 
 /**
- * Test if you can start Activity
- */
-fun Context.canStartActivity(intent: Intent): Boolean {
-    if (this !is Activity) {
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    }
-
-    val resolveInfoList = this.packageManager.queryIntentActivities(intent, 0)
-    return resolveInfoList != null && resolveInfoList.size > 0
-}
-
-/**
- * Test if you can start Activity
- */
-fun Fragment.canStartActivity(intent: Intent): Boolean {
-    val activity = this.activity
-            ?: throw IllegalStateException("Fragment $this not attached to Activity")
-
-    return activity.canStartActivity(intent)
-}
-
-/**
- * Safely launch an Activity, catch ActivityNotFoundException and return false
- */
-fun Context.safeStartActivity(intent: Intent): Boolean {
-    if (this !is Activity) {
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-    }
-
-    return try {
-        this.startActivity(intent)
-        true
-    } catch (e: ActivityNotFoundException) {
-        e.printStackTrace()
-        false
-    }
-}
-
-/**
- * Safely launch an Activity, catch ActivityNotFoundException and return false
- */
-fun Fragment.safeStartActivity(intent: Intent): Boolean {
-    val activity = this.activity
-            ?: throw IllegalStateException("Fragment $this not attached to Activity")
-
-    return activity.safeStartActivity(intent)
-}
-
-/**
  * Create an Intent to take a photo with your camera
  *
  * @param saveFileUri Save the image to the specified uri, If null, get the image from the returned Intent at onActivityResult,
@@ -275,4 +226,53 @@ fun makeCropImageIntent(sourceFileUri: Uri, targetWidth: Int, targetHeight: Int,
 
     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION) // Prepare for FileProvider on Android N
     return intent
+}
+
+/**
+ * Test if you can start Activity
+ */
+fun Context.canStartActivity(intent: Intent): Boolean {
+    if (this !is Activity) {
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
+
+    val resolveInfoList = this.packageManager.queryIntentActivities(intent, 0)
+    return resolveInfoList != null && resolveInfoList.size > 0
+}
+
+/**
+ * Test if you can start Activity
+ */
+fun Fragment.canStartActivity(intent: Intent): Boolean {
+    val activity = this.activity
+            ?: throw IllegalStateException("Fragment $this not attached to Activity")
+
+    return activity.canStartActivity(intent)
+}
+
+/**
+ * Safely launch an Activity, catch ActivityNotFoundException and return false
+ */
+fun Context.safeStartActivity(intent: Intent): Boolean {
+    if (this !is Activity) {
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
+
+    return try {
+        this.startActivity(intent)
+        true
+    } catch (e: ActivityNotFoundException) {
+        e.printStackTrace()
+        false
+    }
+}
+
+/**
+ * Safely launch an Activity, catch ActivityNotFoundException and return false
+ */
+fun Fragment.safeStartActivity(intent: Intent): Boolean {
+    val activity = this.activity
+            ?: throw IllegalStateException("Fragment $this not attached to Activity")
+
+    return activity.safeStartActivity(intent)
 }

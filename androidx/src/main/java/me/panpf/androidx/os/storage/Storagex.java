@@ -50,22 +50,22 @@ public class Storagex {
     /**
      * Get the number of free bytes remaining in the current directory
      */
-    public static long getDirFreeBytes(@NonNull File $receiver) {
-        return StatFsx.getCompatFreeBytes(new StatFs($receiver.getPath()));
+    public static long getDirFreeBytes(@NonNull File dir) {
+        return StatFsx.getCompatFreeBytes(new StatFs(dir.getPath()));
     }
 
     /**
      * Get the number of total bytes in the current directory
      */
-    public static long getDirTotalBytes(@NonNull File $receiver) {
-        return StatFsx.getCompatTotalBytes(new StatFs($receiver.getPath()));
+    public static long getDirTotalBytes(@NonNull File dir) {
+        return StatFsx.getCompatTotalBytes(new StatFs(dir.getPath()));
     }
 
     /**
      * Get the number of bytes remaining in the current directory that are available for the current application
      */
-    public static long getDirAvailableBytes(@NonNull File $receiver) {
-        return StatFsx.getCompatAvailableBytes(new StatFs($receiver.getPath()));
+    public static long getDirAvailableBytes(@NonNull File dir) {
+        return StatFsx.getCompatAvailableBytes(new StatFs(dir.getPath()));
     }
 
     /**

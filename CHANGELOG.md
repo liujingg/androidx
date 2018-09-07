@@ -13,6 +13,8 @@
 * Window 增加 hasNavigationBar getStatusBarHeight getNavigationBarWidth 方法
 * Permission 增加 filterDeniedPermissions
 * Fragment 里的 canStartActivity 和 safeStartActivity 移动到 Intent 中
+* Package.get 重命名为 getPackage
+* ViewAnim 简化所有方法名
 
 ## v0.1
 * 初次发布

@@ -4,7 +4,7 @@
 [![API][min_api_image]][min_api_link]
 [![License][license_image]][license_link]
 
-对 Android 标准库和支持库的扩展
+Extensions to the Android standard library and support libraries and some basic tools
 
 ### Getting Started
 
@@ -37,63 +37,123 @@ Dependencies:
 * com.android.support:support-fragment: 27.1.1
 * me.panpf:[javax-kt][javax]: 0.6.1
 
-`You can add Java or Kotlin versions to your project as needed. If your project is Java and Kotlin mixed development, then both versions can be imported, because there are different package names, so there will be no class duplicates.`
+`You can add Java or Kotlin versions to your project as needed.
+If your project is Java and Kotlin mixed development, then both versions can be imported,
+because there are different package names, so there will be no class duplicates.`
 
 ### Index
 
 * Android: [Androidx.java] | [Android.kt]
+    * getMainHandler, runInUI, isRooted, isMainThread, getInProcessName,
+    getInProcessNameSuffix, isMainProcess, isAtLeast\*, getSdkVersionName
 
 #### app
 * Activity: [Activityx.java] | [Activity.kt]
+    * convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
 * Dialog: [Dialogx.java] | [Dialog.kt]
+    * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] | [Fragment.kt]
+    * getImplWithParent, instance,
 * Permission: [Permissionx.java] ([Test][PermissionTest.java]) | [Permission.kt] ([Test][PermissionTest.kt])
+    * isGrantPermissions, filterDeniedPermissions
 
 #### content
 * Package: [Packagex.java] | [Package.kt]
+    * isInstalled, getVersionCode, getVersionName, getPackage, isSystemApp, getAllAppIdAndVersionCodeMap,
+    getAllAppIdAndVersionCodeSet, getAllAppId, getAllApp, getOne, count, getAppPackageFile,
+    getAppSignatureBytes, getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
 * Asset: [Assetx.java] | [Asset.kt]
+    * openInput, readBytes, readText, readLines, readBitmap
 * Clipboard: [Clipboardx.java] ([Test][ClipboardTest.java]) | [Clipboard.kt] ([Test][ClipboardTest.kt])
+    * copy, copyText, copyHtmlText, copyIntent, copyUri, copyRawUri, copyMimeTypeUri, copyContents,
+    get, getLabel, getContents, getText, getHtmlText, getIntent, getUri, addPrimaryClipChangedListener,
+    removePrimaryClipChangedListener, clear
 * Content: [Contentx.java] | [Content.kt]
+    * openInput, readBytes, readText, readLines, readBitmap
 * Intent: [Intentx.java] | [Intent.kt]
+    * makeRecordingIntent, makeLaunchDialingIntent, makeCallPhoneIntent, makeLaunchSendSmsIntent,
+    makeLaunchWebBrowserIntent, makeScanFileBroadcastIntent, makeInstallAppIntent, makeUninstallAppIntent,
+    makeLaunchAppIntent, makeAppDetailInSystemIntent, makeActivityIntentByResolveInfo, makeTakePhotoIntent,
+    makePickImageIntent, makeCropImageIntent, canStartActivity, safeStartActivity
 * Preference: [Preferencex.java] | [Preference.kt]
+    * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
+    getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
 
 #### graphics
 * Drawable: [Drawablex.java] ([Test][DrawableTest.java])  | [Drawable.kt] ([Test][DrawableTest.kt])
+    * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, toDrawableByColor, toDrawableByColorFromDrawableRes
 * Bitmap: [Bitmapx.java] | [Bitmap.kt]
+    * centerCrop, tint, createByColor, toByteArray, writeToFile, readBitmap, toDrawableByColor,
 * Color: [Colorx.java] ([Test][ColorTest.java]) | [Color.kt] ([Test][ColorTest.kt])
+    * WHITE/BLACK/RED..., getAlpha, setAlpha, addAlpha, getHSVHue, setHSVHue, getHSVSaturation,
+    setHSVSaturation, addHSVSaturation, getHSVValue, setHSVValue, addHSVValue, isLight,
+    makeMatrixColorFilter, argbEvaluate
 * Matrix: [Matrixx.java] | [Matrix.kt]
+    * getValue, getScale
 * OpenGl: [OpenGlx.java] | [OpenGl.kt]
+    * getVersion, getMaxTextureSize,
 * Paint: [Paintx.java] | [Paint.kt]
+    * getTextWidth, getTextHeight, getTextWidthByBounds, getTextHeightByBounds, getTextLeading
 
 #### hardware
 * Hardware: [Hardwarex.java] ([Test][HardwareTest.java]) | [Hardware.kt] ([Test][HardwareTest.kt])
+    * getDeviceModel, getDeviceName, getHardware, getSupportedAbis, getPhoneNumber, getDeviceId,
+    getAndroidId, getSubscriberId, getSimSerialNumber, getSerial, getIMEI, getIMSI, getMacAddress
 
 #### net
 * NetworkState: [NetworkState.java] | [NetworkState.kt]
+    * isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated, isBluetoothActivated,
+    getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName, getSubtypeName,
+    getExtraInfo, getNetworkInfo, getConnectivity
 * Network: [Networkx.java] | [Network.kt]
+    * getState, getWifiState, isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getIpAddress
 
 #### os
 * Storage: [Storagex.java] | [Storage.kt]
+    * getDirFreeBytes, getDirTotalBytes, getDirAvailableBytes, isSDCardMounted, getSDCardFreeBytes,
+    getSDCardTotalBytes, getSDCardAvailableBytes, getSdcardPath, getSdcardFile, getAllSdcardPath,
+    getAllSdcardFile, getAllSdcardWithPathFile, findSdcardBySpace, getChildFileBySpaceFromDirs,
+    getAllAppCacheDirs, getAllAppFilesDirs, getFileFromAppCacheDirs, getFileFromAppFilesDirs,
+    getFileFromAppCacheDirsBySpace, getFileFromAppFilesDirsBySpace, cleanAppCacheDirs, lengthAppCacheDirs,
+    lengthAppFilesDirs, getAppObbDir, getAppDataDir
 * StatFs: [StatFsx.java] | [StatFs.kt]
+    * getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes
 
 #### provider
 * Settings: [Settingsx.java] | [Settings.kt]
+    * isScreenBrightnessModeAutomatic, setScreenBrightnessModeAutomatic, getScreenBrightness, setScreenBrightness,
+    setWindowBrightness, getScreenOffTimeout, setScreenOffTimeout, isAirplaneModeOn, setAirplaneModeOn,
+    isBluetoothOn, setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
 
 #### util
 * Dimen: [Dimenx.java] | [Dimen.kt]
+    * dp2px, px2dp, sp2px, px2sp, unit2px
 * Json: [Jsonx.java] | [Json.kt]
+    * isEmpty, isNotEmpty, toJsonArray, toJson, toStringList, toStringArray, toIntArray,
+    toBeanList, toBean, optString, optInt, optLong, format
 * Text: [Textx.java] | [Text.kt]
 * WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java]) | [WeakAsyncTask.kt] ([Test][WeakAsyncTaskTest.kt])
 
 #### view
 * InputMethod: [InputMethodx.java] | [InputMethod.kt]
+    * showSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
 * Display: [Displayx.java] | [Display.kt]
+    * getScreenSize, getScreenWidth, getScreenHeight, getDisplayMetrics, getScreenDensity,
+    getScreenDensityDpi, isPortraitOrientation
 * ViewAnim: [ViewAnimx.java] | [ViewAnim.kt]
+    * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
+    goneByAnimAlpha, visibleByAnimAlpha,
 * View: [Viewx.java] | [View.kt]
+    * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
+    addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
+    toBitmapByMaxHeight, inflateLayout
 * Window: [Windowx.java] | [Window.kt]
+    * getDisplayRotation, isLandscape, isPortrait, hasNavigationBar, getStatusBarHeight,
+    getNavigationBarHeight, getNavigationBarWidth
 
 #### widget
 * Toast: [Toastx.java] ([Test][ToastTest.java]) | [Toast.kt] ([Test][ToastTest.java])
+    * showLong, showShort, showLongWithView, showShortWithView
 
 ### Change log
 
