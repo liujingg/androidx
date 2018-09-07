@@ -18,6 +18,7 @@ package me.panpf.androidxkt.app
 
 import android.app.Activity
 import android.content.Intent
+import android.os.Bundle
 import android.support.v4.app.Fragment
 import me.panpf.androidxkt.content.canStartActivity
 import me.panpf.androidxkt.content.safeStartActivity
@@ -65,4 +66,24 @@ fun Fragment.safeStartActivity(intent: Intent): Boolean {
             ?: throw IllegalStateException("Fragment $this not attached to Activity")
 
     return activity.safeStartActivity(intent)
+}
+
+/**
+ * Instantiate a Fragment and set arguments
+ */
+fun Class<out Fragment>.instance(arguments: Bundle? = null): Fragment {
+    val fragment: Fragment
+
+    try {
+        fragment = this.newInstance()
+    } catch (e: InstantiationException) {
+        throw IllegalArgumentException(e)
+    } catch (e: IllegalAccessException) {
+        throw IllegalArgumentException(e)
+    }
+
+    if (arguments != null) {
+        fragment.arguments = arguments
+    }
+    return fragment
 }

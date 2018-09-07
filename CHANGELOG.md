@@ -8,6 +8,7 @@
 * 增加 Clipboard
 * Bitmap makeBitmapByColor 方法重命名为 create
 * Drawable 重构
+* Fragment add instance method
 
 ## v0.1
 * 初次发布
