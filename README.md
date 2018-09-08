@@ -6,9 +6,9 @@
 
 Extensions to the Android standard library and support libraries and some basic tools
 
-### Getting Started
+## Getting Started
 
-#### Java version:
+### Java version:
 
 Add the following to your `build.gradle` file
 
@@ -16,13 +16,13 @@ Add the following to your `build.gradle` file
 implementation "me.panpf:android:$lastVersion"
 ```
 
-Please replace `$lastVersion` with the latest version by yourself. [![Download][VersionBadgeIcon]][VersionBadgeLink]
+Please replace `$lastVersion` with the latest version: [![Download][VersionBadgeIcon]][VersionBadgeLink]
 
 Dependencies:
 * com.android.support:support-fragment: 27.1.1
 * me.panpf:[javax][javax]: 0.6.1
 
-#### Kotlin version:
+### Kotlin version:
 
 Add the following to your `build.gradle` file
 
@@ -30,7 +30,7 @@ Add the following to your `build.gradle` file
 implementation "me.panpf:android-kt:$lastVersion"
 ```
 
-Please replace `$lastVersion` with the latest version by yourself. [![Download][KTVersionBadgeIcon]][KTVersionBadgeLink]
+Please replace `$lastVersion` with the latest version: [![Download][KTVersionBadgeIcon]][KTVersionBadgeLink]
 
 Dependencies:
 * org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.50
@@ -41,13 +41,13 @@ Dependencies:
 If your project is Java and Kotlin mixed development, then both versions can be imported,
 because there are different package names, so there will be no class duplicates.`
 
-### Index
+## Index
 
 * Android: [Androidx.java] | [Android.kt]
     * getMainHandler, runInUI, isRooted, isMainThread, getInProcessName,
     getInProcessNameSuffix, isMainProcess, isAtLeast\*, getSdkVersionName
 
-#### app
+### app
 * Activity: [Activityx.java] | [Activity.kt]
     * convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
 * Dialog: [Dialogx.java] | [Dialog.kt]
@@ -57,7 +57,7 @@ because there are different package names, so there will be no class duplicates.
 * Permission: [Permissionx.java] ([Test][PermissionTest.java]) | [Permission.kt] ([Test][PermissionTest.kt])
     * isGrantPermissions, filterDeniedPermissions
 
-#### content
+### content
 * Package: [Packagex.java] | [Package.kt]
     * isInstalled, getVersionCode, getVersionName, getPackage, isSystemApp, getAllAppIdAndVersionCodeMap,
     getAllAppIdAndVersionCodeSet, getAllAppId, getAllApp, getOne, count, getAppPackageFile,
@@ -79,7 +79,7 @@ because there are different package names, so there will be no class duplicates.
     * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
     getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
 
-#### graphics
+### graphics
 * Drawable: [Drawablex.java] ([Test][DrawableTest.java])  | [Drawable.kt] ([Test][DrawableTest.kt])
     * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, toDrawableByColor, toDrawableByColorFromDrawableRes
 * Bitmap: [Bitmapx.java] | [Bitmap.kt]
@@ -95,12 +95,12 @@ because there are different package names, so there will be no class duplicates.
 * Paint: [Paintx.java] | [Paint.kt]
     * getTextWidth, getTextHeight, getTextWidthByBounds, getTextHeightByBounds, getTextLeading
 
-#### hardware
+### hardware
 * Hardware: [Hardwarex.java] ([Test][HardwareTest.java]) | [Hardware.kt] ([Test][HardwareTest.kt])
     * getDeviceModel, getDeviceName, getHardware, getSupportedAbis, getPhoneNumber, getDeviceId,
     getAndroidId, getSubscriberId, getSimSerialNumber, getSerial, getIMEI, getIMSI, getMacAddress
 
-#### net
+### net
 * NetworkState: [NetworkState.java] | [NetworkState.kt]
     * isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated, isBluetoothActivated,
     getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName, getSubtypeName,
@@ -108,7 +108,7 @@ because there are different package names, so there will be no class duplicates.
 * Network: [Networkx.java] | [Network.kt]
     * getState, getWifiState, isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getIpAddress
 
-#### os
+### os
 * Storage: [Storagex.java] | [Storage.kt]
     * getDirFreeBytes, getDirTotalBytes, getDirAvailableBytes, isSDCardMounted, getSDCardFreeBytes,
     getSDCardTotalBytes, getSDCardAvailableBytes, getSdcardPath, getSdcardFile, getAllSdcardPath,
@@ -119,13 +119,13 @@ because there are different package names, so there will be no class duplicates.
 * StatFs: [StatFsx.java] | [StatFs.kt]
     * getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes
 
-#### provider
+### provider
 * Settings: [Settingsx.java] | [Settings.kt]
     * isScreenBrightnessModeAutomatic, setScreenBrightnessModeAutomatic, getScreenBrightness, setScreenBrightness,
     setWindowBrightness, getScreenOffTimeout, setScreenOffTimeout, isAirplaneModeOn, setAirplaneModeOn,
     isBluetoothOn, setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
 
-#### util
+### util
 * Dimen: [Dimenx.java] | [Dimen.kt]
     * dp2px, px2dp, sp2px, px2sp, unit2px
 * Json: [Jsonx.java] | [Json.kt]
@@ -134,7 +134,7 @@ because there are different package names, so there will be no class duplicates.
 * Text: [Textx.java] | [Text.kt]
 * WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java]) | [WeakAsyncTask.kt] ([Test][WeakAsyncTaskTest.kt])
 
-#### view
+### view
 * InputMethod: [InputMethodx.java] | [InputMethod.kt]
     * showSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
 * Display: [Displayx.java] | [Display.kt]
@@ -151,16 +151,16 @@ because there are different package names, so there will be no class duplicates.
     * getDisplayRotation, isLandscape, isPortrait, hasNavigationBar, getStatusBarHeight,
     getNavigationBarHeight, getNavigationBarWidth
 
-#### widget
+### widget
 * Toast: [Toastx.java] ([Test][ToastTest.java]) | [Toast.kt] ([Test][ToastTest.java])
     * showLong, showShort, showLongWithView, showShortWithView
 
-### Change log
+## Change log
 
 Please view the [CHANGELOG.md] file
 
 
-### License
+## License
     Copyright (C) 2018 Peng fei Pan <panpfpanpf@outlook.com>
 
     Licensed under the Apache License, Version 2.0 (the "License");
