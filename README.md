@@ -45,7 +45,7 @@ because there are different package names, so there will be no class duplicates.
 
 * Android: [Androidx.java] | [Android.kt]
     * getMainHandler, runInUI, isRooted, isMainThread, getInProcessName,
-    getInProcessNameSuffix, isMainProcess, isAtLeast\*, getSdkVersionName
+    * getInProcessNameSuffix, isMainProcess, isAtLeast\*, getSdkVersionName
 
 ### app
 * Activity: [Activityx.java] | [Activity.kt]
@@ -60,24 +60,24 @@ because there are different package names, so there will be no class duplicates.
 ### content
 * Package: [Packagex.java] | [Package.kt]
     * isInstalled, getVersionCode, getVersionName, getPackage, isSystemApp, getAllAppIdAndVersionCodeMap,
-    getAllAppIdAndVersionCodeSet, getAllAppId, getAllApp, getOne, count, getAppPackageFile,
-    getAppSignatureBytes, getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
+    * getAllAppIdAndVersionCodeSet, getAllAppId, getAllApp, getOne, count, getAppPackageFile,
+    * getAppSignatureBytes, getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
 * Asset: [Assetx.java] | [Asset.kt]
     * openInput, readBytes, readText, readLines, readBitmap
 * Clipboard: [Clipboardx.java] ([Test][ClipboardTest.java]) | [Clipboard.kt] ([Test][ClipboardTest.kt])
     * copy, copyText, copyHtmlText, copyIntent, copyUri, copyRawUri, copyMimeTypeUri, copyContents,
-    get, getLabel, getContents, getText, getHtmlText, getIntent, getUri, addPrimaryClipChangedListener,
-    removePrimaryClipChangedListener, clear
+    * get, getLabel, getContents, getText, getHtmlText, getIntent, getUri, addPrimaryClipChangedListener,
+    * removePrimaryClipChangedListener, clear
 * Content: [Contentx.java] | [Content.kt]
     * openInput, readBytes, readText, readLines, readBitmap
 * Intent: [Intentx.java] | [Intent.kt]
     * makeRecordingIntent, makeLaunchDialingIntent, makeCallPhoneIntent, makeLaunchSendSmsIntent,
-    makeLaunchWebBrowserIntent, makeScanFileBroadcastIntent, makeInstallAppIntent, makeUninstallAppIntent,
-    makeLaunchAppIntent, makeAppDetailInSystemIntent, makeActivityIntentByResolveInfo, makeTakePhotoIntent,
-    makePickImageIntent, makeCropImageIntent, canStartActivity, safeStartActivity
+    * makeLaunchWebBrowserIntent, makeScanFileBroadcastIntent, makeInstallAppIntent, makeUninstallAppIntent,
+    * makeLaunchAppIntent, makeAppDetailInSystemIntent, makeActivityIntentByResolveInfo, makeTakePhotoIntent,
+    * makePickImageIntent, makeCropImageIntent, canStartActivity, safeStartActivity
 * Preference: [Preferencex.java] | [Preference.kt]
     * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
-    getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
+    * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
 
 ### graphics
 * Drawable: [Drawablex.java] ([Test][DrawableTest.java])  | [Drawable.kt] ([Test][DrawableTest.kt])
@@ -86,8 +86,8 @@ because there are different package names, so there will be no class duplicates.
     * centerCrop, tint, createByColor, toByteArray, writeToFile, readBitmap, toDrawableByColor,
 * Color: [Colorx.java] ([Test][ColorTest.java]) | [Color.kt] ([Test][ColorTest.kt])
     * WHITE/BLACK/RED..., getAlpha, setAlpha, addAlpha, getHSVHue, setHSVHue, getHSVSaturation,
-    setHSVSaturation, addHSVSaturation, getHSVValue, setHSVValue, addHSVValue, isLight,
-    makeMatrixColorFilter, argbEvaluate
+    * setHSVSaturation, addHSVSaturation, getHSVValue, setHSVValue, addHSVValue, isLight,
+    * makeMatrixColorFilter, argbEvaluate
 * Matrix: [Matrixx.java] | [Matrix.kt]
     * getValue, getScale
 * OpenGl: [OpenGlx.java] | [OpenGl.kt]
@@ -98,40 +98,43 @@ because there are different package names, so there will be no class duplicates.
 ### hardware
 * Hardware: [Hardwarex.java] ([Test][HardwareTest.java]) | [Hardware.kt] ([Test][HardwareTest.kt])
     * getDeviceModel, getDeviceName, getHardware, getSupportedAbis, getPhoneNumber, getDeviceId,
-    getAndroidId, getSubscriberId, getSimSerialNumber, getSerial, getIMEI, getIMSI, getMacAddress
+    * getAndroidId, getSubscriberId, getSimSerialNumber, getSerial, getIMEI, getIMSI, getMacAddress
 
 ### net
 * NetworkState: [NetworkState.java] | [NetworkState.kt]
     * isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated, isBluetoothActivated,
-    getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName, getSubtypeName,
-    getExtraInfo, getNetworkInfo, getConnectivity
+    * getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName, getSubtypeName,
+    * getExtraInfo, getNetworkInfo, getConnectivity
 * Network: [Networkx.java] | [Network.kt]
     * getState, getWifiState, isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getIpAddress
 
 ### os
 * Storage: [Storagex.java] | [Storage.kt]
     * getDirFreeBytes, getDirTotalBytes, getDirAvailableBytes, isSDCardMounted, getSDCardFreeBytes,
-    getSDCardTotalBytes, getSDCardAvailableBytes, getSdcardPath, getSdcardFile, getAllSdcardPath,
-    getAllSdcardFile, getAllSdcardWithPathFile, findSdcardBySpace, getChildFileBySpaceFromDirs,
-    getAllAppCacheDirs, getAllAppFilesDirs, getFileFromAppCacheDirs, getFileFromAppFilesDirs,
-    getFileFromAppCacheDirsBySpace, getFileFromAppFilesDirsBySpace, cleanAppCacheDirs, lengthAppCacheDirs,
-    lengthAppFilesDirs, getAppObbDir, getAppDataDir
+    * getSDCardTotalBytes, getSDCardAvailableBytes, getSdcardPath, getSdcardFile, getAllSdcardPath,
+    * getAllSdcardFile, getAllSdcardWithPathFile, findSdcardBySpace, getChildFileBySpaceFromDirs,
+    * getAllAppCacheDirs, getAllAppFilesDirs, getFileFromAppCacheDirs, getFileFromAppFilesDirs,
+    * getFileFromAppCacheDirsBySpace, getFileFromAppFilesDirsBySpace, cleanAppCacheDirs,
+    * lengthAppCacheDirs, lengthAppFilesDirs, getAppObbDir, getAppDataDir
 * StatFs: [StatFsx.java] | [StatFs.kt]
     * getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes
 
 ### provider
 * Settings: [Settingsx.java] | [Settings.kt]
-    * isScreenBrightnessModeAutomatic, setScreenBrightnessModeAutomatic, getScreenBrightness, setScreenBrightness,
-    setWindowBrightness, getScreenOffTimeout, setScreenOffTimeout, isAirplaneModeOn, setAirplaneModeOn,
-    isBluetoothOn, setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
+    * isScreenBrightnessModeAutomatic, setScreenBrightnessModeAutomatic, getScreenBrightness,
+    * setScreenBrightness, setWindowBrightness, getScreenOffTimeout, setScreenOffTimeout,
+    * isAirplaneModeOn, setAirplaneModeOn, isBluetoothOn, setBluetoothOn,
+    * getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
 
 ### util
 * Dimen: [Dimenx.java] | [Dimen.kt]
     * dp2px, px2dp, sp2px, px2sp, unit2px
 * Json: [Jsonx.java] | [Json.kt]
     * isEmpty, isNotEmpty, toJsonArray, toJson, toStringList, toStringArray, toIntArray,
-    toBeanList, toBean, optString, optInt, optLong, format
+    * toBeanList, toBean, optString, optInt, optLong, format
 * Text: [Textx.java] | [Text.kt]
+    * textToBitmap, toHtmlColorFlag, toHtmlRedFlag, keywordMadeColorByHtml, keywordMadeRedByHtml,
+    * keywordMadeColorBySpannable, keywordMadeRedBySpannable
 * WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java]) | [WeakAsyncTask.kt] ([Test][WeakAsyncTaskTest.kt])
 
 ### view
@@ -139,17 +142,17 @@ because there are different package names, so there will be no class duplicates.
     * showSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
 * Display: [Displayx.java] | [Display.kt]
     * getScreenSize, getScreenWidth, getScreenHeight, getDisplayMetrics, getScreenDensity,
-    getScreenDensityDpi, isPortraitOrientation
+    * getScreenDensityDpi, isPortraitOrientation
 * ViewAnim: [ViewAnimx.java] | [ViewAnim.kt]
     * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
-    goneByAnimAlpha, visibleByAnimAlpha,
+    * goneByAnimAlpha, visibleByAnimAlpha,
 * View: [Viewx.java] | [View.kt]
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
-    addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
-    toBitmapByMaxHeight, inflateLayout
+    * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
+    * toBitmapByMaxHeight, inflateLayout
 * Window: [Windowx.java] | [Window.kt]
     * getDisplayRotation, isLandscape, isPortrait, hasNavigationBar, getStatusBarHeight,
-    getNavigationBarHeight, getNavigationBarWidth
+    * getNavigationBarHeight, getNavigationBarWidth
 
 ### widget
 * Toast: [Toastx.java] ([Test][ToastTest.java]) | [Toast.kt] ([Test][ToastTest.java])
