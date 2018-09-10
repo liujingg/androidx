@@ -12,7 +12,7 @@ Extension of Activity and Fragment parameters based on Kotlin features
 Add the following to your `build.gradle` file
 
 ```grovvy
-implementation "me.panpf:android-kt-args:$lastVersion"
+implementation "me.panpf:androidx-kt-args:$lastVersion"
 ```
 
 Please replace `$lastVersion` with the latest version: [![Download][version_icon]][version_link]

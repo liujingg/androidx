@@ -12,7 +12,7 @@ Kotlin extension to Android Architecture related libraries
 Add the following to your `build.gradle` file
 
 ```grovvy
-implementation "me.panpf:android-kt-arch:$lastVersion"
+implementation "me.panpf:androidx-kt-arch:$lastVersion"
 ```
 
 Please replace `$lastVersion` with the latest version: [![Download][version_icon]][version_link]

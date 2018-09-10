@@ -18,7 +18,7 @@ Extensions to the Android standard library and support libraries and some basic 
 Add the following to your `build.gradle` file
 
 ```grovvy
-implementation "me.panpf:android:$lastVersion"
+implementation "me.panpf:androidx:$lastVersion"
 ```
 
 Please replace `$lastVersion` with the latest version: [![Download][version_java_icon]][version_java_link]
@@ -32,7 +32,7 @@ Dependencies:
 Add the following to your `build.gradle` file
 
 ```grovvy
-implementation "me.panpf:android-kt:$lastVersion"
+implementation "me.panpf:androidx-kt:$lastVersion"
 ```
 
 Please replace `$lastVersion` with the latest version: [![Download][version_kotlin_icon]][version_kotlin_link]
