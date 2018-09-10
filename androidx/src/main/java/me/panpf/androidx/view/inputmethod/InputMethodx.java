@@ -19,7 +19,6 @@ package me.panpf.androidx.view.inputmethod;
 import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.support.v4.app.Fragment;
 import android.text.Selection;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -50,7 +49,12 @@ public class InputMethodx {
         imm.hideSoftInputFromWindow(currentFocusView.getWindowToken(), 0);
     }
 
-    public static void hideSoftInput(@NonNull Fragment fragment) {
+    public static void hideSoftInput(@NonNull android.support.v4.app.Fragment fragment) {
+        Activity activity = fragment.getActivity();
+        if (activity != null) hideSoftInput(activity);
+    }
+
+    public static void hideSoftInput(@NonNull android.app.Fragment fragment) {
         Activity activity = fragment.getActivity();
         if (activity != null) hideSoftInput(activity);
     }

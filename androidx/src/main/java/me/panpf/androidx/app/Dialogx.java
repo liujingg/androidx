@@ -21,7 +21,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 
 import me.panpf.javax.lang.Classx;
 
@@ -67,7 +66,7 @@ public class Dialogx {
      * Display a progress dialog
      */
     @Nullable
-    public static ProgressDialog showProgressDialog(@NonNull Fragment fragment, @NonNull String message) {
+    public static ProgressDialog showProgressDialog(@NonNull android.support.v4.app.Fragment fragment, @NonNull String message) {
         Activity activity = fragment.getActivity();
         return activity != null ? showProgressDialog(activity, message) : null;
     }
@@ -76,7 +75,25 @@ public class Dialogx {
      * Display a progress dialog
      */
     @Nullable
-    public static ProgressDialog showProgressDialog(@NonNull Fragment fragment, int messageId) {
+    public static ProgressDialog showProgressDialog(@NonNull android.support.v4.app.Fragment fragment, int messageId) {
+        Activity activity = fragment.getActivity();
+        return activity != null ? showProgressDialog(activity, messageId) : null;
+    }
+
+    /**
+     * Display a progress dialog
+     */
+    @Nullable
+    public static ProgressDialog showProgressDialog(@NonNull android.app.Fragment fragment, @NonNull String message) {
+        Activity activity = fragment.getActivity();
+        return activity != null ? showProgressDialog(activity, message) : null;
+    }
+
+    /**
+     * Display a progress dialog
+     */
+    @Nullable
+    public static ProgressDialog showProgressDialog(@NonNull android.app.Fragment fragment, int messageId) {
         Activity activity = fragment.getActivity();
         return activity != null ? showProgressDialog(activity, messageId) : null;
     }

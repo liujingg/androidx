@@ -17,6 +17,7 @@
 package me.panpf.androidx.app;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -30,7 +31,7 @@ public class Fragmentx {
      * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
      */
     @Nullable
-    public static <T> T getImplWithParent(@NonNull Fragment fragment, @NonNull Class<T> clazz) {
+    public static <T> T getImplWithParent(@NonNull android.support.v4.app.Fragment fragment, @NonNull Class<T> clazz) {
         Fragment parent = fragment;
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {
@@ -55,8 +56,8 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static Fragment instance(@NotNull Class<? extends Fragment> clas, @Nullable Bundle arguments) {
-        Fragment fragment;
+    public static android.support.v4.app.Fragment instanceOrigin(@NotNull Class<? extends android.support.v4.app.Fragment> clas, @Nullable Bundle arguments) {
+        android.support.v4.app.Fragment fragment;
         //noinspection TryWithIdenticalCatches
         try {
             fragment = clas.newInstance();
@@ -74,7 +75,63 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static Fragment instance(@NotNull Class<? extends Fragment> clas) {
+    public static android.support.v4.app.Fragment instanceOrigin(@NotNull Class<? extends android.support.v4.app.Fragment> clas) {
+        return instanceOrigin(clas, null);
+    }
+
+    /**
+     * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
+     */
+    @Nullable
+    public static <T> T getImplWithParent(@NonNull android.app.Fragment fragment, @NonNull Class<T> clazz) {
+        android.app.Fragment parent = fragment;
+        while (parent != null) {
+            if (clazz.isAssignableFrom(parent.getClass())) {
+                //noinspection unchecked
+                return (T) clazz;
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                    parent = parent.getParentFragment();
+                } else {
+                    parent = null;
+                }
+            }
+        }
+        Activity parentActivity = fragment.getActivity();
+        while (parentActivity != null) {
+            if (clazz.isAssignableFrom(parentActivity.getClass())) {
+                //noinspection unchecked
+                return (T) clazz;
+            } else {
+                parentActivity = parentActivity.getParent();
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Instantiate a Fragment and set arguments
+     */
+    public static android.app.Fragment instance(@NotNull Class<? extends android.app.Fragment> clas, @Nullable Bundle arguments) {
+        android.app.Fragment fragment;
+        //noinspection TryWithIdenticalCatches
+        try {
+            fragment = clas.newInstance();
+        } catch (InstantiationException e) {
+            throw new IllegalArgumentException(e);
+        } catch (IllegalAccessException e) {
+            throw new IllegalArgumentException(e);
+        }
+        if (arguments != null) {
+            fragment.setArguments(arguments);
+        }
+        return fragment;
+    }
+
+    /**
+     * Instantiate a Fragment and set arguments
+     */
+    public static android.app.Fragment instance(@NotNull Class<? extends android.app.Fragment> clas) {
         return instance(clas, null);
     }
 }

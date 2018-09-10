@@ -30,7 +30,6 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
-import android.support.v4.app.Fragment;
 
 import java.util.List;
 
@@ -267,7 +266,19 @@ public class Intentx {
     /**
      * Test if you can start Activity
      */
-    public static boolean canStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
+    public static boolean canStartActivity(@NonNull android.support.v4.app.Fragment fragment, @NonNull Intent intent) {
+        Activity activity = fragment.getActivity();
+        if (activity == null) {
+            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
+        }
+
+        return Intentx.canStartActivity(activity, intent);
+    }
+
+    /**
+     * Test if you can start Activity
+     */
+    public static boolean canStartActivity(@NonNull android.app.Fragment fragment, @NonNull Intent intent) {
         Activity activity = fragment.getActivity();
         if (activity == null) {
             throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
@@ -296,7 +307,19 @@ public class Intentx {
     /**
      * Safely launch an Activity, catch ActivityNotFoundException and return false
      */
-    public static boolean safeStartActivity(@NonNull Fragment fragment, @NonNull Intent intent) {
+    public static boolean safeStartActivity(@NonNull android.support.v4.app.Fragment fragment, @NonNull Intent intent) {
+        Activity activity = fragment.getActivity();
+        if (activity == null) {
+            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
+        }
+
+        return Intentx.safeStartActivity(activity, intent);
+    }
+
+    /**
+     * Safely launch an Activity, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStartActivity(@NonNull android.app.Fragment fragment, @NonNull Intent intent) {
         Activity activity = fragment.getActivity();
         if (activity == null) {
             throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");

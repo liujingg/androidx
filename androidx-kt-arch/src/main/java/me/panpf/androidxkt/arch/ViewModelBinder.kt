@@ -5,17 +5,16 @@ package me.panpf.androidxkt.arch
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
-public fun <V : ViewModel> Fragment.bindViewModel(clazz: KClass<V>): ReadOnlyProperty<Fragment, V> {
+public fun <V : ViewModel> android.support.v4.app.Fragment.bindViewModel(clazz: KClass<V>): ReadOnlyProperty<android.support.v4.app.Fragment, V> {
     return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this).get(clazz.java) }
 }
 
-public fun <V : ViewModel> Fragment.bindViewModel(clazz: KClass<V>, factory: ViewModelProvider.Factory): ReadOnlyProperty<Fragment, V> {
+public fun <V : ViewModel> android.support.v4.app.Fragment.bindViewModel(clazz: KClass<V>, factory: ViewModelProvider.Factory): ReadOnlyProperty<android.support.v4.app.Fragment, V> {
     return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this, factory).get(clazz.java) }
 }
 

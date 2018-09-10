@@ -13,8 +13,8 @@ class TestArgsActivity : ArgsFragmentActivity<TestArgsActivity.Args>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.at_test)
+        setContentView(me.panpf.androidxkt.args.test.R.layout.at_test)
 
-        supportFragmentManager.beginTransaction().replace(R.id.testAt_frame, TestArgsFragment().setArgs(args)).commit()
+        supportFragmentManager.beginTransaction().replace(me.panpf.androidxkt.args.test.R.id.testAt_frame, TestArgsFragment().setArgs(args)).commit()
     }
 }

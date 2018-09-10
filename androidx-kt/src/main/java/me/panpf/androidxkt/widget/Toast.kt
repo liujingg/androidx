@@ -21,7 +21,6 @@ import android.support.annotation.StringRes
 import android.view.View
 import android.widget.Toast
 import me.panpf.androidxkt.runInUI
-import android.support.v4.app.Fragment as SupportFragment
 
 /*
  * Toast related extension method
@@ -71,42 +70,84 @@ fun Context.showShortToast(@StringRes messageResId: Int, vararg params: Any) {
 
 /* ************************************* SupportFragment ***************************************** */
 
-fun SupportFragment.showLongToast(message: String) {
+fun android.support.v4.app.Fragment.showLongToast(message: String) {
     val appContext = this.activity?.applicationContext ?: return
     runInUI { Toast.makeText(appContext, message, Toast.LENGTH_LONG).show() }
 }
 
-fun SupportFragment.showLongToast(message: String, vararg params: Any) {
+fun android.support.v4.app.Fragment.showLongToast(message: String, vararg params: Any) {
     val appContext = this.activity?.applicationContext ?: return
     runInUI { Toast.makeText(appContext, message.format(*params), Toast.LENGTH_LONG).show() }
 }
 
-fun SupportFragment.showLongToast(@StringRes messageResId: Int) {
+fun android.support.v4.app.Fragment.showLongToast(@StringRes messageResId: Int) {
     val appContext = this.activity?.applicationContext ?: return
     runInUI { Toast.makeText(appContext, messageResId, Toast.LENGTH_LONG).show() }
 }
 
-fun SupportFragment.showLongToast(@StringRes messageResId: Int, vararg params: Any) {
+fun android.support.v4.app.Fragment.showLongToast(@StringRes messageResId: Int, vararg params: Any) {
     val appContext = this.activity?.applicationContext ?: return
     runInUI { Toast.makeText(appContext, appContext.getString(messageResId, *params), Toast.LENGTH_LONG).show() }
 }
 
-fun SupportFragment.showShortToast(message: String) {
+fun android.support.v4.app.Fragment.showShortToast(message: String) {
     val appContext = this.activity ?: return
     runInUI { Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show() }
 }
 
-fun SupportFragment.showShortToast(message: String, vararg params: Any) {
+fun android.support.v4.app.Fragment.showShortToast(message: String, vararg params: Any) {
     val appContext = this.activity?.applicationContext ?: return
     runInUI { Toast.makeText(appContext, message.format(*params), Toast.LENGTH_SHORT).show() }
 }
 
-fun SupportFragment.showShortToast(@StringRes messageResId: Int) {
+fun android.support.v4.app.Fragment.showShortToast(@StringRes messageResId: Int) {
     val appContext = this.activity?.applicationContext ?: return
     runInUI { Toast.makeText(appContext, messageResId, Toast.LENGTH_SHORT).show() }
 }
 
-fun SupportFragment.showShortToast(@StringRes messageResId: Int, vararg params: Any) {
+fun android.support.v4.app.Fragment.showShortToast(@StringRes messageResId: Int, vararg params: Any) {
+    val appContext = this.activity?.applicationContext ?: return
+    runInUI { Toast.makeText(appContext, appContext.getString(messageResId, *params), Toast.LENGTH_SHORT).show() }
+}
+
+/* ************************************* OriginFragment ***************************************** */
+
+fun android.app.Fragment.showLongToast(message: String) {
+    val appContext = this.activity?.applicationContext ?: return
+    runInUI { Toast.makeText(appContext, message, Toast.LENGTH_LONG).show() }
+}
+
+fun android.app.Fragment.showLongToast(message: String, vararg params: Any) {
+    val appContext = this.activity?.applicationContext ?: return
+    runInUI { Toast.makeText(appContext, message.format(*params), Toast.LENGTH_LONG).show() }
+}
+
+fun android.app.Fragment.showLongToast(@StringRes messageResId: Int) {
+    val appContext = this.activity?.applicationContext ?: return
+    runInUI { Toast.makeText(appContext, messageResId, Toast.LENGTH_LONG).show() }
+}
+
+fun android.app.Fragment.showLongToast(@StringRes messageResId: Int, vararg params: Any) {
+    val appContext = this.activity?.applicationContext ?: return
+    runInUI { Toast.makeText(appContext, appContext.getString(messageResId, *params), Toast.LENGTH_LONG).show() }
+}
+
+fun android.app.Fragment.showShortToast(message: String) {
+    val appContext = this.activity ?: return
+    runInUI { Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show() }
+}
+
+fun android.app.Fragment.showShortToast(message: String, vararg params: Any) {
+    val appContext = this.activity?.applicationContext ?: return
+    runInUI { Toast.makeText(appContext, message.format(*params), Toast.LENGTH_SHORT).show() }
+}
+
+fun android.app.Fragment.showShortToast(@StringRes messageResId: Int) {
+    val appContext = this.activity?.applicationContext ?: return
+    runInUI { Toast.makeText(appContext, messageResId, Toast.LENGTH_SHORT).show() }
+}
+
+fun android.app.Fragment.showShortToast(@StringRes messageResId: Int, vararg params: Any) {
     val appContext = this.activity?.applicationContext ?: return
     runInUI { Toast.makeText(appContext, appContext.getString(messageResId, *params), Toast.LENGTH_SHORT).show() }
 }

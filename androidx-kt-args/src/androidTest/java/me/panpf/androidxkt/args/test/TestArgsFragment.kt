@@ -1,5 +1,5 @@
 package me.panpf.androidxkt.args.test
 
-import me.panpf.androidxkt.args.ArgsFragment
+import me.panpf.androidxkt.args.ArgsSupportFragment
 
-class TestArgsFragment : ArgsFragment<TestArgsActivity.Args>()
+class TestArgsFragment : ArgsSupportFragment<TestArgsActivity.Args>()

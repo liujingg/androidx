@@ -19,7 +19,6 @@ package me.panpf.androidxkt.app
 import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.support.v4.app.Fragment
 import me.panpf.javaxkt.lang.setFieldValue
 
 /**
@@ -58,13 +57,27 @@ fun Activity.showProgressDialog(messageId: Int): ProgressDialog {
 /**
  * Display a progress dialog
  */
-fun Fragment.showProgressDialog(message: String): ProgressDialog? {
+fun android.support.v4.app.Fragment.showProgressDialog(message: String): ProgressDialog? {
     return this.activity?.showProgressDialog(message)
 }
 
 /**
  * Display a progress dialog
  */
-fun Fragment.showProgressDialog(messageId: Int): ProgressDialog? {
+fun android.support.v4.app.Fragment.showProgressDialog(messageId: Int): ProgressDialog? {
+    return this.activity?.showProgressDialog(messageId)
+}
+
+/**
+ * Display a progress dialog
+ */
+fun android.app.Fragment.showProgressDialog(message: String): ProgressDialog? {
+    return this.activity?.showProgressDialog(message)
+}
+
+/**
+ * Display a progress dialog
+ */
+fun android.app.Fragment.showProgressDialog(messageId: Int): ProgressDialog? {
     return this.activity?.showProgressDialog(messageId)
 }

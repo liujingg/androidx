@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidxkt.args.buildArgsActivityIntent
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -16,8 +17,7 @@ class ArgsTest {
     @get:Rule
     val argsTestRule: ActivityTestRule<TestArgsActivity> = object : ActivityTestRule<TestArgsActivity>(TestArgsActivity::class.java) {
         override fun getActivityIntent(): Intent {
-//            return InstrumentationRegistry.getContext().buildArgsIntent(TestActivity::class, TestActivity.Args(2))
-            return Intent(InstrumentationRegistry.getContext(), TestArgsActivity::class.java).apply { putExtra("args", TestArgsActivity.Args(2, TestParcelable("testArgsActivity"))) }
+            return InstrumentationRegistry.getContext().buildArgsActivityIntent(TestArgsActivity::class.java, TestArgsActivity.Args(2, TestParcelable("testArgsActivity")))
         }
     }
 
@@ -103,7 +103,7 @@ class ArgsTest {
 
     @Test
     fun testArgsFragment() {
-        val argsFragment = argsTestRule.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame) as TestArgsFragment
+        val argsFragment = argsTestRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.args.test.R.id.testAt_frame) as TestArgsFragment
 
         Assert.assertTrue(argsFragment.args.int == 2)
         Assert.assertEquals(argsFragment.args.child.tag, "testArgsActivity")
@@ -208,7 +208,7 @@ class ArgsTest {
 
     @Test
     fun testBindFragment() {
-        val bindFragment = bindTestRule.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame) as TestBindFragment
+        val bindFragment = bindTestRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.args.test.R.id.testAt_frame) as TestBindFragment
 
         Assert.assertTrue(bindFragment.booleanRequired)
         Assert.assertTrue(bindFragment.booleanOptional == false)

@@ -77,7 +77,7 @@ class TestBindActivity : FragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.at_test)
+        setContentView(me.panpf.androidxkt.args.test.R.layout.at_test)
 
         val fragment = TestBindFragment()
         fragment.arguments = Bundle().apply {
@@ -148,6 +148,6 @@ class TestBindActivity : FragmentActivity() {
             putBundle("bundleRequired", bundleRequired)
             bundleOptional?.let { putBundle("bundleOptional", it) }
         }
-        supportFragmentManager.beginTransaction().replace(R.id.testAt_frame, fragment).commit()
+        supportFragmentManager.beginTransaction().replace(me.panpf.androidxkt.args.test.R.id.testAt_frame, fragment).commit()
     }
 }

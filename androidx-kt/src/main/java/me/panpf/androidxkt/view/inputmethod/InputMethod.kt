@@ -21,7 +21,6 @@ import android.content.Context
 import android.text.Selection
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
-import android.support.v4.app.Fragment as SupportFragment
 
 /*
  * 输入法相关的扩展方法或属性
@@ -44,7 +43,11 @@ fun Activity.hideSoftInput() {
     inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, 0)
 }
 
-fun SupportFragment.hideSoftInput() {
+fun android.support.v4.app.Fragment.hideSoftInput() {
+    activity?.hideSoftInput()
+}
+
+fun android.app.Fragment.hideSoftInput() {
     activity?.hideSoftInput()
 }
 

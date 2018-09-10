@@ -26,7 +26,6 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.provider.Settings
 import android.support.annotation.RequiresPermission
-import android.support.v4.app.Fragment
 
 
 /**
@@ -243,7 +242,17 @@ fun Context.canStartActivity(intent: Intent): Boolean {
 /**
  * Test if you can start Activity
  */
-fun Fragment.canStartActivity(intent: Intent): Boolean {
+fun android.support.v4.app.Fragment.canStartActivity(intent: Intent): Boolean {
+    val activity = this.activity
+            ?: throw IllegalStateException("Fragment $this not attached to Activity")
+
+    return activity.canStartActivity(intent)
+}
+
+/**
+ * Test if you can start Activity
+ */
+fun android.app.Fragment.canStartActivity(intent: Intent): Boolean {
     val activity = this.activity
             ?: throw IllegalStateException("Fragment $this not attached to Activity")
 
@@ -270,7 +279,17 @@ fun Context.safeStartActivity(intent: Intent): Boolean {
 /**
  * Safely launch an Activity, catch ActivityNotFoundException and return false
  */
-fun Fragment.safeStartActivity(intent: Intent): Boolean {
+fun android.support.v4.app.Fragment.safeStartActivity(intent: Intent): Boolean {
+    val activity = this.activity
+            ?: throw IllegalStateException("Fragment $this not attached to Activity")
+
+    return activity.safeStartActivity(intent)
+}
+
+/**
+ * Safely launch an Activity, catch ActivityNotFoundException and return false
+ */
+fun android.app.Fragment.safeStartActivity(intent: Intent): Boolean {
     val activity = this.activity
             ?: throw IllegalStateException("Fragment $this not attached to Activity")
 

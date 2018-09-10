@@ -27,13 +27,13 @@ class ViewModelBinderTest {
 
     @Test
     fun testFragmentViewModel() {
-        val fragment = activityTestRule.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame) as TestFragment;
+        val fragment = activityTestRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.arch.test.R.id.testAt_frame) as TestFragment;
         Assert.assertNotNull(fragment.viewModel)
     }
 
     @Test
     fun testFragmentFactoryViewModel() {
-        val fragment = activityTestRule.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame) as TestFragment;
+        val fragment = activityTestRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.arch.test.R.id.testAt_frame) as TestFragment;
         Assert.assertEquals(fragment.factoryViewModel.tag, "testFactoryViewModelFragment")
     }
 }
