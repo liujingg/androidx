@@ -49,7 +49,7 @@ public class Permissionx {
     public static String[] filterDeniedPermissions(@NonNull final Context context, @NonNull String... permissions) {
         return Collectionx.filter(Arrayx.toList(permissions), new Predicate<String>() {
             @Override
-            public boolean predicate(@NotNull String permission) {
+            public boolean accept(@NotNull String permission) {
                 return ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_DENIED;
             }
         }).toArray(new String[0]);

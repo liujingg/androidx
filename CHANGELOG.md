@@ -15,6 +15,7 @@
 * Fragment 里的 canStartActivity 和 safeStartActivity 移动到 Intent 中
 * Package.get 重命名为 getPackage
 * ViewAnim 简化所有方法名
+* 升级 Javax 0.6.2
 
 ## v0.1
 * 初次发布

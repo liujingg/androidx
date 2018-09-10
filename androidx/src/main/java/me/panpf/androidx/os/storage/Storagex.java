@@ -141,7 +141,7 @@ public class Storagex {
 
         return Collectionx.filter(paths, new Predicate<String>() {
             @Override
-            public boolean predicate(@NonNull String s) {
+            public boolean accept(@NonNull String s) {
                 if (ignorePrimary && primarySdcardPath.equals(s)) {
                     return false;
                 } else {
@@ -201,7 +201,7 @@ public class Storagex {
         File[] allDir = childPath != null ? getAllSdcardWithPathFile(context, childPath, ignorePrimary) : getAllSdcardFile(context, ignorePrimary);
         return Collectionx.find(Arrays.asList(allDir), new Predicate<File>() {
             @Override
-            public boolean predicate(@NonNull File file) {
+            public boolean accept(@NonNull File file) {
                 return getDirAvailableBytes(file) >= minBytes;
             }
         });
@@ -219,7 +219,7 @@ public class Storagex {
     public static File getChildFileBySpaceFromDirs(File[] dirs, final String childFileName, final long minBytes, final boolean deleteFile) {
         File dir = Collectionx.find(Arrays.asList(dirs), new Predicate<File>() {
             @Override
-            public boolean predicate(@NonNull File file) {
+            public boolean accept(@NonNull File file) {
                 if (file.isDirectory()) {
                     Filex.mkdirsCheck(file);
                     if (deleteFile) Filex.deleteRecursively(new File(file, childFileName));

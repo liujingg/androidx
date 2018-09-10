@@ -60,7 +60,7 @@ public class Hardwarex {
             } else {
                 return Collectionx.filter(Collectionx.listOf(Build.CPU_ABI, Build.CPU_ABI2), new Predicate<String>() {
                     @Override
-                    public boolean predicate(@NonNull String s) {
+                    public boolean accept(@NonNull String s) {
                         return Stringx.isNotEmpty(s) && !"unknown".equals(s);
                     }
                 }).toArray(new String[0]);
@@ -178,7 +178,7 @@ public class Hardwarex {
                 if (nis != null && nis.size() > 0) {
                     NetworkInterface networkInterface = Collectionx.find(nis, new Predicate<NetworkInterface>() {
                         @Override
-                        public boolean predicate(@NonNull NetworkInterface networkInterface) {
+                        public boolean accept(@NonNull NetworkInterface networkInterface) {
                             return networkInterface.getName().equalsIgnoreCase("wlan0");
                         }
                     });

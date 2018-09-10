@@ -78,7 +78,7 @@ public class Androidx {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.RunningAppProcessInfo info = activityManager != null ? Collectionx.find(activityManager.getRunningAppProcesses(), new Predicate<ActivityManager.RunningAppProcessInfo>() {
             @Override
-            public boolean predicate(@NonNull ActivityManager.RunningAppProcessInfo runningAppProcessInfo) {
+            public boolean accept(@NonNull ActivityManager.RunningAppProcessInfo runningAppProcessInfo) {
                 return runningAppProcessInfo.pid == myPid;
             }
         }) : null;

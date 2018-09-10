@@ -20,7 +20,7 @@ Please replace `$lastVersion` with the latest version by yourself. [![Download][
 
 Dependencies:
 * com.android.support:support-fragment: 27.1.1
-* me.panpf:[javax][javax]: 0.6.1
+* me.panpf:[javax][javax]: 0.6.2
 
 #### Kotlin version:
 
@@ -35,7 +35,7 @@ Please replace `$lastVersion` with the latest version by yourself. [![Download][
 Dependencies:
 * org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.50
 * com.android.support:support-fragment: 27.1.1
-* me.panpf:[javax-kt][javax]: 0.6.1
+* me.panpf:[javax-kt][javax]: 0.6.2
 
 `You can add Java or Kotlin versions to your project as needed.
 If your project is Java and Kotlin mixed development, then both versions can be imported,
