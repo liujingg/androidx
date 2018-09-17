@@ -17,11 +17,9 @@
 package me.panpf.androidx.util;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.annotation.NonNull;
 
 import org.jetbrains.annotations.NotNull;
@@ -29,6 +27,9 @@ import org.jetbrains.annotations.Nullable;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Modifier;
+
+import me.panpf.androidx.app.Activityx;
+import me.panpf.androidx.app.Fragmentx;
 
 /**
  * Dedicated to performing asynchronous tasks in an Activity or Fragment, the WeakAsyncTask has the following differences compared to AsyncTask:
@@ -76,17 +77,11 @@ public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends Async
                 return null;
             }
         } else if (page instanceof Activity) {
-            if (Build.VERSION.SDK_INT >= 17) {
-                if (((Activity) page).isDestroyed()) {
-                    return null;
-                }
-            } else {
-                if (((Activity) page).isFinishing()) {
-                    return null;
-                }
+            if (Activityx.isDestroyedCompat((Activity) page)) {
+                return null;
             }
-        } else if (page instanceof Fragment) {
-            if (((Fragment) page).getActivity() == null) {
+        } else if (page instanceof android.app.Fragment) {
+            if (Fragmentx.isDestroyedCompat((android.app.Fragment) page)) {
                 return null;
             }
         }

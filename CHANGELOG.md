@@ -1,4 +1,8 @@
-## v0.2 pre
+## v0.2.1 pre
+* Activity and Fragment add isDestroyedCompat method
+* Optimization WeakAsyncTask test script
+
+## v0.2
 * 增加 Text 增加 keywordMadeColorBySpannable() 方法用于将文件中关键词部分改变颜色
 * 重构 Color
 * 升级 Javax 依赖

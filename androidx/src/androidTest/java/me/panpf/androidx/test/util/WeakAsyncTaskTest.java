@@ -80,16 +80,10 @@ public class WeakAsyncTaskTest {
     public void testDestroyed() {
         WeakAsyncTaskTestActivity activity = activityTestRule.getActivity();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         activityTestRule.finishActivity();
 
         try {
-            Thread.sleep(3000);
+            Thread.sleep(4000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

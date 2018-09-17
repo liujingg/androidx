@@ -66,16 +66,10 @@ class WeakAsyncTaskTest {
     fun testDestroyed() {
         val activity = activityTestRule.activity
 
-        try {
-            Thread.sleep(1000)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-
         activityTestRule.finishActivity()
 
         try {
-            Thread.sleep(3000)
+            Thread.sleep(4000)
         } catch (e: InterruptedException) {
             e.printStackTrace()
         }

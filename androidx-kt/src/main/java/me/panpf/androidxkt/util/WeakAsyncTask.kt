@@ -21,8 +21,7 @@ import android.app.Fragment
 import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.LifecycleOwner
 import android.os.AsyncTask
-import android.os.Build
-
+import me.panpf.androidxkt.app.isDestroyedCompat
 import java.lang.ref.WeakReference
 import java.lang.reflect.Modifier
 
@@ -61,17 +60,11 @@ abstract class WeakAsyncTask<Page, Param, Progress, Result>(page: Page) : AsyncT
                     return null
                 }
             } else if (page is Activity) {
-                if (Build.VERSION.SDK_INT >= 17) {
-                    if ((page as Activity).isDestroyed) {
-                        return null
-                    }
-                } else {
-                    if ((page as Activity).isFinishing) {
-                        return null
-                    }
+                if (page.isDestroyedCompat()) {
+                    return null
                 }
             } else if (page is Fragment) {
-                if ((page as Fragment).activity == null) {
+                if (page.isDestroyedCompat()) {
                     return null
                 }
             }
