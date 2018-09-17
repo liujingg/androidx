@@ -10,5 +10,9 @@
     <application>
         <activity android:name="me.panpf.androidx.test.widget.ToastTestActivity" />
         <activity android:name="me.panpf.androidx.test.util.WeakAsyncTaskTestActivity" />
+        <activity android:name="me.panpf.androidx.test.app.ActivityTestActivity" />
+        <activity android:name="me.panpf.androidx.test.app.ActivityTestFragmentActivity" />
+        <activity android:name="me.panpf.androidx.test.app.FragmentTestActivity" />
+        <activity android:name="me.panpf.androidx.test.app.FragmentTestFragmentActivity" />
     </application>
 </manifest>

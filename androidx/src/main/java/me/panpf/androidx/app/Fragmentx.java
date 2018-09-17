@@ -17,6 +17,7 @@
 package me.panpf.androidx.app;
 
 import android.app.Activity;
+import android.arch.lifecycle.Lifecycle;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -26,6 +27,20 @@ import android.support.v4.app.Fragment;
 import org.jetbrains.annotations.NotNull;
 
 public class Fragmentx {
+
+    /**
+     * Return true if the fragment has been destroyed
+     */
+    public static boolean isDestroyedCompat(@NonNull android.app.Fragment fragment) {
+        return fragment.getActivity() == null;
+    }
+
+    /**
+     * Return true if the fragment has been destroyed
+     */
+    public static boolean isDestroyedCompat(@NonNull android.support.v4.app.Fragment fragment) {
+        return fragment.getLifecycle().getCurrentState() == Lifecycle.State.DESTROYED;
+    }
 
     /**
      * If the own or parent Fragment implements the specified [clazz], it returns its implementation.

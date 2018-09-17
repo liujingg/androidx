@@ -18,8 +18,29 @@ package me.panpf.androidxkt.app
 
 import android.app.Activity
 import android.app.ActivityOptions
+import android.arch.lifecycle.Lifecycle
 import android.os.Build
+import android.support.v4.app.FragmentActivity
 import me.panpf.javaxkt.lang.callMethod
+
+/**
+ * Return true if the activity has been destroyed
+ */
+fun Activity.isDestroyedCompat(): Boolean {
+    // First determine that FragmentActivity can use the compatible isDestroyed method in versions below 17.
+    return if (this is FragmentActivity) {
+        this.lifecycle.currentState == Lifecycle.State.DESTROYED
+    } else {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) this.isDestroyed else this.isFinishing
+    }
+}
+
+/**
+ * Return true if the activity has been destroyed
+ */
+fun FragmentActivity.isDestroyedCompat(): Boolean {
+    return this.lifecycle.currentState == Lifecycle.State.DESTROYED
+}
 
 /**
  * Convert a translucent themed Activity

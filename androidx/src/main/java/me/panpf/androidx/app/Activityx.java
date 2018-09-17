@@ -18,9 +18,11 @@ package me.panpf.androidx.app;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.arch.lifecycle.Lifecycle;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 
 import java.lang.reflect.Method;
 
@@ -28,6 +30,28 @@ import me.panpf.javax.lang.Classx;
 
 @SuppressWarnings("WeakerAccess")
 public class Activityx {
+
+    /**
+     * Return true if the activity has been destroyed
+     */
+    public static boolean isDestroyedCompat(@NonNull Activity activity) {
+        // First determine that FragmentActivity can use the compatible isDestroyed method in versions below 17.
+        if (activity instanceof FragmentActivity) {
+            return ((FragmentActivity) activity).getLifecycle().getCurrentState() == Lifecycle.State.DESTROYED;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return activity.isDestroyed();
+        } else {
+            return activity.isFinishing();
+        }
+    }
+
+    /**
+     * Return true if the activity has been destroyed
+     */
+    public static boolean isDestroyedCompat(@NonNull FragmentActivity activity) {
+        return activity.getLifecycle().getCurrentState() == Lifecycle.State.DESTROYED;
+    }
+
     /**
      * Convert a translucent themed Activity
      * [android.R.attr.windowIsTranslucent] to a fullscreen opaque

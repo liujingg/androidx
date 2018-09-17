@@ -54,11 +54,11 @@ because there are different package names, so there will be no class duplicates.
 
 ### app
 * Activity: [Activityx.java] | [Activity.kt]
-    * convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
+    * isDestroyedCompat, convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
 * Dialog: [Dialogx.java] | [Dialog.kt]
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] | [Fragment.kt]
-    * getImplWithParent, instance,
+    * isDestroyedCompat, getImplWithParent, instance,
 * Permission: [Permissionx.java] ([Test][PermissionTest.java]) | [Permission.kt] ([Test][PermissionTest.kt])
     * isGrantPermissions, filterDeniedPermissions
 
