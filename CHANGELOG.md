@@ -1,4 +1,7 @@
-## v0.2.1 pre
+## v0.2.2
+* Upgrade Javax 0.6.4
+
+## v0.2.1
 * Activity and Fragment add isDestroyedCompat method
 * Optimization WeakAsyncTask test script
 
