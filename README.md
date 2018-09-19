@@ -24,8 +24,8 @@ implementation "me.panpf:androidx:$lastVersion"
 Please replace `$lastVersion` with the latest version: [![Download][version_java_icon]][version_java_link]
 
 Dependencies:
-* com.android.support:support-fragment: 27.1.1
-* me.panpf:[javax][javax]: 0.6.3
+* [com.android.support:support-fragment][support_fragment]: [27.1.1][support_fragment_versions]
+* [me.panpf:javax][javax]: [0.6.4][javax_versions]
 
 ### Kotlin version:
 
@@ -38,9 +38,9 @@ implementation "me.panpf:androidx-kt:$lastVersion"
 Please replace `$lastVersion` with the latest version: [![Download][version_kotlin_icon]][version_kotlin_link]
 
 Dependencies:
-* org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.50
-* com.android.support:support-fragment: 27.1.1
-* me.panpf:[javax-kt][javax]: 0.6.3
+* [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.2.50][kotlin_versions]
+* [com.android.support:support-fragment][support_fragment]: [27.1.1][support_fragment_versions]
+* [me.panpf:javax-kt][javax]: [0.6.4][javax_versions]
 
 `You can add Java or Kotlin versions to your project as needed.
 If your project is Java and Kotlin mixed development, then both versions can be imported,
@@ -196,6 +196,11 @@ Please view the [CHANGELOG.md] file
 [version_kotlin_icon]: https://api.bintray.com/packages/panpf/maven/androidx-kt/images/download.svg
 [version_kotlin_link]: https://bintray.com/panpf/maven/androidx-kt/_latestVersion
 [javax]: https://github.com/panpf/javax
+[javax_versions]: https://github.com/panpf/javax/blob/master/CHANGELOG.md
+[support_fragment]: https://developer.android.com/topic/libraries/support-library/packages#v4-fragment
+[support_fragment_versions]: https://developer.android.com/topic/libraries/support-library/revisions
+[kotlin_stdlib]: https://kotlinlang.org/
+[kotlin_versions]: https://blog.jetbrains.com/kotlin/
 [androidx-kt-arch]: androidx-kt-arch
 [androidx-kt-args]: androidx-kt-args
 
