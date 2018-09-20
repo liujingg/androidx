@@ -93,6 +93,7 @@ public class Networkx {
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (manager == null) throw new IllegalStateException("ConnectivityManager not found");
         try {
+            // todo 测试是否兼容 android 9
             Classx.callMethod(manager, "setMobileDataEnabled", enabled);
             return true;
         } catch (NoSuchMethodException e) {

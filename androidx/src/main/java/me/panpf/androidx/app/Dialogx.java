@@ -32,6 +32,7 @@ public class Dialogx {
      */
     public static void setClickButtonClosable(@NonNull Dialog dialog, boolean close) {
         try {
+            // todo 测试是否兼容 android 9
             Classx.setFieldValue(dialog, "mShowing", close);
         } catch (NoSuchFieldException e) {
             e.printStackTrace();

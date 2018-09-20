@@ -66,6 +66,7 @@ public class Activityx {
      */
     public static void convertActivityFromTranslucent(@NonNull Activity activity) {
         try {
+            // todo 测试是否兼容 android 9
             Classx.callMethod(activity, "convertFromTranslucent");
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
@@ -99,6 +100,7 @@ public class Activityx {
                     }
                 }
                 Method method = activity.getClass().getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz, ActivityOptions.class);
+                // todo 测试是否兼容 android 9
                 Classx.callMethod(activity, method, null, options);
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -113,6 +115,7 @@ public class Activityx {
                     }
                 }
                 Method method = activity.getClass().getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz);
+                // todo 测试是否兼容 android 9
                 Classx.callMethod(activity, method, new Object[]{null});
             } catch (Throwable e) {
                 e.printStackTrace();
