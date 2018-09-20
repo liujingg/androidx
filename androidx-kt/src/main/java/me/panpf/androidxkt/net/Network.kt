@@ -22,6 +22,7 @@ import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
 import android.support.annotation.RequiresPermission
 import me.panpf.javaxkt.lang.callMethod
+import me.panpf.javaxkt.lang.isSafe
 
 import java.net.NetworkInterface
 
@@ -88,9 +89,10 @@ fun Context.setMobileEnabled(enabled: Boolean): Boolean {
 }
 
 /**
- * Get an IP address
+ * Get local IP address
  */
-fun getIpAddress(): String? {
+fun getLocalIpAddress(defaultIpAddress: String): String {
+    var ipAddress: String? = null
     try {
         val en = NetworkInterface.getNetworkInterfaces()
         while (en.hasMoreElements()) {
@@ -99,7 +101,8 @@ fun getIpAddress(): String? {
             while (inetAddresses.hasMoreElements()) {
                 val inetAddress = inetAddresses.nextElement()
                 if (!inetAddress.isLoopbackAddress) {
-                    return inetAddress.hostAddress
+                    ipAddress = inetAddress.hostAddress
+                    break
                 }
             }
         }
@@ -107,5 +110,46 @@ fun getIpAddress(): String? {
         e.printStackTrace()
     }
 
-    return null
+    return if (ipAddress != null && ipAddress.isSafe()) ipAddress else defaultIpAddress
+}
+
+/**
+ * Get local IP address
+ */
+fun getLocalIpAddress(): String? {
+    val ipAddress = getLocalIpAddress("missing")
+    return if ("missing" != ipAddress) ipAddress else null
+}
+
+/**
+ * Get local IPV4 address
+ */
+fun getLocalIpV4Address(defaultIpAddress: String): String {
+    var ipAddress: String? = null
+    try {
+        val en = NetworkInterface.getNetworkInterfaces()
+        while (en.hasMoreElements()) {
+            val networkInterface = en.nextElement()
+            val inetAddresses = networkInterface.inetAddresses
+            while (inetAddresses.hasMoreElements()) {
+                val inetAddress = inetAddresses.nextElement()
+                if (!inetAddress.isLoopbackAddress && !inetAddress.isLinkLocalAddress) {
+                    ipAddress = inetAddress.hostAddress
+                    break
+                }
+            }
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
+
+    return if (ipAddress != null && ipAddress.isSafe()) ipAddress else defaultIpAddress
+}
+
+/**
+ * Get local IPV4 address
+ */
+fun getLocalIpV4Address(): String? {
+    val ipAddress = getLocalIpV4Address("missing")
+    return if ("missing" != ipAddress) ipAddress else null
 }

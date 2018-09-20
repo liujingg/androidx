@@ -22,13 +22,18 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
 
 import me.panpf.javax.lang.Classx;
+import me.panpf.javax.lang.Stringx;
+import me.panpf.javax.util.Premisex;
 
 @SuppressWarnings("WeakerAccess")
 public class Networkx {
@@ -97,22 +102,70 @@ public class Networkx {
     }
 
     /**
-     * Get an IP address
+     * Get local IP address
      */
-    public static String getIpAddress() {
+    @NotNull
+    public static String getLocalIpAddress(@NonNull String defaultIpAddress) {
+        //noinspection ResultOfMethodCallIgnored
+        Premisex.requireNonNull(defaultIpAddress, "param defaultIpAddress is not safe");
+        String ipAddress = null;
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
                 NetworkInterface networkInterface = en.nextElement();
                 for (Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses(); inetAddresses.hasMoreElements(); ) {
                     InetAddress inetAddress = inetAddresses.nextElement();
                     if (!inetAddress.isLoopbackAddress()) {
-                        return inetAddress.getHostAddress();
+                        ipAddress = inetAddress.getHostAddress();
+                        break;
                     }
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return ipAddress != null && Stringx.isSafe(ipAddress) ? ipAddress : defaultIpAddress;
+    }
+
+    /**
+     * Get local IP address
+     */
+    @Nullable
+    public static String getLocalIpAddress() {
+        String ipAddress = getLocalIpAddress("missing");
+        return !"missing".equals(ipAddress) ? ipAddress : null;
+    }
+
+    /**
+     * Get local IPV4 address
+     */
+    @NonNull
+    public static String getLocalIpV4Address(@NonNull String defaultIpAddress) {
+        //noinspection ResultOfMethodCallIgnored
+        Premisex.requireNonNull(defaultIpAddress, "param defaultIpAddress is not safe");
+        String ipAddress = null;
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface networkInterface = en.nextElement();
+                for (Enumeration<InetAddress> inetAddresses = networkInterface.getInetAddresses(); inetAddresses.hasMoreElements(); ) {
+                    InetAddress inetAddress = inetAddresses.nextElement();
+                    if (!inetAddress.isLoopbackAddress() && !inetAddress.isLinkLocalAddress()) {
+                        ipAddress = inetAddress.getHostAddress();
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return ipAddress != null && Stringx.isSafe(ipAddress) ? ipAddress : defaultIpAddress;
+    }
+
+    /**
+     * Get local IPV4 address
+     */
+    @Nullable
+    public static String getLocalIpV4Address() {
+        String ipAddress = getLocalIpV4Address("missing");
+        return !"missing".equals(ipAddress) ? ipAddress : null;
     }
 }
