@@ -123,6 +123,10 @@ because there are different package names, so there will be no class duplicates.
     * lengthAppCacheDirs, lengthAppFilesDirs, getAppObbDir, getAppDataDir
 * StatFs: [StatFsx.java] | [StatFs.kt]
     * getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes
+* StorageManagerCompat: [StorageManagerCompat.java] ([Test][StorageManagerCompatTest.java]) | [StorageManagerCompat.kt] ([Test][StorageManagerCompatTest.kt])
+    * getVolumeList, getStorageVolumes, getVolumePaths, getVolumeState, getStorageVolume
+* StorageVolumeCompat: [StorageVolumeCompat.java] ([Test][StorageVolumeCompatTest.java]) | [StorageVolumeCompat.kt] ([Test][StorageVolumeCompatTest.kt])
+    * getPath, getPathFile, isPrimary, isRemovable, isEmulated, getState, allowMassStorage, getMaxFileSize,
 
 ### provider
 * Settings: [Settingsx.java] | [Settings.kt]
@@ -310,6 +314,16 @@ Please view the [CHANGELOG.md] file
 [StorageTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/storage/StorageTest.java
 [Storage.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/storage/Storage.kt
 [StorageTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/storage/StorageTest.kt
+
+[StorageManagerCompat.java]: androidx/src/main/java/me/panpf/androidx/os/storage/StorageManagerCompat.java
+[StorageManagerCompatTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/storage/StorageManagerCompatTest.java
+[StorageManagerCompat.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/storage/StorageManagerCompat.kt
+[StorageManagerCompatTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/storage/StorageManagerCompatTest.kt
+
+[StorageVolumeCompat.java]: androidx/src/main/java/me/panpf/androidx/os/storage/StorageVolumeCompat.java
+[StorageVolumeCompatTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/storage/StorageVolumeCompatTest.java
+[StorageVolumeCompat.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/storage/StorageVolumeCompat.kt
+[StorageVolumeCompatTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/storage/StorageVolumeCompatTest.kt
 
 [StatFsx.java]: androidx/src/main/java/me/panpf/androidx/os/StatFsx.java
 [StatFsTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/StatFsTest.java
