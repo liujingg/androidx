@@ -23,7 +23,7 @@ import android.os.StatFs
  * StatFs related extension methods or properties
  */
 
-val StatFs.compatAvailableBytes: Long
+val StatFs.availableBytesCompat: Long
     get() {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             this.availableBytes
@@ -32,7 +32,7 @@ val StatFs.compatAvailableBytes: Long
         }
     }
 
-val StatFs.compatFreeBytes: Long
+val StatFs.freeBytesCompat: Long
     get() {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             this.freeBytes
@@ -41,7 +41,7 @@ val StatFs.compatFreeBytes: Long
         }
     }
 
-val StatFs.compatTotalBytes: Long
+val StatFs.totalBytesCompat: Long
     get() {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             this.totalBytes

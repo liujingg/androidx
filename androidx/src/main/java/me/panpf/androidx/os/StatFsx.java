@@ -25,15 +25,15 @@ import android.support.annotation.NonNull;
  */
 public class StatFsx {
 
-    public static long getCompatAvailableBytes(@NonNull StatFs statFs) {
-        return Build.VERSION.SDK_INT >= 18 ? statFs.getAvailableBytes() : (long) statFs.getAvailableBlocks() * (long) statFs.getBlockSize();
+    public static long getAvailableBytesCompat(@NonNull StatFs statFs) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? statFs.getAvailableBytes() : (long) statFs.getAvailableBlocks() * (long) statFs.getBlockSize();
     }
 
-    public static long getCompatFreeBytes(@NonNull StatFs statFs) {
-        return Build.VERSION.SDK_INT >= 18 ? statFs.getFreeBytes() : (long) statFs.getFreeBlocks() * (long) statFs.getBlockSize();
+    public static long getFreeBytesCompat(@NonNull StatFs statFs) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? statFs.getFreeBytes() : (long) statFs.getFreeBlocks() * (long) statFs.getBlockSize();
     }
 
-    public static long getCompatTotalBytes(@NonNull StatFs statFs) {
-        return Build.VERSION.SDK_INT >= 18 ? statFs.getTotalBytes() : (long) statFs.getBlockCount() * (long) statFs.getBlockSize();
+    public static long getTotalBytesCompat(@NonNull StatFs statFs) {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? statFs.getTotalBytes() : (long) statFs.getBlockCount() * (long) statFs.getBlockSize();
     }
 }
