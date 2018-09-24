@@ -20,25 +20,22 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
-import android.os.storage.StorageManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
 import me.panpf.androidx.os.StatFsx;
 import me.panpf.javax.io.Filex;
-import me.panpf.javax.lang.Classx;
 import me.panpf.javax.util.Arrayx;
 import me.panpf.javax.util.Collectionx;
 import me.panpf.javax.util.Predicate;
-import me.panpf.javax.util.Premisex;
 import me.panpf.javax.util.Transformer;
 
 /**
@@ -47,271 +44,533 @@ import me.panpf.javax.util.Transformer;
 @SuppressWarnings("WeakerAccess")
 public class Storagex {
 
+
+    /* ******************************************* Bytes *******************************************/
+
+
     /**
-     * Get the number of free bytes remaining in the current directory
+     * Get the number of free bytes of the given path
      */
-    public static long getDirFreeBytes(@NonNull File dir) {
-        return StatFsx.getCompatFreeBytes(new StatFs(dir.getPath()));
+    public static long getFreeBytes(@NonNull File path) {
+        return StatFsx.getFreeBytesCompat(new StatFs(path.getPath()));
     }
 
     /**
-     * Get the number of total bytes in the current directory
+     * Get the number of total bytes of the given path
      */
-    public static long getDirTotalBytes(@NonNull File dir) {
-        return StatFsx.getCompatTotalBytes(new StatFs(dir.getPath()));
+    public static long getTotalBytes(@NonNull File path) {
+        return StatFsx.getTotalBytesCompat(new StatFs(path.getPath()));
     }
 
     /**
-     * Get the number of bytes remaining in the current directory that are available for the current application
+     * Get the number of available bytes of the given path
      */
-    public static long getDirAvailableBytes(@NonNull File dir) {
-        return StatFsx.getCompatAvailableBytes(new StatFs(dir.getPath()));
+    public static long getAvailableBytes(@NonNull File path) {
+        return StatFsx.getAvailableBytesCompat(new StatFs(path.getPath()));
     }
 
     /**
-     * Return true if the SD card is ready
+     * Get the number of free bytes for the primary shared/external storage media
      */
-    public static boolean isSDCardMounted() {
-        return Premisex.areEqual(Environment.getExternalStorageState(), Environment.MEDIA_MOUNTED);
+    public static long getExternalStorageFreeBytes() {
+        return getFreeBytes(getExternalStorageDirectory());
     }
 
     /**
-     * Get the number of free bytes remaining in the sdcard
+     * Get the number of total bytes for the primary shared/external storage media
      */
-    public static long getSDCardFreeBytes() {
-        return getDirFreeBytes(Environment.getExternalStorageDirectory());
+    public static long getExternalStorageTotalBytes() {
+        return getTotalBytes(getExternalStorageDirectory());
     }
 
     /**
-     * Get the number of total bytes in the sdcard
+     * Get the number of available bytes for the primary shared/external storage media
      */
-    public static long getSDCardTotalBytes() {
-        return getDirTotalBytes(Environment.getExternalStorageDirectory());
+    public static long getExternalStorageAvailableBytes() {
+        return getAvailableBytes(getExternalStorageDirectory());
+    }
+
+
+    /* ******************************************* Volume *******************************************/
+
+    /**
+     * Returns volume state for given path
+     */
+    @NotNull
+    public static String getVolumeState(@NotNull Context context, @NotNull File path) {
+        StorageVolumeCompat volumeCompat = getStorageVolume(context, path);
+        return volumeCompat != null ? volumeCompat.getState(context) : "unknown";
     }
 
     /**
-     * Get the number of bytes remaining in the sdcard that are available for the current application
+     * Returns true if the state of the volume at which the given path is mounted
      */
-    public static long getSDCardAvailableBytes() {
-        return getDirAvailableBytes(Environment.getExternalStorageDirectory());
+    public static boolean isVolumeMounted(@NotNull Context context, @NotNull File path) {
+        return Environment.MEDIA_MOUNTED.equals(getVolumeState(context, path));
+    }
+
+
+    /**
+     * Return true if the volume of the given path is the primary volume
+     */
+    public static boolean isPrimaryVolume(@NotNull Context context, @NotNull File path) {
+        StorageVolumeCompat volumeCompat = getStorageVolume(context, path);
+        return volumeCompat != null && volumeCompat.isPrimary();
     }
 
     /**
-     * Get the path to the SD card
+     * Return true if the volume of the given path is the emulated volume
      */
-    @NonNull
-    public static String getSdcardPath() {
-        return Environment.getExternalStorageDirectory().getPath();
+    public static boolean isVolumeEmulated(@NotNull Context context, @NotNull File path) {
+        StorageVolumeCompat volumeCompat = getStorageVolume(context, path);
+        return volumeCompat != null && volumeCompat.isEmulated();
     }
 
     /**
-     * Get the file to the SD card
+     * Return true if the volume of the given path is the removable volume
      */
-    @NonNull
-    public static File getSdcardFile() {
-        return Environment.getExternalStorageDirectory();
+    public static boolean isVolumeRemovable(@NotNull Context context, @NotNull File path) {
+        StorageVolumeCompat volumeCompat = getStorageVolume(context, path);
+        return volumeCompat != null && volumeCompat.isRemovable();
+    }
+
+
+    /**
+     * Returns list of path for all volumes.
+     */
+    @NotNull
+    public static String[] getVolumePaths(@NotNull Context context) {
+        return new StorageManagerCompat(context).getVolumePaths();
     }
 
     /**
-     * Get the path to all available SD cards
-     *
-     * @param ignorePrimary Ignore the main sdcard
+     * Returns list of path for all mounted volumes.
      */
-    // todo 测试是否兼容 android 9
-    @NonNull
-    public static String[] getAllSdcardPath(@NonNull Context context, final boolean ignorePrimary) {
-        final StorageManager manager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
-        if (manager == null) throw new IllegalStateException("StorageManager not found");
-
-        String[] volumePaths = null;
-        try {
-            volumePaths = (String[]) Classx.callMethod(manager, "getVolumePaths");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        final String primarySdcardPath = getSdcardPath();
-
-        List<String> paths = new LinkedList<>();
-        if (volumePaths != null && volumePaths.length > 0) {
-            Collections.addAll(paths, volumePaths);
-        } else {
-            paths.add(primarySdcardPath);
-        }
-
-        return Collectionx.filter(paths, new Predicate<String>() {
+    @NotNull
+    public static String[] getMountedVolumePaths(@NotNull final Context context) {
+        return Arrayx.filter(getVolumePaths(context), new Predicate<String>() {
             @Override
-            public boolean accept(@NonNull String s) {
-                if (ignorePrimary && primarySdcardPath.equals(s)) {
-                    return false;
-                } else {
-                    String volumeState = null;
-                    try {
-                        volumeState = (String) Classx.callMethod(manager, "getVolumeState", s);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    return (Environment.MEDIA_MOUNTED.equals(volumeState) || Environment.MEDIA_MOUNTED_READ_ONLY.equals(volumeState));
-                }
+            public boolean accept(@NotNull String path) {
+                return isVolumeMounted(context, new File(path));
             }
         }).toArray(new String[0]);
     }
 
+
     /**
-     * Get the path to all available SD cards
-     *
-     * @param ignorePrimary Ignore the main sdcard
+     * Returns list of files for all volumes.
      */
-    @NonNull
-    public static File[] getAllSdcardFile(@NonNull Context context, boolean ignorePrimary) {
-        return Arrayx.map(getAllSdcardPath(context, ignorePrimary), new Transformer<String, File>() {
-            @NonNull
+    @NotNull
+    public static File[] getVolumeFiles(@NotNull Context context) {
+        return Arrayx.map(getVolumePaths(context), new Transformer<String, File>() {
+            @NotNull
             @Override
-            public File transform(@NonNull String s) {
-                return new File(s);
+            public File transform(@NotNull String volumePath) {
+                return new File(volumePath);
             }
         }).toArray(new File[0]);
     }
 
     /**
-     * Get all available SD cards and splicing them back on the specified path
-     *
-     * @param ignorePrimary Ignore the main sdcard
+     * Returns list of files for all mounted volumes.
      */
-    @NonNull
-    public static File[] getAllSdcardWithPathFile(@NonNull Context context, @NonNull final String childPath, boolean ignorePrimary) {
-        return Arrayx.map(getAllSdcardPath(context, ignorePrimary), new Transformer<String, File>() {
-            @NonNull
+    @NotNull
+    public static File[] getMountedVolumeFiles(@NotNull final Context context) {
+        return Arrayx.filter(getVolumeFiles(context), new Predicate<File>() {
             @Override
-            public File transform(@NonNull String s) {
-                return new File(s, childPath);
+            public boolean accept(@NotNull File file) {
+                return isVolumeMounted(context, file);
             }
         }).toArray(new File[0]);
     }
 
+
     /**
-     * Find an SD card with a space no less than the specified number of bytes
-     *
-     * @param minBytes      Minimum number of bytes
-     * @param childPath     Check the space under File(sdcardPath, childDir) and return this file
-     * @param ignorePrimary Ignore the main sdcard
+     * Returns list of StorageVolume for all volumes.
      */
-    @Nullable
-    public static File findSdcardBySpace(@NonNull Context context, final long minBytes, @Nullable String childPath, boolean ignorePrimary) {
-        File[] allDir = childPath != null ? getAllSdcardWithPathFile(context, childPath, ignorePrimary) : getAllSdcardFile(context, ignorePrimary);
-        return Collectionx.find(Arrays.asList(allDir), new Predicate<File>() {
-            @Override
-            public boolean accept(@NonNull File file) {
-                return getDirAvailableBytes(file) >= minBytes;
-            }
-        });
+    @NotNull
+    public static StorageVolumeCompat[] getVolumeList(@NotNull Context context) {
+        return new StorageManagerCompat(context).getVolumeList();
     }
 
     /**
-     * Traverse the directory list, check the remaining space of the directory, and return the file
-     *
-     * @param dirs          Directory list
-     * @param childFileName This file will be deleted from the directory before the space is checked, and will eventually be returned.
-     * @param minBytes      Minimum number of bytes
-     * @param deleteFile    Whether to delete old files before judging the space
+     * Returns list of StorageVolume for all mounted volumes.
+     */
+    @NotNull
+    public static StorageVolumeCompat[] getMountedVolumeList(@NotNull final Context context) {
+        return Arrayx.filter(getVolumeList(context), new Predicate<StorageVolumeCompat>() {
+            @Override
+            public boolean accept(@NotNull StorageVolumeCompat storageVolumeCompat) {
+                return Environment.MEDIA_MOUNTED.equals(storageVolumeCompat.getState(context));
+            }
+        }).toArray(new StorageVolumeCompat[0]);
+    }
+
+
+    /**
+     * Returns StorageVolume for path.
      */
     @Nullable
-    public static File getChildFileBySpaceFromDirs(File[] dirs, final String childFileName, final long minBytes, final boolean deleteFile) {
-        File dir = Collectionx.find(Arrays.asList(dirs), new Predicate<File>() {
-            @Override
-            public boolean accept(@NonNull File file) {
-                if (file.isDirectory()) {
-                    Filex.mkdirsCheck(file);
-                    if (deleteFile) Filex.deleteRecursively(new File(file, childFileName));
-                    return getDirAvailableBytes(file) >= minBytes;
-                } else {
-                    return false;
+    public static StorageVolumeCompat getStorageVolume(@NotNull Context context, @NotNull File path) {
+        return new StorageManagerCompat(context).getStorageVolume(path);
+    }
+
+
+    /* ******************************************* External Storage *******************************************/
+
+
+    /**
+     * Returns the current state of the shared/external storage media at the
+     * given path.
+     *
+     * @return one of {@link Environment#MEDIA_UNKNOWN}, {@link Environment#MEDIA_REMOVED},
+     * {@link Environment#MEDIA_UNMOUNTED}, {@link Environment#MEDIA_CHECKING},
+     * {@link Environment#MEDIA_NOFS}, {@link Environment#MEDIA_MOUNTED},
+     * {@link Environment#MEDIA_MOUNTED_READ_ONLY}, {@link Environment#MEDIA_SHARED},
+     * {@link Environment#MEDIA_BAD_REMOVAL}, or {@link Environment#MEDIA_UNMOUNTABLE}.
+     * @see #getExternalStorageDirectory()
+     */
+    @NotNull
+    public static String getExternalStorageState(@NonNull Context context, @NotNull File path) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return Environment.getExternalStorageState(path);
+        } else {
+            return getVolumeState(context, path);
+        }
+    }
+
+    /**
+     * Return true if the state of the given path is MOUNTED
+     */
+    public static boolean isExternalStorageMounted(@NonNull Context context, @NotNull File path) {
+        return Environment.MEDIA_MOUNTED.equals(getExternalStorageState(context, path));
+    }
+
+    /**
+     * Returns the current state of the primary shared/external storage media.
+     *
+     * @return one of {@link Environment#MEDIA_UNKNOWN}, {@link Environment#MEDIA_REMOVED},
+     * {@link Environment#MEDIA_UNMOUNTED}, {@link Environment#MEDIA_CHECKING},
+     * {@link Environment#MEDIA_NOFS}, {@link Environment#MEDIA_MOUNTED},
+     * {@link Environment#MEDIA_MOUNTED_READ_ONLY}, {@link Environment#MEDIA_SHARED},
+     * {@link Environment#MEDIA_BAD_REMOVAL}, or {@link Environment#MEDIA_UNMOUNTABLE}.
+     * @see #getExternalStorageDirectory()
+     */
+    @NotNull
+    public static String getExternalStorageState() {
+        return Environment.getExternalStorageState();
+    }
+
+    /**
+     * Return true if the state of the primary shared/external storage media is MOUNTED
+     */
+    public static boolean isExternalStorageMounted() {
+        return Environment.MEDIA_MOUNTED.equals(getExternalStorageState());
+    }
+
+    /**
+     * Return true if the path is the primary volume
+     */
+    public static boolean isPrimaryExternalStorage(@NotNull Context context, @NotNull File path) {
+        return isPrimaryVolume(context, path);
+    }
+
+    /**
+     * Return true if the volume of the given path is emulated
+     */
+    public static boolean isExternalStorageEmulated(@NotNull Context context, @NotNull File path) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return Environment.isExternalStorageEmulated(path);
+        } else {
+            StorageVolumeCompat storageVolume = new StorageManagerCompat(context).getStorageVolume(path);
+            return storageVolume != null && storageVolume.isEmulated();
+        }
+    }
+
+    /**
+     * Return true if the primary shared/external storage media is emulated
+     */
+    public static boolean isExternalStorageEmulated() {
+        return Environment.isExternalStorageEmulated();
+    }
+
+    /**
+     * Return true if the state of the given path is REMOVED
+     */
+    public static boolean isExternalStorageRemovable(@NotNull Context context, @NotNull File path) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            return Environment.isExternalStorageRemovable(path);
+        } else {
+            StorageVolumeCompat storageVolume = new StorageManagerCompat(context).getStorageVolume(path);
+            return storageVolume != null && storageVolume.isRemovable();
+        }
+    }
+
+    /**
+     * Return true if the state of the primary shared/external storage media is REMOVED
+     */
+    public static boolean isExternalStorageRemovable() {
+        return Environment.isExternalStorageRemovable();
+    }
+
+
+    /**
+     * Return the primary shared/external storage directory.
+     */
+    @NonNull
+    public static File getExternalStorageDirectory() {
+        return Environment.getExternalStorageDirectory();
+    }
+
+    /**
+     * Return if the primary shared/external storage directory is mounted, otherwise return null
+     */
+    @Nullable
+    public static File getMountedExternalStorageDirectory(@NonNull Context context) {
+        File externalStorageDirectory = Environment.getExternalStorageDirectory();
+        return isExternalStorageMounted(context, externalStorageDirectory) ? externalStorageDirectory : null;
+    }
+
+
+    /**
+     * Return the all shared/external storage directory.
+     *
+     * @param ignorePrimary Ignore primary shared/external storage directory.
+     */
+    @NonNull
+    public static File[] getExternalStorageDirectorys(@NonNull Context context, final boolean ignorePrimary) {
+        List<File> dirs = new LinkedList<>();
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            File[] files = context.getExternalFilesDirs(null);
+            if (files != null && files.length > 0) {
+                String lowerCaseSuffix = "/Android/data/".toLowerCase();
+                for (File file : files) {
+                    String lowerCasePath = file.getPath().toLowerCase();
+                    int index = lowerCasePath.indexOf(lowerCaseSuffix);
+                    if (index != -1) {
+                        dirs.add(new File(file.getPath().substring(0, index)));
+                    }
                 }
             }
-        });
-        return dir != null ? new File(dir, childFileName) : null;
+        }
+
+        if (dirs.isEmpty()) {
+            File[] files = getVolumeFiles(context);
+            if (files.length > 0) {
+                Collectionx.addAll(dirs, files);
+            }
+        }
+
+        final File primaryExternalStorageDirectory = getExternalStorageDirectory();
+        if (dirs.isEmpty()) {
+            dirs.add(primaryExternalStorageDirectory);
+        }
+
+        return Collectionx.filter(dirs, new Predicate<File>() {
+            @Override
+            public boolean accept(@NonNull File file) {
+                return !ignorePrimary || !file.getPath().equals(primaryExternalStorageDirectory.getPath());
+            }
+        }).toArray(new File[0]);
     }
+
+    /**
+     * Returns the all shared/external storage directories that are mounted.
+     *
+     * @param ignorePrimary Ignore primary shared/external storage directory.
+     */
+    @NonNull
+    public static File[] getMountedExternalStorageDirectorys(@NonNull final Context context, final boolean ignorePrimary) {
+        return Arrayx.filter(getExternalStorageDirectorys(context, ignorePrimary), new Predicate<File>() {
+            @Override
+            public boolean accept(@NotNull File file) {
+                return isExternalStorageMounted(context, file);
+            }
+        }).toArray(new File[0]);
+    }
+
+
+    /**
+     * Return the all shared/external storage directory.
+     */
+    @NonNull
+    public static File[] getExternalStorageDirectorys(@NonNull Context context) {
+        return getExternalStorageDirectorys(context, false);
+    }
+
+    /**
+     * Returns the all shared/external storage directories that are mounted.
+     */
+    @NonNull
+    public static File[] getMountedExternalStorageDirectorys(@NonNull final Context context) {
+        return getMountedExternalStorageDirectorys(context, false);
+    }
+
+
+    /**
+     * Get the given path under all shared/external storage media
+     *
+     * @param ignorePrimary Ignore primary shared/external storage directory.
+     */
+    @NonNull
+    public static File[] getExternalStorageDirectorysWithPath(@NonNull Context context, @NonNull final String childPath, boolean ignorePrimary) {
+        return Arrayx.map(getExternalStorageDirectorys(context, ignorePrimary), new Transformer<File, File>() {
+            @NonNull
+            @Override
+            public File transform(@NonNull File file) {
+                return new File(file, childPath);
+            }
+        }).toArray(new File[0]);
+    }
+
+    /**
+     * Get the given path under all mounted shared/external storage media
+     *
+     * @param ignorePrimary Ignore primary shared/external storage directory.
+     */
+    @NonNull
+    public static File[] getMountedExternalStorageDirectorysWithPath(@NonNull Context context, @NonNull final String childPath, boolean ignorePrimary) {
+        return Arrayx.map(getMountedExternalStorageDirectorys(context, ignorePrimary), new Transformer<File, File>() {
+            @NonNull
+            @Override
+            public File transform(@NonNull File file) {
+                return new File(file, childPath);
+            }
+        }).toArray(new File[0]);
+    }
+
+
+    /**
+     * Get the given path under all shared/external storage media
+     */
+    @NonNull
+    public static File[] getExternalStorageDirectorysWithPath(@NonNull Context context, @NonNull final String childPath) {
+        return getExternalStorageDirectorysWithPath(context, childPath, false);
+    }
+
+    /**
+     * Get the given path under all mounted shared/external storage media
+     */
+    @NonNull
+    public static File[] getMountedExternalStorageDirectorysWithPath(@NonNull Context context, @NonNull final String childPath) {
+        return getMountedExternalStorageDirectorysWithPath(context, childPath, false);
+    }
+
+
+    /* ******************************************* App Cache Dir *******************************************/
+
+
+    /**
+     * Get the app external cache directory
+     */
+    @Nullable
+    public static File getAppExternalCacheDir(@NonNull Context context) {
+        File file = context.getExternalCacheDir();
+        if (file != null) {
+            // There is no WRITE_EXTERNAL_STORAGE permission on android 4.1. getExternalCacheDir() returns null
+            return file;
+        } else {
+            File externalDir = getMountedExternalStorageDirectory(context);
+            return externalDir != null ? new File(externalDir, "Android/data/" + context.getPackageName() + "/cache") : null;
+        }
+    }
+
+    /**
+     * Get the external cache directory of the specified app
+     *
+     * @param packageName App package name
+     */
+    @Nullable
+    public static File getAppExternalCacheDir(@NonNull Context context, @NonNull String packageName) {
+        File selfExternalCacheDir = getAppExternalCacheDir(context);
+        return selfExternalCacheDir != null ? new File(selfExternalCacheDir.getPath().replace(context.getPackageName(), packageName)) : null;
+    }
+
+    /**
+     * Get the all app external cache directory
+     */
+    @NotNull
+    public static File[] getAppExternalCacheDirs(@NonNull final Context context) {
+        File[] externalCacheDirs = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            externalCacheDirs = context.getExternalCacheDirs();
+        }
+        if (externalCacheDirs != null && externalCacheDirs.length > 0) {
+            return externalCacheDirs;
+        } else {
+            return Arrayx.map(getMountedExternalStorageDirectorys(context), new Transformer<File, File>() {
+                @NotNull
+                @Override
+                public File transform(@NotNull File file) {
+                    return new File(file, "Android/data/" + context.getPackageName() + "/cache");
+                }
+            }).toArray(new File[0]);
+        }
+    }
+
+    /**
+     * Get the all external cache directory of the specified app
+     *
+     * @param packageName App package name
+     */
+    @NotNull
+    public static File[] getAppExternalCacheDirs(@NonNull final Context context, @NonNull final String packageName) {
+        return Arrayx.map(getAppExternalCacheDirs(context), new Transformer<File, File>() {
+            @NotNull
+            @Override
+            public File transform(@NotNull File file) {
+                return new File(file.getPath().replace(context.getPackageName(), packageName));
+            }
+        }).toArray(new File[0]);
+    }
+
+
+    /**
+     * Get the app internal cache directory
+     */
+    @NotNull
+    public static File getAppInternalCacheDir(@NonNull Context context) {
+        return context.getCacheDir();
+    }
+
+    /**
+     * Get the internal cache directory of the specified app
+     *
+     * @param packageName App package name
+     */
+    @NotNull
+    public static File getAppInternalCacheDir(@NonNull Context context, @NonNull String packageName) {
+        return new File(getAppInternalCacheDir(context).getPath().replace(context.getPackageName(), packageName));
+    }
+
 
     /**
      * Get all app cache directories
      */
     @NonNull
-    public static File[] getAllAppCacheDirs(@NonNull Context context, boolean ignoreInternal) {
-        List<File> fileList = new ArrayList<>();
-        if (Build.VERSION.SDK_INT >= 19) {
-            Collections.addAll(fileList, context.getExternalCacheDirs());
-        } else {
-            File externalCacheDir = context.getExternalCacheDir();
-            if (externalCacheDir != null) {
-                fileList.add(externalCacheDir);
-            }
-        }
-        if (!ignoreInternal) {
-            fileList.add(context.getCacheDir());
-        }
+    public static File[] getAppCacheDirs(@NonNull Context context) {
+        List<File> fileList = new LinkedList<>();
+        File[] externalCacheDirs = getAppExternalCacheDirs(context);
+        Collections.addAll(fileList, externalCacheDirs);
+        fileList.add(getAppInternalCacheDir(context));
         return fileList.toArray(new File[0]);
     }
 
     /**
-     * Get all app file directories
+     * Get all cache directories of the specified app
+     *
+     * @param packageName App package name
      */
     @NonNull
-    public static File[] getAllAppFilesDirs(@NonNull Context context, boolean ignoreInternal) {
-        List<File> fileList = new ArrayList<>();
-        if (Build.VERSION.SDK_INT >= 19) {
-            Collections.addAll(fileList, context.getExternalFilesDirs(null));
-        } else {
-            File externalFilesDir = context.getExternalFilesDir(null);
-            if (externalFilesDir != null) {
-                fileList.add(externalFilesDir);
-            }
-        }
-        if (!ignoreInternal) {
-            fileList.add(context.getFilesDir());
-        }
+    public static File[] getAppCacheDirs(@NonNull final Context context, @NonNull final String packageName) {
+        List<File> fileList = new LinkedList<>();
+        File[] externalCacheDirs = getAppExternalCacheDirs(context, packageName);
+        Collections.addAll(fileList, externalCacheDirs);
+        fileList.add(getAppInternalCacheDir(context, packageName));
         return fileList.toArray(new File[0]);
     }
 
-    /**
-     * Get a file from the APP cache directory, external storage takes precedence
-     */
-    @NonNull
-    public static File getFileFromAppCacheDirs(@NonNull Context context, @NonNull String fileName) {
-        return new File(getAllAppCacheDirs(context, false)[0], fileName);
-    }
-
-    /**
-     * Get a file from the APP files directory, external storage takes precedence
-     */
-    @NonNull
-    public static File getFileFromAppFilesDirs(@NonNull Context context, @NonNull String fileName) {
-        return new File(getAllAppFilesDirs(context, false)[0], fileName);
-    }
-
-    /**
-     * Get a file from the app's cache directory and check the remaining space
-     */
-    @Nullable
-    public static File getFileFromAppCacheDirsBySpace(@NonNull Context context, @NonNull String fileName, long minBytes) {
-        return getChildFileBySpaceFromDirs(getAllAppCacheDirs(context, false), fileName, minBytes, false);
-    }
-
-    /**
-     * Get a file from the app's files directory and check the remaining space
-     */
-    @Nullable
-    public static File getFileFromAppFilesDirsBySpace(@NonNull Context context, @NonNull String fileName, long minBytes) {
-        return getChildFileBySpaceFromDirs(getAllAppFilesDirs(context, false), fileName, minBytes, false);
-    }
-
-    /**
-     * Clean up all app cache directories
-     */
-    public static void cleanAppCacheDirs(@NonNull Context context) {
-        for (File a$receiver$iv : getAllAppCacheDirs(context, false)) {
-            Filex.cleanDir(a$receiver$iv);
-        }
-    }
 
     /**
      * Count the size of all APP cache directories
@@ -319,11 +578,162 @@ public class Storagex {
     @WorkerThread
     public static long lengthAppCacheDirs(@NonNull Context context) {
         long sum = 0;
-        for (File file : getAllAppFilesDirs(context, false)) {
+        for (File file : getAppCacheDirs(context)) {
             sum += Filex.lengthRecursively(file);
         }
         return sum;
     }
+
+    /**
+     * Count the size of all APP cache directories of the specified app
+     *
+     * @param packageName App package name
+     */
+    @WorkerThread
+    public static long lengthAppCacheDirs(@NonNull Context context, @NonNull String packageName) {
+        long sum = 0;
+        for (File file : getAppCacheDirs(context, packageName)) {
+            sum += Filex.lengthRecursively(file);
+        }
+        return sum;
+    }
+
+    /**
+     * Clean up all app cache directories
+     */
+    @WorkerThread
+    public static void cleanAppCacheDirs(@NonNull Context context) {
+        for (File file : getAppCacheDirs(context)) {
+            Filex.cleanDir(file);
+        }
+    }
+
+    /**
+     * Clean up all cache directories of the specified app
+     *
+     * @param packageName App package name
+     */
+    @WorkerThread
+    public static void cleanAppCacheDirs(@NonNull Context context, @NonNull String packageName) {
+        for (File file : getAppCacheDirs(context, packageName)) {
+            Filex.cleanDir(file);
+        }
+    }
+
+
+    /* ******************************************* App Files Dir *******************************************/
+
+
+    /**
+     * Get the app external files directory
+     */
+    @Nullable
+    public static File getAppExternalFilesDir(@NonNull Context context) {
+        File file = context.getExternalFilesDir(null);
+        if (file != null) {
+            // There is no WRITE_EXTERNAL_STORAGE permission on android 4.1. getExternalFilesDir() returns null
+            return file;
+        } else {
+            File externalDir = getMountedExternalStorageDirectory(context);
+            return externalDir != null ? new File(externalDir, "Android/data/" + context.getPackageName() + "/files") : null;
+        }
+    }
+
+    /**
+     * Get the external files directory of the specified app
+     *
+     * @param packageName App package name
+     */
+    @Nullable
+    public static File getAppExternalFilesDir(@NonNull Context context, @NonNull String packageName) {
+        File selfExternalFilesDir = getAppExternalFilesDir(context);
+        return selfExternalFilesDir != null ? new File(selfExternalFilesDir.getPath().replace(context.getPackageName(), packageName)) : null;
+    }
+
+    /**
+     * Get the all app external files directory
+     */
+    @NotNull
+    public static File[] getAppExternalFilesDirs(@NonNull final Context context) {
+        File[] externalFilesDirs = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            externalFilesDirs = context.getExternalFilesDirs(null);
+        }
+        if (externalFilesDirs != null && externalFilesDirs.length > 0) {
+            return externalFilesDirs;
+        } else {
+            return Arrayx.map(getMountedExternalStorageDirectorys(context), new Transformer<File, File>() {
+                @NotNull
+                @Override
+                public File transform(@NotNull File file) {
+                    return new File(file, "Android/data/" + context.getPackageName() + "/files");
+                }
+            }).toArray(new File[0]);
+        }
+    }
+
+    /**
+     * Get the all external files directory of the specified app
+     *
+     * @param packageName App package name
+     */
+    @NotNull
+    public static File[] getAppExternalFilesDirs(@NonNull final Context context, @NonNull final String packageName) {
+        return Arrayx.map(getAppExternalFilesDirs(context), new Transformer<File, File>() {
+            @NotNull
+            @Override
+            public File transform(@NotNull File file) {
+                return new File(file.getPath().replace(context.getPackageName(), packageName));
+            }
+        }).toArray(new File[0]);
+    }
+
+
+    /**
+     * Get the app internal files directory
+     */
+    @NotNull
+    public static File getAppInternalFilesDir(@NonNull Context context) {
+        return context.getFilesDir();
+    }
+
+    /**
+     * Get the internal files directory of the specified app
+     *
+     * @param packageName App package name
+     */
+    @NotNull
+    public static File getAppInternalFilesDir(@NonNull Context context, @NonNull String packageName) {
+        return new File(getAppInternalFilesDir(context).getPath().replace(context.getPackageName(), packageName));
+    }
+
+
+    /**
+     * Get all app files directories
+     */
+    @NonNull
+    public static File[] getAppFilesDirs(@NonNull Context context) {
+        List<File> fileList = new LinkedList<>();
+        File[] externalFilesDirs = getAppExternalFilesDirs(context);
+        Collections.addAll(fileList, externalFilesDirs);
+        fileList.add(getAppInternalFilesDir(context));
+        return fileList.toArray(new File[0]);
+    }
+
+    /**
+     * Get all files directories of the specified app
+     *
+     * @param packageName App package name
+     */
+    @NonNull
+    public static File[] getAppFilesDirs(@NonNull final Context context, @NonNull final String packageName) {
+        List<File> fileList = new LinkedList<>();
+        File[] externalFilesDirs = getAppExternalFilesDirs(context, packageName);
+        Collections.addAll(fileList, externalFilesDirs);
+        fileList.add(getAppInternalFilesDir(context, packageName));
+        return fileList.toArray(new File[0]);
+    }
+
 
     /**
      * Count the size of all APP files directories
@@ -331,10 +741,65 @@ public class Storagex {
     @WorkerThread
     public static long lengthAppFilesDirs(@NonNull Context context) {
         long sum = 0;
-        for (File file : getAllAppCacheDirs(context, false)) {
+        for (File file : getAppFilesDirs(context)) {
             sum += Filex.lengthRecursively(file);
         }
         return sum;
+    }
+
+    /**
+     * Count the size of all APP files directories of the specified app
+     *
+     * @param packageName App package name
+     */
+    @WorkerThread
+    public static long lengthAppFilesDirs(@NonNull Context context, @NonNull String packageName) {
+        long sum = 0;
+        for (File file : getAppFilesDirs(context, packageName)) {
+            sum += Filex.lengthRecursively(file);
+        }
+        return sum;
+    }
+
+    /**
+     * Clean up all app files directories
+     */
+    @WorkerThread
+    public static void cleanAppFilesDirs(@NonNull Context context) {
+        for (File file : getAppFilesDirs(context)) {
+            Filex.cleanDir(file);
+        }
+    }
+
+    /**
+     * Clean up all files directories of the specified app
+     *
+     * @param packageName App package name
+     */
+    @WorkerThread
+    public static void cleanAppFilesDirs(@NonNull Context context, @NonNull String packageName) {
+        for (File file : getAppFilesDirs(context, packageName)) {
+            Filex.cleanDir(file);
+        }
+    }
+
+
+    /* ******************************************* App Obb Dir *******************************************/
+
+
+    /**
+     * Get the app obb directory
+     */
+    @Nullable
+    public static File getAppObbDir(@NonNull Context context) {
+        File file = context.getObbDir();
+        if (file != null) {
+            // There is no WRITE_EXTERNAL_STORAGE permission on android 4.1. getObbDir() returns null
+            return file;
+        } else {
+            File externalDir = getMountedExternalStorageDirectory(context);
+            return externalDir != null ? new File(externalDir, "Android/obb/" + context.getPackageName()) : null;
+        }
     }
 
     /**
@@ -342,18 +807,118 @@ public class Storagex {
      *
      * @param packageName App package name
      */
-    @NonNull
-    public static File getAppObbDir(@NonNull String packageName) {
-        return new File(Environment.getExternalStorageDirectory(), "Android/obb/" + packageName);
+    @Nullable
+    public static File getAppObbDir(@NonNull Context context, @NonNull String packageName) {
+        File selfObbDir = getAppObbDir(context);
+        return selfObbDir != null ? new File(selfObbDir.getPath().replace(context.getPackageName(), packageName)) : null;
     }
 
     /**
-     * Get the data directory of the specified app
+     * Get the all app obb directory
+     */
+    @NotNull
+    public static File[] getAppObbDirs(@NonNull final Context context) {
+        File[] obbDirs = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+            obbDirs = context.getObbDirs();
+        }
+        if (obbDirs != null && obbDirs.length > 0) {
+            return obbDirs;
+        } else {
+            return Arrayx.map(getMountedExternalStorageDirectorys(context), new Transformer<File, File>() {
+                @NotNull
+                @Override
+                public File transform(@NotNull File file) {
+                    return new File(file, "Android/obb/" + context.getPackageName());
+                }
+            }).toArray(new File[0]);
+        }
+    }
+
+    /**
+     * Get the all obb directory of the specified app
      *
      * @param packageName App package name
      */
-    @NonNull
-    public static File getAppDataDir(@NonNull String packageName) {
-        return new File(Environment.getExternalStorageDirectory(), "Android/data/" + packageName);
+    @NotNull
+    public static File[] getAppObbDirs(@NonNull final Context context, @NonNull final String packageName) {
+        return Arrayx.map(getAppObbDirs(context), new Transformer<File, File>() {
+            @NotNull
+            @Override
+            public File transform(@NotNull File file) {
+                return new File(file.getPath().replace(context.getPackageName(), packageName));
+            }
+        }).toArray(new File[0]);
+    }
+
+
+    /**
+     * Count the size of all APP obb directories
+     */
+    @WorkerThread
+    public static long lengthAppObbDirs(@NonNull Context context) {
+        long sum = 0;
+        for (File file : getAppObbDirs(context)) {
+            sum += Filex.lengthRecursively(file);
+        }
+        return sum;
+    }
+
+    /**
+     * Count the size of all APP obb directories of the specified app
+     *
+     * @param packageName App package name
+     */
+    @WorkerThread
+    public static long lengthAppObbDirs(@NonNull Context context, @NonNull String packageName) {
+        long sum = 0;
+        for (File file : getAppObbDirs(context, packageName)) {
+            sum += Filex.lengthRecursively(file);
+        }
+        return sum;
+    }
+
+    /**
+     * Clean up all app obb directories
+     */
+    @WorkerThread
+    public static void cleanAppObbDirs(@NonNull Context context) {
+        for (File file : getAppObbDirs(context)) {
+            Filex.cleanDir(file);
+        }
+    }
+
+    /**
+     * Clean up all obb directories of the specified app
+     *
+     * @param packageName App package name
+     */
+    @WorkerThread
+    public static void cleanAppObbDirs(@NonNull Context context, @NonNull String packageName) {
+        for (File file : getAppObbDirs(context, packageName)) {
+            Filex.cleanDir(file);
+        }
+    }
+
+
+    /* ******************************************* Other *******************************************/
+
+
+    /**
+     * Traverses the given directory collection, returning a directory with free space greater than or equal to the minimum number of bytes
+     *
+     * @param paths    Directory list
+     * @param minBytes Minimum number of bytes
+     */
+    @Nullable
+    public static File filterByMinBytes(@Nullable File[] paths, final long minBytes) {
+        if (paths == null || paths.length == 0) return null;
+        return Arrayx.find(paths, new Predicate<File>() {
+            @Override
+            public boolean accept(@NonNull File path1) {
+                Filex.mkdirsCheck(path1);
+                return path1.isDirectory() && getAvailableBytes(path1) >= minBytes;
+            }
+        });
     }
 }

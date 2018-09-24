@@ -4,6 +4,7 @@
 * :arrow_up: minSdkVersion rose to 16
 * :sparkles: Add StorageManagerCompat and StorageVolumeCompat
 * :hammer: StatFs getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes rename to getAvailableBytesCompat, getFreeBytesCompat, getTotalBytesCompat
+* :hammer: Refactoring Storage
 
 ## v0.2.2
 * Upgrade Javax 0.6.4

@@ -115,12 +115,18 @@ because there are different package names, so there will be no class duplicates.
 
 ### os
 * Storage: [Storagex.java] | [Storage.kt]
-    * getDirFreeBytes, getDirTotalBytes, getDirAvailableBytes, isSDCardMounted, getSDCardFreeBytes,
-    * getSDCardTotalBytes, getSDCardAvailableBytes, getSdcardPath, getSdcardFile, getAllSdcardPath,
-    * getAllSdcardFile, getAllSdcardWithPathFile, findSdcardBySpace, getChildFileBySpaceFromDirs,
-    * getAllAppCacheDirs, getAllAppFilesDirs, getFileFromAppCacheDirs, getFileFromAppFilesDirs,
-    * getFileFromAppCacheDirsBySpace, getFileFromAppFilesDirsBySpace, cleanAppCacheDirs,
-    * lengthAppCacheDirs, lengthAppFilesDirs, getAppObbDir, getAppDataDir
+    * getFreeBytes, getTotalBytes, getAvailableBytes, getVolumeState, isVolumeMounted, isPrimaryVolume,
+    * isVolumeEmulated, isVolumeRemovable, getVolumePaths, getMountedVolumePaths, getVolumeFiles,
+    * getMountedVolumeFiles, getVolumeList, getMountedVolumeList, getStorageVolume,
+    * getExternalStorageState, isExternalStorageMounted, isPrimaryExternalStorage, isExternalStorageEmulated,
+    * isExternalStorageEmulated, isExternalStorageRemovable, isExternalStorageRemovable,
+    * getExternalStorageDirectory, getMountedExternalStorageDirectory, getExternalStorageDirectorys,
+    * getMountedExternalStorageDirectorys, getExternalStorageDirectorys, getMountedExternalStorageDirectorys,
+    * getExternalStorageDirectorysWithPath, getMountedExternalStorageDirectorysWithPath,
+    * getAppExternalCacheDir, getAppExternalCacheDirs, getAppInternalCacheDir, getAppCacheDirs,
+    * lengthAppCacheDirs, cleanAppCacheDirs, getAppExternalFilesDir, getAppExternalFilesDirs,
+    * getAppInternalFilesDir, getAppFilesDirs, lengthAppFilesDirs, cleanAppFilesDirs,
+    * getAppObbDir, getAppObbDirs, lengthAppObbDirs, cleanAppObbDirs, filterByMinBytes
 * StatFs: [StatFsx.java] | [StatFs.kt]
     * getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes
 * StorageManagerCompat: [StorageManagerCompat.java] ([Test][StorageManagerCompatTest.java]) | [StorageManagerCompat.kt] ([Test][StorageManagerCompatTest.kt])
