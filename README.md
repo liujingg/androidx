@@ -127,7 +127,7 @@ because there are different package names, so there will be no class duplicates.
     * lengthAppCacheDirs, cleanAppCacheDirs, getAppExternalFilesDir, getAppExternalFilesDirs,
     * getAppInternalFilesDir, getAppFilesDirs, lengthAppFilesDirs, cleanAppFilesDirs,
     * getAppObbDir, getAppObbDirs, lengthAppObbDirs, cleanAppObbDirs, filterByMinBytes
-* StatFs: [StatFsx.java] | [StatFs.kt]
+* StatFs: [StatFsx.java] ([Test][StatFsTest.java]) | [StatFs.kt] ([Test][StatFsTest.kt])
     * getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes
 * StorageManagerCompat: [StorageManagerCompat.java] ([Test][StorageManagerCompatTest.java]) | [StorageManagerCompat.kt] ([Test][StorageManagerCompatTest.kt])
     * getVolumeList, getStorageVolumes, getVolumePaths, getVolumeState, getStorageVolume
