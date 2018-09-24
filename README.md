@@ -187,7 +187,7 @@ Please view the [CHANGELOG.md] file
 [platform_android_link]: https://android.com
 [platform_kotlin_icon]: https://img.shields.io/badge/Platform-Kotlin-blue.svg
 [platform_kotlin_link]: http://kotlinlang.org
-[min_api_icon]: https://img.shields.io/badge/API-14%2B-orange.svg
+[min_api_icon]: https://img.shields.io/badge/API-16%2B-orange.svg
 [min_api_link]: https://developer.android.com/about/dashboards/
 [license_icon]: https://img.shields.io/badge/License-Apache%202-blue.svg
 [license_link]: https://www.apache.org/licenses/LICENSE-2.0

@@ -1,6 +1,7 @@
 ### v0.2.3 pre
 * :hammer: Network getIpAddress rename to getLocalIpAddress
 * :sparkles: Network add getLocalIpV4Address
+* :arrow_up: minSdkVersion rose to 16
 
 ## v0.2.2
 * Upgrade Javax 0.6.4
