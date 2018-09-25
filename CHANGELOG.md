@@ -5,6 +5,7 @@
 * :sparkles: Add StorageManagerCompat and StorageVolumeCompat
 * :hammer: StatFs getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes rename to getAvailableBytesCompat, getFreeBytesCompat, getTotalBytesCompat
 * :hammer: Refactoring Storage
+* :arrow_up: Upgrade Javax 0.6.5
 
 ## v0.2.2
 * Upgrade Javax 0.6.4

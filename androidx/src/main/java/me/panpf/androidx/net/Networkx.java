@@ -108,7 +108,7 @@ public class Networkx {
     @NotNull
     public static String getLocalIpAddress(@NonNull String defaultIpAddress) {
         //noinspection ResultOfMethodCallIgnored
-        Premisex.requireNonNull(defaultIpAddress, "param defaultIpAddress is not safe");
+        Premisex.requireNotNull(defaultIpAddress, "defaultIpAddress");
         String ipAddress = null;
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
@@ -142,7 +142,7 @@ public class Networkx {
     @NonNull
     public static String getLocalIpV4Address(@NonNull String defaultIpAddress) {
         //noinspection ResultOfMethodCallIgnored
-        Premisex.requireNonNull(defaultIpAddress, "param defaultIpAddress is not safe");
+        Premisex.requireNotNull(defaultIpAddress, "defaultIpAddress");
         String ipAddress = null;
         try {
             for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {

@@ -29,6 +29,7 @@ import android.support.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import me.panpf.androidx.graphics.Colorx;
+import me.panpf.javax.util.LazyValue;
 import me.panpf.javax.util.Premisex;
 
 @SuppressWarnings("WeakerAccess")
@@ -45,7 +46,13 @@ public class Drawablex {
     public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config, @Nullable Bitmap reuseBitmap) {
         final int intrinsicWidth = drawable.getIntrinsicWidth();
         final int intrinsicHeight = drawable.getIntrinsicHeight();
-        Premisex.require(intrinsicWidth > 0 && intrinsicHeight > 0, "Both drawable intrinsicWidth and intrinsicHeight must be greater than 0");
+        Premisex.require(intrinsicWidth > 0 && intrinsicHeight > 0, new LazyValue<String>() {
+            @NotNull
+            @Override
+            public String get() {
+                return "Both drawable intrinsicWidth and intrinsicHeight must be greater than 0";
+            }
+        });
 
         Rect originBounds = new Rect(drawable.getBounds());
 
