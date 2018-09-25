@@ -28,7 +28,7 @@ import org.junit.runner.RunWith;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Permissionx;
 import me.panpf.androidx.hardware.Hardwarex;
-import me.panpf.javax.util.Premisex;
+import me.panpf.javax.util.Comparisonx;
 
 
 @RunWith(AndroidJUnit4.class)
@@ -59,7 +59,7 @@ public class HardwareTest {
         Context context = InstrumentationRegistry.getContext();
         if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
             String deviceId = Hardwarex.getDeviceId(context);
-            Assert.assertTrue(deviceId.length() > 0 && !Premisex.areEqual(deviceId, "unknown") && !Premisex.areEqual(deviceId, "PermissionDenied"));
+            Assert.assertTrue(deviceId.length() > 0 && !Comparisonx.areEqual(deviceId, "unknown") && !Comparisonx.areEqual(deviceId, "PermissionDenied"));
         } else {
             Assert.assertEquals(Hardwarex.getDeviceId(context), "PermissionDenied");
         }
@@ -75,7 +75,7 @@ public class HardwareTest {
         Context context = InstrumentationRegistry.getContext();
         if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
             String subscriberId = Hardwarex.getSubscriberId(context);
-            Assert.assertTrue(subscriberId.length() > 0 && !Premisex.areEqual(subscriberId, "unknown") && !Premisex.areEqual(subscriberId, "PermissionDenied"));
+            Assert.assertTrue(subscriberId.length() > 0 && !Comparisonx.areEqual(subscriberId, "unknown") && !Comparisonx.areEqual(subscriberId, "PermissionDenied"));
         } else {
             Assert.assertEquals(Hardwarex.getSubscriberId(context), "PermissionDenied");
         }
@@ -87,7 +87,7 @@ public class HardwareTest {
         Context context = InstrumentationRegistry.getContext();
         if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
             String simSerialNumber = Hardwarex.getSimSerialNumber(context);
-            Assert.assertTrue(simSerialNumber.length() > 0 && !Premisex.areEqual(simSerialNumber, "unknown") && !Premisex.areEqual(simSerialNumber, "PermissionDenied"));
+            Assert.assertTrue(simSerialNumber.length() > 0 && !Comparisonx.areEqual(simSerialNumber, "unknown") && !Comparisonx.areEqual(simSerialNumber, "PermissionDenied"));
         } else {
             Assert.assertEquals(Hardwarex.getSimSerialNumber(context), "PermissionDenied");
         }
@@ -99,7 +99,7 @@ public class HardwareTest {
             Context context = InstrumentationRegistry.getContext();
             if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
                 String serial = Hardwarex.getSerial();
-                Assert.assertTrue(serial.length() > 0 && !Premisex.areEqual(serial, "unknown") && !Premisex.areEqual(serial, "PermissionDenied"));
+                Assert.assertTrue(serial.length() > 0 && !Comparisonx.areEqual(serial, "unknown") && !Comparisonx.areEqual(serial, "PermissionDenied"));
             } else {
                 Assert.assertEquals(Hardwarex.getSerial(), "PermissionDenied");
             }
@@ -113,7 +113,7 @@ public class HardwareTest {
         Context context = InstrumentationRegistry.getContext();
         if (Permissionx.isGrantPermissions(context, Manifest.permission.ACCESS_WIFI_STATE)) {
             String macAddress = Hardwarex.getMacAddress(context);
-            Assert.assertTrue(macAddress.length() > 0 && !Premisex.areEqual(macAddress, "unknown") && !Premisex.areEqual(macAddress, "PermissionDenied"));
+            Assert.assertTrue(macAddress.length() > 0 && !Comparisonx.areEqual(macAddress, "unknown") && !Comparisonx.areEqual(macAddress, "PermissionDenied"));
         } else {
             Assert.assertEquals(Hardwarex.getMacAddress(context), "PermissionDenied");
         }

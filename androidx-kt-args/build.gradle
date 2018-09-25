@@ -1,7 +1,8 @@
 apply plugin: 'com.android.library'
 apply from: '../build_kotlin.gradle'
 apply from: '../build_test.gradle'
-apply plugin: 'com.novoda.bintray-release'
+//apply plugin: 'com.novoda.bintray-release'
+apply plugin: "guru.stefma.bintrayrelease"
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION.toInteger()
@@ -37,13 +38,24 @@ if (localPropertiesFile.exists()) {
     inputStream.close()
 }
 
+//publish {
+//    groupId = 'me.panpf'
+//    artifactId = 'androidx-kt-args'
+//    publishVersion = android.defaultConfig.versionName
+//    desc = 'Adnroid, Tool, Kotlin, Args'
+//    website = 'https://github.com/panpf/androidx'
+//    userOrg = properties.getProperty("bintray.userOrg")
+//    bintrayUser = properties.getProperty("bintray.user")
+//    bintrayKey = properties.getProperty("bintray.apikey")
+//}
+
+version = android.defaultConfig.versionName
+group = 'me.panpf'
 publish {
-    groupId = 'me.panpf'
+    userOrg = properties.getProperty("bintray.userOrg")
     artifactId = 'androidx-kt-args'
-    publishVersion = android.defaultConfig.versionName
     desc = 'Adnroid, Tool, Kotlin, Args'
     website = 'https://github.com/panpf/androidx'
-    userOrg = properties.getProperty("bintray.userOrg")
     bintrayUser = properties.getProperty("bintray.user")
     bintrayKey = properties.getProperty("bintray.apikey")
 }
