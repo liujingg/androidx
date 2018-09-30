@@ -41,6 +41,30 @@ public class InputMethodx {
         showSoftInput(editText, false);
     }
 
+    public static void delayShowSoftInput(final EditText editText, boolean moveCursorToEnd, long delayMillisecond) {
+        // 定位光标到已输入文本的最后，定位光标不能延迟，要不然页面上看上去会有光标的跳动
+        if (moveCursorToEnd) InputMethodx.moveCursorToEnd(editText);
+
+        editText.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                showSoftInput(editText, false);
+            }
+        }, delayMillisecond);
+    }
+
+    public static void delayShowSoftInput(final EditText editText, boolean moveCursorToEnd) {
+        delayShowSoftInput(editText, moveCursorToEnd, 100);
+    }
+
+    public static void delayShowSoftInput(final EditText editText, long delayMillisecond) {
+        delayShowSoftInput(editText, false, delayMillisecond);
+    }
+
+    public static void delayShowSoftInput(final EditText editText) {
+        delayShowSoftInput(editText, false, 100);
+    }
+
     public static void hideSoftInput(@NonNull Activity activity) {
         View currentFocusView = activity.getCurrentFocus();
         if (currentFocusView == null) return;

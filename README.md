@@ -154,7 +154,7 @@ because there are different package names, so there will be no class duplicates.
 
 ### view
 * InputMethod: [InputMethodx.java] | [InputMethod.kt]
-    * showSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
+    * showSoftInput, delayShowSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
 * Display: [Displayx.java] | [Display.kt]
     * getScreenSize, getScreenWidth, getScreenHeight, getDisplayMetrics, getScreenDensity,
     * getScreenDensityDpi, isPortraitOrientation

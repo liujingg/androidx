@@ -21,6 +21,8 @@ import android.content.Context
 import android.text.Selection
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import me.panpf.androidx.view.inputmethod.InputMethodx
+import me.panpf.androidx.view.inputmethod.InputMethodx.showSoftInput
 
 /*
  * 输入法相关的扩展方法或属性
@@ -34,6 +36,13 @@ fun EditText.showSoftInput(moveCursorToEnd: Boolean = false) {
     inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
 
     if (moveCursorToEnd) this.moveCursorToEnd()
+}
+
+fun EditText.delayShowSoftInput(moveCursorToEnd: Boolean = false, delayMillisecond: Long = 100) {
+    // 定位光标到已输入文本的最后，定位光标不能延迟，要不然页面上看上去会有光标的跳动
+    if (moveCursorToEnd) InputMethodx.moveCursorToEnd(this)
+
+    this.postDelayed({ showSoftInput(this, false) }, delayMillisecond)
 }
 
 fun Activity.hideSoftInput() {
