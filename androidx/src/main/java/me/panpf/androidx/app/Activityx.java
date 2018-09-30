@@ -127,7 +127,7 @@ public class Activityx {
      * If the own or parent activity implements the specified [clazz], it returns its implementation.
      */
     @Nullable
-    public <T> T getImplWithParent(@NonNull Activity activity, @NonNull Class<T> clazz) {
+    public static  <T> T getImplWithParent(@NonNull Activity activity, @NonNull Class<T> clazz) {
         Activity parent = activity;
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {

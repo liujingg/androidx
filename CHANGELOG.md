@@ -1,4 +1,7 @@
-### v0.2.3 pre
+### v0.2.4 pre
+* :hammer: Activityx.getImplWithParent method marked static
+
+### v0.2.3
 * :hammer: Network getIpAddress rename to getLocalIpAddress
 * :sparkles: Network add getLocalIpV4Address
 * :arrow_up: minSdkVersion rose to 16
