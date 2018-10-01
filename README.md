@@ -157,7 +157,7 @@ because there are different package names, so there will be no class duplicates.
     * showSoftInput, delayShowSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
 * Display: [Displayx.java] | [Display.kt]
     * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity, getDisplayRotation
-    * getDensityDpi, isOrientationPortrait, isOrientationLandscape, isOrientationUndefined
+    * getDensityDpi, isOrientationPortrait, isOrientationLandscape, isOrientationUndefined, getRotation
 * ViewAnim: [ViewAnimx.java] | [ViewAnim.kt]
     * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
     * goneByAnimAlpha, visibleByAnimAlpha,

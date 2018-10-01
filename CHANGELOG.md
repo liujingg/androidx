@@ -9,6 +9,7 @@
     isPortraitOrientation rename to isOrientationPortrait
 * :sparkles: Displayx add isOrientationLandscape, isOrientationUndefined
 * :fire: Windowx getDisplayRotation method moved to Displayx
+* :sparkles: Displayx add getRotation
 
 
 ### v0.2.3

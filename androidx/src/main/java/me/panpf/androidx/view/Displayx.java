@@ -16,7 +16,6 @@
 
 package me.panpf.androidx.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
@@ -26,6 +25,9 @@ import android.view.Surface;
 import android.view.WindowManager;
 
 import org.jetbrains.annotations.NotNull;
+
+import me.panpf.javax.util.LazyValue;
+import me.panpf.javax.util.Premisex;
 
 public class Displayx {
 
@@ -70,11 +72,10 @@ public class Displayx {
         return context.getResources().getDisplayMetrics().densityDpi;
     }
 
-    /**
-     * Get the current window direction
-     */
-    public static int getDisplayRotation(@NotNull Activity activity) {
-        switch (activity.getWindowManager().getDefaultDisplay().getRotation()) {
+
+    public static int getRotation(@NotNull Context context) {
+        WindowManager windowManager = Premisex.requireNotNull((WindowManager) context.getSystemService(Context.WINDOW_SERVICE), "windowManager");
+        switch (windowManager.getDefaultDisplay().getRotation()) {
             case Surface.ROTATION_0:
                 return 0;
             case Surface.ROTATION_90:
@@ -88,21 +89,37 @@ public class Displayx {
         }
     }
 
+    public static int getRotation(@NonNull android.support.v4.app.Fragment fragment) {
+        return getRotation(fragment.requireContext());
+    }
+
+    public static int getRotation(@NonNull final android.app.Fragment fragment) {
+        return getRotation(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
+            @NotNull
+            @Override
+            public String get() {
+                return "Fragment " + fragment + " not attached to a context.";
+            }
+        }));
+    }
+
 
     public static boolean isOrientationPortrait(@NonNull Context context) {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
     public static boolean isOrientationPortrait(@NonNull android.support.v4.app.Fragment fragment) {
-        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+        return isOrientationPortrait(fragment.requireContext());
     }
 
-    public static boolean isOrientationPortrait(@NonNull android.app.Fragment fragment) {
-        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-    }
-
-    public static boolean isOrientationPortrait(@NonNull Activity activity) {
-        return activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+    public static boolean isOrientationPortrait(@NonNull final android.app.Fragment fragment) {
+        return isOrientationPortrait(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
+            @NotNull
+            @Override
+            public String get() {
+                return "Fragment " + fragment + " not attached to a context.";
+            }
+        }));
     }
 
     public static boolean isOrientationLandscape(@NonNull Context context) {
@@ -110,15 +127,17 @@ public class Displayx {
     }
 
     public static boolean isOrientationLandscape(@NonNull android.support.v4.app.Fragment fragment) {
-        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+        return isOrientationLandscape(fragment.requireContext());
     }
 
-    public static boolean isOrientationLandscape(@NonNull android.app.Fragment fragment) {
-        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-    }
-
-    public static boolean isOrientationLandscape(@NonNull Activity activity) {
-        return activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    public static boolean isOrientationLandscape(@NonNull final android.app.Fragment fragment) {
+        return isOrientationLandscape(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
+            @NotNull
+            @Override
+            public String get() {
+                return "Fragment " + fragment + " not attached to a context.";
+            }
+        }));
     }
 
     public static boolean isOrientationUndefined(@NonNull Context context) {
@@ -126,14 +145,16 @@ public class Displayx {
     }
 
     public static boolean isOrientationUndefined(@NonNull android.support.v4.app.Fragment fragment) {
-        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_UNDEFINED;
+        return isOrientationUndefined(fragment.requireContext());
     }
 
-    public static boolean isOrientationUndefined(@NonNull android.app.Fragment fragment) {
-        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_UNDEFINED;
-    }
-
-    public static boolean isOrientationUndefined(@NonNull Activity activity) {
-        return activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_UNDEFINED;
+    public static boolean isOrientationUndefined(@NonNull final android.app.Fragment fragment) {
+        return isOrientationUndefined(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
+            @NotNull
+            @Override
+            public String get() {
+                return "Fragment " + fragment + " not attached to a context.";
+            }
+        }));
     }
 }
