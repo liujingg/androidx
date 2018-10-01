@@ -158,6 +158,7 @@ because there are different package names, so there will be no class duplicates.
 * Display: [Displayx.java] | [Display.kt]
     * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity, getDisplayRotation
     * getDensityDpi, isOrientationPortrait, isOrientationLandscape, isOrientationUndefined, getRotation
+    * hasNavigationBar, getStatusBarHeight, getNavigationBarHeight, getNavigationBarWidth
 * ViewAnim: [ViewAnimx.java] | [ViewAnim.kt]
     * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
     * goneByAnimAlpha, visibleByAnimAlpha,
@@ -165,8 +166,7 @@ because there are different package names, so there will be no class duplicates.
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
     * toBitmapByMaxHeight, inflateLayout
-* Window: [Windowx.java] | [Window.kt]
-    * hasNavigationBar, getStatusBarHeight, getNavigationBarHeight, getNavigationBarWidth
+<!--* Window: [Windowx.java] | [Window.kt]-->
 
 ### widget
 * Toast: [Toastx.java] ([Test][ToastTest.java]) | [Toast.kt] ([Test][ToastTest.java])

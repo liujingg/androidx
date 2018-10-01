@@ -8,8 +8,10 @@
     getScreenDensityDpi rename to getDensityDpi,
     isPortraitOrientation rename to isOrientationPortrait
 * :sparkles: Displayx add isOrientationLandscape, isOrientationUndefined
-* :fire: Windowx getDisplayRotation method moved to Displayx
+* :fire: Windowx getDisplayRotation, getStatusBarHeight, hasNavigationBar, getNavigationBarHeight, getNavigationBarWidth method moved to Displayx
 * :sparkles: Displayx add getRotation
+* :sparkles: InputMethodx add delayShowSoftInput method
+
 
 
 ### v0.2.3

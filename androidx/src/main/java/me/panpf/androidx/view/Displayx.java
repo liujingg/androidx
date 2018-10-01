@@ -18,18 +18,37 @@ package me.panpf.androidx.view;
 
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Point;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.view.Surface;
+import android.view.ViewConfiguration;
 import android.view.WindowManager;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.lang.reflect.Method;
 
 import me.panpf.javax.util.LazyValue;
 import me.panpf.javax.util.Premisex;
 
 public class Displayx {
+
+    private static String sNavBarOverride;
+
+    static {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                Method m = Class.forName("android.os.SystemProperties").getDeclaredMethod("get", String.class);
+                m.setAccessible(true);
+                sNavBarOverride = (String) m.invoke(null, "qemu.hw.mainkeys");
+            } catch (Throwable e) {
+                sNavBarOverride = null;
+            }
+        }
+    }
 
     @NonNull
     public static Point getScreenSize(@NonNull Context context) {
@@ -72,7 +91,6 @@ public class Displayx {
         return context.getResources().getDisplayMetrics().densityDpi;
     }
 
-
     public static int getRotation(@NotNull Context context) {
         WindowManager windowManager = Premisex.requireNotNull((WindowManager) context.getSystemService(Context.WINDOW_SERVICE), "windowManager");
         switch (windowManager.getDefaultDisplay().getRotation()) {
@@ -102,7 +120,6 @@ public class Displayx {
             }
         }));
     }
-
 
     public static boolean isOrientationPortrait(@NonNull Context context) {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
@@ -156,5 +173,71 @@ public class Displayx {
                 return "Fragment " + fragment + " not attached to a context.";
             }
         }));
+    }
+
+    private static int getInternalDimensionSize(@NotNull Resources res, @NotNull String resName) {
+        int result = 0;
+        int resourceId = res.getIdentifier(resName, "dimen", "android");
+        if (resourceId > 0) {
+            result = res.getDimensionPixelSize(resourceId);
+        }
+        return result;
+    }
+
+
+    /**
+     * Get the height of the system status bar.
+     *
+     * @return The height of the status bar (in pixels).
+     */
+    public static int getStatusBarHeight(@NotNull Context context) {
+        return getInternalDimensionSize(context.getResources(), "status_bar_height");
+    }
+
+
+    /**
+     * Whether you have a navigation bar
+     */
+    public static boolean hasNavigationBar(@NotNull Context context) {
+        Resources res = context.getResources();
+        int resourceId = res.getIdentifier("config_showNavigationBar", "bool", "android");
+        if (resourceId != 0) {
+            boolean hasNav = res.getBoolean(resourceId);
+            // check override flag (see static block)
+            if ("1".equals(sNavBarOverride)) {
+                hasNav = false;
+            } else if ("0".equals(sNavBarOverride)) {
+                hasNav = true;
+            }
+            return hasNav;
+        } else { // fallback
+            return !ViewConfiguration.get(context).hasPermanentMenuKey();
+        }
+    }
+
+    /**
+     * Get the height of the navigation bar
+     */
+    public static int getNavigationBarHeight(@NotNull Context context) {
+        Resources res = context.getResources();
+        if (hasNavigationBar(context)) {
+            if ((res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+                return getInternalDimensionSize(res, "navigation_bar_height");
+            } else {
+                return getInternalDimensionSize(res, "navigation_bar_height_landscape");
+            }
+        }
+        return 0;
+    }
+
+    /**
+     * Get the width of the navigation bar
+     */
+    public static int getNavigationBarWidth(@NotNull Context context) {
+        if (hasNavigationBar(context)) {
+            return getInternalDimensionSize(context.getResources(), "navigation_bar_width");
+        } else {
+            return 0;
+        }
     }
 }
