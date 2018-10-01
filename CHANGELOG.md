@@ -14,6 +14,8 @@
 * :fire: Androidx remove isAtLeastI, isAtLeast14, isAtLeast4_0, isAtLeastIMR1, isAtLeast15, isAtLeast4_0_3 method, getSdkVersionName rename to getVersionName
 * :sparkles: Androidx add getVersionCodeName method
 * :sparkles: Settingsx add getWindowBrightness, isWindowBrightnessFlowSystem method
+* :bug: Fix StorageManagerCompat's getVolumeList and getStorageVolumes methods return inconsistent bugs on the 8.1 emulator
+* :fire: StorageManagerCompat getStorageVolumes rename to getVolumes, getStorageVolume rename to getVolume
 
 
 

@@ -29,6 +29,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -50,24 +51,7 @@ public class StorageManagerCompat {
     }
 
     @NonNull
-    public StorageVolumeCompat[] getVolumeList() {
-        try {
-            StorageVolume[] storageVolumes = (StorageVolume[]) Classx.callMethod(manager, "getVolumeList");
-            return storageVolumes != null ? Arrayx.map(storageVolumes, new Transformer<StorageVolume, StorageVolumeCompat>() {
-                @NotNull
-                @Override
-                public StorageVolumeCompat transform(@NotNull StorageVolume storageVolume) {
-                    return new StorageVolumeCompat(storageVolume);
-                }
-            }).toArray(new StorageVolumeCompat[0]) : new StorageVolumeCompat[0];
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return new StorageVolumeCompat[0];
-        }
-    }
-
-    @NonNull
-    public List<StorageVolumeCompat> getStorageVolumes() {
+    public List<StorageVolumeCompat> getVolumeList() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return Collectionx.map(manager.getStorageVolumes(), new Transformer<StorageVolume, StorageVolumeCompat>() {
                 @NotNull
@@ -77,14 +61,33 @@ public class StorageManagerCompat {
                 }
             });
         } else {
-            return Arrayx.toList(getVolumeList());
+            StorageVolume[] storageVolumes = null;
+            try {
+                storageVolumes = (StorageVolume[]) Classx.callMethod(manager, "getVolumeList");
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            }
+            return storageVolumes != null ? Arrayx.map(storageVolumes, new Transformer<StorageVolume, StorageVolumeCompat>() {
+                @NotNull
+                @Override
+                public StorageVolumeCompat transform(@NotNull StorageVolume storageVolume) {
+                    return new StorageVolumeCompat(storageVolume);
+                }
+            }) : new ArrayList<StorageVolumeCompat>(0);
         }
+    }
+
+    @NonNull
+    public StorageVolumeCompat[] getVolumes() {
+        // 本来可以 直接 反射调用 getVolumeList 方法的，可是在 8.1 模拟器上发现 manager.getStorageVolumes() 和 反射调用 getVolumeList 方法返回的结果不一致
+        // 为了一致性考虑才使用这种解决办法
+        return getVolumeList().toArray(new StorageVolumeCompat[0]);
     }
 
     @NonNull
     public String[] getVolumePaths() {
         List<String> volumePaths = new LinkedList<>();
-        for (StorageVolumeCompat volumeCompat : getStorageVolumes()) {
+        for (StorageVolumeCompat volumeCompat : getVolumeList()) {
             String path = volumeCompat.getPath();
             if (path != null) {
                 volumePaths.add(path);
@@ -118,30 +121,27 @@ public class StorageManagerCompat {
      */
     @SuppressLint("NewApi")
     @Nullable
-    public StorageVolumeCompat getStorageVolume(@NotNull File file) {
+    public StorageVolumeCompat getVolume(@NotNull File file) {
+        StorageVolume storageVolume = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            StorageVolume storageVolume = manager.getStorageVolume(file);
-            return storageVolume != null ? new StorageVolumeCompat(storageVolume) : null;
-        } else {
-            StorageVolumeCompat volumeCompat = null;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                StorageVolume storageVolume = null;
-                try {
-                    storageVolume = (StorageVolume) Classx.callMethod(manager, "getStorageVolume", file);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                }
-                volumeCompat = storageVolume != null ? new StorageVolumeCompat(storageVolume) : null;
+            // Sometimes the file is right or the StorageVolume is not available.
+            storageVolume = manager.getStorageVolume(file);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            try {
+                storageVolume = (StorageVolume) Classx.callMethod(manager, "getStorageVolume", file);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
             }
-            if (volumeCompat == null) {
-                volumeCompat = getStorageVolume(getVolumeList(), file);
-            }
-            return volumeCompat;
         }
+        if (storageVolume != null) {
+            return new StorageVolumeCompat(storageVolume);
+        }
+
+        return matchVolume(getVolumeList(), file);
     }
 
     @Nullable
-    private StorageVolumeCompat getStorageVolume(@NotNull StorageVolumeCompat[] volumes, @Nullable File file) {
+    private StorageVolumeCompat matchVolume(@NotNull List<StorageVolumeCompat> volumes, @Nullable File file) {
         if (file == null) return null;
         File canonicalFile;
         try {
@@ -152,7 +152,7 @@ public class StorageManagerCompat {
         // 在 4.1 版本内置 SD卡路径是 /mnt/sdcard 扩展 SD 卡路径是 /mnt/sdcard/external_sd，
         // 由于 volumes 始终 /mnt/sdcard 在第一位，如果 file 是 /mnt/sdcard/external_sd/download 将始终匹配到 /mnt/sdcard
         // 因此这里将 volumes 翻转一下就可解决这个问题
-        for (StorageVolumeCompat volume : Arrayx.reversed(volumes)) {
+        for (StorageVolumeCompat volume : Collectionx.reversed(volumes)) {
             File volumeFile = volume.getPathFile();
             File canonicalVolumeFile;
             try {
@@ -160,7 +160,7 @@ public class StorageManagerCompat {
             } catch (IOException ignored) {
                 continue;
             }
-            if (canonicalVolumeFile != null && contains(canonicalVolumeFile, canonicalFile)) {
+            if (contains(canonicalVolumeFile, canonicalFile)) {
                 return volume;
             }
         }
