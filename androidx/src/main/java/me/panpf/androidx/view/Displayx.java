@@ -83,4 +83,36 @@ public class Displayx {
     public static boolean isOrientationPortrait(@NonNull Activity activity) {
         return activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
+
+    public static boolean isOrientationLandscape(@NonNull Context context) {
+        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+    public static boolean isOrientationLandscape(@NonNull android.support.v4.app.Fragment fragment) {
+        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+    public static boolean isOrientationLandscape(@NonNull android.app.Fragment fragment) {
+        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+    public static boolean isOrientationLandscape(@NonNull Activity activity) {
+        return activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    }
+
+    public static boolean isOrientationUndefined(@NonNull Context context) {
+        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_UNDEFINED;
+    }
+
+    public static boolean isOrientationUndefined(@NonNull android.support.v4.app.Fragment fragment) {
+        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_UNDEFINED;
+    }
+
+    public static boolean isOrientationUndefined(@NonNull android.app.Fragment fragment) {
+        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_UNDEFINED;
+    }
+
+    public static boolean isOrientationUndefined(@NonNull Activity activity) {
+        return activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_UNDEFINED;
+    }
 }

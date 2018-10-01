@@ -7,6 +7,7 @@
     getDensity rename to getDensity,
     getScreenDensityDpi rename to getDensityDpi,
     isPortraitOrientation rename to isOrientationPortrait
+* :sparkles: Displayx add isOrientationLandscape, isOrientationUndefined
 
 
 ### v0.2.3
