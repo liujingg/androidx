@@ -12,6 +12,8 @@
 * :sparkles: Displayx add getRotation
 * :sparkles: InputMethodx add delayShowSoftInput method
 * :fire: Androidx remove isAtLeastI, isAtLeast14, isAtLeast4_0, isAtLeastIMR1, isAtLeast15, isAtLeast4_0_3 method, getSdkVersionName rename to getVersionName
+* :sparkles: Androidx add getVersionCodeName method
+* :sparkles: Settingsx add getWindowBrightness, isWindowBrightnessFlowSystem method
 
 
 

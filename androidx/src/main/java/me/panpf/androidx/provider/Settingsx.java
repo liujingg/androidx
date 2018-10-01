@@ -24,6 +24,8 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
 import android.view.Window;
@@ -59,6 +61,7 @@ public class Settingsx {
     /**
      * Get system brightness, the range is 0-255
      */
+    @IntRange(from = 0, to = 255)
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
     public static int getScreenBrightness(@NonNull Context context) {
         try {
@@ -74,20 +77,41 @@ public class Settingsx {
      * @param brightness Brightness, the range is 0-255
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setScreenBrightness(Context context, int brightness) {
+    public static boolean setScreenBrightness(Context context, @IntRange(from = 0, to = 255) int brightness) {
         return Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, brightness);
+    }
+
+    /**
+     * This can be used to override the user's preferred brightness of the screen.
+     * A value of less than 0, the default, means to use the preferred screen brightness.
+     * 0 to 1 adjusts the brightness from dark to full bright.
+     */
+    @FloatRange(from = -1f, to = 1)
+    public static float getWindowBrightness(@NonNull Activity activity) {
+        Window window = activity.getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        return params.screenBrightness;
     }
 
     /**
      * Set the brightness of the Activity window (you can see the effect, the brightness of the system will not change)
      *
-     * @param brightness Brightness, the range is 0-255
+     * @param brightness This can be used to override the user's preferred brightness of the screen.
+     *                   A value of less than 0, the default, means to use the preferred screen brightness.
+     *                   0 to 1 adjusts the brightness from dark to full bright.
      */
-    public static void setWindowBrightness(@NonNull Activity activity, float brightness) {
+    public static void setWindowBrightness(@NonNull Activity activity, @FloatRange(from = -1f, to = 1) float brightness) {
         Window window = activity.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
         params.screenBrightness = brightness;
         window.setAttributes(params);
+    }
+
+    /**
+     * Return true if the current window use the preferred screen brightness.
+     */
+    public static boolean isWindowBrightnessFlowSystem(@NonNull Activity activity) {
+        return getWindowBrightness(activity) < 0;
     }
 
     /**
@@ -165,6 +189,7 @@ public class Settingsx {
     /**
      * Get the media volume, the value range is 0-15
      */
+    @IntRange(from = 0, to = 15)
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
     public static int getMediaVolume(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -184,7 +209,7 @@ public class Settingsx {
      * Set the media volume, the value range is 0-15
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setMediaVolume(@NonNull Context context, int mediaVolume) {
+    public static boolean setMediaVolume(@NonNull Context context, @IntRange(from = 0, to = 15) int mediaVolume) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             if (audioManager == null) throw new IllegalStateException("AudioManager not found");
@@ -198,6 +223,7 @@ public class Settingsx {
     /**
      * Get the ringer volume, the range is 0-7
      */
+    @IntRange(from = 0, to = 7)
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
     public static int getRingVolume(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -217,7 +243,7 @@ public class Settingsx {
      * Set the ringer volume, the range is 0-7
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setRingVolume(@NonNull Context context, int ringVolume) {
+    public static boolean setRingVolume(@NonNull Context context, @IntRange(from = 0, to = 7) int ringVolume) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
             if (audioManager == null) throw new IllegalStateException("AudioManager not found");

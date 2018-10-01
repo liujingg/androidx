@@ -137,9 +137,9 @@ because there are different package names, so there will be no class duplicates.
 ### provider
 * Settings: [Settingsx.java] | [Settings.kt]
     * isScreenBrightnessModeAutomatic, setScreenBrightnessModeAutomatic, getScreenBrightness,
-    * setScreenBrightness, setWindowBrightness, getScreenOffTimeout, setScreenOffTimeout,
-    * isAirplaneModeOn, setAirplaneModeOn, isBluetoothOn, setBluetoothOn,
-    * getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
+    * setScreenBrightness, getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem,
+    * getScreenOffTimeout, setScreenOffTimeout, isAirplaneModeOn, setAirplaneModeOn, isBluetoothOn,
+    * setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
 
 ### util
 * Dimen: [Dimenx.java] | [Dimen.kt]
