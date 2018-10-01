@@ -13,14 +13,16 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 import android.support.v4.app.Fragment as SupportFragment
 
-/* ************************************* SupportFragment ***************************************** */
+/* ************************************* android.support.v4.app.Fragment ***************************************** */
+
+// todo 基础类型没有 Optional
 
 // Boolean
 fun android.support.v4.app.Fragment.bindBooleanArg(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<android.support.v4.app.Fragment, Boolean> =
         ArgLazy(argName) { _, _: KProperty<*> -> requireNotNull(this.arguments) { "arguments is null" }.getBoolean(argName, defaultValue) }
 
-fun android.support.v4.app.Fragment.bindOptionalBooleanArg(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<android.support.v4.app.Fragment, Boolean?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getBoolean(argName, defaultValue) }
+fun android.support.v4.app.Fragment.bindOptionalBooleanArg(argName: String): ReadOnlyProperty<android.support.v4.app.Fragment, Boolean?> =
+        OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getBoolean(argName) }
 
 // BooleanArray
 fun android.support.v4.app.Fragment.bindBooleanArrayArg(argName: String): ReadOnlyProperty<android.support.v4.app.Fragment, BooleanArray> =
@@ -256,7 +258,7 @@ fun android.support.v4.app.Fragment.bindSizeFArg(argName: String): ReadOnlyPrope
 fun android.support.v4.app.Fragment.bindOptionalSizeFArg(argName: String): ReadOnlyProperty<android.support.v4.app.Fragment, SizeF?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.arguments?.getSizeF(argName) }
 
-/* ************************************* OriginFragment ***************************************** */
+/* ************************************* android.app.Fragment ***************************************** */
 
 // Boolean
 fun android.app.Fragment.bindBooleanArg(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<android.app.Fragment, Boolean> =
