@@ -166,7 +166,7 @@ because there are different package names, so there will be no class duplicates.
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
     * toBitmapByMaxHeight, inflateLayout
 * Window: [Windowx.java] | [Window.kt]
-    * getDisplayRotation, isLandscape, isPortrait, hasNavigationBar, getStatusBarHeight,
+    * getDisplayRotation, hasNavigationBar, getStatusBarHeight,
     * getNavigationBarHeight, getNavigationBarWidth
 
 ### widget

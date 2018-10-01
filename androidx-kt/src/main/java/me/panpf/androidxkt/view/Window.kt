@@ -37,20 +37,6 @@ fun Activity.getDisplayRotation(): Int {
     }
 }
 
-/**
- * Return true if the current direction is landscape
- */
-fun Context.isOrientationLandscape(): Boolean {
-    return this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
-}
-
-/**
- * Return true if the current direction is portrait
- */
-fun Context.isOrientationPortrait(): Boolean {
-    return this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
-}
-
 
 private object NavBarOverrideHolder {
     internal var sNavBarOverride: String? = null

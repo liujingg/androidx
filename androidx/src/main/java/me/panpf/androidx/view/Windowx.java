@@ -63,20 +63,6 @@ public class Windowx {
         }
     }
 
-    /**
-     * Return true if the current direction is landscape
-     */
-    public static boolean isLandscape(@NotNull Context context) {
-        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-    }
-
-    /**
-     * Return true if the current direction is portrait
-     */
-    public static boolean isPortrait(@NotNull Context context) {
-        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
-    }
-
 
     private static int getInternalDimensionSize(@NotNull Resources res, @NotNull String resName) {
         int result = 0;
