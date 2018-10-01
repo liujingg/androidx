@@ -18,6 +18,7 @@ package me.panpf.androidx.view;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Point;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
@@ -54,27 +55,32 @@ public class Displayx {
     }
 
     @NonNull
-    public static DisplayMetrics getDisplayMetrics(@NonNull Context context) {
+    public static DisplayMetrics getMetrics(@NonNull Context context) {
         return context.getResources().getDisplayMetrics();
     }
 
-    public static float getScreenDensity(@NonNull Context context) {
+    public static float getDensity(@NonNull Context context) {
         return context.getResources().getDisplayMetrics().density;
     }
 
-    public static int getScreenDensityDpi(@NonNull Context context) {
+    public static int getDensityDpi(@NonNull Context context) {
         return context.getResources().getDisplayMetrics().densityDpi;
     }
 
-    public static boolean isPortraitOrientation(@NonNull Context context) {
-        return context.getResources().getConfiguration().orientation == 1;
+
+    public static boolean isOrientationPortrait(@NonNull Context context) {
+        return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
-    public static boolean isPortraitOrientation(@NonNull android.support.v4.app.Fragment fragment) {
-        return fragment.getResources().getConfiguration().orientation == 1;
+    public static boolean isOrientationPortrait(@NonNull android.support.v4.app.Fragment fragment) {
+        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
-    public static boolean isPortraitOrientation(@NonNull Activity activity) {
-        return activity.getResources().getConfiguration().orientation == 1;
+    public static boolean isOrientationPortrait(@NonNull android.app.Fragment fragment) {
+        return fragment.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+    }
+
+    public static boolean isOrientationPortrait(@NonNull Activity activity) {
+        return activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 }

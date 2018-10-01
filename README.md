@@ -156,8 +156,8 @@ because there are different package names, so there will be no class duplicates.
 * InputMethod: [InputMethodx.java] | [InputMethod.kt]
     * showSoftInput, delayShowSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
 * Display: [Displayx.java] | [Display.kt]
-    * getScreenSize, getScreenWidth, getScreenHeight, getDisplayMetrics, getScreenDensity,
-    * getScreenDensityDpi, isPortraitOrientation
+    * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity,
+    * getDensityDpi, isOrientationPortrait
 * ViewAnim: [ViewAnimx.java] | [ViewAnim.kt]
     * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
     * goneByAnimAlpha, visibleByAnimAlpha,
