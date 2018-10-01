@@ -50,7 +50,7 @@ because there are different package names, so there will be no class duplicates.
 
 * Android: [Androidx.java] | [Android.kt]
     * getMainHandler, runInUI, isRooted, isMainThread, getInProcessName,
-    * getInProcessNameSuffix, isMainProcess, isAtLeast\*, getSdkVersionName
+    * getInProcessNameSuffix, isMainProcess, isAtLeast\*, getVersionName, getVersionCodeName
 
 ### app
 * Activity: [Activityx.java] | [Activity.kt]

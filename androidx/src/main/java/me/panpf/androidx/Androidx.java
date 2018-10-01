@@ -39,7 +39,7 @@ public class Androidx {
      */
     @NonNull
     public static Handler getMainHandler() {
-        return MainHandlerHolder.mainHandler;
+        return MainHandlerHolder.MAIN_HANDLER;
     }
 
     /**
@@ -104,273 +104,250 @@ public class Androidx {
         return context.getPackageName().equals(getInProcessName(context));
     }
 
-    public static boolean isAtLeastI() {
-        return Build.VERSION.SDK_INT >= 14;
-    }
-
-    public static boolean isAtLeast14() {
-        return Build.VERSION.SDK_INT >= 14;
-    }
-
-    public static boolean isAtLeast4_0() {
-        return Build.VERSION.SDK_INT >= 14;
-    }
-
-    public static boolean isAtLeastIMR1() {
-        return Build.VERSION.SDK_INT >= 15;
-    }
-
-    public static boolean isAtLeast15() {
-        return Build.VERSION.SDK_INT >= 15;
-    }
-
-    public static boolean isAtLeast4_0_3() {
-        return Build.VERSION.SDK_INT >= 15;
-    }
 
     public static boolean isAtLeastJ() {
-        return Build.VERSION.SDK_INT >= 16;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     }
 
     public static boolean isAtLeast16() {
-        return Build.VERSION.SDK_INT >= 16;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     }
 
     public static boolean isAtLeast4_1() {
-        return Build.VERSION.SDK_INT >= 16;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN;
     }
 
     public static boolean isAtLeastJMR1() {
-        return Build.VERSION.SDK_INT >= 17;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
     }
 
     public static boolean isAtLeast17() {
-        return Build.VERSION.SDK_INT >= 17;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
     }
 
     public static boolean isAtLeast4_2() {
-        return Build.VERSION.SDK_INT >= 17;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1;
     }
 
     public static boolean isAtLeastJMR2() {
-        return Build.VERSION.SDK_INT >= 18;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
     }
 
     public static boolean isAtLeast18() {
-        return Build.VERSION.SDK_INT >= 18;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
     }
 
     public static boolean isAtLeast4_3() {
-        return Build.VERSION.SDK_INT >= 18;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2;
     }
 
     public static boolean isAtLeastK() {
-        return Build.VERSION.SDK_INT >= 19;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
     }
 
     public static boolean isAtLeast19() {
-        return Build.VERSION.SDK_INT >= 19;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
     }
 
     public static boolean isAtLeast4_4() {
-        return Build.VERSION.SDK_INT >= 19;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
     }
 
     public static boolean isAtLeastKW() {
-        return Build.VERSION.SDK_INT >= 20;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH;
     }
 
     public static boolean isAtLeast20() {
-        return Build.VERSION.SDK_INT >= 20;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH;
     }
 
     public static boolean isAtLeast4_4_W() {
-        return Build.VERSION.SDK_INT >= 20;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH;
     }
 
     public static boolean isAtLeastL() {
-        return Build.VERSION.SDK_INT >= 21;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
     public static boolean isAtLeast21() {
-        return Build.VERSION.SDK_INT >= 21;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
     public static boolean isAtLeast5_0() {
-        return Build.VERSION.SDK_INT >= 21;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
     }
 
     public static boolean isAtLeastLMR1() {
-        return Build.VERSION.SDK_INT >= 22;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1;
     }
 
     public static boolean isAtLeast22() {
-        return Build.VERSION.SDK_INT >= 22;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1;
     }
 
     public static boolean isAtLeast5_1() {
-        return Build.VERSION.SDK_INT >= 22;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1;
     }
 
     public static boolean isAtLeastM() {
-        return Build.VERSION.SDK_INT >= 23;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 
     public static boolean isAtLeast23() {
-        return Build.VERSION.SDK_INT >= 23;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 
     public static boolean isAtLeast6_0() {
-        return Build.VERSION.SDK_INT >= 23;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
     }
 
     public static boolean isAtLeastN() {
-        return Build.VERSION.SDK_INT >= 24;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
     }
 
     public static boolean isAtLeast24() {
-        return Build.VERSION.SDK_INT >= 24;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
     }
 
     public static boolean isAtLeast7_0() {
-        return Build.VERSION.SDK_INT >= 24;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
     }
 
     public static boolean isAtLeastNMR1() {
-        return Build.VERSION.SDK_INT >= 25;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1;
     }
 
     public static boolean isAtLeast25() {
-        return Build.VERSION.SDK_INT >= 25;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1;
     }
 
     public static boolean isAtLeast7_1() {
-        return Build.VERSION.SDK_INT >= 25;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1;
     }
 
     public static boolean isAtLeastO() {
-        return Build.VERSION.SDK_INT >= 26;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
     }
 
     public static boolean isAtLeast26() {
-        return Build.VERSION.SDK_INT >= 26;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
     }
 
     public static boolean isAtLeast8_0() {
-        return Build.VERSION.SDK_INT >= 26;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
     }
 
     public static boolean isAtLeastOMR1() {
-        return Build.VERSION.SDK_INT >= 27;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1;
     }
 
     public static boolean isAtLeast27() {
-        return Build.VERSION.SDK_INT >= 27;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1;
     }
 
     public static boolean isAtLeast8_1() {
-        return Build.VERSION.SDK_INT >= 27;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1;
     }
 
     public static boolean isAtLeastP() {
-        return Build.VERSION.SDK_INT >= 28;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
     }
 
     public static boolean isAtLeast28() {
-        return Build.VERSION.SDK_INT >= 28;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
     }
 
     public static boolean isAtLeast9_0() {
-        return Build.VERSION.SDK_INT >= 28;
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.P;
     }
 
     @NonNull
-    public static String getSdkVersionName(int sdkVersion) {
+    public static String getVersionName(int sdkVersion) {
         String name;
         switch (sdkVersion) {
-            case 1:
-                name = "1.0";
+            case Build.VERSION_CODES.BASE:
+                name = "1.0.0";
                 break;
-            case 2:
-                name = "1.1";
+            case Build.VERSION_CODES.BASE_1_1:
+                name = "1.1.0";
                 break;
-            case 3:
-                name = "1.5";
+            case Build.VERSION_CODES.CUPCAKE:
+                name = "1.5.0";
                 break;
-            case 4:
-                name = "1.6";
+            case Build.VERSION_CODES.DONUT:
+                name = "1.6.0";
                 break;
-            case 5:
-                name = "2.0";
+            case Build.VERSION_CODES.ECLAIR:
+                name = "2.0.0";
                 break;
-            case 6:
+            case Build.VERSION_CODES.ECLAIR_0_1:
                 name = "2.0.1";
                 break;
-            case 7:
-                name = "2.1";
+            case Build.VERSION_CODES.ECLAIR_MR1:
+                name = "2.1.0";
                 break;
-            case 8:
-                name = "2.2";
+            case Build.VERSION_CODES.FROYO:
+                name = "2.2.0";
                 break;
-            case 9:
-                name = "2.3";
+            case Build.VERSION_CODES.GINGERBREAD:
+                name = "2.3.0";
                 break;
-            case 10:
+            case Build.VERSION_CODES.GINGERBREAD_MR1:
                 name = "2.3.3";
                 break;
-            case 11:
-                name = "3.0";
+            case Build.VERSION_CODES.HONEYCOMB:
+                name = "3.0.0";
                 break;
-            case 12:
-                name = "3.1";
+            case Build.VERSION_CODES.HONEYCOMB_MR1:
+                name = "3.1.0";
                 break;
-            case 13:
-                name = "3.2";
+            case Build.VERSION_CODES.HONEYCOMB_MR2:
+                name = "3.2.0";
                 break;
-            case 14:
-                name = "4.0";
+            case Build.VERSION_CODES.ICE_CREAM_SANDWICH:
+                name = "4.0.0";
                 break;
-            case 15:
+            case Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1:
                 name = "4.0.3";
                 break;
-            case 16:
-                name = "4.1";
+            case Build.VERSION_CODES.JELLY_BEAN:
+                name = "4.1.0";
                 break;
-            case 17:
-                name = "4.2";
+            case Build.VERSION_CODES.JELLY_BEAN_MR1:
+                name = "4.2.0";
                 break;
-            case 18:
-                name = "4.3";
+            case Build.VERSION_CODES.JELLY_BEAN_MR2:
+                name = "4.3.0";
                 break;
-            case 19:
-                name = "4.4";
+            case Build.VERSION_CODES.KITKAT:
+                name = "4.4.0";
                 break;
-            case 20:
+            case Build.VERSION_CODES.KITKAT_WATCH:
                 name = "4.4W";
                 break;
-            case 21:
-                name = "5.0";
+            case Build.VERSION_CODES.LOLLIPOP:
+                name = "5.0.0";
                 break;
-            case 22:
-                name = "5.1";
+            case Build.VERSION_CODES.LOLLIPOP_MR1:
+                name = "5.1.0";
                 break;
-            case 23:
-                name = "6.0";
+            case Build.VERSION_CODES.M:
+                name = "6.0.0";
                 break;
-            case 24:
-                name = "7.0";
+            case Build.VERSION_CODES.N:
+                name = "7.0.0";
                 break;
-            case 25:
+            case Build.VERSION_CODES.N_MR1:
                 name = "7.1.1";
                 break;
-            case 26:
-                name = "8.0";
+            case Build.VERSION_CODES.O:
+                name = "8.0.0";
                 break;
-            case 27:
-                name = "8.1";
+            case Build.VERSION_CODES.O_MR1:
+                name = "8.1.0";
                 break;
-            case 28:
-                name = "9.0";
+            case Build.VERSION_CODES.P:
+                name = "9.0.0";
                 break;
             default:
                 name = "Unknown(" + sdkVersion + ')';
@@ -379,7 +356,81 @@ public class Androidx {
         return name;
     }
 
+    @NonNull
+    public static String getVersionName() {
+        return Build.VERSION.RELEASE;
+    }
+
+    @NonNull
+    public static String getVersionCodeName(int sdkVersion) {
+        switch (sdkVersion) {
+            case Build.VERSION_CODES.BASE:
+                return "Base";
+            case Build.VERSION_CODES.BASE_1_1:
+                return "Base1_1";
+            case Build.VERSION_CODES.CUPCAKE:
+                return "Cupcake";
+            case Build.VERSION_CODES.DONUT:
+                return "Donut";
+            case Build.VERSION_CODES.ECLAIR:
+                return "Eclair";
+            case Build.VERSION_CODES.ECLAIR_0_1:
+                return "Eclair01";
+            case Build.VERSION_CODES.ECLAIR_MR1:
+                return "EclairMR1";
+            case Build.VERSION_CODES.FROYO:
+                return "Froyo";
+            case Build.VERSION_CODES.GINGERBREAD:
+                return "Gingerbread";
+            case Build.VERSION_CODES.GINGERBREAD_MR1:
+                return "GingerbreadMR1";
+            case Build.VERSION_CODES.HONEYCOMB:
+                return "Honeycomb";
+            case Build.VERSION_CODES.HONEYCOMB_MR1:
+                return "HoneycombMR1";
+            case Build.VERSION_CODES.HONEYCOMB_MR2:
+                return "HoneycombMR2";
+            case Build.VERSION_CODES.ICE_CREAM_SANDWICH:
+                return "IceCreamSandwich";
+            case Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1:
+                return "IceCreamSandwichMR1";
+            case Build.VERSION_CODES.JELLY_BEAN:
+                return "JellyBean";
+            case Build.VERSION_CODES.JELLY_BEAN_MR1:
+                return "JellyBeanMR1";
+            case Build.VERSION_CODES.JELLY_BEAN_MR2:
+                return "JellyBeanMR2";
+            case Build.VERSION_CODES.KITKAT:
+                return "KITKAT";
+            case Build.VERSION_CODES.KITKAT_WATCH:
+                return "KitkatWatch";
+            case Build.VERSION_CODES.LOLLIPOP:
+                return "Lollipop";
+            case Build.VERSION_CODES.LOLLIPOP_MR1:
+                return "LollipopMR1";
+            case Build.VERSION_CODES.M:
+                return "Marshmallow";
+            case Build.VERSION_CODES.N:
+                return "Nougat";
+            case Build.VERSION_CODES.N_MR1:
+                return "NougatMR1";
+            case Build.VERSION_CODES.O:
+                return "Oreo";
+            case Build.VERSION_CODES.O_MR1:
+                return "OreoMR1";
+            case Build.VERSION_CODES.P:
+                return "Pie";
+            default:
+                return "Unknown(" + sdkVersion + ')';
+        }
+    }
+
+    @NonNull
+    public static String getVersionCodeName() {
+        return getVersionCodeName(Build.VERSION.SDK_INT);
+    }
+
     private static class MainHandlerHolder {
-        private static final Handler mainHandler = new Handler(Looper.getMainLooper());
+        private static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
     }
 }
