@@ -29,6 +29,7 @@ android {
 dependencies {
     api "com.android.support:support-fragment:${SUPPORT_VERSION}"
     api "me.panpf:javax-kt:${JAVAX}"
+    api project(":androidx")
 }
 
 Properties properties = new Properties()

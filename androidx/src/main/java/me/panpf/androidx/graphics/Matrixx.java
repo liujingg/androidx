@@ -20,7 +20,7 @@ import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 
 public class Matrixx {
-    private static final float[] matrixValues = new float[9];
+    private static final float[] MATRIX_VALUES = new float[9];
 
     /**
      * Helper method that 'unpacks' a Matrix and returns the required value
@@ -30,9 +30,9 @@ public class Matrixx {
      * @return float - returned value
      */
     public static float getValue(@NonNull Matrix matrix, int whichValue) {
-        synchronized (matrixValues) {
-            matrix.getValues(matrixValues);
-            return matrixValues[whichValue];
+        synchronized (MATRIX_VALUES) {
+            matrix.getValues(MATRIX_VALUES);
+            return MATRIX_VALUES[whichValue];
         }
     }
 
@@ -40,10 +40,10 @@ public class Matrixx {
      * Get scale ratio
      */
     public static float getScale(@NonNull Matrix matrix) {
-        synchronized (matrixValues) {
-            matrix.getValues(matrixValues);
-            float scaleX = matrixValues[Matrix.MSCALE_X];
-            float scaleY = matrixValues[Matrix.MSKEW_Y];
+        synchronized (MATRIX_VALUES) {
+            matrix.getValues(MATRIX_VALUES);
+            float scaleX = MATRIX_VALUES[Matrix.MSCALE_X];
+            float scaleY = MATRIX_VALUES[Matrix.MSKEW_Y];
             return (float) Math.sqrt((float) Math.pow(scaleX, 2) + (float) Math.pow(scaleY, 2));
         }
     }

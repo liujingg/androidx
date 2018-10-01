@@ -14,165 +14,114 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt
 
-import android.app.ActivityManager
 import android.content.Context
-import android.os.Build
 import android.os.Handler
-import android.os.Looper
-import java.io.File
+import me.panpf.androidx.Androidx
 
-private object MainHandlerHolder {
-    val mainHandler = Handler(Looper.getMainLooper())
-}
 
 /**
  * Get the main thread Handler
  */
-fun getMainHandler(): Handler = MainHandlerHolder.mainHandler
+inline fun getMainHandler(): Handler = Androidx.getMainHandler()
 
 /**
  * Execute the specified code block in the main thread
  */
-fun runInUI(block: () -> Unit) {
-    if (isMainThread()) {
-        block()
-    } else {
-        getMainHandler().post { block() }
-    }
-}
+inline fun runInUI(block: Runnable) = Androidx.runInUI(block)
+
+/**
+ * Execute the specified code block in the main thread
+ */
+inline fun runInUI(noinline block: () -> Unit) = Androidx.runInUI(block)
 
 /**
  * Return true if ROOT is already
  */
-fun isRooted(): Boolean {
-    return (File("/system/bin/su").exists() || File("/system/xbin/su").exists()
-            || File("/sbin/su").exists() || File("/su").exists())
-}
+inline fun isRooted(): Boolean = Androidx.isRooted()
 
 
 /**
  * Get the name of the current process
  */
-fun Context.getInProcessName(): String? {
-    val myPid = android.os.Process.myPid()
-    val activityManager = (getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager)
-    return activityManager.runningAppProcesses?.find { it.pid == myPid }?.processName
-}
+inline fun Context.getInProcessName(): String? = Androidx.getInProcessName(this)
 
 /**
  * Get the suffix of the current process name, for example, the process name is 'com.my.app:push', then the suffix is ​​':push'
  */
-fun Context.getInProcessNameSuffix(): String? {
-    val processName = getInProcessName() ?: return null
-    val lastIndex = processName.lastIndexOf(packageName)
-    return if (lastIndex != -1) processName.substring(lastIndex + packageName.length) else null
-}
+inline fun Context.getInProcessNameSuffix(): String? = Androidx.getInProcessNameSuffix(this)
 
 /**
  * Is in the main process?
  */
-fun Context.isMainProcess(): Boolean = packageName == getInProcessName()
+inline fun Context.isMainProcess(): Boolean = Androidx.isMainProcess(this)
 
 
 /**
  * Is it the main thread?
  */
-fun isMainThread(): Boolean {
-    return Looper.getMainLooper().thread === Thread.currentThread()
-}
+inline fun isMainThread(): Boolean = Androidx.isMainThread()
 
-fun isAtLeastI() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
-fun isAtLeast14() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
-fun isAtLeast4_0() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH
+inline fun isAtLeastJ() = Androidx.isAtLeastJ()
+inline fun isAtLeast16() = Androidx.isAtLeast16()
+inline fun isAtLeast4_1() = Androidx.isAtLeast4_1()
 
-fun isAtLeastIMR1() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
-fun isAtLeast15() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
-fun isAtLeast4_0_3() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
+inline fun isAtLeastJMR1() = Androidx.isAtLeastJMR1()
+inline fun isAtLeast17() = Androidx.isAtLeast17()
+inline fun isAtLeast4_2() = Androidx.isAtLeast4_2()
 
-fun isAtLeastJ() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
-fun isAtLeast16() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
-fun isAtLeast4_1() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN
+inline fun isAtLeastJMR2() = Androidx.isAtLeastJMR2()
+inline fun isAtLeast18() = Androidx.isAtLeast18()
+inline fun isAtLeast4_3() = Androidx.isAtLeast4_3()
 
-fun isAtLeastJMR1() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1
-fun isAtLeast17() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1
-fun isAtLeast4_2() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1
+inline fun isAtLeastK() = Androidx.isAtLeastK()
+inline fun isAtLeast19() = Androidx.isAtLeast19()
+inline fun isAtLeast4_4() = Androidx.isAtLeast4_4()
 
-fun isAtLeastJMR2() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
-fun isAtLeast18() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
-fun isAtLeast4_3() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2
+inline fun isAtLeastKW() = Androidx.isAtLeastKW()
+inline fun isAtLeast20() = Androidx.isAtLeast20()
+inline fun isAtLeast4_4_W() = Androidx.isAtLeast4_4_W()
 
-fun isAtLeastK() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
-fun isAtLeast19() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
-fun isAtLeast4_4() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT
+inline fun isAtLeastL() = Androidx.isAtLeastL()
+inline fun isAtLeast21() = Androidx.isAtLeast21()
+inline fun isAtLeast5_0() = Androidx.isAtLeast5_0()
 
-fun isAtLeastKW() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH
-fun isAtLeast20() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH
-fun isAtLeast4_4_W() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT_WATCH
+inline fun isAtLeastLMR1() = Androidx.isAtLeastLMR1()
+inline fun isAtLeast22() = Androidx.isAtLeast22()
+inline fun isAtLeast5_1() = Androidx.isAtLeast5_1()
 
-fun isAtLeastL() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-fun isAtLeast21() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
-fun isAtLeast5_0() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
+inline fun isAtLeastM() = Androidx.isAtLeastM()
+inline fun isAtLeast23() = Androidx.isAtLeast23()
+inline fun isAtLeast6_0() = Androidx.isAtLeast6_0()
 
-fun isAtLeastLMR1() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
-fun isAtLeast22() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
-fun isAtLeast5_1() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1
+inline fun isAtLeastN() = Androidx.isAtLeastN()
+inline fun isAtLeast24() = Androidx.isAtLeast24()
+inline fun isAtLeast7_0() = Androidx.isAtLeast7_0()
 
-fun isAtLeastM() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-fun isAtLeast23() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
-fun isAtLeast6_0() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+inline fun isAtLeastNMR1() = Androidx.isAtLeastNMR1()
+inline fun isAtLeast25() = Androidx.isAtLeast25()
+inline fun isAtLeast7_1() = Androidx.isAtLeast7_1()
 
-fun isAtLeastN() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
-fun isAtLeast24() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
-fun isAtLeast7_0() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N
+inline fun isAtLeastO() = Androidx.isAtLeastO()
+inline fun isAtLeast26() = Androidx.isAtLeast26()
+inline fun isAtLeast8_0() = Androidx.isAtLeast8_0()
 
-fun isAtLeastNMR1() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1
-fun isAtLeast25() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1
-fun isAtLeast7_1() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1
+inline fun isAtLeastOMR1() = Androidx.isAtLeastOMR1()
+inline fun isAtLeast27() = Androidx.isAtLeast27()
+inline fun isAtLeast8_1() = Androidx.isAtLeast8_1()
 
-fun isAtLeastO() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-fun isAtLeast26() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
-fun isAtLeast8_0() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
+inline fun isAtLeastP() = Androidx.isAtLeastP()
+inline fun isAtLeast28() = Androidx.isAtLeast28()
+inline fun isAtLeast9_0() = Androidx.isAtLeast9_0()
 
-fun isAtLeastOMR1() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1
-fun isAtLeast27() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1
-fun isAtLeast8_1() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1
 
-fun isAtLeastP() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1 + 1
-fun isAtLeast28() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1 + 1
-fun isAtLeast9_0() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1 + 1
+inline fun getAndroidVersionName(version: Int): String = Androidx.getVersionName(version)
 
-fun getSdkVersionName(sdkVersion: Int): String {
-    return when (sdkVersion) {
-        1 -> "1.0"
-        2 -> "1.1"
-        3 -> "1.5"
-        4 -> "1.6"
-        5 -> "2.0"
-        6 -> "2.0.1"
-        7 -> "2.1"
-        8 -> "2.2"
-        9 -> "2.3"
-        10 -> "2.3.3"
-        11 -> "3.0"
-        12 -> "3.1"
-        13 -> "3.2"
-        14 -> "4.0"
-        15 -> "4.0.3"
-        16 -> "4.1"
-        17 -> "4.2"
-        18 -> "4.3"
-        19 -> "4.4"
-        20 -> "4.4W"
-        21 -> "5.0"
-        22 -> "5.1"
-        23 -> "6.0"
-        24 -> "7.0"
-        25 -> "7.1.1"
-        26 -> "8.0"
-        27 -> "8.1"
-        28 -> "9.0"
-        else -> "Unknown($sdkVersion)"
-    }
-}
+inline fun getAndroidVersionName(): String = Androidx.getVersionName()
+
+inline fun getAndroidVersionCodeName(version: Int): String = Androidx.getVersionCodeName(version)
+
+inline fun getAndroidVersionCodeName(): String = Androidx.getVersionCodeName()

@@ -13,8 +13,6 @@ Extensions to the Android standard library and support libraries and some basic 
 
 ## Getting Started
 
-### Java version:
-
 Add the following to your `build.gradle` file
 
 ```grovvy
@@ -27,7 +25,7 @@ Dependencies:
 * [com.android.support:support-fragment][support_fragment]: [27.1.1][support_fragment_versions]
 * [me.panpf:javax][javax]: [0.6.5][javax_versions]
 
-### Kotlin version:
+### Kotlin Expansion:
 
 Add the following to your `build.gradle` file
 
@@ -42,9 +40,7 @@ Dependencies:
 * [com.android.support:support-fragment][support_fragment]: [27.1.1][support_fragment_versions]
 * [me.panpf:javax-kt][javax]: [0.6.5][javax_versions]
 
-`You can add Java or Kotlin versions to your project as needed.
-If your project is Java and Kotlin mixed development, then both versions can be imported,
-because there are different package names, so there will be no class duplicates.`
+`androidx-kt is a androidx extension on the Kotlin platform that allows you to use androidx more comfortably on Kotlin`
 
 ## Index
 

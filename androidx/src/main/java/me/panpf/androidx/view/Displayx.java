@@ -24,6 +24,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.view.Surface;
+import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.WindowManager;
 
@@ -78,6 +79,7 @@ public class Displayx {
         return point.y;
     }
 
+
     @NonNull
     public static DisplayMetrics getMetrics(@NonNull Context context) {
         return context.getResources().getDisplayMetrics();
@@ -90,6 +92,7 @@ public class Displayx {
     public static int getDensityDpi(@NonNull Context context) {
         return context.getResources().getDisplayMetrics().densityDpi;
     }
+
 
     public static int getRotation(@NotNull Context context) {
         WindowManager windowManager = Premisex.requireNotNull((WindowManager) context.getSystemService(Context.WINDOW_SERVICE), "windowManager");
@@ -121,6 +124,11 @@ public class Displayx {
         }));
     }
 
+    public static int getRotation(@NonNull View view) {
+        return getRotation(view.getContext());
+    }
+
+
     public static boolean isOrientationPortrait(@NonNull Context context) {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
@@ -138,6 +146,11 @@ public class Displayx {
             }
         }));
     }
+
+    public static boolean isOrientationPortrait(@NonNull View view) {
+        return isOrientationPortrait(view.getContext());
+    }
+
 
     public static boolean isOrientationLandscape(@NonNull Context context) {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
@@ -157,6 +170,11 @@ public class Displayx {
         }));
     }
 
+    public static boolean isOrientationLandscape(@NonNull View view) {
+        return isOrientationLandscape(view.getContext());
+    }
+
+
     public static boolean isOrientationUndefined(@NonNull Context context) {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_UNDEFINED;
     }
@@ -174,6 +192,11 @@ public class Displayx {
             }
         }));
     }
+
+    public static boolean isOrientationUndefined(@NonNull View view) {
+        return isOrientationUndefined(view.getContext());
+    }
+
 
     private static int getInternalDimensionSize(@NotNull Resources res, @NotNull String resName) {
         int result = 0;

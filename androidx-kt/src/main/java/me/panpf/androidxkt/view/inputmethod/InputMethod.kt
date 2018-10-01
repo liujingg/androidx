@@ -14,70 +14,36 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.view.inputmethod
 
 import android.app.Activity
-import android.content.Context
-import android.text.Selection
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import me.panpf.androidx.view.inputmethod.InputMethodx
-import me.panpf.androidx.view.inputmethod.InputMethodx.showSoftInput
 
 /*
  * 输入法相关的扩展方法或属性
  */
 
-fun EditText.showSoftInput(moveCursorToEnd: Boolean = false) {
-    this.requestFocus()
+inline fun EditText.showSoftInput(moveCursorToEnd: Boolean = false) = InputMethodx.showSoftInput(this, moveCursorToEnd)
 
-    val inputMethodManager = (this.context.getSystemService(Context.INPUT_METHOD_SERVICE)
-            ?: throw IllegalStateException("InputMethodManager not found")) as InputMethodManager
-    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
+inline fun EditText.delayShowSoftInput(moveCursorToEnd: Boolean = false, delayMillisecond: Long = 100) =
+        InputMethodx.delayShowSoftInput(this, moveCursorToEnd, delayMillisecond)
 
-    if (moveCursorToEnd) this.moveCursorToEnd()
-}
+inline fun Activity.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
-fun EditText.delayShowSoftInput(moveCursorToEnd: Boolean = false, delayMillisecond: Long = 100) {
-    // 定位光标到已输入文本的最后，定位光标不能延迟，要不然页面上看上去会有光标的跳动
-    if (moveCursorToEnd) InputMethodx.moveCursorToEnd(this)
+inline fun android.support.v4.app.Fragment.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
-    this.postDelayed({ showSoftInput(this, false) }, delayMillisecond)
-}
+inline fun android.app.Fragment.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
-fun Activity.hideSoftInput() {
-    val currentFocusView = this.currentFocus ?: return
-    val inputMethodManager = (this.getSystemService(Context.INPUT_METHOD_SERVICE)
-            ?: throw IllegalStateException("InputMethodManager not found")) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(currentFocusView.windowToken, 0)
-}
+inline fun EditText.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
-fun android.support.v4.app.Fragment.hideSoftInput() {
-    activity?.hideSoftInput()
-}
+inline fun EditText.moveCursorToEnd() = InputMethodx.moveCursorToEnd(this)
 
-fun android.app.Fragment.hideSoftInput() {
-    activity?.hideSoftInput()
-}
+inline fun EditText.moveCursorToStart() = InputMethodx.moveCursorToStart(this)
 
-fun EditText.hideSoftInput() {
-    this.windowToken ?: return
-    val inputMethodManager = (this.context.getSystemService(Context.INPUT_METHOD_SERVICE)
-            ?: throw IllegalStateException("InputMethodManager not found")) as InputMethodManager
-    inputMethodManager.hideSoftInputFromWindow(this.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
-}
-
-fun EditText.moveCursorToEnd() {
-    Selection.setSelection(this.editableText, this.length())
-}
-
-fun EditText.moveCursorToStart() {
-    Selection.setSelection(this.editableText, 0)
-}
-
-fun EditText.moveCursorTo(index: Int) {
-    Selection.setSelection(this.editableText, index)
-}
+inline fun EditText.moveCursorTo(index: Int) = InputMethodx.moveCursorTo(this, index)
 
 
 

@@ -14,70 +14,46 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.app
 
 import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
-import me.panpf.javaxkt.lang.setFieldValue
+import me.panpf.androidx.app.Dialogx
 
 /**
  * Whether to automatically close the dialog box when setting the click button
  */
-fun Dialog.setClickButtonClosable(close: Boolean) {
-    try {
-        this.setFieldValue("mShowing", close)
-    } catch (e: NoSuchFieldException) {
-        e.printStackTrace()
-    }
-}
+inline fun Dialog.setClickButtonClosable(closable: Boolean) = Dialogx.setClickButtonClosable(this, closable)
 
 /**
  * Display a progress dialog
  */
-fun Activity.showProgressDialog(message: String): ProgressDialog {
-    val newDialog = ProgressDialog(this)
-    newDialog.setTitle(null)
-    newDialog.setMessage(message)
-    newDialog.isIndeterminate = true
-    newDialog.setCancelable(false)
-    newDialog.setOnCancelListener(null)
-    newDialog.setCanceledOnTouchOutside(false)
-    newDialog.show()
-    return newDialog
-}
+inline fun Activity.showProgressDialog(message: String): ProgressDialog = Dialogx.showProgressDialog(this, message)
 
 /**
  * Display a progress dialog
  */
-fun Activity.showProgressDialog(messageId: Int): ProgressDialog {
-    return this.showProgressDialog(this.getString(messageId))
-}
+inline fun Activity.showProgressDialog(messageId: Int): ProgressDialog = Dialogx.showProgressDialog(this, messageId)
 
 /**
  * Display a progress dialog
  */
-fun android.support.v4.app.Fragment.showProgressDialog(message: String): ProgressDialog? {
-    return this.activity?.showProgressDialog(message)
-}
+inline fun android.support.v4.app.Fragment.showProgressDialog(message: String): ProgressDialog? = Dialogx.showProgressDialog(this, message)
 
 /**
  * Display a progress dialog
  */
-fun android.support.v4.app.Fragment.showProgressDialog(messageId: Int): ProgressDialog? {
-    return this.activity?.showProgressDialog(messageId)
-}
+inline fun android.support.v4.app.Fragment.showProgressDialog(messageId: Int): ProgressDialog? = Dialogx.showProgressDialog(this, messageId)
 
 /**
  * Display a progress dialog
  */
-fun android.app.Fragment.showProgressDialog(message: String): ProgressDialog? {
-    return this.activity?.showProgressDialog(message)
-}
+inline fun android.app.Fragment.showProgressDialog(message: String): ProgressDialog? = Dialogx.showProgressDialog(activity, message)
 
 /**
  * Display a progress dialog
  */
-fun android.app.Fragment.showProgressDialog(messageId: Int): ProgressDialog? {
-    return this.activity?.showProgressDialog(messageId)
-}
+inline fun android.app.Fragment.showProgressDialog(messageId: Int): ProgressDialog? = Dialogx.showProgressDialog(this, messageId)

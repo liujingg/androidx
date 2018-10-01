@@ -14,118 +14,39 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.app
 
-import android.app.Activity
-import android.arch.lifecycle.Lifecycle
-import android.os.Build
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import me.panpf.androidx.app.Fragmentx
 
 /**
  * Return true if the fragment has been destroyed
  */
-fun android.app.Fragment.isDestroyedCompat(): Boolean {
-    return this.activity == null
-}
+inline fun android.app.Fragment.isDestroyedCompat(): Boolean = Fragmentx.isDestroyedCompat(this)
 
 /**
  * Return true if the fragment has been destroyed
  */
-fun android.support.v4.app.Fragment.isDestroyedCompat(): Boolean {
-    return this.lifecycle.currentState == Lifecycle.State.DESTROYED
-}
+inline fun android.support.v4.app.Fragment.isDestroyedCompat(): Boolean = Fragmentx.isDestroyedCompat(this)
 
 /**
  * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
  */
-fun <T> android.support.v4.app.Fragment.getImplWithParent(clazz: Class<T>): T? {
-    var parent: android.support.v4.app.Fragment? = this
-    while (parent != null) {
-        if (clazz.isAssignableFrom(parent.javaClass)) {
-            @Suppress("UNCHECKED_CAST")
-            return clazz as T
-        } else {
-            parent = parent.parentFragment
-        }
-    }
-    var parentActivity: Activity? = this.activity
-    while (parentActivity != null) {
-        if (clazz.isAssignableFrom(parentActivity.javaClass)) {
-            @Suppress("UNCHECKED_CAST")
-            return clazz as T
-        } else {
-            parentActivity = parentActivity.parent
-        }
-    }
-    return null
-}
-
-/**
- * Instantiate a Fragment and set arguments
- */
-fun Class<out android.support.v4.app.Fragment>.instance(arguments: Bundle? = null): Fragment {
-    val fragment: android.support.v4.app.Fragment
-
-    try {
-        fragment = this.newInstance()
-    } catch (e: InstantiationException) {
-        throw IllegalArgumentException(e)
-    } catch (e: IllegalAccessException) {
-        throw IllegalArgumentException(e)
-    }
-
-    if (arguments != null) {
-        fragment.arguments = arguments
-    }
-    return fragment
-}
+inline fun <T> android.support.v4.app.Fragment.getImplWithParent(clazz: Class<T>): T? = Fragmentx.getImplWithParent(this, clazz)
 
 /**
  * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
  */
-fun <T> android.app.Fragment.getImplWithParent(clazz: Class<T>): T? {
-    var parent: android.app.Fragment? = this
-    while (parent != null) {
-        if (clazz.isAssignableFrom(parent.javaClass)) {
-            @Suppress("UNCHECKED_CAST")
-            return clazz as T
-        } else {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                parent = parent.parentFragment
-            } else {
-                parent = null
-            }
-        }
-    }
-    var parentActivity: Activity? = this.activity
-    while (parentActivity != null) {
-        if (clazz.isAssignableFrom(parentActivity.javaClass)) {
-            @Suppress("UNCHECKED_CAST")
-            return clazz as T
-        } else {
-            parentActivity = parentActivity.parent
-        }
-    }
-    return null
-}
+inline fun <T> android.app.Fragment.getImplWithParent(clazz: Class<T>): T? = Fragmentx.getImplWithParent(this, clazz)
 
 /**
  * Instantiate a Fragment and set arguments
  */
-fun Class<out android.app.Fragment>.instanceOrigin(arguments: Bundle? = null): android.app.Fragment {
-    val fragment: android.app.Fragment
+inline fun Class<out android.support.v4.app.Fragment>.instance(arguments: Bundle? = null): android.support.v4.app.Fragment = Fragmentx.instance(this, arguments)
 
-    try {
-        fragment = this.newInstance()
-    } catch (e: InstantiationException) {
-        throw IllegalArgumentException(e)
-    } catch (e: IllegalAccessException) {
-        throw IllegalArgumentException(e)
-    }
-
-    if (arguments != null) {
-        fragment.arguments = arguments
-    }
-    return fragment
-}
+/**
+ * Instantiate a Fragment and set arguments
+ */
+inline fun Class<out android.app.Fragment>.instanceOrigin(arguments: Bundle? = null): android.app.Fragment = Fragmentx.instanceOrigin(this, arguments)

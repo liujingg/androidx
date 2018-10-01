@@ -14,21 +14,16 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.os.storage
 
 import android.content.Context
-import android.os.Build
 import android.os.Environment
-import android.os.StatFs
 import android.support.annotation.WorkerThread
-import me.panpf.androidxkt.os.availableBytesCompat
-import me.panpf.androidxkt.os.freeBytesCompat
-import me.panpf.androidxkt.os.totalBytesCompat
-import me.panpf.javaxkt.io.cleanDir
-import me.panpf.javaxkt.io.lengthRecursively
-import me.panpf.javaxkt.io.mkdirsCheck
+import me.panpf.androidx.os.storage.StorageVolumeCompat
+import me.panpf.androidx.os.storage.Storagex
 import java.io.File
-import java.util.*
 
 /*
  * Storage related extension methods or properties
@@ -40,44 +35,32 @@ import java.util.*
 /**
  * Get the number of free bytes of the given path
  */
-fun File.getFreeBytes(): Long {
-    return StatFs(this.path).freeBytesCompat
-}
+inline fun File.getFreeBytes(): Long = Storagex.getFreeBytes(this)
 
 /**
  * Get the number of total bytes of the given path
  */
-fun File.getTotalBytes(): Long {
-    return StatFs(this.path).totalBytesCompat
-}
+inline fun File.getTotalBytes(): Long = Storagex.getTotalBytes(this)
 
 /**
  * Get the number of available bytes of the given path
  */
-fun File.getAvailableBytes(): Long {
-    return StatFs(this.path).availableBytesCompat
-}
+inline fun File.getAvailableBytes(): Long = Storagex.getAvailableBytes(this)
 
 /**
  * Get the number of free bytes for the primary shared/external storage media
  */
-fun getExternalStorageFreeBytes(): Long {
-    return getExternalStorageDirectory().getFreeBytes()
-}
+inline fun getExternalStorageFreeBytes(): Long = Storagex.getExternalStorageFreeBytes()
 
 /**
  * Get the number of total bytes for the primary shared/external storage media
  */
-fun getExternalStorageTotalBytes(): Long {
-    return getExternalStorageDirectory().getTotalBytes()
-}
+inline fun getExternalStorageTotalBytes(): Long = Storagex.getExternalStorageTotalBytes()
 
 /**
  * Get the number of available bytes for the primary shared/external storage media
  */
-fun getExternalStorageAvailableBytes(): Long {
-    return getExternalStorageDirectory().getAvailableBytes()
-}
+inline fun getExternalStorageAvailableBytes(): Long = Storagex.getExternalStorageAvailableBytes()
 
 
 /* ******************************************* Volume *******************************************/
@@ -85,95 +68,77 @@ fun getExternalStorageAvailableBytes(): Long {
 /**
  * Returns volume state for given path
  */
-fun Context.getVolumeState(path: File): String {
-    val volumeCompat = this.getStorageVolume(path)
-    return volumeCompat?.getState(this) ?: "unknown"
-}
+inline fun Context.getVolumeState(path: File): String = Storagex.getVolumeState(this, path)
 
 /**
  * Returns true if the state of the volume at which the given path is mounted
  */
-fun Context.isVolumeMounted(path: File): Boolean {
-    return Environment.MEDIA_MOUNTED == this.getVolumeState(path)
-}
+inline fun Context.isVolumeMounted(path: File): Boolean = Storagex.isVolumeMounted(this, path)
 
 
 /**
  * Return true if the volume of the given path is the primary volume
  */
-fun Context.isPrimaryVolume(path: File): Boolean {
-    val volumeCompat = this.getStorageVolume(path)
-    return volumeCompat != null && volumeCompat.isPrimary
-}
+inline fun Context.isPrimaryVolume(path: File): Boolean = Storagex.isPrimaryVolume(this, path)
 
 /**
  * Return true if the volume of the given path is the emulated volume
  */
-fun Context.isVolumeEmulated(path: File): Boolean {
-    val volumeCompat = this.getStorageVolume(path)
-    return volumeCompat != null && volumeCompat.isEmulated
-}
+inline fun Context.isVolumeEmulated(path: File): Boolean = Storagex.isVolumeEmulated(this, path)
 
 /**
  * Return true if the volume of the given path is the removable volume
  */
-fun Context.isVolumeRemovable(path: File): Boolean {
-    val volumeCompat = this.getStorageVolume(path)
-    return volumeCompat != null && volumeCompat.isRemovable
-}
+inline fun Context.isVolumeRemovable(path: File): Boolean = Storagex.isVolumeRemovable(this, path)
 
 
 /**
  * Returns list of path for all volumes.
  */
-fun Context.getVolumePaths(): Array<String> {
-    return StorageManagerCompat(this).getVolumePaths()
-}
+inline fun Context.getVolumePaths(): Array<String> = Storagex.getVolumePaths(this)
 
 /**
  * Returns list of path for all mounted volumes.
  */
-fun Context.getMountedVolumePaths(): Array<String> {
-    return this.getVolumePaths().filter { this.isVolumeMounted(File(it)) }.toTypedArray()
-}
+inline fun Context.getMountedVolumePaths(): Array<String> = Storagex.getMountedVolumePaths(this)
 
 
 /**
  * Returns list of files for all volumes.
  */
-fun Context.getVolumeFiles(): Array<File> {
-    return this.getVolumePaths().map { File(it) }.toTypedArray()
-}
+inline fun Context.getVolumeFiles(): Array<File> = Storagex.getVolumeFiles(this)
 
 /**
  * Returns list of files for all mounted volumes.
  */
-fun Context.getMountedVolumeFiles(): Array<File> {
-    return this.getVolumeFiles().filter { this.isVolumeMounted(it) }.toTypedArray()
-}
+inline fun Context.getMountedVolumeFiles(): Array<File> = Storagex.getMountedVolumeFiles(this)
 
 
 /**
  * Returns list of StorageVolume for all volumes.
  */
-fun Context.getVolumeList(): Array<StorageVolumeCompat> {
-    return StorageManagerCompat(this).getVolumeList()
-}
+inline fun Context.getVolumeList(): List<StorageVolumeCompat> = Storagex.getVolumeList(this)
 
 /**
  * Returns list of StorageVolume for all mounted volumes.
  */
-fun Context.getMountedVolumeList(): Array<StorageVolumeCompat> {
-    return this.getVolumeList().filter { Environment.MEDIA_MOUNTED == it.getState(this) }.toTypedArray()
-}
+inline fun Context.getMountedVolumeList(): List<StorageVolumeCompat> = Storagex.getMountedVolumeList(this)
+
+/**
+ * Returns array of StorageVolume for all volumes.
+ */
+inline fun Context.getVolumes(): Array<StorageVolumeCompat> = Storagex.getVolumes(this)
+
+/**
+ * Returns array of StorageVolume for all mounted volumes.
+ */
+inline fun Context.getMountedVolumes(): Array<StorageVolumeCompat> = Storagex.getMountedVolumes(this)
 
 
 /**
  * Returns StorageVolume for path.
  */
-fun Context.getStorageVolume(path: File): StorageVolumeCompat? {
-    return StorageManagerCompat(this).getStorageVolume(path)
-}
+inline fun Context.getVolume(path: File): StorageVolumeCompat? = Storagex.getVolume(this, path)
 
 
 /* ******************************************* External Storage *******************************************/
@@ -190,20 +155,12 @@ fun Context.getStorageVolume(path: File): StorageVolumeCompat? {
  * [Environment.MEDIA_BAD_REMOVAL], or [Environment.MEDIA_UNMOUNTABLE].
  * @see .getExternalStorageDirectory
  */
-fun Context.getExternalStorageState(path: File): String {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        Environment.getExternalStorageState(path)
-    } else {
-        this.getVolumeState(path)
-    }
-}
+inline fun Context.getExternalStorageState(path: File): String = Storagex.getExternalStorageState(this, path)
 
 /**
  * Return true if the state of the given path is MOUNTED
  */
-fun Context.isExternalStorageMounted(path: File): Boolean {
-    return Environment.MEDIA_MOUNTED == this.getExternalStorageState(path)
-}
+inline fun Context.isExternalStorageMounted(path: File): Boolean = Storagex.isExternalStorageMounted(this, path)
 
 /**
  * Returns the current state of the primary shared/external storage media.
@@ -215,77 +172,48 @@ fun Context.isExternalStorageMounted(path: File): Boolean {
  * [Environment.MEDIA_BAD_REMOVAL], or [Environment.MEDIA_UNMOUNTABLE].
  * @see .getExternalStorageDirectory
  */
-fun getExternalStorageState(): String {
-    return Environment.getExternalStorageState()
-}
+inline fun getExternalStorageState(): String = Storagex.getExternalStorageState()
 
 /**
  * Return true if the state of the primary shared/external storage media is MOUNTED
  */
-fun isExternalStorageMounted(): Boolean {
-    return Environment.MEDIA_MOUNTED == getExternalStorageState()
-}
+inline fun isExternalStorageMounted(): Boolean = Storagex.isExternalStorageMounted()
 
 /**
  * Return true if the path is the primary volume
  */
-fun Context.isPrimaryExternalStorage(path: File): Boolean {
-    return this.isPrimaryVolume(path)
-}
+inline fun Context.isPrimaryExternalStorage(path: File): Boolean = Storagex.isPrimaryExternalStorage(this, path)
 
 /**
  * Return true if the volume of the given path is emulated
  */
-fun Context.isExternalStorageEmulated(path: File): Boolean {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        Environment.isExternalStorageEmulated(path)
-    } else {
-        val storageVolume = StorageManagerCompat(this).getStorageVolume(path)
-        storageVolume != null && storageVolume.isEmulated
-    }
-}
+inline fun Context.isExternalStorageEmulated(path: File): Boolean = Storagex.isExternalStorageEmulated(this, path)
 
 /**
  * Return true if the primary shared/external storage media is emulated
  */
-fun isExternalStorageEmulated(): Boolean {
-    return Environment.isExternalStorageEmulated()
-}
+inline fun isExternalStorageEmulated(): Boolean = Storagex.isExternalStorageEmulated()
 
 /**
  * Return true if the state of the given path is REMOVED
  */
-fun Context.isExternalStorageRemovable(path: File): Boolean {
-    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        Environment.isExternalStorageRemovable(path)
-    } else {
-        val storageVolume = StorageManagerCompat(this).getStorageVolume(path)
-        storageVolume != null && storageVolume.isRemovable
-    }
-}
+inline fun Context.isExternalStorageRemovable(path: File): Boolean = Storagex.isExternalStorageRemovable(this, path)
 
 /**
  * Return true if the state of the primary shared/external storage media is REMOVED
  */
-fun isExternalStorageRemovable(): Boolean {
-    return Environment.isExternalStorageRemovable()
-}
+inline fun isExternalStorageRemovable(): Boolean = Storagex.isExternalStorageRemovable()
 
 
 /**
  * Return the primary shared/external storage directory.
  */
-fun getExternalStorageDirectory(): File {
-    return Environment.getExternalStorageDirectory()
-}
+inline fun getExternalStorageDirectory(): File = Storagex.getExternalStorageDirectory()
 
 /**
  * Return if the primary shared/external storage directory is mounted, otherwise return null
  */
-fun Context.getMountedExternalStorageDirectory(): File? {
-    val externalStorageDirectory = Environment.getExternalStorageDirectory()
-    return if (this.isExternalStorageMounted(externalStorageDirectory)) externalStorageDirectory else null
-}
+inline fun Context.getMountedExternalStorageDirectory(): File? = Storagex.getMountedExternalStorageDirectory(this)
 
 
 /**
@@ -293,61 +221,27 @@ fun Context.getMountedExternalStorageDirectory(): File? {
  *
  * @param ignorePrimary Ignore primary shared/external storage directory.
  */
-fun Context.getExternalStorageDirectorys(ignorePrimary: Boolean): Array<File> {
-    val dirs = LinkedList<File>()
-
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-        val files = this.getExternalFilesDirs(null)
-        if (files != null && files.isNotEmpty()) {
-            val lowerCaseSuffix = "/Android/data/".toLowerCase()
-            for (file in files) {
-                val lowerCasePath = file.path.toLowerCase()
-                val index = lowerCasePath.indexOf(lowerCaseSuffix)
-                if (index != -1) {
-                    dirs.add(File(file.path.substring(0, index)))
-                }
-            }
-        }
-    }
-
-    if (dirs.isEmpty()) {
-        val files = this.getVolumeFiles()
-        if (files.isNotEmpty()) {
-            dirs.addAll(files)
-        }
-    }
-
-    val primaryExternalStorageDirectory = getExternalStorageDirectory()
-    if (dirs.isEmpty()) {
-        dirs.add(primaryExternalStorageDirectory)
-    }
-
-    return dirs.filter { !ignorePrimary || it.path != primaryExternalStorageDirectory.path }.toTypedArray()
-}
+inline fun Context.getExternalStorageDirectorys(ignorePrimary: Boolean): Array<File> =
+        Storagex.getExternalStorageDirectorys(this, ignorePrimary)
 
 /**
  * Returns the all shared/external storage directories that are mounted.
  *
  * @param ignorePrimary Ignore primary shared/external storage directory.
  */
-fun Context.getMountedExternalStorageDirectorys(ignorePrimary: Boolean): Array<File> {
-    return this.getExternalStorageDirectorys(ignorePrimary).filter { this.isExternalStorageMounted(it) }.toTypedArray()
-}
+inline fun Context.getMountedExternalStorageDirectorys(ignorePrimary: Boolean): Array<File> =
+        Storagex.getMountedExternalStorageDirectorys(this, ignorePrimary)
 
 
 /**
  * Return the all shared/external storage directory.
  */
-fun Context.getExternalStorageDirectorys(): Array<File> {
-    return this.getExternalStorageDirectorys(false)
-}
+inline fun Context.getExternalStorageDirectorys(): Array<File> = Storagex.getExternalStorageDirectorys(this)
 
 /**
  * Returns the all shared/external storage directories that are mounted.
  */
-fun Context.getMountedExternalStorageDirectorys(): Array<File> {
-    return this.getMountedExternalStorageDirectorys(false)
-}
+inline fun Context.getMountedExternalStorageDirectorys(): Array<File> = Storagex.getMountedExternalStorageDirectorys(this)
 
 
 /**
@@ -355,33 +249,29 @@ fun Context.getMountedExternalStorageDirectorys(): Array<File> {
  *
  * @param ignorePrimary Ignore primary shared/external storage directory.
  */
-fun Context.getExternalStorageDirectorysWithPath(childPath: String, ignorePrimary: Boolean): Array<File> {
-    return this.getExternalStorageDirectorys(ignorePrimary).map { File(it, childPath) }.toTypedArray()
-}
+inline fun Context.getExternalStorageDirectorysWithPath(childPath: String, ignorePrimary: Boolean): Array<File> =
+        Storagex.getExternalStorageDirectorysWithPath(this, childPath, ignorePrimary)
 
 /**
  * Get the given path under all mounted shared/external storage media
  *
  * @param ignorePrimary Ignore primary shared/external storage directory.
  */
-fun Context.getMountedExternalStorageDirectorysWithPath(childPath: String, ignorePrimary: Boolean): Array<File> {
-    return this.getMountedExternalStorageDirectorys(ignorePrimary).map { File(it, childPath) }.toTypedArray()
-}
+inline fun Context.getMountedExternalStorageDirectorysWithPath(childPath: String, ignorePrimary: Boolean): Array<File> =
+        Storagex.getMountedExternalStorageDirectorysWithPath(this, childPath, ignorePrimary)
 
 
 /**
  * Get the given path under all shared/external storage media
  */
-fun Context.getExternalStorageDirectorysWithPath(childPath: String): Array<File> {
-    return this.getExternalStorageDirectorysWithPath(childPath, false)
-}
+inline fun Context.getExternalStorageDirectorysWithPath(childPath: String): Array<File> =
+        Storagex.getExternalStorageDirectorysWithPath(this, childPath)
 
 /**
  * Get the given path under all mounted shared/external storage media
  */
-fun Context.getMountedExternalStorageDirectorysWithPath(childPath: String): Array<File> {
-    return this.getMountedExternalStorageDirectorysWithPath(childPath, false)
-}
+inline fun Context.getMountedExternalStorageDirectorysWithPath(childPath: String): Array<File> =
+        Storagex.getMountedExternalStorageDirectorysWithPath(this, childPath)
 
 
 /* ******************************************* App Cache Dir *******************************************/
@@ -390,105 +280,59 @@ fun Context.getMountedExternalStorageDirectorysWithPath(childPath: String): Arra
 /**
  * Get the app external cache directory
  */
-fun Context.getAppExternalCacheDir(): File? {
-    val file = this.externalCacheDir
-    return if (file != null) {
-        // There is no WRITE_EXTERNAL_STORAGE permission on android 4.1. getExternalCacheDir() returns null
-        file
-    } else {
-        val externalDir = this.getMountedExternalStorageDirectory()
-        if (externalDir != null) File(externalDir, "Android/data/" + this.packageName + "/cache") else null
-    }
-}
+inline fun Context.getAppExternalCacheDir(): File? = Storagex.getAppExternalCacheDir(this)
 
 /**
  * Get the external cache directory of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppExternalCacheDir(packageName: String): File? {
-    val selfExternalCacheDir = this.getAppExternalCacheDir()
-    return if (selfExternalCacheDir != null) File(selfExternalCacheDir.path.replace(this.packageName, packageName)) else null
-}
+inline fun Context.getAppExternalCacheDir(packageName: String): File? = Storagex.getAppExternalCacheDir(this, packageName)
 
 /**
  * Get the all app external cache directory
  */
-fun Context.getAppExternalCacheDirs(): Array<File> {
-    var externalCacheDirs: Array<File>? = null
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-        externalCacheDirs = this.externalCacheDirs
-    }
-    return if (externalCacheDirs != null && externalCacheDirs.isNotEmpty()) {
-        externalCacheDirs
-    } else {
-        this.getMountedExternalStorageDirectorys().map { File(it, "Android/data/" + this.packageName + "/cache") }.toTypedArray()
-    }
-}
+inline fun Context.getAppExternalCacheDirs(): Array<File> = Storagex.getAppExternalCacheDirs(this)
 
 /**
  * Get the all external cache directory of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppExternalCacheDirs(packageName: String): Array<File> {
-    return this.getAppExternalCacheDirs().map { File(it.path.replace(this.packageName, packageName)) }.toTypedArray()
-}
+inline fun Context.getAppExternalCacheDirs(packageName: String): Array<File> = Storagex.getAppExternalCacheDirs(this, packageName)
 
 
 /**
  * Get the app internal cache directory
  */
-fun Context.getAppInternalCacheDir(): File {
-    return this.cacheDir
-}
+inline fun Context.getAppInternalCacheDir(): File = Storagex.getAppInternalCacheDir(this)
 
 /**
  * Get the internal cache directory of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppInternalCacheDir(packageName: String): File {
-    return File(this.getAppInternalCacheDir().path.replace(this.packageName, packageName))
-}
+inline fun Context.getAppInternalCacheDir(packageName: String): File = Storagex.getAppInternalCacheDir(this, packageName)
 
 
 /**
  * Get all app cache directories
  */
-fun Context.getAppCacheDirs(): Array<File> {
-    val fileList = LinkedList<File>()
-    val externalCacheDirs = this.getAppExternalCacheDirs()
-    Collections.addAll(fileList, *externalCacheDirs)
-    fileList.add(this.getAppInternalCacheDir())
-    return fileList.toTypedArray()
-}
+inline fun Context.getAppCacheDirs(): Array<File> = Storagex.getAppCacheDirs(this)
 
 /**
  * Get all cache directories of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppCacheDirs(packageName: String): Array<File> {
-    val fileList = LinkedList<File>()
-    val externalCacheDirs = this.getAppExternalCacheDirs(packageName)
-    Collections.addAll(fileList, *externalCacheDirs)
-    fileList.add(this.getAppInternalCacheDir(packageName))
-    return fileList.toTypedArray()
-}
+inline fun Context.getAppCacheDirs(packageName: String): Array<File> = Storagex.getAppCacheDirs(this, packageName)
 
 
 /**
  * Count the size of all APP cache directories
  */
 @WorkerThread
-fun Context.lengthAppCacheDirs(): Long {
-    var sum: Long = 0
-    for (file in this.getAppCacheDirs()) {
-        sum += file.lengthRecursively()
-    }
-    return sum
-}
+inline fun Context.lengthAppCacheDirs(): Long = Storagex.lengthAppCacheDirs(this)
 
 /**
  * Count the size of all APP cache directories of the specified app
@@ -496,23 +340,13 @@ fun Context.lengthAppCacheDirs(): Long {
  * @param packageName App package name
  */
 @WorkerThread
-fun Context.lengthAppCacheDirs(packageName: String): Long {
-    var sum: Long = 0
-    for (file in this.getAppCacheDirs(packageName)) {
-        sum += file.lengthRecursively()
-    }
-    return sum
-}
+inline fun Context.lengthAppCacheDirs(packageName: String): Long = Storagex.lengthAppCacheDirs(this, packageName)
 
 /**
  * Clean up all app cache directories
  */
 @WorkerThread
-fun Context.cleanAppCacheDirs() {
-    for (file in this.getAppCacheDirs()) {
-        file.cleanDir()
-    }
-}
+inline fun Context.cleanAppCacheDirs() = Storagex.cleanAppCacheDirs(this)
 
 /**
  * Clean up all cache directories of the specified app
@@ -520,11 +354,7 @@ fun Context.cleanAppCacheDirs() {
  * @param packageName App package name
  */
 @WorkerThread
-fun Context.cleanAppCacheDirs(packageName: String) {
-    for (file in this.getAppCacheDirs(packageName)) {
-        file.cleanDir()
-    }
-}
+inline fun Context.cleanAppCacheDirs(packageName: String) = Storagex.cleanAppCacheDirs(this, packageName)
 
 
 /* ******************************************* App Files Dir *******************************************/
@@ -533,105 +363,59 @@ fun Context.cleanAppCacheDirs(packageName: String) {
 /**
  * Get the app external files directory
  */
-fun Context.getAppExternalFilesDir(): File? {
-    val file = this.getExternalFilesDir(null)
-    return if (file != null) {
-        // There is no WRITE_EXTERNAL_STORAGE permission on android 4.1. getExternalFilesDir() returns null
-        file
-    } else {
-        val externalDir = this.getMountedExternalStorageDirectory()
-        if (externalDir != null) File(externalDir, "Android/data/" + this.packageName + "/files") else null
-    }
-}
+inline fun Context.getAppExternalFilesDir(): File? = Storagex.getAppExternalFilesDir(this)
 
 /**
  * Get the external files directory of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppExternalFilesDir(packageName: String): File? {
-    val selfExternalFilesDir = this.getAppExternalFilesDir()
-    return if (selfExternalFilesDir != null) File(selfExternalFilesDir.path.replace(this.packageName, packageName)) else null
-}
+inline fun Context.getAppExternalFilesDir(packageName: String): File? = Storagex.getAppExternalFilesDir(this, packageName)
 
 /**
  * Get the all app external files directory
  */
-fun Context.getAppExternalFilesDirs(): Array<File> {
-    var externalFilesDirs: Array<File>? = null
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-        externalFilesDirs = this.getExternalFilesDirs(null)
-    }
-    return if (externalFilesDirs != null && externalFilesDirs.isNotEmpty()) {
-        externalFilesDirs
-    } else {
-        this.getMountedExternalStorageDirectorys().map { File(it, "Android/data/" + this.packageName + "/files") }.toTypedArray()
-    }
-}
+inline fun Context.getAppExternalFilesDirs(): Array<File> = Storagex.getAppExternalFilesDirs(this)
 
 /**
  * Get the all external files directory of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppExternalFilesDirs(packageName: String): Array<File> {
-    return this.getAppExternalFilesDirs().map { File(it.path.replace(this.packageName, packageName)) }.toTypedArray()
-}
+inline fun Context.getAppExternalFilesDirs(packageName: String): Array<File> = Storagex.getAppExternalFilesDirs(this, packageName)
 
 
 /**
  * Get the app internal files directory
  */
-fun Context.getAppInternalFilesDir(): File {
-    return this.filesDir
-}
+inline fun Context.getAppInternalFilesDir(): File = Storagex.getAppInternalFilesDir(this)
 
 /**
  * Get the internal files directory of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppInternalFilesDir(packageName: String): File {
-    return File(this.getAppInternalFilesDir().path.replace(this.packageName, packageName))
-}
+inline fun Context.getAppInternalFilesDir(packageName: String): File = Storagex.getAppInternalFilesDir(this, packageName)
 
 
 /**
  * Get all app files directories
  */
-fun Context.getAppFilesDirs(): Array<File> {
-    val fileList = LinkedList<File>()
-    val externalFilesDirs = this.getAppExternalFilesDirs()
-    Collections.addAll(fileList, *externalFilesDirs)
-    fileList.add(this.getAppInternalFilesDir())
-    return fileList.toTypedArray()
-}
+inline fun Context.getAppFilesDirs(): Array<File> = Storagex.getAppFilesDirs(this)
 
 /**
  * Get all files directories of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppFilesDirs(packageName: String): Array<File> {
-    val fileList = LinkedList<File>()
-    val externalFilesDirs = this.getAppExternalFilesDirs(packageName)
-    Collections.addAll(fileList, *externalFilesDirs)
-    fileList.add(this.getAppInternalFilesDir(packageName))
-    return fileList.toTypedArray()
-}
+inline fun Context.getAppFilesDirs(packageName: String): Array<File> = Storagex.getAppFilesDirs(this, packageName)
 
 
 /**
  * Count the size of all APP files directories
  */
 @WorkerThread
-fun Context.lengthAppFilesDirs(): Long {
-    var sum: Long = 0
-    for (file in this.getAppFilesDirs()) {
-        sum += file.lengthRecursively()
-    }
-    return sum
-}
+inline fun Context.lengthAppFilesDirs(): Long = Storagex.lengthAppFilesDirs(this)
 
 /**
  * Count the size of all APP files directories of the specified app
@@ -639,23 +423,13 @@ fun Context.lengthAppFilesDirs(): Long {
  * @param packageName App package name
  */
 @WorkerThread
-fun Context.lengthAppFilesDirs(packageName: String): Long {
-    var sum: Long = 0
-    for (file in this.getAppFilesDirs(packageName)) {
-        sum += file.lengthRecursively()
-    }
-    return sum
-}
+inline fun Context.lengthAppFilesDirs(packageName: String): Long = Storagex.lengthAppFilesDirs(this, packageName)
 
 /**
  * Clean up all app files directories
  */
 @WorkerThread
-fun Context.cleanAppFilesDirs() {
-    for (file in this.getAppFilesDirs()) {
-        file.cleanDir()
-    }
-}
+inline fun Context.cleanAppFilesDirs() = Storagex.cleanAppFilesDirs(this)
 
 /**
  * Clean up all files directories of the specified app
@@ -663,11 +437,7 @@ fun Context.cleanAppFilesDirs() {
  * @param packageName App package name
  */
 @WorkerThread
-fun Context.cleanAppFilesDirs(packageName: String) {
-    for (file in this.getAppFilesDirs(packageName)) {
-        file.cleanDir()
-    }
-}
+inline fun Context.cleanAppFilesDirs(packageName: String) = Storagex.cleanAppFilesDirs(this, packageName)
 
 
 /* ******************************************* App Obb Dir *******************************************/
@@ -676,63 +446,33 @@ fun Context.cleanAppFilesDirs(packageName: String) {
 /**
  * Get the app obb directory
  */
-fun Context.getAppObbDir(): File? {
-    val file = this.obbDir
-    return if (file != null) {
-        // There is no WRITE_EXTERNAL_STORAGE permission on android 4.1. getObbDir() returns null
-        file
-    } else {
-        val externalDir = this.getMountedExternalStorageDirectory()
-        if (externalDir != null) File(externalDir, "Android/obb/" + this.packageName) else null
-    }
-}
+inline fun Context.getAppObbDir(): File? = Storagex.getAppObbDir(this)
 
 /**
  * Get the obb directory of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppObbDir(packageName: String): File? {
-    val selfObbDir = this.getAppObbDir()
-    return if (selfObbDir != null) File(selfObbDir.path.replace(this.packageName, packageName)) else null
-}
+inline fun Context.getAppObbDir(packageName: String): File? = Storagex.getAppObbDir(this, packageName)
 
 /**
  * Get the all app obb directory
  */
-fun Context.getAppObbDirs(): Array<File> {
-    var obbDirs: Array<File>? = null
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-        obbDirs = this.obbDirs
-    }
-    return if (obbDirs != null && obbDirs.isNotEmpty()) {
-        obbDirs
-    } else {
-        this.getMountedExternalStorageDirectorys().map { File(it, "Android/obb/" + this.packageName) }.toTypedArray()
-    }
-}
+inline fun Context.getAppObbDirs(): Array<File> = Storagex.getAppObbDirs(this)
 
 /**
  * Get the all obb directory of the specified app
  *
  * @param packageName App package name
  */
-fun Context.getAppObbDirs(packageName: String): Array<File> {
-    return this.getAppObbDirs().map { File(it.path.replace(this.packageName, packageName)) }.toTypedArray()
-}
+inline fun Context.getAppObbDirs(packageName: String): Array<File> = Storagex.getAppObbDirs(this, packageName)
 
 
 /**
  * Count the size of all APP obb directories
  */
 @WorkerThread
-fun Context.lengthAppObbDirs(): Long {
-    var sum: Long = 0
-    for (file in this.getAppObbDirs()) {
-        sum += file.lengthRecursively()
-    }
-    return sum
-}
+inline fun Context.lengthAppObbDirs(): Long = Storagex.lengthAppObbDirs(this)
 
 /**
  * Count the size of all APP obb directories of the specified app
@@ -740,23 +480,13 @@ fun Context.lengthAppObbDirs(): Long {
  * @param packageName App package name
  */
 @WorkerThread
-fun Context.lengthAppObbDirs(packageName: String): Long {
-    var sum: Long = 0
-    for (file in this.getAppObbDirs(packageName)) {
-        sum += file.lengthRecursively()
-    }
-    return sum
-}
+inline fun Context.lengthAppObbDirs(packageName: String): Long = Storagex.lengthAppObbDirs(this, packageName)
 
 /**
  * Clean up all app obb directories
  */
 @WorkerThread
-fun Context.cleanAppObbDirs() {
-    for (file in this.getAppObbDirs()) {
-        file.cleanDir()
-    }
-}
+inline fun Context.cleanAppObbDirs() = Storagex.cleanAppObbDirs(this)
 
 /**
  * Clean up all obb directories of the specified app
@@ -764,11 +494,7 @@ fun Context.cleanAppObbDirs() {
  * @param packageName App package name
  */
 @WorkerThread
-fun Context.cleanAppObbDirs(packageName: String) {
-    for (file in this.getAppObbDirs(packageName)) {
-        file.cleanDir()
-    }
-}
+inline fun Context.cleanAppObbDirs(packageName: String) = Storagex.cleanAppObbDirs(this, packageName)
 
 
 /* ******************************************* Other *******************************************/
@@ -779,9 +505,4 @@ fun Context.cleanAppObbDirs(packageName: String) {
  *
  * @param minBytes Minimum number of bytes
  */
-fun Array<File>?.filterByMinBytes(minBytes: Long): File? {
-    return if (this == null || this.isEmpty()) null else this.find {
-        it.mkdirsCheck()
-        it.isDirectory && it.getAvailableBytes() >= minBytes
-    }
-}
+inline fun Array<File>?.filterByMinBytes(minBytes: Long): File? = Storagex.filterByMinBytes(this, minBytes)

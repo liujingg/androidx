@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.util
 
 import android.content.Context
-import android.support.annotation.IntDef
-import android.util.TypedValue
 import android.view.View
+import me.panpf.androidx.util.Dimenx
 
 /*
  * 尺寸相关的扩展方法或属性
@@ -27,136 +28,110 @@ import android.view.View
 
 /* ************************************* Context ***************************************** */
 
-fun Context.dp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.density + 0.5).toInt()
+inline fun Context.dp2px(dpValue: Float): Int = Dimenx.dp2px(this, dpValue)
 
-fun Context.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
-
-
-fun Context.px2dp(px: Float): Float =
-        px / this.resources.displayMetrics.density + 0.5f
-
-fun Context.px2dp(px: Int): Float = px2dp(px.toFloat())
+inline fun Context.dp2px(dpValue: Int): Int = Dimenx.dp2px(this, dpValue)
 
 
-fun Context.sp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt()
+inline fun Context.px2dp(px: Float): Float = Dimenx.px2dp(this, px)
 
-fun Context.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
-
-
-fun Context.px2sp(px: Float): Float =
-        px / this.resources.displayMetrics.scaledDensity + 0.5f
-
-fun Context.px2sp(px: Int): Float = px2sp(px.toFloat())
+inline fun Context.px2dp(px: Int): Float = Dimenx.px2dp(this, px)
 
 
-fun Context.unit2px(@DimenUnit unit: Int, value: Float): Float =
-        TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
+inline fun Context.sp2px(dpValue: Float): Int = Dimenx.sp2px(this, dpValue)
 
-fun Context.unit2px(@DimenUnit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
-
-
-/* ************************************* SupportFragment ***************************************** */
+inline fun Context.sp2px(dpValue: Int): Int = Dimenx.sp2px(this, dpValue)
 
 
-fun android.support.v4.app.Fragment.dp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.density + 0.5).toInt()
+inline fun Context.px2sp(px: Float): Float = Dimenx.px2sp(this, px)
 
-fun android.support.v4.app.Fragment.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
-
-
-fun android.support.v4.app.Fragment.px2dp(px: Float): Float =
-        px / this.resources.displayMetrics.density + 0.5f
-
-fun android.support.v4.app.Fragment.px2dp(px: Int): Float = px2dp(px.toFloat())
+inline fun Context.px2sp(px: Int): Float = Dimenx.px2sp(this, px)
 
 
-fun android.support.v4.app.Fragment.sp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt()
+inline fun Context.unit2px(@Dimenx.DimenUnit unit: Int, value: Float): Float = Dimenx.unit2px(this, unit, value)
 
-fun android.support.v4.app.Fragment.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
-
-
-fun android.support.v4.app.Fragment.px2sp(px: Float): Float =
-        px / this.resources.displayMetrics.scaledDensity + 0.5f
-
-fun android.support.v4.app.Fragment.px2sp(px: Int): Float = px2sp(px.toFloat())
+inline fun Context.unit2px(@Dimenx.DimenUnit unit: Int, value: Int): Float = Dimenx.unit2px(this, unit, value)
 
 
-fun android.support.v4.app.Fragment.unit2px(@DimenUnit unit: Int, value: Float): Float =
-        TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
-
-fun android.support.v4.app.Fragment.unit2px(@DimenUnit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+/* ************************************* android.support.v4.app.Fragment ***************************************** */
 
 
-/* ************************************* OriginFragment ***************************************** */
+inline fun android.support.v4.app.Fragment.dp2px(dpValue: Float): Int = Dimenx.dp2px(this, dpValue)
+
+inline fun android.support.v4.app.Fragment.dp2px(dpValue: Int): Int = Dimenx.dp2px(this, dpValue)
 
 
-fun android.app.Fragment.dp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.density + 0.5).toInt()
+inline fun android.support.v4.app.Fragment.px2dp(px: Float): Float = Dimenx.px2dp(this, px)
 
-fun android.app.Fragment.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
-
-
-fun android.app.Fragment.px2dp(px: Float): Float =
-        px / this.resources.displayMetrics.density + 0.5f
-
-fun android.app.Fragment.px2dp(px: Int): Float = px2dp(px.toFloat())
+inline fun android.support.v4.app.Fragment.px2dp(px: Int): Float = Dimenx.px2dp(this, px)
 
 
-fun android.app.Fragment.sp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt()
+inline fun android.support.v4.app.Fragment.sp2px(dpValue: Float): Int = Dimenx.sp2px(this, dpValue)
 
-fun android.app.Fragment.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
-
-
-fun android.app.Fragment.px2sp(px: Float): Float =
-        px / this.resources.displayMetrics.scaledDensity + 0.5f
-
-fun android.app.Fragment.px2sp(px: Int): Float = px2sp(px.toFloat())
+inline fun android.support.v4.app.Fragment.sp2px(dpValue: Int): Int = Dimenx.sp2px(this, dpValue)
 
 
-fun android.app.Fragment.unit2px(@DimenUnit unit: Int, value: Float): Float =
-        TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
+inline fun android.support.v4.app.Fragment.px2sp(px: Float): Float = Dimenx.px2sp(this, px)
 
-fun android.app.Fragment.unit2px(@DimenUnit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+inline fun android.support.v4.app.Fragment.px2sp(px: Int): Float = Dimenx.px2sp(this, px)
+
+
+inline fun android.support.v4.app.Fragment.unit2px(@Dimenx.DimenUnit unit: Int, value: Float): Float = Dimenx.unit2px(this, unit, value)
+
+inline fun android.support.v4.app.Fragment.unit2px(@Dimenx.DimenUnit unit: Int, value: Int): Float = Dimenx.unit2px(this, unit, value)
+
+
+/* ************************************* android.app.Fragment ***************************************** */
+
+
+inline fun android.app.Fragment.dp2px(dpValue: Float): Int = Dimenx.dp2px(this, dpValue)
+
+inline fun android.app.Fragment.dp2px(dpValue: Int): Int = Dimenx.dp2px(this, dpValue)
+
+
+inline fun android.app.Fragment.px2dp(px: Float): Float = Dimenx.px2dp(this, px)
+
+inline fun android.app.Fragment.px2dp(px: Int): Float = Dimenx.px2dp(this, px)
+
+
+inline fun android.app.Fragment.sp2px(dpValue: Float): Int = Dimenx.sp2px(this, dpValue)
+
+inline fun android.app.Fragment.sp2px(dpValue: Int): Int = Dimenx.sp2px(this, dpValue)
+
+
+inline fun android.app.Fragment.px2sp(px: Float): Float = Dimenx.px2sp(this, px)
+
+inline fun android.app.Fragment.px2sp(px: Int): Float = Dimenx.px2sp(this, px)
+
+
+inline fun android.app.Fragment.unit2px(@Dimenx.DimenUnit unit: Int, value: Float): Float = Dimenx.unit2px(this, unit, value)
+
+inline fun android.app.Fragment.unit2px(@Dimenx.DimenUnit unit: Int, value: Int): Float = Dimenx.unit2px(this, unit, value)
 
 
 /* ************************************* View ***************************************** */
 
 
-fun View.dp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.density + 0.5).toInt()
+inline fun View.dp2px(dpValue: Float): Int = Dimenx.dp2px(this, dpValue)
 
-fun View.dp2px(dpValue: Int): Int = dp2px(dpValue.toFloat())
-
-
-fun View.px2dp(px: Float): Float =
-        px / this.resources.displayMetrics.density + 0.5f
-
-fun View.px2dp(px: Int): Float = px2dp(px.toFloat())
+inline fun View.dp2px(dpValue: Int): Int = Dimenx.dp2px(this, dpValue)
 
 
-fun View.sp2px(dpValue: Float): Int =
-        (dpValue * this.resources.displayMetrics.scaledDensity + 0.5).toInt()
+inline fun View.px2dp(px: Float): Float = Dimenx.px2dp(this, px)
 
-fun View.sp2px(dpValue: Int): Int = sp2px(dpValue.toFloat())
-
-
-fun View.px2sp(px: Float): Float =
-        px / this.resources.displayMetrics.scaledDensity + 0.5f
-
-fun View.px2sp(px: Int): Float = px2sp(px.toFloat())
+inline fun View.px2dp(px: Int): Float = Dimenx.px2dp(this, px)
 
 
-fun View.unit2px(@DimenUnit unit: Int, value: Float): Float =
-        TypedValue.applyDimension(unit, value, this.resources.displayMetrics)
+inline fun View.sp2px(dpValue: Float): Int = Dimenx.sp2px(this, dpValue)
 
-fun View.unit2px(@DimenUnit unit: Int, value: Int): Float = unit2px(unit, value.toFloat())
+inline fun View.sp2px(dpValue: Int): Int = Dimenx.sp2px(this, dpValue)
 
-@IntDef(TypedValue.COMPLEX_UNIT_SP, TypedValue.COMPLEX_UNIT_DIP, TypedValue.COMPLEX_UNIT_PX,
-        TypedValue.COMPLEX_UNIT_PT, TypedValue.COMPLEX_UNIT_IN, TypedValue.COMPLEX_UNIT_MM)
-@Target(AnnotationTarget.PROPERTY, AnnotationTarget.FIELD, AnnotationTarget.VALUE_PARAMETER)
-@Retention(AnnotationRetention.BINARY)
-annotation class DimenUnit
+
+inline fun View.px2sp(px: Float): Float = Dimenx.px2sp(this, px)
+
+inline fun View.px2sp(px: Int): Float = Dimenx.px2sp(this, px)
+
+
+inline fun View.unit2px(@Dimenx.DimenUnit unit: Int, value: Float): Float = Dimenx.unit2px(this, unit, value)
+
+inline fun View.unit2px(@Dimenx.DimenUnit unit: Int, value: Int): Float = Dimenx.unit2px(this, unit, value)

@@ -97,7 +97,7 @@ public class Viewx {
 
     public static void setLayoutMarginTop(@NonNull View view, int newMarinTop) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        if (layoutParams != null && layoutParams instanceof ViewGroup.MarginLayoutParams) {
+        if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
             ((ViewGroup.MarginLayoutParams) layoutParams).topMargin = newMarinTop;
             view.setLayoutParams(layoutParams);
         }
@@ -131,7 +131,7 @@ public class Viewx {
 
     public static void addLayoutMarginTop(@NonNull View view, int addMarinTop) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        if (layoutParams != null && layoutParams instanceof ViewGroup.MarginLayoutParams) {
+        if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
             ((ViewGroup.MarginLayoutParams) layoutParams).topMargin += addMarinTop;
             view.setLayoutParams(layoutParams);
         }
@@ -169,6 +169,7 @@ public class Viewx {
     public static Bitmap toBitmapByMaxHeight(@NonNull View view, @NonNull Bitmap.Config config, int maxHeight) {
         return toBitmap(view, config, Math.min((float) maxHeight / (float) view.getHeight(), 1.0F));
     }
+
 
     @NonNull
     public static View inflateLayout(@NonNull Context context, @LayoutRes int id, @Nullable ViewGroup parent, boolean attachToRoot) {

@@ -58,7 +58,7 @@ public class StorageTest {
     public void testVolumeState() {
         Context context = InstrumentationRegistry.getContext();
 
-        StorageVolumeCompat volumeCompat = Storagex.getStorageVolume(context, Storagex.getExternalStorageDirectory());
+        StorageVolumeCompat volumeCompat = Storagex.getVolume(context, Storagex.getExternalStorageDirectory());
         File volumeFile = volumeCompat != null ? volumeCompat.getPathFile() : null;
         assertNotNull(volumeFile);
 
@@ -102,8 +102,8 @@ public class StorageTest {
         assertTrue(Storagex.getVolumeFiles(context).length >= 1);
         assertTrue(Storagex.getMountedVolumeFiles(context).length >= 1);
 
-        assertTrue(Storagex.getVolumeList(context).length >= 1);
-        assertTrue(Storagex.getMountedVolumeList(context).length >= 1);
+        assertTrue(Storagex.getVolumeList(context).size() >= 1);
+        assertTrue(Storagex.getMountedVolumeList(context).size() >= 1);
     }
 
     @Test

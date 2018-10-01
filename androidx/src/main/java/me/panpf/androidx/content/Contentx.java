@@ -34,6 +34,8 @@ import me.panpf.javax.io.IOStreamx;
 
 public class Contentx {
 
+    // TODO: 2018/10/1 get 各种 manager
+
     @Nullable
     public static InputStream openInput(@NonNull Context context, @NonNull Uri uri) throws IOException {
         return context.getContentResolver().openInputStream(uri);

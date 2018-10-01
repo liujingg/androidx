@@ -9,7 +9,6 @@
 
     <application>
         <activity android:name="me.panpf.androidxkt.test.widget.ToastTestActivity" />
-        <activity android:name="me.panpf.androidxkt.test.util.WeakAsyncTaskTestActivity" />
         <activity android:name="me.panpf.androidxkt.test.app.ActivityTestActivity" />
         <activity android:name="me.panpf.androidxkt.test.app.ActivityTestFragmentActivity" />
         <activity android:name="me.panpf.androidxkt.test.app.FragmentTestActivity" />

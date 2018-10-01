@@ -79,10 +79,10 @@ public class Jsonx {
     }
 
 
-    @Nullable
+    @NotNull
     public static List<String> toStringList(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() <= 0) {
-            return null;
+            return new ArrayList<>(0);
         }
 
         ArrayList<String> dataList = new ArrayList<>(jsonArray.length());
@@ -93,16 +93,16 @@ public class Jsonx {
         return dataList;
     }
 
-    @Nullable
+    @NotNull
     public static List<String> toStringList(@Nullable String json) throws JSONException {
-        return !isEmpty(json) ? toStringList(new JSONArray(json)) : null;
+        return !isEmpty(json) ? toStringList(new JSONArray(json)) : new ArrayList<String>(0);
     }
 
 
-    @Nullable
+    @NotNull
     public static String[] toStringArray(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
-            return null;
+            return new String[0];
         }
 
         String[] dataStrings = new String[jsonArray.length()];
@@ -113,16 +113,16 @@ public class Jsonx {
         return dataStrings;
     }
 
-    @Nullable
+    @NotNull
     public static String[] toStringArray(@Nullable String json) throws JSONException {
-        return !isEmpty(json) ? toStringArray(new JSONArray(json)) : null;
+        return !isEmpty(json) ? toStringArray(new JSONArray(json)) : new String[0];
     }
 
 
-    @Nullable
+    @NotNull
     public static int[] toIntArray(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
-            return null;
+            return new int[0];
         }
 
         int[] dataInts = new int[jsonArray.length()];
@@ -133,16 +133,16 @@ public class Jsonx {
         return dataInts;
     }
 
-    @Nullable
+    @NotNull
     public static int[] toIntArray(@Nullable String json) throws JSONException {
-        return !isEmpty(json) ? toIntArray(new JSONArray(json)) : null;
+        return !isEmpty(json) ? toIntArray(new JSONArray(json)) : new int[0];
     }
 
 
-    @Nullable
+    @NotNull
     public static <Bean> ArrayList<Bean> toBeanList(@Nullable JSONArray jsonArray, @NonNull BeanParser<Bean> parser) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
-            return null;
+            return new ArrayList<>(0);
         }
 
         ArrayList<Bean> commentList = new ArrayList<>(jsonArray.length());
@@ -159,9 +159,9 @@ public class Jsonx {
         return commentList;
     }
 
-    @Nullable
+    @NotNull
     public static <Bean> ArrayList<Bean> toBeanList(@Nullable String jsonArrayString, @NonNull BeanParser<Bean> parser) throws JSONException {
-        if (isEmpty(jsonArrayString)) return null;
+        if (isEmpty(jsonArrayString)) return new ArrayList<>(0);
         return toBeanList(new JSONArray(jsonArrayString), parser);
     }
 
@@ -179,7 +179,7 @@ public class Jsonx {
     }
 
 
-    @Nullable
+    @NotNull
     public static String optString(@NonNull JSONObject jsonObject, @NonNull String[] keys, @NonNull String defaultValue) {
         Object value;
         for (String key : keys) {
@@ -193,7 +193,7 @@ public class Jsonx {
         return defaultValue;
     }
 
-    @Nullable
+    @NotNull
     public static String optString(@NonNull JSONObject jsonObject, @NonNull String[] keys) {
         return optString(jsonObject, keys, "");
     }

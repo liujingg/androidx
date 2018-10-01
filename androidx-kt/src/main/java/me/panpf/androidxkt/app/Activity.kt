@@ -14,33 +14,23 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.app
 
 import android.app.Activity
-import android.app.ActivityOptions
-import android.arch.lifecycle.Lifecycle
-import android.os.Build
 import android.support.v4.app.FragmentActivity
-import me.panpf.javaxkt.lang.callMethod
+import me.panpf.androidx.app.Activityx
 
 /**
  * Return true if the activity has been destroyed
  */
-fun Activity.isDestroyedCompat(): Boolean {
-    // First determine that FragmentActivity can use the compatible isDestroyed method in versions below 17.
-    return if (this is FragmentActivity) {
-        this.lifecycle.currentState == Lifecycle.State.DESTROYED
-    } else {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) this.isDestroyed else this.isFinishing
-    }
-}
+inline fun Activity.isDestroyedCompat(): Boolean = Activityx.isDestroyedCompat(this)
 
 /**
  * Return true if the activity has been destroyed
  */
-fun FragmentActivity.isDestroyedCompat(): Boolean {
-    return this.lifecycle.currentState == Lifecycle.State.DESTROYED
-}
+inline fun FragmentActivity.isDestroyedCompat(): Boolean = Activityx.isDestroyedCompat(this)
 
 /**
  * Convert a translucent themed Activity
@@ -54,9 +44,7 @@ fun FragmentActivity.isDestroyedCompat(): Boolean {
  * This call has no effect on non-translucent activities or on activities
  * with the [android.R.attr.windowIsFloating] attribute.
  */
-fun Activity.convertActivityFromTranslucent() {
-    this.callMethod("convertFromTranslucent")
-}
+inline fun Activity.convertActivityFromTranslucent() = Activityx.convertActivityFromTranslucent(this)
 
 /**
  * Convert a translucent themed Activity
@@ -72,53 +60,9 @@ fun Activity.convertActivityFromTranslucent() {
  * This call has no effect on non-translucent activities or on activities
  * with the [android.R.attr.windowIsFloating] attribute.
  */
-fun Activity.convertActivityToTranslucent() {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-        try {
-            val options = this.callMethod("getActivityOptions")
-
-            val classes = Activity::class.java.declaredClasses
-            var translucentConversionListenerClazz: Class<*>? = null
-            for (clazz in classes) {
-                if (clazz.simpleName.contains("TranslucentConversionListener")) {
-                    translucentConversionListenerClazz = clazz
-                }
-            }
-            val method = Activity::class.java.getDeclaredMethod("convertToTranslucent",
-                    translucentConversionListenerClazz, ActivityOptions::class.java)
-            this.callMethod(method, arrayOf(null, options))
-        } catch (t: Throwable) {
-            t.printStackTrace()
-        }
-    } else {
-        try {
-            val classes = Activity::class.java.declaredClasses
-            var translucentConversionListenerClazz: Class<*>? = null
-            for (clazz in classes) {
-                if (clazz.simpleName.contains("TranslucentConversionListener")) {
-                    translucentConversionListenerClazz = clazz
-                }
-            }
-            val method = Activity::class.java.getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz)
-            this.callMethod(method, arrayOf<Any?>(null))
-        } catch (t: Throwable) {
-            t.printStackTrace()
-        }
-    }
-}
+inline fun Activity.convertActivityToTranslucent() = Activityx.convertActivityToTranslucent(this)
 
 /**
  * If the own or parent activity implements the specified [clazz], it returns its implementation.
  */
-fun <T> Activity.getImplWithParent(clazz: Class<T>): T? {
-    var parent: Activity? = this
-    while (parent != null) {
-        if (clazz.isAssignableFrom(parent.javaClass)) {
-            @Suppress("UNCHECKED_CAST")
-            return clazz as T
-        } else {
-            parent = parent.parent
-        }
-    }
-    return null
-}
+inline fun <T> Activity.getImplWithParent(clazz: Class<T>): T? = Activityx.getImplWithParent(this, clazz)

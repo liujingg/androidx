@@ -35,14 +35,14 @@ public class StorageManagerCompatTest {
     public void testGetVolumeList() {
         Context context = InstrumentationRegistry.getContext();
         StorageManagerCompat managerCompat = new StorageManagerCompat(context);
-        Assert.assertTrue(managerCompat.getVolumeList().length >= 1);
+        Assert.assertTrue(managerCompat.getVolumes().length >= 1);
     }
 
     @Test
     public void testGetStorageVolumes() {
         Context context = InstrumentationRegistry.getContext();
         StorageManagerCompat managerCompat = new StorageManagerCompat(context);
-        Assert.assertTrue(managerCompat.getStorageVolumes().size() >= 1);
+        Assert.assertTrue(managerCompat.getVolumeList().size() >= 1);
     }
 
     @Test
@@ -56,7 +56,7 @@ public class StorageManagerCompatTest {
     public void testGetStorageVolume() {
         Context context = InstrumentationRegistry.getContext();
         StorageManagerCompat managerCompat = new StorageManagerCompat(context);
-        Assert.assertNotNull(managerCompat.getStorageVolume(new File(managerCompat.getVolumePaths()[0])));
+        Assert.assertNotNull(managerCompat.getVolume(new File(managerCompat.getVolumePaths()[0])));
     }
 
     @Test

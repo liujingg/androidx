@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.graphics
 
 import android.graphics.Matrix
-
-private val matrixValues = FloatArray(9)
+import me.panpf.androidx.graphics.Matrixx
 
 /**
  * Helper method that 'unpacks' a Matrix and returns the required value
@@ -26,21 +27,9 @@ private val matrixValues = FloatArray(9)
  * @param whichValue - Which value from Matrix.M* to return
  * @return float - returned value
  */
-fun Matrix.getValue(whichValue: Int): Float {
-    synchronized(matrixValues) {
-        this.getValues(matrixValues)
-        return matrixValues[whichValue]
-    }
-}
+inline fun Matrix.getValue(whichValue: Int): Float = Matrixx.getValue(this, whichValue)
 
 /**
  * Get scale ratio
  */
-fun Matrix.getScale(): Float {
-    synchronized(matrixValues) {
-        this.getValues(matrixValues)
-        val scaleX = matrixValues[Matrix.MSCALE_X]
-        val scaleY = matrixValues[Matrix.MSKEW_Y]
-        return Math.sqrt((Math.pow(scaleX.toDouble(), 2.0).toFloat() + Math.pow(scaleY.toDouble(), 2.0).toFloat()).toDouble()).toFloat()
-    }
-}
+inline fun Matrix.getScale(): Float = Matrixx.getScale(this)

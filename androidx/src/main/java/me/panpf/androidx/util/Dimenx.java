@@ -30,6 +30,10 @@ import java.lang.annotation.Target;
 @SuppressWarnings("WeakerAccess")
 public class Dimenx {
 
+
+    /* ************************************* Context ***************************************** */
+
+
     public static int dp2px(@NonNull Context context, float dpValue) {
         return (int) ((double) (dpValue * context.getResources().getDisplayMetrics().density) + 0.5D);
     }
@@ -69,6 +73,10 @@ public class Dimenx {
     public static float unit2px(@NonNull Context context, @DimenUnit int unit, int value) {
         return unit2px(context, unit, (float) value);
     }
+
+
+    /* ************************************* android.support.v4.app.Fragment ***************************************** */
+
 
     public static int dp2px(@NonNull android.support.v4.app.Fragment fragment, float dpValue) {
         return (int) ((double) (dpValue * fragment.getResources().getDisplayMetrics().density) + 0.5D);
@@ -110,6 +118,54 @@ public class Dimenx {
         return unit2px(fragment, unit, (float) value);
     }
 
+
+    /* ************************************* android.app.Fragment ***************************************** */
+
+
+    public static int dp2px(@NonNull android.app.Fragment fragment, float dpValue) {
+        return (int) ((double) (dpValue * fragment.getResources().getDisplayMetrics().density) + 0.5D);
+    }
+
+    public static int dp2px(@NonNull android.app.Fragment fragment, int dpValue) {
+        return dp2px(fragment, (float) dpValue);
+    }
+
+    public static float px2dp(@NonNull android.app.Fragment fragment, float px) {
+        return px / fragment.getResources().getDisplayMetrics().density + 0.5F;
+    }
+
+    public static float px2dp(@NonNull android.app.Fragment fragment, int px) {
+        return px2dp(fragment, (float) px);
+    }
+
+    public static int sp2px(@NonNull android.app.Fragment fragment, float dpValue) {
+        return (int) ((double) (dpValue * fragment.getResources().getDisplayMetrics().scaledDensity) + 0.5D);
+    }
+
+    public static int sp2px(@NonNull android.app.Fragment fragment, int dpValue) {
+        return sp2px(fragment, (float) dpValue);
+    }
+
+    public static float px2sp(@NonNull android.app.Fragment fragment, float px) {
+        return px / fragment.getResources().getDisplayMetrics().scaledDensity + 0.5F;
+    }
+
+    public static float px2sp(@NonNull android.app.Fragment fragment, int px) {
+        return px2sp(fragment, (float) px);
+    }
+
+    public static float unit2px(@NonNull android.app.Fragment fragment, @DimenUnit int unit, float value) {
+        return TypedValue.applyDimension(unit, value, fragment.getResources().getDisplayMetrics());
+    }
+
+    public static float unit2px(@NonNull android.app.Fragment fragment, @DimenUnit int unit, int value) {
+        return unit2px(fragment, unit, (float) value);
+    }
+
+
+    /* ************************************* View ***************************************** */
+
+
     public static int dp2px(@NonNull View view, float dpValue) {
         return (int) ((double) (dpValue * view.getResources().getDisplayMetrics().density) + 0.5D);
     }
@@ -149,6 +205,7 @@ public class Dimenx {
     public static float unit2px(@NonNull View view, @DimenUnit int unit, int value) {
         return unit2px(view, unit, (float) value);
     }
+
 
     @IntDef({TypedValue.COMPLEX_UNIT_SP, TypedValue.COMPLEX_UNIT_DIP, TypedValue.COMPLEX_UNIT_PX,
             TypedValue.COMPLEX_UNIT_PT, TypedValue.COMPLEX_UNIT_IN, TypedValue.COMPLEX_UNIT_MM})

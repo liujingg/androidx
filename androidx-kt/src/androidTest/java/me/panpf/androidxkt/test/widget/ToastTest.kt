@@ -81,9 +81,8 @@ class ToastTest {
 
     @Test
     fun testWithViewToast(){
-        val view = InstrumentationRegistry.getContext().inflateLayout(R.layout.view_toast)
+        InstrumentationRegistry.getContext().inflateLayout(R.layout.view_toast).showLongToastWithSelf()
 
-        view.showLongToastWithSelf()
-        view.showShortToastWithSelf()
+        InstrumentationRegistry.getContext().inflateLayout(R.layout.view_toast).showShortToastWithSelf()
     }
 }

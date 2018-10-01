@@ -14,22 +14,18 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.net
 
 import android.Manifest
 import android.content.Context
-import android.net.ConnectivityManager
-import android.net.wifi.WifiManager
 import android.support.annotation.RequiresPermission
-import me.panpf.javaxkt.lang.callMethod
-import me.panpf.javaxkt.lang.isSafe
-
-import java.net.NetworkInterface
+import me.panpf.androidx.net.NetworkState
+import me.panpf.androidx.net.Networkx
 
 @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-fun Context.getNetworkState(): NetworkState {
-    return NetworkState[this]
-}
+inline fun Context.getNetworkState(): NetworkState = Networkx.getState(this)
 
 /**
  * Get the status of Wi-Fi
@@ -37,119 +33,48 @@ fun Context.getNetworkState(): NetworkState {
  * @return The value is one of WIFI_STATE_ENABLED, WIFI_STATE_ENABLING, WIFI_STATE_DISABLED, WIFI_STATE_DISABLING, WIFI_STATE_UNKNOWN in WifiManager.
  */
 @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-fun Context.getWifiState(): Int {
-    val manager = (this.applicationContext.getSystemService(Context.WIFI_SERVICE)
-            ?: throw IllegalStateException("WifiManager not found")) as WifiManager
-    return manager.wifiState
-}
+inline fun Context.getWifiState(): Int = Networkx.getWifiState(this)
 
 /**
  * Return true if Wi-Fi is turned on
  */
 @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-fun Context.isWifiEnabled(): Boolean {
-    val state = this.getWifiState();
-    return state == WifiManager.WIFI_STATE_ENABLED || state == WifiManager.WIFI_STATE_ENABLING
-}
+inline fun Context.isWifiEnabled(): Boolean = Networkx.isWifiEnabled(this)
 
 /**
  * Turn Wi-Fi on or off
  */
 @RequiresPermission(anyOf = [(Manifest.permission.ACCESS_WIFI_STATE), (Manifest.permission.CHANGE_WIFI_STATE)])
-fun Context.setWifiEnabled(enable: Boolean): Boolean {
-    val manager = (this.applicationContext.getSystemService(Context.WIFI_SERVICE)
-            ?: throw IllegalStateException("WifiManager not found")) as WifiManager
-    return manager.setWifiEnabled(enable)
-}
+inline fun Context.setWifiEnabled(enable: Boolean): Boolean = Networkx.setWifiEnabled(this, enable)
 
 /**
  * Return true if mobile network is turned on
  */
 @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-fun Context.isMobileEnabled(): Boolean {
-    val manager = (this.getSystemService(Context.CONNECTIVITY_SERVICE)
-            ?: throw IllegalStateException("ConnectivityManager not found")) as ConnectivityManager
-    return manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)?.isConnected ?: false
-}
+inline fun Context.isMobileEnabled(): Boolean = Networkx.isMobileEnabled(this)
 
 /**
  * Turn mobile network on or off
  */
 @RequiresPermission(Manifest.permission.CHANGE_NETWORK_STATE)
-fun Context.setMobileEnabled(enabled: Boolean): Boolean {
-    val manager = (this.getSystemService(Context.CONNECTIVITY_SERVICE)
-            ?: throw IllegalStateException("ConnectivityManager not found")) as ConnectivityManager
-    return try {
-        manager.callMethod("setMobileDataEnabled", enabled)
-        true
-    } catch (e: NoSuchMethodException) {
-        e.printStackTrace()
-        false
-    }
-}
+inline fun Context.setMobileEnabled(enabled: Boolean): Boolean = Networkx.setMobileEnabled(this, enabled)
 
 /**
  * Get local IP address
  */
-fun getLocalIpAddress(defaultIpAddress: String): String {
-    var ipAddress: String? = null
-    try {
-        val en = NetworkInterface.getNetworkInterfaces()
-        while (en.hasMoreElements()) {
-            val networkInterface = en.nextElement()
-            val inetAddresses = networkInterface.inetAddresses
-            while (inetAddresses.hasMoreElements()) {
-                val inetAddress = inetAddresses.nextElement()
-                if (!inetAddress.isLoopbackAddress) {
-                    ipAddress = inetAddress.hostAddress
-                    break
-                }
-            }
-        }
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-
-    return if (ipAddress != null && ipAddress.isSafe()) ipAddress else defaultIpAddress
-}
+inline fun getLocalIpAddress(defaultIpAddress: String): String = Networkx.getLocalIpAddress(defaultIpAddress)
 
 /**
  * Get local IP address
  */
-fun getLocalIpAddress(): String? {
-    val ipAddress = getLocalIpAddress("missing")
-    return if ("missing" != ipAddress) ipAddress else null
-}
+inline fun getLocalIpAddress(): String? = Networkx.getLocalIpAddress()
 
 /**
  * Get local IPV4 address
  */
-fun getLocalIpV4Address(defaultIpAddress: String): String {
-    var ipAddress: String? = null
-    try {
-        val en = NetworkInterface.getNetworkInterfaces()
-        while (en.hasMoreElements()) {
-            val networkInterface = en.nextElement()
-            val inetAddresses = networkInterface.inetAddresses
-            while (inetAddresses.hasMoreElements()) {
-                val inetAddress = inetAddresses.nextElement()
-                if (!inetAddress.isLoopbackAddress && !inetAddress.isLinkLocalAddress) {
-                    ipAddress = inetAddress.hostAddress
-                    break
-                }
-            }
-        }
-    } catch (e: Exception) {
-        e.printStackTrace()
-    }
-
-    return if (ipAddress != null && ipAddress.isSafe()) ipAddress else defaultIpAddress
-}
+inline fun getLocalIpV4Address(defaultIpAddress: String): String = Networkx.getLocalIpV4Address(defaultIpAddress)
 
 /**
  * Get local IPV4 address
  */
-fun getLocalIpV4Address(): String? {
-    val ipAddress = getLocalIpV4Address("missing")
-    return if ("missing" != ipAddress) ipAddress else null
-}
+inline fun getLocalIpV4Address(): String? = Networkx.getLocalIpV4Address()

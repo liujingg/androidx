@@ -14,138 +14,75 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.hardware
 
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.net.wifi.WifiManager
-import android.os.Build
-import android.provider.Settings
 import android.support.annotation.RequiresPermission
-import android.telephony.TelephonyManager
-import java.net.NetworkInterface
+import me.panpf.androidx.hardware.Hardwarex
 
 /*
  * 设备硬件相关的扩展方法或属性
  */
 
 
-fun getDeviceModel(): String = Build.MODEL.orEmpty()
+inline fun getDeviceModel(): String = Hardwarex.getDeviceModel()
 
-fun getDeviceName(): String = Build.DEVICE.orEmpty()
+inline fun getDeviceName(): String = Hardwarex.getDeviceName()
 
-fun getHardware(): String = Build.HARDWARE
+inline fun getHardware(): String = Hardwarex.getHardware()
 
-fun getSupportedAbis(): Array<out String> {
-    return try {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Build.SUPPORTED_ABIS
-        } else {
-            arrayListOf<String>(Build.CPU_ABI, Build.CPU_ABI2).filter { it.isNotEmpty() && it != "unknown" }.toTypedArray()
-        }
-    } catch (err: Throwable) {
-        arrayOf()
-    }
-}
+inline fun getSupportedAbis(): Array<out String> = Hardwarex.getSupportedAbis()
 
 @SuppressLint("HardwareIds")
 @RequiresPermission(anyOf = [(Manifest.permission.READ_PHONE_STATE), (Manifest.permission.READ_SMS), (Manifest.permission.READ_PHONE_NUMBERS)])
-fun Context.getPhoneNumber(): String = try {
-    (getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager).line1Number
-} catch (e: Throwable) {
-    e.printStackTrace()
-    if (e is SecurityException) "PermissionDenied" else null
-}.orEmpty()
+inline fun Context.getPhoneNumber(): String = Hardwarex.getPhoneNumber(this)
 
 @SuppressLint("HardwareIds", "MissingPermission")
 @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-fun Context.getDeviceId(): String = try {
-    (getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager).run {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) this.imei else this.deviceId
-    }
-} catch (e: Throwable) {
-    e.printStackTrace()
-    if (e is SecurityException) "PermissionDenied" else null
-}.orEmpty()
+inline fun Context.getDeviceId(): String = Hardwarex.getDeviceId(this)
 
 @SuppressLint("HardwareIds")
-fun Context.getAndroidId(): String = Settings.Secure.getString(this.contentResolver, Settings.Secure.ANDROID_ID)
+inline fun Context.getAndroidId(): String = Hardwarex.getAndroidId(this)
 
 /**
  * 获取国际移动用户识别码
  */
 @SuppressLint("HardwareIds", "MissingPermission")
 @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-fun Context.getSubscriberId(): String = try {
-    (getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager).subscriberId
-} catch (e: Throwable) {
-    e.printStackTrace()
-    if (e is SecurityException) "PermissionDenied" else null
-}.orEmpty()
+inline fun Context.getSubscriberId(): String = Hardwarex.getSubscriberId(this)
 
 /**
  * 获取 SIM 卡序列号
  */
 @SuppressLint("HardwareIds", "MissingPermission")
 @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-fun Context.getSimSerialNumber(): String = try {
-    (getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager).simSerialNumber
-} catch (e: Throwable) {
-    e.printStackTrace()
-    if (e is SecurityException) "PermissionDenied" else null
-}.orEmpty()
+inline fun Context.getSimSerialNumber(): String = Hardwarex.getSimSerialNumber(this)
 
 @SuppressLint("MissingPermission", "HardwareIds")
 @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-fun getSerial(): String = try {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-        Build.getSerial()
-    } else {
-        Build.SERIAL
-    }
-} catch (e: Throwable) {
-    e.printStackTrace()
-    if (e is SecurityException) "PermissionDenied" else null
-}.orEmpty()
+inline fun getSerial(): String = Hardwarex.getSerial()
 
 /**
  * 获取国际移动设备身份码
  */
 @SuppressLint("HardwareIds", "MissingPermission")
 @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-fun Context.getIMEI(): String = getDeviceId()
+inline fun Context.getIMEI(): String = Hardwarex.getIMEI(this)
 
 /**
  * 获取国际移动用户识别码
  */
 @SuppressLint("HardwareIds", "MissingPermission")
 @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-fun Context.getIMSI(): String = getSubscriberId()
+inline fun Context.getIMSI(): String = Hardwarex.getIMSI(this)
 
 /**
  * 获取 MAC 地址
  */
 @SuppressLint("HardwareIds")
 @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-fun Context.getMacAddress(): String {
-    val macAddress = try {
-        val wifiManager = this.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            val nis = NetworkInterface.getNetworkInterfaces()?.toList()
-            if (nis != null && nis.isNotEmpty()) {
-                nis.find { it.name.equals("wlan0", ignoreCase = true) }?.hardwareAddress?.let {
-                    it.joinToString(separator = ":") { b -> Integer.toHexString(b.toInt() and 0xFF) }
-                }
-            } else {
-                wifiManager.connectionInfo?.macAddress
-            }
-        } else {
-            wifiManager.connectionInfo?.macAddress
-        }
-    } catch (e: Exception) {
-        e.printStackTrace()
-        if (e is SecurityException) "PermissionDenied" else null
-    }
-    return macAddress ?: "02:00:00:00:00:00"
-}
+inline fun Context.getMacAddress(): String = Hardwarex.getMacAddress(this)

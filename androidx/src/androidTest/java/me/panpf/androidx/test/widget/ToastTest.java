@@ -88,9 +88,7 @@ public class ToastTest {
 
     @Test
     public final void testWithViewToast() {
-        View view = Viewx.inflateLayout(InstrumentationRegistry.getContext(), R.layout.view_toast);
-
-        Toastx.showLongWithView(view);
-        Toastx.showShortWithView(view);
+        Toastx.showLongWithView(Viewx.inflateLayout(InstrumentationRegistry.getContext(), R.layout.view_toast));
+        Toastx.showShortWithView(Viewx.inflateLayout(InstrumentationRegistry.getContext(), R.layout.view_toast));
     }
 }

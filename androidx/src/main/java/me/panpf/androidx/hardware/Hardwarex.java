@@ -41,18 +41,22 @@ import me.panpf.javax.util.Transformer;
 @SuppressWarnings("WeakerAccess")
 public class Hardwarex {
 
+    @NonNull
     public static String getDeviceModel() {
         return Stringx.orEmpty(Build.MODEL);
     }
 
+    @NonNull
     public static String getDeviceName() {
         return Stringx.orEmpty(Build.DEVICE);
     }
 
+    @NonNull
     public static String getHardware() {
         return Build.HARDWARE;
     }
 
+    @NonNull
     public static String[] getSupportedAbis() {
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -71,6 +75,7 @@ public class Hardwarex {
         }
     }
 
+    @NonNull
     @SuppressLint({"HardwareIds"})
     @RequiresPermission(anyOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
     public static String getPhoneNumber(@NonNull Context context) {
@@ -83,6 +88,7 @@ public class Hardwarex {
         }
     }
 
+    @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getDeviceId(@NonNull Context context) {
@@ -95,6 +101,7 @@ public class Hardwarex {
         }
     }
 
+    @NonNull
     @SuppressLint("HardwareIds")
     public static String getAndroidId(@NonNull Context context) {
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -103,6 +110,7 @@ public class Hardwarex {
     /**
      * 获取国际移动用户识别码
      */
+    @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getSubscriberId(@NonNull Context context) {
@@ -118,6 +126,7 @@ public class Hardwarex {
     /**
      * 获取 SIM 卡序列号
      */
+    @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getSimSerialNumber(@NonNull Context context) {
@@ -130,6 +139,7 @@ public class Hardwarex {
         }
     }
 
+    @NonNull
     @SuppressLint({"MissingPermission", "HardwareIds"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getSerial() {
@@ -148,6 +158,7 @@ public class Hardwarex {
     /**
      * 获取国际移动设备身份码
      */
+    @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getIMEI(@NonNull Context context) {
@@ -157,6 +168,7 @@ public class Hardwarex {
     /**
      * 获取国际移动用户识别码
      */
+    @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getIMSI(@NonNull Context context) {
@@ -166,6 +178,7 @@ public class Hardwarex {
     /**
      * 获取 MAC 地址
      */
+    @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
     public static String getMacAddress(@NonNull Context context) {

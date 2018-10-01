@@ -14,6 +14,8 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.content
 
 import android.content.Context
@@ -21,6 +23,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.net.Uri
+import me.panpf.androidx.content.Contentx
 
 import java.io.FileNotFoundException
 import java.io.IOException
@@ -28,41 +31,25 @@ import java.io.InputStream
 import java.nio.charset.Charset
 
 @Throws(IOException::class)
-fun Context.openInputFromContent(uri: Uri): InputStream? {
-    return this.contentResolver.openInputStream(uri)
-}
+inline fun Context.openInputFromContent(uri: Uri): InputStream? = Contentx.openInput(this, uri)
 
 @Throws(IOException::class)
-fun Context.readBytesFromContent(uri: Uri): ByteArray? {
-    return this.contentResolver.openInputStream(uri)?.use { it.readBytes() }
-}
+inline fun Context.readBytesFromContent(uri: Uri): ByteArray? = Contentx.readBytes(this, uri)
 
 @Throws(IOException::class)
-fun Context.readTextFromContent(uri: Uri, charset: Charset): String? {
-    return this.contentResolver.openInputStream(uri)?.bufferedReader(charset)?.use { it.readText() }
-}
+inline fun Context.readTextFromContent(uri: Uri, charset: Charset): String? = Contentx.readText(this, uri, charset)
 
 @Throws(IOException::class)
-fun Context.readTextFromContent(uri: Uri): String? {
-    return this.contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readText() }
-}
+inline fun Context.readTextFromContent(uri: Uri): String? = Contentx.readText(this, uri)
 
 @Throws(IOException::class)
-fun Context.readLinesFromContent(uri: Uri, charset: Charset): List<String>? {
-    return this.contentResolver.openInputStream(uri)?.bufferedReader(charset)?.use { it.readLines() }
-}
+inline fun Context.readLinesFromContent(uri: Uri, charset: Charset): List<String>? = Contentx.readLines(this, uri, charset)
 
 @Throws(IOException::class)
-fun Context.readLinesFromContent(uri: Uri): List<String>? {
-    return this.contentResolver.openInputStream(uri)?.bufferedReader()?.use { it.readLines() }
-}
+inline fun Context.readLinesFromContent(uri: Uri): List<String>? = Contentx.readLines(this, uri)
 
 @Throws(FileNotFoundException::class)
-fun Context.readBitmapFromContent(uri: Uri, outPadding: Rect?, options: BitmapFactory.Options?): Bitmap? {
-    return this.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it, outPadding, options) }
-}
+inline fun Context.readBitmapFromContent(uri: Uri, outPadding: Rect?, options: BitmapFactory.Options?): Bitmap? = Contentx.readBitmap(this, uri, outPadding, options)
 
 @Throws(FileNotFoundException::class)
-fun Context.readBitmapFromContent(uri: Uri): Bitmap? {
-    return this.contentResolver.openInputStream(uri)?.use { BitmapFactory.decodeStream(it) }
-}
+inline fun Context.readBitmapFromContent(uri: Uri): Bitmap? = Contentx.readBitmap(this, uri)

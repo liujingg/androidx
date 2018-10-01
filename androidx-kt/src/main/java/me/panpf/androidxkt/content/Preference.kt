@@ -14,174 +14,59 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.content
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import me.panpf.androidx.content.Preferencex
 
-fun Context.getPreference(name: String? = null): SharedPreferences {
-    return if (name == null) {
-        PreferenceManager.getDefaultSharedPreferences(this)
-    } else {
-        this.getSharedPreferences(name, Context.MODE_PRIVATE)
-    }
-}
-
-fun Context.putInt(key: String, value: Int, name: String? = null) {
-    val editor = getPreference(name).edit()
-    editor.putInt(key, value)
-    editor.apply()
-}
-
-fun Context.putInts(dataMap: Map<String, Int>, name: String? = null) {
-    val editor = getPreference(name).edit()
-    for (key in dataMap.keys) {
-        val value = dataMap[key]
-        if (value != null) {
-            editor.putInt(key, value)
-        } else {
-            editor.remove(key)
-        }
-    }
-    editor.apply()
-}
-
-fun Context.putLong(key: String, value: Long, name: String? = null) {
-    val editor = getPreference(name).edit()
-    editor.putLong(key, value)
-    editor.apply()
-}
-
-fun Context.putLongs(dataMap: Map<String, Long>, name: String? = null) {
-    val editor = getPreference(name).edit()
-    for (key in dataMap.keys) {
-        val value = dataMap[key]
-        if (value != null) {
-            editor.putLong(key, value)
-        } else {
-            editor.remove(key)
-        }
-    }
-    editor.apply()
-}
-
-fun Context.putBoolean(key: String, value: Boolean, name: String? = null) {
-    val editor = getPreference(name).edit()
-    editor.putBoolean(key, value)
-    editor.apply()
-}
-
-fun Context.putBooleans(dataMap: Map<String, Boolean>, name: String? = null) {
-    val editor = getPreference(name).edit()
-    for (key in dataMap.keys) {
-        val value = dataMap[key]
-        if (value != null) {
-            editor.putBoolean(key, value)
-        } else {
-            editor.remove(key)
-        }
-    }
-    editor.apply()
-}
-
-fun Context.putFloat(key: String, value: Float, name: String? = null) {
-    val editor = getPreference(name).edit()
-    editor.putFloat(key, value)
-    editor.apply()
-}
-
-fun Context.putFloats(dataMap: Map<String, Float>, name: String? = null) {
-    val editor = getPreference(name).edit()
-    for (key in dataMap.keys) {
-        val value = dataMap[key]
-        if (value != null) {
-            editor.putFloat(key, value)
-        } else {
-            editor.remove(key)
-        }
-    }
-    editor.apply()
-}
-
-fun Context.putString(key: String, value: String?, name: String? = null) {
-    val editor = getPreference(name).edit()
-    editor.putString(key, value)
-    editor.apply()
-}
-
-fun Context.putStrings(dataMap: Map<String, String>, name: String? = null) {
-    val editor = getPreference(name).edit()
-    for (key in dataMap.keys) {
-        val value = dataMap[key]
-        if (value != null) {
-            editor.putString(key, value)
-        } else {
-            editor.remove(key)
-        }
-    }
-    editor.apply()
-}
-
-fun Context.putStringSet(key: String, value: Set<String>?, name: String? = null) {
-    val editor = getPreference(name).edit()
-    editor.putStringSet(key, value)
-    editor.apply()
-}
-
-fun Context.putStringSets(dataMap: Map<String, Set<String>>, name: String? = null) {
-    val editor = getPreference(name).edit()
-    for (key in dataMap.keys) {
-        val value = dataMap[key]
-        if (value != null) {
-            editor.putStringSet(key, value)
-        } else {
-            editor.remove(key)
-        }
-    }
-    editor.apply()
-}
+inline fun Context.getPreference(name: String? = null): SharedPreferences = Preferencex.getPreference(this, name)
 
 
-fun Context.getInt(key: String, defValue: Int, name: String? = null): Int {
-    return getPreference(name).getInt(key, defValue)
-}
+inline fun Context.putIntPreference(key: String, value: Int, name: String? = null) = Preferencex.putInt(this, key, value, name)
 
-fun Context.getLong(key: String, defValue: Long, name: String? = null): Long {
-    return getPreference(name).getLong(key, defValue)
-}
+inline fun Context.putIntsPreference(dataMap: Map<String, Int>, name: String? = null) = Preferencex.putInts(this, dataMap, name)
 
-fun Context.getBoolean(key: String, defValue: Boolean, name: String? = null): Boolean {
-    return getPreference(name).getBoolean(key, defValue)
-}
+inline fun Context.putLongPreference(key: String, value: Long, name: String? = null) = Preferencex.putLong(this, key, value, name)
 
-fun Context.getFloat(key: String, defValue: Float, name: String? = null): Float {
-    return getPreference(name).getFloat(key, defValue)
-}
+inline fun Context.putLongsPreference(dataMap: Map<String, Long>, name: String? = null) = Preferencex.putLongs(this, dataMap, name)
 
-fun Context.getString(key: String, defValue: String?, name: String? = null): String? {
-    return getPreference(name).getString(key, defValue)
-}
+inline fun Context.putBooleanPreference(key: String, value: Boolean, name: String? = null) = Preferencex.putBoolean(this, key, value, name)
 
-fun Context.getStringSet(key: String, defValue: Set<String>?, name: String? = null): Set<String>? {
-    return getPreference(name).getStringSet(key, defValue)
-}
+inline fun Context.putBooleansPreference(dataMap: Map<String, Boolean>, name: String? = null) = Preferencex.putBooleans(this, dataMap, name)
 
-fun Context.getAll(name: String? = null): Map<String, *> {
-    return getPreference(name).all
-}
+inline fun Context.putFloatPreference(key: String, value: Float, name: String? = null) = Preferencex.putFloat(this, key, value, name)
+
+inline fun Context.putFloatsPreference(dataMap: Map<String, Float>, name: String? = null) = Preferencex.putFloats(this, dataMap, name)
+
+inline fun Context.putStringPreference(key: String, value: String?, name: String? = null) = Preferencex.putString(this, key, value, name)
+
+inline fun Context.putStringsPreference(dataMap: Map<String, String>, name: String? = null) = Preferencex.putStrings(this, dataMap, name)
+
+inline fun Context.putStringSetPreference(key: String, value: Set<String>?, name: String? = null) = Preferencex.putStringSet(this, key, value, name)
+
+inline fun Context.putStringSetsPreference(dataMap: Map<String, Set<String>>, name: String? = null) = Preferencex.putStringSets(this, dataMap, name)
 
 
-fun Context.remove(keys: Array<String>, name: String? = null) {
-    val editor = getPreference(name).edit()
-    for (key in keys) {
-        editor.remove(key)
-    }
-    editor.apply()
-}
+inline fun Context.getIntPreference(key: String, defValue: Int, name: String? = null): Int = Preferencex.getInt(this, key, defValue, name)
 
-fun Context.clear(name: String? = null) {
-    val editor = getPreference(name).edit()
-    editor.clear()
-    editor.apply()
-}
+inline fun Context.getLongPreference(key: String, defValue: Long, name: String? = null): Long = Preferencex.getLong(this, key, defValue, name)
+
+inline fun Context.getBooleanPreference(key: String, defValue: Boolean, name: String? = null): Boolean = Preferencex.getBoolean(this, key, defValue, name)
+
+inline fun Context.getFloatPreference(key: String, defValue: Float, name: String? = null): Float = Preferencex.getFloat(this, key, defValue, name)
+
+inline fun Context.getStringPreference(key: String, defValue: String?, name: String? = null): String? = Preferencex.getString(this, key, defValue, name)
+
+inline fun Context.getStringSetPreference(key: String, defValue: Set<String>?, name: String? = null): Set<String>? = Preferencex.getStringSet(this, key, defValue, name)
+
+inline fun Context.getAllPreference(name: String? = null): Map<String, *> = Preferencex.getAll(this, name)
+
+
+inline fun Context.removePreference(keys: Array<String>, name: String? = null) = Preferencex.remove(this, keys, name)
+
+inline fun Context.removePreference(key: String, name: String? = null) = Preferencex.remove(this, key, name)
+
+inline fun Context.clearPreference(name: String? = null) = Preferencex.clear(this, name)

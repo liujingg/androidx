@@ -25,19 +25,17 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 import android.text.TextUtils;
+import android.util.Pair;
 
 import java.io.File;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
+import me.panpf.javax.util.Premisex;
 
 @SuppressWarnings("WeakerAccess")
 public class Packagex {
@@ -117,7 +115,7 @@ public class Packagex {
             return null;
         }
 
-        return assembleAppPackage(packageManager, packageInfo);
+        return packageInfoToAppPackage(packageInfo, packageManager);
     }
 
     /**
@@ -145,13 +143,13 @@ public class Packagex {
      * @param packageName    app 包名
      * @return false: 未安装或不是系统 app
      */
-    public static boolean isSystemApp(@NonNull PackageManager packageManager, @NonNull String packageName) {
+    public static Boolean isSystemApp(@NonNull PackageManager packageManager, @NonNull String packageName) {
         ApplicationInfo applicationInfo;
         try {
             applicationInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
         } catch (NameNotFoundException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
         return isSystemApp(applicationInfo.flags);
     }
@@ -163,47 +161,10 @@ public class Packagex {
      * @param packageName app 包名
      * @return false: 未安装或不是系统 app
      */
-    public static boolean isSystemApp(@NonNull Context context, @NonNull String packageName) {
+    public static Boolean isSystemApp(@NonNull Context context, @NonNull String packageName) {
         return isSystemApp(context.getPackageManager(), packageName);
     }
 
-
-    /**
-     * 获取所有已安装 app 的包名和版本号 Map
-     *
-     * @param context          {@link Context}
-     * @param excludeSystemApp 是否排除系统应用
-     * @param excludeSelf      是否排除自己
-     * @return 所有已安装 app 的包名和版本号集合
-     */
-    @Nullable
-    @WorkerThread
-    public static Map<String, Integer> getAllAppIdAndVersionCodeMap(Context context, boolean excludeSystemApp, boolean excludeSelf) {
-        List<PackageInfo> packageInfoList = null;
-        try {
-            packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-            // ApplicationPackageManager 内部在 dazen X7 4.4.4 和 Coolpad Y803-8 5.1 机型上会崩溃
-        }
-        if (packageInfoList != null && !packageInfoList.isEmpty()) {
-            Map<String, Integer> appsSet = new android.support.v4.util.ArrayMap<>();
-            for (PackageInfo packageInfo : packageInfoList) {
-                if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
-                    continue;
-                }
-
-                if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo.flags)) {
-                    continue;
-                }
-
-                appsSet.put(packageInfo.packageName, packageInfo.versionCode);
-            }
-            return appsSet;
-        } else {
-            return null;
-        }
-    }
 
     /**
      * 获取所有已安装 app 的包名和版本号集合
@@ -215,31 +176,68 @@ public class Packagex {
      */
     @Nullable
     @WorkerThread
-    public static Set<Map.Entry<String, Integer>> getAllAppIdAndVersionCodeSet(Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    public static List<Pair<String, Integer>> listAppIdAndVersionCode(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
         } catch (NullPointerException e) {
             e.printStackTrace();
-            // ApplicationPackageManager 内部在 dazen X7 4.4.4 和 Coolpad Y803-8 5.1 机型上会崩溃
+            // ApplicationPackageManager crashes internally on dazen X7 4.4.4 and Coolpad Y803-8 5.1 models
         }
-        if (packageInfoList != null && !packageInfoList.isEmpty()) {
-            Set<Map.Entry<String, Integer>> appsSet = new android.support.v4.util.ArraySet<>();
-            for (PackageInfo packageInfo : packageInfoList) {
-                if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
-                    continue;
-                }
-
-                if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo.flags)) {
-                    continue;
-                }
-
-                appsSet.add(new AbstractMap.SimpleEntry<>(packageInfo.packageName, packageInfo.versionCode));
-            }
-            return appsSet;
-        } else {
+        if (packageInfoList == null || packageInfoList.isEmpty()) {
             return null;
         }
+
+        List<Pair<String, Integer>> appsSet = new ArrayList<>(packageInfoList.size());
+        for (PackageInfo packageInfo : packageInfoList) {
+            if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
+                continue;
+            }
+
+            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo.flags)) {
+                continue;
+            }
+
+            appsSet.add(new Pair<>(packageInfo.packageName, packageInfo.versionCode));
+        }
+        return appsSet;
+    }
+
+    /**
+     * 获取所有已安装 app 的包名和版本号 Map
+     *
+     * @param context          {@link Context}
+     * @param excludeSystemApp 是否排除系统应用
+     * @param excludeSelf      是否排除自己
+     * @return 所有已安装 app 的包名和版本号集合
+     */
+    @Nullable
+    @WorkerThread
+    public static android.support.v4.util.ArrayMap<String, Integer> listAppIdAndVersionCodeToMap(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+        List<PackageInfo> packageInfoList = null;
+        try {
+            packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            // ApplicationPackageManager crashes internally on dazen X7 4.4.4 and Coolpad Y803-8 5.1 models
+        }
+        if (packageInfoList == null || packageInfoList.isEmpty()) {
+            return null;
+        }
+
+        android.support.v4.util.ArrayMap<String, Integer> appsSet = new android.support.v4.util.ArrayMap<>();
+        for (PackageInfo packageInfo : packageInfoList) {
+            if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
+                continue;
+            }
+
+            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo.flags)) {
+                continue;
+            }
+
+            appsSet.put(packageInfo.packageName, packageInfo.versionCode);
+        }
+        return appsSet;
     }
 
     /**
@@ -252,16 +250,16 @@ public class Packagex {
      */
     @Nullable
     @WorkerThread
-    public static Set<String> getAllAppId(Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
+    public static List<String> listAppId(Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
         } catch (NullPointerException e) {
             e.printStackTrace();
-            // ApplicationPackageManager 内部在 dazen X7 4.4.4 和 Coolpad Y803-8 5.1 机型上会崩溃
+            // ApplicationPackageManager crashes internally on dazen X7 4.4.4 and Coolpad Y803-8 5.1 models
         }
         if (packageInfoList != null && !packageInfoList.isEmpty()) {
-            Set<String> appsSet = new android.support.v4.util.ArraySet<>();
+            List<String> appsSet = new ArrayList<>();
             for (PackageInfo packageInfo : packageInfoList) {
                 if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
                     continue;
@@ -291,14 +289,14 @@ public class Packagex {
     @SuppressWarnings("WeakerAccess")
     @Nullable
     @WorkerThread
-    public static List<AppPackage> getAllApp(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf, int size) {
+    public static List<AppPackage> listPackage(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf, int size) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = packageManager.getInstalledPackages(PackageManager.GET_META_DATA);
         } catch (NullPointerException e) {
             e.printStackTrace();
-            // ApplicationPackageManager 内部在 dazen X7 4.4.4 和 Coolpad Y803-8 5.1 机型上会崩溃
+            // ApplicationPackageManager crashes internally on dazen X7 4.4.4 and Coolpad Y803-8 5.1 models
         }
         if (packageInfoList == null || packageInfoList.isEmpty()) {
             return null;
@@ -315,11 +313,9 @@ public class Packagex {
                 continue;
             }
 
-            AppPackage appPackage = assembleAppPackage(packageManager, packageInfo);
-            if (appPackage != null) {
-                packageArrayList.add(appPackage);
-                index++;
-            }
+            AppPackage appPackage = packageInfoToAppPackage(packageInfo, packageManager);
+            packageArrayList.add(appPackage);
+            index++;
             if (size > 0 && index >= size) {
                 break;
             }
@@ -337,12 +333,12 @@ public class Packagex {
      */
     @Nullable
     @WorkerThread
-    public static List<AppPackage> getAllApp(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
-        return getAllApp(context, excludeSystemApp, excludeSelf, -1);
+    public static List<AppPackage> listPackage(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
+        return listPackage(context, excludeSystemApp, excludeSelf, -1);
     }
 
     /**
-     * 获取已安装的指定包名 app 的信息
+     * 获取第一个 app 的信息
      *
      * @param context          {@link Context}
      * @param excludeSystemApp 是否排除系统应用
@@ -351,8 +347,8 @@ public class Packagex {
      */
     @Nullable
     @SuppressWarnings("WeakerAccess")
-    public static AppPackage getOne(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
-        List<AppPackage> appPackageList = getAllApp(context, excludeSystemApp, excludeSelf, 1);
+    public static AppPackage getFirstPackage(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
+        List<AppPackage> appPackageList = listPackage(context, excludeSystemApp, excludeSelf, 1);
         return appPackageList != null && appPackageList.size() >= 1 ? appPackageList.get(0) : null;
     }
 
@@ -372,7 +368,7 @@ public class Packagex {
             packageInfoList = packageManager.getInstalledPackages(PackageManager.GET_META_DATA);
         } catch (NullPointerException e) {
             e.printStackTrace();
-            // ApplicationPackageManager 内部在 dazen X7 4.4.4 和 Coolpad Y803-8 5.1 机型上会崩溃
+            // ApplicationPackageManager crashes internally on dazen X7 4.4.4 and Coolpad Y803-8 5.1 models
         }
         if (packageInfoList == null || packageInfoList.isEmpty()) {
             return 0;
@@ -393,28 +389,16 @@ public class Packagex {
         return count;
     }
 
-    private static AppPackage assembleAppPackage(@NonNull PackageManager packageManager, @NonNull PackageInfo packageInfo) {
+    @NonNull
+    public static AppPackage packageInfoToAppPackage(@NonNull PackageInfo packageInfo, @NonNull PackageManager packageManager) {
         ApplicationInfo applicationInfo = packageInfo.applicationInfo;
-        if (applicationInfo == null) {
-            return null;
-        }
-
-        AppPackage appPackage = new AppPackage();
+        Premisex.checkNotNull(applicationInfo, "applicationInfo");
 
         CharSequence label = applicationInfo.loadLabel(packageManager);
-        appPackage.name = label != null ? label.toString() : "";
-        appPackage.packageName = applicationInfo.packageName;
-        appPackage.versionCode = packageInfo.versionCode;
-        appPackage.versionName = packageInfo.versionName;
-
-        appPackage.packageFilePath = applicationInfo.sourceDir;
         File packageFile = new File(applicationInfo.sourceDir);
-        appPackage.packageSize = packageFile.length();
-        appPackage.packageLastModifiedTime = packageFile.lastModified();
-
-        appPackage.systemApp = isSystemApp(applicationInfo.flags);
-        appPackage.enabled = applicationInfo.enabled;
-        return appPackage;
+        return new AppPackage(label.toString(), applicationInfo.packageName, packageInfo.versionCode,
+                packageInfo.versionName, packageFile.getPath(), packageFile.length(),
+                packageFile.lastModified(), isSystemApp(applicationInfo.flags), applicationInfo.enabled);
     }
 
     /**
@@ -426,7 +410,7 @@ public class Packagex {
      */
     @Nullable
     @WorkerThread
-    public static File getAppPackageFile(@NonNull Context context, @NonNull String packageName) {
+    public static File getPackageFile(@NonNull Context context, @NonNull String packageName) {
         ApplicationInfo applicationInfo;
         try {
             applicationInfo = context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
@@ -560,112 +544,5 @@ public class Packagex {
         Canvas canvas = new Canvas(bitmap);
         drawable.draw(canvas);
         return bitmap;
-    }
-
-    public static class AppPackage implements Parcelable {
-        public static final Creator<AppPackage> CREATOR = new Creator<AppPackage>() {
-            @Override
-            public AppPackage createFromParcel(Parcel in) {
-                return new AppPackage(in);
-            }
-
-            @Override
-            public AppPackage[] newArray(int size) {
-                return new AppPackage[size];
-            }
-        };
-        /**
-         * app 名称
-         */
-        @SuppressWarnings("WeakerAccess")
-        public String name;
-        /**
-         * app 包名
-         */
-        @SuppressWarnings("WeakerAccess")
-        public String packageName;
-        /**
-         * app 版本号
-         */
-        @SuppressWarnings("WeakerAccess")
-        public int versionCode;
-        /**
-         * app 版本名称
-         */
-        @SuppressWarnings("WeakerAccess")
-        public String versionName;
-        /**
-         * app 安装包路径
-         */
-        @SuppressWarnings("WeakerAccess")
-        public String packageFilePath;
-        /**
-         * app 安装包大小
-         */
-        @SuppressWarnings("WeakerAccess")
-        public long packageSize;
-        /**
-         * app 安装包最后修改时间
-         */
-        @SuppressWarnings("WeakerAccess")
-        public long packageLastModifiedTime;
-        /**
-         * app 是否是系统应用
-         */
-        @SuppressWarnings("WeakerAccess")
-        public boolean systemApp;
-        /**
-         * app 未被禁用（通常只有系统自带 app 可以被禁用）
-         */
-        @SuppressWarnings("WeakerAccess")
-        public boolean enabled;
-
-        public AppPackage() {
-        }
-
-        protected AppPackage(Parcel in) {
-            name = in.readString();
-            packageName = in.readString();
-            versionCode = in.readInt();
-            versionName = in.readString();
-            packageFilePath = in.readString();
-            packageSize = in.readLong();
-            packageLastModifiedTime = in.readLong();
-            systemApp = in.readByte() != 0;
-            enabled = in.readByte() != 0;
-        }
-
-        @Override
-        public String toString() {
-            return "AppPackage{" +
-                    "name='" + name + '\'' +
-                    ", packageName='" + packageName + '\'' +
-                    ", versionCode=" + versionCode +
-                    ", versionName='" + versionName + '\'' +
-                    ", packageFilePath='" + packageFilePath + '\'' +
-                    ", packageSize=" + packageSize +
-                    ", packageLastModifiedTime=" + packageLastModifiedTime +
-                    ", systemApp=" + systemApp +
-                    ", enabled=" + enabled +
-                    '}';
-        }
-
-        @Override
-        public int describeContents() {
-            return 0;
-        }
-
-        @Override
-        public void writeToParcel(Parcel dest, int flags) {
-            dest.writeString(name);
-            dest.writeString(packageName);
-            dest.writeInt(versionCode);
-            dest.writeString(versionName);
-            dest.writeString(packageFilePath);
-            dest.writeLong(packageSize);
-            dest.writeLong(packageLastModifiedTime);
-            dest.writeByte((byte) (systemApp ? 1 : 0));
-            dest.writeByte((byte) (enabled ? 1 : 0));
-        }
     }
 }

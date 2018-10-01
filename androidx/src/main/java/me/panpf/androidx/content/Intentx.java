@@ -95,10 +95,10 @@ public class Intentx {
     }
 
     /**
-     * Create a broadcast Intent that lets System Explorer scan the specified file
+     * Create a broadcast Intent that lets System Explorer scan the specified file uri
      */
     @NonNull
-    public static Intent createScanFileBroadcastIntent(Uri fileUri) {
+    public static Intent createScanFileBroadcastIntent(@NonNull Uri fileUri) {
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, fileUri);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
         return intent;

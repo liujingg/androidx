@@ -8,9 +8,13 @@ import android.net.Uri
 import android.os.Build
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidx.content.ClipHtmlText
+import me.panpf.androidx.content.ClipIntent
+import me.panpf.androidx.content.ClipPlainText
+import me.panpf.androidx.content.ClipUri
 import me.panpf.androidxkt.content.*
 import me.panpf.androidxkt.runInUI
-import me.panpf.androidxkt.test.util.WeakAsyncTaskTestActivity
+import me.panpf.androidxkt.test.app.ActivityTestActivity
 import me.panpf.androidxkt.test.widget.ToastTestActivity
 import org.junit.Assert
 import org.junit.Test
@@ -95,7 +99,7 @@ class ClipboardTest {
         val result = context.getClipIntent()
         Assert.assertEquals(result?.getComponent().toString(), intent.component.toString())
 
-        val intent2 = Intent(context, WeakAsyncTaskTestActivity::class.java)
+        val intent2 = Intent(context, ActivityTestActivity::class.java)
         context.copyIntent(arrayOf(intent, intent2))
 
         val results = context.getClipIntents()

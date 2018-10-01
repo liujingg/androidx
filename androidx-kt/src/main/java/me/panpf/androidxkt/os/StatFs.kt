@@ -16,36 +16,18 @@
 
 package me.panpf.androidxkt.os
 
-import android.os.Build
 import android.os.StatFs
+import me.panpf.androidx.os.StatFsx
 
 /*
  * StatFs related extension methods or properties
  */
 
 val StatFs.availableBytesCompat: Long
-    get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            this.availableBytes
-        } else {
-            this.availableBlocks.toLong() * this.blockSize.toLong()
-        }
-    }
+    get() = StatFsx.getAvailableBytesCompat(this)
 
 val StatFs.freeBytesCompat: Long
-    get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            this.freeBytes
-        } else {
-            this.freeBlocks.toLong() * this.blockSize.toLong()
-        }
-    }
+    get() = StatFsx.getFreeBytesCompat(this)
 
 val StatFs.totalBytesCompat: Long
-    get() {
-        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            this.totalBytes
-        } else {
-            this.blockCount.toLong() * this.blockSize.toLong()
-        }
-    }
+    get() = StatFsx.getTotalBytesCompat(this)

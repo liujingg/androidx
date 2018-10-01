@@ -36,6 +36,7 @@ public class Preferencex {
         }
     }
 
+
     public static void putInt(@NonNull Context context, @NonNull String key, int value, @Nullable String name) {
         SharedPreferences.Editor editor = getPreference(context, name).edit();
         editor.putInt(key, value);
@@ -266,6 +267,16 @@ public class Preferencex {
 
     public static void remove(@NonNull Context context, String[] keys) {
         remove(context, keys, null);
+    }
+
+    public static void remove(@NonNull Context context, @NonNull String key, @Nullable String name) {
+        SharedPreferences.Editor editor = getPreference(context, name).edit();
+        editor.remove(key);
+        editor.apply();
+    }
+
+    public static void remove(@NonNull Context context, String key) {
+        remove(context, key, null);
     }
 
     public static void clear(@NonNull Context context, @Nullable String name) {

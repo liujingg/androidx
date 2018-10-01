@@ -14,11 +14,12 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.app
 
 import android.content.Context
-import android.content.pm.PackageManager
-import android.support.v4.app.ActivityCompat
+import me.panpf.androidx.app.Permissionx
 
 /*
  * Permission related extension methods or properties
@@ -27,17 +28,9 @@ import android.support.v4.app.ActivityCompat
 /**
  * Return true if all specified permissions have been granted, false otherwise
  */
-fun Context.isGrantPermissions(vararg permissions: String): Boolean {
-    return permissions.asSequence()
-            .map { ActivityCompat.checkSelfPermission(this, it) }
-            .find { it == PackageManager.PERMISSION_DENIED } == null
-}
+inline fun Context.isGrantPermissions(vararg permissions: String): Boolean = Permissionx.isGrantPermissions(this, *permissions)
 
 /**
  * Filter all denied permissions
  */
-fun Context.filterDeniedPermissions(vararg permissions: String): Array<String> {
-    return permissions.filter { permission ->
-        ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED
-    }.toTypedArray()
-}
+inline fun Context.filterDeniedPermissions(vararg permissions: String): Array<String> = Permissionx.filterDeniedPermissions(this, *permissions)

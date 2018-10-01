@@ -14,8 +14,11 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.util
 
+import me.panpf.androidx.util.Jsonx
 import org.json.JSONArray
 import org.json.JSONException
 import org.json.JSONObject
@@ -26,244 +29,77 @@ import java.util.*
  */
 
 
-fun String?.isEmptyJson(): Boolean = this == null || this.trim().let { "" == it || "null".equals(it, ignoreCase = true) || "{}".equals(it, ignoreCase = true) || "[]" == it }
+inline fun String?.isEmptyJson(): Boolean = Jsonx.isEmpty(this)
 
-fun String?.isNotEmptyJson(): Boolean = !isEmptyJson()
-
-
-fun List<String>?.toJsonArray(): JSONArray = JSONArray().apply { this@toJsonArray?.let { for (item in it) put(item) } }
-
-fun IntArray?.toJsonArray(): JSONArray = JSONArray().apply { this@toJsonArray?.let { for (item in it) put(item) } }
+inline fun String?.isNotEmptyJson(): Boolean = Jsonx.isNotEmpty(this)
 
 
-fun List<String>?.toJson(): String = this.toJsonArray().toString()
+inline fun List<String>?.toJsonArray(): JSONArray = Jsonx.toJsonArray(this)
 
-fun IntArray?.toJson(): String = this.toJsonArray().toString()
+inline fun IntArray?.toJsonArray(): JSONArray = Jsonx.toJsonArray(this)
 
+inline fun List<String>?.toJson(): String = Jsonx.toJson(this)
 
-fun JSONArray.toStringList(): List<String> = (0 until this.length()).map { this.getString(it) }
-
-@Throws(JSONException::class)
-fun String?.jsonToStringList(): List<String>? = if (this.isNotEmptyJson()) JSONArray(this).toStringList() else null
+inline fun IntArray?.toJson(): String = Jsonx.toJson(this)
 
 
-fun JSONArray.toStringArray(): Array<String> = Array(this.length()) { "" }.apply {
-    (0 until this@toStringArray.length()).forEach { index -> this[index] = this@toStringArray.getString(index) }
-}
+inline fun JSONArray.toStringList(): List<String> = Jsonx.toStringList(this)
 
 @Throws(JSONException::class)
-fun String?.jsonToStringArray(): Array<String>? = if (this.isNotEmptyJson()) JSONArray(this).toStringArray() else null
+inline fun String?.jsonToStringList(): List<String> = Jsonx.toStringList(this)
 
-
-fun JSONArray.toIntArray(): IntArray = IntArray(this.length()).apply {
-    (0 until this@toIntArray.length()).forEach { index -> this[index] = this@toIntArray.getInt(index) }
-}
+inline fun JSONArray.toStringArray(): Array<String> = Jsonx.toStringArray(this)
 
 @Throws(JSONException::class)
-fun String?.jsonToIntArray(): IntArray? = if (this.isNotEmptyJson()) JSONArray(this).toIntArray() else null
+inline fun String?.jsonToStringArray(): Array<String> = Jsonx.toStringArray(this)
+
+
+inline fun JSONArray.toIntArray(): IntArray = Jsonx.toIntArray(this)
+
+@Throws(JSONException::class)
+inline fun String?.jsonToIntArray(): IntArray = Jsonx.toIntArray(this)
 
 
 @Throws(JSONException::class)
-fun <Bean> JSONArray.toBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bean> = ArrayList<Bean>(this.length()).apply {
-    (0 until this@toBeanList.length()).forEach { index ->
-        beanParser(this@toBeanList.getJSONObject(index))?.let { this += it }
-    }
-}
+inline fun <Bean> JSONArray.toBeanList(parser: Jsonx.BeanParser<Bean>): ArrayList<Bean> = Jsonx.toBeanList(this, parser)
 
 @Throws(JSONException::class)
-fun <Bean> String?.jsonToBeanList(beanParser: (JSONObject) -> Bean): ArrayList<Bean>? {
-    return if (this.isNotEmptyJson()) JSONArray(this).toBeanList(beanParser) else null
-}
-
+inline fun <Bean> JSONArray.toBeanList(noinline parser: (JSONObject) -> Bean): ArrayList<Bean> = Jsonx.toBeanList(this, parser)
 
 @Throws(JSONException::class)
-fun <Bean> JSONObject.toBean(beanParser: (JSONObject) -> Bean): Bean = beanParser(this)
+inline fun <Bean> String?.jsonToBeanList(parser: Jsonx.BeanParser<Bean>): ArrayList<Bean> = Jsonx.toBeanList(this, parser)
 
 @Throws(JSONException::class)
-fun <Bean> String?.jsonToBean(beanParser: (JSONObject) -> Bean): Bean? {
-    return if (this.isNotEmptyJson()) JSONObject(this).toBean(beanParser) else null
-}
+inline fun <Bean> String?.jsonToBeanList(noinline parser: (JSONObject) -> Bean): ArrayList<Bean> = Jsonx.toBeanList(this, parser)
+
+@Throws(JSONException::class)
+inline fun <Bean> JSONObject.toBean(parser: Jsonx.BeanParser<Bean>): Bean? = Jsonx.toBean(this, parser)
+
+@Throws(JSONException::class)
+inline fun <Bean> JSONObject.toBean(noinline parser: (JSONObject) -> Bean): Bean? = Jsonx.toBean(this, parser)
+
+@Throws(JSONException::class)
+inline fun <Bean> String?.jsonToBean(parser: Jsonx.BeanParser<Bean>): Bean? = Jsonx.toBean(this, parser)
+
+@Throws(JSONException::class)
+inline fun <Bean> String?.jsonToBean(noinline parser: (JSONObject) -> Bean): Bean? = Jsonx.toBean(this, parser)
 
 
-private fun Any?.toInteger(): Int? {
-    when (this) {
-        is Int -> return this
-        is Number -> return this.toInt()
-        is String -> try {
-            return java.lang.Double.parseDouble((this as String?)!!).toInt()
-        } catch (ignored: NumberFormatException) {
-        }
-    }
-    return null
-}
+inline fun JSONObject.optString(keys: Array<String>, defaultValue: String): String = Jsonx.optString(this, keys, defaultValue)
 
-private fun Any?.toLong(): Long? {
-    when (this) {
-        is Long -> return this
-        is Number -> return this.toLong()
-        is String -> try {
-            return java.lang.Double.parseDouble((this as String?)!!).toLong()
-        } catch (ignored: NumberFormatException) {
-        }
-    }
-    return null
-}
+inline fun JSONObject.optString(keys: Array<String>): String = Jsonx.optString(this, keys)
+
+inline fun JSONObject.optInt(keys: Array<String>, defaultValue: Int): Int = Jsonx.optInt(this, keys, defaultValue)
+
+inline fun JSONObject.optInt(keys: Array<String>): Int = Jsonx.optInt(this, keys)
+
+inline fun JSONObject.optLong(keys: Array<String>, defaultValue: Long): Long = Jsonx.optLong(this, keys, defaultValue)
+
+inline fun JSONObject.optLong(keys: Array<String>): Long = Jsonx.optLong(this, keys)
 
 
-fun JSONObject.optString(keys: Array<String>, defaultValue: String = ""): String? {
-    var value: Any?
-    for (key in keys) {
-        value = this.opt(key)
-        if (value !== null && value !== JSONObject.NULL) {
-            return value.toString()
-        }
-    }
+inline fun JSONObject?.format(): String = Jsonx.format(this)
 
-    return defaultValue
-}
+inline fun JSONArray?.format(): String = Jsonx.format(this)
 
-fun JSONObject.optInt(keys: Array<String>, defaultValue: Int = 0): Int {
-    var value: Any?
-    for (key in keys) {
-        value = this.opt(key)
-        if (value !== null && value !== JSONObject.NULL) {
-
-            return value.toInteger()!!
-        }
-    }
-
-    return defaultValue
-}
-
-fun JSONObject.optLong(keys: Array<String>, defaultValue: Long = 0L): Long {
-    var value: Any?
-    for (key in keys) {
-        value = this.opt(key)
-        if (value !== null && value !== JSONObject.NULL) {
-
-            return value.toLong()!!
-        }
-    }
-
-    return defaultValue
-}
-
-
-private const val INDENTATION = "    "
-
-fun JSONObject?.format(): String {
-    this ?: return "{}"
-    return appendJsonObject(StringBuilder(), this, 0).toString()
-}
-
-fun JSONArray?.format(): String {
-    this ?: return "[]"
-    return appendJsonArray(StringBuilder(), this, 0).toString()
-}
-
-fun String?.format(): String {
-    if (this.isEmptyJson()) {
-        return "{}"
-    }
-
-    try {
-        return JSONObject(this).format()
-    } catch (e: JSONException) {
-        e.printStackTrace()
-    }
-
-    try {
-        return JSONArray(this).format()
-    } catch (e: JSONException) {
-        e.printStackTrace()
-    }
-
-    throw IllegalArgumentException("Invalid json: " + this)
-}
-
-private fun appendJsonObject(builder: StringBuilder, jsonObject: JSONObject, indentationCount: Int): StringBuilder {
-    builder.append("{")
-
-    val newIndentationCount = indentationCount + 1
-    var hasData = false
-
-    val keyIterator = jsonObject.keys()
-    while (keyIterator.hasNext()) {
-        hasData = true
-        val key = keyIterator.next() as String
-        val value = jsonObject.opt(key)
-
-        builder.append("\n")
-        appendIndentation(builder, newIndentationCount)
-
-        builder.append("\"").append(key).append("\"").append(":")
-
-        if (value is JSONArray) {
-            appendJsonArray(builder, value, newIndentationCount)
-        } else if (value is JSONObject) {
-            appendJsonObject(builder, value, newIndentationCount)
-        } else if (value is String) {
-            builder.append("\"").append(value.toString()).append("\"")
-        } else if (value != null) {
-            builder.append(value.toString())
-        }
-
-        if (keyIterator.hasNext()) {
-            builder.append(",")
-        }
-    }
-
-    if (hasData) {
-        builder.append("\n")
-    }
-    appendIndentation(builder, indentationCount)
-    builder.append("}")
-
-    return builder
-}
-
-private fun appendJsonArray(builder: StringBuilder, jsonArray: JSONArray, indentationCount: Int): StringBuilder {
-    builder.append("[")
-
-    val newIndentationCount = indentationCount + 1
-    var hasData = false
-
-    var w = 0
-    val size = jsonArray.length()
-    while (w < size) {
-        hasData = true
-        val item = jsonArray.opt(w)
-
-        builder.append("\n")
-        appendIndentation(builder, newIndentationCount)
-
-        if (item is JSONArray) {
-            appendJsonArray(builder, item, newIndentationCount)
-        } else if (item is JSONObject) {
-            appendJsonObject(builder, item, newIndentationCount)
-        } else if (item is String) {
-            builder.append("\"").append(item.toString()).append("\"")
-        } else if (item != null) {
-            builder.append(item.toString())
-        }
-
-        if (w < size - 1) {
-            builder.append(",")
-        }
-        w++
-    }
-
-    if (hasData) {
-        builder.append("\n")
-    }
-    appendIndentation(builder, indentationCount)
-    builder.append("]")
-
-    return builder
-}
-
-private fun appendIndentation(builder: StringBuilder, indentationCount: Int) {
-    for (w in 0 until indentationCount) {
-        builder.append(INDENTATION)
-    }
-}
+inline fun String?.format(): String = Jsonx.format(this)

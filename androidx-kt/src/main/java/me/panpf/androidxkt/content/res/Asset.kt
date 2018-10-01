@@ -14,12 +14,15 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.content.res
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Rect
+import me.panpf.androidx.content.res.Assetx
 import java.io.IOException
 import java.io.InputStream
 import java.nio.charset.Charset
@@ -29,41 +32,25 @@ import java.nio.charset.Charset
  */
 
 @Throws(IOException::class)
-fun Context.openInputFromAsset(fileName: String): InputStream {
-    return this.assets.open(fileName)
-}
+inline fun Context.openInputFromAsset(fileName: String): InputStream = Assetx.openInput(this, fileName)
 
 @Throws(IOException::class)
-fun Context.readBytesFromAsset(fileName: String): ByteArray {
-    return this.assets.open(fileName).use { it.readBytes() }
-}
+inline fun Context.readBytesFromAsset(fileName: String): ByteArray = Assetx.readBytes(this, fileName)
 
 @Throws(IOException::class)
-fun Context.readTextFromAsset(fileName: String, charset: Charset): String {
-    return this.assets.open(fileName).bufferedReader(charset).use { it.readText() }
-}
+inline fun Context.readTextFromAsset(fileName: String, charset: Charset): String = Assetx.readText(this, fileName, charset)
 
 @Throws(IOException::class)
-fun Context.readTextFromAsset(fileName: String): String {
-    return this.assets.open(fileName).bufferedReader().use { it.readText() }
-}
+inline fun Context.readTextFromAsset(fileName: String): String = Assetx.readText(this, fileName)
 
 @Throws(IOException::class)
-fun Context.readLinesFromAsset(fileName: String, charset: Charset): List<String> {
-    return this.assets.open(fileName).bufferedReader(charset).use { it.readLines() }
-}
+inline fun Context.readLinesFromAsset(fileName: String, charset: Charset): List<String> = Assetx.readLines(this, fileName, charset)
 
 @Throws(IOException::class)
-fun Context.readLinesFromAsset(fileName: String): List<String> {
-    return this.assets.open(fileName).bufferedReader().use { it.readLines() }
-}
+inline fun Context.readLinesFromAsset(fileName: String): List<String> = Assetx.readLines(this, fileName)
 
 @Throws(IOException::class)
-fun Context.readBitmapFromAsset(fileName: String, outPadding: Rect?, options: BitmapFactory.Options?): Bitmap? {
-    return this.assets.open(fileName).use { BitmapFactory.decodeStream(it, outPadding, options) }
-}
+inline fun Context.readBitmapFromAsset(fileName: String, outPadding: Rect?, options: BitmapFactory.Options?): Bitmap? = Assetx.readBitmap(this, fileName, outPadding, options)
 
 @Throws(IOException::class)
-fun Context.readBitmapFromAsset(fileName: String): Bitmap? {
-    return this.assets.open(fileName).use { BitmapFactory.decodeStream(it) }
-}
+inline fun Context.readBitmapFromAsset(fileName: String): Bitmap? = Assetx.readBitmap(this, fileName)

@@ -3,10 +3,7 @@
 * :hammer: Color All method names that have started with make are changed to create
 * :hammer: Intent All method names that have started with make are changed to create
 * :fire: Remove Windowx isLandscape, isPortrait method
-* :fire: Displayx getDisplayMetrics rename to getScreenMetrics,
-    getDensity rename to getDensity,
-    getScreenDensityDpi rename to getDensityDpi,
-    isPortraitOrientation rename to isOrientationPortrait
+* :fire: Displayx getDisplayMetrics rename to getScreenMetrics, getDensity rename to getDensity, getScreenDensityDpi rename to getDensityDpi, isPortraitOrientation rename to isOrientationPortrait
 * :sparkles: Displayx add isOrientationLandscape, isOrientationUndefined
 * :fire: Windowx getDisplayRotation, getStatusBarHeight, hasNavigationBar, getNavigationBarHeight, getNavigationBarWidth method moved to Displayx
 * :sparkles: Displayx add getRotation
@@ -17,6 +14,10 @@
 * :bug: Fix StorageManagerCompat's getVolumeList and getStorageVolumes methods return inconsistent bugs on the 8.1 emulator
 * :fire: StorageManagerCompat getStorageVolumes rename to getVolumes, getStorageVolume rename to getVolume
 * :fire: Storagex's getVolumeList method now returns List<StorageVolumeCompat>, increments getVolumes method returns StorageVolumeCompat\[\], getStorageVolume method renames to getVolume
+* :hammer: Now all methods in androidx-kt are extensions to androidx, so some duplicate classes or constants have been removed. Please use the corresponding class or constant in androidx now.
+    * ClipContent.kt, ClipHtmlText.kt, ClipIntent.kt, ClipPlainText.kt, ClipUri.kt,
+    * NetworkState.kt, StorageManagerCompat.kt, StorageVolumeCompat.kt, WeakAsyncTask.kt
+
 
 
 ### v0.2.3

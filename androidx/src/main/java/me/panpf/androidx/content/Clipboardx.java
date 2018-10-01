@@ -23,6 +23,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -85,24 +86,24 @@ public class Clipboardx {
     /**
      * Copy html text
      */
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     public static void copyHtmlText(@NotNull Context context, @NotNull CharSequence label, @NotNull ClipHtmlText[] htmlContents) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            if (htmlContents.length <= 0) return;
-            ClipHtmlText htmlContent = htmlContents[0];
-            ClipData data = ClipData.newHtmlText(label, htmlContent.text, htmlContent.htmlText);
-            if (htmlContents.length > 1) {
-                for (int index : Rangex.until(1, htmlContents.length)) {
-                    htmlContent = htmlContents[index];
-                    data.addItem(new ClipData.Item(htmlContent.text, htmlContent.htmlText));
-                }
+        if (htmlContents.length <= 0) return;
+        ClipHtmlText htmlContent = htmlContents[0];
+        ClipData data = ClipData.newHtmlText(label, htmlContent.text, htmlContent.htmlText);
+        if (htmlContents.length > 1) {
+            for (int index : Rangex.until(1, htmlContents.length)) {
+                htmlContent = htmlContents[index];
+                data.addItem(new ClipData.Item(htmlContent.text, htmlContent.htmlText));
             }
-            copy(context, data);
         }
+        copy(context, data);
     }
 
     /**
      * Copy html text
      */
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     public static void copyHtmlText(@NotNull Context context, @NotNull ClipHtmlText[] htmlContents) {
         copyHtmlText(context, "htmlText", htmlContents);
     }
@@ -110,6 +111,7 @@ public class Clipboardx {
     /**
      * Copy html text
      */
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     public static void copyHtmlText(@NotNull Context context, @NotNull CharSequence label, @NotNull CharSequence text, @NotNull String htmlText) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             copy(context, ClipData.newHtmlText(label, text, htmlText));
@@ -119,6 +121,7 @@ public class Clipboardx {
     /**
      * Copy html text
      */
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     public static void copyHtmlText(@NotNull Context context, @NotNull CharSequence text, @NotNull String htmlText) {
         copyHtmlText(context, "htmlText", text, htmlText);
     }
@@ -340,7 +343,7 @@ public class Clipboardx {
                 }
             }
         }
-        return objectList.toArray(new ClipContent[objectList.size()]);
+        return objectList.toArray(new ClipContent[0]);
     }
 
     /**
@@ -377,7 +380,7 @@ public class Clipboardx {
                 textList.add(data.getItemAt(index).getText());
             }
         }
-        return textList.toArray(new CharSequence[textList.size()]);
+        return textList.toArray(new CharSequence[0]);
     }
 
 
@@ -385,8 +388,8 @@ public class Clipboardx {
      * Get current clip html text data
      */
     @Nullable
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     public static ClipHtmlText getHtmlText(@NotNull Context context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) return null;
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -404,8 +407,8 @@ public class Clipboardx {
      * Get current clip all html text data
      */
     @Nullable
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
     public static ClipHtmlText[] getHtmlTexts(@NotNull Context context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) return null;
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -420,7 +423,7 @@ public class Clipboardx {
                 htmlTestList.add(new ClipHtmlText(mimeType, clipDataItem.getText(), clipDataItem.getHtmlText()));
             }
         }
-        return htmlTestList.toArray(new ClipHtmlText[htmlTestList.size()]);
+        return htmlTestList.toArray(new ClipHtmlText[0]);
     }
 
 
@@ -458,7 +461,7 @@ public class Clipboardx {
                 intentList.add(data.getItemAt(index).getIntent());
             }
         }
-        return intentList.toArray(new Intent[intentList.size()]);
+        return intentList.toArray(new Intent[0]);
     }
 
 
@@ -502,7 +505,7 @@ public class Clipboardx {
                 }
             }
         }
-        return uriList.toArray(new ClipUri[uriList.size()]);
+        return uriList.toArray(new ClipUri[0]);
     }
 
 
@@ -528,11 +531,12 @@ public class Clipboardx {
     /**
      * Clean clip data
      */
+    @RequiresApi(Build.VERSION_CODES.P)
     public static void clear(@NotNull Context context) {
-        if (Build.VERSION.SDK_INT >= 28) {
-            ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-            if (clipboardManager == null) throw new IllegalStateException("ClipboardManager not found");
-            clipboardManager.clearPrimaryClip();
-        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return;
+        ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        if (clipboardManager == null)
+            throw new IllegalStateException("ClipboardManager not found");
+        clipboardManager.clearPrimaryClip();
     }
 }

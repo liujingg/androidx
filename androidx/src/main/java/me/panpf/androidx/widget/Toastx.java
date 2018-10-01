@@ -26,7 +26,9 @@ import me.panpf.androidx.Androidx;
 
 public class Toastx {
 
+
     /* ************************************* Context ***************************************** */
+
 
     public static void showLong(@NonNull Context context, @NonNull final String message) {
         final Context appContext = context.getApplicationContext();
@@ -108,7 +110,9 @@ public class Toastx {
         });
     }
 
-    /* ************************************* SupportFragment ***************************************** */
+
+    /* ************************************ android.support.v4.app.Fragment **************************************** */
+
 
     public static void showLong(@NonNull android.support.v4.app.Fragment fragment, @NonNull final String message) {
         final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
@@ -198,7 +202,101 @@ public class Toastx {
         });
     }
 
+
+    /* ************************************* android.app.Fragment ***************************************** */
+
+
+    public static void showLong(@NonNull android.app.Fragment fragment, @NonNull final String message) {
+        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
+        if (appContext == null) return;
+        Androidx.runInUI(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(appContext, message, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public static void showLong(@NonNull android.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
+        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
+        if (appContext == null) return;
+        Androidx.runInUI(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public static void showLong(@NonNull android.app.Fragment fragment, @StringRes final int messageResId) {
+        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
+        if (appContext == null) return;
+        Androidx.runInUI(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(appContext, messageResId, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public static void showLong(@NonNull android.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
+        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
+        if (appContext == null) return;
+        Androidx.runInUI(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public static void showShort(@NonNull android.app.Fragment fragment, @NonNull final String message) {
+        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
+        if (appContext == null) return;
+        Androidx.runInUI(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public static void showShort(@NonNull android.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
+        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
+        if (appContext == null) return;
+        Androidx.runInUI(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public static void showShort(@NonNull android.app.Fragment fragment, @StringRes final int messageResId) {
+        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
+        if (appContext == null) return;
+        Androidx.runInUI(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(appContext, messageResId, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    public static void showShort(@NonNull android.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
+        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
+        if (appContext == null) return;
+        Androidx.runInUI(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
     /* ************************************* View ***************************************** */
+
 
     public static void showLong(@NonNull View view, @NonNull final String message) {
         final Context appContext = view.getContext().getApplicationContext();
@@ -288,7 +386,9 @@ public class Toastx {
         });
     }
 
+
     /* ************************************* Show View ***************************************** */
+
 
     public static void showLongWithView(@NonNull final View view) {
         final Context appContext = view.getContext().getApplicationContext();

@@ -45,7 +45,7 @@ class StorageTest {
     fun testVolumeState() {
         val context = InstrumentationRegistry.getContext()
 
-        val volumeCompat = context.getStorageVolume(getExternalStorageDirectory())
+        val volumeCompat = context.getVolume(getExternalStorageDirectory())
         val volumeFile = volumeCompat?.pathFile
         assertNotNull(volumeFile)
 

@@ -14,23 +14,18 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.view
 
 import android.view.View
-import android.view.animation.AlphaAnimation
-import android.view.animation.Animation
 import android.view.animation.Animation.AnimationListener
-import android.view.animation.CycleInterpolator
-import android.view.animation.TranslateAnimation
+import me.panpf.androidx.view.ViewAnimx
+import me.panpf.androidx.view.ViewAnimx.DEFAULT_ANIMATION_DURATION
 
 /*
  * View animation related extension methods or properties
  */
-
-/**
- * 默认动画持续时间
- */
-const val DEFAULT_ANIMATION_DURATION: Long = 400
 
 /**
  * 透明度动画
@@ -41,30 +36,8 @@ const val DEFAULT_ANIMATION_DURATION: Long = 400
  * @param isBanClick        在执行动画的过程中是否禁止点击
  * @param listener 动画监听器
  */
-fun View.animAlpha(fromAlpha: Float, toAlpha: Float, durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                        isBanClick: Boolean = false, listener: AnimationListener? = null) {
-    this.clearAnimation()
-    val isClickable = this.isClickable
-
-    this.startAnimation(AlphaAnimation(fromAlpha, toAlpha).apply {
-        duration = durationMillis
-        setAnimationListener(object : AnimationListener {
-            override fun onAnimationStart(anim: Animation) {
-                if (isClickable && isBanClick) this@animAlpha.isClickable = false
-                listener?.onAnimationStart(anim)
-            }
-
-            override fun onAnimationRepeat(anim: Animation) {
-                listener?.onAnimationRepeat(anim)
-            }
-
-            override fun onAnimationEnd(anim: Animation) {
-                if (isClickable && isBanClick) this@animAlpha.isClickable = true
-                listener?.onAnimationEnd(anim)
-            }
-        })
-    })
-}
+inline fun View.animAlpha(fromAlpha: Float, toAlpha: Float, durationMillis: Long = DEFAULT_ANIMATION_DURATION,
+                   isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.animAlpha(this, fromAlpha, toAlpha, durationMillis, isBanClick, listener)
 
 /**
  * 移动动画
@@ -78,32 +51,9 @@ fun View.animAlpha(fromAlpha: Float, toAlpha: Float, durationMillis: Long = DEFA
  * @param isBanClick     在执行动画的过程中是否禁止点击
  * @param listener       动画监听器
  */
-fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float, cycles: Float,
-                            durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                            isBanClick: Boolean = false, listener: AnimationListener? = null) {
-    this.clearAnimation()
-    val isClickable = this.isClickable
-
-    this.startAnimation(TranslateAnimation(fromXDelta, toXDelta, fromYDelta, toYDelta).apply {
-        duration = durationMillis
-        if (cycles > 0.0f) interpolator = CycleInterpolator(cycles)
-        setAnimationListener(object : AnimationListener {
-            override fun onAnimationStart(anim: Animation) {
-                if (isClickable && isBanClick) this@animTranslate.isClickable = false
-                listener?.onAnimationStart(anim)
-            }
-
-            override fun onAnimationRepeat(anim: Animation) {
-                listener?.onAnimationRepeat(anim)
-            }
-
-            override fun onAnimationEnd(anim: Animation) {
-                if (isClickable && isBanClick) this@animTranslate.isClickable = true
-                listener?.onAnimationEnd(anim)
-            }
-        })
-    })
-}
+inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float, cycles: Float,
+                       durationMillis: Long = DEFAULT_ANIMATION_DURATION,
+                       isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, durationMillis, isBanClick, listener)
 
 /**
  * 视图左右摇晃
@@ -114,10 +64,8 @@ fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, to
  * @param isBanClick     在执行动画的过程中是否禁止点击
  * @param listener       动画监听器
  */
-fun View.shake(extent: Float = 10.0f, cycles: Float = 7f, durationMillis: Long = 700,
-               isBanClick: Boolean = false, listener: AnimationListener? = null) {
-    animTranslate(0.0f, extent, 0.0f, 0.0f, cycles, durationMillis, isBanClick, listener)
-}
+inline fun View.shake(extent: Float = 10.0f, cycles: Float = 7f, durationMillis: Long = 700,
+               isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.shake(this, extent, cycles, durationMillis, isBanClick, listener)
 
 /**
  * 视图上下震动
@@ -128,38 +76,15 @@ fun View.shake(extent: Float = 10.0f, cycles: Float = 7f, durationMillis: Long =
  * @param isBanClick     在执行动画的过程中是否禁止点击
  * @param listener       动画监听器
  */
-fun View.shock(extent: Float = 10.0f, cycles: Float = 7f, durationMillis: Long = 700,
-               isBanClick: Boolean = false, listener: AnimationListener? = null) {
-    animTranslate(0.0f, 0.0f, 0.0f, extent, cycles, durationMillis, isBanClick, listener)
-}
+inline fun View.shock(extent: Float = 10.0f, cycles: Float = 7f, durationMillis: Long = 700,
+               isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.shock(this, extent, cycles, durationMillis, isBanClick, listener)
 
 /**
  * 执行资源中定义的动画
  * @param animId   动画资源 ID
  * @param listener      动画监听器
  */
-fun View.startAnimFromRes(animId: Int, isBanClick: Boolean = false, listener: AnimationListener? = null) {
-    this.clearAnimation()
-    val isClickable = this.isClickable
-
-    startAnimation(android.view.animation.AnimationUtils.loadAnimation(context, animId).apply {
-        setAnimationListener(object : AnimationListener {
-            override fun onAnimationStart(anim: Animation) {
-                if (isClickable && isBanClick) this@startAnimFromRes.isClickable = false
-                listener?.onAnimationStart(anim)
-            }
-
-            override fun onAnimationRepeat(anim: Animation) {
-                listener?.onAnimationRepeat(anim)
-            }
-
-            override fun onAnimationEnd(anim: Animation) {
-                if (isClickable && isBanClick) this@startAnimFromRes.isClickable = true
-                listener?.onAnimationEnd(anim)
-            }
-        })
-    })
-}
+inline fun View.startAnimFromRes(animId: Int, isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.startAnimFromRes(this, animId, isBanClick, listener)
 
 /**
  * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.INVISIBLE
@@ -168,24 +93,8 @@ fun View.startAnimFromRes(animId: Int, isBanClick: Boolean = false, listener: An
  * @param isBanClick        在执行动画的过程中是否禁止点击
  * @param listener          动画监听器
  */
-fun View.invisibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                                   isBanClick: Boolean = false, listener: AnimationListener? = null) {
-    if (this.visibility == View.INVISIBLE) return
-    animAlpha(1.0f, 0.0f, durationMillis, isBanClick, object : AnimationListener {
-        override fun onAnimationStart(anim: Animation?) {
-            listener?.onAnimationStart(anim)
-        }
-
-        override fun onAnimationRepeat(anim: Animation?) {
-            listener?.onAnimationRepeat(anim)
-        }
-
-        override fun onAnimationEnd(anim: Animation?) {
-            this@invisibleByAnimAlpha.visibility = View.INVISIBLE
-            listener?.onAnimationEnd(anim)
-        }
-    })
-}
+inline fun View.invisibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
+                              isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.invisibleByAnimAlpha(this, durationMillis, isBanClick, listener)
 
 /**
  * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.GONE
@@ -194,24 +103,8 @@ fun View.invisibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
  * @param isBanClick        在执行动画的过程中是否禁止点击
  * @param listener          动画监听器
  */
-fun View.goneByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                              isBanClick: Boolean = false, listener: AnimationListener? = null) {
-    if (this.visibility == View.GONE) return
-    animAlpha(1.0f, 0.0f, durationMillis, isBanClick, object : AnimationListener {
-        override fun onAnimationStart(anim: Animation?) {
-            listener?.onAnimationStart(anim)
-        }
-
-        override fun onAnimationRepeat(anim: Animation?) {
-            listener?.onAnimationRepeat(anim)
-        }
-
-        override fun onAnimationEnd(anim: Animation?) {
-            this@goneByAnimAlpha.visibility = View.GONE
-            listener?.onAnimationEnd(anim)
-        }
-    })
-}
+inline fun View.goneByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
+                         isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.goneByAnimAlpha(this, durationMillis, isBanClick, listener)
 
 /**
  * 使用透明度渐变动画显示 View
@@ -220,9 +113,5 @@ fun View.goneByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
  * @param isBanClick        在执行动画的过程中是否禁止点击
  * @param listener          动画监听器
  */
-fun View.visibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                                 isBanClick: Boolean = false, listener: AnimationListener? = null) {
-    if (this.visibility == View.VISIBLE) return
-    this.visibility = View.VISIBLE
-    animAlpha(0.0f, 1.0f, durationMillis, isBanClick, listener)
-}
+inline fun View.visibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
+                            isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.visibleByAnimAlpha(this, durationMillis, isBanClick, listener)

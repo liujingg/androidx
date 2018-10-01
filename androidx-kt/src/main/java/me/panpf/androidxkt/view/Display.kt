@@ -14,36 +14,91 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.view
 
-import android.app.Activity
 import android.content.Context
-import android.content.res.Configuration
 import android.graphics.Point
 import android.util.DisplayMetrics
-import android.view.WindowManager
+import android.view.View
+import me.panpf.androidx.view.Displayx
+
 
 /*
  * Extension method related to screen display
  */
 
-val Context.screenSize: Point get() = Point().apply { (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getSize(this) }
 
-val Context.screenWidth: Int get() = Point().apply { (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getSize(this) }.x
+inline fun Context.getScreenSize(): Point = Displayx.getScreenSize(this)
 
-val Context.screenHeight: Int get() = Point().apply { (getSystemService(Context.WINDOW_SERVICE) as WindowManager).defaultDisplay.getSize(this) }.y
+inline fun Context.getScreenWidth(): Int = Displayx.getScreenWidth(this)
 
-val Context.displayMetrics: DisplayMetrics get() = this.resources.displayMetrics
-
-val Context.screenDensity: Float get() = this.resources.displayMetrics.density
-
-val Context.screenDensityDpi: Int get() = this.resources.displayMetrics.densityDpi
+inline fun Context.getScreenHeight(): Int = Displayx.getScreenHeight(this)
 
 
-fun Context.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+inline fun Context.getDisplayMetrics(): DisplayMetrics = Displayx.getMetrics(this)
 
-fun android.app.Fragment.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+inline fun Context.getDisplayDensity(): Float = Displayx.getDensity(this)
 
-fun android.support.v4.app.Fragment.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+inline fun Context.getDisplayDensityDpi(): Int = Displayx.getDensityDpi(this)
 
-fun Activity.isPortraitOrientation() = resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT
+
+inline fun Context.getDisplayRotation(): Int = Displayx.getRotation(this)
+
+inline fun android.support.v4.app.Fragment.getDisplayRotation(): Int = Displayx.getRotation(this)
+
+inline fun android.app.Fragment.getDisplayRotation(): Int = Displayx.getRotation(this)
+
+inline fun View.getDisplayRotation(): Int = Displayx.getRotation(this)
+
+
+inline fun Context.isOrientationPortrait(): Boolean = Displayx.isOrientationPortrait(this)
+
+inline fun android.app.Fragment.isOrientationPortrait(): Boolean = Displayx.isOrientationPortrait(this)
+
+inline fun android.support.v4.app.Fragment.isOrientationPortrait(): Boolean = Displayx.isOrientationPortrait(this)
+
+inline fun View.isOrientationPortrait(): Boolean = Displayx.isOrientationPortrait(this)
+
+
+inline fun Context.isOrientationLandscape(): Boolean = Displayx.isOrientationLandscape(this)
+
+inline fun android.app.Fragment.isOrientationLandscape(): Boolean = Displayx.isOrientationLandscape(this)
+
+inline fun android.support.v4.app.Fragment.isOrientationLandscape(): Boolean = Displayx.isOrientationLandscape(this)
+
+inline fun View.isOrientationLandscape(): Boolean = Displayx.isOrientationLandscape(this)
+
+
+inline fun Context.isOrientationUndefined(): Boolean = Displayx.isOrientationUndefined(this)
+
+inline fun android.app.Fragment.isOrientationUndefined(): Boolean = Displayx.isOrientationUndefined(this)
+
+inline fun android.support.v4.app.Fragment.isOrientationUndefined(): Boolean = Displayx.isOrientationUndefined(this)
+
+inline fun View.isOrientationUndefined(): Boolean = Displayx.isOrientationUndefined(this)
+
+
+/**
+ * Get the height of the system status bar.
+ *
+ * @return The height of the status bar (in pixels).
+ */
+inline fun Context.getStatusBarHeight(): Int = Displayx.getStatusBarHeight(this)
+
+
+/**
+ * Whether you have a navigation bar
+ */
+inline fun Context.hasNavigationBar(): Boolean = Displayx.hasNavigationBar(this)
+
+/**
+ * Get the height of the navigation bar
+ */
+inline fun Context.getNavigationBarHeight(): Int = Displayx.getNavigationBarHeight(this)
+
+/**
+ * Get the width of the navigation bar
+ */
+inline fun Context.getNavigationBarWidth(): Int = Displayx.getNavigationBarWidth(this)

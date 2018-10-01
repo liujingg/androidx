@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.graphics.drawable
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
-import me.panpf.androidxkt.graphics.createMatrixColorFilter
+import me.panpf.androidx.graphics.drawable.Drawablex
 
 /*
  * Drawable related extension methods
@@ -36,26 +36,8 @@ import me.panpf.androidxkt.graphics.createMatrixColorFilter
  * @param config      Bitmap configuration, default value Bitmap.Config.ARGB_8888
  * @param reuseBitmap Reusable Bitmap
  */
-fun Drawable.toBitmapWithIntrinsicSize(config: Bitmap.Config = Bitmap.Config.ARGB_8888, reuseBitmap: Bitmap? = null): Bitmap {
-    val intrinsicWidth = this.intrinsicWidth
-    val intrinsicHeight = this.intrinsicHeight
-    require(intrinsicWidth > 0 && intrinsicHeight > 0) { "Both drawable intrinsicWidth and intrinsicHeight must be greater than 0" }
-
-    val originBounds = Rect(this.bounds)
-
-    this.setBounds(0, 0, intrinsicWidth, intrinsicHeight)
-
-    var bitmap = reuseBitmap
-    if (bitmap == null) {
-        bitmap = Bitmap.createBitmap(intrinsicWidth, intrinsicHeight, config)
-    }
-    val canvas = Canvas(bitmap!!)
-    this.draw(canvas)
-
-    // Restore bounds
-    this.bounds = originBounds
-    return bitmap
-}
+inline fun Drawable.toBitmapWithIntrinsicSize(config: Bitmap.Config = Bitmap.Config.ARGB_8888, reuseBitmap: Bitmap? = null): Bitmap =
+        Drawablex.toBitmapWithIntrinsicSize(this, config, reuseBitmap)
 
 /**
  * Convert Drawable to bitmap, use bounds size as the size of the new bitmap
@@ -64,43 +46,19 @@ fun Drawable.toBitmapWithIntrinsicSize(config: Bitmap.Config = Bitmap.Config.ARG
  * @param config      Bitmap configuration, default value Bitmap.Config.ARGB_8888
  * @param reuseBitmap Reusable Bitmap
  */
-fun Drawable.toBitmapWithBoundsSize(config: Bitmap.Config = Bitmap.Config.ARGB_8888, reuseBitmap: Bitmap? = null): Bitmap {
-    val originBounds = Rect(this.bounds)
-    if (originBounds.isEmpty) throw IllegalStateException("drawable bounds is empty")
-
-    var bitmap = reuseBitmap
-    if (bitmap == null) {
-        bitmap = Bitmap.createBitmap(originBounds.width(), originBounds.height(), config)
-    }
-    if (originBounds.left != 0 || originBounds.top != 0) {
-        this.setBounds(0, 0, originBounds.width(), originBounds.height())
-    }
-    val canvas = Canvas(bitmap!!)
-    this.draw(canvas)
-
-    // Restore bounds
-    if (originBounds.left != 0 || originBounds.top != 0) {
-        this.bounds = originBounds
-    }
-    return bitmap
-}
+inline fun Drawable.toBitmapWithBoundsSize(config: Bitmap.Config = Bitmap.Config.ARGB_8888, reuseBitmap: Bitmap? = null): Bitmap =
+        Drawablex.toBitmapWithBoundsSize(this, config, reuseBitmap)
 
 
 /**
  * Change the color of the drawable
  */
-fun <T : Drawable> T.toDrawableByColor(@ColorInt color: Int): T {
-    @Suppress("UNCHECKED_CAST")
-    val newDrawable: T = this.mutate() as T
-    newDrawable.colorFilter = color.createMatrixColorFilter()
-    return newDrawable
-}
+inline fun <T : Drawable> T.toDrawableByColor(@ColorInt color: Int): T = Drawablex.toDrawableByColor(this, color)
 
 /**
  * Change the color of the resource drawable
  *
  * @param resId Drawable resource id
  */
-fun Context.toDrawableByColorFromDrawableRes(@DrawableRes resId: Int, @ColorInt color: Int): Drawable {
-    return this.resources.getDrawable(resId).toDrawableByColor(color)
-}
+inline fun Context.toDrawableByColorFromDrawableRes(@DrawableRes resId: Int, @ColorInt color: Int): Drawable =
+        Drawablex.toDrawableByColorFromDrawableRes(this, resId, color)

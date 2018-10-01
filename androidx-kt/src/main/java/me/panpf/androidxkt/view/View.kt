@@ -14,155 +14,58 @@
  * limitations under the License.
  */
 
+@file:Suppress("NOTHING_TO_INLINE")
+
 package me.panpf.androidxkt.view
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.graphics.Matrix
 import android.support.annotation.LayoutRes
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import me.panpf.androidxkt.widget.showShortToast
+import me.panpf.androidx.view.Viewx
 
 /*
  * View related extension method
  */
 
 
-fun View.setLongClickToastHint(hintContent: String) {
-    this.setOnLongClickListener {
-        this.showShortToast(hintContent)
-        true
-    }
-}
+inline fun View.setLongClickToastHint(hintContent: String) = Viewx.setLongClickToastHint(this, hintContent)
 
-fun View.setLongClickToastHint(hintContentId: Int) {
-    this.setLongClickToastHint(context.getString(hintContentId))
-}
+inline fun View.setLongClickToastHint(hintContentId: Int) = Viewx.setLongClickToastHint(this, hintContentId)
 
 
-fun View.setLayoutWidth(newWidth: Int, initHeight: Int) {
-    var layoutParams: ViewGroup.LayoutParams? = this.layoutParams
-    if (layoutParams == null) {
-        layoutParams = ViewGroup.LayoutParams(newWidth, initHeight)
-    } else {
-        layoutParams.width = newWidth
-    }
-    this.layoutParams = layoutParams
-}
+inline fun View.setLayoutWidth(newWidth: Int, initHeight: Int) = Viewx.setLayoutWidth(this, newWidth, initHeight)
 
-fun View.setLayoutWidth(newWidth: Int) {
-    val layoutParams = this.layoutParams
-    if (layoutParams != null) {
-        layoutParams.width = newWidth
-        this.layoutParams = layoutParams
-    }
-}
+inline fun View.setLayoutWidth(newWidth: Int) = Viewx.setLayoutWidth(this, newWidth)
 
-fun View.setLayoutHeight(newHeight: Int, initWidth: Int) {
-    var layoutParams: ViewGroup.LayoutParams? = this.layoutParams
-    if (layoutParams == null) {
-        layoutParams = ViewGroup.LayoutParams(initWidth, newHeight)
-    } else {
-        layoutParams.height = newHeight
-    }
-    this.layoutParams = layoutParams
-}
+inline fun View.setLayoutHeight(newHeight: Int, initWidth: Int) = Viewx.setLayoutHeight(this, newHeight, initWidth)
 
-fun View.setLayoutHeight(newHeight: Int) {
-    val layoutParams = this.layoutParams
-    if (layoutParams != null) {
-        layoutParams.height = newHeight
-        this.layoutParams = layoutParams
-    }
-}
+inline fun View.setLayoutHeight(newHeight: Int) = Viewx.setLayoutHeight(this, newHeight)
 
-fun View.setLayoutSize(width: Int, height: Int) {
-    var layoutParams: ViewGroup.LayoutParams? = this.layoutParams
-    if (layoutParams == null) {
-        layoutParams = ViewGroup.LayoutParams(width, height)
-    } else {
-        layoutParams.width = width
-        layoutParams.height = height
-    }
-    this.layoutParams = layoutParams
-}
+inline fun View.setLayoutSize(width: Int, height: Int) = Viewx.setLayoutSize(this, width, height)
 
-fun View.setLayoutMarginTop(newMarinTop: Int) {
-    val layoutParams = this.layoutParams
-    if (layoutParams != null && layoutParams is ViewGroup.MarginLayoutParams) {
-        layoutParams.topMargin = newMarinTop
-        this.layoutParams = layoutParams
-    }
-}
+inline fun View.setLayoutMarginTop(newMarinTop: Int) = Viewx.setLayoutMarginTop(this, newMarinTop)
 
 
-fun View.addLayoutHeight(addHeight: Int) {
-    val layoutParams = this.layoutParams
-    if (layoutParams != null) {
-        layoutParams.height += addHeight
-        this.layoutParams = layoutParams
-    }
-}
+inline fun View.addLayoutWidth(addWidth: Int) = Viewx.addLayoutWidth(this, addWidth)
 
-fun View.addLayoutWidth(addWidth: Int) {
-    val layoutParams = this.layoutParams
-    if (layoutParams != null) {
-        layoutParams.width += addWidth
-        this.layoutParams = layoutParams
-    }
-}
+inline fun View.addLayoutHeight(addHeight: Int) = Viewx.addLayoutHeight(this, addHeight)
 
-fun View.addLayoutSize(addWidth: Int, addHeight: Int) {
-    val layoutParams = this.layoutParams
-    if (layoutParams != null) {
-        layoutParams.width += addWidth
-        layoutParams.height += addHeight
-        this.layoutParams = layoutParams
-    }
-}
+inline fun View.addLayoutSize(addWidth: Int, addHeight: Int) = Viewx.addLayoutSize(this, addWidth, addHeight)
 
-fun View.addLayoutMarginTop(addMarinTop: Int) {
-    val layoutParams = this.layoutParams
-    if (layoutParams != null && layoutParams is ViewGroup.MarginLayoutParams) {
-        layoutParams.topMargin += addMarinTop
-        this.layoutParams = layoutParams
-    }
-}
+inline fun View.addLayoutMarginTop(addMarinTop: Int) = Viewx.addLayoutMarginTop(this, addMarinTop)
 
-fun View.toBitmap(config: Bitmap.Config, scale: Float = 1.0f): Bitmap {
-    var bitmapWidth = this.width
-    var bitmapHeight = this.height
-    val matrix = Matrix()
+inline fun View.toBitmap(config: Bitmap.Config, scale: Float): Bitmap = Viewx.toBitmap(this, config, scale)
 
-    if (scale > 0) {
-        bitmapWidth = (bitmapWidth * scale).toInt()
-        bitmapHeight = (bitmapHeight * scale).toInt()
-        matrix.setScale(scale, scale)
-    }
+inline fun View.toBitmap(config: Bitmap.Config): Bitmap = Viewx.toBitmap(this, config)
 
-    val bitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, config)
-    val canvas = Canvas(bitmap)
-    canvas.matrix = matrix
-    this.draw(canvas)
+inline fun View.toBitmapByMaxWidth(config: Bitmap.Config, maxWidth: Int): Bitmap = Viewx.toBitmapByMaxWidth(this, config, maxWidth)
 
-    return bitmap
-}
+inline fun View.toBitmapByMaxHeight(config: Bitmap.Config, maxHeight: Int): Bitmap = Viewx.toBitmapByMaxHeight(this, config, maxHeight)
 
-fun View.toBitmapByMaxWidth(config: Bitmap.Config, maxWidth: Int): Bitmap {
-    return toBitmap(config, Math.min(maxWidth.toFloat() / this.width, 1.0f))
-}
 
-fun View.toBitmapByMaxHeight(config: Bitmap.Config, maxHeight: Int): Bitmap {
-    return toBitmap(config, Math.min(maxHeight.toFloat() / this.height, 1.0f))
-}
+inline fun Context.inflateLayout(@LayoutRes id: Int, parent: ViewGroup? = null, attachToRoot: Boolean = false): View =
+        Viewx.inflateLayout(this, id, parent, attachToRoot)
 
-fun Context.inflateLayout(@LayoutRes id: Int, parent: ViewGroup? = null, attachToRoot: Boolean = false): View {
-    return LayoutInflater.from(this).inflate(id, parent, attachToRoot)
-}
-
-fun Context.inflateLayout(@LayoutRes id: Int, parent: ViewGroup? = null): View {
-    return LayoutInflater.from(this).inflate(id, parent, false)
-}
+inline fun Context.inflateLayout(@LayoutRes id: Int, parent: ViewGroup? = null): View = Viewx.inflateLayout(this, id, parent)

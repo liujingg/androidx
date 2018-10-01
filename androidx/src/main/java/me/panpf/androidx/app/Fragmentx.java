@@ -69,32 +69,6 @@ public class Fragmentx {
     }
 
     /**
-     * Instantiate a Fragment and set arguments
-     */
-    public static android.support.v4.app.Fragment instanceOrigin(@NotNull Class<? extends android.support.v4.app.Fragment> clas, @Nullable Bundle arguments) {
-        android.support.v4.app.Fragment fragment;
-        //noinspection TryWithIdenticalCatches
-        try {
-            fragment = clas.newInstance();
-        } catch (InstantiationException e) {
-            throw new IllegalArgumentException(e);
-        } catch (IllegalAccessException e) {
-            throw new IllegalArgumentException(e);
-        }
-        if (arguments != null) {
-            fragment.setArguments(arguments);
-        }
-        return fragment;
-    }
-
-    /**
-     * Instantiate a Fragment and set arguments
-     */
-    public static android.support.v4.app.Fragment instanceOrigin(@NotNull Class<? extends android.support.v4.app.Fragment> clas) {
-        return instanceOrigin(clas, null);
-    }
-
-    /**
      * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
      */
     @Nullable
@@ -127,7 +101,33 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static android.app.Fragment instance(@NotNull Class<? extends android.app.Fragment> clas, @Nullable Bundle arguments) {
+    public static android.support.v4.app.Fragment instance(@NotNull Class<? extends android.support.v4.app.Fragment> clas, @Nullable Bundle arguments) {
+        android.support.v4.app.Fragment fragment;
+        //noinspection TryWithIdenticalCatches
+        try {
+            fragment = clas.newInstance();
+        } catch (InstantiationException e) {
+            throw new IllegalArgumentException(e);
+        } catch (IllegalAccessException e) {
+            throw new IllegalArgumentException(e);
+        }
+        if (arguments != null) {
+            fragment.setArguments(arguments);
+        }
+        return fragment;
+    }
+
+    /**
+     * Instantiate a Fragment and set arguments
+     */
+    public static android.support.v4.app.Fragment instance(@NotNull Class<? extends android.support.v4.app.Fragment> clas) {
+        return instance(clas, null);
+    }
+
+    /**
+     * Instantiate a Fragment and set arguments
+     */
+    public static android.app.Fragment instanceOrigin(@NotNull Class<? extends android.app.Fragment> clas, @Nullable Bundle arguments) {
         android.app.Fragment fragment;
         //noinspection TryWithIdenticalCatches
         try {
@@ -146,7 +146,7 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static android.app.Fragment instance(@NotNull Class<? extends android.app.Fragment> clas) {
-        return instance(clas, null);
+    public static android.app.Fragment instanceOrigin(@NotNull Class<? extends android.app.Fragment> clas) {
+        return instanceOrigin(clas, null);
     }
 }
