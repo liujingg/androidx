@@ -117,7 +117,7 @@ because there are different package names, so there will be no class duplicates.
 * Storage: [Storagex.java] | [Storage.kt]
     * getFreeBytes, getTotalBytes, getAvailableBytes, getVolumeState, isVolumeMounted, isPrimaryVolume,
     * isVolumeEmulated, isVolumeRemovable, getVolumePaths, getMountedVolumePaths, getVolumeFiles,
-    * getMountedVolumeFiles, getVolumeList, getMountedVolumeList, getStorageVolume,
+    * getMountedVolumeFiles, getVolumeList, getMountedVolumeList, getVolumes, getMountedVolumes, getVolume,
     * getExternalStorageState, isExternalStorageMounted, isPrimaryExternalStorage, isExternalStorageEmulated,
     * isExternalStorageEmulated, isExternalStorageRemovable, isExternalStorageRemovable,
     * getExternalStorageDirectory, getMountedExternalStorageDirectory, getExternalStorageDirectorys,
@@ -130,8 +130,7 @@ because there are different package names, so there will be no class duplicates.
 * StatFs: [StatFsx.java] ([Test][StatFsTest.java]) | [StatFs.kt] ([Test][StatFsTest.kt])
     * getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes
 * StorageManagerCompat: [StorageManagerCompat.java] ([Test][StorageManagerCompatTest.java]) | [StorageManagerCompat.kt] ([Test][StorageManagerCompatTest.kt])
-    * getVolumeList, getVolumes, getVolumePaths, getVolumeState, get
-    Volume
+    * getVolumeList, getVolumes, getVolumePaths, getVolumeState, getVolume
 * StorageVolumeCompat: [StorageVolumeCompat.java] ([Test][StorageVolumeCompatTest.java]) | [StorageVolumeCompat.kt] ([Test][StorageVolumeCompatTest.kt])
     * getPath, getPathFile, isPrimary, isRemovable, isEmulated, getState, allowMassStorage, getMaxFileSize,
 

@@ -16,7 +16,7 @@
 * :sparkles: Settingsx add getWindowBrightness, isWindowBrightnessFlowSystem method
 * :bug: Fix StorageManagerCompat's getVolumeList and getStorageVolumes methods return inconsistent bugs on the 8.1 emulator
 * :fire: StorageManagerCompat getStorageVolumes rename to getVolumes, getStorageVolume rename to getVolume
-
+* :fire: Storagex's getVolumeList method now returns List<StorageVolumeCompat>, increments getVolumes method returns StorageVolumeCompat\[\], getStorageVolume method renames to getVolume
 
 
 ### v0.2.3

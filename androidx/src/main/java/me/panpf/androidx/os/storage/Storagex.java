@@ -98,7 +98,7 @@ public class Storagex {
      */
     @NotNull
     public static String getVolumeState(@NotNull Context context, @NotNull File path) {
-        StorageVolumeCompat volumeCompat = getStorageVolume(context, path);
+        StorageVolumeCompat volumeCompat = getVolume(context, path);
         return volumeCompat != null ? volumeCompat.getState(context) : "unknown";
     }
 
@@ -114,7 +114,7 @@ public class Storagex {
      * Return true if the volume of the given path is the primary volume
      */
     public static boolean isPrimaryVolume(@NotNull Context context, @NotNull File path) {
-        StorageVolumeCompat volumeCompat = getStorageVolume(context, path);
+        StorageVolumeCompat volumeCompat = getVolume(context, path);
         return volumeCompat != null && volumeCompat.isPrimary();
     }
 
@@ -122,7 +122,7 @@ public class Storagex {
      * Return true if the volume of the given path is the emulated volume
      */
     public static boolean isVolumeEmulated(@NotNull Context context, @NotNull File path) {
-        StorageVolumeCompat volumeCompat = getStorageVolume(context, path);
+        StorageVolumeCompat volumeCompat = getVolume(context, path);
         return volumeCompat != null && volumeCompat.isEmulated();
     }
 
@@ -130,7 +130,7 @@ public class Storagex {
      * Return true if the volume of the given path is the removable volume
      */
     public static boolean isVolumeRemovable(@NotNull Context context, @NotNull File path) {
-        StorageVolumeCompat volumeCompat = getStorageVolume(context, path);
+        StorageVolumeCompat volumeCompat = getVolume(context, path);
         return volumeCompat != null && volumeCompat.isRemovable();
     }
 
@@ -189,7 +189,7 @@ public class Storagex {
      * Returns list of StorageVolume for all volumes.
      */
     @NotNull
-    public static StorageVolumeCompat[] getVolumeList(@NotNull Context context) {
+    public static List<StorageVolumeCompat> getVolumeList(@NotNull Context context) {
         return new StorageManagerCompat(context).getVolumeList();
     }
 
@@ -197,8 +197,29 @@ public class Storagex {
      * Returns list of StorageVolume for all mounted volumes.
      */
     @NotNull
-    public static StorageVolumeCompat[] getMountedVolumeList(@NotNull final Context context) {
-        return Arrayx.filter(getVolumeList(context), new Predicate<StorageVolumeCompat>() {
+    public static List<StorageVolumeCompat> getMountedVolumeList(@NotNull final Context context) {
+        return Collectionx.filter(getVolumeList(context), new Predicate<StorageVolumeCompat>() {
+            @Override
+            public boolean accept(@NotNull StorageVolumeCompat storageVolumeCompat) {
+                return Environment.MEDIA_MOUNTED.equals(storageVolumeCompat.getState(context));
+            }
+        });
+    }
+
+    /**
+     * Returns array of StorageVolume for all volumes.
+     */
+    @NotNull
+    public static StorageVolumeCompat[] getVolumes(@NotNull Context context) {
+        return new StorageManagerCompat(context).getVolumes();
+    }
+
+    /**
+     * Returns array of StorageVolume for all mounted volumes.
+     */
+    @NotNull
+    public static StorageVolumeCompat[] getMountedVolumes(@NotNull final Context context) {
+        return Arrayx.filter(getMountedVolumes(context), new Predicate<StorageVolumeCompat>() {
             @Override
             public boolean accept(@NotNull StorageVolumeCompat storageVolumeCompat) {
                 return Environment.MEDIA_MOUNTED.equals(storageVolumeCompat.getState(context));
@@ -211,8 +232,8 @@ public class Storagex {
      * Returns StorageVolume for path.
      */
     @Nullable
-    public static StorageVolumeCompat getStorageVolume(@NotNull Context context, @NotNull File path) {
-        return new StorageManagerCompat(context).getStorageVolume(path);
+    public static StorageVolumeCompat getVolume(@NotNull Context context, @NotNull File path) {
+        return new StorageManagerCompat(context).getVolume(path);
     }
 
 
@@ -282,7 +303,7 @@ public class Storagex {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return Environment.isExternalStorageEmulated(path);
         } else {
-            StorageVolumeCompat storageVolume = new StorageManagerCompat(context).getStorageVolume(path);
+            StorageVolumeCompat storageVolume = new StorageManagerCompat(context).getVolume(path);
             return storageVolume != null && storageVolume.isEmulated();
         }
     }
@@ -301,7 +322,7 @@ public class Storagex {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return Environment.isExternalStorageRemovable(path);
         } else {
-            StorageVolumeCompat storageVolume = new StorageManagerCompat(context).getStorageVolume(path);
+            StorageVolumeCompat storageVolume = new StorageManagerCompat(context).getVolume(path);
             return storageVolume != null && storageVolume.isRemovable();
         }
     }
