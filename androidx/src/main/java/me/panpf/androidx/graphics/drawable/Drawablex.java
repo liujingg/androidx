@@ -172,7 +172,7 @@ public class Drawablex {
     public static <T extends Drawable> T toDrawableByColor(@NotNull T drawable, @ColorInt int color) {
         //noinspection unchecked
         T newDrawable = (T) drawable.mutate();
-        newDrawable.setColorFilter(Colorx.makeMatrixColorFilter(color));
+        newDrawable.setColorFilter(Colorx.createMatrixColorFilter(color));
         return drawable;
     }
 

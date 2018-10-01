@@ -525,7 +525,7 @@ public class Colorx {
      *
      * @param noAlphaRgbColor RGB color value (alpha value is useless)
      */
-    public static ColorMatrixColorFilter makeMatrixColorFilter(@ColorInt int noAlphaRgbColor) {
+    public static ColorMatrixColorFilter createMatrixColorFilter(@ColorInt int noAlphaRgbColor) {
         float mRed = Color.red(noAlphaRgbColor);
         float mGreen = Color.green(noAlphaRgbColor);
         float mBlue = Color.blue(noAlphaRgbColor);

@@ -23,7 +23,7 @@ import android.graphics.Rect
 import android.graphics.drawable.Drawable
 import android.support.annotation.ColorInt
 import android.support.annotation.DrawableRes
-import me.panpf.androidxkt.graphics.makeMatrixColorFilter
+import me.panpf.androidxkt.graphics.createMatrixColorFilter
 
 /*
  * Drawable related extension methods
@@ -92,7 +92,7 @@ fun Drawable.toBitmapWithBoundsSize(config: Bitmap.Config = Bitmap.Config.ARGB_8
 fun <T : Drawable> T.toDrawableByColor(@ColorInt color: Int): T {
     @Suppress("UNCHECKED_CAST")
     val newDrawable: T = this.mutate() as T
-    newDrawable.colorFilter = color.makeMatrixColorFilter()
+    newDrawable.colorFilter = color.createMatrixColorFilter()
     return newDrawable
 }
 

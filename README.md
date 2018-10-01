@@ -92,7 +92,7 @@ because there are different package names, so there will be no class duplicates.
 * Color: [Colorx.java] ([Test][ColorTest.java]) | [Color.kt] ([Test][ColorTest.kt])
     * WHITE/BLACK/RED..., getAlpha, setAlpha, addAlpha, getHSVHue, setHSVHue, getHSVSaturation,
     * setHSVSaturation, addHSVSaturation, getHSVValue, setHSVValue, addHSVValue, isLight,
-    * makeMatrixColorFilter, argbEvaluate
+    * createMatrixColorFilter, argbEvaluate
 * Matrix: [Matrixx.java] | [Matrix.kt]
     * getValue, getScale
 * OpenGl: [OpenGlx.java] | [OpenGl.kt]

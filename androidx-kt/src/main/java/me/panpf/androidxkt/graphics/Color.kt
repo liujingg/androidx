@@ -541,7 +541,7 @@ fun Int.isLightColor(): Boolean {
  *
  * @receiver rgb color value (alpha value is useless)
  */
-fun Int.makeMatrixColorFilter(): ColorMatrixColorFilter {
+fun Int.createMatrixColorFilter(): ColorMatrixColorFilter {
     val mRed = Color.red(this).toFloat()
     val mGreen = Color.green(this).toFloat()
     val mBlue = Color.blue(this).toFloat()

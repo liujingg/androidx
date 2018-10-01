@@ -138,6 +138,6 @@ fun Bitmap.toDrawableByColor(@ColorInt color: Int, resources: Resources? = null)
     if (resources == null) {
         bitmapDrawable.setTargetDensity(this.density)
     }
-    bitmapDrawable.colorFilter = color.makeMatrixColorFilter()
+    bitmapDrawable.colorFilter = color.createMatrixColorFilter()
     return bitmapDrawable
 }

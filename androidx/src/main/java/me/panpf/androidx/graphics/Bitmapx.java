@@ -188,7 +188,7 @@ public class Bitmapx {
         if (resources == null) {
             bitmapDrawable.setTargetDensity(bitmap.getDensity());
         }
-        bitmapDrawable.setColorFilter(Colorx.makeMatrixColorFilter(color));
+        bitmapDrawable.setColorFilter(Colorx.createMatrixColorFilter(color));
         return bitmapDrawable;
     }
 
