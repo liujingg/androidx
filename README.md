@@ -44,60 +44,60 @@ Dependencies:
 
 ## Index
 
-* Android: [Androidx.java] | [Android.kt]
+* Android: [Androidx.java] | [Androidx.kt]
     * getMainHandler, runInUI, isRooted, isMainThread, getInProcessName,
     * getInProcessNameSuffix, isMainProcess, isAtLeast\*, getVersionName, getVersionCodeName
 
 ### app
-* Activity: [Activityx.java] | [Activity.kt]
+* Activity: [Activityx.java] | [Activityx.kt]
     * isDestroyedCompat, convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
-* Dialog: [Dialogx.java] | [Dialog.kt]
+* Dialog: [Dialogx.java] | [Dialogx.kt]
     * setClickButtonClosable, showProgressDialog
-* Fragment: [Fragmentx.java] | [Fragment.kt]
+* Fragment: [Fragmentx.java] | [Fragmentx.kt]
     * isDestroyedCompat, getImplWithParent, instance,
-* Permission: [Permissionx.java] ([Test][PermissionTest.java]) | [Permission.kt] ([Test][PermissionTest.kt])
+* Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
 
 ### content
-* Package: [Packagex.java] | [Package.kt]
+* Package: [Packagex.java] | [Packagex.kt]
     * isInstalled, getVersionCode, getVersionName, getPackage, isSystemApp, getAllAppIdAndVersionCodeMap,
     * getAllAppIdAndVersionCodeSet, getAllAppId, getAllApp, getOne, count, getAppPackageFile,
     * getAppSignatureBytes, getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
-* Asset: [Assetx.java] | [Asset.kt]
+* Asset: [Assetx.java] | [Assetx.kt]
     * openInput, readBytes, readText, readLines, readBitmap
-* Clipboard: [Clipboardx.java] ([Test][ClipboardTest.java]) | [Clipboard.kt] ([Test][ClipboardTest.kt])
+* Clipboard: [Clipboardx.java] ([Test][ClipboardxTest.java]) | [Clipboardx.kt] ([Test][ClipboardxTest.kt])
     * copy, copyText, copyHtmlText, copyIntent, copyUri, copyRawUri, copyMimeTypeUri, copyContents,
     * get, getLabel, getContents, getText, getHtmlText, getIntent, getUri, addPrimaryClipChangedListener,
     * removePrimaryClipChangedListener, clear
-* Content: [Contentx.java] | [Content.kt]
+* Content: [Contentx.java] | [Contentx.kt]
     * openInput, readBytes, readText, readLines, readBitmap
-* Intent: [Intentx.java] | [Intent.kt]
+* Intent: [Intentx.java] | [Intentx.kt]
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
     * createLaunchAppIntent, createAppDetailInSystemIntent, createActivityIntentByResolveInfo, createTakePhotoIntent,
     * createPickImageIntent, createCropImageIntent, canStartActivity, safeStartActivity
-* Preference: [Preferencex.java] | [Preference.kt]
+* Preference: [Preferencex.java] | [Preferencex.kt]
     * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
     * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
 
 ### graphics
-* Drawable: [Drawablex.java] ([Test][DrawableTest.java])  | [Drawable.kt] ([Test][DrawableTest.kt])
+* Drawable: [Drawablex.java] ([Test][DrawablexTest.java])  | [Drawablex.kt] ([Test][DrawablexTest.kt])
     * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, toDrawableByColor, toDrawableByColorFromDrawableRes
-* Bitmap: [Bitmapx.java] | [Bitmap.kt]
+* Bitmap: [Bitmapx.java] | [Bitmapx.kt]
     * centerCrop, tint, createByColor, toByteArray, writeToFile, readBitmap, toDrawableByColor,
-* Color: [Colorx.java] ([Test][ColorTest.java]) | [Color.kt] ([Test][ColorTest.kt])
+* Color: [Colorx.java] ([Test][ColorxTest.java]) | [Colorx.kt] ([Test][ColorxTest.kt])
     * WHITE/BLACK/RED..., getAlpha, setAlpha, addAlpha, getHSVHue, setHSVHue, getHSVSaturation,
     * setHSVSaturation, addHSVSaturation, getHSVValue, setHSVValue, addHSVValue, isLight,
     * createMatrixColorFilter, argbEvaluate
-* Matrix: [Matrixx.java] | [Matrix.kt]
+* Matrix: [Matrixx.java] | [Matrixx.kt]
     * getValue, getScale
-* OpenGl: [OpenGlx.java] | [OpenGl.kt]
+* OpenGl: [OpenGlx.java] | [OpenGlx.kt]
     * getVersion, getMaxTextureSize,
-* Paint: [Paintx.java] | [Paint.kt]
+* Paint: [Paintx.java] | [Paintx.kt]
     * getTextWidth, getTextHeight, getTextWidthByBounds, getTextHeightByBounds, getTextLeading
 
 ### hardware
-* Hardware: [Hardwarex.java] ([Test][HardwareTest.java]) | [Hardware.kt] ([Test][HardwareTest.kt])
+* Hardware: [Hardwarex.java] ([Test][HardwarexTest.java]) | [Hardwarex.kt] ([Test][HardwarexTest.kt])
     * getDeviceModel, getDeviceName, getHardware, getSupportedAbis, getPhoneNumber, getDeviceId,
     * getAndroidId, getSubscriberId, getSimSerialNumber, getSerial, getIMEI, getIMSI, getMacAddress
 
@@ -106,11 +106,11 @@ Dependencies:
     * isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated, isBluetoothActivated,
     * getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName, getSubtypeName,
     * getExtraInfo, getNetworkInfo, getConnectivity
-* Network: [Networkx.java] | [Network.kt]
+* Network: [Networkx.java] | [Networkx.kt]
     * getState, getWifiState, isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getIpAddress
 
 ### os
-* Storage: [Storagex.java] | [Storage.kt]
+* Storage: [Storagex.java] | [Storagex.kt]
     * getFreeBytes, getTotalBytes, getAvailableBytes, getVolumeState, isVolumeMounted, isPrimaryVolume,
     * isVolumeEmulated, isVolumeRemovable, getVolumePaths, getMountedVolumePaths, getVolumeFiles,
     * getMountedVolumeFiles, getVolumeList, getMountedVolumeList, getVolumes, getMountedVolumes, getVolume,
@@ -123,7 +123,7 @@ Dependencies:
     * lengthAppCacheDirs, cleanAppCacheDirs, getAppExternalFilesDir, getAppExternalFilesDirs,
     * getAppInternalFilesDir, getAppFilesDirs, lengthAppFilesDirs, cleanAppFilesDirs,
     * getAppObbDir, getAppObbDirs, lengthAppObbDirs, cleanAppObbDirs, filterByMinBytes
-* StatFs: [StatFsx.java] ([Test][StatFsTest.java]) | [StatFs.kt] ([Test][StatFsTest.kt])
+* StatFs: [StatFsx.java] ([Test][StatFsxTest.java]) | [StatFsx.kt] ([Test][StatFsxTest.kt])
     * getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes
 * StorageManagerCompat: [StorageManagerCompat.java] ([Test][StorageManagerCompatTest.java]) | [StorageManagerCompat.kt] ([Test][StorageManagerCompatTest.kt])
     * getVolumeList, getVolumes, getVolumePaths, getVolumeState, getVolume
@@ -131,41 +131,41 @@ Dependencies:
     * getPath, getPathFile, isPrimary, isRemovable, isEmulated, getState, allowMassStorage, getMaxFileSize,
 
 ### provider
-* Settings: [Settingsx.java] | [Settings.kt]
+* Settings: [Settingsx.java] | [Settingsx.kt]
     * isScreenBrightnessModeAutomatic, setScreenBrightnessModeAutomatic, getScreenBrightness,
     * setScreenBrightness, getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem,
     * getScreenOffTimeout, setScreenOffTimeout, isAirplaneModeOn, setAirplaneModeOn, isBluetoothOn,
     * setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
 
 ### util
-* Dimen: [Dimenx.java] | [Dimen.kt]
+* Dimen: [Dimenx.java] | [Dimenx.kt]
     * dp2px, px2dp, sp2px, px2sp, unit2px
-* Json: [Jsonx.java] | [Json.kt]
+* Json: [Jsonx.java] | [Jsonx.kt]
     * isEmpty, isNotEmpty, toJsonArray, toJson, toStringList, toStringArray, toIntArray,
     * toBeanList, toBean, optString, optInt, optLong, format
-* Text: [Textx.java] | [Text.kt]
+* Text: [Textx.java] | [Textx.kt]
     * textToBitmap, toHtmlColorFlag, toHtmlRedFlag, keywordMadeColorByHtml, keywordMadeRedByHtml,
     * keywordMadeColorBySpannable, keywordMadeRedBySpannable
 * WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java]) | [WeakAsyncTask.kt] ([Test][WeakAsyncTaskTest.kt])
 
 ### view
-* InputMethod: [InputMethodx.java] | [InputMethod.kt]
+* InputMethod: [InputMethodx.java] | [InputMethodx.kt]
     * showSoftInput, delayShowSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
-* Display: [Displayx.java] | [Display.kt]
+* Display: [Displayx.java] | [Displayx.kt]
     * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity, getDisplayRotation
     * getDensityDpi, isOrientationPortrait, isOrientationLandscape, isOrientationUndefined, getRotation
     * hasNavigationBar, getStatusBarHeight, getNavigationBarHeight, getNavigationBarWidth
-* ViewAnim: [ViewAnimx.java] | [ViewAnim.kt]
+* ViewAnim: [ViewAnimx.java] | [ViewAnimx.kt]
     * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
     * goneByAnimAlpha, visibleByAnimAlpha,
-* View: [Viewx.java] | [View.kt]
+* View: [Viewx.java] | [Viewx.kt]
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
     * toBitmapByMaxHeight, inflateLayout
-<!--* Window: [Windowx.java] | [Window.kt]-->
+<!--* Window: [Windowx.java] | [Windowx.kt]-->
 
 ### widget
-* Toast: [Toastx.java] ([Test][ToastTest.java]) | [Toast.kt] ([Test][ToastTest.java])
+* Toast: [Toastx.java] ([Test][ToastxTest.java]) | [Toastx.kt] ([Test][ToastxTest.kt])
     * showLong, showShort, showLongWithView, showShortWithView
 
 ## Change Log
@@ -212,94 +212,94 @@ Please view the [CHANGELOG.md] file
 [CHANGELOG.md]: CHANGELOG.md
 
 [Androidx.java]: androidx/src/main/java/me/panpf/androidx/Androidx.java
-[AndroidTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/AndroidTest.java
-[Android.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/Android.kt
-[AndroidTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/AndroidTest.kt
+[AndroidxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/AndroidxTest.java
+[Androidx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/Androidx.kt
+[AndroidxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/AndroidxTest.kt
 
 [Activityx.java]: androidx/src/main/java/me/panpf/androidx/app/Activityx.java
-[ActivityTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/ActivityTest.java
-[Activity.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Activity.kt
-[ActivityTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ActivityTest.kt
+[ActivityxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/ActivityxTest.java
+[Activityx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Activityx.kt
+[ActivityxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ActivityxTest.kt
 
 [Dialogx.java]: androidx/src/main/java/me/panpf/androidx/app/Dialogx.java
-[DialogTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/DialogTest.java
-[Dialog.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Dialog.kt
-[DialogTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/DialogTest.kt
+[DialogxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/DialogxTest.java
+[Dialogx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Dialogx.kt
+[DialogxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/DialogxTest.kt
 
 [Fragmentx.java]: androidx/src/main/java/me/panpf/androidx/app/Fragmentx.java
-[FragmentTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/FragmentTest.java
-[Fragment.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Fragment.kt
-[FragmentTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/FragmentTest.kt
+[FragmentxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/FragmentxTest.java
+[Fragmentx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Fragmentx.kt
+[FragmentxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/FragmentxTest.kt
 
 [Permissionx.java]: androidx/src/main/java/me/panpf/androidx/app/Permissionx.java
-[PermissionTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/PermissionTest.java
-[Permission.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Permission.kt
-[PermissionTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/PermissionTest.kt
+[PermissionxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/PermissionxTest.java
+[Permissionx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Permissionx.kt
+[PermissionxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/PermissionxTest.kt
 
 [Packagex.java]: androidx/src/main/java/me/panpf/androidx/content/pm/Packagex.java
-[PackageTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/pm/PackageTest.java
-[Package.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/pm/Package.kt
-[PackageTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/pm/PackageTest.kt
+[PackagexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/pm/PackagexTest.java
+[Packagex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/pm/Packagex.kt
+[PackagexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/pm/PackagexTest.kt
 
 [Assetx.java]: androidx/src/main/java/me/panpf/androidx/content/res/Assetx.java
-[AssetTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/res/AssetTest.java
-[Asset.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/res/Asset.kt
-[AssetTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/res/AssetTest.kt
+[AssetxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/res/AssetxTest.java
+[Assetx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/res/Assetx.kt
+[AssetxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/res/AssetxTest.kt
 
 [Contentx.java]: androidx/src/main/java/me/panpf/androidx/content/Contentx.java
-[ContentTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContentTest.java
-[Content.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Content.kt
-[ContentTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ContentTest.kt
+[ContentxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContentxTest.java
+[Contentx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Contentx.kt
+[ContentxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ContentxTest.kt
 
 [Clipboardx.java]: androidx/src/main/java/me/panpf/androidx/content/Clipboardx.java
-[ClipboardTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ClipboardTest.java
-[Clipboard.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Clipboard.kt
-[ClipboardTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ClipboardTest.kt
+[ClipboardxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ClipboardxTest.java
+[Clipboardx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Clipboardx.kt
+[ClipboardxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ClipboardxTest.kt
 
 [Intentx.java]: androidx/src/main/java/me/panpf/androidx/content/Intentx.java
-[IntentTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/IntentTest.java
-[Intent.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Intent.kt
-[IntentTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/IntentTest.kt
+[IntentxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/IntentxTest.java
+[Intentx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Intentx.kt
+[IntentxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/IntentxTest.kt
 
 [Preferencex.java]: androidx/src/main/java/me/panpf/androidx/content/Preferencex.java
-[PreferenceTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/PreferenceTest.java
-[Preference.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Preference.kt
-[PreferenceTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/PreferenceTest.kt
+[PreferencexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/PreferencexTest.java
+[Preferencex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Preferencex.kt
+[PreferencexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/PreferencexTest.kt
 
 [Drawablex.java]: androidx/src/main/java/me/panpf/androidx/graphics/drawable/Drawablex.java
-[DrawableTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/drawable/DrawableTest.java
-[Drawable.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/drawable/Drawable.kt
-[DrawableTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/drawable/DrawableTest.kt
+[DrawablexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/drawable/DrawablexTest.java
+[Drawablex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/drawable/Drawablex.kt
+[DrawablexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/drawable/DrawablexTest.kt
 
 [Bitmapx.java]: androidx/src/main/java/me/panpf/androidx/graphics/Bitmapx.java
-[BitmapTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/BitmapTest.java
-[Bitmap.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Bitmap.kt
-[BitmapTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/BitmapTest.kt
+[BitmapxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/BitmapxTest.java
+[Bitmapx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Bitmapx.kt
+[BitmapxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/BitmapxTest.kt
 
 [Colorx.java]: androidx/src/main/java/me/panpf/androidx/graphics/Colorx.java
-[ColorTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/ColorTest.java
-[Color.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Color.kt
-[ColorTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/ColorTest.kt
+[ColorxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/ColorxTest.java
+[Colorx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Colorx.kt
+[ColorxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/ColorxTest.kt
 
 [Matrixx.java]: androidx/src/main/java/me/panpf/androidx/graphics/Matrixx.java
-[MatrixTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/MatrixTest.java
-[Matrix.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Matrix.kt
-[MatrixTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/MatrixTest.kt
+[MatrixxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/MatrixxTest.java
+[Matrixx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Matrixx.kt
+[MatrixxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/MatrixxTest.kt
 
 [OpenGlx.java]: androidx/src/main/java/me/panpf/androidx/graphics/OpenGlx.java
-[OpenGlTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/OpenGlTest.java
-[OpenGl.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/OpenGl.kt
-[OpenGlTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/OpenGlTest.kt
+[OpenGlxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/OpenGlxTest.java
+[OpenGlx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/OpenGlx.kt
+[OpenGlxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/OpenGlxTest.kt
 
 [Paintx.java]: androidx/src/main/java/me/panpf/androidx/graphics/Paintx.java
-[PaintTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/PaintTest.java
-[Paint.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Paint.kt
-[PaintTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/PaintTest.kt
+[PaintxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/PaintxTest.java
+[Paintx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Paintx.kt
+[PaintxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/PaintxTest.kt
 
 [Hardwarex.java]: androidx/src/main/java/me/panpf/androidx/hardware/Hardwarex.java
-[HardwareTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/hardware/HardwareTest.java
-[Hardware.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/hardware/Hardware.kt
-[HardwareTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/hardware/HardwareTest.kt
+[HardwarexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/hardware/HardwarexTest.java
+[Hardwarex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/hardware/Hardwarex.kt
+[HardwarexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/hardware/HardwarexTest.kt
 
 [NetworkState.java]: androidx/src/main/java/me/panpf/androidx/net/NetworkState.java
 [NetworkStateTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/net/NetworkStateTest.java
@@ -307,14 +307,14 @@ Please view the [CHANGELOG.md] file
 [NetworkStateTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/net/NetworkStateTest.kt
 
 [Networkx.java]: androidx/src/main/java/me/panpf/androidx/net/Networkx.java
-[NetworkTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/net/NetworkTest.java
-[Network.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/net/Network.kt
-[NetworkTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/net/NetworkTest.kt
+[NetworkxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/net/NetworkxTest.java
+[Networkx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/net/Networkx.kt
+[NetworkxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/net/NetworkxTest.kt
 
 [Storagex.java]: androidx/src/main/java/me/panpf/androidx/os/storage/Storagex.java
-[StorageTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/storage/StorageTest.java
-[Storage.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/storage/Storage.kt
-[StorageTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/storage/StorageTest.kt
+[StoragexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/storage/StoragexTest.java
+[Storagex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/storage/Storagex.kt
+[StoragexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/storage/StoragexTest.kt
 
 [StorageManagerCompat.java]: androidx/src/main/java/me/panpf/androidx/os/storage/StorageManagerCompat.java
 [StorageManagerCompatTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/storage/StorageManagerCompatTest.java
@@ -327,59 +327,59 @@ Please view the [CHANGELOG.md] file
 [StorageVolumeCompatTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/storage/StorageVolumeCompatTest.kt
 
 [StatFsx.java]: androidx/src/main/java/me/panpf/androidx/os/StatFsx.java
-[StatFsTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/StatFsTest.java
-[StatFs.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/StatFs.kt
-[StatFsTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/StatFsTest.kt
+[StatFsxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/StatFsxTest.java
+[StatFsx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/StatFsx.kt
+[StatFsxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/StatFsxTest.kt
 
 [Settingsx.java]: androidx/src/main/java/me/panpf/androidx/provider/Settingsx.java
-[SettingsTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/provider/SettingsTest.java
-[Settings.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/provider/Settings.kt
-[SettingsTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/provider/SettingsTest.kt
+[SettingsxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/provider/SettingsxTest.java
+[Settingsx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/provider/Settingsx.kt
+[SettingsxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/provider/SettingsxTest.kt
 
 [Dimenx.java]: androidx/src/main/java/me/panpf/androidx/util/Dimenx.java
-[DimenTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/DimenTest.java
-[Dimen.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/util/Dimen.kt
-[DimenTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/DimenTest.kt
+[DimenxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/DimenxTest.java
+[Dimenx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/util/Dimenx.kt
+[DimenxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/DimenxTest.kt
 
 [Jsonx.java]: androidx/src/main/java/me/panpf/androidx/util/Jsonx.java
-[JsonTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/JsonTest.java
-[Json.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/util/Json.kt
-[JsonTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/JsonTest.kt
+[JsonxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/JsonxTest.java
+[Jsonx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/util/Jsonx.kt
+[JsonxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/JsonxTest.kt
 
 [Textx.java]: androidx/src/main/java/me/panpf/androidx/util/Textx.java
-[TextTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/TextTest.java
-[Text.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/util/Text.kt
-[TextTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/TextTest.kt
+[TextxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/TextxTest.java
+[Textx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/util/Textx.kt
+[TextxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/TextxTest.kt
 
 [InputMethodx.java]: androidx/src/main/java/me/panpf/androidx/view/inputmethod/InputMethodx.java
-[InputMethodTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/inputmethod/InputMethodTest.java
-[InputMethod.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/inputmethod/InputMethod.kt
-[InputMethodTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/inputmethod/InputMethodTest.kt
+[InputMethodxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/inputmethod/InputMethodxTest.java
+[InputMethodx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/inputmethod/InputMethodx.kt
+[InputMethodxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/inputmethod/InputMethodxTest.kt
 
 [Displayx.java]: androidx/src/main/java/me/panpf/androidx/view/Displayx.java
-[DisplayTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/DisplayTest.java
-[Display.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/Display.kt
-[DisplayTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/DisplayTest.kt
+[DisplayxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/DisplayxTest.java
+[Displayx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/Displayx.kt
+[DisplayxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/DisplayxTest.kt
 
 [ViewAnimx.java]: androidx/src/main/java/me/panpf/androidx/view/ViewAnimx.java
-[ViewAnimTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/ViewAnimTest.java
-[ViewAnim.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/ViewAnim.kt
-[ViewAnimTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/ViewAnimTest.kt
+[ViewAnimxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/ViewAnimxTest.java
+[ViewAnimx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/ViewAnimx.kt
+[ViewAnimxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/ViewAnimxTest.kt
 
 [Viewx.java]: androidx/src/main/java/me/panpf/androidx/view/Viewx.java
-[ViewTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/ViewTest.java
-[View.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/View.kt
-[ViewTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/ViewTest.kt
+[ViewxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/ViewxTest.java
+[Viewx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/Viewx.kt
+[ViewxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/ViewxTest.kt
 
 [Windowx.java]: androidx/src/main/java/me/panpf/androidx/view/Windowx.java
-[WindowTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/WindowTest.java
-[Window.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/Window.kt
-[WindowTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/WindowTest.kt
+[WindowxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/WindowxTest.java
+[Windowx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/Windowx.kt
+[WindowxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/WindowxTest.kt
 
 [Toastx.java]: androidx/src/main/java/me/panpf/androidx/widget/Toastx.java
-[ToastTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/widget/ToastTest.java
-[Toast.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/widget/Toast.kt
-[ToastTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/widget/ToastTest.kt
+[ToastxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/widget/ToastxTest.java
+[Toastx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/widget/Toastx.kt
+[ToastxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/widget/ToastxTest.kt
 
 [WeakAsyncTask.java]: androidx/src/main/java/me/panpf/androidx/util/WeakAsyncTask.java
 [WeakAsyncTaskTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/WeakAsyncTaskTest.java
