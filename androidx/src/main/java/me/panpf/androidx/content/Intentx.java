@@ -43,7 +43,7 @@ public class Intentx {
      * Create an Intent that opens the recording page
      */
     @NonNull
-    public static Intent makeRecordingIntent() {
+    public static Intent createRecordingIntent() {
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("audio/amr");
         return intent;
@@ -56,7 +56,7 @@ public class Intentx {
      */
     @NonNull
     @RequiresPermission(Manifest.permission.CALL_PHONE)
-    public static Intent makeLaunchDialingIntent(@NonNull String phoneNumber) {
+    public static Intent createLaunchDialingIntent(@NonNull String phoneNumber) {
         return new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
     }
 
@@ -67,7 +67,7 @@ public class Intentx {
      */
     @NonNull
     @RequiresPermission(Manifest.permission.CALL_PHONE)
-    public static Intent makeCallPhoneIntent(@NonNull String phoneNumber) {
+    public static Intent createCallPhoneIntent(@NonNull String phoneNumber) {
         return new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phoneNumber));
     }
 
@@ -78,7 +78,7 @@ public class Intentx {
      * @param messageContent SMS content
      */
     @NonNull
-    public static Intent makeLaunchSendSmsIntent(@NonNull String phoneNumber, String messageContent) {
+    public static Intent createLaunchSendSmsIntent(@NonNull String phoneNumber, String messageContent) {
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumber));
         intent.putExtra("sms_body", messageContent);
         return intent;
@@ -90,7 +90,7 @@ public class Intentx {
      * @param url Web page url
      */
     @NonNull
-    public static Intent makeLaunchWebBrowserIntent(String url) {
+    public static Intent createLaunchWebBrowserIntent(String url) {
         return new Intent(Intent.ACTION_VIEW, Uri.parse(url));
     }
 
@@ -98,7 +98,7 @@ public class Intentx {
      * Create a broadcast Intent that lets System Explorer scan the specified file
      */
     @NonNull
-    public static Intent makeScanFileBroadcastIntent(Uri fileUri) {
+    public static Intent createScanFileBroadcastIntent(Uri fileUri) {
         Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, fileUri);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
         return intent;
@@ -111,7 +111,7 @@ public class Intentx {
      * @param apkFileUri APK file uri
      */
     @NonNull
-    public static Intent makeInstallAppIntent(@NonNull Uri apkFileUri) {
+    public static Intent createInstallAppIntent(@NonNull Uri apkFileUri) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.addCategory(Intent.CATEGORY_DEFAULT);
         intent.setDataAndType(apkFileUri, "application/vnd.android.package-archive");
@@ -126,7 +126,7 @@ public class Intentx {
      * @param packageName App package name
      */
     @NonNull
-    public static Intent makeUninstallAppIntent(@NonNull String packageName) {
+    public static Intent createUninstallAppIntent(@NonNull String packageName) {
         return new Intent(Intent.ACTION_DELETE, Uri.parse("package: " + packageName));
     }
 
@@ -136,7 +136,7 @@ public class Intentx {
      * @param packageName App package name
      */
     @Nullable
-    public static Intent makeLaunchAppIntent(@NonNull Context context, @NonNull String packageName) {
+    public static Intent createLaunchAppIntent(@NonNull Context context, @NonNull String packageName) {
         try {
             Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
             if (intent != null) {
@@ -167,7 +167,7 @@ public class Intentx {
      * @param packageName App package name
      */
     @NonNull
-    public static Intent makeAppDetailInSystemIntent(@NonNull String packageName) {
+    public static Intent createAppDetailInSystemIntent(@NonNull String packageName) {
         Intent intent = new Intent();
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", packageName, null);
@@ -179,7 +179,7 @@ public class Intentx {
      * Create an Intent based on the source Intent and the ResolveInfo found with it
      */
     @NonNull
-    public static Intent makeActivityIntentByResolveInfo(@NonNull Intent sourceIntent, @NonNull ResolveInfo resolveInfo) {
+    public static Intent createActivityIntentByResolveInfo(@NonNull Intent sourceIntent, @NonNull ResolveInfo resolveInfo) {
         Intent resolveIntent = new Intent();
         resolveIntent.setClassName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name);
         resolveIntent.setAction(sourceIntent.getAction());
@@ -199,7 +199,7 @@ public class Intentx {
      *                    for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
      */
     @NonNull
-    public static Intent makeTakePhotoIntent(@Nullable Uri saveFileUri) {
+    public static Intent createTakePhotoIntent(@Nullable Uri saveFileUri) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (saveFileUri != null) {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, saveFileUri);
@@ -213,7 +213,7 @@ public class Intentx {
      * for example: Uri imageUri = (Bitmap) intent.getData()
      */
     @NonNull
-    public static Intent makePickImageIntent() {
+    public static Intent createPickImageIntent() {
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         return intent;
@@ -229,7 +229,7 @@ public class Intentx {
      *                      for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
      */
     @NonNull
-    public static Intent makeCropImageIntent(@NonNull Uri sourceFileUri, int targetWidth, int targetHeight, @Nullable Uri saveFileUri) {
+    public static Intent createCropImageIntent(@NonNull Uri sourceFileUri, int targetWidth, int targetHeight, @Nullable Uri saveFileUri) {
         Intent intent = new Intent("com.android.camera.action.CROP");
         intent.setDataAndType(sourceFileUri, "image/*");
         intent.putExtra("crop", true);

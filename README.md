@@ -76,10 +76,10 @@ because there are different package names, so there will be no class duplicates.
 * Content: [Contentx.java] | [Content.kt]
     * openInput, readBytes, readText, readLines, readBitmap
 * Intent: [Intentx.java] | [Intent.kt]
-    * makeRecordingIntent, makeLaunchDialingIntent, makeCallPhoneIntent, makeLaunchSendSmsIntent,
-    * makeLaunchWebBrowserIntent, makeScanFileBroadcastIntent, makeInstallAppIntent, makeUninstallAppIntent,
-    * makeLaunchAppIntent, makeAppDetailInSystemIntent, makeActivityIntentByResolveInfo, makeTakePhotoIntent,
-    * makePickImageIntent, makeCropImageIntent, canStartActivity, safeStartActivity
+    * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
+    * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
+    * createLaunchAppIntent, createAppDetailInSystemIntent, createActivityIntentByResolveInfo, createTakePhotoIntent,
+    * createPickImageIntent, createCropImageIntent, canStartActivity, safeStartActivity
 * Preference: [Preferencex.java] | [Preference.kt]
     * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
     * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear

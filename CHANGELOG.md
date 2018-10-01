@@ -1,6 +1,7 @@
 ### v0.2.4 pre
 * :hammer: Activityx.getImplWithParent method marked static
 * :hammer: Color All method names that have started with make are changed to create
+* :hammer: Intent All method names that have started with make are changed to create
 
 ### v0.2.3
 * :hammer: Network getIpAddress rename to getLocalIpAddress

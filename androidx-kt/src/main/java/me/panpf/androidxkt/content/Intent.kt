@@ -26,16 +26,13 @@ import android.net.Uri
 import android.provider.MediaStore
 import android.provider.Settings
 import android.support.annotation.RequiresPermission
+import me.panpf.androidx.content.Intentx
 
 
 /**
  * Create an Intent that opens the recording page
  */
-fun makeRecordingIntent(): Intent {
-    val intent = Intent(Intent.ACTION_GET_CONTENT)
-    intent.type = "audio/amr"
-    return intent
-}
+fun createRecordingIntent(): Intent = Intentx.createRecordingIntent()
 
 /**
  * Create an Intent that opens the dialing page and displays the specified phone number
@@ -43,7 +40,7 @@ fun makeRecordingIntent(): Intent {
  * @param phoneNumber Target phone number
  */
 @RequiresPermission(Manifest.permission.CALL_PHONE)
-fun makeLaunchDialingIntent(phoneNumber: String): Intent {
+fun createLaunchDialingIntent(phoneNumber: String): Intent {
     return Intent(Intent.ACTION_DIAL, Uri.parse("tel:$phoneNumber"))
 }
 
@@ -53,7 +50,7 @@ fun makeLaunchDialingIntent(phoneNumber: String): Intent {
  * @param phoneNumber Target phone number
  */
 @RequiresPermission(Manifest.permission.CALL_PHONE)
-fun makeCallPhoneIntent(phoneNumber: String): Intent {
+fun createCallPhoneIntent(phoneNumber: String): Intent {
     return Intent(Intent.ACTION_CALL, Uri.parse("tel:$phoneNumber"))
 }
 
@@ -63,7 +60,7 @@ fun makeCallPhoneIntent(phoneNumber: String): Intent {
  * @param phoneNumber    Target phone number
  * @param messageContent SMS content
  */
-fun makeLaunchSendSmsIntent(phoneNumber: String, messageContent: String): Intent {
+fun createLaunchSendSmsIntent(phoneNumber: String, messageContent: String): Intent {
     val intent = Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:$phoneNumber"))
     intent.putExtra("sms_body", messageContent)
     return intent
@@ -74,14 +71,14 @@ fun makeLaunchSendSmsIntent(phoneNumber: String, messageContent: String): Intent
  *
  * @param url Web page url
  */
-fun makeLaunchWebBrowserIntent(url: String): Intent {
+fun createLaunchWebBrowserIntent(url: String): Intent {
     return Intent(Intent.ACTION_VIEW, Uri.parse(url))
 }
 
 /**
  * Create a broadcast Intent that lets System Explorer scan the specified file
  */
-fun makeScanFileBroadcastIntent(fileUri: Uri): Intent {
+fun createScanFileBroadcastIntent(fileUri: Uri): Intent {
     val intent = Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, fileUri)
     intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION) // Prepare for FileProvider on Android N
     return intent
@@ -93,7 +90,7 @@ fun makeScanFileBroadcastIntent(fileUri: Uri): Intent {
  *
  * @param apkFileUri APK file uri
  */
-fun makeInstallAppIntent(apkFileUri: Uri): Intent {
+fun createInstallAppIntent(apkFileUri: Uri): Intent {
     val intent = Intent(Intent.ACTION_VIEW)
     intent.addCategory(Intent.CATEGORY_DEFAULT)
     intent.setDataAndType(apkFileUri, "application/vnd.android.package-archive")
@@ -107,7 +104,7 @@ fun makeInstallAppIntent(apkFileUri: Uri): Intent {
  *
  * @param packageName App package name
  */
-fun makeUninstallAppIntent(packageName: String): Intent {
+fun createUninstallAppIntent(packageName: String): Intent {
     return Intent(Intent.ACTION_DELETE, Uri.parse("package: $packageName"))
 }
 
@@ -116,7 +113,7 @@ fun makeUninstallAppIntent(packageName: String): Intent {
  *
  * @param packageName App package name
  */
-fun Context.makeLaunchAppIntent(packageName: String): Intent? {
+fun Context.createLaunchAppIntent(packageName: String): Intent? {
     try {
         var intent = this.packageManager.getLaunchIntentForPackage(packageName)
         if (intent != null) {
@@ -147,7 +144,7 @@ fun Context.makeLaunchAppIntent(packageName: String): Intent? {
  *
  * @param packageName App package name
  */
-fun makeAppDetailInSystemIntent(packageName: String): Intent {
+fun createAppDetailInSystemIntent(packageName: String): Intent {
     val intent = Intent()
     intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
     val uri = Uri.fromParts("package", packageName, null)
@@ -158,7 +155,7 @@ fun makeAppDetailInSystemIntent(packageName: String): Intent {
 /**
  * Create an Intent based on the source Intent and the ResolveInfo found with it
  */
-fun makeActivityIntentByResolveInfo(sourceIntent: Intent, resolveInfo: ResolveInfo): Intent {
+fun createActivityIntentByResolveInfo(sourceIntent: Intent, resolveInfo: ResolveInfo): Intent {
     val resolveIntent = Intent()
     resolveIntent.setClassName(resolveInfo.activityInfo.packageName, resolveInfo.activityInfo.name)
     resolveIntent.action = sourceIntent.action
@@ -177,7 +174,7 @@ fun makeActivityIntentByResolveInfo(sourceIntent: Intent, resolveInfo: ResolveIn
  * @param saveFileUri Save the image to the specified uri, If null, get the image from the returned Intent at onActivityResult,
  * for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
  */
-fun makeTakePhotoIntent(saveFileUri: Uri?): Intent {
+fun createTakePhotoIntent(saveFileUri: Uri?): Intent {
     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
     if (saveFileUri != null) {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, saveFileUri)
@@ -190,7 +187,7 @@ fun makeTakePhotoIntent(saveFileUri: Uri?): Intent {
  * Create an Intent that selects a picture from the system album, And then get the image uri from the returned Intent at onActivityResult,
  * for example: Uri imageUri = (Bitmap) intent.getData()
  */
-fun makePickImageIntent(): Intent {
+fun createPickImageIntent(): Intent {
     val intent = Intent(Intent.ACTION_PICK)
     intent.type = "image/*"
     return intent
@@ -205,7 +202,7 @@ fun makePickImageIntent(): Intent {
  * @param saveFileUri   Save the image to the specified uri, If null, get the image from the returned Intent at onActivityResult,
  * for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
  */
-fun makeCropImageIntent(sourceFileUri: Uri, targetWidth: Int, targetHeight: Int, saveFileUri: Uri?): Intent {
+fun createCropImageIntent(sourceFileUri: Uri, targetWidth: Int, targetHeight: Int, saveFileUri: Uri?): Intent {
     val intent = Intent("com.android.camera.action.CROP")
     intent.setDataAndType(sourceFileUri, "image/*")
     intent.putExtra("crop", true)
