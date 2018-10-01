@@ -8,6 +8,7 @@
     getScreenDensityDpi rename to getDensityDpi,
     isPortraitOrientation rename to isOrientationPortrait
 * :sparkles: Displayx add isOrientationLandscape, isOrientationUndefined
+* :fire: Windowx getDisplayRotation method moved to Displayx
 
 
 ### v0.2.3

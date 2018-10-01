@@ -16,12 +16,10 @@
 
 package me.panpf.androidx.view;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
-import android.view.Surface;
 import android.view.ViewConfiguration;
 
 import org.jetbrains.annotations.NotNull;
@@ -42,24 +40,6 @@ public class Windowx {
             } catch (Throwable e) {
                 sNavBarOverride = null;
             }
-        }
-    }
-
-    /**
-     * Get the current window direction
-     */
-    public static int getDisplayRotation(@NotNull Activity activity) {
-        switch (activity.getWindowManager().getDefaultDisplay().getRotation()) {
-            case Surface.ROTATION_0:
-                return 0;
-            case Surface.ROTATION_90:
-                return 90;
-            case Surface.ROTATION_180:
-                return 180;
-            case Surface.ROTATION_270:
-                return 270;
-            default:
-                return 0;
         }
     }
 

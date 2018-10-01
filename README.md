@@ -156,7 +156,7 @@ because there are different package names, so there will be no class duplicates.
 * InputMethod: [InputMethodx.java] | [InputMethod.kt]
     * showSoftInput, delayShowSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
 * Display: [Displayx.java] | [Display.kt]
-    * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity,
+    * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity, getDisplayRotation
     * getDensityDpi, isOrientationPortrait, isOrientationLandscape, isOrientationUndefined
 * ViewAnim: [ViewAnimx.java] | [ViewAnim.kt]
     * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
@@ -166,8 +166,7 @@ because there are different package names, so there will be no class duplicates.
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
     * toBitmapByMaxHeight, inflateLayout
 * Window: [Windowx.java] | [Window.kt]
-    * getDisplayRotation, hasNavigationBar, getStatusBarHeight,
-    * getNavigationBarHeight, getNavigationBarWidth
+    * hasNavigationBar, getStatusBarHeight, getNavigationBarHeight, getNavigationBarWidth
 
 ### widget
 * Toast: [Toastx.java] ([Test][ToastTest.java]) | [Toast.kt] ([Test][ToastTest.java])
