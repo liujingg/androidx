@@ -1,27 +1,36 @@
-### v0.2.4 pre
-* :hammer: Activityx.getImplWithParent method marked static
-* :hammer: Color All method names that have started with make are changed to create
-* :hammer: Intent All method names that have started with make are changed to create
-* :fire: Remove Windowx isLandscape, isPortrait method
-* :fire: Displayx getDisplayMetrics rename to getScreenMetrics, getDensity rename to getDensity, getScreenDensityDpi rename to getDensityDpi, isPortraitOrientation rename to isOrientationPortrait
-* :sparkles: Displayx add isOrientationLandscape, isOrientationUndefined
-* :fire: Windowx getDisplayRotation, getStatusBarHeight, hasNavigationBar, getNavigationBarHeight, getNavigationBarWidth method moved to Displayx
-* :sparkles: Displayx add getRotation
-* :sparkles: InputMethodx add delayShowSoftInput method
-* :fire: Androidx remove isAtLeastI, isAtLeast14, isAtLeast4_0, isAtLeastIMR1, isAtLeast15, isAtLeast4_0_3 method, getSdkVersionName rename to getVersionName
-* :sparkles: Androidx add getVersionCodeName method
-* :sparkles: Settingsx add getWindowBrightness, isWindowBrightnessFlowSystem method
+## v0.2.4
+
+Bug
 * :bug: Fix StorageManagerCompat's getVolumeList and getStorageVolumes methods return inconsistent bugs on the 8.1 emulator
+
+Removed or Renamed
+* :fire: Displayx getDisplayMetrics rename to getScreenMetrics, getDensity rename to getDensity, getScreenDensityDpi rename to getDensityDpi, isPortraitOrientation rename to isOrientationPortrait
+* :fire: Windowx remove isLandscape, isPortrait method
+* :fire: Windowx getDisplayRotation, getStatusBarHeight, hasNavigationBar, getNavigationBarHeight, getNavigationBarWidth method moved to Displayx
+* :fire: Androidx remove isAtLeastI, isAtLeast14, isAtLeast4_0, isAtLeastIMR1, isAtLeast15, isAtLeast4_0_3 method
+* :fire: Androidx getSdkVersionName rename to getVersionName
 * :fire: StorageManagerCompat getStorageVolumes rename to getVolumes, getStorageVolume rename to getVolume
-* :fire: Storagex's getVolumeList method now returns List<StorageVolumeCompat>, increments getVolumes method returns StorageVolumeCompat\[\], getStorageVolume method renames to getVolume
-* :hammer: Now all methods in androidx-kt are extensions to androidx, so some duplicate classes or constants have been removed. Please use the corresponding class or constant in androidx now.
+* :fire: Storagex getVolumeList method now returns List<StorageVolumeCompat>, increments getVolumes method returns StorageVolumeCompat\[\]
+* :fire: Color All method names that have started with make are changed to create
+* :fire: Intent All method names that have started with make are changed to create
+* :fire: Some duplicate classes or constants have been removed. Please use the corresponding class or constant in androidx now.
     * ClipContent.kt, ClipHtmlText.kt, ClipIntent.kt, ClipPlainText.kt, ClipUri.kt,
     * NetworkState.kt, StorageManagerCompat.kt, StorageVolumeCompat.kt, WeakAsyncTask.kt
+
+Hammer
+* :hammer: Activityx.getImplWithParent method marked static
+* :hammer: Now all methods in androidx-kt are extensions to androidx
+
+New
+* :sparkles: Displayx add isOrientationLandscape, isOrientationUndefined, getRotation method
+* :sparkles: InputMethodx add delayShowSoftInput method
+* :sparkles: Androidx add getVersionCodeName method
+* :sparkles: Settingsx add getWindowBrightness, isWindowBrightnessFlowSystem method
+
+Upgrade
 * :arrow_up: Upgrade Javax 0.6.6
 
-
-
-### v0.2.3
+## v0.2.3
 * :hammer: Network getIpAddress rename to getLocalIpAddress
 * :sparkles: Network add getLocalIpV4Address
 * :arrow_up: minSdkVersion rose to 16
