@@ -16,6 +16,7 @@
 
 package me.panpf.androidxkt.test.crypto
 
+import me.panpf.javax.crypto.Desx
 import me.panpf.javaxkt.crypto.*
 import org.junit.Assert
 import org.junit.Test
@@ -51,7 +52,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, IllegalBlockSizeException::class, BadPaddingException::class)
     fun testDefaultConfig() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE.toByteArray().desEncrypt(DES, key).desDecryptToString(DES, key)
+        val decryptResult = SOURCE.toByteArray().desEncrypt(Desx.DEFAULT, key).desDecryptToString(Desx.DEFAULT, key)
         Assert.assertEquals("testDefaultConfig", SOURCE, decryptResult)
     }
 
@@ -59,7 +60,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, IllegalBlockSizeException::class, BadPaddingException::class)
     fun testDefaultConfigWithBase64() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE.toByteArray().desEncryptToBase64(DES, key).desDecryptToStringFromBase64(DES, key)
+        val decryptResult = SOURCE.toByteArray().desEncryptToBase64(Desx.DEFAULT, key).desDecryptToStringFromBase64(Desx.DEFAULT, key)
         Assert.assertEquals("testDefaultConfigWithBase64", SOURCE, decryptResult)
     }
 
@@ -68,7 +69,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbNoPadding() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE_NO_PADDING.toByteArray().desEncrypt(DES_ECB_NO, key).desDecryptToString(DES_ECB_NO, key)
+        val decryptResult = SOURCE_NO_PADDING.toByteArray().desEncrypt(Desx.ECB_NO, key).desDecryptToString(Desx.ECB_NO, key)
         Assert.assertEquals("testEcbPKCS5Padding", SOURCE_NO_PADDING, decryptResult)
     }
 
@@ -76,7 +77,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbPKCS5Padding() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE.toByteArray().desEncrypt(DES_ECB_PKCS5, key).desDecryptToString(DES_ECB_PKCS5, key)
+        val decryptResult = SOURCE.toByteArray().desEncrypt(Desx.ECB_PKCS5, key).desDecryptToString(Desx.ECB_PKCS5, key)
         Assert.assertEquals("testEcbPKCS5Padding", SOURCE, decryptResult)
     }
 
@@ -84,7 +85,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbPKCS7Padding() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE.toByteArray().desEncrypt(DES_ECB_PKCS7, key).desDecryptToString(DES_ECB_PKCS7, key)
+        val decryptResult = SOURCE.toByteArray().desEncrypt(Desx.ECB_PKCS7, key).desDecryptToString(Desx.ECB_PKCS7, key)
         Assert.assertEquals("testEcbPKCS7Padding", SOURCE, decryptResult)
     }
 
@@ -92,7 +93,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbISO10126Padding() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE.toByteArray().desEncrypt(DES_ECB_ISO10126, key).desDecryptToString(DES_ECB_ISO10126, key)
+        val decryptResult = SOURCE.toByteArray().desEncrypt(Desx.ECB_ISO10126, key).desDecryptToString(Desx.ECB_ISO10126, key)
         Assert.assertEquals("testEcbISO10126Padding", SOURCE, decryptResult)
     }
 
@@ -101,7 +102,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testCbcNoPadding() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE_NO_PADDING.toByteArray().desEncrypt(DES_CBC_NO, key).desDecryptToString(DES_CBC_NO, key)
+        val decryptResult = SOURCE_NO_PADDING.toByteArray().desEncrypt(Desx.CBC_NO, key).desDecryptToString(Desx.CBC_NO, key)
         Assert.assertEquals("testCbcPKCS5Padding", SOURCE_NO_PADDING, decryptResult)
     }
 
@@ -109,7 +110,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testCbcPKCS5Padding() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE.toByteArray().desEncrypt(DES_CBC_PKCS5, key).desDecryptToString(DES_CBC_PKCS5, key)
+        val decryptResult = SOURCE.toByteArray().desEncrypt(Desx.CBC_PKCS5, key).desDecryptToString(Desx.CBC_PKCS5, key)
         Assert.assertEquals("testCbcPKCS5Padding", SOURCE, decryptResult)
     }
 
@@ -117,7 +118,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testCbcPKCS7Padding() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE.toByteArray().desEncrypt(DES_CBC_PKCS7, key).desDecryptToString(DES_CBC_PKCS7, key)
+        val decryptResult = SOURCE.toByteArray().desEncrypt(Desx.CBC_PKCS7, key).desDecryptToString(Desx.CBC_PKCS7, key)
         Assert.assertEquals("testCbcPKCS7Padding", SOURCE, decryptResult)
     }
 
@@ -125,7 +126,7 @@ class DesxTest {
     @Throws(InvalidKeySpecException::class, InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testCbcISO10126Padding() {
         val key = PASSWORD.createDesKeyByPassword()
-        val decryptResult = SOURCE.toByteArray().desEncrypt(DES_CBC_ISO10126, key).desDecryptToString(DES_CBC_ISO10126, key)
+        val decryptResult = SOURCE.toByteArray().desEncrypt(Desx.CBC_ISO10126, key).desDecryptToString(Desx.CBC_ISO10126, key)
         Assert.assertEquals("testCbcISO10126Padding", SOURCE, decryptResult)
     }
 
@@ -136,10 +137,10 @@ class DesxTest {
         val key = PASSWORD.createDesKeyByPassword()
         val errorKey = PASSWORD_ERROR.createDesKeyByPassword()
 
-        val encryptResult = SOURCE.desEncryptToBase64(DES_ECB_PKCS5, key)
+        val encryptResult = SOURCE.desEncryptToBase64(Desx.ECB_PKCS5, key)
         var errorDecryptResult: String? = null
         try {
-            errorDecryptResult = encryptResult.desDecryptToStringFromBase64(DES_ECB_PKCS5, errorKey)
+            errorDecryptResult = encryptResult.desDecryptToStringFromBase64(Desx.ECB_PKCS5, errorKey)
         } catch (e: BadPaddingException) {
         }
 
@@ -152,8 +153,8 @@ class DesxTest {
         val key = PASSWORD.createDesKeyByPassword()
         val likeKey = PASSWORD_LIKE.createDesKeyByPassword()
 
-        val encryptResult = SOURCE.desEncryptToBase64(DES_ECB_PKCS5, key)
-        val likeDecryptResult = encryptResult.desDecryptToStringFromBase64(DES_ECB_PKCS5, likeKey)
+        val encryptResult = SOURCE.desEncryptToBase64(Desx.ECB_PKCS5, key)
+        val likeDecryptResult = encryptResult.desDecryptToStringFromBase64(Desx.ECB_PKCS5, likeKey)
 
         Assert.assertEquals("testLikePassword", SOURCE, likeDecryptResult)
     }

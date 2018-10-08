@@ -16,6 +16,7 @@
 
 package me.panpf.androidxkt.test.crypto
 
+import me.panpf.javax.crypto.Rsax
 import me.panpf.javaxkt.crypto.*
 import org.junit.Assert
 import org.junit.Test
@@ -40,7 +41,7 @@ class RsaxTest {
     @Throws(BadPaddingException::class, InvalidKeyException::class, IllegalBlockSizeException::class)
     fun testPubPriBytes() {
         val keyPair = createRsaKey(1024)
-        val decryptResult = SOURCE.toByteArray().encrypt(RSA, keyPair.public).decryptToString(RSA, keyPair.private)
+        val decryptResult = SOURCE.toByteArray().rsaEncrypt(Rsax.DEFAULT, keyPair.public).rsaDecryptToString(Rsax.DEFAULT, keyPair.private)
         Assert.assertEquals("testPubPriBytes", SOURCE, decryptResult)
     }
 
@@ -51,7 +52,7 @@ class RsaxTest {
     @Throws(BadPaddingException::class, InvalidKeyException::class, IllegalBlockSizeException::class)
     fun testPriPubBytes() {
         val keyPair = createRsaKey(1024)
-        val decryptResult = SOURCE.toByteArray().encrypt(RSA, keyPair.private).decryptToString(RSA, keyPair.public)
+        val decryptResult = SOURCE.toByteArray().rsaEncrypt(Rsax.DEFAULT, keyPair.private).rsaDecryptToString(Rsax.DEFAULT, keyPair.public)
         Assert.assertEquals("testPriPubBytes", SOURCE, decryptResult)
     }
 
@@ -62,7 +63,7 @@ class RsaxTest {
     @Throws(BadPaddingException::class, InvalidKeyException::class, IllegalBlockSizeException::class)
     fun testPubPriWithBase64() {
         val keyPair = createRsaKey(1024)
-        val decryptResult = SOURCE.encryptToBase64(RSA, keyPair.public).decryptToStringFromBase64(RSA, keyPair.private)
+        val decryptResult = SOURCE.rsaEncryptToBase64(Rsax.DEFAULT, keyPair.public).rsaDecryptToStringFromBase64(Rsax.DEFAULT, keyPair.private)
         Assert.assertEquals("testPubPriWithBase64", SOURCE, decryptResult)
     }
 
@@ -73,7 +74,7 @@ class RsaxTest {
     @Throws(BadPaddingException::class, InvalidKeyException::class, IllegalBlockSizeException::class)
     fun testPriPubWithBase64() {
         val keyPair = createRsaKey(1024)
-        val decryptResult = SOURCE.encryptToBase64(RSA, keyPair.private).decryptToStringFromBase64(RSA, keyPair.public)
+        val decryptResult = SOURCE.rsaEncryptToBase64(Rsax.DEFAULT, keyPair.private).rsaDecryptToStringFromBase64(Rsax.DEFAULT, keyPair.public)
         Assert.assertEquals("testPriPubWithBase64", SOURCE, decryptResult)
     }
 
@@ -106,10 +107,10 @@ class RsaxTest {
     @Test
     @Throws(InvalidKeyException::class, IllegalBlockSizeException::class, BadPaddingException::class)
     fun testErrorKey() {
-        val encryptBytes = SOURCE.toByteArray().encrypt(RSA, createRsaKey(1024).public)
+        val encryptBytes = SOURCE.toByteArray().rsaEncrypt(Rsax.DEFAULT, createRsaKey(1024).public)
         var bytesPriKeyDecryptResult: String? = null
         try {
-            bytesPriKeyDecryptResult = encryptBytes.decryptToString(RSA, createRsaKey(1024).private)
+            bytesPriKeyDecryptResult = encryptBytes.rsaDecryptToString(Rsax.DEFAULT, createRsaKey(1024).private)
         } catch (e: Exception) {
             //            e.printStackTrace();
         }
@@ -121,7 +122,7 @@ class RsaxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbPKCS1Padding() {
         val keyPair = createRsaKey(1024)
-        val decryptResult = SOURCE.toByteArray().encrypt(RSA_ECB_PKCS1, keyPair.public).decryptToString(RSA_ECB_PKCS1, keyPair.private)
+        val decryptResult = SOURCE.toByteArray().rsaEncrypt(Rsax.ECB_PKCS1, keyPair.public).rsaDecryptToString(Rsax.ECB_PKCS1, keyPair.private)
         Assert.assertEquals("testEcbPKCS1Padding", SOURCE, decryptResult)
     }
 
@@ -129,7 +130,7 @@ class RsaxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbOAEPPadding() {
         val keyPair = createRsaKey(1024)
-        val decryptResult = SOURCE_OAEP.toByteArray().encrypt(RSA_ECB_OAEP, keyPair.public).decryptToString(RSA_ECB_OAEP, keyPair.private)
+        val decryptResult = SOURCE_OAEP.toByteArray().rsaEncrypt(Rsax.ECB_OAEP, keyPair.public).rsaDecryptToString(Rsax.ECB_OAEP, keyPair.private)
         Assert.assertEquals("testEcbOAEPPadding", SOURCE_OAEP, decryptResult)
     }
 }

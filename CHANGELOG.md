@@ -17,6 +17,7 @@
 * :hammer: Now all methods in androidx-kt are extensions to androidx, so some duplicate classes or constants have been removed. Please use the corresponding class or constant in androidx now.
     * ClipContent.kt, ClipHtmlText.kt, ClipIntent.kt, ClipPlainText.kt, ClipUri.kt,
     * NetworkState.kt, StorageManagerCompat.kt, StorageVolumeCompat.kt, WeakAsyncTask.kt
+* :arrow_up: Upgrade Javax 0.6.6
 
 
 

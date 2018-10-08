@@ -48,16 +48,16 @@ public class AesxTest {
     @Test
     public void testDefaultConfig() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.AES, key);
-        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.AES, key);
+        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.DEFAULT, key);
+        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.DEFAULT, key);
         Assert.assertEquals("testDefaultConfig", SOURCE, decryptResult);
     }
 
     @Test
     public void testDefaultConfigWithBase64() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        String encryptResult = Aesx.encryptToBase64(SOURCE.getBytes(), Aesx.AES, key);
-        String decryptResult = Aesx.decryptToStringFromBase64(encryptResult, Aesx.AES, key);
+        String encryptResult = Aesx.encryptToBase64(SOURCE.getBytes(), Aesx.DEFAULT, key);
+        String decryptResult = Aesx.decryptToStringFromBase64(encryptResult, Aesx.DEFAULT, key);
         Assert.assertEquals("testDefaultConfigWithBase64", SOURCE, decryptResult);
     }
 
@@ -65,32 +65,32 @@ public class AesxTest {
     @Test
     public void testEcbNoPadding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        byte[] encryptResult = Aesx.encrypt(SOURCE_NO_PADDING.getBytes(), Aesx.AES_ECB_NO, key);
-        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.AES_ECB_NO, key);
+        byte[] encryptResult = Aesx.encrypt(SOURCE_NO_PADDING.getBytes(), Aesx.ECB_NO, key);
+        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.ECB_NO, key);
         Assert.assertEquals("testEcbNoPadding", SOURCE_NO_PADDING, decryptResult);
     }
 
     @Test
     public void testEcbPKCS5Padding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.AES_ECB_PKCS5, key);
-        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.AES_ECB_PKCS5, key);
+        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.ECB_PKCS5, key);
+        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.ECB_PKCS5, key);
         Assert.assertEquals("testEcbPKCS5Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testEcbPKCS7Padding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.AES_ECB_PKCS7, key);
-        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.AES_ECB_PKCS7, key);
+        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.ECB_PKCS7, key);
+        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.ECB_PKCS7, key);
         Assert.assertEquals("testEcbPKCS7Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testEcbISO10126Padding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.AES_ECB_ISO10126, key);
-        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.AES_ECB_ISO10126, key);
+        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.ECB_ISO10126, key);
+        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.ECB_ISO10126, key);
         Assert.assertEquals("testEcbISO10126Padding", SOURCE, decryptResult);
     }
 
@@ -98,32 +98,32 @@ public class AesxTest {
     @Test
     public void testCbcNoPadding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        byte[] encryptResult = Aesx.encrypt(SOURCE_NO_PADDING.getBytes(), Aesx.AES_CBC_NO, key);
-        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.AES_CBC_NO, key);
+        byte[] encryptResult = Aesx.encrypt(SOURCE_NO_PADDING.getBytes(), Aesx.CBC_NO, key);
+        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.CBC_NO, key);
         Assert.assertEquals("testCbcNoPadding", SOURCE_NO_PADDING, decryptResult);
     }
 
     @Test
     public void testCbcPKCS5Padding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.AES_CBC_PKCS5, key);
-        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.AES_CBC_PKCS5, key);
+        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.CBC_PKCS5, key);
+        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.CBC_PKCS5, key);
         Assert.assertEquals("testCbcPKCS5Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testCbcPKCS7Padding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.AES_CBC_PKCS7, key);
-        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.AES_CBC_PKCS7, key);
+        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.CBC_PKCS7, key);
+        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.CBC_PKCS7, key);
         Assert.assertEquals("testCbcPKCS7Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testCbcISO10126Padding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Aesx.createKey(128);
-        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.AES_CBC_ISO10126, key);
-        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.AES_CBC_ISO10126, key);
+        byte[] encryptResult = Aesx.encrypt(SOURCE.getBytes(), Aesx.CBC_ISO10126, key);
+        String decryptResult = Aesx.decryptToString(encryptResult, Aesx.CBC_ISO10126, key);
         Assert.assertEquals("testCbcISO10126Padding", SOURCE, decryptResult);
     }
 
@@ -133,10 +133,10 @@ public class AesxTest {
         Key key = Aesx.createKey(128);
         Key errorKey = Aesx.createKey(128);
 
-        String encryptResult = Aesx.encryptToBase64(SOURCE, Aesx.AES_CBC_PKCS5, key);
+        String encryptResult = Aesx.encryptToBase64(SOURCE, Aesx.CBC_PKCS5, key);
         String errorDecryptResult = null;
         try {
-            errorDecryptResult = Aesx.decryptToStringFromBase64(encryptResult, Aesx.AES_CBC_PKCS5, errorKey);
+            errorDecryptResult = Aesx.decryptToStringFromBase64(encryptResult, Aesx.CBC_PKCS5, errorKey);
         } catch (BadPaddingException ignored) {
         }
 

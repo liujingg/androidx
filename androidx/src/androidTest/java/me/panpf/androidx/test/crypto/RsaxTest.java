@@ -40,8 +40,8 @@ public class RsaxTest {
     @Test
     public void testPubPriBytes() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
         KeyPair keyPair = Rsax.createKey(1024);
-        byte[] encryptResult = Rsax.encrypt(SOURCE.getBytes(), Rsax.RSA, keyPair.getPublic());
-        String decryptResult = Rsax.decryptToString(encryptResult, Rsax.RSA, keyPair.getPrivate());
+        byte[] encryptResult = Rsax.encrypt(SOURCE.getBytes(), Rsax.DEFAULT, keyPair.getPublic());
+        String decryptResult = Rsax.decryptToString(encryptResult, Rsax.DEFAULT, keyPair.getPrivate());
         Assert.assertEquals("testPubPriBytes", SOURCE, decryptResult);
     }
 
@@ -51,8 +51,8 @@ public class RsaxTest {
     @Test
     public void testPriPubBytes() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
         KeyPair keyPair = Rsax.createKey(1024);
-        byte[] encryptResult = Rsax.encrypt(SOURCE.getBytes(), Rsax.RSA, keyPair.getPrivate());
-        String decryptResult = Rsax.decryptToString(encryptResult, Rsax.RSA, keyPair.getPublic());
+        byte[] encryptResult = Rsax.encrypt(SOURCE.getBytes(), Rsax.DEFAULT, keyPair.getPrivate());
+        String decryptResult = Rsax.decryptToString(encryptResult, Rsax.DEFAULT, keyPair.getPublic());
         Assert.assertEquals("testPriPubBytes", SOURCE, decryptResult);
     }
 
@@ -62,8 +62,8 @@ public class RsaxTest {
     @Test
     public void testPubPriWithBase64() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
         KeyPair keyPair = Rsax.createKey(1024);
-        String encryptResult = Rsax.encryptToBase64(SOURCE, Rsax.RSA, keyPair.getPublic());
-        String decryptResult = Rsax.decryptToStringFromBase64(encryptResult, Rsax.RSA, keyPair.getPrivate());
+        String encryptResult = Rsax.encryptToBase64(SOURCE, Rsax.DEFAULT, keyPair.getPublic());
+        String decryptResult = Rsax.decryptToStringFromBase64(encryptResult, Rsax.DEFAULT, keyPair.getPrivate());
         Assert.assertEquals("testPubPriWithBase64", SOURCE, decryptResult);
     }
 
@@ -73,8 +73,8 @@ public class RsaxTest {
     @Test
     public void testPriPubWithBase64() throws BadPaddingException, InvalidKeyException, IllegalBlockSizeException {
         KeyPair keyPair = Rsax.createKey(1024);
-        String encryptResult = Rsax.encryptToBase64(SOURCE, Rsax.RSA, keyPair.getPrivate());
-        String decryptResult = Rsax.decryptToStringFromBase64(encryptResult, Rsax.RSA, keyPair.getPublic());
+        String encryptResult = Rsax.encryptToBase64(SOURCE, Rsax.DEFAULT, keyPair.getPrivate());
+        String decryptResult = Rsax.decryptToStringFromBase64(encryptResult, Rsax.DEFAULT, keyPair.getPublic());
         Assert.assertEquals("testPriPubWithBase64", SOURCE, decryptResult);
     }
 
@@ -104,10 +104,10 @@ public class RsaxTest {
      */
     @Test
     public void testErrorKey() throws InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        byte[] encryptBytes = Rsax.encrypt(SOURCE.getBytes(), Rsax.RSA, Rsax.createKey(1024).getPublic());
+        byte[] encryptBytes = Rsax.encrypt(SOURCE.getBytes(), Rsax.DEFAULT, Rsax.createKey(1024).getPublic());
         String bytesPriKeyDecryptResult = null;
         try {
-            bytesPriKeyDecryptResult = Rsax.decryptToString(encryptBytes, Rsax.RSA, Rsax.createKey(1024).getPrivate());
+            bytesPriKeyDecryptResult = Rsax.decryptToString(encryptBytes, Rsax.DEFAULT, Rsax.createKey(1024).getPrivate());
         } catch (Exception ignored) {
         }
         Assert.assertNotEquals("testErrorKey", SOURCE, bytesPriKeyDecryptResult);
@@ -116,16 +116,16 @@ public class RsaxTest {
     @Test
     public void testEcbPKCS1Padding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         KeyPair keyPair = Rsax.createKey(1024);
-        byte[] encryptResult = Rsax.encrypt(SOURCE.getBytes(), Rsax.RSA_ECB_PKCS1, keyPair.getPublic());
-        String decryptResult = Rsax.decryptToString(encryptResult, Rsax.RSA_ECB_PKCS1, keyPair.getPrivate());
+        byte[] encryptResult = Rsax.encrypt(SOURCE.getBytes(), Rsax.ECB_PKCS1, keyPair.getPublic());
+        String decryptResult = Rsax.decryptToString(encryptResult, Rsax.ECB_PKCS1, keyPair.getPrivate());
         Assert.assertEquals("testEcbPKCS1Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testEcbOAEPPadding() throws InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         KeyPair keyPair = Rsax.createKey(1024);
-        byte[] encryptResult = Rsax.encrypt(SOURCE_OAEP.getBytes(), Rsax.RSA_ECB_OAEP, keyPair.getPublic());
-        String decryptResult = Rsax.decryptToString(encryptResult, Rsax.RSA_ECB_OAEP, keyPair.getPrivate());
+        byte[] encryptResult = Rsax.encrypt(SOURCE_OAEP.getBytes(), Rsax.ECB_OAEP, keyPair.getPublic());
+        String decryptResult = Rsax.decryptToString(encryptResult, Rsax.ECB_OAEP, keyPair.getPrivate());
         Assert.assertEquals("testEcbOAEPPadding", SOURCE_OAEP, decryptResult);
     }
 }

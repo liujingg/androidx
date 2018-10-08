@@ -16,6 +16,7 @@
 
 package me.panpf.androidxkt.test.crypto
 
+import me.panpf.javax.crypto.Aesx
 import me.panpf.javaxkt.crypto.*
 import org.junit.Assert
 import org.junit.Test
@@ -47,7 +48,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testDefaultConfig() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE.toByteArray().aesEncrypt(AES, key).aesDecryptToString(AES, key)
+        val decryptResult = SOURCE.toByteArray().aesEncrypt(Aesx.DEFAULT, key).aesDecryptToString(Aesx.DEFAULT, key)
         Assert.assertEquals("testDefaultConfig", SOURCE, decryptResult)
     }
 
@@ -55,7 +56,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testDefaultConfigWithBase64() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE.toByteArray().aesEncryptToBase64(AES, key).aesDecryptToStringFromBase64(AES, key)
+        val decryptResult = SOURCE.toByteArray().aesEncryptToBase64(Aesx.DEFAULT, key).aesDecryptToStringFromBase64(Aesx.DEFAULT, key)
         Assert.assertEquals("testDefaultConfigWithBase64", SOURCE, decryptResult)
     }
 
@@ -64,7 +65,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbNoPadding() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE_NO_PADDING.toByteArray().aesEncrypt(AES_ECB_NO, key).aesDecryptToString(AES_ECB_NO, key)
+        val decryptResult = SOURCE_NO_PADDING.toByteArray().aesEncrypt(Aesx.ECB_NO, key).aesDecryptToString(Aesx.ECB_NO, key)
         Assert.assertEquals("testEcbNoPadding", SOURCE_NO_PADDING, decryptResult)
     }
 
@@ -72,7 +73,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbPKCS5Padding() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE.toByteArray().aesEncrypt(AES_ECB_PKCS5, key).aesDecryptToString(AES_ECB_PKCS5, key)
+        val decryptResult = SOURCE.toByteArray().aesEncrypt(Aesx.ECB_PKCS5, key).aesDecryptToString(Aesx.ECB_PKCS5, key)
         Assert.assertEquals("testEcbPKCS5Padding", SOURCE, decryptResult)
     }
 
@@ -80,7 +81,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbPKCS7Padding() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE.toByteArray().aesEncrypt(AES_ECB_PKCS7, key).aesDecryptToString(AES_ECB_PKCS7, key)
+        val decryptResult = SOURCE.toByteArray().aesEncrypt(Aesx.ECB_PKCS7, key).aesDecryptToString(Aesx.ECB_PKCS7, key)
         Assert.assertEquals("testEcbPKCS7Padding", SOURCE, decryptResult)
     }
 
@@ -88,7 +89,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testEcbISO10126Padding() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE.toByteArray().aesEncrypt(AES_ECB_ISO10126, key).aesDecryptToString(AES_ECB_ISO10126, key)
+        val decryptResult = SOURCE.toByteArray().aesEncrypt(Aesx.ECB_ISO10126, key).aesDecryptToString(Aesx.ECB_ISO10126, key)
         Assert.assertEquals("testEcbISO10126Padding", SOURCE, decryptResult)
     }
 
@@ -97,7 +98,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testCbcNoPadding() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE_NO_PADDING.toByteArray().aesEncrypt(AES_CBC_NO, key).aesDecryptToString(AES_CBC_NO, key)
+        val decryptResult = SOURCE_NO_PADDING.toByteArray().aesEncrypt(Aesx.CBC_NO, key).aesDecryptToString(Aesx.CBC_NO, key)
         Assert.assertEquals("testCbcNoPadding", SOURCE_NO_PADDING, decryptResult)
     }
 
@@ -105,7 +106,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testCbcPKCS5Padding() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE.toByteArray().aesEncrypt(AES_CBC_PKCS5, key).aesDecryptToString(AES_CBC_PKCS5, key)
+        val decryptResult = SOURCE.toByteArray().aesEncrypt(Aesx.CBC_PKCS5, key).aesDecryptToString(Aesx.CBC_PKCS5, key)
         Assert.assertEquals("testCbcPKCS5Padding", SOURCE, decryptResult)
     }
 
@@ -113,7 +114,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testCbcPKCS7Padding() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE.toByteArray().aesEncrypt(AES_CBC_PKCS7, key).aesDecryptToString(AES_CBC_PKCS7, key)
+        val decryptResult = SOURCE.toByteArray().aesEncrypt(Aesx.CBC_PKCS7, key).aesDecryptToString(Aesx.CBC_PKCS7, key)
         Assert.assertEquals("testCbcPKCS7Padding", SOURCE, decryptResult)
     }
 
@@ -121,7 +122,7 @@ class AesxTest {
     @Throws(InvalidKeyException::class, BadPaddingException::class, IllegalBlockSizeException::class)
     fun testCbcISO10126Padding() {
         val key = createAesKey(128)
-        val decryptResult = SOURCE.toByteArray().aesEncrypt(AES_CBC_ISO10126, key).aesDecryptToString(AES_CBC_ISO10126, key)
+        val decryptResult = SOURCE.toByteArray().aesEncrypt(Aesx.CBC_ISO10126, key).aesDecryptToString(Aesx.CBC_ISO10126, key)
         Assert.assertEquals("testCbcISO10126Padding", SOURCE, decryptResult)
     }
 
@@ -132,10 +133,10 @@ class AesxTest {
         val key = createAesKey(128)
         val errorKey = createAesKey(128)
 
-        val encryptResult = SOURCE.aesEncryptToBase64(AES_CBC_PKCS5, key)
+        val encryptResult = SOURCE.aesEncryptToBase64(Aesx.CBC_PKCS5, key)
         var errorDecryptResult: String? = null
         try {
-            errorDecryptResult = encryptResult.aesDecryptToStringFromBase64(AES_CBC_PKCS5, errorKey)
+            errorDecryptResult = encryptResult.aesDecryptToStringFromBase64(Aesx.CBC_PKCS5, errorKey)
         } catch (e: BadPaddingException) {
             //            e.printStackTrace();
         }

@@ -51,16 +51,16 @@ public class DesxTest {
     @Test
     public void testDefaultConfig() throws InvalidKeySpecException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.DES, key);
-        String decryptResult = Desx.decryptToString(encryptResult, Desx.DES, key);
+        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.DEFAULT, key);
+        String decryptResult = Desx.decryptToString(encryptResult, Desx.DEFAULT, key);
         Assert.assertEquals("testDefaultConfig", SOURCE, decryptResult);
     }
 
     @Test
     public void testDefaultConfigWithBase64() throws InvalidKeySpecException, InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        String encryptResult = Desx.encryptToBase64(SOURCE.getBytes(), Desx.DES, key);
-        String decryptResult = Desx.decryptToStringFromBase64(encryptResult, Desx.DES, key);
+        String encryptResult = Desx.encryptToBase64(SOURCE.getBytes(), Desx.DEFAULT, key);
+        String decryptResult = Desx.decryptToStringFromBase64(encryptResult, Desx.DEFAULT, key);
         Assert.assertEquals("testDefaultConfigWithBase64", SOURCE, decryptResult);
     }
 
@@ -68,64 +68,64 @@ public class DesxTest {
     @Test
     public void testEcbNoPadding() throws InvalidKeySpecException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        byte[] encryptResult = Desx.encrypt(SOURCE_NO_PADDING.getBytes(), Desx.DES_ECB_NO, key);
-        String decryptResult = Desx.decryptToString(encryptResult, Desx.DES_ECB_NO, key);
+        byte[] encryptResult = Desx.encrypt(SOURCE_NO_PADDING.getBytes(), Desx.ECB_NO, key);
+        String decryptResult = Desx.decryptToString(encryptResult, Desx.ECB_NO, key);
         Assert.assertEquals("testEcbPKCS5Padding", SOURCE_NO_PADDING, decryptResult);
     }
 
     @Test
     public void testEcbPKCS5Padding() throws InvalidKeySpecException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.DES_ECB_PKCS5, key);
-        String decryptResult = Desx.decryptToString(encryptResult, Desx.DES_ECB_PKCS5, key);
+        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.ECB_PKCS5, key);
+        String decryptResult = Desx.decryptToString(encryptResult, Desx.ECB_PKCS5, key);
         Assert.assertEquals("testEcbPKCS5Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testEcbPKCS7Padding() throws InvalidKeySpecException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.DES_ECB_PKCS7, key);
-        String decryptResult = Desx.decryptToString(encryptResult, Desx.DES_ECB_PKCS7, key);
+        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.ECB_PKCS7, key);
+        String decryptResult = Desx.decryptToString(encryptResult, Desx.ECB_PKCS7, key);
         Assert.assertEquals("testEcbPKCS7Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testEcbISO10126Padding() throws InvalidKeySpecException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.DES_ECB_ISO10126, key);
-        String decryptResult = Desx.decryptToString(encryptResult, Desx.DES_ECB_ISO10126, key);
+        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.ECB_ISO10126, key);
+        String decryptResult = Desx.decryptToString(encryptResult, Desx.ECB_ISO10126, key);
         Assert.assertEquals("testEcbISO10126Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testCbcNoPadding() throws InvalidKeySpecException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        byte[] encryptResult = Desx.encrypt(SOURCE_NO_PADDING.getBytes(), Desx.DES_CBC_NO, key);
-        String decryptResult = Desx.decryptToString(encryptResult, Desx.DES_CBC_NO, key);
+        byte[] encryptResult = Desx.encrypt(SOURCE_NO_PADDING.getBytes(), Desx.CBC_NO, key);
+        String decryptResult = Desx.decryptToString(encryptResult, Desx.CBC_NO, key);
         Assert.assertEquals("testCbcPKCS5Padding", SOURCE_NO_PADDING, decryptResult);
     }
 
     @Test
     public void testCbcPKCS5Padding() throws InvalidKeySpecException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.DES_CBC_PKCS5, key);
-        String decryptResult = Desx.decryptToString(encryptResult, Desx.DES_CBC_PKCS5, key);
+        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.CBC_PKCS5, key);
+        String decryptResult = Desx.decryptToString(encryptResult, Desx.CBC_PKCS5, key);
         Assert.assertEquals("testCbcPKCS5Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testCbcPKCS7Padding() throws InvalidKeySpecException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.DES_CBC_PKCS7, key);
-        String decryptResult = Desx.decryptToString(encryptResult, Desx.DES_CBC_PKCS7, key);
+        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.CBC_PKCS7, key);
+        String decryptResult = Desx.decryptToString(encryptResult, Desx.CBC_PKCS7, key);
         Assert.assertEquals("testCbcPKCS7Padding", SOURCE, decryptResult);
     }
 
     @Test
     public void testCbcISO10126Padding() throws InvalidKeySpecException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         Key key = Desx.createKeyByPassword(PASSWORD);
-        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.DES_CBC_ISO10126, key);
-        String decryptResult = Desx.decryptToString(encryptResult, Desx.DES_CBC_ISO10126, key);
+        byte[] encryptResult = Desx.encrypt(SOURCE.getBytes(), Desx.CBC_ISO10126, key);
+        String decryptResult = Desx.decryptToString(encryptResult, Desx.CBC_ISO10126, key);
         Assert.assertEquals("testCbcISO10126Padding", SOURCE, decryptResult);
     }
 
@@ -134,10 +134,10 @@ public class DesxTest {
         Key key = Desx.createKeyByPassword(PASSWORD);
         Key errorKey = Desx.createKeyByPassword(PASSWORD_ERROR);
 
-        String encryptResult = Desx.encryptToBase64(SOURCE, Desx.DES_ECB_PKCS5, key);
+        String encryptResult = Desx.encryptToBase64(SOURCE, Desx.ECB_PKCS5, key);
         String errorDecryptResult = null;
         try {
-            errorDecryptResult = Desx.decryptToStringFromBase64(encryptResult, Desx.DES_ECB_PKCS5, errorKey);
+            errorDecryptResult = Desx.decryptToStringFromBase64(encryptResult, Desx.ECB_PKCS5, errorKey);
         } catch (BadPaddingException ignored) {
         }
 
@@ -149,8 +149,8 @@ public class DesxTest {
         Key key = Desx.createKeyByPassword(PASSWORD);
         Key likeKey = Desx.createKeyByPassword(PASSWORD_LIKE);
 
-        String encryptResult = Desx.encryptToBase64(SOURCE, Desx.DES_ECB_PKCS5, key);
-        String likeDecryptResult = Desx.decryptToStringFromBase64(encryptResult, Desx.DES_ECB_PKCS5, likeKey);
+        String encryptResult = Desx.encryptToBase64(SOURCE, Desx.ECB_PKCS5, key);
+        String likeDecryptResult = Desx.decryptToStringFromBase64(encryptResult, Desx.ECB_PKCS5, likeKey);
 
         Assert.assertEquals("testLikePassword", SOURCE, likeDecryptResult);
     }
