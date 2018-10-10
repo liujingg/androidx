@@ -16,6 +16,7 @@ import android.support.v4.app.Fragment as SupportFragment
 /* ************************************* android.support.v4.app.Fragment ***************************************** */
 
 // todo 基础类型没有 Optional
+// todo 支持从 uri 中取参数
 
 // Boolean
 fun android.support.v4.app.Fragment.bindBooleanArg(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<android.support.v4.app.Fragment, Boolean> =
