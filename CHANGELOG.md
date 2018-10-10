@@ -1,3 +1,10 @@
+## v0.2.5
+
+Upgrade
+* :arrow_up: Upgrade Javax 0.6.7
+
+
+
 ## v0.2.4
 
 Bug
