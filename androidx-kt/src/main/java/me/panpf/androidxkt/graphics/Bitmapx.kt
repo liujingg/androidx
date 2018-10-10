@@ -31,18 +31,12 @@ import java.io.FileDescriptor
 import java.io.InputStream
 
 /*
- * Bitmap 相关的扩展方法或属性
+ * Bitmap related extension methods or properties
  */
 
-inline fun Bitmap.centerCrop(outWidth: Int, outHeight: Int, outConfig: Bitmap.Config): Bitmap = Bitmapx.centerCrop(this, outWidth, outHeight, outConfig)
 
-inline fun Bitmap.tint(color: Int): Bitmap = Bitmapx.tint(this, color)
+/* ************************************** read ******************************************  */
 
-inline fun createBitmapByColor(width: Int, height: Int, @ColorInt color: Int): Bitmap = Bitmapx.createByColor(width, height, color)
-
-inline fun Bitmap.toByteArray(format: Bitmap.CompressFormat, quality: Int): ByteArray = Bitmapx.toByteArray(this, format, quality)
-
-inline fun Bitmap.writeToFile(file: File, format: Bitmap.CompressFormat, quality: Int) = Bitmapx.writeToFile(this, file, format, quality)
 
 inline fun File.readBitmap(options: BitmapFactory.Options? = null): Bitmap? = Bitmapx.readBitmap(this, options)
 
@@ -67,6 +61,18 @@ inline fun Resources.readBitmap(resId: Int): Bitmap? = Bitmapx.readBitmap(this, 
 inline fun Resources.readBitmap(value: TypedValue?, inputStream: InputStream?, pad: Rect?, options: BitmapFactory.Options?): Bitmap? =
         Bitmapx.readBitmap(this, value, inputStream, pad, options)
 
+
+/* ************************************** save ******************************************  */
+
+
+inline fun Bitmap.writeToFile(file: File, format: Bitmap.CompressFormat, quality: Int) = Bitmapx.writeToFile(this, file, format, quality)
+
+
+/* ************************************** to ******************************************  */
+
+
+inline fun Bitmap.toByteArray(format: Bitmap.CompressFormat, quality: Int): ByteArray = Bitmapx.toByteArray(this, format, quality)
+
 /**
  * Change the color of the bitmap
  *
@@ -74,3 +80,27 @@ inline fun Resources.readBitmap(value: TypedValue?, inputStream: InputStream?, p
  * @param resources setting initial target density based on the display metrics of the resources.
  */
 inline fun Bitmap.toDrawableByColor(@ColorInt color: Int, resources: Resources? = null): BitmapDrawable = Bitmapx.toDrawableByColor(this, color, resources)
+
+
+/* ************************************** process ******************************************  */
+
+
+inline fun Bitmap.circularTo(dstBitmap: Bitmap): Bitmap = Bitmapx.circularTo(this, dstBitmap)
+
+inline fun Bitmap.circular(newSize: Int, config: Bitmap.Config): Bitmap = Bitmapx.circular(this, newSize, config)
+
+inline fun Bitmap.circular(newSize: Int): Bitmap = Bitmapx.circular(this, newSize)
+
+inline fun Bitmap.circular(config: Bitmap.Config): Bitmap = Bitmapx.circular(this, config)
+
+inline fun Bitmap.circular(): Bitmap = Bitmapx.circular(this)
+
+
+inline fun Bitmap.centerCropTo(dstBitmap: Bitmap): Bitmap = Bitmapx.centerCropTo(this, dstBitmap)
+
+inline fun Bitmap.centerCrop(newWidth: Int, newHeight: Int, config: Bitmap.Config): Bitmap = Bitmapx.centerCrop(this, newWidth, newHeight, config)
+
+inline fun Bitmap.centerCrop(newWidth: Int, newHeight: Int): Bitmap = Bitmapx.centerCrop(this, newWidth, newHeight)
+
+
+inline fun Bitmap.tint(@ColorInt color: Int): Bitmap = Bitmapx.tint(this, color)

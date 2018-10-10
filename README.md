@@ -84,7 +84,8 @@ Dependencies:
 * Drawable: [Drawablex.java] ([Test][DrawablexTest.java])  | [Drawablex.kt] ([Test][DrawablexTest.kt])
     * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, toDrawableByColor, toDrawableByColorFromDrawableRes
 * Bitmap: [Bitmapx.java] | [Bitmapx.kt]
-    * centerCrop, tint, createByColor, toByteArray, writeToFile, readBitmap, toDrawableByColor,
+    * centerCrop, centerCropTo, circular, circularTo, tint, createByColor, toByteArray,
+    * writeToFile, readBitmap, toDrawableByColor,
 * Color: [Colorx.java] ([Test][ColorxTest.java]) | [Colorx.kt] ([Test][ColorxTest.kt])
     * WHITE/BLACK/RED..., getAlpha, setAlpha, addAlpha, getHSVHue, setHSVHue, getHSVSaturation,
     * setHSVSaturation, addHSVSaturation, getHSVValue, setHSVValue, addHSVValue, isLight,

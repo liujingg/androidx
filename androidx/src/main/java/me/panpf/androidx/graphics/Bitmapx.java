@@ -20,17 +20,17 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorMatrix;
-import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.TypedValue;
+import android.widget.ImageView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -48,78 +48,12 @@ import me.panpf.javax.io.IOStreamx;
 @SuppressWarnings("WeakerAccess")
 public class Bitmapx {
 
-    public static Bitmap centerCrop(Bitmap srcBitmap, int outWidth, int outHeight, Bitmap.Config outConfig) {
-        float widthScale = (float) outWidth / srcBitmap.getWidth();
-        float heightScale = (float) outHeight / srcBitmap.getHeight();
-        float finalScale = Math.max(widthScale, heightScale);
-        float dx = (srcBitmap.getWidth() * finalScale - outWidth) / 2;
-        float dy = (srcBitmap.getHeight() * finalScale - outHeight) / 2;
-
-        Paint paint = new Paint();
-        Matrix matrix = new Matrix();
-        matrix.postScale(finalScale, finalScale);
-        matrix.postTranslate(-dx, -dy);
-
-        Bitmap newBitmap = Bitmap.createBitmap(outWidth, outHeight, outConfig);
-        Canvas canvas = new Canvas(newBitmap);
-        canvas.drawBitmap(srcBitmap, matrix, paint);
-
-        return newBitmap;
+    private Bitmapx() {
     }
 
-    public static Bitmap tint(Bitmap bitmap, int color) {
-        Bitmap newBitmap = Bitmap.createBitmap(bitmap.getWidth(), bitmap.getHeight(), bitmap.getConfig());
-        Canvas canvas = new Canvas(newBitmap);
-        Paint mPaint = new Paint();
-        float mRed = Color.red(color);
-        float mGreen = Color.green(color);
-        float mBlue = Color.blue(color);
-        float[] src = new float[]{
-                0, 0, 0, 0, mRed,
-                0, 0, 0, 0, mGreen,
-                0, 0, 0, 0, mBlue,
-                0, 0, 0, 1, 0};
-        ColorMatrix matrix = new ColorMatrix();
-        matrix.set(src);
-        mPaint.setColorFilter(new ColorMatrixColorFilter(src));
-        canvas.drawBitmap(bitmap, new Matrix(), mPaint);
-        return newBitmap;
-    }
 
-    public static Bitmap createByColor(int width, int height, @ColorInt int color, Bitmap.Config config) {
-        Bitmap bitmap = Bitmap.createBitmap(width, height, config);
-        Canvas canvas = new Canvas(bitmap);
-        canvas.drawColor(color);
-        return bitmap;
-    }
+    /* ************************************** read ******************************************  */
 
-    public static Bitmap createByColor(int width, int height, @ColorInt int color) {
-        return createByColor(width, height, color, Bitmap.Config.ARGB_8888);
-    }
-
-    public static byte[] toByteArray(Bitmap bitmap, Bitmap.CompressFormat format, int quality) {
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        bitmap.compress(format, quality, outputStream);
-        return outputStream.toByteArray();
-    }
-
-    public static void writeToFile(Bitmap bm, File file, Bitmap.CompressFormat format, int quality) throws IOException {
-        Filex.createNewFileOrThrow(file);
-        BufferedOutputStream bos;
-        try {
-            bos = new BufferedOutputStream(new FileOutputStream(file));
-        } catch (IOException e) {
-            //noinspection ResultOfMethodCallIgnored
-            file.delete();
-            throw e;
-        }
-        try {
-            bm.compress(format, quality, bos);
-        } finally {
-            //noinspection ResultOfMethodCallIgnored
-            IOStreamx.safeClose(bos);
-        }
-    }
 
     @Nullable
     public static Bitmap readBitmap(@NonNull File file, @Nullable BitmapFactory.Options options) {
@@ -176,6 +110,53 @@ public class Bitmapx {
         return BitmapFactory.decodeResourceStream(res, value, is, pad, options);
     }
 
+
+    /* ************************************** create ******************************************  */
+
+
+    public static Bitmap createByColor(int width, int height, @ColorInt int color, Bitmap.Config config) {
+        Bitmap bitmap = Bitmap.createBitmap(width, height, config);
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawColor(color);
+        return bitmap;
+    }
+
+    public static Bitmap createByColor(int width, int height, @ColorInt int color) {
+        return createByColor(width, height, color, Bitmap.Config.ARGB_8888);
+    }
+
+
+    /* ************************************** save ******************************************  */
+
+
+    public static void writeToFile(Bitmap bm, File file, Bitmap.CompressFormat format, int quality) throws IOException {
+        Filex.createNewFileOrThrow(file);
+        BufferedOutputStream bos;
+        try {
+            bos = new BufferedOutputStream(new FileOutputStream(file));
+        } catch (IOException e) {
+            //noinspection ResultOfMethodCallIgnored
+            file.delete();
+            throw e;
+        }
+        try {
+            bm.compress(format, quality, bos);
+        } finally {
+            //noinspection ResultOfMethodCallIgnored
+            IOStreamx.safeClose(bos);
+        }
+    }
+
+
+    /* ************************************** to ******************************************  */
+
+
+    public static byte[] toByteArray(Bitmap bitmap, Bitmap.CompressFormat format, int quality) {
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        bitmap.compress(format, quality, outputStream);
+        return outputStream.toByteArray();
+    }
+
     /**
      * Change the color of the bitmap
      *
@@ -200,5 +181,86 @@ public class Bitmapx {
     @NotNull
     public static BitmapDrawable toDrawableByColor(@NotNull Bitmap bitmap, @ColorInt int color) {
         return toDrawableByColor(bitmap, color, null);
+    }
+
+
+    /* ************************************** process ******************************************  */
+
+
+    @NonNull
+    public static Bitmap circularTo(@NonNull Bitmap srcBitmap, @NonNull Bitmap dstBitmap) {
+        final Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setColor(0xFFFF0000);
+
+        Canvas canvas = new Canvas(dstBitmap);
+        canvas.drawARGB(0, 0, 0, 0);
+
+        float newBitmapRadius = Math.min(dstBitmap.getWidth(), dstBitmap.getHeight()) / 2;
+        canvas.drawCircle(newBitmapRadius, newBitmapRadius, newBitmapRadius, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        ResizeCalculator.Result result = ResizeCalculator.calculator(srcBitmap.getWidth(), srcBitmap.getHeight(),
+                dstBitmap.getWidth(), dstBitmap.getHeight(), ImageView.ScaleType.CENTER_CROP, false);
+        canvas.drawBitmap(srcBitmap, result.srcRect, result.destRect, paint);
+
+        return dstBitmap;
+    }
+
+    @NonNull
+    public static Bitmap circular(@NonNull Bitmap srcBitmap, int newSize, @NonNull Bitmap.Config config) {
+        return circularTo(srcBitmap, Bitmap.createBitmap(newSize, newSize, config));
+    }
+
+    @NonNull
+    public static Bitmap circular(@NonNull Bitmap srcBitmap, int newSize) {
+        return circularTo(srcBitmap, Bitmap.createBitmap(newSize, newSize, Bitmap.Config.ARGB_8888));
+    }
+
+    @NonNull
+    public static Bitmap circular(@NonNull Bitmap srcBitmap, @NonNull Bitmap.Config config) {
+        final int newBitmapSize = Math.min(srcBitmap.getWidth(), srcBitmap.getHeight());
+        return circularTo(srcBitmap, Bitmap.createBitmap(newBitmapSize, newBitmapSize, config));
+    }
+
+    @NonNull
+    public static Bitmap circular(@NonNull Bitmap srcBitmap) {
+        return circular(srcBitmap, Bitmap.Config.ARGB_8888);
+    }
+
+
+    @NonNull
+    public static Bitmap centerCropTo(@NonNull Bitmap srcBitmap, @NonNull Bitmap dstBitmap) {
+        Paint paint = new Paint();
+        Canvas canvas = new Canvas(dstBitmap);
+
+        ResizeCalculator.Result result = ResizeCalculator.calculator(srcBitmap.getWidth(), srcBitmap.getHeight(),
+                dstBitmap.getWidth(), dstBitmap.getHeight(), ImageView.ScaleType.CENTER_CROP, false);
+        canvas.drawBitmap(srcBitmap, result.srcRect, result.destRect, paint);
+
+        return dstBitmap;
+    }
+
+    @NonNull
+    public static Bitmap centerCrop(@NonNull Bitmap srcBitmap, int newWidth, int newHeight, @NonNull Bitmap.Config config) {
+        return centerCropTo(srcBitmap, Bitmap.createBitmap(newWidth, newHeight, config));
+    }
+
+    @NonNull
+    public static Bitmap centerCrop(@NonNull Bitmap srcBitmap, int newWidth, int newHeight) {
+        return centerCropTo(srcBitmap, Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888));
+    }
+
+
+    @NonNull
+    public static Bitmap tint(@NonNull Bitmap srcBitmap, @ColorInt int color) {
+        Paint mPaint = new Paint();
+        mPaint.setColorFilter(Colorx.createMatrixColorFilter(color));
+
+        Bitmap newBitmap = Bitmap.createBitmap(srcBitmap.getWidth(), srcBitmap.getHeight(), srcBitmap.getConfig());
+        Canvas canvas = new Canvas(newBitmap);
+        canvas.drawBitmap(srcBitmap, new Matrix(), mPaint);
+
+        return newBitmap;
     }
 }

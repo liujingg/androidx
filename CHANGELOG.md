@@ -4,6 +4,7 @@
     isMobileActivated, isBluetoothActivated, isVPNActivated, isMetered, isRoaming,
     isFailover, getType, getTypeName, getSubtypeName, getExtraInfo, getNetworkInfo, getConnectivity
 * :sparkles: Fragmentx add findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem method
+* :sparkles: Bitmapx add circularTo, circular, centerCropTo method and add related overloaded methods
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.7
