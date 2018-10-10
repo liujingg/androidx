@@ -22,10 +22,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
+@SuppressWarnings("WeakerAccess")
 public class Fragmentx {
 
     /**
@@ -47,7 +50,7 @@ public class Fragmentx {
      */
     @Nullable
     public static <T> T getImplWithParent(@NonNull android.support.v4.app.Fragment fragment, @NonNull Class<T> clazz) {
-        Fragment parent = fragment;
+        android.support.v4.app.Fragment parent = fragment;
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {
                 //noinspection unchecked
@@ -148,5 +151,82 @@ public class Fragmentx {
      */
     public static android.app.Fragment instanceOrigin(@NotNull Class<? extends android.app.Fragment> clas) {
         return instanceOrigin(clas, null);
+    }
+
+    /**
+     * Find the visible fragments visible to the current user from the fragment list
+     */
+    @Nullable
+    public static android.support.v4.app.Fragment findUserVisibleChildFragment(@Nullable List<android.support.v4.app.Fragment> fragmentList) {
+        android.support.v4.app.Fragment userVisibleFragment = null;
+        if (fragmentList != null) {
+            for (android.support.v4.app.Fragment childFragment : fragmentList) {
+                if (childFragment != null) {
+                    if (childFragment.isResumed() && childFragment.getUserVisibleHint()) {
+                        userVisibleFragment = childFragment;
+                    } else {
+                        List<android.support.v4.app.Fragment> childFragmentList = childFragment.getChildFragmentManager().getFragments();
+                        userVisibleFragment = findUserVisibleChildFragment(childFragmentList);
+                    }
+                    if (userVisibleFragment != null) {
+                        break;
+                    }
+                }
+            }
+        }
+        return userVisibleFragment;
+    }
+
+    /**
+     * Find the visible fragments visible to the current user from the FragmentActivity
+     */
+    @Nullable
+    public static android.support.v4.app.Fragment findUserVisibleChildFragment(@Nullable FragmentActivity fragmentActivity) {
+        return findUserVisibleChildFragment(fragmentActivity != null ? fragmentActivity.getSupportFragmentManager().getFragments() : null);
+    }
+
+    /**
+     * Find the visible fragments visible to the current user from the fragment
+     */
+    @Nullable
+    public static android.support.v4.app.Fragment findUserVisibleChildFragment(@Nullable android.support.v4.app.Fragment fragment) {
+        return findUserVisibleChildFragment(fragment != null ? fragment.getChildFragmentManager().getFragments() : null);
+    }
+
+    /**
+     * Find the target fragment from the specified fragment list based on the current Item of ViewPager
+     */
+    @Nullable
+    public static android.support.v4.app.Fragment findFragmentByViewPagerCurrentItem(
+            @Nullable List<android.support.v4.app.Fragment> fragmentList, int viewPagerCurrentItem) {
+        if (fragmentList != null) {
+            String viewPagerCurrentItemString = String.valueOf(viewPagerCurrentItem);
+            for (android.support.v4.app.Fragment fragment : fragmentList) {
+                String fragmentTag = fragment.getTag();
+                if (fragmentTag != null) {
+                    String[] tagItems = fragmentTag.split(":");
+                    if (tagItems.length > 0 && tagItems[tagItems.length - 1].equals(viewPagerCurrentItemString)) {
+                        return fragment;
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Find the target fragment from the specified fragment list based on the current Item of ViewPager
+     */
+    @Nullable
+    public static android.support.v4.app.Fragment findFragmentByViewPagerCurrentItem(@Nullable FragmentActivity fragmentActivity, int viewPagerCurrentItem) {
+        return findFragmentByViewPagerCurrentItem(fragmentActivity != null ? fragmentActivity.getSupportFragmentManager().getFragments() : null, viewPagerCurrentItem);
+    }
+
+    /**
+     * Find the target fragment from the specified fragment list based on the current Item of ViewPager
+     */
+    @Nullable
+    public static android.support.v4.app.Fragment findFragmentByViewPagerCurrentItem(@Nullable android.support.v4.app.Fragment fragment, int viewPagerCurrentItem) {
+        return findFragmentByViewPagerCurrentItem(fragment != null ? fragment.getChildFragmentManager().getFragments() : null, viewPagerCurrentItem);
     }
 }

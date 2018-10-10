@@ -19,6 +19,7 @@
 package me.panpf.androidxkt.app
 
 import android.os.Bundle
+import android.support.v4.app.FragmentActivity
 import me.panpf.androidx.app.Fragmentx
 
 /**
@@ -50,3 +51,34 @@ inline fun Class<out android.support.v4.app.Fragment>.instance(arguments: Bundle
  * Instantiate a Fragment and set arguments
  */
 inline fun Class<out android.app.Fragment>.instanceOrigin(arguments: Bundle? = null): android.app.Fragment = Fragmentx.instanceOrigin(this, arguments)
+
+
+/**
+ * Find the visible fragments visible to the current user from the fragment list
+ */
+inline fun List<android.support.v4.app.Fragment>?.findUserVisibleChildFragment(): android.support.v4.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
+
+/**
+ * Find the visible fragments visible to the current user from the FragmentActivity
+ */
+inline fun FragmentActivity?.findUserVisibleChildFragment(): android.support.v4.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
+
+/**
+ * Find the visible fragments visible to the current user from the fragment
+ */
+inline fun android.support.v4.app.Fragment?.findUserVisibleChildFragment(): android.support.v4.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
+
+/**
+ * Find the target fragment from the specified fragment list based on the current Item of ViewPager
+ */
+inline fun List<android.support.v4.app.Fragment>?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): android.support.v4.app.Fragment? = Fragmentx.findFragmentByViewPagerCurrentItem(this, viewPagerCurrentItem)
+
+/**
+ * Find the target fragment from the specified fragment list based on the current Item of ViewPager
+ */
+inline fun FragmentActivity?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): android.support.v4.app.Fragment? = Fragmentx.findFragmentByViewPagerCurrentItem(this, viewPagerCurrentItem)
+
+/**
+ * Find the target fragment from the specified fragment list based on the current Item of ViewPager
+ */
+inline fun android.support.v4.app.Fragment?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): android.support.v4.app.Fragment? = Fragmentx.findFragmentByViewPagerCurrentItem(this, viewPagerCurrentItem)

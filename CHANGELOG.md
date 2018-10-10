@@ -3,6 +3,7 @@
 * :sparkles: Networdx add isActivated, isWifiActivated, isNoMeteredWifiActivated,
     isMobileActivated, isBluetoothActivated, isVPNActivated, isMetered, isRoaming,
     isFailover, getType, getTypeName, getSubtypeName, getExtraInfo, getNetworkInfo, getConnectivity
+* :sparkles: Fragmentx add findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem method
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.7
