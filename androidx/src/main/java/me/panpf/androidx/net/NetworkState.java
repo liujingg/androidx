@@ -26,7 +26,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 
 /**
- * 判断网络状态的工具类，可一次性满足是否有网络以及什么网络类型
+ * A tool class that determines the state of the network, which can satisfy whether there is a network and what type of network at one time.
  */
 @SuppressWarnings("WeakerAccess")
 public class NetworkState {
@@ -44,9 +44,7 @@ public class NetworkState {
     }
 
     /**
-     * 获取网络状态
-     *
-     * @param context Context
+     * Get network state
      */
     @NonNull
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
@@ -55,21 +53,21 @@ public class NetworkState {
     }
 
     /**
-     * 是否有可用的网络连接
+     * Return true if any type of network is currently available
      */
     public boolean isActivated() {
         return networkInfo != null && networkInfo.isConnected();
     }
 
     /**
-     * 是否有可用的 wifi 网络连接
+     * Return true if the currently available network type is WIFI
      */
     public boolean isWifiActivated() {
         return networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI;
     }
 
     /**
-     * 是否有可用的不计量 wifi 网络连接
+     * Return true if the currently available network type is not metered WIFI
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public boolean isNoMeteredWifiActivated() {
@@ -77,25 +75,21 @@ public class NetworkState {
     }
 
     /**
-     * 是否有可用的移动数据网络连接
+     * Return true if the type of currently available network is mobile data
      */
     public boolean isMobileActivated() {
         return networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_MOBILE;
     }
 
     /**
-     * 是否有可用的蓝牙网络连接
+     * Return true if the currently available network type is Bluetooth
      */
     public boolean isBluetoothActivated() {
         return networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_BLUETOOTH;
     }
 
-    public int getType(){
-        return networkInfo != null ? networkInfo.getType() : -1;
-    }
-
     /**
-     * 是否有可用的蓝牙网络连接
+     * Return true if the currently available network type is VPN
      */
     public boolean isVPNActivated() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP && networkInfo != null
@@ -103,7 +97,7 @@ public class NetworkState {
     }
 
     /**
-     * 当前网络是否是计量的，比如移动数据肯定是计量的，还有热点 wifi 也是计量的
+     * Return true if the currently available network is metered
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public boolean isMetered() {
@@ -111,21 +105,28 @@ public class NetworkState {
     }
 
     /**
-     * 是否是漫游网络
+     * Return true if the type of currently available network is roaming
      */
     public boolean isRoaming() {
         return networkInfo != null && networkInfo.isRoaming();
     }
 
     /**
-     * 是否是故障转移网络
+     * Return true if the currently available network is automatically transferred after a failure
      */
     public boolean isFailover() {
         return networkInfo != null && networkInfo.isFailover();
     }
 
     /**
-     * 获取网络类型名字
+     * Get the type of network currently available
+     */
+    public int getType() {
+        return networkInfo != null ? networkInfo.getType() : -1;
+    }
+
+    /**
+     * Get the name of the type of currently available network
      */
     @NonNull
     public String getTypeName() {
@@ -133,7 +134,7 @@ public class NetworkState {
     }
 
     /**
-     * 获取子类型名字
+     * Get the name of the subtype of the currently available network
      */
     @NonNull
     public String getSubtypeName() {
@@ -141,18 +142,24 @@ public class NetworkState {
     }
 
     /**
-     * 获取扩展信息
+     * Get additional information about the currently available network
      */
     @NonNull
     public String getExtraInfo() {
         return networkInfo != null ? networkInfo.getExtraInfo() : "Unknown";
     }
 
+    /**
+     * Get information about currently available networks
+     */
     @Nullable
     public NetworkInfo getNetworkInfo() {
         return networkInfo;
     }
 
+    /**
+     * Get network connection
+     */
     @Nullable
     public ConnectivityManager getConnectivity() {
         return connectivity;

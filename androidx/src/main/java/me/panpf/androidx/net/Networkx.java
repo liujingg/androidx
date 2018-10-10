@@ -38,9 +38,137 @@ import me.panpf.javax.util.Premisex;
 @SuppressWarnings("WeakerAccess")
 public class Networkx {
 
+    /**
+     * Get network state
+     */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static NetworkState getState(Context context) {
+    public static NetworkState getState(@NonNull Context context) {
         return NetworkState.get(context);
+    }
+
+    /**
+     * Return true if any type of network is currently available
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isActivated(@NonNull Context context) {
+        return NetworkState.get(context).isActivated();
+    }
+
+    /**
+     * Return true if the currently available network type is WIFI
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isWifiActivated(@NonNull Context context) {
+        return NetworkState.get(context).isWifiActivated();
+    }
+
+    /**
+     * Return true if the currently available network type is not metered WIFI
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isNoMeteredWifiActivated(@NonNull Context context) {
+        return NetworkState.get(context).isNoMeteredWifiActivated();
+    }
+
+    /**
+     * Return true if the type of currently available network is mobile data
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isMobileActivated(@NonNull Context context) {
+        return NetworkState.get(context).isMobileActivated();
+    }
+
+    /**
+     * Return true if the currently available network type is Bluetooth
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isBluetoothActivated(@NonNull Context context) {
+        return NetworkState.get(context).isBluetoothActivated();
+    }
+
+    /**
+     * Return true if the currently available network type is VPN
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isVPNActivated(@NonNull Context context) {
+        return NetworkState.get(context).isVPNActivated();
+    }
+
+    /**
+     * Return true if the currently available network is metered
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isMetered(@NonNull Context context) {
+        return NetworkState.get(context).isVPNActivated();
+    }
+
+    /**
+     * Return true if the type of currently available network is roaming
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isRoaming(@NonNull Context context) {
+        return NetworkState.get(context).isRoaming();
+    }
+
+    /**
+     * Return true if the currently available network is automatically transferred after a failure
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static boolean isFailover(@NonNull Context context) {
+        return NetworkState.get(context).isFailover();
+    }
+
+    /**
+     * Get the type of network currently available
+     */
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static int getType(@NonNull Context context) {
+        return NetworkState.get(context).getType();
+    }
+
+    /**
+     * Get the name of the type of currently available network
+     */
+    @NonNull
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static String getTypeName(@NonNull Context context) {
+        return NetworkState.get(context).getTypeName();
+    }
+
+    /**
+     * Get the name of the subtype of the currently available network
+     */
+    @NonNull
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static String getSubtypeName(@NonNull Context context) {
+        return NetworkState.get(context).getSubtypeName();
+    }
+
+    /**
+     * Get additional information about the currently available network
+     */
+    @NonNull
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static String getExtraInfo(@NonNull Context context) {
+        return NetworkState.get(context).getExtraInfo();
+    }
+
+    /**
+     * Get information about currently available networks
+     */
+    @Nullable
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static NetworkInfo getNetworkInfo(@NonNull Context context) {
+        return NetworkState.get(context).getNetworkInfo();
+    }
+
+    /**
+     * Get network connection
+     */
+    @Nullable
+    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+    public static ConnectivityManager getConnectivity(@NonNull Context context) {
+        return NetworkState.get(context).getConnectivity();
     }
 
     /**
@@ -89,7 +217,7 @@ public class Networkx {
      * Turn mobile network on or off
      */
     @RequiresPermission(Manifest.permission.CHANGE_NETWORK_STATE)
-    public static boolean setMobileEnabled(Context context, boolean enabled) {
+    public static boolean setMobileEnabled(@NonNull Context context, boolean enabled) {
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (manager == null) throw new IllegalStateException("ConnectivityManager not found");
         try {

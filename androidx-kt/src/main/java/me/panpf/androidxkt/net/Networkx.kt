@@ -20,12 +20,107 @@ package me.panpf.androidxkt.net
 
 import android.Manifest
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.support.annotation.RequiresPermission
 import me.panpf.androidx.net.NetworkState
 import me.panpf.androidx.net.Networkx
 
+/**
+ * Get network state
+ */
 @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
 inline fun Context.getNetworkState(): NetworkState = Networkx.getState(this)
+
+/**
+ * Return true if any type of network is currently available
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.isNetworkActivated(): Boolean = Networkx.isActivated(this)
+
+/**
+ * Return true if the currently available network type is WIFI
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.isWifiNetworkActivated(): Boolean = Networkx.isWifiActivated(this)
+
+/**
+ * Return true if the currently available network type is not metered WIFI
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.isNoMeteredWifiNetworkActivated(): Boolean = Networkx.isNoMeteredWifiActivated(this)
+
+/**
+ * Return true if the type of currently available network is mobile data
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.isMobileNetworkActivated(): Boolean = Networkx.isMobileActivated(this)
+
+/**
+ * Return true if the currently available network type is Bluetooth
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.isBluetoothNetworkActivated(): Boolean = Networkx.isBluetoothActivated(this)
+
+/**
+ * Return true if the currently available network type is VPN
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.isVPNNetworkActivated(): Boolean = Networkx.isVPNActivated(this)
+
+/**
+ * Return true if the currently available network is metered
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.isNetworkMetered(): Boolean = Networkx.isMetered(this)
+
+/**
+ * Return true if the type of currently available network is roaming
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.isNetworkRoaming(): Boolean = Networkx.isRoaming(this)
+
+/**
+ * Return true if the currently available network is automatically transferred after a failure
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.isNetworkFailover(): Boolean = Networkx.isFailover(this)
+
+/**
+ * Get the type of network currently available
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.getNetworkType(): Int = Networkx.getType(this)
+
+/**
+ * Get the name of the type of currently available network
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.getNetworkTypeName(): String = Networkx.getTypeName(this)
+
+/**
+ * Get the name of the subtype of the currently available network
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.getNetworkSubtypeName(): String = Networkx.getSubtypeName(this)
+
+/**
+ * Get additional information about the currently available network
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.getNetworkExtraInfo(): String = Networkx.getExtraInfo(this)
+
+/**
+ * Get information about currently available networks
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.getNetworkInfo(): NetworkInfo? = Networkx.getNetworkInfo(this)
+
+/**
+ * Get network connection
+ */
+@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
+inline fun Context.getNetworkConnectivity(): ConnectivityManager? = Networkx.getConnectivity(this)
 
 /**
  * Get the status of Wi-Fi

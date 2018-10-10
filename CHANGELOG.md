@@ -1,5 +1,9 @@
 ## v0.2.5
 
+* :sparkles: Networdx add isActivated, isWifiActivated, isNoMeteredWifiActivated,
+    isMobileActivated, isBluetoothActivated, isVPNActivated, isMetered, isRoaming,
+    isFailover, getType, getTypeName, getSubtypeName, getExtraInfo, getNetworkInfo, getConnectivity
+
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.7
 
