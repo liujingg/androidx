@@ -86,6 +86,8 @@ Dependencies:
 * Bitmap: [Bitmapx.java] | [Bitmapx.kt]
     * centerCrop, centerCropTo, circular, circularTo, tint, createByColor, toByteArray,
     * writeToFile, readBitmap, toDrawableByColor,
+* Image: [Imagex.java] ([Test][ImagexTest.java])   | [Imagex.kt] ([Test][ImagexTest.kt])
+    * getMimeType, getMimeSubType
 * Color: [Colorx.java] ([Test][ColorxTest.java]) | [Colorx.kt] ([Test][ColorxTest.kt])
     * WHITE/BLACK/RED..., getAlpha, setAlpha, addAlpha, getHSVHue, setHSVHue, getHSVSaturation,
     * setHSVSaturation, addHSVSaturation, getHSVValue, setHSVValue, addHSVValue, isLight,
@@ -279,6 +281,11 @@ Please view the [CHANGELOG.md] file
 [BitmapxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/BitmapxTest.java
 [Bitmapx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Bitmapx.kt
 [BitmapxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/BitmapxTest.kt
+
+[Imagex.java]: androidx/src/main/java/me/panpf/androidx/graphics/Imagex.java
+[ImagexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/ImagexTest.java
+[Imagex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Imagex.kt
+[ImagexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/ImagexTest.kt
 
 [Colorx.java]: androidx/src/main/java/me/panpf/androidx/graphics/Colorx.java
 [ColorxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/ColorxTest.java

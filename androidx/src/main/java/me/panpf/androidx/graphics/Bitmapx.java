@@ -27,6 +27,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.TypedValue;
@@ -81,8 +82,18 @@ public class Bitmapx {
     }
 
     @Nullable
+    public static Bitmap readBitmap(@NonNull byte[] data, @Nullable BitmapFactory.Options options) {
+        return BitmapFactory.decodeByteArray(data, 0, data.length, options);
+    }
+
+    @Nullable
     public static Bitmap readBitmap(@NonNull byte[] data, int offset, int length) {
         return BitmapFactory.decodeByteArray(data, offset, length);
+    }
+
+    @Nullable
+    public static Bitmap readBitmap(@NonNull byte[] data) {
+        return BitmapFactory.decodeByteArray(data, 0, data.length);
     }
 
     @Nullable
@@ -96,12 +107,12 @@ public class Bitmapx {
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NonNull Resources resources, int resId, @Nullable BitmapFactory.Options options) {
+    public static Bitmap readBitmap(@NonNull Resources resources, @DrawableRes int resId, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeResource(resources, resId, options);
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NonNull Resources resources, int resId) {
+    public static Bitmap readBitmap(@NonNull Resources resources, @DrawableRes int resId) {
         return BitmapFactory.decodeResource(resources, resId);
     }
 
