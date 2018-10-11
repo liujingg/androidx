@@ -236,7 +236,7 @@ public class Romx {
     public static String getBuildProperties(@NonNull String key) {
         if (GET_BUILD_PROP_METHOD != null) {
             //noinspection ConstantConditions
-            return Stringx.orEmpty((String) Classx.callMethod(GET_BUILD_PROP_METHOD, new Object[]{key}));
+            return Stringx.orEmpty((String) Classx.callStaticMethod(GET_BUILD_PROP_METHOD, key));
         } else {
             return "";
         }
