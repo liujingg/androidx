@@ -49,6 +49,8 @@ public class RomxTest {
             Assert.assertEquals(Romx.getTypeName(), "LineageOS");
         } else if (Romx.isAndroidType() && Romx.isType(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "Android");
+        } else if (Romx.isSamsungType() && Romx.isType(Romx.getType())) {
+            Assert.assertEquals(Romx.getTypeName(), "Samsung");
         } else if (Romx.isUnknownType() && Romx.isType(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "Unknown");
         }

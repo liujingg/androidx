@@ -37,6 +37,7 @@ public class Romx {
     public static final int TYPE_H2OS = 7;
     public static final int TYPE_LINEAGE_OS = 8;
     public static final int TYPE_ANDROID = 9;
+    public static final int TYPE_SAMSUNG = 10;
     public static final int TYPE_UNKNOWN = 999;
 
     @Nullable
@@ -95,6 +96,9 @@ public class Romx {
         } else if ((versionInfos = checkAndroid()) != null) {
             TYPE = TYPE_ANDROID;
             TYPE_NAME = "Android";
+        } else if ((versionInfos = checkSamsung()) != null) {
+            TYPE = TYPE_SAMSUNG;
+            TYPE_NAME = "Samsung";
         } else {
             TYPE = TYPE_UNKNOWN;
             TYPE_NAME = "Unknown";
@@ -217,6 +221,17 @@ public class Romx {
         }
     }
 
+    @Nullable
+    private static String[] checkSamsung() {
+        if ("dpi".equalsIgnoreCase(getBuildProperties("ro.build.user"))) {
+            String versionName = getBuildProperties("ro.build.display.id");
+            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+            return Arrayx.arrayOf(versionName, "", versionIncremental);
+        } else {
+            return null;
+        }
+    }
+
     @NonNull
     public static String getBuildProperties(@NonNull String key) {
         if (GET_BUILD_PROP_METHOD != null) {
@@ -306,6 +321,13 @@ public class Romx {
      */
     public static boolean isAndroidType() {
         return TYPE == TYPE_ANDROID;
+    }
+
+    /**
+     * Return true if the ROM type is origin Samsung
+     */
+    public static boolean isSamsungType() {
+        return TYPE == TYPE_SAMSUNG;
     }
 
     /**
