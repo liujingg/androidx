@@ -36,6 +36,7 @@ public class Romx {
     public static final int TYPE_SMARTISAN_OS = 6;
     public static final int TYPE_H2OS = 7;
     public static final int TYPE_LINEAGE_OS = 8;
+    public static final int TYPE_ANDROID = 9;
     public static final int TYPE_UNKNOWN = 999;
 
     @Nullable
@@ -91,6 +92,9 @@ public class Romx {
         } else if ((versionInfos = checkLineageOS()) != null) {
             TYPE = TYPE_LINEAGE_OS;
             TYPE_NAME = "LineageOS";
+        } else if ((versionInfos = checkAndroid()) != null) {
+            TYPE = TYPE_ANDROID;
+            TYPE_NAME = "Android";
         } else {
             TYPE = TYPE_UNKNOWN;
             TYPE_NAME = "Unknown";
@@ -107,6 +111,7 @@ public class Romx {
         }
     }
 
+    @Nullable
     private static String[] checkMIUI() {
         String versionName = getBuildProperties("ro.miui.ui.version.name");
         if (Stringx.isSafe(versionName)) {
@@ -118,6 +123,7 @@ public class Romx {
         }
     }
 
+    @Nullable
     private static String[] checkFlyme() {
         if ("flyme".equalsIgnoreCase(getBuildProperties("ro.build.user")) || Stringx.isSafe(getBuildProperties("ro.flyme.published"))) {
             String displayId = getBuildProperties("ro.build.display.id");
@@ -129,6 +135,7 @@ public class Romx {
         }
     }
 
+    @Nullable
     private static String[] checkColorOS() {
         String versionName = getBuildProperties("ro.build.version.opporom");
         if (Stringx.isSafe(versionName)) {
@@ -139,6 +146,7 @@ public class Romx {
         }
     }
 
+    @Nullable
     private static String[] checkEMUI() {
         String versionName = getBuildProperties("ro.build.version.emui");
         versionName = versionName.startsWith("EmotionUI_") ? versionName.substring("EmotionUI_".length()) : versionName;
@@ -151,6 +159,7 @@ public class Romx {
         }
     }
 
+    @Nullable
     private static String[] checkFuntouchOS() {
         if ("Funtouch".equalsIgnoreCase(getBuildProperties("ro.vivo.os.name"))) {
             String versionName = getBuildProperties("ro.vivo.os.version");
@@ -162,6 +171,7 @@ public class Romx {
         }
     }
 
+    @Nullable
     private static String[] checkSmartisanOS() {
         String versionName = getBuildProperties("ro.smartisan.version");
         if (Stringx.isSafe(versionName)) {
@@ -173,6 +183,7 @@ public class Romx {
         }
     }
 
+    @Nullable
     private static String[] checkH2OS() {
         if ("OnePlus".equalsIgnoreCase(getBuildProperties("ro.build.user"))) {
             String versionName = getBuildProperties("ro.rom.version");
@@ -183,11 +194,24 @@ public class Romx {
         }
     }
 
+    @Nullable
     private static String[] checkLineageOS() {
         if ("lineage".equalsIgnoreCase(getBuildProperties("ro.build.user"))) {
             String versionName = getBuildProperties("ro.cm.build.version");
             String versionIncremental = getBuildProperties("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, "", versionIncremental);
+        } else {
+            return null;
+        }
+    }
+
+    @Nullable
+    private static String[] checkAndroid() {
+        if ("android-build".equalsIgnoreCase(getBuildProperties("ro.build.user"))) {
+            String versionName = getBuildProperties("ro.build.version.release");
+            String versionCode = getBuildProperties("ro.build.version.sdk");
+            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+            return Arrayx.arrayOf(versionName, versionCode, versionIncremental);
         } else {
             return null;
         }
@@ -278,6 +302,13 @@ public class Romx {
     }
 
     /**
+     * Return true if the ROM type is origin Android
+     */
+    public static boolean isAndroidType() {
+        return TYPE == TYPE_ANDROID;
+    }
+
+    /**
      * Return true if the ROM type is Unknown
      */
     public static boolean isUnknownType() {
@@ -287,6 +318,7 @@ public class Romx {
     /**
      * Get the name of the ROM type
      */
+    @NonNull
     public static String getTypeName() {
         return TYPE_NAME;
     }
@@ -294,6 +326,7 @@ public class Romx {
     /**
      * Get the ROM version name
      */
+    @NonNull
     public static String getVersionName() {
         return VERSION_NAME;
     }
@@ -301,6 +334,7 @@ public class Romx {
     /**
      * Get the ROM version code
      */
+    @NonNull
     public static String getVersionCode() {
         return VERSION_CODE;
     }
@@ -313,6 +347,7 @@ public class Romx {
         return VERSION_INCREMENTAL;
     }
 
+    @NonNull
     public static String getInfo() {
         return TYPE_NAME + ":" + VERSION_NAME + ":" + VERSION_CODE + ":" + VERSION_INCREMENTAL;
     }
