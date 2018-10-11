@@ -35,6 +35,7 @@ public class Romx {
     public static final int TYPE_FUNTOUCH_OS = 5;
     public static final int TYPE_SMARTISAN_OS = 6;
     public static final int TYPE_H2OS = 7;
+    public static final int TYPE_LINEAGE_OS = 8;
     public static final int TYPE_UNKNOWN = 999;
 
     @Nullable
@@ -87,6 +88,9 @@ public class Romx {
         } else if ((versionInfos = checkFlyme()) != null) {
             TYPE = TYPE_FLYME;
             TYPE_NAME = "Flyme";
+        } else if ((versionInfos = checkLineageOS()) != null) {
+            TYPE = TYPE_LINEAGE_OS;
+            TYPE_NAME = "LineageOS";
         } else {
             TYPE = TYPE_UNKNOWN;
             TYPE_NAME = "Unknown";
@@ -179,6 +183,16 @@ public class Romx {
         }
     }
 
+    private static String[] checkLineageOS() {
+        if ("lineage".equalsIgnoreCase(getBuildProperties("ro.build.user"))) {
+            String versionName = getBuildProperties("ro.cm.build.version");
+            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+            return Arrayx.arrayOf(versionName, "", versionIncremental);
+        } else {
+            return null;
+        }
+    }
+
     @NonNull
     public static String getBuildProperties(@NonNull String key) {
         if (GET_BUILD_PROP_METHOD != null) {
@@ -254,6 +268,13 @@ public class Romx {
      */
     public static boolean isH2OSType() {
         return TYPE == TYPE_H2OS;
+    }
+
+    /**
+     * Return true if the ROM type is Lineage OS
+     */
+    public static boolean isLineageOSType() {
+        return TYPE == TYPE_LINEAGE_OS;
     }
 
     /**
