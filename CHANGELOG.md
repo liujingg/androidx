@@ -7,6 +7,7 @@
 * :sparkles: Bitmapx add circularTo, circular, centerCropTo method and add related overloaded methods
 * :sparkles: Add Imagex
 * :sparkles: Add Servicex
+* :sparkles: Add Romx
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.7

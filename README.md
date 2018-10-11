@@ -137,6 +137,9 @@ Dependencies:
     * getVolumeList, getVolumes, getVolumePaths, getVolumeState, getVolume
 * StorageVolumeCompat: [StorageVolumeCompat.java] ([Test][StorageVolumeCompatTest.java]) | [StorageVolumeCompat.kt] ([Test][StorageVolumeCompatTest.kt])
     * getPath, getPathFile, isPrimary, isRemovable, isEmulated, getState, allowMassStorage, getMaxFileSize,
+* Rom: [Romx.java] ([Test][RomxTest.java])
+    * getType, isType, isMiuiType, isEmuiType, isFlymeType, isColorType, isFuntouchOSType, isSmartisanOSType,
+    * isH2OSType, getTypeName, getVersionName, getVersionCode, getVersionIncremental
 
 ### provider
 * Settings: [Settingsx.java] | [Settingsx.kt]
@@ -348,6 +351,11 @@ Please view the [CHANGELOG.md] file
 [StatFsxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/StatFsxTest.java
 [StatFsx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/StatFsx.kt
 [StatFsxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/StatFsxTest.kt
+
+[Romx.java]: androidx/src/main/java/me/panpf/androidx/os/Romx.java
+[RomxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/RomxTest.java
+[Romx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/Romx.kt
+[RomxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/RomxTest.kt
 
 [Settingsx.java]: androidx/src/main/java/me/panpf/androidx/provider/Settingsx.java
 [SettingsxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/provider/SettingsxTest.java
