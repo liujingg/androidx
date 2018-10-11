@@ -6,6 +6,7 @@
 * :sparkles: Fragmentx add findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem method
 * :sparkles: Bitmapx add circularTo, circular, centerCropTo method and add related overloaded methods
 * :sparkles: Add Imagex
+* :sparkles: Add Servicex
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.7

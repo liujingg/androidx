@@ -57,6 +57,8 @@ Dependencies:
     * isDestroyedCompat, getImplWithParent, instance, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
+* Service: [Servicex.java] | [Servicex.kt]
+    * isRunning, start, tryStart, stop, tryStop
 
 ### content
 * Package: [Packagex.java] | [Packagex.kt]
@@ -241,6 +243,11 @@ Please view the [CHANGELOG.md] file
 [PermissionxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/PermissionxTest.java
 [Permissionx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Permissionx.kt
 [PermissionxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/PermissionxTest.kt
+
+[Servicex.java]: androidx/src/main/java/me/panpf/androidx/app/Servicex.java
+[ServicexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/ServicexTest.java
+[Servicex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Servicex.kt
+[ServicexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ServicexTest.kt
 
 [Packagex.java]: androidx/src/main/java/me/panpf/androidx/content/pm/Packagex.java
 [PackagexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/pm/PackagexTest.java
