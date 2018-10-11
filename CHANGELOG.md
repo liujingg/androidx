@@ -10,7 +10,7 @@
 * :sparkles: Add Romx
 
 Upgrade
-* :arrow_up: Upgrade Javax 0.6.7
+* :arrow_up: Upgrade Javax 0.6.8
 
 
 

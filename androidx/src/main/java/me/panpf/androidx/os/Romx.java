@@ -183,60 +183,110 @@ public class Romx {
     public static String getBuildProperties(@NonNull String key) {
         if (GET_BUILD_PROP_METHOD != null) {
             //noinspection ConstantConditions
-            return Stringx.orEmpty((String) Classx.callMethod(null, GET_BUILD_PROP_METHOD, key));
+            return Stringx.orEmpty((String) Classx.callMethod(GET_BUILD_PROP_METHOD, new Object[]{key}));
         } else {
             return "";
         }
     }
 
+    /**
+     * Get the ROM type, Ranges: {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI},
+     * {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}
+     */
     public static int getType() {
         return TYPE;
     }
 
+    /**
+     * Return true if the current ROM type is the same as the specified type
+     *
+     * @param type Ranges: {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI},
+     *             {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}
+     */
     public static boolean isType(int type) {
         return TYPE == type;
     }
 
+    /**
+     * Return true if the ROM type is MIUI
+     */
     public static boolean isMiuiType() {
         return TYPE == TYPE_MIUI;
     }
 
+    /**
+     * Return true if the ROM type is EMUI
+     */
     public static boolean isEmuiType() {
         return TYPE == TYPE_EMUI;
     }
 
+    /**
+     * Return true if the ROM type is Flyme
+     */
     public static boolean isFlymeType() {
         return TYPE == TYPE_FLYME;
     }
 
-    public static boolean isColorType() {
+    /**
+     * Return true if the ROM type is Color OS
+     */
+    public static boolean isColorOSType() {
         return TYPE == TYPE_COLOR_OS;
     }
 
+    /**
+     * Return true if the ROM type is Funtouch OS
+     */
     public static boolean isFuntouchOSType() {
         return TYPE == TYPE_FUNTOUCH_OS;
     }
 
+    /**
+     * Return true if the ROM type is Smartisan OS
+     */
     public static boolean isSmartisanOSType() {
         return TYPE == TYPE_SMARTISAN_OS;
     }
 
+    /**
+     * Return true if the ROM type is H2OS
+     */
     public static boolean isH2OSType() {
         return TYPE == TYPE_H2OS;
     }
 
+    /**
+     * Return true if the ROM type is Unknown
+     */
+    public static boolean isUnknownType() {
+        return TYPE == TYPE_UNKNOWN;
+    }
+
+    /**
+     * Get the name of the ROM type
+     */
     public static String getTypeName() {
         return TYPE_NAME;
     }
 
+    /**
+     * Get the ROM version name
+     */
     public static String getVersionName() {
         return VERSION_NAME;
     }
 
+    /**
+     * Get the ROM version code
+     */
     public static String getVersionCode() {
         return VERSION_CODE;
     }
 
+    /**
+     * Get the ROM version incremental
+     */
     @NonNull
     public static String getVersionIncremental() {
         return VERSION_INCREMENTAL;
