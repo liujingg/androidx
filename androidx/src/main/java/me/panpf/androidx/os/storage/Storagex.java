@@ -57,6 +57,21 @@ public class Storagex {
     }
 
     /**
+     * Get the number of free bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
+     */
+    public static long getFreeBytes(@NonNull File path, long defaultValue) {
+        try {
+            if (!path.exists() && !path.mkdirs()) {
+                return defaultValue;
+            }
+            return StatFsx.getFreeBytesCompat(new StatFs(path.getPath()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defaultValue;
+        }
+    }
+
+    /**
      * Get the number of total bytes of the given path
      */
     public static long getTotalBytes(@NonNull File path) {
@@ -64,10 +79,40 @@ public class Storagex {
     }
 
     /**
+     * Get the number of total bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
+     */
+    public static long getTotalBytes(@NonNull File path, long defaultValue) {
+        try {
+            if (!path.exists() && !path.mkdirs()) {
+                return defaultValue;
+            }
+            return StatFsx.getTotalBytesCompat(new StatFs(path.getPath()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defaultValue;
+        }
+    }
+
+    /**
      * Get the number of available bytes of the given path
      */
     public static long getAvailableBytes(@NonNull File path) {
         return StatFsx.getAvailableBytesCompat(new StatFs(path.getPath()));
+    }
+
+    /**
+     * Get the number of available bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
+     */
+    public static long getAvailableBytes(@NonNull File path, long defaultValue) {
+        try {
+            if (!path.exists() && !path.mkdirs()) {
+                return defaultValue;
+            }
+            return StatFsx.getAvailableBytesCompat(new StatFs(path.getPath()));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return defaultValue;
+        }
     }
 
     /**
@@ -959,7 +1004,7 @@ public class Storagex {
             @Override
             public boolean accept(@NonNull File path1) {
                 Filex.mkdirsCheck(path1);
-                return path1.isDirectory() && getAvailableBytes(path1) >= minBytes;
+                return path1.isDirectory() && getAvailableBytes(path1, 0) >= minBytes;
             }
         });
     }

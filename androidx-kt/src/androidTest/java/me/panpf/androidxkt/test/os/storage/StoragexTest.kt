@@ -37,8 +37,11 @@ class StoragexTest {
 
         val downloadDir = File(Environment.getExternalStorageDirectory(), "download")
         assertTrue(downloadDir.getFreeBytes() <= downloadDir.getTotalBytes())
-        assertTrue(downloadDir.getAvailableBytes() <= downloadDir.getTotalBytes())
+        assertTrue(downloadDir.getFreeBytes(0) <= downloadDir.getTotalBytes())
+        assertTrue(downloadDir.getTotalBytes() <= downloadDir.getTotalBytes())
+        assertTrue(downloadDir.getTotalBytes(0) <= downloadDir.getTotalBytes())
         assertTrue(downloadDir.getAvailableBytes() <= downloadDir.getFreeBytes())
+        assertTrue(downloadDir.getAvailableBytes(0) <= downloadDir.getFreeBytes())
     }
 
     @Test
@@ -83,6 +86,8 @@ class StoragexTest {
     fun testVolumes() {
         val context = InstrumentationRegistry.getContext()
 
+        assertTrue(context.getVolumes().isNotEmpty())
+        assertTrue(context.getMountedVolumes().isNotEmpty())
         assertTrue(context.getVolumePaths().isNotEmpty())
         assertTrue(context.getMountedVolumePaths().isNotEmpty())
 
@@ -133,7 +138,9 @@ class StoragexTest {
 
     @Test
     fun testExternalStorageDirectory() {
+        val context = InstrumentationRegistry.getContext()
         assertNotNull(getExternalStorageDirectory())
+        assertNotNull(context.getMountedExternalStorageDirectory())
     }
 
     @Test

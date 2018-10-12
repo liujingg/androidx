@@ -50,8 +50,11 @@ public class StoragexTest {
 
         File downloadDir = new File(Environment.getExternalStorageDirectory(), "download");
         assertTrue(Storagex.getFreeBytes(downloadDir) <= Storagex.getTotalBytes(downloadDir));
+        assertTrue(Storagex.getFreeBytes(downloadDir, 0) <= Storagex.getTotalBytes(downloadDir));
         assertTrue(Storagex.getAvailableBytes(downloadDir) <= Storagex.getTotalBytes(downloadDir));
+        assertTrue(Storagex.getAvailableBytes(downloadDir, 0) <= Storagex.getTotalBytes(downloadDir));
         assertTrue(Storagex.getAvailableBytes(downloadDir) <= Storagex.getFreeBytes(downloadDir));
+        assertTrue(Storagex.getAvailableBytes(downloadDir, 0) <= Storagex.getFreeBytes(downloadDir));
     }
 
     @Test
@@ -96,6 +99,8 @@ public class StoragexTest {
     public void testVolumes() {
         Context context = InstrumentationRegistry.getContext();
 
+        assertTrue(Storagex.getVolumes(context).length >= 1);
+        assertTrue(Storagex.getMountedVolumes(context).length >= 1);
         assertTrue(Storagex.getVolumePaths(context).length >= 1);
         assertTrue(Storagex.getMountedVolumePaths(context).length >= 1);
 
@@ -146,7 +151,9 @@ public class StoragexTest {
 
     @Test
     public void testExternalStorageDirectory() {
+        Context context = InstrumentationRegistry.getContext();
         assertNotNull(Storagex.getExternalStorageDirectory());
+        assertNotNull(Storagex.getMountedExternalStorageDirectory(context));
     }
 
     @Test

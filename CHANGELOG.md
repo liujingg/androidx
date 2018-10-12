@@ -1,6 +1,7 @@
 ## v0.2.6 pre
 
 * :bug: Fixed Storagex getMountedVolumes method StackOverflow error
+* :sparkles: Storagex add getFreeBytes(File, long), getTotalBytes(File, long), getAvailableBytes(File, long) method
 
 ## v0.2.5
 
