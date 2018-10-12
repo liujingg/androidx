@@ -18,4 +18,29 @@ package me.panpf.androidxkt.test.app
 
 import android.app.Activity
 
-class ActivityxTestActivity : Activity(), ImplTestInterface
+class ActivityxTestActivity : Activity(), ImplTestInterface{
+    var finished: Boolean = false
+    var finishedActivity: Boolean = false
+    var finishedActivityFromChild: Boolean = false
+    var destoryed: Boolean = false
+
+    override fun finish() {
+        super.finish()
+        finished = true
+    }
+
+    override fun finishActivity(requestCode: Int) {
+        super.finishActivity(requestCode)
+        finishedActivity = true
+    }
+
+    override fun finishActivityFromChild(child: Activity, requestCode: Int) {
+        super.finishActivityFromChild(child, requestCode)
+        finishedActivityFromChild = true
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        destoryed = true
+    }
+}

@@ -74,20 +74,17 @@ public class HardwarexTest {
     public final void testSubscriberId() {
         Context context = InstrumentationRegistry.getContext();
         if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
-            String subscriberId = Hardwarex.getSubscriberId(context);
-            Assert.assertTrue(subscriberId.length() > 0 && !Comparisonx.areEqual(subscriberId, "unknown") && !Comparisonx.areEqual(subscriberId, "PermissionDenied"));
+            Assert.assertNotNull(Hardwarex.getSubscriberId(context));
         } else {
             Assert.assertEquals(Hardwarex.getSubscriberId(context), "PermissionDenied");
         }
-
     }
 
     @Test
     public final void testSimSerialNumber() {
         Context context = InstrumentationRegistry.getContext();
         if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
-            String simSerialNumber = Hardwarex.getSimSerialNumber(context);
-            Assert.assertTrue(simSerialNumber.length() > 0 && !Comparisonx.areEqual(simSerialNumber, "unknown") && !Comparisonx.areEqual(simSerialNumber, "PermissionDenied"));
+            Assert.assertNotNull(Hardwarex.getSimSerialNumber(context));
         } else {
             Assert.assertEquals(Hardwarex.getSimSerialNumber(context), "PermissionDenied");
         }

@@ -72,7 +72,7 @@ class HardwarexTest {
         val context = InstrumentationRegistry.getContext()
 
         if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
-            Assert.assertTrue(context.getSubscriberId().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+            Assert.assertNotNull(context.getSubscriberId())
         } else {
             Assert.assertEquals(context.getSubscriberId(), "PermissionDenied")
         }
@@ -83,7 +83,7 @@ class HardwarexTest {
         val context = InstrumentationRegistry.getContext()
 
         if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
-            Assert.assertTrue(context.getSimSerialNumber().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+            Assert.assertNotNull(context.getSimSerialNumber())
         } else {
             Assert.assertEquals(context.getSimSerialNumber(), "PermissionDenied")
         }

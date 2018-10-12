@@ -17,7 +17,35 @@
 package me.panpf.androidx.test.app;
 
 import android.app.Activity;
+import android.support.annotation.NonNull;
 
 public class ActivityxTestActivity extends Activity implements ImplTestInterface {
+    public boolean finished;
+    public boolean finishedActivity;
+    public boolean finishedActivityFromChild;
+    public boolean destoryed;
 
+    @Override
+    public void finish() {
+        super.finish();
+        finished = true;
+    }
+
+    @Override
+    public void finishActivity(int requestCode) {
+        super.finishActivity(requestCode);
+        finishedActivity = true;
+    }
+
+    @Override
+    public void finishActivityFromChild(@NonNull Activity child, int requestCode) {
+        super.finishActivityFromChild(child, requestCode);
+        finishedActivityFromChild = true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        destoryed = true;
+    }
 }

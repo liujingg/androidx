@@ -48,7 +48,7 @@ public class StoragexTest {
         assertTrue(Storagex.getExternalStorageAvailableBytes() <= Storagex.getExternalStorageTotalBytes());
         assertTrue(Storagex.getExternalStorageAvailableBytes() <= Storagex.getExternalStorageFreeBytes());
 
-        File downloadDir = new File("/sdcard/download");
+        File downloadDir = new File(Environment.getExternalStorageDirectory(), "download");
         assertTrue(Storagex.getFreeBytes(downloadDir) <= Storagex.getTotalBytes(downloadDir));
         assertTrue(Storagex.getAvailableBytes(downloadDir) <= Storagex.getTotalBytes(downloadDir));
         assertTrue(Storagex.getAvailableBytes(downloadDir) <= Storagex.getFreeBytes(downloadDir));
@@ -152,7 +152,7 @@ public class StoragexTest {
     @Test
     public void testExternalStorageDirectorys() {
         Context context = InstrumentationRegistry.getContext();
-        final File sdcard = new File("/sdcard");
+        final File sdcard = Environment.getExternalStorageDirectory();
         assertNotNull(Arrayx.find(Storagex.getExternalStorageDirectorys(context), new Predicate<File>() {
             @Override
             public boolean accept(@NotNull File file) {
@@ -203,7 +203,7 @@ public class StoragexTest {
     public void testExternalStorageDirectorysWithPath() {
         Context context = InstrumentationRegistry.getContext();
         String childPath = "Download";
-        final File sdcard = new File("/sdcard", childPath);
+        final File sdcard = new File(Environment.getExternalStorageDirectory(), childPath);
         assertNotNull(Arrayx.find(Storagex.getExternalStorageDirectorysWithPath(context, childPath), new Predicate<File>() {
             @Override
             public boolean accept(@NotNull File file) {

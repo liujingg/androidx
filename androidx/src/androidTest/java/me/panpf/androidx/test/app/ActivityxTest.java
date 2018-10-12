@@ -54,6 +54,8 @@ public class ActivityxTest {
     public void testActivityDestroyed() {
         ActivityxTestActivity activity = activityTestRule.getActivity();
 
+        Assert.assertFalse(Activityx.isDestroyedCompat(activity));
+
         activityTestRule.finishActivity();
 
         try {
@@ -69,6 +71,8 @@ public class ActivityxTest {
     public void testActivityNormal() {
         ActivityxTestActivity activity = activityTestRule.getActivity();
 
+        Assert.assertFalse(Activityx.isDestroyedCompat(activity));
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
@@ -81,6 +85,8 @@ public class ActivityxTest {
     @Test
     public void testFragmentActivityDestroyed() {
         ActivityxTestFragmentActivity activity = fragmentActivityTestRule.getActivity();
+
+        Assert.assertFalse(Activityx.isDestroyedCompat(activity));
 
         fragmentActivityTestRule.finishActivity();
 
@@ -96,6 +102,8 @@ public class ActivityxTest {
     @Test
     public void testFragmentActivityNormal() {
         ActivityxTestFragmentActivity activity = fragmentActivityTestRule.getActivity();
+
+        Assert.assertFalse(Activityx.isDestroyedCompat(activity));
 
         try {
             Thread.sleep(2000);

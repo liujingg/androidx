@@ -35,7 +35,7 @@ class StoragexTest {
         assertTrue(getExternalStorageAvailableBytes() <= getExternalStorageTotalBytes())
         assertTrue(getExternalStorageAvailableBytes() <= getExternalStorageFreeBytes())
 
-        val downloadDir = File("/sdcard/download")
+        val downloadDir = File(Environment.getExternalStorageDirectory(), "download")
         assertTrue(downloadDir.getFreeBytes() <= downloadDir.getTotalBytes())
         assertTrue(downloadDir.getAvailableBytes() <= downloadDir.getTotalBytes())
         assertTrue(downloadDir.getAvailableBytes() <= downloadDir.getFreeBytes())
@@ -139,7 +139,7 @@ class StoragexTest {
     @Test
     fun testExternalStorageDirectorys() {
         val context = InstrumentationRegistry.getContext()
-        val sdcard = File("/sdcard")
+        val sdcard = Environment.getExternalStorageDirectory()
         assertNotNull(context.getExternalStorageDirectorys().find {
             try {
                 it.canonicalPath == sdcard.canonicalPath
@@ -178,7 +178,7 @@ class StoragexTest {
     fun testExternalStorageDirectorysWithPath() {
         val context = InstrumentationRegistry.getContext()
         val childPath = "Download"
-        val sdcard = File("/sdcard", childPath)
+        val sdcard = File(Environment.getExternalStorageDirectory(), childPath)
         assertNotNull(context.getExternalStorageDirectorysWithPath(childPath).find {
             try {
                 it.canonicalPath == sdcard.canonicalPath

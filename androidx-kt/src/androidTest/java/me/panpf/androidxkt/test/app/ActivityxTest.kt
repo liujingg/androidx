@@ -42,6 +42,8 @@ class ActivityxTest {
     fun testActivityDestroyed() {
         val activity = activityTestRule.activity
 
+        Assert.assertFalse(activity.isDestroyedCompat())
+
         activityTestRule.finishActivity()
 
         try {
@@ -57,6 +59,8 @@ class ActivityxTest {
     fun testActivityNormal() {
         val activity = activityTestRule.activity
 
+        Assert.assertFalse(activity.isDestroyedCompat())
+
         try {
             Thread.sleep(2000)
         } catch (e: InterruptedException) {
@@ -69,6 +73,8 @@ class ActivityxTest {
     @Test
     fun testFragmentActivityDestroyed() {
         val activity = fragmentActivityTestRule.activity
+
+        Assert.assertFalse(activity.isDestroyedCompat())
 
         fragmentActivityTestRule.finishActivity()
 
@@ -84,6 +90,8 @@ class ActivityxTest {
     @Test
     fun testFragmentActivityNormal() {
         val activity = fragmentActivityTestRule.activity
+
+        Assert.assertFalse(activity.isDestroyedCompat())
 
         try {
             Thread.sleep(2000)
