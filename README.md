@@ -74,15 +74,7 @@ Dependencies:
 * Content: [Contentx.java] | [Contentx.kt]
     * openInput, readBytes, readText, readLines, readBitmap
 * Context: [Contextx.java] ([Test][ContextxTest.java]) | [Contextx.kt] ([Test][ContextxTest.kt])
-    * systemService, systemServiceOrNull, packageManager, powerManager, windowManager, accountManager,
-    * activityManager, layoutInflater, notificationManager, accessibilityManager, sensorManager,
-    * storageManager, storageManagerCompat, storageStatsManager, vibrator, connectivityManager,
-    * networkStatsManager, wifiManager, wifiManagerOrNull, wifiAwareManager, wifiAwareManagerOrNull,
-    * wifiP2pManager, wifiRttManager, audioManager, fingerprintManager, fingerprintManagerOrNull,
-    * telephonyManager, telephonyManagerOrNull, clipboardManager, inputMethodManager, appWidgetManager,
-    * dropBoxManager, devicePolicyManager, downloadManager, nfcManager, bluetoothManager, usbManager,
-    * inputManager, displayManager, userManager, cameraManager, printManager, usageStatsManager,
-    * batteryManager, jobScheduler, shortcutManager
+    * systemService, systemServiceOrNull, \*Manager
 * Intent: [Intentx.java] | [Intentx.kt]
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,

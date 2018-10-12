@@ -41,17 +41,28 @@ class ContextxTest {
         Assert.assertNotNull(context.windowManager())
         Assert.assertNotNull(context.accountManager())
         Assert.assertNotNull(context.activityManager())
+        Assert.assertNotNull(context.alarmManager())
         Assert.assertNotNull(context.layoutInflater())
         Assert.assertNotNull(context.notificationManager())
         Assert.assertNotNull(context.accessibilityManager())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Assert.assertNotNull(context.captioningManager())
+        }
+        Assert.assertNotNull(context.keyguardManager())
+        Assert.assertNotNull(context.locationManager())
+        Assert.assertNotNull(context.searchManager())
         Assert.assertNotNull(context.sensorManager())
         Assert.assertNotNull(context.storageManager())
         Assert.assertNotNull(context.storageManagerCompat())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             Assert.assertNotNull(context.storageStatsManager())
         }
+        Assert.assertNotNull(context.wallpaperManager())
         Assert.assertNotNull(context.vibrator())
         Assert.assertNotNull(context.connectivityManager())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            Assert.assertNotNull(context.ipSecManager())
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             Assert.assertNotNull(context.networkStatsManager())
         }
@@ -75,6 +86,7 @@ class ContextxTest {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             Assert.assertNotNull(context.wifiRttManager())
         }
+        Assert.assertNotNull(context.nsdManager())
         Assert.assertNotNull(context.audioManager())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             try {
@@ -85,6 +97,7 @@ class ContextxTest {
 
             context.fingerprintManagerOrNull()
         }
+        Assert.assertNotNull(context.mediaRouter())
         try {
             context.telephonyManager()
         } catch (e: Exception) {
@@ -92,19 +105,36 @@ class ContextxTest {
         }
 
         context.telephonyManagerOrNull()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
+            Assert.assertNotNull(context.telephonySubscriptionManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Assert.assertNotNull(context.carrierConfigManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Assert.assertNotNull(context.telecomManager())
+        }
         Assert.assertNotNull(context.clipboardManager())
         Assert.assertNotNull(context.inputMethodManager())
+        Assert.assertNotNull(context.textServicesManager())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Assert.assertNotNull(context.textClassificationManager())
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Assert.assertNotNull(context.appWidgetManager())
         }
         Assert.assertNotNull(context.dropBoxManager())
         Assert.assertNotNull(context.devicePolicyManager())
+        Assert.assertNotNull(context.uiModeManager())
         Assert.assertNotNull(context.downloadManager())
         Assert.assertNotNull(context.nfcManager())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             Assert.assertNotNull(context.bluetoothManager())
         }
         Assert.assertNotNull(context.usbManager())
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Assert.assertNotNull(context.launcherApps())
+        }
         Assert.assertNotNull(context.inputManager())
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             Assert.assertNotNull(context.displayManager())
@@ -113,13 +143,33 @@ class ContextxTest {
             Assert.assertNotNull(context.userManager())
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Assert.assertNotNull(context.restrictionsManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Assert.assertNotNull(context.appOpsManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Assert.assertNotNull(context.cameraManager())
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Assert.assertNotNull(context.printManager())
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Assert.assertNotNull(context.consumerIrManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            try {
+                context.tvInputManager()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+            context.tvInputManagerOrNull()
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP_MR1) {
             Assert.assertNotNull(context.usageStatsManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Assert.assertNotNull(context.mediaSessionManager())
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Assert.assertNotNull(context.batteryManager())
@@ -127,8 +177,26 @@ class ContextxTest {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Assert.assertNotNull(context.jobScheduler())
         }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Assert.assertNotNull(context.mediaProjectionManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            Assert.assertNotNull(context.midiManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Assert.assertNotNull(context.hardwarePropertiesManager())
+        }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
             Assert.assertNotNull(context.shortcutManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Assert.assertNotNull(context.systemHealthManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Assert.assertNotNull(context.companionDeviceManager())
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            Assert.assertNotNull(context.crossProfileApps())
         }
     }
 }

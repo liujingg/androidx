@@ -18,8 +18,14 @@ package me.panpf.androidx.content;
 
 import android.accounts.AccountManager;
 import android.app.ActivityManager;
+import android.app.AlarmManager;
+import android.app.AppOpsManager;
 import android.app.DownloadManager;
+import android.app.KeyguardManager;
 import android.app.NotificationManager;
+import android.app.SearchManager;
+import android.app.UiModeManager;
+import android.app.WallpaperManager;
 import android.app.admin.DevicePolicyManager;
 import android.app.job.JobScheduler;
 import android.app.usage.NetworkStatsManager;
@@ -27,18 +33,31 @@ import android.app.usage.StorageStatsManager;
 import android.app.usage.UsageStatsManager;
 import android.appwidget.AppWidgetManager;
 import android.bluetooth.BluetoothManager;
+import android.companion.CompanionDeviceManager;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.RestrictionsManager;
+import android.content.pm.CrossProfileApps;
+import android.content.pm.LauncherApps;
 import android.content.pm.PackageManager;
 import android.content.pm.ShortcutManager;
+import android.hardware.ConsumerIrManager;
 import android.hardware.SensorManager;
 import android.hardware.camera2.CameraManager;
 import android.hardware.display.DisplayManager;
 import android.hardware.fingerprint.FingerprintManager;
 import android.hardware.input.InputManager;
 import android.hardware.usb.UsbManager;
+import android.location.LocationManager;
 import android.media.AudioManager;
+import android.media.MediaRouter;
+import android.media.midi.MidiManager;
+import android.media.projection.MediaProjectionManager;
+import android.media.session.MediaSessionManager;
+import android.media.tv.TvInputManager;
 import android.net.ConnectivityManager;
+import android.net.IpSecManager;
+import android.net.nsd.NsdManager;
 import android.net.wifi.WifiManager;
 import android.net.wifi.aware.WifiAwareManager;
 import android.net.wifi.p2p.WifiP2pManager;
@@ -47,19 +66,27 @@ import android.nfc.NfcManager;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.DropBoxManager;
+import android.os.HardwarePropertiesManager;
 import android.os.PowerManager;
 import android.os.UserManager;
 import android.os.Vibrator;
+import android.os.health.SystemHealthManager;
 import android.os.storage.StorageManager;
 import android.print.PrintManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.telecom.TelecomManager;
+import android.telephony.CarrierConfigManager;
+import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
+import android.view.accessibility.CaptioningManager;
 import android.view.inputmethod.InputMethodManager;
+import android.view.textclassifier.TextClassificationManager;
+import android.view.textservice.TextServicesManager;
 
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.os.storage.StorageManagerCompat;
@@ -101,6 +128,11 @@ public class Contextx {
     }
 
     @NonNull
+    public static LayoutInflater layoutInflater(@NonNull Context context) {
+        return systemService(context, Context.LAYOUT_INFLATER_SERVICE);
+    }
+
+    @NonNull
     public static AccountManager accountManager(@NonNull Context context) {
         return systemService(context, Context.ACCOUNT_SERVICE);
     }
@@ -111,8 +143,8 @@ public class Contextx {
     }
 
     @NonNull
-    public static LayoutInflater layoutInflater(@NonNull Context context) {
-        return systemService(context, Context.LAYOUT_INFLATER_SERVICE);
+    public static AlarmManager alarmManager(@NonNull Context context) {
+        return systemService(context, Context.ALARM_SERVICE);
     }
 
     @NonNull
@@ -123,6 +155,27 @@ public class Contextx {
     @NonNull
     public static AccessibilityManager accessibilityManager(@NonNull Context context) {
         return systemService(context, Context.ACCESSIBILITY_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static CaptioningManager captioningManager(@NonNull Context context) {
+        return systemService(context, Context.CAPTIONING_SERVICE);
+    }
+
+    @NonNull
+    public static KeyguardManager keyguardManager(@NonNull Context context) {
+        return systemService(context, Context.KEYGUARD_SERVICE);
+    }
+
+    @NonNull
+    public static LocationManager locationManager(@NonNull Context context) {
+        return systemService(context, Context.LOCATION_SERVICE);
+    }
+
+    @NonNull
+    public static SearchManager searchManager(@NonNull Context context) {
+        return systemService(context, Context.SEARCH_SERVICE);
     }
 
     @NonNull
@@ -147,6 +200,13 @@ public class Contextx {
     }
 
     @NonNull
+    public static WallpaperManager wallpaperManager(@NonNull Context context) {
+        return systemService(context, Context.WALLPAPER_SERVICE);
+    }
+
+    // TIME_ZONE_RULES_MANAGER_SERVICE
+
+    @NonNull
     public static Vibrator vibrator(@NonNull Context context) {
         return systemService(context, Context.VIBRATOR_SERVICE);
     }
@@ -154,6 +214,12 @@ public class Contextx {
     @NonNull
     public static ConnectivityManager connectivityManager(@NonNull Context context) {
         return systemService(context, Context.CONNECTIVITY_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public static IpSecManager ipSecManager(@NonNull Context context) {
+        return systemService(context, Context.IPSEC_SERVICE);
     }
 
     @NonNull
@@ -189,10 +255,17 @@ public class Contextx {
         return systemService(context, Context.WIFI_P2P_SERVICE);
     }
 
+    // WIFI_SCANNING_SERVICE
+
     @NonNull
     @RequiresApi(api = Build.VERSION_CODES.P)
     public static WifiRttManager wifiRttManager(@NonNull Context context) {
         return systemService(context, Context.WIFI_RTT_RANGING_SERVICE);
+    }
+
+    @NonNull
+    public static NsdManager nsdManager(@NonNull Context context) {
+        return systemService(context, Context.NSD_SERVICE);
     }
 
     @NonNull
@@ -213,6 +286,11 @@ public class Contextx {
     }
 
     @NonNull
+    public static MediaRouter mediaRouter(@NonNull Context context) {
+        return systemService(context, Context.MEDIA_ROUTER_SERVICE);
+    }
+
+    @NonNull
     public static TelephonyManager telephonyManager(@NonNull Context context) {
         return systemService(context, Context.TELEPHONY_SERVICE);
     }
@@ -220,6 +298,24 @@ public class Contextx {
     @Nullable
     public static TelephonyManager telephonyManagerOrNull(@NonNull Context context) {
         return systemServiceOrNull(context, Context.TELEPHONY_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
+    public static SubscriptionManager telephonySubscriptionManager(@NonNull Context context) {
+        return systemService(context, Context.TELEPHONY_SUBSCRIPTION_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public static CarrierConfigManager carrierConfigManager(@NonNull Context context) {
+        return systemService(context, Context.CARRIER_CONFIG_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static TelecomManager telecomManager(@NonNull Context context) {
+        return systemService(context, Context.TELECOM_SERVICE);
     }
 
     @NonNull
@@ -248,6 +344,17 @@ public class Contextx {
     }
 
     @NonNull
+    public static TextServicesManager textServicesManager(@NonNull Context context) {
+        return systemService(context, Context.TEXT_SERVICES_MANAGER_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static TextClassificationManager textClassificationManager(@NonNull Context context) {
+        return systemService(context, Context.TEXT_CLASSIFICATION_SERVICE);
+    }
+
+    @NonNull
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static AppWidgetManager appWidgetManager(@NonNull Context context) {
         return systemService(context, Context.APPWIDGET_SERVICE);
@@ -261,6 +368,11 @@ public class Contextx {
     @NonNull
     public static DevicePolicyManager devicePolicyManager(@NonNull Context context) {
         return systemService(context, Context.DEVICE_POLICY_SERVICE);
+    }
+
+    @NonNull
+    public static UiModeManager uiModeManager(@NonNull Context context) {
+        return systemService(context, Context.UI_MODE_SERVICE);
     }
 
     @NonNull
@@ -285,6 +397,12 @@ public class Contextx {
     }
 
     @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static LauncherApps launcherApps(@NonNull Context context) {
+        return systemService(context, Context.LAUNCHER_APPS_SERVICE);
+    }
+
+    @NonNull
     public static InputManager inputManager(@NonNull Context context) {
         return systemService(context, Context.INPUT_SERVICE);
     }
@@ -303,6 +421,18 @@ public class Contextx {
 
     @NonNull
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static RestrictionsManager restrictionsManager(@NonNull Context context) {
+        return systemService(context, Context.RESTRICTIONS_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static AppOpsManager appOpsManager(@NonNull Context context) {
+        return systemService(context, Context.APP_OPS_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public static CameraManager cameraManager(@NonNull Context context) {
         return systemService(context, Context.CAMERA_SERVICE);
     }
@@ -314,9 +444,33 @@ public class Contextx {
     }
 
     @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static ConsumerIrManager consumerIrManager(@NonNull Context context) {
+        return systemService(context, Context.CONSUMER_IR_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static TvInputManager tvInputManager(@NonNull Context context) {
+        return systemService(context, Context.TV_INPUT_SERVICE);
+    }
+
+    @Nullable
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static TvInputManager tvInputManagerOrNull(@NonNull Context context) {
+        return systemServiceOrNull(context, Context.TV_INPUT_SERVICE);
+    }
+
+    @NonNull
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP_MR1)
     public static UsageStatsManager usageStatsManager(@NonNull Context context) {
         return systemService(context, Context.USAGE_STATS_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static MediaSessionManager mediaSessionManager(@NonNull Context context) {
+        return systemService(context, Context.MEDIA_SESSION_SERVICE);
     }
 
     @NonNull
@@ -332,10 +486,46 @@ public class Contextx {
     }
 
     @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static MediaProjectionManager mediaProjectionManager(@NonNull Context context) {
+        return systemService(context, Context.MEDIA_PROJECTION_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public static MidiManager midiManager(@NonNull Context context) {
+        return systemService(context, Context.MIDI_SERVICE);
+    }
+
+    // RADIO_SERVICE
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static HardwarePropertiesManager hardwarePropertiesManager(@NonNull Context context) {
+        return systemService(context, Context.HARDWARE_PROPERTIES_SERVICE);
+    }
+
+    @NonNull
     @RequiresApi(api = Build.VERSION_CODES.N_MR1)
     public static ShortcutManager shortcutManager(@NonNull Context context) {
         return systemService(context, Context.SHORTCUT_SERVICE);
     }
 
-    // TODO: 2018/10/1 补充剩余的 manager
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    public static SystemHealthManager systemHealthManager(@NonNull Context context) {
+        return systemService(context, Context.SYSTEM_HEALTH_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    public static CompanionDeviceManager companionDeviceManager(@NonNull Context context) {
+        return systemService(context, Context.COMPANION_DEVICE_SERVICE);
+    }
+
+    @NonNull
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    public static CrossProfileApps crossProfileApps(@NonNull Context context) {
+        return systemService(context, Context.CROSS_PROFILE_APPS_SERVICE);
+    }
 }
