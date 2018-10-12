@@ -61,10 +61,9 @@ import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.view.inputmethod.InputMethodManager;
 
-import java.util.concurrent.CountDownLatch;
-
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.os.storage.StorageManagerCompat;
+import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.javax.util.Premisex;
 
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
@@ -229,25 +228,17 @@ public class Contextx {
             return systemService(context, Context.CLIPBOARD_SERVICE);
         } else {
             /*
-             * 首次获取 ClipboardManager 时 Android 内部会创建 ClipboardManager，并创建 Handler，
+             * 首次获取 ClipboardManager 时会创建 ClipboardManager，并创建 Handler，
              * 如果当前环境是在非主线程执行的，这里就涉及到了在非主线程创建 Handler 的问题
              */
             final Context appContext = context.getApplicationContext();
-            final ClipboardManager[] clipboardManagers = new ClipboardManager[1];
-            final CountDownLatch countDownLatch = new CountDownLatch(1);
-            Androidx.runInUI(new Runnable() {
+            return Premisex.requireNotNull(Androidx.waitRunInUI(new NullableResultRunnable<ClipboardManager>() {
+                @Nullable
                 @Override
-                public void run() {
-                    clipboardManagers[0] = systemServiceOrNull(appContext, Context.CLIPBOARD_SERVICE);
-                    countDownLatch.countDown();
+                public ClipboardManager run() {
+                    return systemServiceOrNull(appContext, Context.CLIPBOARD_SERVICE);
                 }
-            });
-            try {
-                countDownLatch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            return Premisex.requireNotNull(clipboardManagers[0], Context.CLIPBOARD_SERVICE);
+            }), Context.CLIPBOARD_SERVICE);
         }
     }
 

@@ -19,14 +19,9 @@
 package me.panpf.androidxkt
 
 import android.content.Context
-import android.os.Handler
 import me.panpf.androidx.Androidx
-
-
-/**
- * Get the main thread Handler
- */
-inline fun getMainHandler(): Handler = Androidx.getMainHandler()
+import me.panpf.androidx.util.NullableResultRunnable
+import me.panpf.androidx.util.ResultRunnable
 
 /**
  * Execute the specified code block in the main thread
@@ -38,10 +33,39 @@ inline fun runInUI(block: Runnable) = Androidx.runInUI(block)
  */
 inline fun runInUI(noinline block: () -> Unit) = Androidx.runInUI(block)
 
+
 /**
- * Return true if ROOT is already
+ * Execute the specified code block in the main thread
  */
-inline fun isRooted(): Boolean = Androidx.isRooted()
+inline fun waitRunInUI(block: Runnable) = Androidx.waitRunInUI(block)
+
+/**
+ * Execute the specified code block in the main thread
+ */
+inline fun waitRunInUI(noinline block: () -> Unit) = Androidx.waitRunInUI(block)
+
+
+/**
+ * Execute the specified code block in the main thread
+ */
+inline fun <T> waitResultRunInUI(block: ResultRunnable<T>): T = Androidx.waitRunInUI(block)
+
+/**
+ * Execute the specified code block in the main thread
+ */
+inline fun <T> waitResultRunInUI(noinline block: () -> T): T = Androidx.waitRunInUI(ResultRunnable { block() })
+
+
+/**
+ * Execute the specified code block in the main thread
+ */
+inline fun <T> waitNullableResultRunInUI(block: NullableResultRunnable<T>): T? = Androidx.waitRunInUI(block)
+
+
+/**
+ * Execute the specified code block in the main thread
+ */
+inline fun <T> waitNullableResultRunInUI(noinline block: () -> T?): T? = Androidx.waitRunInUI(NullableResultRunnable { block() })
 
 
 /**
@@ -58,70 +82,3 @@ inline fun Context.getInProcessNameSuffix(): String? = Androidx.getInProcessName
  * Is in the main process?
  */
 inline fun Context.isMainProcess(): Boolean = Androidx.isMainProcess(this)
-
-
-/**
- * Is it the main thread?
- */
-inline fun isMainThread(): Boolean = Androidx.isMainThread()
-
-inline fun isAtLeastJ() = Androidx.isAtLeastJ()
-inline fun isAtLeast16() = Androidx.isAtLeast16()
-inline fun isAtLeast4_1() = Androidx.isAtLeast4_1()
-
-inline fun isAtLeastJMR1() = Androidx.isAtLeastJMR1()
-inline fun isAtLeast17() = Androidx.isAtLeast17()
-inline fun isAtLeast4_2() = Androidx.isAtLeast4_2()
-
-inline fun isAtLeastJMR2() = Androidx.isAtLeastJMR2()
-inline fun isAtLeast18() = Androidx.isAtLeast18()
-inline fun isAtLeast4_3() = Androidx.isAtLeast4_3()
-
-inline fun isAtLeastK() = Androidx.isAtLeastK()
-inline fun isAtLeast19() = Androidx.isAtLeast19()
-inline fun isAtLeast4_4() = Androidx.isAtLeast4_4()
-
-inline fun isAtLeastKW() = Androidx.isAtLeastKW()
-inline fun isAtLeast20() = Androidx.isAtLeast20()
-inline fun isAtLeast4_4_W() = Androidx.isAtLeast4_4_W()
-
-inline fun isAtLeastL() = Androidx.isAtLeastL()
-inline fun isAtLeast21() = Androidx.isAtLeast21()
-inline fun isAtLeast5_0() = Androidx.isAtLeast5_0()
-
-inline fun isAtLeastLMR1() = Androidx.isAtLeastLMR1()
-inline fun isAtLeast22() = Androidx.isAtLeast22()
-inline fun isAtLeast5_1() = Androidx.isAtLeast5_1()
-
-inline fun isAtLeastM() = Androidx.isAtLeastM()
-inline fun isAtLeast23() = Androidx.isAtLeast23()
-inline fun isAtLeast6_0() = Androidx.isAtLeast6_0()
-
-inline fun isAtLeastN() = Androidx.isAtLeastN()
-inline fun isAtLeast24() = Androidx.isAtLeast24()
-inline fun isAtLeast7_0() = Androidx.isAtLeast7_0()
-
-inline fun isAtLeastNMR1() = Androidx.isAtLeastNMR1()
-inline fun isAtLeast25() = Androidx.isAtLeast25()
-inline fun isAtLeast7_1() = Androidx.isAtLeast7_1()
-
-inline fun isAtLeastO() = Androidx.isAtLeastO()
-inline fun isAtLeast26() = Androidx.isAtLeast26()
-inline fun isAtLeast8_0() = Androidx.isAtLeast8_0()
-
-inline fun isAtLeastOMR1() = Androidx.isAtLeastOMR1()
-inline fun isAtLeast27() = Androidx.isAtLeast27()
-inline fun isAtLeast8_1() = Androidx.isAtLeast8_1()
-
-inline fun isAtLeastP() = Androidx.isAtLeastP()
-inline fun isAtLeast28() = Androidx.isAtLeast28()
-inline fun isAtLeast9_0() = Androidx.isAtLeast9_0()
-
-
-inline fun getAndroidVersionName(version: Int): String = Androidx.getVersionName(version)
-
-inline fun getAndroidVersionName(): String = Androidx.getVersionName()
-
-inline fun getAndroidVersionCodeName(version: Int): String = Androidx.getVersionCodeName(version)
-
-inline fun getAndroidVersionCodeName(): String = Androidx.getVersionCodeName()

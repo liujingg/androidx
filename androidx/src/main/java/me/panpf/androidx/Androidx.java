@@ -26,11 +26,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.io.File;
+import java.util.concurrent.CountDownLatch;
 
 import me.panpf.androidx.content.Contextx;
+import me.panpf.androidx.util.NullableResultRunnable;
+import me.panpf.androidx.util.ResultRunnable;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Collectionx;
 import me.panpf.javax.util.Predicate;
+import me.panpf.javax.util.Premisex;
 
 @SuppressWarnings("WeakerAccess")
 public class Androidx {
@@ -46,11 +50,88 @@ public class Androidx {
     /**
      * Execute the specified code block in the main thread
      */
-    public static void runInUI(@NonNull Runnable runnable) {
+    public static void runInUI(@NonNull Runnable block) {
         if (isMainThread()) {
-            runnable.run();
+            block.run();
         } else {
-            getMainHandler().post(runnable);
+            getMainHandler().post(block);
+        }
+    }
+
+    /**
+     * Execute the specified code block in the main thread
+     */
+    public static void waitRunInUI(@NonNull final Runnable block) {
+        if (isMainThread()) {
+            block.run();
+        } else {
+            final CountDownLatch countDownLatch = new CountDownLatch(1);
+            getMainHandler().post(new Runnable() {
+                @Override
+                public void run() {
+                    block.run();
+                    countDownLatch.countDown();
+                }
+            });
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /**
+     * Execute the specified code block in the main thread
+     */
+    @NonNull
+    public static <T> T waitRunInUI(@NonNull final ResultRunnable<T> block) {
+        if (isMainThread()) {
+            return block.run();
+        } else {
+            final Object[] results = new Object[1];
+            final CountDownLatch countDownLatch = new CountDownLatch(1);
+            getMainHandler().post(new Runnable() {
+                @Override
+                public void run() {
+                    results[0] = block.run();
+                    countDownLatch.countDown();
+                }
+            });
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //noinspection unchecked
+            return Premisex.requireNotNull((T) results[0], "result");
+        }
+    }
+
+    /**
+     * Execute the specified code block in the main thread
+     */
+    @Nullable
+    public static <T> T waitRunInUI(@NonNull final NullableResultRunnable<T> block) {
+        if (isMainThread()) {
+            return block.run();
+        } else {
+            final Object[] results = new Object[1];
+            final CountDownLatch countDownLatch = new CountDownLatch(1);
+            getMainHandler().post(new Runnable() {
+                @Override
+                public void run() {
+                    results[0] = block.run();
+                    countDownLatch.countDown();
+                }
+            });
+            try {
+                countDownLatch.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            //noinspection unchecked
+            return (T) results[0];
         }
     }
 
@@ -359,7 +440,7 @@ public class Androidx {
 
     @NonNull
     public static String getVersionName() {
-        return Build.VERSION.RELEASE;
+        return getVersionName(Build.VERSION.SDK_INT);
     }
 
     @NonNull

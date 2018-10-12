@@ -9,6 +9,7 @@
 * :sparkles: Add Servicex
 * :sparkles: Add Romx
 * :sparkles: Add Contextx
+* :sparkles: Androidx add waitRunInUI
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.9

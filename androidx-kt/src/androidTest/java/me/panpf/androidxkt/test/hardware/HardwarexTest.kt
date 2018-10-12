@@ -19,9 +19,9 @@ package me.panpf.androidxkt.test.hardware
 import android.Manifest
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidx.Androidx.isAtLeastP
 import me.panpf.androidxkt.app.isGrantPermissions
 import me.panpf.androidxkt.hardware.*
-import me.panpf.androidxkt.isAtLeastP
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
