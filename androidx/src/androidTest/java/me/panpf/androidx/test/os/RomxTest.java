@@ -36,13 +36,13 @@ public class RomxTest {
         } else if (Romx.isEmuiType() && Romx.isType(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "EMUI");
         } else if (Romx.isFlymeType() && Romx.isType(Romx.getType())) {
-            Assert.assertEquals(Romx.getTypeName(), "ColorOS");
-        } else if (Romx.isColorOSType() && Romx.isType(Romx.getType())) {
-            Assert.assertEquals(Romx.getTypeName(), "FuntouchOS");
-        } else if (Romx.isFuntouchOSType() && Romx.isType(Romx.getType())) {
-            Assert.assertEquals(Romx.getTypeName(), "SmartisanOS");
-        } else if (Romx.isSmartisanOSType() && Romx.isType(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "Flyme");
+        } else if (Romx.isColorOSType() && Romx.isType(Romx.getType())) {
+            Assert.assertEquals(Romx.getTypeName(), "ColorOS");
+        } else if (Romx.isFuntouchOSType() && Romx.isType(Romx.getType())) {
+            Assert.assertEquals(Romx.getTypeName(), "FuntouchOS");
+        } else if (Romx.isSmartisanOSType() && Romx.isType(Romx.getType())) {
+            Assert.assertEquals(Romx.getTypeName(), "SmartisanOS");
         } else if (Romx.isH2OSType() && Romx.isType(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "H2OS");
         } else if (Romx.isLineageOSType() && Romx.isType(Romx.getType())) {
