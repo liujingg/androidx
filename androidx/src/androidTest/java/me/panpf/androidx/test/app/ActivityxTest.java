@@ -16,6 +16,7 @@
 
 package me.panpf.androidx.test.app;
 
+import android.arch.lifecycle.ViewModelStoreOwner;
 import android.support.annotation.NonNull;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -25,6 +26,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Activityx;
 
 @RunWith(AndroidJUnit4.class)
@@ -102,5 +104,54 @@ public class ActivityxTest {
         }
 
         Assert.assertFalse(Activityx.isDestroyedCompat(activity));
+    }
+
+    @Test
+    public void testConvertTranslucent() {
+        final ActivityxTestActivity activity = activityTestRule.getActivity();
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        Androidx.waitRunInUI(new Runnable() {
+            @Override
+            public void run() {
+                Activityx.convertToTranslucent(activity);
+            }
+        });
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        Androidx.waitRunInUI(new Runnable() {
+            @Override
+            public void run() {
+                Activityx.convertFromTranslucent(activity);
+            }
+        });
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testImpl() {
+        ActivityxTestActivity activity = activityTestRule.getActivity();
+        Assert.assertNotNull(Activityx.getImplWithParent(activity, ImplTestInterface.class));
+        Assert.assertNull(Activityx.getImplWithParent(activity, ViewModelStoreOwner.class));
+
+        ActivityxTestFragmentActivity activity2 = fragmentActivityTestRule.getActivity();
+        Assert.assertNull(Activityx.getImplWithParent(activity2, ImplTestInterface.class));
+        Assert.assertNotNull(Activityx.getImplWithParent(activity2, ViewModelStoreOwner.class));
     }
 }

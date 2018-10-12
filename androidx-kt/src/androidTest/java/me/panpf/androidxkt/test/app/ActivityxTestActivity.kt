@@ -18,4 +18,4 @@ package me.panpf.androidxkt.test.app
 
 import android.app.Activity
 
-class ActivityxTestActivity : Activity()
+class ActivityxTestActivity : Activity(), ImplTestInterface

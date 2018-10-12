@@ -18,6 +18,6 @@ package me.panpf.androidx.test.app;
 
 import android.app.Activity;
 
-public class ActivityxTestActivity extends Activity {
+public class ActivityxTestActivity extends Activity implements ImplTestInterface {
 
 }

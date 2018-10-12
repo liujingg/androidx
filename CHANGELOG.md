@@ -10,6 +10,7 @@
 * :sparkles: Add Romx
 * :sparkles: Add Contextx
 * :sparkles: Androidx add waitRunInUI
+* :bug: Fixed bug where Activityx convertToTranslucent method is invalid
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.9

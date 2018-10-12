@@ -26,7 +26,7 @@ import me.panpf.androidx.app.Dialogx
 /**
  * Whether to automatically close the dialog box when setting the click button
  */
-inline fun Dialog.setClickButtonClosable(closable: Boolean) = Dialogx.setClickButtonClosable(this, closable)
+inline fun Dialog.setClickButtonClosable(closable: Boolean): Boolean = Dialogx.setClickButtonClosable(this, closable)
 
 /**
  * Display a progress dialog

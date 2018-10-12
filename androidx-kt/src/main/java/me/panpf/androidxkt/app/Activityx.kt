@@ -44,7 +44,7 @@ inline fun FragmentActivity.isDestroyedCompat(): Boolean = Activityx.isDestroyed
  * This call has no effect on non-translucent activities or on activities
  * with the [android.R.attr.windowIsFloating] attribute.
  */
-inline fun Activity.convertActivityFromTranslucent() = Activityx.convertActivityFromTranslucent(this)
+inline fun Activity.convertFromTranslucentCompat(): Boolean = Activityx.convertFromTranslucent(this)
 
 /**
  * Convert a translucent themed Activity
@@ -60,7 +60,7 @@ inline fun Activity.convertActivityFromTranslucent() = Activityx.convertActivity
  * This call has no effect on non-translucent activities or on activities
  * with the [android.R.attr.windowIsFloating] attribute.
  */
-inline fun Activity.convertActivityToTranslucent() = Activityx.convertActivityToTranslucent(this)
+inline fun Activity.convertToTranslucentCompat(): Boolean = Activityx.convertToTranslucent(this)
 
 /**
  * If the own or parent activity implements the specified [clazz], it returns its implementation.

@@ -30,12 +30,13 @@ public class Dialogx {
     /**
      * Whether to automatically close the dialog box when setting the click button
      */
-    public static void setClickButtonClosable(@NonNull Dialog dialog, boolean closable) {
+    public static boolean setClickButtonClosable(@NonNull Dialog dialog, boolean closable) {
         try {
-            // todo 测试是否兼容 android 9
             Classx.setFieldValue(dialog, "mShowing", closable);
+            return true;
         } catch (NoSuchFieldException e) {
             e.printStackTrace();
+            return false;
         }
     }
 

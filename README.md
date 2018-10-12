@@ -44,12 +44,12 @@ Dependencies:
 
 ## Index
 
-* Android: [Androidx.java] ([Test][AndroidxTest.java])  | [Androidx.kt] ([Test][AndroidxTest.kt])
+* Android: [Androidx.java] ([Test][AndroidxTest.java]) | [Androidx.kt] ([Test][AndroidxTest.kt])
     * getMainHandler, runInUI, isRooted, isMainThread, getInProcessName,
     * getInProcessNameSuffix, isMainProcess, isAtLeast\*, getVersionName, getVersionCodeName
 
 ### app
-* Activity: [Activityx.java] | [Activityx.kt]
+* Activity: [Activityx.java] ([Test][ActivityxTest.java]) | [Activityx.kt] ([Test][ActivityxTest.kt])
     * isDestroyedCompat, convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
 * Dialog: [Dialogx.java] | [Dialogx.kt]
     * setClickButtonClosable, showProgressDialog
@@ -73,7 +73,7 @@ Dependencies:
     * removePrimaryClipChangedListener, clear
 * Content: [Contentx.java] | [Contentx.kt]
     * openInput, readBytes, readText, readLines, readBitmap
-* Context: [Contextx.java] ([Test][ContextxTest.java])  | [Contextx.kt] ([Test][ContextxTest.kt])
+* Context: [Contextx.java] ([Test][ContextxTest.java]) | [Contextx.kt] ([Test][ContextxTest.kt])
     * systemService, systemServiceOrNull, packageManager, powerManager, windowManager, accountManager,
     * activityManager, layoutInflater, notificationManager, accessibilityManager, sensorManager,
     * storageManager, storageManagerCompat, storageStatsManager, vibrator, connectivityManager,
@@ -93,7 +93,7 @@ Dependencies:
     * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
 
 ### graphics
-* Drawable: [Drawablex.java] ([Test][DrawablexTest.java])  | [Drawablex.kt] ([Test][DrawablexTest.kt])
+* Drawable: [Drawablex.java] ([Test][DrawablexTest.java]) | [Drawablex.kt] ([Test][DrawablexTest.kt])
     * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, toDrawableByColor, toDrawableByColorFromDrawableRes
 * Bitmap: [Bitmapx.java] | [Bitmapx.kt]
     * centerCrop, centerCropTo, circular, circularTo, tint, createByColor, toByteArray,

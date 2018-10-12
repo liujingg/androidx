@@ -24,6 +24,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import me.panpf.javax.lang.Classx;
@@ -64,12 +65,13 @@ public class Activityx {
      * This call has no effect on non-translucent activities or on activities
      * with the [android.R.attr.windowIsFloating] attribute.
      */
-    public static void convertActivityFromTranslucent(@NonNull Activity activity) {
+    public static boolean convertFromTranslucent(@NonNull Activity activity) {
         try {
-            // todo 测试是否兼容 android 9
             Classx.callMethod(activity, "convertFromTranslucent");
+            return true;
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
+            return false;
         }
     }
 
@@ -87,38 +89,27 @@ public class Activityx {
      * This call has no effect on non-translucent activities or on activities
      * with the [android.R.attr.windowIsFloating] attribute.
      */
-    public static void convertActivityToTranslucent(@NonNull Activity activity) {
+    public static boolean convertToTranslucent(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             try {
                 ActivityOptions options = (ActivityOptions) Classx.callMethod(activity, "getActivityOptions");
-
-                Class<?>[] classes = activity.getClass().getDeclaredClasses();
-                Class<?> translucentConversionListenerClazz = null;
-                for (Class<?> clazz : classes) {
-                    if (clazz.getSimpleName().contains("TranslucentConversionListener")) {
-                        translucentConversionListenerClazz = clazz;
-                    }
-                }
-                Method method = activity.getClass().getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz, ActivityOptions.class);
-                // todo 测试是否兼容 android 9
-                Classx.callMethod(activity, method, null, options);
+                Field mTranslucentCallbackField = Classx.getFieldWithParent(activity, "mTranslucentCallback");
+                Method method = Classx.getMethodWithParent(activity, "convertToTranslucent", mTranslucentCallbackField.getType(), ActivityOptions.class);
+                Classx.callMethod(activity, method, Classx.getFieldValue(activity, mTranslucentCallbackField), options);
+                return true;
             } catch (Throwable e) {
                 e.printStackTrace();
+                return false;
             }
         } else {
             try {
-                Class<?>[] classes = activity.getClass().getDeclaredClasses();
-                Class<?> translucentConversionListenerClazz = null;
-                for (Class<?> clazz : classes) {
-                    if (clazz.getSimpleName().contains("TranslucentConversionListener")) {
-                        translucentConversionListenerClazz = clazz;
-                    }
-                }
-                Method method = activity.getClass().getDeclaredMethod("convertToTranslucent", translucentConversionListenerClazz);
-                // todo 测试是否兼容 android 9
-                Classx.callMethod(activity, method, new Object[]{null});
+                Field mTranslucentCallbackField = Classx.getFieldWithParent(activity, "mTranslucentCallback");
+                Method method = Classx.getMethodWithParent(activity, "convertToTranslucent", mTranslucentCallbackField.getType());
+                Classx.callMethod(activity, method, Classx.getFieldValue(activity, mTranslucentCallbackField));
+                return true;
             } catch (Throwable e) {
                 e.printStackTrace();
+                return false;
             }
         }
     }

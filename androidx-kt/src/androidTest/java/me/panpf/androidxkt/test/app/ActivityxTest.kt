@@ -16,10 +16,14 @@
 
 package me.panpf.androidxkt.test.app
 
+import android.arch.lifecycle.ViewModelStoreOwner
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidxkt.app.convertFromTranslucentCompat
+import me.panpf.androidxkt.app.convertToTranslucentCompat
+import me.panpf.androidxkt.app.getImplWithParent
 import me.panpf.androidxkt.app.isDestroyedCompat
-
+import me.panpf.androidxkt.waitRunInUI
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -88,5 +92,45 @@ class ActivityxTest {
         }
 
         Assert.assertFalse(activity.isDestroyedCompat())
+    }
+
+    @Test
+    fun testConvertTranslucent() {
+        val activity = activityTestRule.activity
+
+        try {
+            Thread.sleep(2000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+
+        waitRunInUI { activity.convertToTranslucentCompat() }
+
+        try {
+            Thread.sleep(2000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+
+
+        waitRunInUI { activity.convertFromTranslucentCompat() }
+
+        try {
+            Thread.sleep(2000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+
+    }
+
+    @Test
+    fun testImpl() {
+        val activity = activityTestRule.activity
+        Assert.assertNotNull(activity.getImplWithParent(ImplTestInterface::class.java))
+        Assert.assertNull(activity.getImplWithParent(ViewModelStoreOwner::class.java))
+
+        val activity2 = fragmentActivityTestRule.activity
+        Assert.assertNull(activity2.getImplWithParent(ImplTestInterface::class.java))
+        Assert.assertNotNull(activity2.getImplWithParent(ViewModelStoreOwner::class.java))
     }
 }
