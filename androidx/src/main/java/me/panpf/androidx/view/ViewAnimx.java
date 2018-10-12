@@ -129,7 +129,7 @@ public class ViewAnimx {
      * @param listener       动画监听器
      */
     public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
-                                          float cycles, long durationMillis, final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
+                                     float cycles, long durationMillis, final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
         view.clearAnimation();
         final boolean isClickable = view.isClickable();
 
@@ -171,7 +171,7 @@ public class ViewAnimx {
      * @param listener       动画监听器
      */
     public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
-                                          float cycles, long durationMillis, @Nullable final Animation.AnimationListener listener) {
+                                     float cycles, long durationMillis, @Nullable final Animation.AnimationListener listener) {
         animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, durationMillis, false, listener);
     }
 
@@ -186,7 +186,7 @@ public class ViewAnimx {
      * @param listener   动画监听器
      */
     public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
-                                          float cycles, @Nullable final Animation.AnimationListener listener) {
+                                     float cycles, @Nullable final Animation.AnimationListener listener) {
         animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, DEFAULT_ANIMATION_DURATION, false, listener);
     }
 
@@ -201,7 +201,7 @@ public class ViewAnimx {
      * @param durationMillis 持续时间
      */
     public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
-                                          float cycles, long durationMillis) {
+                                     float cycles, long durationMillis) {
         animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, durationMillis, false, null);
     }
 
@@ -215,7 +215,7 @@ public class ViewAnimx {
      * @param cycles     重复
      */
     public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
-                                          float cycles) {
+                                     float cycles) {
         animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, DEFAULT_ANIMATION_DURATION, false, null);
     }
 
@@ -294,8 +294,8 @@ public class ViewAnimx {
     /**
      * 执行资源中定义的动画
      *
-     * @param animId 动画资源 ID
-     * @param listener    动画监听器
+     * @param animId   动画资源 ID
+     * @param listener 动画监听器
      */
     public static void startAnimFromRes(@NonNull final View view, int animId, final boolean isBanClick,
                                         @Nullable final Animation.AnimationListener listener) {
@@ -327,8 +327,8 @@ public class ViewAnimx {
     /**
      * 执行资源中定义的动画
      *
-     * @param animId 动画资源 ID
-     * @param listener    动画监听器
+     * @param animId   动画资源 ID
+     * @param listener 动画监听器
      */
     public static void startAnimFromRes(@NonNull final View view, int animId, @Nullable final Animation.AnimationListener listener) {
         startAnimFromRes(view, animId, false, listener);
@@ -351,7 +351,7 @@ public class ViewAnimx {
      * @param listener       动画监听器
      */
     public static void invisibleByAnimAlpha(@NonNull final View view, long durationMillis,
-                                                 final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
+                                            final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
         if (view.getVisibility() == View.INVISIBLE) return;
         animAlpha(view, 1.0f, 0.0f, durationMillis, isBanClick, new Animation.AnimationListener() {
             @Override
@@ -415,7 +415,7 @@ public class ViewAnimx {
      * @param listener       动画监听器
      */
     public static void goneByAnimAlpha(@NonNull final View view, long durationMillis,
-                                            final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
+                                       final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
         if (view.getVisibility() == View.GONE) return;
         animAlpha(view, 1.0f, 0.0f, durationMillis, isBanClick, new Animation.AnimationListener() {
             @Override
@@ -479,7 +479,7 @@ public class ViewAnimx {
      * @param listener       动画监听器
      */
     public static void visibleByAnimAlpha(@NonNull final View view, long durationMillis,
-                                               final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
+                                          final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
         if (view.getVisibility() == View.VISIBLE) return;
         view.setVisibility(View.VISIBLE);
         animAlpha(view, 0.0f, 1.0f, durationMillis, isBanClick, listener);

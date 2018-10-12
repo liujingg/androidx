@@ -299,11 +299,11 @@ class StoragexTest {
          * appExternalFilesDir2
          */
         val appExternalFilesDirs = context.getAppExternalFilesDirs()
-        assertTrue(appExternalFilesDirs.isNotEmpty() && appExternalFilesDirs.all{
+        assertTrue(appExternalFilesDirs.isNotEmpty() && appExternalFilesDirs.all {
             !it.path.startsWith("/data/") && it.path.endsWith("Android/data/" + context.packageName + "/files")
         })
         val appExternalFilesDirs2 = context.getAppExternalFilesDirs("com.github.panpf.test")
-        assertTrue(appExternalFilesDirs2.isNotEmpty() && appExternalFilesDirs2.all{
+        assertTrue(appExternalFilesDirs2.isNotEmpty() && appExternalFilesDirs2.all {
             !it.path.startsWith("/data/") && it.path.endsWith("Android/data/com.github.panpf.test/files")
         })
 
@@ -320,15 +320,15 @@ class StoragexTest {
          * appFilesDirs
          */
         val appFilesDirs = context.getAppFilesDirs()
-        assertTrue(appFilesDirs.size >= 2 && appFilesDirs.any{
+        assertTrue(appFilesDirs.size >= 2 && appFilesDirs.any {
             !it.path.startsWith("/data/") && it.path.endsWith("Android/data/" + context.packageName + "/files")
-        } && appFilesDirs.any{
+        } && appFilesDirs.any {
             it.path.startsWith("/data/") && it.path.endsWith(context.packageName + "/files")
         })
         val appFilesDirs2 = context.getAppFilesDirs("com.github.panpf.test")
-        assertTrue(appFilesDirs2.size >= 2 && appFilesDirs2.any{
+        assertTrue(appFilesDirs2.size >= 2 && appFilesDirs2.any {
             !it.path.startsWith("/data/") && it.path.endsWith("Android/data/com.github.panpf.test/files")
-        } && appFilesDirs2.any{
+        } && appFilesDirs2.any {
             it.path.startsWith("/data/") && it.path.endsWith("com.github.panpf.test/files")
         })
 
@@ -365,11 +365,11 @@ class StoragexTest {
          * appObbDir2
          */
         val appObbDirs = context.getAppObbDirs()
-        assertTrue(appObbDirs.isNotEmpty() && appObbDirs.all{
+        assertTrue(appObbDirs.isNotEmpty() && appObbDirs.all {
             !it.path.startsWith("/data/") && it.path.endsWith("Android/obb/" + context.packageName)
         })
         val appObbDirs2 = context.getAppObbDirs("com.github.panpf.test")
-        assertTrue(appObbDirs2.isNotEmpty() && appObbDirs2.all{
+        assertTrue(appObbDirs2.isNotEmpty() && appObbDirs2.all {
             !it.path.startsWith("/data/") && it.path.endsWith("Android/obb/com.github.panpf.test")
         })
 

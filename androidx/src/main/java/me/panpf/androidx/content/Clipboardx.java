@@ -40,10 +40,7 @@ public class Clipboardx {
      * copy
      */
     public static void copy(@NotNull Context context, @NotNull ClipData clipData) {
-        ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clipboardManager == null) throw new IllegalStateException("ClipboardManager not found");
-
-        clipboardManager.setPrimaryClip(clipData);
+        Contextx.clipboardManager(context).setPrimaryClip(clipData);
     }
 
 
@@ -301,9 +298,7 @@ public class Clipboardx {
      */
     @Nullable
     public static ClipData get(@NotNull Context context) {
-        ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clipboardManager == null) throw new IllegalStateException("ClipboardManager not found");
-        return clipboardManager.getPrimaryClip();
+        return Contextx.clipboardManager(context).getPrimaryClip();
     }
 
     /**
@@ -513,18 +508,14 @@ public class Clipboardx {
      * Add primary clip changed listener
      */
     public static void addPrimaryClipChangedListener(@NotNull Context context, @NotNull ClipboardManager.OnPrimaryClipChangedListener listener) {
-        ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clipboardManager == null) throw new IllegalStateException("ClipboardManager not found");
-        clipboardManager.addPrimaryClipChangedListener(listener);
+        Contextx.clipboardManager(context).addPrimaryClipChangedListener(listener);
     }
 
     /**
      * Remove primary clip changed listener
      */
     public static void removePrimaryClipChangedListener(@NotNull Context context, @NotNull ClipboardManager.OnPrimaryClipChangedListener listener) {
-        ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clipboardManager == null) throw new IllegalStateException("ClipboardManager not found");
-        clipboardManager.removePrimaryClipChangedListener(listener);
+        Contextx.clipboardManager(context).removePrimaryClipChangedListener(listener);
     }
 
 
@@ -533,10 +524,8 @@ public class Clipboardx {
      */
     @RequiresApi(Build.VERSION_CODES.P)
     public static void clear(@NotNull Context context) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.P) return;
-        ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        if (clipboardManager == null)
-            throw new IllegalStateException("ClipboardManager not found");
-        clipboardManager.clearPrimaryClip();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            Contextx.clipboardManager(context).clearPrimaryClip();
+        }
     }
 }

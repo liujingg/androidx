@@ -37,7 +37,7 @@ class ToastxTest {
     val fragmentRuleToast: ActivityTestRule<ToastxTestActivity> = ActivityTestRule<ToastxTestActivity>(ToastxTestActivity::class.java)
 
     @Test
-    fun testContextToast(){
+    fun testContextToast() {
         fragmentRuleToast.activity.showLongToast("今天是2018年10月18号")
         fragmentRuleToast.activity.showLongToast("今天是%d年%d月%d号", 2018, 10, 18)
         fragmentRuleToast.activity.showLongToast(R.string.toast_test)
@@ -50,7 +50,7 @@ class ToastxTest {
     }
 
     @Test
-    fun testFragmentToast(){
+    fun testFragmentToast() {
         val fragment = fragmentRuleToast.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame)
 
         fragment.showLongToast("今天是2018年10月18号")
@@ -65,7 +65,7 @@ class ToastxTest {
     }
 
     @Test
-    fun testViewToast(){
+    fun testViewToast() {
         val view = fragmentRuleToast.activity.findViewById<View>(R.id.testAt_frame)
 
         view.showLongToast("今天是2018年10月18号")
@@ -80,7 +80,7 @@ class ToastxTest {
     }
 
     @Test
-    fun testWithViewToast(){
+    fun testWithViewToast() {
         InstrumentationRegistry.getContext().inflateLayout(R.layout.view_toast).showLongToastWithSelf()
 
         InstrumentationRegistry.getContext().inflateLayout(R.layout.view_toast).showShortToastWithSelf()

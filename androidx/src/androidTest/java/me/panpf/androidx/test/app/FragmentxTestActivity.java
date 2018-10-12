@@ -28,7 +28,7 @@ public class FragmentxTestActivity extends Activity {
         getFragmentManager().beginTransaction().replace(android.R.id.content, new TestOriginFragment()).commit();
     }
 
-    public static class TestOriginFragment extends android.app.Fragment{
+    public static class TestOriginFragment extends android.app.Fragment {
 
     }
 }

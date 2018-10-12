@@ -35,7 +35,7 @@ class ColorxTest {
     @Test
     fun testAlpha() {
         Assert.assertEquals(COLOR.getColorAlpha(), 137)
-        Assert.assertEquals(COLOR.setColorAlpha( 211).getColorAlpha(), 211)
+        Assert.assertEquals(COLOR.setColorAlpha(211).getColorAlpha(), 211)
         Assert.assertEquals(COLOR.addColorAlpha(0.56f).getColorAlpha(), 76)
     }
 

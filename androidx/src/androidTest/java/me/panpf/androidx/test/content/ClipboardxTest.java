@@ -25,14 +25,10 @@ import android.os.Build;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import java.util.concurrent.CountDownLatch;
-
-import me.panpf.androidx.Androidx;
 import me.panpf.androidx.content.ClipContent;
 import me.panpf.androidx.content.ClipHtmlText;
 import me.panpf.androidx.content.ClipIntent;
@@ -87,34 +83,9 @@ public class ClipboardxTest {
             "    <li><a href=\"/shop\">积分商城</a></li>\n" +
             "  </ul>\n";
 
-    @NotNull
-    private Context prepareContext() {
-        final Context context = InstrumentationRegistry.getContext();
-
-        /*
-         * 在测试环境首次获取 ClipboardManager 时 Android 内部会创建 ClipboardManager，并创建 Handler，
-         * 由于测试代码是在异步线程执行的，因此这里就涉及到了在异步线程创建 Handler 的问题
-         */
-        final CountDownLatch countDownLatch = new CountDownLatch(1);
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Clipboardx.get(context);
-                countDownLatch.countDown();
-            }
-        });
-        try {
-            countDownLatch.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        return context;
-    }
-
     @Test
     public void testLabel() {
-        Context context = prepareContext();
+        Context context = InstrumentationRegistry.getContext();
 
         Clipboardx.copyText(context, "clipLabel", TEST_TEXT);
         Assert.assertEquals(Clipboardx.getLabel(context), "clipLabel");
@@ -122,7 +93,7 @@ public class ClipboardxTest {
 
     @Test
     public void testText() {
-        Context context = prepareContext();
+        Context context = InstrumentationRegistry.getContext();
 
         Clipboardx.copyText(context, TEST_TEXT);
         Assert.assertEquals(Clipboardx.getText(context), TEST_TEXT);
@@ -136,7 +107,7 @@ public class ClipboardxTest {
     @Test
     public void testHtmlText() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            Context context = prepareContext();
+            Context context = InstrumentationRegistry.getContext();
 
             Clipboardx.copyHtmlText(context, TEST_HTML_TEXT, TEST_HTML_HTML);
             ClipHtmlText clipHtmlText = Clipboardx.getHtmlText(context);
@@ -158,7 +129,7 @@ public class ClipboardxTest {
 
     @Test
     public void testIntent() {
-        Context context = prepareContext();
+        Context context = InstrumentationRegistry.getContext();
 
         Intent intent = new Intent(context, ToastxTestActivity.class);
         Clipboardx.copyIntent(context, intent);
@@ -176,7 +147,7 @@ public class ClipboardxTest {
 
     @Test
     public void testRawUri() {
-        Context context = prepareContext();
+        Context context = InstrumentationRegistry.getContext();
 
         Uri uri = Uri.parse("https://www.github.com");
         Clipboardx.copyRawUri(context, uri);
@@ -197,7 +168,7 @@ public class ClipboardxTest {
 
     @Test
     public void testMimeTypeUri() {
-        Context context = prepareContext();
+        Context context = InstrumentationRegistry.getContext();
 
         Uri uri = Uri.parse("https://www.github.com");
         Clipboardx.copyMimeTypeUri(context, "app/android", uri);
@@ -218,7 +189,7 @@ public class ClipboardxTest {
 
     @Test
     public void testUri() {
-        Context context = prepareContext();
+        Context context = InstrumentationRegistry.getContext();
 
         Uri uri = Uri.parse("https://www.github.com");
         Clipboardx.copyUri(context, uri);
@@ -239,7 +210,7 @@ public class ClipboardxTest {
 
     @Test
     public void testListener() {
-        final Context context = prepareContext();
+        final Context context = InstrumentationRegistry.getContext();
 
         final String[] result = new String[1];
         ClipboardManager.OnPrimaryClipChangedListener listener = new ClipboardManager.OnPrimaryClipChangedListener() {
@@ -273,7 +244,7 @@ public class ClipboardxTest {
 
     @Test
     public void testMultiType() {
-        final Context context = prepareContext();
+        final Context context = InstrumentationRegistry.getContext();
 
         ClipPlainText text = new ClipPlainText(TEST_TEXT);
         ClipHtmlText htmlText = new ClipHtmlText(TEST_HTML_TEXT, TEST_HTML_HTML);
@@ -302,7 +273,7 @@ public class ClipboardxTest {
     @Test
     public void testClean() {
         if (Build.VERSION.SDK_INT >= 28) {
-            final Context context = prepareContext();
+            final Context context = InstrumentationRegistry.getContext();
 
             Clipboardx.copyText(context, "Hello Word");
             Assert.assertEquals(Clipboardx.getText(context), "Hello Word");

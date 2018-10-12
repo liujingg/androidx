@@ -8,6 +8,7 @@
 * :sparkles: Add Imagex
 * :sparkles: Add Servicex
 * :sparkles: Add Romx
+* :sparkles: Add Contextx
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.9

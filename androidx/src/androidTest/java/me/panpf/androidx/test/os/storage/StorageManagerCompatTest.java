@@ -26,6 +26,7 @@ import org.junit.runner.RunWith;
 
 import java.io.File;
 
+import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.storage.StorageManagerCompat;
 
 @RunWith(AndroidJUnit4.class)
@@ -34,35 +35,32 @@ public class StorageManagerCompatTest {
     @Test
     public void testGetVolumeList() {
         Context context = InstrumentationRegistry.getContext();
-        StorageManagerCompat managerCompat = new StorageManagerCompat(context);
-        Assert.assertTrue(managerCompat.getVolumes().length >= 1);
+        Assert.assertTrue(Contextx.storageManagerCompat(context).getVolumes().length >= 1);
     }
 
     @Test
     public void testGetStorageVolumes() {
         Context context = InstrumentationRegistry.getContext();
-        StorageManagerCompat managerCompat = new StorageManagerCompat(context);
-        Assert.assertTrue(managerCompat.getVolumeList().size() >= 1);
+        Assert.assertTrue(Contextx.storageManagerCompat(context).getVolumeList().size() >= 1);
     }
 
     @Test
     public void testGetVolumePaths() {
         Context context = InstrumentationRegistry.getContext();
-        StorageManagerCompat managerCompat = new StorageManagerCompat(context);
-        Assert.assertTrue(managerCompat.getVolumePaths().length >= 1);
+        Assert.assertTrue(Contextx.storageManagerCompat(context).getVolumePaths().length >= 1);
     }
 
     @Test
     public void testGetStorageVolume() {
         Context context = InstrumentationRegistry.getContext();
-        StorageManagerCompat managerCompat = new StorageManagerCompat(context);
+        StorageManagerCompat managerCompat = Contextx.storageManagerCompat(context);
         Assert.assertNotNull(managerCompat.getVolume(new File(managerCompat.getVolumePaths()[0])));
     }
 
     @Test
     public void testGetVolumeState() {
         Context context = InstrumentationRegistry.getContext();
-        StorageManagerCompat managerCompat = new StorageManagerCompat(context);
+        StorageManagerCompat managerCompat = Contextx.storageManagerCompat(context);
         Assert.assertNotEquals(managerCompat.getVolumeState(managerCompat.getVolumePaths()[0]), "unknown");
     }
 }

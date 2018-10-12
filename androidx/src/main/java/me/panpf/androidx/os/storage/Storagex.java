@@ -31,6 +31,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
+import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.StatFsx;
 import me.panpf.javax.io.Filex;
 import me.panpf.javax.util.Arrayx;
@@ -41,7 +42,7 @@ import me.panpf.javax.util.Transformer;
 /**
  * Storage related tool methods
  */
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "InfiniteRecursion"})
 public class Storagex {
 
 
@@ -140,7 +141,7 @@ public class Storagex {
      */
     @NotNull
     public static String[] getVolumePaths(@NotNull Context context) {
-        return new StorageManagerCompat(context).getVolumePaths();
+        return Contextx.storageManagerCompat(context).getVolumePaths();
     }
 
     /**
@@ -190,7 +191,7 @@ public class Storagex {
      */
     @NotNull
     public static List<StorageVolumeCompat> getVolumeList(@NotNull Context context) {
-        return new StorageManagerCompat(context).getVolumeList();
+        return Contextx.storageManagerCompat(context).getVolumeList();
     }
 
     /**
@@ -211,7 +212,7 @@ public class Storagex {
      */
     @NotNull
     public static StorageVolumeCompat[] getVolumes(@NotNull Context context) {
-        return new StorageManagerCompat(context).getVolumes();
+        return Contextx.storageManagerCompat(context).getVolumes();
     }
 
     /**
@@ -233,7 +234,7 @@ public class Storagex {
      */
     @Nullable
     public static StorageVolumeCompat getVolume(@NotNull Context context, @NotNull File path) {
-        return new StorageManagerCompat(context).getVolume(path);
+        return Contextx.storageManagerCompat(context).getVolume(path);
     }
 
 
@@ -303,7 +304,7 @@ public class Storagex {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return Environment.isExternalStorageEmulated(path);
         } else {
-            StorageVolumeCompat storageVolume = new StorageManagerCompat(context).getVolume(path);
+            StorageVolumeCompat storageVolume = Contextx.storageManagerCompat(context).getVolume(path);
             return storageVolume != null && storageVolume.isEmulated();
         }
     }
@@ -322,7 +323,7 @@ public class Storagex {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return Environment.isExternalStorageRemovable(path);
         } else {
-            StorageVolumeCompat storageVolume = new StorageManagerCompat(context).getVolume(path);
+            StorageVolumeCompat storageVolume = Contextx.storageManagerCompat(context).getVolume(path);
             return storageVolume != null && storageVolume.isRemovable();
         }
     }

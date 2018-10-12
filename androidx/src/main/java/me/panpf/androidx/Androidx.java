@@ -27,6 +27,7 @@ import android.support.annotation.Nullable;
 
 import java.io.File;
 
+import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Collectionx;
 import me.panpf.javax.util.Predicate;
@@ -75,13 +76,12 @@ public class Androidx {
     @Nullable
     public static String getInProcessName(@NonNull Context context) {
         final int myPid = android.os.Process.myPid();
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        ActivityManager.RunningAppProcessInfo info = activityManager != null ? Collectionx.find(activityManager.getRunningAppProcesses(), new Predicate<ActivityManager.RunningAppProcessInfo>() {
+        ActivityManager.RunningAppProcessInfo info = Collectionx.find(Contextx.activityManager(context).getRunningAppProcesses(), new Predicate<ActivityManager.RunningAppProcessInfo>() {
             @Override
             public boolean accept(@NonNull ActivityManager.RunningAppProcessInfo runningAppProcessInfo) {
                 return runningAppProcessInfo.pid == myPid;
             }
-        }) : null;
+        });
         return info != null ? info.processName : null;
     }
 

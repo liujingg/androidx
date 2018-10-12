@@ -33,21 +33,24 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Classx;
 import me.panpf.javax.util.Arrayx;
 import me.panpf.javax.util.Collectionx;
 import me.panpf.javax.util.Transformer;
 
-@SuppressWarnings("WeakerAccess")
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class StorageManagerCompat {
 
     @NotNull
     private StorageManager manager;
 
-    public StorageManagerCompat(@NotNull Context context) {
-        final StorageManager manager = (StorageManager) context.getSystemService(Context.STORAGE_SERVICE);
-        if (manager == null) throw new IllegalStateException("StorageManager not found");
+    public StorageManagerCompat(@NotNull StorageManager manager) {
         this.manager = manager;
+    }
+
+    public StorageManagerCompat(@NotNull Context context) {
+        this(Contextx.storageManager(context));
     }
 
     @NonNull

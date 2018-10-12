@@ -17,7 +17,6 @@
 package me.panpf.androidx.graphics;
 
 import android.annotation.TargetApi;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.opengl.EGL14;
 import android.opengl.GLES10;
@@ -31,6 +30,8 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 
+import me.panpf.androidx.content.Contextx;
+
 public class OpenGlx {
 
     /**
@@ -38,11 +39,7 @@ public class OpenGlx {
      */
     @NonNull
     public static String getVersion(@NonNull Context context) {
-        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        if (am == null) {
-            throw new IllegalStateException("No ActivityManager");
-        }
-        return am.getDeviceConfigurationInfo().getGlEsVersion();
+        return Contextx.activityManager(context).getDeviceConfigurationInfo().getGlEsVersion();
     }
 
     /**

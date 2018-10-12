@@ -18,7 +18,6 @@ package me.panpf.androidxkt.test.content
 
 import android.content.ClipDescription
 import android.content.ClipboardManager
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
@@ -29,41 +28,18 @@ import me.panpf.androidx.content.ClipIntent
 import me.panpf.androidx.content.ClipPlainText
 import me.panpf.androidx.content.ClipUri
 import me.panpf.androidxkt.content.*
-import me.panpf.androidxkt.runInUI
 import me.panpf.androidxkt.test.app.ActivityxTestActivity
 import me.panpf.androidxkt.test.widget.ToastxTestActivity
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.util.concurrent.CountDownLatch
 
 @RunWith(AndroidJUnit4::class)
 class ClipboardxTest {
 
-    private fun prepareContext(): Context {
-        val context = InstrumentationRegistry.getContext()
-
-        /*
-         * 在测试环境首次获取 ClipboardManager 时 Android 内部会创建 ClipboardManager，并创建 Handler，
-         * 由于测试代码是在异步线程执行的，因此这里就涉及到了在异步线程创建 Handler 的问题
-         */
-        val countDownLatch = CountDownLatch(1)
-        runInUI{
-            context.getClipData()
-            countDownLatch.countDown()
-        }
-        try {
-            countDownLatch.await()
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
-
-        return context
-    }
-
     @Test
     fun testLabel() {
-        val context = prepareContext()
+        val context = InstrumentationRegistry.getContext()
 
         context.copyText("clipLabel", TEST_TEXT)
         Assert.assertEquals(context.getClipDataLabel(), "clipLabel")
@@ -71,7 +47,7 @@ class ClipboardxTest {
 
     @Test
     fun testText() {
-        val context = prepareContext()
+        val context = InstrumentationRegistry.getContext()
 
         context.copyText(TEST_TEXT)
         Assert.assertEquals(context.getClipText(), TEST_TEXT)
@@ -85,7 +61,7 @@ class ClipboardxTest {
     @Test
     fun testHtmlText() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            val context = prepareContext()
+            val context = InstrumentationRegistry.getContext()
 
             context.copyHtmlText(TEST_HTML_TEXT, TEST_HTML_HTML)
             val clipHtmlText = context.getClipHtmlText()
@@ -107,7 +83,7 @@ class ClipboardxTest {
 
     @Test
     fun testIntent() {
-        val context = prepareContext()
+        val context = InstrumentationRegistry.getContext()
 
         val intent = Intent(context, ToastxTestActivity::class.java)
         context.copyIntent(intent)
@@ -125,7 +101,7 @@ class ClipboardxTest {
 
     @Test
     fun testRawUri() {
-        val context = prepareContext()
+        val context = InstrumentationRegistry.getContext()
 
         val uri = Uri.parse("https://www.github.com")
         context.copyRawUri(uri)
@@ -146,7 +122,7 @@ class ClipboardxTest {
 
     @Test
     fun testMimeTypeUri() {
-        val context = prepareContext()
+        val context = InstrumentationRegistry.getContext()
 
         val uri = Uri.parse("https://www.github.com")
         context.copyMimeTypeUri("app/android", uri)
@@ -167,7 +143,7 @@ class ClipboardxTest {
 
     @Test
     fun testUri() {
-        val context = prepareContext()
+        val context = InstrumentationRegistry.getContext()
 
         val uri = Uri.parse("https://www.github.com")
         context.copyUri(uri)
@@ -188,7 +164,7 @@ class ClipboardxTest {
 
     @Test
     fun testListener() {
-        val context = prepareContext()
+        val context = InstrumentationRegistry.getContext()
 
         val result = arrayOfNulls<String>(1)
         val listener = ClipboardManager.OnPrimaryClipChangedListener { result[0] = "onPrimaryClipChanged" }
@@ -219,7 +195,7 @@ class ClipboardxTest {
 
     @Test
     fun testMultiType() {
-        val context = prepareContext()
+        val context = InstrumentationRegistry.getContext()
 
         val text = ClipPlainText(TEST_TEXT)
         val htmlText = ClipHtmlText(TEST_HTML_TEXT, TEST_HTML_HTML)
@@ -248,7 +224,7 @@ class ClipboardxTest {
     @Test
     fun testClean() {
         if (Build.VERSION.SDK_INT >= 28) {
-            val context = prepareContext()
+            val context = InstrumentationRegistry.getContext()
 
             context.copyText("Hello Word")
             Assert.assertEquals(context.getClipText(), "Hello Word")

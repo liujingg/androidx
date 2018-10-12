@@ -31,6 +31,7 @@ import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.util.Enumeration;
 
+import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Classx;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Premisex;
@@ -165,7 +166,7 @@ public class Networkx {
     /**
      * Get network connection
      */
-    @Nullable
+    @NonNull
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public static ConnectivityManager getConnectivity(@NonNull Context context) {
         return NetworkState.get(context).getConnectivity();
@@ -178,9 +179,7 @@ public class Networkx {
      */
     @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
     public static int getWifiState(@NonNull Context context) {
-        WifiManager manager = ((WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE));
-        if (manager == null) throw new IllegalStateException("WifiManager not found");
-        return manager.getWifiState();
+        return Contextx.wifiManager(context).getWifiState();
     }
 
     /**
@@ -197,9 +196,7 @@ public class Networkx {
      */
     @RequiresPermission(allOf = {Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.CHANGE_WIFI_STATE})
     public static boolean setWifiEnabled(@NonNull Context context, boolean enable) {
-        WifiManager manager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        if (manager == null) throw new IllegalStateException("WifiManager not found");
-        return manager.setWifiEnabled(enable);
+        return Contextx.wifiManager(context).setWifiEnabled(enable);
     }
 
     /**
@@ -207,9 +204,7 @@ public class Networkx {
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public static boolean isMobileEnabled(@NonNull Context context) {
-        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (manager == null) throw new IllegalStateException("ConnectivityManager not found");
-        NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+        NetworkInfo networkInfo = Contextx.connectivityManager(context).getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
         return networkInfo != null && networkInfo.isConnected();
     }
 
@@ -218,11 +213,9 @@ public class Networkx {
      */
     @RequiresPermission(Manifest.permission.CHANGE_NETWORK_STATE)
     public static boolean setMobileEnabled(@NonNull Context context, boolean enabled) {
-        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (manager == null) throw new IllegalStateException("ConnectivityManager not found");
         try {
             // todo 测试是否兼容 android 9
-            Classx.callMethod(manager, "setMobileDataEnabled", enabled);
+            Classx.callMethod(Contextx.connectivityManager(context), "setMobileDataEnabled", enabled);
             return true;
         } catch (NoSuchMethodException e) {
             e.printStackTrace();

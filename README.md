@@ -73,6 +73,16 @@ Dependencies:
     * removePrimaryClipChangedListener, clear
 * Content: [Contentx.java] | [Contentx.kt]
     * openInput, readBytes, readText, readLines, readBitmap
+* Context: [Contextx.java] ([Test][ContextxTest.java])  | [Contextx.kt] ([Test][ContextxTest.kt])
+    * systemService, systemServiceOrNull, packageManager, powerManager, windowManager, accountManager,
+    * activityManager, layoutInflater, notificationManager, accessibilityManager, sensorManager,
+    * storageManager, storageManagerCompat, storageStatsManager, vibrator, connectivityManager,
+    * networkStatsManager, wifiManager, wifiManagerOrNull, wifiAwareManager, wifiAwareManagerOrNull,
+    * wifiP2pManager, wifiRttManager, audioManager, fingerprintManager, fingerprintManagerOrNull,
+    * telephonyManager, telephonyManagerOrNull, clipboardManager, inputMethodManager, appWidgetManager,
+    * dropBoxManager, devicePolicyManager, downloadManager, nfcManager, bluetoothManager, usbManager,
+    * inputManager, displayManager, userManager, cameraManager, printManager, usageStatsManager,
+    * batteryManager, jobScheduler, shortcutManager
 * Intent: [Intentx.java] | [Intentx.kt]
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
@@ -266,6 +276,11 @@ Please view the [CHANGELOG.md] file
 [ContentxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContentxTest.java
 [Contentx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Contentx.kt
 [ContentxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ContentxTest.kt
+
+[Contextx.java]: androidx/src/main/java/me/panpf/androidx/content/Contextx.java
+[ContextxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContextxTest.java
+[Contextx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Contextx.kt
+[ContextxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ContextxTest.kt
 
 [Clipboardx.java]: androidx/src/main/java/me/panpf/androidx/content/Clipboardx.java
 [ClipboardxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ClipboardxTest.java

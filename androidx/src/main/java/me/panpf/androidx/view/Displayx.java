@@ -26,12 +26,12 @@ import android.util.DisplayMetrics;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.WindowManager;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Method;
 
+import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.util.LazyValue;
 import me.panpf.javax.util.Premisex;
 
@@ -53,29 +53,20 @@ public class Displayx {
 
     @NonNull
     public static Point getScreenSize(@NonNull Context context) {
-        Object service = context.getSystemService(Context.WINDOW_SERVICE);
-        if (service == null) throw new IllegalStateException("WindowManager not found");
-
         Point point = new Point();
-        ((WindowManager) service).getDefaultDisplay().getSize(point);
+        Contextx.windowManager(context).getDefaultDisplay().getSize(point);
         return point;
     }
 
     public static int getScreenWidth(@NonNull Context context) {
-        Object service = context.getSystemService(Context.WINDOW_SERVICE);
-        if (service == null) throw new IllegalStateException("WindowManager not found");
-
         Point point = new Point();
-        ((WindowManager) service).getDefaultDisplay().getSize(point);
+        Contextx.windowManager(context).getDefaultDisplay().getSize(point);
         return point.x;
     }
 
     public static int getScreenHeight(@NonNull Context context) {
-        Object service = context.getSystemService(Context.WINDOW_SERVICE);
-        if (service == null) throw new IllegalStateException("WindowManager not found");
-
         Point point = new Point();
-        ((WindowManager) service).getDefaultDisplay().getSize(point);
+        Contextx.windowManager(context).getDefaultDisplay().getSize(point);
         return point.y;
     }
 
@@ -95,8 +86,7 @@ public class Displayx {
 
 
     public static int getRotation(@NotNull Context context) {
-        WindowManager windowManager = Premisex.requireNotNull((WindowManager) context.getSystemService(Context.WINDOW_SERVICE), "windowManager");
-        switch (windowManager.getDefaultDisplay().getRotation()) {
+        switch (Contextx.windowManager(context).getDefaultDisplay().getRotation()) {
             case Surface.ROTATION_0:
                 return 0;
             case Surface.ROTATION_90:

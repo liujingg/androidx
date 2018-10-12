@@ -34,8 +34,6 @@ import me.panpf.javax.io.IOStreamx;
 
 public class Contentx {
 
-    // TODO: 2018/10/1 get 各种 manager
-
     @Nullable
     public static InputStream openInput(@NonNull Context context, @NonNull Uri uri) throws IOException {
         return context.getContentResolver().openInputStream(uri);
@@ -92,7 +90,8 @@ public class Contentx {
     }
 
     @Nullable
-    public static Bitmap readBitmap(@NonNull Context context, @NonNull Uri uri, @Nullable Rect outPadding, @Nullable BitmapFactory.Options options) throws FileNotFoundException {
+    public static Bitmap readBitmap(@NonNull Context context, @NonNull Uri uri, @Nullable Rect outPadding,
+                                    @Nullable BitmapFactory.Options options) throws FileNotFoundException {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         try {
             return inputStream != null ? BitmapFactory.decodeStream(inputStream, outPadding, options) : null;

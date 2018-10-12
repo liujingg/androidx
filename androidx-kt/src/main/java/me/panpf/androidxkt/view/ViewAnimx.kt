@@ -37,7 +37,7 @@ import me.panpf.androidx.view.ViewAnimx.DEFAULT_ANIMATION_DURATION
  * @param listener 动画监听器
  */
 inline fun View.animAlpha(fromAlpha: Float, toAlpha: Float, durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                   isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.animAlpha(this, fromAlpha, toAlpha, durationMillis, isBanClick, listener)
+                          isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.animAlpha(this, fromAlpha, toAlpha, durationMillis, isBanClick, listener)
 
 /**
  * 移动动画
@@ -52,8 +52,8 @@ inline fun View.animAlpha(fromAlpha: Float, toAlpha: Float, durationMillis: Long
  * @param listener       动画监听器
  */
 inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float, cycles: Float,
-                       durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                       isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, durationMillis, isBanClick, listener)
+                              durationMillis: Long = DEFAULT_ANIMATION_DURATION,
+                              isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, durationMillis, isBanClick, listener)
 
 /**
  * 视图左右摇晃
@@ -65,7 +65,7 @@ inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Fl
  * @param listener       动画监听器
  */
 inline fun View.shake(extent: Float = 10.0f, cycles: Float = 7f, durationMillis: Long = 700,
-               isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.shake(this, extent, cycles, durationMillis, isBanClick, listener)
+                      isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.shake(this, extent, cycles, durationMillis, isBanClick, listener)
 
 /**
  * 视图上下震动
@@ -77,7 +77,7 @@ inline fun View.shake(extent: Float = 10.0f, cycles: Float = 7f, durationMillis:
  * @param listener       动画监听器
  */
 inline fun View.shock(extent: Float = 10.0f, cycles: Float = 7f, durationMillis: Long = 700,
-               isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.shock(this, extent, cycles, durationMillis, isBanClick, listener)
+                      isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.shock(this, extent, cycles, durationMillis, isBanClick, listener)
 
 /**
  * 执行资源中定义的动画
@@ -94,7 +94,7 @@ inline fun View.startAnimFromRes(animId: Int, isBanClick: Boolean = false, liste
  * @param listener          动画监听器
  */
 inline fun View.invisibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                              isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.invisibleByAnimAlpha(this, durationMillis, isBanClick, listener)
+                                     isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.invisibleByAnimAlpha(this, durationMillis, isBanClick, listener)
 
 /**
  * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.GONE
@@ -104,7 +104,7 @@ inline fun View.invisibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DU
  * @param listener          动画监听器
  */
 inline fun View.goneByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                         isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.goneByAnimAlpha(this, durationMillis, isBanClick, listener)
+                                isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.goneByAnimAlpha(this, durationMillis, isBanClick, listener)
 
 /**
  * 使用透明度渐变动画显示 View
@@ -114,4 +114,4 @@ inline fun View.goneByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATIO
  * @param listener          动画监听器
  */
 inline fun View.visibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                            isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.visibleByAnimAlpha(this, durationMillis, isBanClick, listener)
+                                   isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.visibleByAnimAlpha(this, durationMillis, isBanClick, listener)

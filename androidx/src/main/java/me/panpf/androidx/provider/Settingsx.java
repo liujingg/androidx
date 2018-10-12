@@ -31,6 +31,8 @@ import android.support.annotation.RequiresPermission;
 import android.view.Window;
 import android.view.WindowManager;
 
+import me.panpf.androidx.content.Contextx;
+
 /**
  * System setup tool method
  */
@@ -193,9 +195,7 @@ public class Settingsx {
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
     public static int getMediaVolume(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-            if (audioManager == null) throw new IllegalStateException("AudioManager not found");
-            return audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            return Contextx.audioManager(context).getStreamVolume(AudioManager.STREAM_MUSIC);
         } else {
             try {
                 return Settings.System.getInt(context.getContentResolver(), "volume_music");
@@ -211,9 +211,7 @@ public class Settingsx {
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
     public static boolean setMediaVolume(@NonNull Context context, @IntRange(from = 0, to = 15) int mediaVolume) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-            if (audioManager == null) throw new IllegalStateException("AudioManager not found");
-            audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, mediaVolume, 0);
+            Contextx.audioManager(context).setStreamVolume(AudioManager.STREAM_MUSIC, mediaVolume, 0);
             return true;
         } else {
             return Settings.System.putInt(context.getContentResolver(), "volume_music", mediaVolume);
@@ -227,9 +225,7 @@ public class Settingsx {
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
     public static int getRingVolume(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-            if (audioManager == null) throw new IllegalStateException("AudioManager not found");
-            return audioManager.getStreamVolume(AudioManager.STREAM_RING);
+            return Contextx.audioManager(context).getStreamVolume(AudioManager.STREAM_RING);
         } else {
             try {
                 return Settings.System.getInt(context.getContentResolver(), "volume_ring");
@@ -245,9 +241,7 @@ public class Settingsx {
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
     public static boolean setRingVolume(@NonNull Context context, @IntRange(from = 0, to = 7) int ringVolume) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
-            if (audioManager == null) throw new IllegalStateException("AudioManager not found");
-            audioManager.setStreamVolume(AudioManager.STREAM_RING, ringVolume, 0);
+            Contextx.audioManager(context).setStreamVolume(AudioManager.STREAM_RING, ringVolume, 0);
             return true;
         } else {
             return Settings.System.putInt(context.getContentResolver(), "volume_ring", ringVolume);

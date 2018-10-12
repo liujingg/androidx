@@ -33,6 +33,7 @@ import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
+import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Collectionx;
 import me.panpf.javax.util.Predicate;
@@ -80,7 +81,7 @@ public class Hardwarex {
     @RequiresPermission(anyOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
     public static String getPhoneNumber(@NonNull Context context) {
         try {
-            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
             return Stringx.orEmpty(manager != null ? manager.getLine1Number() : null);
         } catch (Throwable e) {
             e.printStackTrace();
@@ -93,7 +94,7 @@ public class Hardwarex {
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getDeviceId(@NonNull Context context) {
         try {
-            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
             return Stringx.orEmpty(manager != null ? (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? manager.getImei() : manager.getDeviceId()) : null);
         } catch (Throwable e) {
             e.printStackTrace();
@@ -115,7 +116,7 @@ public class Hardwarex {
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getSubscriberId(@NonNull Context context) {
         try {
-            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
             return Stringx.orEmpty(manager != null ? manager.getSubscriberId() : null);
         } catch (Throwable e) {
             e.printStackTrace();
@@ -131,7 +132,7 @@ public class Hardwarex {
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getSimSerialNumber(@NonNull Context context) {
         try {
-            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
             return Stringx.orEmpty(manager != null ? manager.getSimSerialNumber() : null);
         } catch (Throwable e) {
             e.printStackTrace();
@@ -184,7 +185,7 @@ public class Hardwarex {
     public static String getMacAddress(@NonNull Context context) {
         String macAddress = null;
         try {
-            WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+            WifiManager wifiManager = Contextx.wifiManagerOrNull(context);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 Enumeration<NetworkInterface> interfaceEnumeration = NetworkInterface.getNetworkInterfaces();
                 List<NetworkInterface> nis = interfaceEnumeration != null ? Collections.list(interfaceEnumeration) : null;

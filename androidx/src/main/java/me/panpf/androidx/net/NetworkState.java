@@ -25,13 +25,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 
+import me.panpf.androidx.content.Contextx;
+
 /**
  * A tool class that determines the state of the network, which can satisfy whether there is a network and what type of network at one time.
  */
 @SuppressWarnings("WeakerAccess")
 public class NetworkState {
 
-    @Nullable
+    @NonNull
     private ConnectivityManager connectivity;
 
     @Nullable
@@ -39,8 +41,8 @@ public class NetworkState {
 
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     private NetworkState(@NonNull Context context) {
-        this.connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        this.networkInfo = this.connectivity != null ? this.connectivity.getActiveNetworkInfo() : null;
+        this.connectivity = Contextx.connectivityManager(context);
+        this.networkInfo = this.connectivity.getActiveNetworkInfo();
     }
 
     /**
@@ -101,7 +103,7 @@ public class NetworkState {
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public boolean isMetered() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && connectivity != null && connectivity.isActiveNetworkMetered();
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && connectivity.isActiveNetworkMetered();
     }
 
     /**
@@ -160,7 +162,7 @@ public class NetworkState {
     /**
      * Get network connection
      */
-    @Nullable
+    @NonNull
     public ConnectivityManager getConnectivity() {
         return connectivity;
     }

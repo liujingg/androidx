@@ -100,7 +100,7 @@ public class ResizeCalculator {
      */
     @NonNull
     public static Result calculator(int imageWidth, int imageHeight, int resizeWidth, int resizeHeight,
-                             @NonNull ImageView.ScaleType scaleType, boolean exactlySame) {
+                                    @NonNull ImageView.ScaleType scaleType, boolean exactlySame) {
         if (imageWidth == resizeWidth && imageHeight == resizeHeight) {
             Result result = new Result();
             result.imageWidth = imageWidth;

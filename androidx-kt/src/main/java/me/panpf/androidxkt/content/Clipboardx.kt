@@ -250,7 +250,7 @@ inline fun Context.addPrimaryClipChangedListener(listener: ClipboardManager.OnPr
 inline fun Context.removePrimaryClipChangedListener(listener: ClipboardManager.OnPrimaryClipChangedListener) = Clipboardx.removePrimaryClipChangedListener(this, listener)
 
 
-        /**
+/**
  * Clean clip date
  */
 @RequiresApi(Build.VERSION_CODES.P)

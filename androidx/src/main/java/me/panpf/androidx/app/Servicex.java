@@ -26,7 +26,7 @@ import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
-import me.panpf.javax.util.Premisex;
+import me.panpf.androidx.content.Contextx;
 
 @SuppressWarnings("WeakerAccess")
 public class Servicex {
@@ -38,8 +38,8 @@ public class Servicex {
         try {
             String serviceClassName = serviceClass.getName();
 
-            ActivityManager activityManager = Premisex.requireNotNull((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE), "activityManager");
-            ArrayList<ActivityManager.RunningServiceInfo> runningService = (ArrayList<ActivityManager.RunningServiceInfo>) activityManager.getRunningServices(Integer.MAX_VALUE);
+            ArrayList<ActivityManager.RunningServiceInfo> runningService = (ArrayList<ActivityManager.RunningServiceInfo>)
+                    Contextx.activityManager(context).getRunningServices(Integer.MAX_VALUE);
             if (runningService != null) {
                 for (int i = 0, size = runningService.size(); i < size; i++) {
                     if (runningService.get(i).service.getClassName().equals(serviceClassName)) {

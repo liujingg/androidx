@@ -26,6 +26,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 
+import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Classx;
 
 @SuppressWarnings("WeakerAccess")
@@ -176,7 +177,7 @@ public class StorageVolumeCompat {
             }
 
             String path = getPath();
-            return path != null ? new StorageManagerCompat(context).getVolumeState(path) : "unknown";
+            return path != null ? Contextx.storageManagerCompat(context).getVolumeState(path) : "unknown";
         }
     }
 
