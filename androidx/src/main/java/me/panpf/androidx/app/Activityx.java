@@ -40,7 +40,7 @@ public class Activityx {
         if (activity instanceof FragmentActivity) {
             return ((FragmentActivity) activity).getLifecycle().getCurrentState() == Lifecycle.State.DESTROYED;
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            return activity.isDestroyed();
+            return activity.isDestroyed() || activity.isFinishing();
         } else {
             return activity.isFinishing();
         }
