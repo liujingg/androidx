@@ -189,8 +189,11 @@ public class Romx {
 
     @Nullable
     private static String[] checkH2OS() {
-        if ("OnePlus".equalsIgnoreCase(getBuildProperties("ro.build.user"))) {
+        if (getBuildProperties("ro.build.user").toLowerCase().contains("oneplus")) {
             String versionName = getBuildProperties("ro.rom.version");
+            if (versionName.toLowerCase().startsWith("H2OS V".toLowerCase())) {
+                versionName = versionName.substring("H2OS V".length());
+            }
             String versionIncremental = getBuildProperties("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, "", versionIncremental);
         } else {

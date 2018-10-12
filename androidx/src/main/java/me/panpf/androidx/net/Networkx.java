@@ -214,7 +214,6 @@ public class Networkx {
     @RequiresPermission(Manifest.permission.CHANGE_NETWORK_STATE)
     public static boolean setMobileEnabled(@NonNull Context context, boolean enabled) {
         try {
-            // todo 测试是否兼容 android 9
             Classx.callMethod(Contextx.connectivityManager(context), "setMobileDataEnabled", enabled);
             return true;
         } catch (NoSuchMethodException e) {
