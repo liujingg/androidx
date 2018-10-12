@@ -368,10 +368,12 @@ public class Storagex {
             if (files != null && files.length > 0) {
                 String lowerCaseSuffix = "/Android/data/".toLowerCase();
                 for (File file : files) {
-                    String lowerCasePath = file.getPath().toLowerCase();
-                    int index = lowerCasePath.indexOf(lowerCaseSuffix);
-                    if (index != -1) {
-                        dirs.add(new File(file.getPath().substring(0, index)));
+                    if (file != null) {
+                        String lowerCasePath = file.getPath().toLowerCase();
+                        int index = lowerCasePath.indexOf(lowerCaseSuffix);
+                        if (index != -1) {
+                            dirs.add(new File(file.getPath().substring(0, index)));
+                        }
                     }
                 }
             }
@@ -516,7 +518,13 @@ public class Storagex {
     public static File[] getAppExternalCacheDirs(@NonNull final Context context) {
         File[] externalCacheDirs = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            externalCacheDirs = context.getExternalCacheDirs();
+            externalCacheDirs = Arrayx.filter(context.getExternalCacheDirs(), new Predicate<File>() {
+                @Override
+                public boolean accept(@NotNull File file) {
+                    //noinspection ConstantConditions
+                    return file != null;
+                }
+            }).toArray(new File[0]);
         }
         if (externalCacheDirs != null && externalCacheDirs.length > 0) {
             return externalCacheDirs;
@@ -679,7 +687,13 @@ public class Storagex {
     public static File[] getAppExternalFilesDirs(@NonNull final Context context) {
         File[] externalFilesDirs = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            externalFilesDirs = context.getExternalFilesDirs(null);
+            externalFilesDirs = Arrayx.filter(context.getExternalFilesDirs(null), new Predicate<File>() {
+                @Override
+                public boolean accept(@NotNull File file) {
+                    //noinspection ConstantConditions
+                    return file != null;
+                }
+            }).toArray(new File[0]);
         }
         if (externalFilesDirs != null && externalFilesDirs.length > 0) {
             return externalFilesDirs;
@@ -842,7 +856,13 @@ public class Storagex {
     public static File[] getAppObbDirs(@NonNull final Context context) {
         File[] obbDirs = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            obbDirs = context.getObbDirs();
+            obbDirs = Arrayx.filter(context.getObbDirs(), new Predicate<File>() {
+                @Override
+                public boolean accept(@NotNull File file) {
+                    //noinspection ConstantConditions
+                    return file != null;
+                }
+            }).toArray(new File[0]);
         }
         if (obbDirs != null && obbDirs.length > 0) {
             return obbDirs;

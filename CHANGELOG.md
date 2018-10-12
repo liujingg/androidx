@@ -11,6 +11,7 @@
 * :sparkles: Add Contextx
 * :sparkles: Androidx add waitRunInUI
 * :bug: Fixed bug where Activityx convertToTranslucent method is invalid
+* :bug: Fixed a bug that caused a context.getExternalCacheDirs() and context.getExternalFilesDirs() to return null
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.9
