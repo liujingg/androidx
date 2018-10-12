@@ -220,7 +220,7 @@ public class Storagex {
      */
     @NotNull
     public static StorageVolumeCompat[] getMountedVolumes(@NotNull final Context context) {
-        return Arrayx.filter(getMountedVolumes(context), new Predicate<StorageVolumeCompat>() {
+        return Arrayx.filter(getVolumes(context), new Predicate<StorageVolumeCompat>() {
             @Override
             public boolean accept(@NotNull StorageVolumeCompat storageVolumeCompat) {
                 return Environment.MEDIA_MOUNTED.equals(storageVolumeCompat.getState(context));

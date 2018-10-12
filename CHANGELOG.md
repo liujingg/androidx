@@ -1,3 +1,7 @@
+## v0.2.6 pre
+
+* :bug: Fixed Storagex getMountedVolumes method StackOverflow error
+
 ## v0.2.5
 
 * :sparkles: Networdx add isActivated, isWifiActivated, isNoMeteredWifiActivated,
