@@ -49,7 +49,7 @@ class TestBindActivity : FragmentActivity() {
 }
 ```
 
-Also supports `bindOptionalBooleanArg` optional binding, `bindBooleanArrayArg` array binding, please see [ArgsBinder.kt] for more binding methods.
+Also supports `bindBooleanArrayArg` array binding, please see [ArgsBinder.kt] for more binding methods.
 
 ### Encapsulate all parameters into a data class
 

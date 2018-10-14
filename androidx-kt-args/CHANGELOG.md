@@ -1,3 +1,8 @@
+## v0.2.6
+
+* :fire: Remove bindOptionalByteArg, bindOptionalShortArg, bindOptionalIntArg, bindOptionalLongArg,
+    bindOptionalFloatArg, bindOptionalDoubleArg, bindOptionalBooleanArg, bindOptionalCharArg method
+
 ## v0.2
 * buildArgsIntent rename to buildArgsActivityIntent
 * buildArgsActivityIntent and startArgsActivity add generic parameters

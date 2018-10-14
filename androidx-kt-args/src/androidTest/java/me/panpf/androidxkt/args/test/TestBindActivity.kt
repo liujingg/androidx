@@ -7,47 +7,39 @@ import me.panpf.androidxkt.args.*
 
 class TestBindActivity : FragmentActivity() {
 
-    val booleanRequired by bindBooleanArg("booleanRequired")
-    val booleanOptional by bindOptionalBooleanArg("booleanOptional")
-    val booleanArrayRequired by bindBooleanArrayArg("booleanArrayRequired")
-    val booleanArrayOptional by bindOptionalBooleanArrayArg("booleanArrayOptional")
-
     val byteRequired by bindByteArg("byteRequired")
-    val byteOptional by bindOptionalByteArg("byteOptional")
     val byteArrayRequired by bindByteArrayArg("byteArrayRequired")
     val byteArrayOptional by bindOptionalByteArrayArg("byteArrayOptional")
 
-    val charRequired by bindCharArg("charRequired")
-    val charOptional by bindOptionalCharArg("charOptional")
-    val charArrayRequired by bindCharArrayArg("charArrayRequired")
-    val charArrayOptional by bindOptionalCharArrayArg("charArrayOptional")
-
     val shortRequired by bindShortArg("shortRequired")
-    val shortOptional by bindOptionalShortArg("shortOptional")
     val shortArrayRequired by bindShortArrayArg("shortArrayRequired")
     val shortArrayOptional by bindOptionalShortArrayArg("shortArrayOptional")
 
-    val floatRequired by bindFloatArg("floatRequired")
-    val floatOptional by bindOptionalFloatArg("floatOptional")
-    val floatArrayRequired by bindFloatArrayArg("floatArrayRequired")
-    val floatArrayOptional by bindOptionalFloatArrayArg("floatArrayOptional")
-
     val intRequired by bindIntArg("intRequired")
-    val intOptional by bindOptionalIntArg("intOptional")
     val intArrayRequired by bindIntArrayArg("intArrayRequired")
     val intArrayOptional by bindOptionalIntArrayArg("intArrayOptional")
     val intArrayListRequired by bindIntArrayListArg("intArrayListRequired")
     val intArrayListOptional by bindOptionalIntArrayListArg("intArrayListOptional")
 
+    val longRequired by bindLongArg("longRequired")
+    val longArrayRequired by bindLongArrayArg("longArrayRequired")
+    val longArrayOptional by bindOptionalLongArrayArg("longArrayOptional")
+
+    val floatRequired by bindFloatArg("floatRequired")
+    val floatArrayRequired by bindFloatArrayArg("floatArrayRequired")
+    val floatArrayOptional by bindOptionalFloatArrayArg("floatArrayOptional")
+
     val doubleRequired by bindDoubleArg("doubleRequired")
-    val doubleOptional by bindOptionalDoubleArg("doubleOptional")
     val doubleArrayRequired by bindDoubleArrayArg("doubleArrayRequired")
     val doubleArrayOptional by bindOptionalDoubleArrayArg("doubleArrayOptional")
 
-    val longRequired by bindLongArg("longRequired")
-    val longOptional by bindOptionalLongArg("longOptional")
-    val longArrayRequired by bindLongArrayArg("longArrayRequired")
-    val longArrayOptional by bindOptionalLongArrayArg("longArrayOptional")
+    val booleanRequired by bindBooleanArg("booleanRequired")
+    val booleanArrayRequired by bindBooleanArrayArg("booleanArrayRequired")
+    val booleanArrayOptional by bindOptionalBooleanArrayArg("booleanArrayOptional")
+
+    val charRequired by bindCharArg("charRequired")
+    val charArrayRequired by bindCharArrayArg("charArrayRequired")
+    val charArrayOptional by bindOptionalCharArrayArg("charArrayOptional")
 
     val charSequenceRequired by bindCharSequenceArg("charSequenceRequired")
     val charSequenceOptional by bindOptionalCharSequenceArg("charSequenceOptional")
@@ -81,47 +73,39 @@ class TestBindActivity : FragmentActivity() {
 
         val fragment = TestBindFragment()
         fragment.arguments = Bundle().apply {
-            putBoolean("booleanRequired", booleanRequired)
-            booleanOptional?.let { putBoolean("booleanOptional", it) }
-            putBooleanArray("booleanArrayRequired", booleanArrayRequired)
-            booleanArrayOptional?.let { putBooleanArray("booleanArrayOptional", it) }
-
             putByte("byteRequired", byteRequired)
-            byteOptional?.let { putByte("byteOptional", it) }
             putByteArray("byteArrayRequired", byteArrayRequired)
             byteArrayOptional?.let { putByteArray("byteArrayOptional", it) }
 
-            putChar("charRequired", charRequired)
-            charOptional?.let { putChar("charOptional", it) }
-            putCharArray("charArrayRequired", charArrayRequired)
-            charArrayOptional?.let { putCharArray("charArrayOptional", it) }
-
             putShort("shortRequired", shortRequired)
-            shortOptional?.let { putShort("shortOptional", it) }
             putShortArray("shortArrayRequired", shortArrayRequired)
             shortArrayOptional?.let { putShortArray("shortArrayOptional", it) }
 
-            putFloat("floatRequired", floatRequired)
-            floatOptional?.let { putFloat("floatOptional", it) }
-            putFloatArray("floatArrayRequired", floatArrayRequired)
-            floatArrayOptional?.let { putFloatArray("floatArrayOptional", it) }
-
-            putLong("longRequired", longRequired)
-            longOptional?.let { putLong("longOptional", it) }
-            putLongArray("longArrayRequired", longArrayRequired)
-            longArrayOptional?.let { putLongArray("longArrayOptional", it) }
-
             putInt("intRequired", intRequired)
-            intOptional?.let { putInt("intOptional", it) }
             putIntArray("intArrayRequired", intArrayRequired)
             intArrayOptional?.let { putIntArray("intArrayOptional", it) }
             putIntegerArrayList("intArrayListRequired", intArrayListRequired)
             intArrayListOptional?.let { putIntegerArrayList("intArrayListOptional", it) }
 
+            putLong("longRequired", longRequired)
+            putLongArray("longArrayRequired", longArrayRequired)
+            longArrayOptional?.let { putLongArray("longArrayOptional", it) }
+
+            putFloat("floatRequired", floatRequired)
+            putFloatArray("floatArrayRequired", floatArrayRequired)
+            floatArrayOptional?.let { putFloatArray("floatArrayOptional", it) }
+
             putDouble("doubleRequired", doubleRequired)
-            doubleOptional?.let { putDouble("doubleOptional", it) }
             putDoubleArray("doubleArrayRequired", doubleArrayRequired)
             doubleArrayOptional?.let { putDoubleArray("doubleArrayOptional", it) }
+
+            putBoolean("booleanRequired", booleanRequired)
+            putBooleanArray("booleanArrayRequired", booleanArrayRequired)
+            booleanArrayOptional?.let { putBooleanArray("booleanArrayOptional", it) }
+
+            putChar("charRequired", charRequired)
+            putCharArray("charArrayRequired", charArrayRequired)
+            charArrayOptional?.let { putCharArray("charArrayOptional", it) }
 
             putString("stringRequired", stringRequired)
             stringOptional?.let { putString("stringOptional", it) }

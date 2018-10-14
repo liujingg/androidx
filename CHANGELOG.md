@@ -1,5 +1,7 @@
 ## v0.2.6 pre
 
+### ANDROIDX-KT
+
 Fixed some bugs:
 * :bug: Fixed Storagex getMountedVolumes method StackOverflow error
 
@@ -10,6 +12,10 @@ Added the following:
 * :sparkles: Storagex add getFreeBytes(File, long), getTotalBytes(File, long), getAvailableBytes(File, long) method
 * :sparkles: Perfect Contextx
 
+### ANDROIDX-KT-ARGS
+
+* :fire: Remove bindOptionalByteArg, bindOptionalShortArg, bindOptionalIntArg, bindOptionalLongArg,
+    bindOptionalFloatArg, bindOptionalDoubleArg, bindOptionalBooleanArg, bindOptionalCharArg method
 
 ## v0.2.5
 
