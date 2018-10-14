@@ -1,9 +1,15 @@
 ## v0.2.6 pre
 
+Fixed some bugs:
 * :bug: Fixed Storagex getMountedVolumes method StackOverflow error
+
+Renamed or deleted the following:
+* :fire: Romx all `is*Type` method rename to `is*`
+
+Added the following:
 * :sparkles: Storagex add getFreeBytes(File, long), getTotalBytes(File, long), getAvailableBytes(File, long) method
 * :sparkles: Perfect Contextx
-* :fire: Romx all `is*Type` method rename to `is*`
+
 
 ## v0.2.5
 
@@ -23,7 +29,6 @@
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.9
-
 
 
 ## v0.2.4
@@ -58,6 +63,7 @@ New
 Upgrade
 * :arrow_up: Upgrade Javax 0.6.6
 
+
 ## v0.2.3
 * :hammer: Network getIpAddress rename to getLocalIpAddress
 * :sparkles: Network add getLocalIpV4Address
@@ -67,31 +73,34 @@ Upgrade
 * :hammer: Refactoring Storage
 * :arrow_up: Upgrade Javax 0.6.5
 
+
 ## v0.2.2
 * Upgrade Javax 0.6.4
+
 
 ## v0.2.1
 * Activity and Fragment add isDestroyedCompat method
 * Optimization WeakAsyncTask test script
 
+
 ## v0.2
-* 增加 Text 增加 keywordMadeColorBySpannable() 方法用于将文件中关键词部分改变颜色
-* 重构 Color
-* 升级 Javax 依赖
-* Color 增加 argbEvaluate 方法
-* 增加 WeakAsyncTask
-* Build、Process、System、Thread 合并到 Android 中
-* 增加 Clipboard
-* Bitmap makeBitmapByColor 方法重命名为 create
-* Drawable 重构
-* Fragment add instance method
-* Json 增加 format 方法
-* Window 增加 hasNavigationBar getStatusBarHeight getNavigationBarWidth 方法
-* Permission 增加 filterDeniedPermissions
-* Fragment 里的 canStartActivity 和 safeStartActivity 移动到 Intent 中
-* Package.get 重命名为 getPackage
-* ViewAnim 简化所有方法名
-* 升级 Javax 0.6.2
+* :sparkles: Text adds the keywordMadeColorBySpannable() method
+* :fire: Refactoring Color
+* :sparkles: Color adds argbEvaluate method
+* :sparkles: Add WeakAsyncTask
+* :fire: Build, Process, System, Thread merge into Android
+* :sparkles: Add Clipboard
+* :fire: Bitmap makeBitmapByColor method renamed to create
+* :fire: Refactoring Drawable
+* :sparkles: Fragment add instance method
+* :sparkles: Json adds format method
+* :sparkles: Window adds the hasNavigationBar, getStatusBarHeight, getNavigationBarWidth methods
+* :sparkles: Permission adds filterDeniedPermissions method
+* :fire: CanStartActivity adds safeStartActivity in Fragment are moved to Intent
+* :fire: Rename Package.get to getPackage
+* :fire: Simplify ViewAnim all method names
+* :arrow_up: Upgrade Javax 0.6.2
+
 
 ## v0.1
-* 初次发布
+* Initial release
