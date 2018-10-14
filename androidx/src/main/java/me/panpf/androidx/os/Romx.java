@@ -259,84 +259,84 @@ public class Romx {
      * @param type Ranges: {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI},
      *             {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}, {@link Romx#TYPE_MIUI}
      */
-    public static boolean isType(int type) {
+    public static boolean is(int type) {
         return TYPE == type;
     }
 
     /**
      * Return true if the ROM type is MIUI
      */
-    public static boolean isMiuiType() {
+    public static boolean isMIUI() {
         return TYPE == TYPE_MIUI;
     }
 
     /**
      * Return true if the ROM type is EMUI
      */
-    public static boolean isEmuiType() {
+    public static boolean isEMUI() {
         return TYPE == TYPE_EMUI;
     }
 
     /**
      * Return true if the ROM type is Flyme
      */
-    public static boolean isFlymeType() {
+    public static boolean isFlyme() {
         return TYPE == TYPE_FLYME;
     }
 
     /**
      * Return true if the ROM type is Color OS
      */
-    public static boolean isColorOSType() {
+    public static boolean isColorOS() {
         return TYPE == TYPE_COLOR_OS;
     }
 
     /**
      * Return true if the ROM type is Funtouch OS
      */
-    public static boolean isFuntouchOSType() {
+    public static boolean isFuntouchOS() {
         return TYPE == TYPE_FUNTOUCH_OS;
     }
 
     /**
      * Return true if the ROM type is Smartisan OS
      */
-    public static boolean isSmartisanOSType() {
+    public static boolean isSmartisanOS() {
         return TYPE == TYPE_SMARTISAN_OS;
     }
 
     /**
      * Return true if the ROM type is H2OS
      */
-    public static boolean isH2OSType() {
+    public static boolean isH2OS() {
         return TYPE == TYPE_H2OS;
     }
 
     /**
      * Return true if the ROM type is Lineage OS
      */
-    public static boolean isLineageOSType() {
+    public static boolean isLineageOS() {
         return TYPE == TYPE_LINEAGE_OS;
     }
 
     /**
      * Return true if the ROM type is origin Android
      */
-    public static boolean isAndroidType() {
+    public static boolean isAndroid() {
         return TYPE == TYPE_ANDROID;
     }
 
     /**
      * Return true if the ROM type is origin Samsung
      */
-    public static boolean isSamsungType() {
+    public static boolean isSamsung() {
         return TYPE == TYPE_SAMSUNG;
     }
 
     /**
      * Return true if the ROM type is Unknown
      */
-    public static boolean isUnknownType() {
+    public static boolean isUnknown() {
         return TYPE == TYPE_UNKNOWN;
     }
 

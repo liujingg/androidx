@@ -3,6 +3,7 @@
 * :bug: Fixed Storagex getMountedVolumes method StackOverflow error
 * :sparkles: Storagex add getFreeBytes(File, long), getTotalBytes(File, long), getAvailableBytes(File, long) method
 * :sparkles: Perfect Contextx
+* :fire: Romx all `is*Type` method rename to `is*`
 
 ## v0.2.5
 

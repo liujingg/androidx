@@ -31,27 +31,27 @@ public class RomxTest {
     public void testRom() {
         System.out.println("Romx -> " + Romx.getInfo());
 
-        if (Romx.isMiuiType() && Romx.isType(Romx.getType())) {
+        if (Romx.isMIUI() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "MIUI");
-        } else if (Romx.isEmuiType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isEMUI() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "EMUI");
-        } else if (Romx.isFlymeType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isFlyme() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "Flyme");
-        } else if (Romx.isColorOSType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isColorOS() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "ColorOS");
-        } else if (Romx.isFuntouchOSType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isFuntouchOS() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "FuntouchOS");
-        } else if (Romx.isSmartisanOSType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isSmartisanOS() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "SmartisanOS");
-        } else if (Romx.isH2OSType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isH2OS() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "H2OS");
-        } else if (Romx.isLineageOSType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isLineageOS() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "LineageOS");
-        } else if (Romx.isAndroidType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isAndroid() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "Android");
-        } else if (Romx.isSamsungType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isSamsung() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "Samsung");
-        } else if (Romx.isUnknownType() && Romx.isType(Romx.getType())) {
+        } else if (Romx.isUnknown() && Romx.is(Romx.getType())) {
             Assert.assertEquals(Romx.getTypeName(), "Unknown");
         }
 
