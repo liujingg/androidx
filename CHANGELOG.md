@@ -18,7 +18,7 @@ Added the following:
 
 * :fire: Remove bindOptionalByteArg, bindOptionalShortArg, bindOptionalIntArg, bindOptionalLongArg,
     bindOptionalFloatArg, bindOptionalDoubleArg, bindOptionalBooleanArg, bindOptionalCharArg method
-* :sparkles: Adds `read*UriArg` and `bind*UriArg` method
+* :sparkles: Adds `bind*UriArg` method
 
 ## v0.2.5
 

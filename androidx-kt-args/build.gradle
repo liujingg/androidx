@@ -28,6 +28,7 @@ android {
 
 dependencies {
     api "com.android.support:support-fragment:${SUPPORT_VERSION}"
+    api project(":androidx-kt")
 }
 
 Properties properties = new Properties()
