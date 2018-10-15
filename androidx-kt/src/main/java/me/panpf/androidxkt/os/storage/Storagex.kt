@@ -521,3 +521,21 @@ inline fun Context.cleanAppObbDirs(packageName: String) = Storagex.cleanAppObbDi
  * @param minBytes Minimum number of bytes
  */
 inline fun Array<File>?.filterByMinBytes(minBytes: Long): File? = Storagex.filterByMinBytes(this, minBytes)
+
+/**
+ * Traverse the specified directory list, check the remaining space of the directory, and return the file (not created)
+ *
+ * @param fileName     file name
+ * @param minBytes     Minimum available bytes
+ * @param cleanOldFile Whether to delete old files before judging the space
+ */
+inline fun Array<File>?.getFileIn(fileName: String, minBytes: Long, cleanOldFile: Boolean): File? =
+        Storagex.getFileIn(this, fileName, minBytes, cleanOldFile)
+
+/**
+ * Traverse the specified directory list, check the remaining space of the directory, and return the file (not created)
+ *
+ * @param fileName file name
+ * @param minBytes Minimum available bytes
+ */
+inline fun Array<File>?.getFileIn(fileName: String, minBytes: Long): File? = Storagex.getFileIn(this, fileName, minBytes)

@@ -134,7 +134,7 @@ Dependencies:
     * getAppExternalCacheDir, getAppExternalCacheDirs, getAppInternalCacheDir, getAppCacheDirs,
     * lengthAppCacheDirs, cleanAppCacheDirs, getAppExternalFilesDir, getAppExternalFilesDirs,
     * getAppInternalFilesDir, getAppFilesDirs, lengthAppFilesDirs, cleanAppFilesDirs,
-    * getAppObbDir, getAppObbDirs, lengthAppObbDirs, cleanAppObbDirs, filterByMinBytes
+    * getAppObbDir, getAppObbDirs, lengthAppObbDirs, cleanAppObbDirs, filterByMinBytes, getFileIn
 * StatFs: [StatFsx.java] ([Test][StatFsxTest.java]) | [StatFsx.kt] ([Test][StatFsxTest.kt])
     * getCompatAvailableBytes, getCompatFreeBytes, getCompatTotalBytes
 * StorageManagerCompat: [StorageManagerCompat.java] ([Test][StorageManagerCompatTest.java]) | [StorageManagerCompat.kt] ([Test][StorageManagerCompatTest.kt])

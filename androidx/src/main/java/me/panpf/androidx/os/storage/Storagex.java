@@ -34,6 +34,7 @@ import java.util.List;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.StatFsx;
 import me.panpf.javax.io.Filex;
+import me.panpf.javax.io.UnableCreateDirException;
 import me.panpf.javax.util.Arrayx;
 import me.panpf.javax.util.Collectionx;
 import me.panpf.javax.util.Predicate;
@@ -1007,5 +1008,53 @@ public class Storagex {
                 return path1.isDirectory() && getAvailableBytes(path1, 0) >= minBytes;
             }
         });
+    }
+
+    /**
+     * Traverse the specified directory list, check the remaining space of the directory, and return the file (not created)
+     *
+     * @param fileName     file name
+     * @param minBytes     Minimum available bytes
+     * @param cleanOldFile Whether to delete old files before judging the space
+     * @param dirs         Directory list
+     */
+    @Nullable
+    public static File getFileIn(@Nullable File[] dirs, @NonNull String fileName, long minBytes, boolean cleanOldFile) {
+        if (dirs != null && dirs.length > 0) {
+            for (File dir : dirs) {
+                if (dir == null || dir.exists() && dir.isFile()) {
+                    continue;
+                }
+
+                try {
+                    Filex.mkdirsOrThrow(dir);
+                } catch (UnableCreateDirException e) {
+                    e.printStackTrace();
+                }
+
+                File newFile = new File(dir, fileName);
+                if (cleanOldFile && newFile.exists()) {
+                    //noinspection ResultOfMethodCallIgnored
+                    newFile.delete();
+                }
+
+                if (Storagex.getAvailableBytes(dir, 0) >= minBytes) {
+                    return newFile;
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Traverse the specified directory list, check the remaining space of the directory, and return the file (not created)
+     *
+     * @param fileName file name
+     * @param minBytes Minimum available bytes
+     * @param dirs     Directory list
+     */
+    @Nullable
+    public static File getFileIn(@Nullable File[] dirs, @NonNull String fileName, long minBytes) {
+        return getFileIn(dirs, fileName, minBytes, false);
     }
 }

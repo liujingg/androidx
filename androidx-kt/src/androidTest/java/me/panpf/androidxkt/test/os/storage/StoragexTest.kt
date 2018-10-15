@@ -399,4 +399,11 @@ class StoragexTest {
         assertNotNull(context.getExternalStorageDirectorys().filterByMinBytes(1024))
         assertNull(context.getExternalStorageDirectorys().filterByMinBytes(java.lang.Long.MAX_VALUE))
     }
+
+    @Test
+    fun testGetFileIn() {
+        val context = InstrumentationRegistry.getContext()
+        assertNotNull(context.getAppExternalCacheDirs().getFileIn("test.jpeg", 1024 * 1024 * 8, true))
+        assertNotNull(context.getAppExternalCacheDirs().getFileIn("test.jpeg", 1024 * 1024 * 8))
+    }
 }

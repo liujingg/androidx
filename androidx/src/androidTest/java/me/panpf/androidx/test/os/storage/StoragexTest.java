@@ -478,4 +478,11 @@ public class StoragexTest {
         assertNotNull(Storagex.filterByMinBytes(Storagex.getExternalStorageDirectorys(context), 1024));
         assertNull(Storagex.filterByMinBytes(Storagex.getExternalStorageDirectorys(context), Long.MAX_VALUE));
     }
+
+    @Test
+    public void testGetFileIn() {
+        final Context context = InstrumentationRegistry.getContext();
+        assertNotNull(Storagex.getFileIn(Storagex.getAppExternalCacheDirs(context), "test.jpeg", 1024 * 1024 * 8, true));
+        assertNotNull(Storagex.getFileIn(Storagex.getAppExternalCacheDirs(context), "test.jpeg", 1024 * 1024 * 8));
+    }
 }

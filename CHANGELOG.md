@@ -1,3 +1,7 @@
+### v0.2.7
+
+* :sparkles: Storagex adds getFileIn method
+
 ## v0.2.6
 
 ### ANDROIDX
