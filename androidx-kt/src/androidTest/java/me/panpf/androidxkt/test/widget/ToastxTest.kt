@@ -53,15 +53,15 @@ class ToastxTest {
     fun testFragmentToast() {
         val fragment = fragmentRuleToast.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame)
 
-        fragment.showLongToast("今天是2018年10月18号")
-        fragment.showLongToast("今天是%d年%d月%d号", 2018, 10, 18)
-        fragment.showLongToast(R.string.toast_test)
-        fragment.showLongToast(R.string.toast_test_tp, 2018, 10, 18)
+        fragment?.showLongToast("今天是2018年10月18号")
+        fragment?.showLongToast("今天是%d年%d月%d号", 2018, 10, 18)
+        fragment?.showLongToast(R.string.toast_test)
+        fragment?.showLongToast(R.string.toast_test_tp, 2018, 10, 18)
 
-        fragment.showShortToast("今天是2018年10月18号")
-        fragment.showShortToast("今天是%d年%d月%d号", 2018, 10, 18)
-        fragment.showShortToast(R.string.toast_test)
-        fragment.showShortToast(R.string.toast_test_tp, 2018, 10, 18)
+        fragment?.showShortToast("今天是2018年10月18号")
+        fragment?.showShortToast("今天是%d年%d月%d号", 2018, 10, 18)
+        fragment?.showShortToast(R.string.toast_test)
+        fragment?.showShortToast(R.string.toast_test_tp, 2018, 10, 18)
     }
 
     @Test

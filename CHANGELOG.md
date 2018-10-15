@@ -1,4 +1,12 @@
-### v0.2.7
+## v0.3.0
+
+* :arrow_up: Kotlin upgrade to 1.2.71
+* :arrow_up: Javax upgrade to 0.7.0
+* :arrow_up: support-fragment upgrade to 28.0.0
+* :arrow_up: lifecycle upgrade to 1.1.1
+
+
+## v0.2.7
 
 * :sparkles: Storagex adds getFileIn method
 

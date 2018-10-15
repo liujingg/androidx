@@ -74,7 +74,7 @@ class FragmentxTest {
             e.printStackTrace()
         }
 
-        Assert.assertTrue(fragment.isDestroyedCompat())
+        Assert.assertTrue(fragment?.isDestroyedCompat() ?: false)
     }
 
     @Test
@@ -87,6 +87,6 @@ class FragmentxTest {
             e.printStackTrace()
         }
 
-        Assert.assertFalse(fragment.isDestroyedCompat())
+        Assert.assertFalse(fragment?.isDestroyedCompat() ?: false)
     }
 }

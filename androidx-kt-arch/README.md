@@ -18,10 +18,10 @@ implementation "me.panpf:androidx-kt-arch:$lastVersion"
 Please replace `$lastVersion` with the latest version: [![Download][version_icon]][version_link]
 
 Dependencies:
-* org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.61
-* com.android.support:support-fragment: 27.1.1
-* android.arch.lifecycle:viewmodel: 1.1.0
-* android.arch.lifecycle:extensions: 1.1.0
+* org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.71
+* com.android.support:support-fragment: 28.0.0
+* android.arch.lifecycle:viewmodel: 1.1.1
+* android.arch.lifecycle:extensions: 1.1.1
 
 ## Usage Guide
 
