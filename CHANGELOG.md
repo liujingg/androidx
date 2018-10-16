@@ -1,3 +1,15 @@
+## v.0.3.1
+
+ANDROIDX
+
+* :fire: read\*Arg(\*, default) rename to read\*ArgOr(\*, default)
+* :fire: readOptional\*Arg(\*, default) rename to read\*ArgOrNull(\*, default)
+
+ANDROIDX-KT-ARGS
+
+* :fire: bind\*Arg(\*, default) rename to bind\*ArgOr(\*, default)
+* :fire: bindOptional\*Arg(\*, default) rename to bind\*ArgOrNull(\*, default)
+
 ## v0.3.0
 
 * :arrow_up: Kotlin upgrade to 1.2.71
@@ -12,7 +24,7 @@
 
 ## v0.2.6
 
-### ANDROIDX
+ANDROIDX
 
 Fixed some bugs:
 * :bug: Fixed Storagex getMountedVolumes method StackOverflow error
@@ -26,7 +38,7 @@ Added the following:
 * :sparkles: Androidx adds `read*Arg`, `read*UriArg` method
 * :sparkles: Fragmentx adds `read*Arg` method
 
-### ANDROIDX-KT-ARGS
+ANDROIDX-KT-ARGS
 
 * :fire: Remove bindOptionalByteArg, bindOptionalShortArg, bindOptionalIntArg, bindOptionalLongArg,
     bindOptionalFloatArg, bindOptionalDoubleArg, bindOptionalBooleanArg, bindOptionalCharArg method

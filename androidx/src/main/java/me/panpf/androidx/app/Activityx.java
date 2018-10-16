@@ -102,9 +102,6 @@ public class Activityx {
         }
     }
 
-
-    /* ************************************* Intent Args ***************************************** */
-
     /**
      * Convert a translucent themed Activity
      * [android.R.attr.windowIsTranslucent] back from opaque to
@@ -161,9 +158,14 @@ public class Activityx {
         return null;
     }
 
-    public static byte readByteArg(@NotNull Activity activity, @NotNull String argName, byte defaultValue) {
+
+    /* ************************************* Intent Args ***************************************** */
+
+
+    public static byte readByteArgOr(@NotNull Activity activity, @NotNull String argName, byte defaultValue) {
         return activity.getIntent().getByteExtra(argName, defaultValue);
     }
+
 
     @NotNull
     public static byte[] readByteArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -173,19 +175,21 @@ public class Activityx {
     }
 
     @NotNull
-    public static byte[] readByteArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull byte[] defaultValue) {
+    public static byte[] readByteArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull byte[] defaultValue) {
         byte[] bytes = activity.getIntent().getByteArrayExtra(argName);
         return bytes != null ? bytes : defaultValue;
     }
 
     @Nullable
-    public static byte[] readOptionalByteArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static byte[] readByteArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getByteArrayExtra(argName);
     }
 
-    public static short readShortArg(@NotNull Activity activity, @NotNull String argName, short defaultValue) {
+
+    public static short readShortArgOr(@NotNull Activity activity, @NotNull String argName, short defaultValue) {
         return activity.getIntent().getShortExtra(argName, defaultValue);
     }
+
 
     @NotNull
     public static short[] readShortArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -195,19 +199,21 @@ public class Activityx {
     }
 
     @NotNull
-    public static short[] readShortArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull short[] defaultValue) {
+    public static short[] readShortArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull short[] defaultValue) {
         short[] shorts = activity.getIntent().getShortArrayExtra(argName);
         return shorts != null ? shorts : defaultValue;
     }
 
     @Nullable
-    public static short[] readOptionalShortArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static short[] readShortArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getShortArrayExtra(argName);
     }
 
-    public static int readIntArg(@NotNull Activity activity, @NotNull String argName, int defaultValue) {
+
+    public static int readIntArgOr(@NotNull Activity activity, @NotNull String argName, int defaultValue) {
         return activity.getIntent().getIntExtra(argName, defaultValue);
     }
+
 
     @NotNull
     public static int[] readIntArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -217,15 +223,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static int[] readIntArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull int[] defaultValue) {
+    public static int[] readIntArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull int[] defaultValue) {
         int[] ints = activity.getIntent().getIntArrayExtra(argName);
         return ints != null ? ints : defaultValue;
     }
 
     @Nullable
-    public static int[] readOptionalIntArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static int[] readIntArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getIntArrayExtra(argName);
     }
+
 
     @NotNull
     public static ArrayList<Integer> readIntArrayListArg(@NotNull Activity activity, @NotNull String argName) {
@@ -235,19 +242,21 @@ public class Activityx {
     }
 
     @NotNull
-    public static ArrayList<Integer> readIntArrayListArg(@NotNull Activity activity, @NotNull String argName, @NotNull ArrayList<Integer> defaultValue) {
+    public static ArrayList<Integer> readIntArrayListArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull ArrayList<Integer> defaultValue) {
         ArrayList<Integer> integers = activity.getIntent().getIntegerArrayListExtra(argName);
         return integers != null ? integers : defaultValue;
     }
 
     @Nullable
-    public static ArrayList<Integer> readOptionalIntArrayListArg(@NotNull Activity activity, @NotNull String argName) {
+    public static ArrayList<Integer> readIntArrayListArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getIntegerArrayListExtra(argName);
     }
 
-    public static long readLongArg(@NotNull Activity activity, @NotNull String argName, long defaultValue) {
+
+    public static long readLongArgOr(@NotNull Activity activity, @NotNull String argName, long defaultValue) {
         return activity.getIntent().getLongExtra(argName, defaultValue);
     }
+
 
     @NotNull
     public static long[] readLongArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -257,19 +266,21 @@ public class Activityx {
     }
 
     @NotNull
-    public static long[] readLongArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull long[] defaultValue) {
+    public static long[] readLongArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull long[] defaultValue) {
         long[] longs = activity.getIntent().getLongArrayExtra(argName);
         return longs != null ? longs : defaultValue;
     }
 
     @Nullable
-    public static long[] readOptionalLongArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static long[] readLongArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getLongArrayExtra(argName);
     }
 
-    public static float readFloatArg(@NotNull Activity activity, @NotNull String argName, float defaultValue) {
+
+    public static float readFloatArgOr(@NotNull Activity activity, @NotNull String argName, float defaultValue) {
         return activity.getIntent().getFloatExtra(argName, defaultValue);
     }
+
 
     @NotNull
     public static float[] readFloatArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -279,19 +290,21 @@ public class Activityx {
     }
 
     @NotNull
-    public static float[] readFloatArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull float[] defaultValue) {
+    public static float[] readFloatArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull float[] defaultValue) {
         float[] floats = activity.getIntent().getFloatArrayExtra(argName);
         return floats != null ? floats : defaultValue;
     }
 
     @Nullable
-    public static float[] readOptionalFloatArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static float[] readFloatArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getFloatArrayExtra(argName);
     }
 
-    public static double readDoubleArg(@NotNull Activity activity, @NotNull String argName, double defaultValue) {
+
+    public static double readDoubleArgOr(@NotNull Activity activity, @NotNull String argName, double defaultValue) {
         return activity.getIntent().getDoubleExtra(argName, defaultValue);
     }
+
 
     @NotNull
     public static double[] readDoubleArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -301,19 +314,21 @@ public class Activityx {
     }
 
     @NotNull
-    public static double[] readDoubleArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull double[] defaultValue) {
+    public static double[] readDoubleArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull double[] defaultValue) {
         double[] doubles = activity.getIntent().getDoubleArrayExtra(argName);
         return doubles != null ? doubles : defaultValue;
     }
 
     @Nullable
-    public static double[] readOptionalDoubleArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static double[] readDoubleArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getDoubleArrayExtra(argName);
     }
 
-    public static boolean readBooleanArg(@NotNull Activity activity, @NotNull String argName, boolean defaultValue) {
+
+    public static boolean readBooleanArgOr(@NotNull Activity activity, @NotNull String argName, boolean defaultValue) {
         return activity.getIntent().getBooleanExtra(argName, defaultValue);
     }
+
 
     @NotNull
     public static boolean[] readBooleanArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -323,19 +338,21 @@ public class Activityx {
     }
 
     @NotNull
-    public static boolean[] readBooleanArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull boolean[] defaultValue) {
+    public static boolean[] readBooleanArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull boolean[] defaultValue) {
         boolean[] booleans = activity.getIntent().getBooleanArrayExtra(argName);
         return booleans != null ? booleans : defaultValue;
     }
 
     @Nullable
-    public static boolean[] readOptionalBooleanArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static boolean[] readBooleanArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getBooleanArrayExtra(argName);
     }
 
-    public static char readCharArg(@NotNull Activity activity, @NotNull String argName, char defaultValue) {
+
+    public static char readCharArgOr(@NotNull Activity activity, @NotNull String argName, char defaultValue) {
         return activity.getIntent().getCharExtra(argName, defaultValue);
     }
+
 
     @NotNull
     public static char[] readCharArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -345,15 +362,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static char[] readCharArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull char[] defaultValue) {
+    public static char[] readCharArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull char[] defaultValue) {
         char[] chars = activity.getIntent().getCharArrayExtra(argName);
         return chars != null ? chars : defaultValue;
     }
 
     @Nullable
-    public static char[] readOptionalCharArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static char[] readCharArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getCharArrayExtra(argName);
     }
+
 
     @NotNull
     public static CharSequence readCharSequenceArg(@NotNull Activity activity, @NotNull String argName) {
@@ -363,15 +381,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static CharSequence readCharSequenceArg(@NotNull Activity activity, @NotNull String argName, @NotNull CharSequence defaultValue) {
+    public static CharSequence readCharSequenceArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull CharSequence defaultValue) {
         CharSequence charSequence = activity.getIntent().getCharSequenceExtra(argName);
         return charSequence != null && !Comparisonx.areEqual(charSequence.toString().trim(), "") ? charSequence : defaultValue;
     }
 
     @Nullable
-    public static CharSequence readOptionalCharSequenceArg(@NotNull Activity activity, @NotNull String argName) {
+    public static CharSequence readCharSequenceArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getCharSequenceExtra(argName);
     }
+
 
     @NotNull
     public static CharSequence[] readCharSequenceArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -381,15 +400,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static CharSequence[] readCharSequenceArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull CharSequence[] defaultValue) {
+    public static CharSequence[] readCharSequenceArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull CharSequence[] defaultValue) {
         CharSequence[] charSequences = activity.getIntent().getCharSequenceArrayExtra(argName);
         return charSequences != null ? charSequences : defaultValue;
     }
 
     @Nullable
-    public static CharSequence[] readOptionalCharSequenceArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static CharSequence[] readCharSequenceArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getCharSequenceArrayExtra(argName);
     }
+
 
     @NotNull
     public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NotNull Activity activity, @NotNull String argName) {
@@ -399,15 +419,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NotNull Activity activity, @NotNull String argName, @NotNull ArrayList<CharSequence> defaultValue) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull ArrayList<CharSequence> defaultValue) {
         ArrayList<CharSequence> charSequences = activity.getIntent().getCharSequenceArrayListExtra(argName);
         return charSequences != null ? charSequences : defaultValue;
     }
 
     @Nullable
-    public static ArrayList<CharSequence> readOptionalCharSequenceArrayListArg(@NotNull Activity activity, @NotNull String argName) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getCharSequenceArrayListExtra(argName);
     }
+
 
     @NotNull
     public static String readStringArg(@NotNull Activity activity, @NotNull String argName) {
@@ -417,15 +438,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static String readStringArg(@NotNull Activity activity, @NotNull String argName, @NotNull String defaultValue) {
+    public static String readStringArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull String defaultValue) {
         String string = activity.getIntent().getStringExtra(argName);
         return string != null && !Comparisonx.areEqual(string.trim(), "") ? string : defaultValue;
     }
 
     @Nullable
-    public static String readOptionalStringArg(@NotNull Activity activity, @NotNull String argName) {
+    public static String readStringArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getStringExtra(argName);
     }
+
 
     @NotNull
     public static String[] readStringArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -435,15 +457,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static String[] readStringArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull String[] defaultValue) {
+    public static String[] readStringArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull String[] defaultValue) {
         String[] strings = activity.getIntent().getStringArrayExtra(argName);
         return strings != null ? strings : defaultValue;
     }
 
     @Nullable
-    public static String[] readOptionalStringArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static String[] readStringArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getStringArrayExtra(argName);
     }
+
 
     @NotNull
     public static ArrayList<String> readStringArrayListArg(@NotNull Activity activity, @NotNull String argName) {
@@ -453,15 +476,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static ArrayList<String> readStringArrayListArg(@NotNull Activity activity, @NotNull String argName, @NotNull ArrayList<String> defaultValue) {
+    public static ArrayList<String> readStringArrayListArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull ArrayList<String> defaultValue) {
         ArrayList<String> strings = activity.getIntent().getStringArrayListExtra(argName);
         return strings != null ? strings : defaultValue;
     }
 
     @Nullable
-    public static ArrayList<String> readOptionalStringArrayListArg(@NotNull Activity activity, @NotNull String argName) {
+    public static ArrayList<String> readStringArrayListArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getStringArrayListExtra(argName);
     }
+
 
     @NotNull
     public static <V extends Parcelable> V readParcelableArg(@NotNull Activity activity, @NotNull String argName) {
@@ -471,15 +495,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static <V extends Parcelable> V readParcelableArg(@NotNull Activity activity, @NotNull String argName, @NotNull V defaultValue) {
+    public static <V extends Parcelable> V readParcelableArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull V defaultValue) {
         V parcelable = activity.getIntent().getParcelableExtra(argName);
         return parcelable != null ? parcelable : defaultValue;
     }
 
     @Nullable
-    public static <V extends Parcelable> V readOptionalParcelableArg(@NotNull Activity activity, @NotNull String argName) {
+    public static <V extends Parcelable> V readParcelableArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getParcelableExtra(argName);
     }
+
 
     @NotNull
     public static <V extends Parcelable> V[] readParcelableArrayArg(@NotNull Activity activity, @NotNull String argName) {
@@ -490,17 +515,18 @@ public class Activityx {
     }
 
     @NotNull
-    public static <V extends Parcelable> V[] readParcelableArrayArg(@NotNull Activity activity, @NotNull String argName, @NotNull V[] defaultValue) {
+    public static <V extends Parcelable> V[] readParcelableArrayArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull V[] defaultValue) {
         //noinspection unchecked
         V[] parcelables = (V[]) activity.getIntent().getParcelableArrayExtra(argName);
         return parcelables != null ? parcelables : defaultValue;
     }
 
     @Nullable
-    public static <V extends Parcelable> V[] readOptionalParcelableArrayArg(@NotNull Activity activity, @NotNull String argName) {
+    public static <V extends Parcelable> V[] readParcelableArrayArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         //noinspection unchecked
         return (V[]) activity.getIntent().getParcelableArrayExtra(argName);
     }
+
 
     @NotNull
     public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NotNull Activity activity, @NotNull String argName) {
@@ -510,15 +536,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NotNull Activity activity, @NotNull String argName, @NotNull ArrayList<V> defaultValue) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull ArrayList<V> defaultValue) {
         ArrayList<V> parcelables = activity.getIntent().getParcelableArrayListExtra(argName);
         return parcelables != null ? parcelables : defaultValue;
     }
 
     @Nullable
-    public static <V extends Parcelable> ArrayList<V> readOptionalParcelableArrayListArg(@NotNull Activity activity, @NotNull String argName) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getParcelableArrayListExtra(argName);
     }
+
 
     @NotNull
     public static <V extends Serializable> V readSerializableArg(@NotNull Activity activity, @NotNull String argName) {
@@ -529,17 +556,18 @@ public class Activityx {
     }
 
     @NotNull
-    public static <V extends Serializable> V readSerializableArg(@NotNull Activity activity, @NotNull String argName, @NotNull V defaultValue) {
+    public static <V extends Serializable> V readSerializableArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull V defaultValue) {
         //noinspection unchecked
         V serializable = (V) activity.getIntent().getSerializableExtra(argName);
         return serializable != null ? serializable : defaultValue;
     }
 
     @Nullable
-    public static <V extends Serializable> V readOptionalSerializableArg(@NotNull Activity activity, @NotNull String argName) {
+    public static <V extends Serializable> V readSerializableArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         //noinspection unchecked
         return (V) activity.getIntent().getSerializableExtra(argName);
     }
+
 
     @NotNull
     public static Bundle readBundleArg(@NotNull Activity activity, @NotNull String argName) {
@@ -549,15 +577,16 @@ public class Activityx {
     }
 
     @NotNull
-    public static Bundle readBundleArg(@NotNull Activity activity, @NotNull String argName, @NotNull Bundle defaultValue) {
+    public static Bundle readBundleArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull Bundle defaultValue) {
         Bundle bundle = activity.getIntent().getBundleExtra(argName);
         return bundle != null ? bundle : defaultValue;
     }
 
     @Nullable
-    public static Bundle readOptionalBundleArg(@NotNull Activity activity, @NotNull String argName) {
+    public static Bundle readBundleArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         return activity.getIntent().getBundleExtra(argName);
     }
+
 
     @NotNull
     public static Bundle readExtrasArg(@NotNull Activity activity) {
@@ -567,13 +596,13 @@ public class Activityx {
     }
 
     @NotNull
-    public static Bundle readExtrasArg(@NotNull Activity activity, @NotNull Bundle defaultValue) {
+    public static Bundle readExtrasArgOr(@NotNull Activity activity, @NotNull Bundle defaultValue) {
         Bundle extras = activity.getIntent().getExtras();
         return extras != null ? extras : defaultValue;
     }
 
     @Nullable
-    public static Bundle readOptionalExtrasArg(@NotNull Activity activity) {
+    public static Bundle readExtrasArgOrNull(@NotNull Activity activity) {
         return activity.getIntent().getExtras();
     }
 
@@ -589,7 +618,7 @@ public class Activityx {
         throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
     }
 
-    public static byte readByteUriArg(@NotNull Activity activity, @NotNull String paramName, byte defaultValue) {
+    public static byte readByteUriArgOr(@NotNull Activity activity, @NotNull String paramName, byte defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -603,7 +632,7 @@ public class Activityx {
     }
 
     @Nullable
-    public static Byte readOptionalByteUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static Byte readByteUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -625,7 +654,7 @@ public class Activityx {
         throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
     }
 
-    public static short readShortUriArg(@NotNull Activity activity, @NotNull String paramName, short defaultValue) {
+    public static short readShortUriArgOr(@NotNull Activity activity, @NotNull String paramName, short defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -639,7 +668,7 @@ public class Activityx {
     }
 
     @Nullable
-    public static Short readOptionalShortUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static Short readShortUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -661,7 +690,7 @@ public class Activityx {
         throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
     }
 
-    public static int readIntUriArg(@NotNull Activity activity, @NotNull String paramName, int defaultValue) {
+    public static int readIntUriArgOr(@NotNull Activity activity, @NotNull String paramName, int defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -675,7 +704,7 @@ public class Activityx {
     }
 
     @Nullable
-    public static Integer readOptionalIntUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static Integer readIntUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -697,7 +726,7 @@ public class Activityx {
         throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
     }
 
-    public static long readLongUriArg(@NotNull Activity activity, @NotNull String paramName, long defaultValue) {
+    public static long readLongUriArgOr(@NotNull Activity activity, @NotNull String paramName, long defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -711,7 +740,7 @@ public class Activityx {
     }
 
     @Nullable
-    public static Long readOptionalLongUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static Long readLongUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -733,7 +762,7 @@ public class Activityx {
         throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
     }
 
-    public static float readFloatUriArg(@NotNull Activity activity, @NotNull String paramName, float defaultValue) {
+    public static float readFloatUriArgOr(@NotNull Activity activity, @NotNull String paramName, float defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -747,7 +776,7 @@ public class Activityx {
     }
 
     @Nullable
-    public static Float readOptionalFloatUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static Float readFloatUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -769,7 +798,7 @@ public class Activityx {
         throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
     }
 
-    public static double readDoubleUriArg(@NotNull Activity activity, @NotNull String paramName, double defaultValue) {
+    public static double readDoubleUriArgOr(@NotNull Activity activity, @NotNull String paramName, double defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -783,7 +812,7 @@ public class Activityx {
     }
 
     @Nullable
-    public static Double readOptionalDoubleUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static Double readDoubleUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -805,7 +834,7 @@ public class Activityx {
         throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
     }
 
-    public static boolean readBooleanUriArg(@NotNull Activity activity, @NotNull String paramName, boolean defaultValue) {
+    public static boolean readBooleanUriArgOr(@NotNull Activity activity, @NotNull String paramName, boolean defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -819,7 +848,7 @@ public class Activityx {
     }
 
     @Nullable
-    public static Boolean readOptionalBooleanUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static Boolean readBooleanUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -843,7 +872,7 @@ public class Activityx {
     }
 
     @NotNull
-    public static String readStringUriArg(@NotNull Activity activity, @NotNull String paramName, @NotNull String defaultValue) {
+    public static String readStringUriArgOr(@NotNull Activity activity, @NotNull String paramName, @NotNull String defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
@@ -857,7 +886,7 @@ public class Activityx {
     }
 
     @Nullable
-    public static String readOptionalStringUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static String readStringUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();

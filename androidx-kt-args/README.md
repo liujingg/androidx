@@ -30,14 +30,14 @@ Define the properties to be accessed directly when they are used, as follows:
 ```kotlin
 class TestBindActivity : FragmentActivity() {
 
-    val booleanRequired by bindBooleanArg("booleanRequired")
-    val byteRequired by bindByteArg("byteRequired")
-    val charRequired by bindCharArg("charRequired")
-    val shortRequired by bindShortArg("shortRequired")
-    val floatRequired by bindFloatArg("floatRequired")
-    val intRequired by bindIntArg("intRequired")
-    val doubleRequired by bindDoubleArg("doubleRequired")
-    val longRequired by bindLongArg("longRequired")
+    val booleanRequired by bindBooleanArgOr("booleanRequired")
+    val byteRequired by bindByteArgOr("byteRequired")
+    val charRequired by bindCharArgOr("charRequired")
+    val shortRequired by bindShortArg(Or"shortRequired")
+    val floatRequired by bindFloatArgOr("floatRequired")
+    val intRequired by bindIntArgOr("intRequired")
+    val doubleRequired by bindDoubleArgOr("doubleRequired")
+    val longRequired by bindLongArgOr("longRequired")
     val charSequenceRequired by bindCharSequenceArg("charSequenceRequired")
     val stringRequired by bindStringArg("stringRequired")
     val parcelableRequired by bindParcelableArg<TestParcelable>("parcelableRequired")
@@ -49,7 +49,36 @@ class TestBindActivity : FragmentActivity() {
 }
 ```
 
-Also supports `bindBooleanArrayArg` array binding, please see [ArgsBinder.kt] for more binding methods.
+There are more bind methods, please refer to:
+
+* [ActivityIntentArgsBinder.kt]
+* [SupportFragmentArgsBinder.kt]
+* [OriginFragmentArgsBinder.kt]
+
+### Read parameters from Activity Intent uri
+
+```kotlin
+class TestBindActivity : FragmentActivity() {
+
+    val booleanRequired by bindBooleanUriArg("booleanRequired")
+    val byteRequired by bindByteUriArg("byteRequired")
+    val charRequired by bindCharUriArg("charRequired")
+    val shortRequired by bindShortUriArg("shortRequired")
+    val floatRequired by bindFloatUriArg("floatRequired")
+    val intRequired by bindIntUriArg("intRequired")
+    val doubleRequired by bindDoubleUriArg("doubleRequired")
+    val longRequired by bindLongUriArg("longRequired")
+    val stringRequired by bindStringUriArg("stringRequired")
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        println(booleanRequired)
+    }
+}
+```
+
+There are more bind methods, please refer to:
+
+* [ActivityUriArgsBinder.kt]
 
 ### Encapsulate all parameters into a data class
 
@@ -139,5 +168,9 @@ Please view the [CHANGELOG.md] file
 
 [CHANGELOG.md]: CHANGELOG.md
 [ArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/ArgsBinder.kt
+[ActivityIntentArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/ActivityIntentArgsBinder.kt
+[ActivityUriArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/ActivityUriArgsBinder.kt
+[SupportFragmentArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/SupportFragmentArgsBinder.kt
+[OriginFragmentArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/OriginFragmentArgsBinder.kt
 [ArgsActivity.kt]: src/main/java/me/panpf/androidxkt/args/ArgsActivity.kt
 [ArgsFragment.kt]: src/main/java/me/panpf/androidxkt/args/ArgsFragment.kt

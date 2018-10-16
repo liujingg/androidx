@@ -1,3 +1,8 @@
+## v.0.3.1
+
+* :fire: bind\*Arg(\*, default) rename to bind\*ArgOr(\*, default)
+* :fire: bindOptional\*Arg(\*, default) rename to bind\*ArgOrNull(\*, default)
+
 ## v0.2.6
 
 * :fire: Remove bindOptionalByteArg, bindOptionalShortArg, bindOptionalIntArg, bindOptionalLongArg,

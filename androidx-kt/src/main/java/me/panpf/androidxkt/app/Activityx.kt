@@ -75,160 +75,175 @@ inline fun <T> Activity.getImplWithParent(clazz: Class<T>): T? = Activityx.getIm
 /* ************************************* Intent Args ***************************************** */
 
 
-inline fun Activity.readByteArg(argName: String, defaultValue: Byte): Byte = Activityx.readByteArg(this, argName, defaultValue)
+inline fun Activity.readByteArgOr(argName: String, defaultValue: Byte): Byte = Activityx.readByteArgOr(this, argName, defaultValue)
+
 
 inline fun Activity.readByteArrayArg(argName: String): ByteArray = Activityx.readByteArrayArg(this, argName)
 
-inline fun Activity.readByteArrayArg(argName: String, defaultValue: ByteArray): ByteArray = Activityx.readByteArrayArg(this, argName, defaultValue)
+inline fun Activity.readByteArrayArgOr(argName: String, defaultValue: ByteArray): ByteArray = Activityx.readByteArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalByteArrayArg(argName: String): ByteArray? = Activityx.readOptionalByteArrayArg(this, argName)
+inline fun Activity.readByteArrayArgOrNull(argName: String): ByteArray? = Activityx.readByteArrayArgOrNull(this, argName)
 
 
-inline fun Activity.readShortArg(argName: String, defaultValue: Short): Short = Activityx.readShortArg(this, argName, defaultValue)
+inline fun Activity.readShortArgOr(argName: String, defaultValue: Short): Short = Activityx.readShortArgOr(this, argName, defaultValue)
+
 
 inline fun Activity.readShortArrayArg(argName: String): ShortArray = Activityx.readShortArrayArg(this, argName)
 
-inline fun Activity.readShortArrayArg(argName: String, defaultValue: ShortArray): ShortArray = Activityx.readShortArrayArg(this, argName, defaultValue)
+inline fun Activity.readShortArrayArgOr(argName: String, defaultValue: ShortArray): ShortArray = Activityx.readShortArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalShortArrayArg(argName: String): ShortArray? = Activityx.readOptionalShortArrayArg(this, argName)
+inline fun Activity.readShortArrayArgOrNull(argName: String): ShortArray? = Activityx.readShortArrayArgOrNull(this, argName)
 
 
-inline fun Activity.readIntArg(argName: String, defaultValue: Int): Int = Activityx.readIntArg(this, argName, defaultValue)
+inline fun Activity.readIntArgOr(argName: String, defaultValue: Int): Int = Activityx.readIntArgOr(this, argName, defaultValue)
+
 
 inline fun Activity.readIntArrayArg(argName: String): IntArray = Activityx.readIntArrayArg(this, argName)
 
-inline fun Activity.readIntArrayArg(argName: String, defaultValue: IntArray): IntArray = Activityx.readIntArrayArg(this, argName, defaultValue)
+inline fun Activity.readIntArrayArgOr(argName: String, defaultValue: IntArray): IntArray = Activityx.readIntArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalIntArrayArg(argName: String): IntArray? = Activityx.readOptionalIntArrayArg(this, argName)
+inline fun Activity.readIntArrayArgOrNull(argName: String): IntArray? = Activityx.readIntArrayArgOrNull(this, argName)
+
 
 inline fun Activity.readIntArrayListArg(argName: String): ArrayList<Int> = Activityx.readIntArrayListArg(this, argName)
 
-inline fun Activity.readIntArrayListArg(argName: String, defaultValue: ArrayList<Int>): ArrayList<Int> = Activityx.readIntArrayListArg(this, argName, defaultValue)
+inline fun Activity.readIntArrayListArgOr(argName: String, defaultValue: ArrayList<Int>): ArrayList<Int> = Activityx.readIntArrayListArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalIntArrayListArg(argName: String): ArrayList<Int>? = Activityx.readOptionalIntArrayListArg(this, argName)
+inline fun Activity.readIntArrayListArgOrNull(argName: String): ArrayList<Int>? = Activityx.readIntArrayListArgOrNull(this, argName)
 
 
-inline fun Activity.readLongArg(argName: String, defaultValue: Long): Long = Activityx.readLongArg(this, argName, defaultValue)
+inline fun Activity.readLongArgOr(argName: String, defaultValue: Long): Long = Activityx.readLongArgOr(this, argName, defaultValue)
+
 
 inline fun Activity.readLongArrayArg(argName: String): LongArray = Activityx.readLongArrayArg(this, argName)
 
-inline fun Activity.readLongArrayArg(argName: String, defaultValue: LongArray): LongArray = Activityx.readLongArrayArg(this, argName, defaultValue)
+inline fun Activity.readLongArrayArgOr(argName: String, defaultValue: LongArray): LongArray = Activityx.readLongArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalLongArrayArg(argName: String): LongArray? = Activityx.readOptionalLongArrayArg(this, argName)
+inline fun Activity.readLongArrayArgOrNull(argName: String): LongArray? = Activityx.readLongArrayArgOrNull(this, argName)
 
 
-inline fun Activity.readFloatArg(argName: String, defaultValue: Float): Float = Activityx.readFloatArg(this, argName, defaultValue)
+inline fun Activity.readFloatArgOr(argName: String, defaultValue: Float): Float = Activityx.readFloatArgOr(this, argName, defaultValue)
+
 
 inline fun Activity.readFloatArrayArg(argName: String): FloatArray = Activityx.readFloatArrayArg(this, argName)
 
-inline fun Activity.readFloatArrayArg(argName: String, defaultValue: FloatArray): FloatArray = Activityx.readFloatArrayArg(this, argName, defaultValue)
+inline fun Activity.readFloatArrayArgOr(argName: String, defaultValue: FloatArray): FloatArray = Activityx.readFloatArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalFloatArrayArg(argName: String): FloatArray? = Activityx.readOptionalFloatArrayArg(this, argName)
+inline fun Activity.readFloatArrayArgOrNull(argName: String): FloatArray? = Activityx.readFloatArrayArgOrNull(this, argName)
 
 
-inline fun Activity.readDoubleArg(argName: String, defaultValue: Double): Double = Activityx.readDoubleArg(this, argName, defaultValue)
+inline fun Activity.readDoubleArgOr(argName: String, defaultValue: Double): Double = Activityx.readDoubleArgOr(this, argName, defaultValue)
+
 
 inline fun Activity.readDoubleArrayArg(argName: String): DoubleArray = Activityx.readDoubleArrayArg(this, argName)
 
-inline fun Activity.readDoubleArrayArg(argName: String, defaultValue: DoubleArray): DoubleArray = Activityx.readDoubleArrayArg(this, argName, defaultValue)
+inline fun Activity.readDoubleArrayArgOr(argName: String, defaultValue: DoubleArray): DoubleArray = Activityx.readDoubleArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalDoubleArrayArg(argName: String): DoubleArray? = Activityx.readOptionalDoubleArrayArg(this, argName)
+inline fun Activity.readDoubleArrayArgOrNull(argName: String): DoubleArray? = Activityx.readDoubleArrayArgOrNull(this, argName)
 
 
-inline fun Activity.readBooleanArg(argName: String, defaultValue: Boolean): Boolean = Activityx.readBooleanArg(this, argName, defaultValue)
+inline fun Activity.readBooleanArgOr(argName: String, defaultValue: Boolean): Boolean = Activityx.readBooleanArgOr(this, argName, defaultValue)
+
 
 inline fun Activity.readBooleanArrayArg(argName: String): BooleanArray = Activityx.readBooleanArrayArg(this, argName)
 
-inline fun Activity.readBooleanArrayArg(argName: String, defaultValue: BooleanArray): BooleanArray = Activityx.readBooleanArrayArg(this, argName, defaultValue)
+inline fun Activity.readBooleanArrayArgOr(argName: String, defaultValue: BooleanArray): BooleanArray = Activityx.readBooleanArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalBooleanArrayArg(argName: String): BooleanArray? = Activityx.readOptionalBooleanArrayArg(this, argName)
+inline fun Activity.readBooleanArrayArgOrNull(argName: String): BooleanArray? = Activityx.readBooleanArrayArgOrNull(this, argName)
 
 
-inline fun Activity.readCharArg(argName: String, defaultValue: Char): Char = Activityx.readCharArg(this, argName, defaultValue)
+inline fun Activity.readCharArgOr(argName: String, defaultValue: Char): Char = Activityx.readCharArgOr(this, argName, defaultValue)
+
 
 inline fun Activity.readCharArrayArg(argName: String): CharArray = Activityx.readCharArrayArg(this, argName)
 
-inline fun Activity.readCharArrayArg(argName: String, defaultValue: CharArray): CharArray = Activityx.readCharArrayArg(this, argName, defaultValue)
+inline fun Activity.readCharArrayArgOr(argName: String, defaultValue: CharArray): CharArray = Activityx.readCharArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalCharArrayArg(argName: String): CharArray? = Activityx.readOptionalCharArrayArg(this, argName)
+inline fun Activity.readCharArrayArgOrNull(argName: String): CharArray? = Activityx.readCharArrayArgOrNull(this, argName)
 
 
 inline fun Activity.readCharSequenceArg(argName: String): CharSequence = Activityx.readCharSequenceArg(this, argName)
 
-inline fun Activity.readCharSequenceArg(argName: String, defaultValue: CharSequence): CharSequence = Activityx.readCharSequenceArg(this, argName, defaultValue)
+inline fun Activity.readCharSequenceArgOr(argName: String, defaultValue: CharSequence): CharSequence = Activityx.readCharSequenceArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalCharSequenceArg(argName: String): CharSequence? = Activityx.readOptionalCharSequenceArg(this, argName)
+inline fun Activity.readCharSequenceArgOrNull(argName: String): CharSequence? = Activityx.readCharSequenceArgOrNull(this, argName)
+
 
 inline fun Activity.readCharSequenceArrayArg(argName: String): Array<CharSequence> = Activityx.readCharSequenceArrayArg(this, argName)
 
-inline fun Activity.readCharSequenceArrayArg(argName: String, defaultValue: Array<CharSequence>): Array<CharSequence> = Activityx.readCharSequenceArrayArg(this, argName, defaultValue)
+inline fun Activity.readCharSequenceArrayArgOr(argName: String, defaultValue: Array<CharSequence>): Array<CharSequence> = Activityx.readCharSequenceArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalCharSequenceArrayArg(argName: String): Array<CharSequence>? = Activityx.readOptionalCharSequenceArrayArg(this, argName)
+inline fun Activity.readCharSequenceArrayArgOrNull(argName: String): Array<CharSequence>? = Activityx.readCharSequenceArrayArgOrNull(this, argName)
+
 
 inline fun Activity.readCharSequenceArrayListArg(argName: String): ArrayList<CharSequence> = Activityx.readCharSequenceArrayListArg(this, argName)
 
-inline fun Activity.readCharSequenceArrayListArg(argName: String, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> = Activityx.readCharSequenceArrayListArg(this, argName, defaultValue)
+inline fun Activity.readCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> = Activityx.readCharSequenceArrayListArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalCharSequenceArrayListArg(argName: String): ArrayList<CharSequence>? = Activityx.readOptionalCharSequenceArrayListArg(this, argName)
+inline fun Activity.readCharSequenceArrayListArgOrNull(argName: String): ArrayList<CharSequence>? = Activityx.readCharSequenceArrayListArgOrNull(this, argName)
 
 
 inline fun Activity.readStringArg(argName: String): String = Activityx.readStringArg(this, argName)
 
-inline fun Activity.readStringArg(argName: String, defaultValue: String): String = Activityx.readStringArg(this, argName, defaultValue)
+inline fun Activity.readStringArgOr(argName: String, defaultValue: String): String = Activityx.readStringArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalStringArg(argName: String): String? = Activityx.readOptionalStringArg(this, argName)
+inline fun Activity.readStringArgOrNull(argName: String): String? = Activityx.readStringArgOrNull(this, argName)
+
 
 inline fun Activity.readStringArrayArg(argName: String): Array<String> = Activityx.readStringArrayArg(this, argName)
 
-inline fun Activity.readStringArrayArg(argName: String, defaultValue: Array<String>): Array<String> = Activityx.readStringArrayArg(this, argName, defaultValue)
+inline fun Activity.readStringArrayArgOr(argName: String, defaultValue: Array<String>): Array<String> = Activityx.readStringArrayArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalStringArrayArg(argName: String): Array<String>? = Activityx.readOptionalStringArrayArg(this, argName)
+inline fun Activity.readStringArrayArgOrNull(argName: String): Array<String>? = Activityx.readStringArrayArgOrNull(this, argName)
+
 
 inline fun Activity.readStringArrayListArg(argName: String): ArrayList<String> = Activityx.readStringArrayListArg(this, argName)
 
-inline fun Activity.readStringArrayListArg(argName: String, defaultValue: ArrayList<String>): ArrayList<String> = Activityx.readStringArrayListArg(this, argName, defaultValue)
+inline fun Activity.readStringArrayListArgOr(argName: String, defaultValue: ArrayList<String>): ArrayList<String> = Activityx.readStringArrayListArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalStringArrayListArg(argName: String): ArrayList<String>? = Activityx.readOptionalStringArrayListArg(this, argName)
+inline fun Activity.readStringArrayListArgOrNull(argName: String): ArrayList<String>? = Activityx.readStringArrayListArgOrNull(this, argName)
 
 
 inline fun <V : Parcelable> Activity.readParcelableArg(argName: String): V = Activityx.readParcelableArg(this, argName)
 
-inline fun <V : Parcelable> Activity.readParcelableArg(argName: String, defaultValue: V): V = Activityx.readParcelableArg(this, argName, defaultValue)
+inline fun <V : Parcelable> Activity.readParcelableArgOr(argName: String, defaultValue: V): V = Activityx.readParcelableArgOr(this, argName, defaultValue)
 
-inline fun <V : Parcelable> Activity.readOptionalParcelableArg(argName: String): V? = Activityx.readOptionalParcelableArg(this, argName)
+inline fun <V : Parcelable> Activity.readParcelableArgOrNull(argName: String): V? = Activityx.readParcelableArgOrNull(this, argName)
+
 
 inline fun <V : Parcelable> Activity.readParcelableArrayArg(argName: String): Array<V> = Activityx.readParcelableArrayArg(this, argName)
 
-inline fun <V : Parcelable> Activity.readParcelableArrayArg(argName: String, defaultValue: Array<V>): Array<V> = Activityx.readParcelableArrayArg(this, argName, defaultValue)
+inline fun <V : Parcelable> Activity.readParcelableArrayArgOr(argName: String, defaultValue: Array<V>): Array<V> = Activityx.readParcelableArrayArgOr(this, argName, defaultValue)
 
-inline fun <V : Parcelable> Activity.readOptionalParcelableArrayArg(argName: String): Array<V>? = Activityx.readOptionalParcelableArrayArg(this, argName)
+inline fun <V : Parcelable> Activity.readParcelableArrayArgOrNull(argName: String): Array<V>? = Activityx.readParcelableArrayArgOrNull(this, argName)
+
 
 inline fun <V : Parcelable> Activity.readParcelableArrayListArg(argName: String): ArrayList<V> = Activityx.readParcelableArrayListArg(this, argName)
 
-inline fun <V : Parcelable> Activity.readParcelableArrayListArg(argName: String, defaultValue: ArrayList<V>): ArrayList<V> = Activityx.readParcelableArrayListArg(this, argName, defaultValue)
+inline fun <V : Parcelable> Activity.readParcelableArrayListArgOr(argName: String, defaultValue: ArrayList<V>): ArrayList<V> = Activityx.readParcelableArrayListArgOr(this, argName, defaultValue)
 
-inline fun <V : Parcelable> Activity.readOptionalParcelableArrayListArg(argName: String): ArrayList<V>? = Activityx.readOptionalParcelableArrayListArg(this, argName)
+inline fun <V : Parcelable> Activity.readParcelableArrayListArgOrNull(argName: String): ArrayList<V>? = Activityx.readParcelableArrayListArgOrNull(this, argName)
 
 
 inline fun <V : Serializable> Activity.readSerializableArg(argName: String): V = Activityx.readSerializableArg(this, argName)
 
-inline fun <V : Serializable> Activity.readSerializableArg(argName: String, defaultValue: V): V = Activityx.readSerializableArg(this, argName, defaultValue)
+inline fun <V : Serializable> Activity.readSerializableArgOr(argName: String, defaultValue: V): V = Activityx.readSerializableArgOr(this, argName, defaultValue)
 
-inline fun <V : Serializable> Activity.readOptionalSerializableArg(argName: String): V? = Activityx.readOptionalSerializableArg(this, argName)
+inline fun <V : Serializable> Activity.readSerializableArgOrNull(argName: String): V? = Activityx.readSerializableArgOrNull(this, argName)
 
 
 inline fun Activity.readBundleArg(argName: String): Bundle = Activityx.readBundleArg(this, argName)
 
-inline fun Activity.readBundleArg(argName: String, defaultValue: Bundle): Bundle = Activityx.readBundleArg(this, argName, defaultValue)
+inline fun Activity.readBundleArgOr(argName: String, defaultValue: Bundle): Bundle = Activityx.readBundleArgOr(this, argName, defaultValue)
 
-inline fun Activity.readOptionalBundleArg(argName: String): Bundle? = Activityx.readOptionalBundleArg(this, argName)
+inline fun Activity.readBundleArgOrNull(argName: String): Bundle? = Activityx.readBundleArgOrNull(this, argName)
 
 
 inline fun Activity.readExtrasArg(): Bundle = Activityx.readExtrasArg(this)
 
-inline fun Activity.readExtrasArg(defaultValue: Bundle): Bundle = Activityx.readExtrasArg(this, defaultValue)
+inline fun Activity.readExtrasArgOr(defaultValue: Bundle): Bundle = Activityx.readExtrasArgOr(this, defaultValue)
 
-inline fun Activity.readOptionalExtrasArg(): Bundle? = Activityx.readOptionalExtrasArg(this)
+inline fun Activity.readExtrasArgOrNull(): Bundle? = Activityx.readExtrasArgOrNull(this)
 
 
 /* ************************************* Uri Args ***************************************** */
@@ -236,55 +251,55 @@ inline fun Activity.readOptionalExtrasArg(): Bundle? = Activityx.readOptionalExt
 
 inline fun Activity.readByteUriArg(paramName: String): Byte = Activityx.readByteUriArg(this, paramName)
 
-inline fun Activity.readByteUriArg(paramName: String, defaultValue: Byte): Byte = Activityx.readByteUriArg(this, paramName, defaultValue)
+inline fun Activity.readByteUriArgOr(paramName: String, defaultValue: Byte): Byte = Activityx.readByteUriArgOr(this, paramName, defaultValue)
 
-inline fun Activity.readOptionalByteUriArg(paramName: String): Byte? = Activityx.readOptionalByteUriArg(this, paramName)
+inline fun Activity.readByteUriArgOrNull(paramName: String): Byte? = Activityx.readByteUriArgOrNull(this, paramName)
 
 
 inline fun Activity.readShortUriArg(paramName: String): Short = Activityx.readShortUriArg(this, paramName)
 
-inline fun Activity.readShortUriArg(paramName: String, defaultValue: Short): Short = Activityx.readShortUriArg(this, paramName, defaultValue)
+inline fun Activity.readShortUriArgOr(paramName: String, defaultValue: Short): Short = Activityx.readShortUriArgOr(this, paramName, defaultValue)
 
-inline fun Activity.readOptionalShortUriArg(paramName: String): Short? = Activityx.readOptionalShortUriArg(this, paramName)
+inline fun Activity.readShortUriArgOrNull(paramName: String): Short? = Activityx.readShortUriArgOrNull(this, paramName)
 
 
 inline fun Activity.readIntUriArg(paramName: String): Int = Activityx.readIntUriArg(this, paramName)
 
-inline fun Activity.readIntUriArg(paramName: String, defaultValue: Int): Int = Activityx.readIntUriArg(this, paramName, defaultValue)
+inline fun Activity.readIntUriArgOr(paramName: String, defaultValue: Int): Int = Activityx.readIntUriArgOr(this, paramName, defaultValue)
 
-inline fun Activity.readOptionalIntUriArg(paramName: String): Int? = Activityx.readOptionalIntUriArg(this, paramName)
+inline fun Activity.readIntUriArgOrNull(paramName: String): Int? = Activityx.readIntUriArgOrNull(this, paramName)
 
 
 inline fun Activity.readLongUriArg(paramName: String): Long = Activityx.readLongUriArg(this, paramName)
 
-inline fun Activity.readLongUriArg(paramName: String, defaultValue: Long): Long = Activityx.readLongUriArg(this, paramName, defaultValue)
+inline fun Activity.readLongUriArgOr(paramName: String, defaultValue: Long): Long = Activityx.readLongUriArgOr(this, paramName, defaultValue)
 
-inline fun Activity.readOptionalLongUriArg(paramName: String): Long? = Activityx.readOptionalLongUriArg(this, paramName)
+inline fun Activity.readLongUriArgOrNull(paramName: String): Long? = Activityx.readLongUriArgOrNull(this, paramName)
 
 
 inline fun Activity.readFloatUriArg(paramName: String): Float = Activityx.readFloatUriArg(this, paramName)
 
-inline fun Activity.readFloatUriArg(paramName: String, defaultValue: Float): Float = Activityx.readFloatUriArg(this, paramName, defaultValue)
+inline fun Activity.readFloatUriArgOr(paramName: String, defaultValue: Float): Float = Activityx.readFloatUriArgOr(this, paramName, defaultValue)
 
-inline fun Activity.readOptionalFloatUriArg(paramName: String): Float? = Activityx.readOptionalFloatUriArg(this, paramName)
+inline fun Activity.readFloatUriArgOrNull(paramName: String): Float? = Activityx.readFloatUriArgOrNull(this, paramName)
 
 
 inline fun Activity.readDoubleUriArg(paramName: String): Double = Activityx.readDoubleUriArg(this, paramName)
 
-inline fun Activity.readDoubleUriArg(paramName: String, defaultValue: Double): Double = Activityx.readDoubleUriArg(this, paramName, defaultValue)
+inline fun Activity.readDoubleUriArgOr(paramName: String, defaultValue: Double): Double = Activityx.readDoubleUriArgOr(this, paramName, defaultValue)
 
-inline fun Activity.readOptionalDoubleUriArg(paramName: String): Double? = Activityx.readOptionalDoubleUriArg(this, paramName)
+inline fun Activity.readDoubleUriArgOrNull(paramName: String): Double? = Activityx.readDoubleUriArgOrNull(this, paramName)
 
 
 inline fun Activity.readBooleanUriArg(paramName: String): Boolean = Activityx.readBooleanUriArg(this, paramName)
 
-inline fun Activity.readBooleanUriArg(paramName: String, defaultValue: Boolean): Boolean = Activityx.readBooleanUriArg(this, paramName, defaultValue)
+inline fun Activity.readBooleanUriArgOr(paramName: String, defaultValue: Boolean): Boolean = Activityx.readBooleanUriArgOr(this, paramName, defaultValue)
 
-inline fun Activity.readOptionalBooleanUriArg(paramName: String): Boolean? = Activityx.readOptionalBooleanUriArg(this, paramName)
+inline fun Activity.readBooleanUriArgOrNull(paramName: String): Boolean? = Activityx.readBooleanUriArgOrNull(this, paramName)
 
 
 inline fun Activity.readStringUriArg(paramName: String): String = Activityx.readStringUriArg(this, paramName)
 
-inline fun Activity.readStringUriArg(paramName: String, defaultValue: String): String = Activityx.readStringUriArg(this, paramName, defaultValue)
+inline fun Activity.readStringUriArgOr(paramName: String, defaultValue: String): String = Activityx.readStringUriArgOr(this, paramName, defaultValue)
 
-inline fun Activity.readOptionalStringUriArg(paramName: String): String? = Activityx.readOptionalStringUriArg(this, paramName)
+inline fun Activity.readStringUriArgOrNull(paramName: String): String? = Activityx.readStringUriArgOrNull(this, paramName)
