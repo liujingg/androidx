@@ -50,8 +50,8 @@
 //            intent.putExtra("intRequired", 500);
 //            intent.putExtra("intArrayRequired", new int[]{500, -500});
 //            intent.putExtra("intArrayOptional", new int[]{-500, 500});
-//            intent.putIntegerArrayListExtra("intArrayListRequired", (ArrayList<Integer>) Collectionx.listOf(500, -500));
-//            intent.putIntegerArrayListExtra("intArrayListOptional", (ArrayList<Integer>) Collectionx.listOf(-500, 500));
+//            intent.putIntegerArrayListExtra("intArrayListRequired", Collectionx.arrayListOf(500, -500));
+//            intent.putIntegerArrayListExtra("intArrayListOptional", Collectionx.arrayListOf(-500, 500));
 //            intent.putExtra("longRequired", 1000L);
 //            intent.putExtra("longArrayRequired", new long[]{1000L, -1000L});
 //            intent.putExtra("longArrayOptional", new long[]{-1000L, 1000L});
@@ -71,8 +71,8 @@
 //            intent.putExtra("stringOptional", "stringOptional");
 //            intent.putExtra("stringArrayRequired", new String[]{"stringRequired", "stringOptional"});
 //            intent.putExtra("stringArrayOptional", new String[]{"stringOptional", "stringRequired"});
-//            intent.putStringArrayListExtra("stringArrayListRequired", (ArrayList<String>) Collectionx.listOf("stringRequired", "stringOptional"));
-//            intent.putStringArrayListExtra("stringArrayListOptional", (ArrayList<String>) Collectionx.listOf("stringOptional", "stringRequired"));
+//            intent.putStringArrayListExtra("stringArrayListRequired", Collectionx.arrayListOf("stringRequired", "stringOptional"));
+//            intent.putStringArrayListExtra("stringArrayListOptional", Collectionx.arrayListOf("stringOptional", "stringRequired"));
 //            intent.putExtra("charSequenceRequired", "stringRequired");
 //            intent.putExtra("charSequenceOptional", "stringOptional");
 //            intent.putExtra("charSequenceArrayRequired", new String[]{"stringRequired", "stringOptional"});
@@ -81,8 +81,8 @@
 //            intent.putExtra("parcelableOptional", new TestParcelable("parcelableOptional"));
 //            intent.putExtra("parcelableArrayRequired", new TestParcelable[]{new TestParcelable("parcelableRequired"), new TestParcelable("parcelableOptional")});
 //            intent.putExtra("parcelableArrayOptional", new TestParcelable[]{new TestParcelable("parcelableOptional"), new TestParcelable("parcelableRequired")});
-//            intent.putParcelableArrayListExtra("parcelableArrayListRequired", (ArrayList<? extends Parcelable>) Collectionx.listOf(new TestParcelable("parcelableRequired"), new TestParcelable("parcelableOptional")));
-//            intent.putParcelableArrayListExtra("parcelableArrayListOptional", (ArrayList<? extends Parcelable>) Collectionx.listOf(new TestParcelable("parcelableOptional"), new TestParcelable("parcelableRequired")));
+//            intent.putParcelableArrayListExtra("parcelableArrayListRequired", (ArrayList<? extends Parcelable>) Collectionx.arrayListOf(new TestParcelable("parcelableRequired"), new TestParcelable("parcelableOptional")));
+//            intent.putParcelableArrayListExtra("parcelableArrayListOptional", (ArrayList<? extends Parcelable>) Collectionx.arrayListOf(new TestParcelable("parcelableOptional"), new TestParcelable("parcelableRequired")));
 //            intent.putExtra("serializableRequired", new TestSerializable("serializableRequired"));
 //            intent.putExtra("serializableOptional", new TestSerializable("serializableOptional"));
 //

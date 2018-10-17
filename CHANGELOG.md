@@ -6,6 +6,7 @@ ANDROIDX
 * :fire: Activityx and Fragmentx readOptional\*Arg(\*, default) rename to read\*ArgOrNull(\*, default)
 * :sparkles: Activityx adds read\*UriIntentArg and read\*IntentUriArg method
 * :sparkles: Contextx adds midiManagerOrNull method
+* :arrow_up: Javax upgrade to 0.7.1
 
 ANDROIDX-KT-ARGS
 
