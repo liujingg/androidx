@@ -171,7 +171,7 @@ public class Activityx {
     public static byte[] readByteArrayArg(@NotNull Activity activity, @NotNull String argName) {
         byte[] bytes = activity.getIntent().getByteArrayExtra(argName);
         if (bytes != null) return bytes;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -195,7 +195,7 @@ public class Activityx {
     public static short[] readShortArrayArg(@NotNull Activity activity, @NotNull String argName) {
         short[] shorts = activity.getIntent().getShortArrayExtra(argName);
         if (shorts != null) return shorts;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -219,7 +219,7 @@ public class Activityx {
     public static int[] readIntArrayArg(@NotNull Activity activity, @NotNull String argName) {
         int[] ints = activity.getIntent().getIntArrayExtra(argName);
         if (ints != null) return ints;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -238,7 +238,7 @@ public class Activityx {
     public static ArrayList<Integer> readIntArrayListArg(@NotNull Activity activity, @NotNull String argName) {
         ArrayList<Integer> integers = activity.getIntent().getIntegerArrayListExtra(argName);
         if (integers != null) return integers;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -262,7 +262,7 @@ public class Activityx {
     public static long[] readLongArrayArg(@NotNull Activity activity, @NotNull String argName) {
         long[] longs = activity.getIntent().getLongArrayExtra(argName);
         if (longs != null) return longs;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -286,7 +286,7 @@ public class Activityx {
     public static float[] readFloatArrayArg(@NotNull Activity activity, @NotNull String argName) {
         float[] floats = activity.getIntent().getFloatArrayExtra(argName);
         if (floats != null) return floats;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -310,7 +310,7 @@ public class Activityx {
     public static double[] readDoubleArrayArg(@NotNull Activity activity, @NotNull String argName) {
         double[] doubles = activity.getIntent().getDoubleArrayExtra(argName);
         if (doubles != null) return doubles;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -334,7 +334,7 @@ public class Activityx {
     public static boolean[] readBooleanArrayArg(@NotNull Activity activity, @NotNull String argName) {
         boolean[] booleans = activity.getIntent().getBooleanArrayExtra(argName);
         if (booleans != null) return booleans;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -358,7 +358,7 @@ public class Activityx {
     public static char[] readCharArrayArg(@NotNull Activity activity, @NotNull String argName) {
         char[] chars = activity.getIntent().getCharArrayExtra(argName);
         if (chars != null) return chars;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -377,7 +377,7 @@ public class Activityx {
     public static CharSequence readCharSequenceArg(@NotNull Activity activity, @NotNull String argName) {
         CharSequence charSequence = activity.getIntent().getCharSequenceExtra(argName);
         if (charSequence != null) return charSequence;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -396,7 +396,7 @@ public class Activityx {
     public static CharSequence[] readCharSequenceArrayArg(@NotNull Activity activity, @NotNull String argName) {
         CharSequence[] charSequences = activity.getIntent().getCharSequenceArrayExtra(argName);
         if (charSequences != null) return charSequences;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -415,7 +415,7 @@ public class Activityx {
     public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NotNull Activity activity, @NotNull String argName) {
         ArrayList<CharSequence> charSequences = activity.getIntent().getCharSequenceArrayListExtra(argName);
         if (charSequences != null) return charSequences;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -434,7 +434,7 @@ public class Activityx {
     public static String readStringArg(@NotNull Activity activity, @NotNull String argName) {
         String string = activity.getIntent().getStringExtra(argName);
         if (string != null) return string;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -453,7 +453,7 @@ public class Activityx {
     public static String[] readStringArrayArg(@NotNull Activity activity, @NotNull String argName) {
         String[] strings = activity.getIntent().getStringArrayExtra(argName);
         if (strings != null) return strings;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -472,7 +472,7 @@ public class Activityx {
     public static ArrayList<String> readStringArrayListArg(@NotNull Activity activity, @NotNull String argName) {
         ArrayList<String> strings = activity.getIntent().getStringArrayListExtra(argName);
         if (strings != null) return strings;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -491,7 +491,7 @@ public class Activityx {
     public static <V extends Parcelable> V readParcelableArg(@NotNull Activity activity, @NotNull String argName) {
         V parcelable = activity.getIntent().getParcelableExtra(argName);
         if (parcelable != null) return parcelable;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -511,7 +511,7 @@ public class Activityx {
         //noinspection unchecked
         V[] parcelables = (V[]) activity.getIntent().getParcelableArrayExtra(argName);
         if (parcelables != null) return parcelables;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -532,7 +532,7 @@ public class Activityx {
     public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NotNull Activity activity, @NotNull String argName) {
         ArrayList<V> parcelables = activity.getIntent().getParcelableArrayListExtra(argName);
         if (parcelables != null) return parcelables;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -552,7 +552,7 @@ public class Activityx {
         //noinspection unchecked
         V serializable = (V) activity.getIntent().getSerializableExtra(argName);
         if (serializable != null) return serializable;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -573,7 +573,7 @@ public class Activityx {
     public static Bundle readBundleArg(@NotNull Activity activity, @NotNull String argName) {
         Bundle bundle = activity.getIntent().getBundleExtra(argName);
         if (bundle != null) return bundle;
-        throw new IllegalArgumentException("Param '" + argName + "' not found");
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
     }
 
     @NotNull
@@ -610,18 +610,18 @@ public class Activityx {
     /* ************************************* Uri Args ***************************************** */
 
 
-    public static byte readByteUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static byte readByteUriArg(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Byte.parseByte(value);
-        throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
+        throw new IllegalArgumentException(String.format("Param '%s' not found: %s", argName, uri));
     }
 
-    public static byte readByteUriArgOr(@NotNull Activity activity, @NotNull String paramName, byte defaultValue) {
+    public static byte readByteUriArgOr(@NotNull Activity activity, @NotNull String argName, byte defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
         try {
             return Byte.parseByte(value.trim());
@@ -632,10 +632,10 @@ public class Activityx {
     }
 
     @Nullable
-    public static Byte readByteUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
+    public static Byte readByteUriArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
         try {
             return Byte.parseByte(value.trim());
@@ -646,18 +646,18 @@ public class Activityx {
     }
 
 
-    public static short readShortUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static short readShortUriArg(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Short.parseShort(value);
-        throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
+        throw new IllegalArgumentException(String.format("Param '%s' not found: %s", argName, uri));
     }
 
-    public static short readShortUriArgOr(@NotNull Activity activity, @NotNull String paramName, short defaultValue) {
+    public static short readShortUriArgOr(@NotNull Activity activity, @NotNull String argName, short defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
         try {
             return Short.parseShort(value.trim());
@@ -668,10 +668,10 @@ public class Activityx {
     }
 
     @Nullable
-    public static Short readShortUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
+    public static Short readShortUriArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
         try {
             return Short.parseShort(value.trim());
@@ -682,18 +682,18 @@ public class Activityx {
     }
 
 
-    public static int readIntUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static int readIntUriArg(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Integer.parseInt(value);
-        throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
+        throw new IllegalArgumentException(String.format("Param '%s' not found: %s", argName, uri));
     }
 
-    public static int readIntUriArgOr(@NotNull Activity activity, @NotNull String paramName, int defaultValue) {
+    public static int readIntUriArgOr(@NotNull Activity activity, @NotNull String argName, int defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
         try {
             return Integer.parseInt(value.trim());
@@ -704,10 +704,10 @@ public class Activityx {
     }
 
     @Nullable
-    public static Integer readIntUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
+    public static Integer readIntUriArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
         try {
             return Integer.parseInt(value.trim());
@@ -718,18 +718,18 @@ public class Activityx {
     }
 
 
-    public static long readLongUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static long readLongUriArg(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Long.parseLong(value);
-        throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
+        throw new IllegalArgumentException(String.format("Param '%s' not found: %s", argName, uri));
     }
 
-    public static long readLongUriArgOr(@NotNull Activity activity, @NotNull String paramName, long defaultValue) {
+    public static long readLongUriArgOr(@NotNull Activity activity, @NotNull String argName, long defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
         try {
             return Long.parseLong(value.trim());
@@ -740,10 +740,10 @@ public class Activityx {
     }
 
     @Nullable
-    public static Long readLongUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
+    public static Long readLongUriArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
         try {
             return Long.parseLong(value.trim());
@@ -754,18 +754,18 @@ public class Activityx {
     }
 
 
-    public static float readFloatUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static float readFloatUriArg(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Float.parseFloat(value);
-        throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
+        throw new IllegalArgumentException(String.format("Param '%s' not found: %s", argName, uri));
     }
 
-    public static float readFloatUriArgOr(@NotNull Activity activity, @NotNull String paramName, float defaultValue) {
+    public static float readFloatUriArgOr(@NotNull Activity activity, @NotNull String argName, float defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
         try {
             return Float.parseFloat(value.trim());
@@ -776,10 +776,10 @@ public class Activityx {
     }
 
     @Nullable
-    public static Float readFloatUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
+    public static Float readFloatUriArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
         try {
             return Float.parseFloat(value.trim());
@@ -790,18 +790,18 @@ public class Activityx {
     }
 
 
-    public static double readDoubleUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static double readDoubleUriArg(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Double.parseDouble(value);
-        throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
+        throw new IllegalArgumentException(String.format("Param '%s' not found: %s", argName, uri));
     }
 
-    public static double readDoubleUriArgOr(@NotNull Activity activity, @NotNull String paramName, double defaultValue) {
+    public static double readDoubleUriArgOr(@NotNull Activity activity, @NotNull String argName, double defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
         try {
             return Double.parseDouble(value.trim());
@@ -812,10 +812,10 @@ public class Activityx {
     }
 
     @Nullable
-    public static Double readDoubleUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
+    public static Double readDoubleUriArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
         try {
             return Double.parseDouble(value.trim());
@@ -826,18 +826,18 @@ public class Activityx {
     }
 
 
-    public static boolean readBooleanUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static boolean readBooleanUriArg(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Boolean.parseBoolean(value);
-        throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
+        throw new IllegalArgumentException(String.format("Param '%s' not found: %s", argName, uri));
     }
 
-    public static boolean readBooleanUriArgOr(@NotNull Activity activity, @NotNull String paramName, boolean defaultValue) {
+    public static boolean readBooleanUriArgOr(@NotNull Activity activity, @NotNull String argName, boolean defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
         try {
             return Boolean.parseBoolean(value.trim());
@@ -848,10 +848,10 @@ public class Activityx {
     }
 
     @Nullable
-    public static Boolean readBooleanUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
+    public static Boolean readBooleanUriArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
         try {
             return Boolean.parseBoolean(value.trim());
@@ -863,19 +863,19 @@ public class Activityx {
 
 
     @NotNull
-    public static String readStringUriArg(@NotNull Activity activity, @NotNull String paramName) {
+    public static String readStringUriArg(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return value;
-        throw new IllegalArgumentException("Param " + paramName + " not found: $uri");
+        throw new IllegalArgumentException(String.format("Param '%s' not found: %s", argName, uri));
     }
 
     @NotNull
-    public static String readStringUriArgOr(@NotNull Activity activity, @NotNull String paramName, @NotNull String defaultValue) {
+    public static String readStringUriArgOr(@NotNull Activity activity, @NotNull String argName, @NotNull String defaultValue) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
         try {
             return value;
@@ -886,10 +886,10 @@ public class Activityx {
     }
 
     @Nullable
-    public static String readStringUriArgOrNull(@NotNull Activity activity, @NotNull String paramName) {
+    public static String readStringUriArgOrNull(@NotNull Activity activity, @NotNull String argName) {
         Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
-        String value = Stringx.orEmpty(uri.getQueryParameter(paramName)).trim();
+        String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
         try {
             return value;
@@ -897,5 +897,119 @@ public class Activityx {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    /* ************************************* Uri Intent Args ***************************************** */
+
+
+    public static byte readByteUriIntentArgOr(@NotNull Activity activity, @NotNull String argName, byte defaultValue) {
+        Byte uriValue = readByteUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readByteArgOr(activity, argName, defaultValue);
+    }
+
+    public static short readShortUriIntentArgOr(@NotNull Activity activity, @NotNull String argName, short defaultValue) {
+        Short uriValue = readShortUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readShortArgOr(activity, argName, defaultValue);
+    }
+
+    public static int readIntUriIntentArgOr(@NotNull Activity activity, @NotNull String argName, int defaultValue) {
+        Integer uriValue = readIntUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readIntArgOr(activity, argName, defaultValue);
+    }
+
+    public static long readLongUriIntentArgOr(@NotNull Activity activity, @NotNull String argName, long defaultValue) {
+        Long uriValue = readLongUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readLongArgOr(activity, argName, defaultValue);
+    }
+
+    public static float readFloatUriIntentArgOr(@NotNull Activity activity, @NotNull String argName, float defaultValue) {
+        Float uriValue = readFloatUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readFloatArgOr(activity, argName, defaultValue);
+    }
+
+    public static double readDoubleUriIntentArgOr(@NotNull Activity activity, @NotNull String argName, double defaultValue) {
+        Double uriValue = readDoubleUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readDoubleArgOr(activity, argName, defaultValue);
+    }
+
+    public static boolean readBooleanUriIntentArgOr(@NotNull Activity activity, @NotNull String argName, boolean defaultValue) {
+        Boolean uriValue = readBooleanUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readBooleanArgOr(activity, argName, defaultValue);
+    }
+
+    @NonNull
+    public static String readStringUriIntentArg(@NotNull Activity activity, @NotNull String argName) {
+        String uriValue = readStringUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readStringArg(activity, argName);
+    }
+
+    @NonNull
+    public static String readStringUriIntentArgOr(@NotNull Activity activity, @NotNull String argName, String defaultValue) {
+        String uriValue = readStringUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readStringArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static String readStringUriIntentArgOrNull(@NotNull Activity activity, @NotNull String argName) {
+        String uriValue = readStringUriArgOrNull(activity, argName);
+        return uriValue != null ? uriValue : readStringArgOrNull(activity, argName);
+    }
+
+
+    /* ************************************* Intent Uri Args ***************************************** */
+
+
+    public static byte readByteIntentUriArgOr(@NotNull Activity activity, @NotNull String argName, byte defaultValue) {
+        byte uriValue = readByteArgOr(activity, argName, Byte.MIN_VALUE);
+        return uriValue != Byte.MIN_VALUE ? uriValue : readByteUriArgOr(activity, argName, defaultValue);
+    }
+
+    public static short readShortIntentUriArgOr(@NotNull Activity activity, @NotNull String argName, short defaultValue) {
+        short uriValue = readShortArgOr(activity, argName, Short.MIN_VALUE);
+        return uriValue != Short.MIN_VALUE ? uriValue : readShortUriArgOr(activity, argName, defaultValue);
+    }
+
+    public static int readIntIntentUriArgOr(@NotNull Activity activity, @NotNull String argName, int defaultValue) {
+        int uriValue = readIntArgOr(activity, argName, Integer.MIN_VALUE);
+        return uriValue != Integer.MIN_VALUE ? uriValue : readIntUriArgOr(activity, argName, defaultValue);
+    }
+
+    public static long readLongIntentUriArgOr(@NotNull Activity activity, @NotNull String argName, long defaultValue) {
+        long uriValue = readLongArgOr(activity, argName, Long.MIN_VALUE);
+        return uriValue != Long.MIN_VALUE ? uriValue : readLongUriArgOr(activity, argName, defaultValue);
+    }
+
+    public static float readFloatIntentUriArgOr(@NotNull Activity activity, @NotNull String argName, float defaultValue) {
+        float uriValue = readFloatArgOr(activity, argName, Float.MIN_VALUE);
+        return uriValue != Float.MIN_VALUE ? uriValue : readFloatUriArgOr(activity, argName, defaultValue);
+    }
+
+    public static double readDoubleIntentUriArgOr(@NotNull Activity activity, @NotNull String argName, double defaultValue) {
+        double uriValue = readDoubleArgOr(activity, argName, Double.MIN_VALUE);
+        return uriValue != Double.MIN_VALUE ? uriValue : readDoubleUriArgOr(activity, argName, defaultValue);
+    }
+
+    public static boolean readBooleanIntentUriArgOr(@NotNull Activity activity, @NotNull String argName, boolean defaultValue) {
+        boolean uriValue = readBooleanArgOr(activity, argName, false);
+        return uriValue || readBooleanUriArgOr(activity, argName, defaultValue);
+    }
+
+    @NonNull
+    public static String readStringIntentUriArg(@NotNull Activity activity, @NotNull String argName) {
+        String uriValue = readStringArgOrNull(activity, argName);
+        return uriValue != null && Stringx.isSafe(uriValue) ? uriValue : readStringUriArg(activity, argName);
+    }
+
+    @NonNull
+    public static String readStringIntentUriArgOr(@NotNull Activity activity, @NotNull String argName, String defaultValue) {
+        String uriValue = readStringArgOrNull(activity, argName);
+        return uriValue != null && Stringx.isSafe(uriValue) ? uriValue : readStringUriArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static String readStringIntentUriArgOrNull(@NotNull Activity activity, @NotNull String argName) {
+        String uriValue = readStringArgOrNull(activity, argName);
+        return uriValue != null && Stringx.isSafe(uriValue) ? uriValue : readStringUriArgOrNull(activity, argName);
     }
 }

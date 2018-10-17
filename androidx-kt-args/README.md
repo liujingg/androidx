@@ -79,6 +79,8 @@ class TestBindActivity : FragmentActivity() {
 There are more bind methods, please refer to:
 
 * [ActivityUriArgsBinder.kt]
+* [ActivityUriIntentArgsBinder.kt]
+* [ActivityIntentUriArgsBinder.kt]
 
 ### Encapsulate all parameters into a data class
 
@@ -170,6 +172,8 @@ Please view the [CHANGELOG.md] file
 [ArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/ArgsBinder.kt
 [ActivityIntentArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/ActivityIntentArgsBinder.kt
 [ActivityUriArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/ActivityUriArgsBinder.kt
+[ActivityUriIntentArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/ActivityUriIntentArgsBinder.kt
+[ActivityIntentUriArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/ActivityIntentUriArgsBinder.kt
 [SupportFragmentArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/SupportFragmentArgsBinder.kt
 [OriginFragmentArgsBinder.kt]: src/main/java/me/panpf/androidxkt/args/OriginFragmentArgsBinder.kt
 [ArgsActivity.kt]: src/main/java/me/panpf/androidxkt/args/ArgsActivity.kt

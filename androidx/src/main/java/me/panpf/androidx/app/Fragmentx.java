@@ -253,7 +253,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         byte[] bytes = arguments != null ? arguments.getByteArray(argName) : null;
         if (bytes != null) return bytes;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -281,7 +281,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         short[] shorts = arguments != null ? arguments.getShortArray(argName) : null;
         if (shorts != null) return shorts;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -309,7 +309,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         int[] ints = arguments != null ? arguments.getIntArray(argName) : null;
         if (ints != null) return ints;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -331,7 +331,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         ArrayList<Integer> ints = arguments != null ? arguments.getIntegerArrayList(argName) : null;
         if (ints != null) return ints;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -359,7 +359,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         long[] longs = arguments != null ? arguments.getLongArray(argName) : null;
         if (longs != null) return longs;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -387,7 +387,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         float[] floats = arguments != null ? arguments.getFloatArray(argName) : null;
         if (floats != null) return floats;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -415,7 +415,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         double[] doubles = arguments != null ? arguments.getDoubleArray(argName) : null;
         if (doubles != null) return doubles;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -443,7 +443,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         boolean[] booleans = arguments != null ? arguments.getBooleanArray(argName) : null;
         if (booleans != null) return booleans;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -471,7 +471,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         char[] chars = arguments != null ? arguments.getCharArray(argName) : null;
         if (chars != null) return chars;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -493,7 +493,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         CharSequence charSequence = arguments != null ? arguments.getCharSequence(argName) : null;
         if (charSequence != null) return charSequence;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -515,7 +515,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         CharSequence[] charSequences = arguments != null ? arguments.getCharSequenceArray(argName) : null;
         if (charSequences != null) return charSequences;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -537,7 +537,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         ArrayList<CharSequence> charSequences = arguments != null ? arguments.getCharSequenceArrayList(argName) : null;
         if (charSequences != null) return charSequences;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -559,7 +559,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         String string = arguments != null ? arguments.getString(argName) : null;
         if (string != null) return string;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -581,7 +581,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         String[] strings = arguments != null ? arguments.getStringArray(argName) : null;
         if (strings != null) return strings;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -603,7 +603,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         ArrayList<String> strings = arguments != null ? arguments.getStringArrayList(argName) : null;
         if (strings != null) return strings;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -628,7 +628,7 @@ public class Fragmentx {
         //noinspection unchecked
         V parcelable = arguments != null ? (V) arguments.getParcelable(argName) : null;
         if (parcelable != null) return parcelable;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -659,7 +659,7 @@ public class Fragmentx {
         //noinspection unchecked
         V[] parcelables = arguments != null ? (V[]) arguments.getParcelableArray(argName) : null;
         if (parcelables != null) return parcelables;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -690,7 +690,7 @@ public class Fragmentx {
         //noinspection unchecked
         ArrayList<V> parcelable = arguments != null ? (ArrayList<V>) arguments.getParcelableArrayList(argName) : null;
         if (parcelable != null) return parcelable;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -721,7 +721,7 @@ public class Fragmentx {
         //noinspection unchecked
         SparseArray<V> sparseArray = arguments != null ? (SparseArray<V>) arguments.getSparseParcelableArray(argName) : null;
         if (sparseArray != null) return sparseArray;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -750,7 +750,7 @@ public class Fragmentx {
         //noinspection unchecked
         V serializable = arguments != null ? (V) arguments.getSerializable(argName) : null;
         if (serializable != null) return serializable;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -774,7 +774,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         Bundle bundle = arguments != null ? arguments.getBundle(argName) : null;
         if (bundle != null) return bundle;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -797,7 +797,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         IBinder iBinder = arguments != null ? arguments.getBinder(argName) : null;
         if (iBinder != null) return iBinder;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -822,7 +822,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         Size size = arguments != null ? arguments.getSize(argName) : null;
         if (size != null) return size;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -847,7 +847,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         SizeF sizeF = arguments != null ? arguments.getSizeF(argName) : null;
         if (sizeF != null) return sizeF;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -880,7 +880,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         byte[] bytes = arguments != null ? arguments.getByteArray(argName) : null;
         if (bytes != null) return bytes;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -908,7 +908,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         short[] shorts = arguments != null ? arguments.getShortArray(argName) : null;
         if (shorts != null) return shorts;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -936,7 +936,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         int[] ints = arguments != null ? arguments.getIntArray(argName) : null;
         if (ints != null) return ints;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -958,7 +958,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         ArrayList<Integer> ints = arguments != null ? arguments.getIntegerArrayList(argName) : null;
         if (ints != null) return ints;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -986,7 +986,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         long[] longs = arguments != null ? arguments.getLongArray(argName) : null;
         if (longs != null) return longs;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1014,7 +1014,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         float[] floats = arguments != null ? arguments.getFloatArray(argName) : null;
         if (floats != null) return floats;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1042,7 +1042,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         double[] doubles = arguments != null ? arguments.getDoubleArray(argName) : null;
         if (doubles != null) return doubles;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1070,7 +1070,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         boolean[] booleans = arguments != null ? arguments.getBooleanArray(argName) : null;
         if (booleans != null) return booleans;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1098,7 +1098,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         char[] chars = arguments != null ? arguments.getCharArray(argName) : null;
         if (chars != null) return chars;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1120,7 +1120,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         CharSequence charSequence = arguments != null ? arguments.getCharSequence(argName) : null;
         if (charSequence != null) return charSequence;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1142,7 +1142,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         CharSequence[] charSequences = arguments != null ? arguments.getCharSequenceArray(argName) : null;
         if (charSequences != null) return charSequences;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1164,7 +1164,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         ArrayList<CharSequence> charSequences = arguments != null ? arguments.getCharSequenceArrayList(argName) : null;
         if (charSequences != null) return charSequences;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1186,7 +1186,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         String string = arguments != null ? arguments.getString(argName) : null;
         if (string != null) return string;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1208,7 +1208,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         String[] strings = arguments != null ? arguments.getStringArray(argName) : null;
         if (strings != null) return strings;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1230,7 +1230,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         ArrayList<String> strings = arguments != null ? arguments.getStringArrayList(argName) : null;
         if (strings != null) return strings;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1255,7 +1255,7 @@ public class Fragmentx {
         //noinspection unchecked
         V parcelable = arguments != null ? (V) arguments.getParcelable(argName) : null;
         if (parcelable != null) return parcelable;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1286,7 +1286,7 @@ public class Fragmentx {
         //noinspection unchecked
         V[] parcelables = arguments != null ? (V[]) arguments.getParcelableArray(argName) : null;
         if (parcelables != null) return parcelables;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1317,7 +1317,7 @@ public class Fragmentx {
         //noinspection unchecked
         ArrayList<V> parcelable = arguments != null ? (ArrayList<V>) arguments.getParcelableArrayList(argName) : null;
         if (parcelable != null) return parcelable;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1348,7 +1348,7 @@ public class Fragmentx {
         //noinspection unchecked
         SparseArray<V> sparseArray = arguments != null ? (SparseArray<V>) arguments.getSparseParcelableArray(argName) : null;
         if (sparseArray != null) return sparseArray;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1377,7 +1377,7 @@ public class Fragmentx {
         //noinspection unchecked
         V serializable = arguments != null ? (V) arguments.getSerializable(argName) : null;
         if (serializable != null) return serializable;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1401,7 +1401,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         Bundle bundle = arguments != null ? arguments.getBundle(argName) : null;
         if (bundle != null) return bundle;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1424,7 +1424,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         IBinder iBinder = arguments != null ? arguments.getBinder(argName) : null;
         if (iBinder != null) return iBinder;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1449,7 +1449,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         Size size = arguments != null ? arguments.getSize(argName) : null;
         if (size != null) return size;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull
@@ -1474,7 +1474,7 @@ public class Fragmentx {
         Bundle arguments = fragment.getArguments();
         SizeF sizeF = arguments != null ? arguments.getSizeF(argName) : null;
         if (sizeF != null) return sizeF;
-        throw (new IllegalArgumentException("Param '" + argName + "' not found"));
+        throw (new IllegalArgumentException(String.format("Param '%s' not found", argName)));
     }
 
     @NotNull

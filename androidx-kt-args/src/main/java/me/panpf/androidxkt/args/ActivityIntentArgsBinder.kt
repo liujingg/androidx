@@ -177,6 +177,16 @@ fun Activity.bindCharSequenceArrayArgOrNull(argName: String): ReadOnlyProperty<A
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrNull(argName) }
 
 
+fun Activity.bindCharSequenceArrayListArg(argName: String): ReadOnlyProperty<Activity, ArrayList<CharSequence>> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayListArg(argName) }
+
+fun Activity.bindCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ReadOnlyProperty<Activity, ArrayList<CharSequence>> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOr(argName, defaultValue) }
+
+fun Activity.bindCharSequenceArrayListArgOrNull(argName: String): ReadOnlyProperty<Activity, ArrayList<CharSequence>?> =
+        OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrNull(argName) }
+
+
 /* ************************************* String ***************************************** */
 
 

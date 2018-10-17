@@ -183,6 +183,16 @@ fun Fragment.bindCharSequenceArrayArgOrNull(argName: String): ReadOnlyProperty<F
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrNull(argName) }
 
 
+fun Fragment.bindCharSequenceArrayListArg(argName: String): ReadOnlyProperty<Fragment, ArrayList<CharSequence>> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayListArg(argName) }
+
+fun Fragment.bindCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ReadOnlyProperty<Fragment, ArrayList<CharSequence>> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOr(argName, defaultValue) }
+
+fun Fragment.bindCharSequenceArrayListArgOrNull(argName: String): ReadOnlyProperty<Fragment, ArrayList<CharSequence>?> =
+        OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrNull(argName) }
+
+
 /* ************************************* String ***************************************** */
 
 

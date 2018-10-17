@@ -14,6 +14,7 @@
         <activity android:name="me.panpf.androidx.test.util.WeakAsyncTaskTestActivity" />
         <activity android:name="me.panpf.androidx.test.app.ActivityxTestActivity" />
         <activity android:name="me.panpf.androidx.test.app.ActivityxTestFragmentActivity" />
+        <!--<activity android:name="me.panpf.androidx.test.app.ActivityxArgsTestActivity" />-->
         <activity android:name="me.panpf.androidx.test.app.FragmentxTestActivity" />
         <activity android:name="me.panpf.androidx.test.app.FragmentxTestFragmentActivity" />
     </application>

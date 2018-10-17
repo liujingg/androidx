@@ -37,8 +37,8 @@ class ArgsTest {
                 putExtra("intRequired", 500)
                 putExtra("intArrayRequired", intArrayOf(500, -500))
                 putExtra("intArrayOptional", intArrayOf(-500, 500))
-                putExtra("intArrayListRequired", arrayListOf(500, -500))
-                putExtra("intArrayListOptional", arrayListOf(-500, 500))
+                putIntegerArrayListExtra("intArrayListRequired", arrayListOf(500, -500))
+                putIntegerArrayListExtra("intArrayListOptional", arrayListOf(-500, 500))
 
                 putExtra("longRequired", 1000L)
                 putExtra("longArrayRequired", longArrayOf(1000L, -1000L))
@@ -64,8 +64,8 @@ class ArgsTest {
                 putExtra("stringOptional", "stringOptional")
                 putExtra("stringArrayRequired", arrayOf("stringRequired", "stringOptional"))
                 putExtra("stringArrayOptional", arrayOf("stringOptional", "stringRequired"))
-                putExtra("stringArrayListRequired", arrayListOf("stringRequired", "stringOptional"))
-                putExtra("stringArrayListOptional", arrayListOf("stringOptional", "stringRequired"))
+                putStringArrayListExtra("stringArrayListRequired", arrayListOf("stringRequired", "stringOptional"))
+                putStringArrayListExtra("stringArrayListOptional", arrayListOf("stringOptional", "stringRequired"))
 
                 putExtra("charSequenceRequired", "stringRequired")
                 putExtra("charSequenceOptional", "stringOptional")
@@ -76,8 +76,8 @@ class ArgsTest {
                 putExtra("parcelableOptional", TestParcelable("parcelableOptional"))
                 putExtra("parcelableArrayRequired", arrayOf(TestParcelable("parcelableRequired"), TestParcelable("parcelableOptional")))
                 putExtra("parcelableArrayOptional", arrayOf(TestParcelable("parcelableOptional"), TestParcelable("parcelableRequired")))
-                putExtra("parcelableArrayListRequired", arrayListOf(TestParcelable("parcelableRequired"), TestParcelable("parcelableOptional")))
-                putExtra("parcelableArrayListOptional", arrayListOf(TestParcelable("parcelableOptional"), TestParcelable("parcelableRequired")))
+                putParcelableArrayListExtra("parcelableArrayListRequired", arrayListOf(TestParcelable("parcelableRequired"), TestParcelable("parcelableOptional")))
+                putParcelableArrayListExtra("parcelableArrayListOptional", arrayListOf(TestParcelable("parcelableOptional"), TestParcelable("parcelableRequired")))
 
                 putExtra("serializableRequired", TestSerializable("serializableRequired"))
                 putExtra("serializableOptional", TestSerializable("serializableOptional"))

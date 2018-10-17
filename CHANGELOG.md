@@ -2,13 +2,16 @@
 
 ANDROIDX
 
-* :fire: read\*Arg(\*, default) rename to read\*ArgOr(\*, default)
-* :fire: readOptional\*Arg(\*, default) rename to read\*ArgOrNull(\*, default)
+* :fire: Activityx and Fragmentx read\*Arg(\*, default) rename to read\*ArgOr(\*, default)
+* :fire: Activityx and Fragmentx readOptional\*Arg(\*, default) rename to read\*ArgOrNull(\*, default)
+* :sparkles: Activityx adds read\*UriIntentArg and read\*IntentUriArg method
 
 ANDROIDX-KT-ARGS
 
 * :fire: bind\*Arg(\*, default) rename to bind\*ArgOr(\*, default)
 * :fire: bindOptional\*Arg(\*, default) rename to bind\*ArgOrNull(\*, default)
+* :sparkles: Activity adds bind\*UriIntentArgOr and bind\*IntentUriArgOr method
+* :sparkles: Activity and Fragment adds bindCharSequenceArrayListArg, bindCharSequenceArrayListArgOr, bindCharSequenceArrayListArgOrNull method
 
 ## v0.3.0
 

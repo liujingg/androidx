@@ -1,5 +1,5 @@
 ## v0.2
-* 支持 ViewModelProvider.Factory
+* Support ViewModelProvider.Factory
 
 ## v0.1
-* 初次发布
+* Initial release

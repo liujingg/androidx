@@ -249,57 +249,105 @@ inline fun Activity.readExtrasArgOrNull(): Bundle? = Activityx.readExtrasArgOrNu
 /* ************************************* Uri Args ***************************************** */
 
 
-inline fun Activity.readByteUriArg(paramName: String): Byte = Activityx.readByteUriArg(this, paramName)
+inline fun Activity.readByteUriArg(argName: String): Byte = Activityx.readByteUriArg(this, argName)
 
-inline fun Activity.readByteUriArgOr(paramName: String, defaultValue: Byte): Byte = Activityx.readByteUriArgOr(this, paramName, defaultValue)
+inline fun Activity.readByteUriArgOr(argName: String, defaultValue: Byte): Byte = Activityx.readByteUriArgOr(this, argName, defaultValue)
 
-inline fun Activity.readByteUriArgOrNull(paramName: String): Byte? = Activityx.readByteUriArgOrNull(this, paramName)
-
-
-inline fun Activity.readShortUriArg(paramName: String): Short = Activityx.readShortUriArg(this, paramName)
-
-inline fun Activity.readShortUriArgOr(paramName: String, defaultValue: Short): Short = Activityx.readShortUriArgOr(this, paramName, defaultValue)
-
-inline fun Activity.readShortUriArgOrNull(paramName: String): Short? = Activityx.readShortUriArgOrNull(this, paramName)
+inline fun Activity.readByteUriArgOrNull(argName: String): Byte? = Activityx.readByteUriArgOrNull(this, argName)
 
 
-inline fun Activity.readIntUriArg(paramName: String): Int = Activityx.readIntUriArg(this, paramName)
+inline fun Activity.readShortUriArg(argName: String): Short = Activityx.readShortUriArg(this, argName)
 
-inline fun Activity.readIntUriArgOr(paramName: String, defaultValue: Int): Int = Activityx.readIntUriArgOr(this, paramName, defaultValue)
+inline fun Activity.readShortUriArgOr(argName: String, defaultValue: Short): Short = Activityx.readShortUriArgOr(this, argName, defaultValue)
 
-inline fun Activity.readIntUriArgOrNull(paramName: String): Int? = Activityx.readIntUriArgOrNull(this, paramName)
-
-
-inline fun Activity.readLongUriArg(paramName: String): Long = Activityx.readLongUriArg(this, paramName)
-
-inline fun Activity.readLongUriArgOr(paramName: String, defaultValue: Long): Long = Activityx.readLongUriArgOr(this, paramName, defaultValue)
-
-inline fun Activity.readLongUriArgOrNull(paramName: String): Long? = Activityx.readLongUriArgOrNull(this, paramName)
+inline fun Activity.readShortUriArgOrNull(argName: String): Short? = Activityx.readShortUriArgOrNull(this, argName)
 
 
-inline fun Activity.readFloatUriArg(paramName: String): Float = Activityx.readFloatUriArg(this, paramName)
+inline fun Activity.readIntUriArg(argName: String): Int = Activityx.readIntUriArg(this, argName)
 
-inline fun Activity.readFloatUriArgOr(paramName: String, defaultValue: Float): Float = Activityx.readFloatUriArgOr(this, paramName, defaultValue)
+inline fun Activity.readIntUriArgOr(argName: String, defaultValue: Int): Int = Activityx.readIntUriArgOr(this, argName, defaultValue)
 
-inline fun Activity.readFloatUriArgOrNull(paramName: String): Float? = Activityx.readFloatUriArgOrNull(this, paramName)
-
-
-inline fun Activity.readDoubleUriArg(paramName: String): Double = Activityx.readDoubleUriArg(this, paramName)
-
-inline fun Activity.readDoubleUriArgOr(paramName: String, defaultValue: Double): Double = Activityx.readDoubleUriArgOr(this, paramName, defaultValue)
-
-inline fun Activity.readDoubleUriArgOrNull(paramName: String): Double? = Activityx.readDoubleUriArgOrNull(this, paramName)
+inline fun Activity.readIntUriArgOrNull(argName: String): Int? = Activityx.readIntUriArgOrNull(this, argName)
 
 
-inline fun Activity.readBooleanUriArg(paramName: String): Boolean = Activityx.readBooleanUriArg(this, paramName)
+inline fun Activity.readLongUriArg(argName: String): Long = Activityx.readLongUriArg(this, argName)
 
-inline fun Activity.readBooleanUriArgOr(paramName: String, defaultValue: Boolean): Boolean = Activityx.readBooleanUriArgOr(this, paramName, defaultValue)
+inline fun Activity.readLongUriArgOr(argName: String, defaultValue: Long): Long = Activityx.readLongUriArgOr(this, argName, defaultValue)
 
-inline fun Activity.readBooleanUriArgOrNull(paramName: String): Boolean? = Activityx.readBooleanUriArgOrNull(this, paramName)
+inline fun Activity.readLongUriArgOrNull(argName: String): Long? = Activityx.readLongUriArgOrNull(this, argName)
 
 
-inline fun Activity.readStringUriArg(paramName: String): String = Activityx.readStringUriArg(this, paramName)
+inline fun Activity.readFloatUriArg(argName: String): Float = Activityx.readFloatUriArg(this, argName)
 
-inline fun Activity.readStringUriArgOr(paramName: String, defaultValue: String): String = Activityx.readStringUriArgOr(this, paramName, defaultValue)
+inline fun Activity.readFloatUriArgOr(argName: String, defaultValue: Float): Float = Activityx.readFloatUriArgOr(this, argName, defaultValue)
 
-inline fun Activity.readStringUriArgOrNull(paramName: String): String? = Activityx.readStringUriArgOrNull(this, paramName)
+inline fun Activity.readFloatUriArgOrNull(argName: String): Float? = Activityx.readFloatUriArgOrNull(this, argName)
+
+
+inline fun Activity.readDoubleUriArg(argName: String): Double = Activityx.readDoubleUriArg(this, argName)
+
+inline fun Activity.readDoubleUriArgOr(argName: String, defaultValue: Double): Double = Activityx.readDoubleUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readDoubleUriArgOrNull(argName: String): Double? = Activityx.readDoubleUriArgOrNull(this, argName)
+
+
+inline fun Activity.readBooleanUriArg(argName: String): Boolean = Activityx.readBooleanUriArg(this, argName)
+
+inline fun Activity.readBooleanUriArgOr(argName: String, defaultValue: Boolean): Boolean = Activityx.readBooleanUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readBooleanUriArgOrNull(argName: String): Boolean? = Activityx.readBooleanUriArgOrNull(this, argName)
+
+
+inline fun Activity.readStringUriArg(argName: String): String = Activityx.readStringUriArg(this, argName)
+
+inline fun Activity.readStringUriArgOr(argName: String, defaultValue: String): String = Activityx.readStringUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readStringUriArgOrNull(argName: String): String? = Activityx.readStringUriArgOrNull(this, argName)
+
+
+/* ************************************* Uri Intent Args ***************************************** */
+
+
+inline fun Activity.readByteUriIntentArgOr(argName: String, defaultValue: Byte): Byte = Activityx.readByteUriIntentArgOr(this, argName, defaultValue)
+
+inline fun Activity.readShortUriIntentArgOr(argName: String, defaultValue: Short): Short = Activityx.readShortUriIntentArgOr(this, argName, defaultValue)
+
+inline fun Activity.readIntUriIntentArgOr(argName: String, defaultValue: Int): Int = Activityx.readIntUriIntentArgOr(this, argName, defaultValue)
+
+inline fun Activity.readLongUriIntentArgOr(argName: String, defaultValue: Long): Long = Activityx.readLongUriIntentArgOr(this, argName, defaultValue)
+
+inline fun Activity.readFloatUriIntentArgOr(argName: String, defaultValue: Float): Float = Activityx.readFloatUriIntentArgOr(this, argName, defaultValue)
+
+inline fun Activity.readDoubleUriIntentArgOr(argName: String, defaultValue: Double): Double = Activityx.readDoubleUriIntentArgOr(this, argName, defaultValue)
+
+inline fun Activity.readBooleanUriIntentArgOr(argName: String, defaultValue: Boolean): Boolean = Activityx.readBooleanUriIntentArgOr(this, argName, defaultValue)
+
+inline fun Activity.readStringUriIntentArg(argName: String): String = Activityx.readStringUriIntentArg(this, argName)
+
+inline fun Activity.readStringUriIntentArgOr(argName: String, defaultValue: String): String = Activityx.readStringUriIntentArgOr(this, argName, defaultValue)
+
+inline fun Activity.readStringUriIntentArgOrNull(argName: String): String? = Activityx.readStringUriIntentArgOrNull(this, argName)
+
+
+/* ************************************* Intent Uri Args ***************************************** */
+
+
+inline fun Activity.readByteIntentUriArgOr(argName: String, defaultValue: Byte): Byte = Activityx.readByteIntentUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readShortIntentUriArgOr(argName: String, defaultValue: Short): Short = Activityx.readShortIntentUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readIntIntentUriArgOr(argName: String, defaultValue: Int): Int = Activityx.readIntIntentUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readLongIntentUriArgOr(argName: String, defaultValue: Long): Long = Activityx.readLongIntentUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readFloatIntentUriArgOr(argName: String, defaultValue: Float): Float = Activityx.readFloatIntentUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readDoubleIntentUriArgOr(argName: String, defaultValue: Double): Double = Activityx.readDoubleIntentUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readBooleanIntentUriArgOr(argName: String, defaultValue: Boolean): Boolean = Activityx.readBooleanIntentUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readStringIntentUriArg(argName: String): String = Activityx.readStringIntentUriArg(this, argName)
+
+inline fun Activity.readStringIntentUriArgOr(argName: String, defaultValue: String): String = Activityx.readStringIntentUriArgOr(this, argName, defaultValue)
+
+inline fun Activity.readStringIntentUriArgOrNull(argName: String): String? = Activityx.readStringIntentUriArgOrNull(this, argName)

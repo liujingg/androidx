@@ -51,12 +51,12 @@ Dependencies:
 ### app
 * Activity: [Activityx.java] ([Test][ActivityxTest.java]) | [Activityx.kt] ([Test][ActivityxTest.kt])
     * isDestroyedCompat, convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
-    * readIntArg, readStringArg, read\*Arg, readIntUriArg, readStringUriArg, read\*UriArg
+    * read\*Arg, read\*UriArg, read\*UriIntentArg, read\*IntentUriArg
 * Dialog: [Dialogx.java] | [Dialogx.kt]
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] | [Fragmentx.kt]
     * isDestroyedCompat, getImplWithParent, instance, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
-    * readIntArg, readStringArg, read\*Arg
+    * read\*Arg
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
 * Service: [Servicex.java] | [Servicex.kt]

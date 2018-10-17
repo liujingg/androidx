@@ -2,6 +2,9 @@
 
 * :fire: bind\*Arg(\*, default) rename to bind\*ArgOr(\*, default)
 * :fire: bindOptional\*Arg(\*, default) rename to bind\*ArgOrNull(\*, default)
+* :sparkles: Activity adds bind\*UriIntentArgOr and bind\*IntentUriArgOr method
+* :sparkles: Activity adds bindCharSequenceArrayListArg, bindCharSequenceArrayListArgOr, bindCharSequenceArrayListArgOrNull method
+* :sparkles: Fragment adds bindCharSequenceArrayListArg, bindCharSequenceArrayListArgOr, bindCharSequenceArrayListArgOrNull method
 
 ## v0.2.6
 
@@ -15,4 +18,4 @@
 * buildArgsActivityIntent and startArgsActivity add generic parameters
 
 ## v0.1
-* 初次发布
+* Initial release
