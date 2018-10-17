@@ -497,6 +497,12 @@ public class Contextx {
         return systemService(context, Context.MIDI_SERVICE);
     }
 
+    @Nullable
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public static MidiManager midiManagerOrNull(@NonNull Context context) {
+        return systemServiceOrNull(context, Context.MIDI_SERVICE);
+    }
+
     // RADIO_SERVICE
 
     @NonNull

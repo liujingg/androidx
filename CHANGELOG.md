@@ -5,6 +5,7 @@ ANDROIDX
 * :fire: Activityx and Fragmentx read\*Arg(\*, default) rename to read\*ArgOr(\*, default)
 * :fire: Activityx and Fragmentx readOptional\*Arg(\*, default) rename to read\*ArgOrNull(\*, default)
 * :sparkles: Activityx adds read\*UriIntentArg and read\*IntentUriArg method
+* :sparkles: Contextx adds midiManagerOrNull method
 
 ANDROIDX-KT-ARGS
 

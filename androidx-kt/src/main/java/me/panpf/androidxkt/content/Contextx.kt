@@ -251,6 +251,9 @@ fun Context.mediaProjectionManager(): MediaProjectionManager = Contextx.mediaPro
 @RequiresApi(api = Build.VERSION_CODES.M)
 fun Context.midiManager(): MidiManager = Contextx.midiManager(this)
 
+@RequiresApi(api = Build.VERSION_CODES.M)
+fun Context.midiManagerOrNull(): MidiManager? = Contextx.midiManagerOrNull(this)
+
 // RADIO_SERVICE
 
 @RequiresApi(api = Build.VERSION_CODES.N)

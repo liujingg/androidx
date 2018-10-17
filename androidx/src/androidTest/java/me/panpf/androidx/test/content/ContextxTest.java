@@ -178,7 +178,12 @@ public class ContextxTest {
             Assert.assertNotNull(Contextx.mediaProjectionManager(context));
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Assert.assertNotNull(Contextx.midiManager(context));
+            try {
+                Contextx.midiManager(context);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            Contextx.midiManagerOrNull(context);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Assert.assertNotNull(Contextx.hardwarePropertiesManager(context));

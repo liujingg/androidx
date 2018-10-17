@@ -181,7 +181,11 @@ class ContextxTest {
             Assert.assertNotNull(context.mediaProjectionManager())
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Assert.assertNotNull(context.midiManager())
+            try {
+                context.midiManager()
+            } catch (e: Exception) {
+            }
+            context.midiManagerOrNull()
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             Assert.assertNotNull(context.hardwarePropertiesManager())
