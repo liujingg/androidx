@@ -104,3 +104,15 @@ inline fun Bitmap.centerCrop(newWidth: Int, newHeight: Int): Bitmap = Bitmapx.ce
 
 
 inline fun Bitmap.tint(@ColorInt color: Int): Bitmap = Bitmapx.tint(this, color)
+
+
+/* ************************************** use ******************************************  */
+
+
+inline fun <R> Bitmap.use(block: (Bitmap) -> R): R {
+    try {
+        return block(this)
+    } finally {
+        this@use.recycle()
+    }
+}

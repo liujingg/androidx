@@ -2,6 +2,7 @@
 
 * :arrow_up: Javax upgrade to 0.8.0
 * :fire: Networkx removed getLocalIpAddress, getLocalIpV4Address method
+* :sparkles: Bitmapx.kt adds use method
 
 
 ## v.0.3.1
