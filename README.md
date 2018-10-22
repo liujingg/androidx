@@ -118,8 +118,8 @@ Dependencies:
 * Network: [Networkx.java] | [Networkx.kt]
     * getState, isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated,
     * isBluetoothActivated, getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName,
-    * getSubtypeName, getExtraInfo, getNetworkInfo, getConnectivity, getWifiState, isWifiEnabled,
-    * setWifiEnabled, isMobileEnabled, setMobileEnabled, getIpAddress
+    * getSubtypeName, getExtraInfo, getNetworkInfo, getConnectivity, getWifiState,
+    * isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled
 
 ### os
 * Storage: [Storagex.java] | [Storagex.kt]

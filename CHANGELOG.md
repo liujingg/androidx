@@ -1,6 +1,7 @@
 ## v0.3.2
 
 * :arrow_up: Javax upgrade to 0.8.0
+* :fire: Networkx removed getLocalIpAddress, getLocalIpV4Address method
 
 
 ## v.0.3.1

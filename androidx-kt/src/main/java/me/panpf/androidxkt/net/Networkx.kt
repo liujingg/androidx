@@ -153,23 +153,3 @@ inline fun Context.isMobileEnabled(): Boolean = Networkx.isMobileEnabled(this)
  */
 @RequiresPermission(Manifest.permission.CHANGE_NETWORK_STATE)
 inline fun Context.setMobileEnabled(enabled: Boolean): Boolean = Networkx.setMobileEnabled(this, enabled)
-
-/**
- * Get local IP address
- */
-inline fun getLocalIpAddress(defaultIpAddress: String): String = Networkx.getLocalIpAddress(defaultIpAddress)
-
-/**
- * Get local IP address
- */
-inline fun getLocalIpAddress(): String? = Networkx.getLocalIpAddress()
-
-/**
- * Get local IPV4 address
- */
-inline fun getLocalIpV4Address(defaultIpAddress: String): String = Networkx.getLocalIpV4Address(defaultIpAddress)
-
-/**
- * Get local IPV4 address
- */
-inline fun getLocalIpV4Address(): String? = Networkx.getLocalIpV4Address()
