@@ -31,32 +31,15 @@ dependencies {
     api project(":androidx-kt")
 }
 
-Properties properties = new Properties()
-File localPropertiesFile = project.file("local.properties")
-if (localPropertiesFile.exists()) {
-    InputStream inputStream = localPropertiesFile.newDataInputStream()
-    properties.load(inputStream)
-    inputStream.close()
-}
-
-//publish {
-//    groupId = 'me.panpf'
-//    artifactId = 'androidx-kt-args'
-//    publishVersion = android.defaultConfig.versionName
-//    desc = 'Adnroid, Tool, Kotlin, Args'
-//    website = 'https://github.com/panpf/androidx'
-//    userOrg = properties.getProperty("bintray.userOrg")
-//    bintrayUser = properties.getProperty("bintray.user")
-//    bintrayKey = properties.getProperty("bintray.apikey")
-//}
-
 version = android.defaultConfig.versionName
 group = 'me.panpf'
 publish {
-    userOrg = properties.getProperty("bintray.userOrg")
     artifactId = 'androidx-kt-args'
     desc = 'Adnroid, Tool, Kotlin, Args'
     website = 'https://github.com/panpf/androidx'
+    def properties = new Properties()
+    properties.load(project.file("local.properties").newDataInputStream())
+    userOrg = properties.getProperty("bintray.userOrg")
     bintrayUser = properties.getProperty("bintray.user")
     bintrayKey = properties.getProperty("bintray.apikey")
 }

@@ -1,3 +1,8 @@
+## v0.3.2
+
+* :arrow_up: Javax upgrade to 0.8.0
+
+
 ## v.0.3.1
 
 ANDROIDX
