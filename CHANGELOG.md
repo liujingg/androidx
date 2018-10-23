@@ -5,6 +5,7 @@
 * :sparkles: Activityx adds appContext method
 * :sparkles: Viewx adds appContext method
 * :fire: Intentx canStartActivity and safeStartActivity method removed to Activityx and rename to canStart and safeStart
+* :sparkles: Activityx adds start method
 
 
 ## v0.3.2

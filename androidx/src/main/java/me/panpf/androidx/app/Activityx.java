@@ -30,6 +30,7 @@ import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -219,45 +220,45 @@ public class Activityx {
     }
 
 
-//    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
-//        safeStart(new Intent(context, clazz), bundle);
-//    }
-//
-//    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz) {
-//        activity.startActivity(new Intent(activity, clazz));
-//    }
-//
-//    public static void start(@NotNull android.support.v4.app.Fragment fragment, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
-//        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz), bundle);
-//    }
-//
-//    public static void start(@NotNull android.support.v4.app.Fragment fragment, @NotNull Class<? extends Activity> clazz) {
-//        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz));
-//    }
-//
-//    public static void start(@NotNull android.app.Fragment fragment, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
-//        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz), bundle);
-//    }
-//
-//    public static void start(@NotNull android.app.Fragment fragment, @NotNull Class<? extends Activity> clazz) {
-//        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz));
-//    }
-//
-//    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
-//        Intentx.safeStartActivity(new Intent(context, clazz), bundle);
-//    }
-//
-//    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz) {
-//        activity.startActivity(new Intent(activity, clazz));
-//    }
-//
-//    public static void start(@NotNull View view, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
-//        activity.startActivity(new Intent(activity, clazz), bundle);
-//    }
-//
-//    public static void start(@NotNull View view, @NotNull Class<? extends Activity> clazz) {
-//        activity.startActivity(new Intent(activity, clazz));
-//    }
+    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz, @NotNull Bundle options) {
+        safeStart(context, new Intent(context, clazz), options);
+    }
+
+    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz) {
+        safeStart(context, new Intent(context, clazz));
+    }
+
+    public static void start(@NotNull android.support.v4.app.Fragment fragment, @NotNull Class<? extends Activity> clazz, @NotNull Bundle options) {
+        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz), options);
+    }
+
+    public static void start(@NotNull android.support.v4.app.Fragment fragment, @NotNull Class<? extends Activity> clazz) {
+        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz));
+    }
+
+    public static void start(@NotNull android.app.Fragment fragment, @NotNull Class<? extends Activity> clazz, @NotNull Bundle options) {
+        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz), options);
+    }
+
+    public static void start(@NotNull android.app.Fragment fragment, @NotNull Class<? extends Activity> clazz) {
+        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz));
+    }
+
+    public static void start(@NotNull View view, @NotNull Class<? extends Activity> clazz, @NotNull Bundle options) {
+        safeStart(view.getContext(), new Intent(view.getContext(), clazz), options);
+    }
+
+    public static void start(@NotNull View view, @NotNull Class<? extends Activity> clazz) {
+        safeStart(view.getContext(), new Intent(view.getContext(), clazz));
+    }
+
+    public static void start(@NotNull View view, @NotNull Intent intent, @NotNull Bundle options) {
+        safeStart(view.getContext(), intent, options);
+    }
+
+    public static void start(@NotNull View view, @NotNull Intent intent) {
+        safeStart(view.getContext(), intent);
+    }
 
 
     /* ************************************* Intent Args ***************************************** */

@@ -24,6 +24,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.FragmentActivity
+import android.view.View
 import me.panpf.androidx.app.Activityx
 import java.io.Serializable
 import java.util.*
@@ -92,6 +93,27 @@ inline fun Context.safeStartActivity(intent: Intent, options: Bundle): Boolean =
  * Safely launch an Activity, catch ActivityNotFoundException and return false
  */
 inline fun Context.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart(this, intent)
+
+
+inline fun Context.startActivity(clazz: Class<out Activity>, options: Bundle) = Activityx.start(this, clazz, options)
+
+inline fun Context.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+
+inline fun android.support.v4.app.Fragment.startActivity(clazz: Class<out Activity>, options: Bundle) = Activityx.start(this, clazz, options)
+
+inline fun android.support.v4.app.Fragment.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+
+inline fun android.app.Fragment.startActivity(clazz: Class<out Activity>, options: Bundle) = Activityx.start(this, clazz, options)
+
+inline fun android.app.Fragment.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+
+inline fun View.startActivity(clazz: Class<out Activity>, options: Bundle) = Activityx.start(this, clazz, options)
+
+inline fun View.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+
+inline fun View.startActivity(intent: Intent, options: Bundle) = Activityx.start(this, intent, options)
+
+inline fun View.startActivity(intent: Intent) = Activityx.start(this, intent)
 
 
 /* ************************************* Intent Args ***************************************** */
