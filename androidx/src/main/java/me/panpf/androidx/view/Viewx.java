@@ -28,14 +28,12 @@ import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
-import org.jetbrains.annotations.NotNull;
-
 import me.panpf.androidx.widget.Toastx;
 
 @SuppressWarnings("WeakerAccess")
 public class Viewx {
 
-    @NotNull
+    @NonNull
     public static Context appContext(@NonNull View view) {
         return view.getContext().getApplicationContext();
     }

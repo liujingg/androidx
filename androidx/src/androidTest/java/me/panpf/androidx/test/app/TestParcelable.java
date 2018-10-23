@@ -4,37 +4,35 @@
 //import android.os.Parcelable;
 //import android.support.annotation.Nullable;
 //
-//import org.jetbrains.annotations.NotNull;
-//
 //import me.panpf.javax.util.Comparisonx;
 //
 //public final class TestParcelable implements Parcelable {
-//    @NotNull
+//    @NonNull
 //    private final String tag;
 //    public static final android.os.Parcelable.Creator CREATOR = new TestParcelable.Creator();
 //
-//    @NotNull
+//    @NonNull
 //    public final String getTag() {
 //        return this.tag;
 //    }
 //
-//    public TestParcelable(@NotNull String tag) {
+//    public TestParcelable(@NonNull String tag) {
 //        this.tag = tag;
 //    }
 //
-//    @NotNull
+//    @NonNull
 //    public final String component1() {
 //        return this.tag;
 //    }
 //
-//    @NotNull
-//    public final TestParcelable copy(@NotNull String tag) {
+//    @NonNull
+//    public final TestParcelable copy(@NonNull String tag) {
 //        return new TestParcelable(tag);
 //    }
 //
 //    // $FF: synthetic method
 //    // $FF: bridge method
-//    @NotNull
+//    @NonNull
 //    public static TestParcelable copy$default(TestParcelable var0, String var1, int var2, Object var3) {
 //        if ((var2 & 1) != 0) {
 //            var1 = var0.tag;
@@ -43,7 +41,7 @@
 //        return var0.copy(var1);
 //    }
 //
-//    @NotNull
+//    @NonNull
 //    public String toString() {
 //        return "TestParcelable(tag=" + this.tag + ")";
 //    }
@@ -71,18 +69,18 @@
 //        return 0;
 //    }
 //
-//    public void writeToParcel(@NotNull Parcel parcel, int flags) {
+//    public void writeToParcel(@NonNull Parcel parcel, int flags) {
 //        parcel.writeString(this.tag);
 //    }
 //
 //    public static class Creator implements android.os.Parcelable.Creator {
-//        @NotNull
+//        @NonNull
 //        public final Object[] newArray(int size) {
 //            return new TestParcelable[size];
 //        }
 //
-//        @NotNull
-//        public final Object createFromParcel(@NotNull Parcel in) {
+//        @NonNull
+//        public final Object createFromParcel(@NonNull Parcel in) {
 //            return new TestParcelable(in.readString());
 //        }
 //    }

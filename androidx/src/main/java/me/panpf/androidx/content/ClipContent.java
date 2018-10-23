@@ -17,14 +17,14 @@
 package me.panpf.androidx.content;
 
 import android.content.ClipData;
+import android.support.annotation.NonNull;
 
-import org.jetbrains.annotations.NotNull;
-
+@SuppressWarnings("WeakerAccess")
 public abstract class ClipContent {
-    @NotNull
+    @NonNull
     public String mimeType;
 
-    public ClipContent(@NotNull String mimeType) {
+    public ClipContent(@NonNull String mimeType) {
         this.mimeType = mimeType;
     }
 

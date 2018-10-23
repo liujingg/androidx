@@ -23,10 +23,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class Clipboardx {
     /**
      * copy
      */
-    public static void copy(@NotNull Context context, @NotNull ClipData clipData) {
+    public static void copy(@NonNull Context context, @NonNull ClipData clipData) {
         Contextx.clipboardManager(context).setPrimaryClip(clipData);
     }
 
@@ -47,7 +46,7 @@ public class Clipboardx {
     /**
      * Copy text
      */
-    public static void copyText(@NotNull Context context, @NotNull CharSequence label, @NotNull CharSequence[] texts) {
+    public static void copyText(@NonNull Context context, @NonNull CharSequence label, @NonNull CharSequence[] texts) {
         if (texts.length <= 0) return;
         ClipData data = ClipData.newPlainText(label, texts[0]);
         if (texts.length > 1) {
@@ -61,21 +60,21 @@ public class Clipboardx {
     /**
      * Copy text
      */
-    public static void copyText(@NotNull Context context, @NotNull CharSequence[] texts) {
+    public static void copyText(@NonNull Context context, @NonNull CharSequence[] texts) {
         copyText(context, "text", texts);
     }
 
     /**
      * Copy text
      */
-    public static void copyText(@NotNull Context context, @NotNull CharSequence label, @NotNull CharSequence text) {
+    public static void copyText(@NonNull Context context, @NonNull CharSequence label, @NonNull CharSequence text) {
         copy(context, ClipData.newPlainText(label, text));
     }
 
     /**
      * Copy text
      */
-    public static void copyText(@NotNull Context context, @NotNull CharSequence text) {
+    public static void copyText(@NonNull Context context, @NonNull CharSequence text) {
         copyText(context, "text", text);
     }
 
@@ -84,7 +83,7 @@ public class Clipboardx {
      * Copy html text
      */
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static void copyHtmlText(@NotNull Context context, @NotNull CharSequence label, @NotNull ClipHtmlText[] htmlContents) {
+    public static void copyHtmlText(@NonNull Context context, @NonNull CharSequence label, @NonNull ClipHtmlText[] htmlContents) {
         if (htmlContents.length <= 0) return;
         ClipHtmlText htmlContent = htmlContents[0];
         ClipData data = ClipData.newHtmlText(label, htmlContent.text, htmlContent.htmlText);
@@ -101,7 +100,7 @@ public class Clipboardx {
      * Copy html text
      */
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static void copyHtmlText(@NotNull Context context, @NotNull ClipHtmlText[] htmlContents) {
+    public static void copyHtmlText(@NonNull Context context, @NonNull ClipHtmlText[] htmlContents) {
         copyHtmlText(context, "htmlText", htmlContents);
     }
 
@@ -109,7 +108,7 @@ public class Clipboardx {
      * Copy html text
      */
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static void copyHtmlText(@NotNull Context context, @NotNull CharSequence label, @NotNull CharSequence text, @NotNull String htmlText) {
+    public static void copyHtmlText(@NonNull Context context, @NonNull CharSequence label, @NonNull CharSequence text, @NonNull String htmlText) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             copy(context, ClipData.newHtmlText(label, text, htmlText));
         }
@@ -119,7 +118,7 @@ public class Clipboardx {
      * Copy html text
      */
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static void copyHtmlText(@NotNull Context context, @NotNull CharSequence text, @NotNull String htmlText) {
+    public static void copyHtmlText(@NonNull Context context, @NonNull CharSequence text, @NonNull String htmlText) {
         copyHtmlText(context, "htmlText", text, htmlText);
     }
 
@@ -127,7 +126,7 @@ public class Clipboardx {
     /**
      * Copy intent
      */
-    public static void copyIntent(@NotNull Context context, @NotNull CharSequence label, @NotNull Intent[] intents) {
+    public static void copyIntent(@NonNull Context context, @NonNull CharSequence label, @NonNull Intent[] intents) {
         if (intents.length <= 0) return;
         ClipData data = ClipData.newIntent(label, intents[0]);
         if (intents.length > 1) {
@@ -141,21 +140,21 @@ public class Clipboardx {
     /**
      * Copy intent
      */
-    public static void copyIntent(@NotNull Context context, @NotNull Intent[] intents) {
+    public static void copyIntent(@NonNull Context context, @NonNull Intent[] intents) {
         copyIntent(context, "intent", intents);
     }
 
     /**
      * Copy intent
      */
-    public static void copyIntent(@NotNull Context context, @NotNull CharSequence label, @NotNull Intent intent) {
+    public static void copyIntent(@NonNull Context context, @NonNull CharSequence label, @NonNull Intent intent) {
         copy(context, ClipData.newIntent(label, intent));
     }
 
     /**
      * Copy intent
      */
-    public static void copyIntent(@NotNull Context context, @NotNull Intent intent) {
+    public static void copyIntent(@NonNull Context context, @NonNull Intent intent) {
         copyIntent(context, "intent", intent);
     }
 
@@ -163,7 +162,7 @@ public class Clipboardx {
     /**
      * Copy uri
      */
-    public static void copyUri(@NotNull Context context, @NotNull CharSequence label, @NotNull Uri[] uris) {
+    public static void copyUri(@NonNull Context context, @NonNull CharSequence label, @NonNull Uri[] uris) {
         if (uris.length <= 0) return;
         ClipData data = ClipData.newUri(context.getContentResolver(), label, uris[0]);
         if (uris.length > 1) {
@@ -177,21 +176,21 @@ public class Clipboardx {
     /**
      * Copy uri
      */
-    public static void copyUri(@NotNull Context context, @NotNull Uri[] uris) {
+    public static void copyUri(@NonNull Context context, @NonNull Uri[] uris) {
         copyUri(context, "uri", uris);
     }
 
     /**
      * Copy uri
      */
-    public static void copyUri(@NotNull Context context, @NotNull CharSequence label, @NotNull Uri uri) {
+    public static void copyUri(@NonNull Context context, @NonNull CharSequence label, @NonNull Uri uri) {
         copy(context, ClipData.newUri(context.getContentResolver(), label, uri));
     }
 
     /**
      * Copy uri
      */
-    public static void copyUri(@NotNull Context context, @NotNull Uri uri) {
+    public static void copyUri(@NonNull Context context, @NonNull Uri uri) {
         copyUri(context, "uri", uri);
     }
 
@@ -199,7 +198,7 @@ public class Clipboardx {
     /**
      * Copy raw uri
      */
-    public static void copyRawUri(@NotNull Context context, @NotNull CharSequence label, @NotNull Uri[] uris) {
+    public static void copyRawUri(@NonNull Context context, @NonNull CharSequence label, @NonNull Uri[] uris) {
         if (uris.length <= 0) return;
         ClipData data = ClipData.newRawUri(label, uris[0]);
         if (uris.length > 1) {
@@ -213,21 +212,21 @@ public class Clipboardx {
     /**
      * Copy raw uri
      */
-    public static void copyRawUri(@NotNull Context context, @NotNull Uri[] uris) {
+    public static void copyRawUri(@NonNull Context context, @NonNull Uri[] uris) {
         copyRawUri(context, "rawUri", uris);
     }
 
     /**
      * Copy raw uri
      */
-    public static void copyRawUri(@NotNull Context context, @NotNull CharSequence label, @NotNull Uri uri) {
+    public static void copyRawUri(@NonNull Context context, @NonNull CharSequence label, @NonNull Uri uri) {
         copy(context, ClipData.newRawUri(label, uri));
     }
 
     /**
      * Copy raw uri
      */
-    public static void copyRawUri(@NotNull Context context, @NotNull Uri uri) {
+    public static void copyRawUri(@NonNull Context context, @NonNull Uri uri) {
         copyRawUri(context, "rawUri", uri);
     }
 
@@ -235,7 +234,7 @@ public class Clipboardx {
     /**
      * Copy uri
      */
-    public static void copyMimeTypeUri(@NotNull Context context, @NotNull CharSequence label, @NotNull String mimeType, @NotNull Uri[] uris) {
+    public static void copyMimeTypeUri(@NonNull Context context, @NonNull CharSequence label, @NonNull String mimeType, @NonNull Uri[] uris) {
         if (uris.length <= 0) return;
         ClipData data = new ClipData(label, new String[]{mimeType}, new ClipData.Item(uris[0]));
         if (uris.length > 1) {
@@ -249,28 +248,28 @@ public class Clipboardx {
     /**
      * Copy uri
      */
-    public static void copyMimeTypeUri(@NotNull Context context, @NotNull String mimeType, @NotNull Uri[] uris) {
+    public static void copyMimeTypeUri(@NonNull Context context, @NonNull String mimeType, @NonNull Uri[] uris) {
         copyMimeTypeUri(context, "mimeTypeUri", mimeType, uris);
     }
 
     /**
      * Copy uri
      */
-    public static void copyMimeTypeUri(@NotNull Context context, @NotNull CharSequence label, @NotNull String mimeType, @NotNull Uri uri) {
+    public static void copyMimeTypeUri(@NonNull Context context, @NonNull CharSequence label, @NonNull String mimeType, @NonNull Uri uri) {
         copy(context, new ClipData(label, new String[]{mimeType}, new ClipData.Item(uri)));
     }
 
     /**
      * Copy uri
      */
-    public static void copyMimeTypeUri(@NotNull Context context, @NotNull String mimeType, @NotNull Uri uri) {
+    public static void copyMimeTypeUri(@NonNull Context context, @NonNull String mimeType, @NonNull Uri uri) {
         copyMimeTypeUri(context, "mimeTypeUri", mimeType, uri);
     }
 
     /**
      * Copy multi type content
      */
-    public static void copyContents(@NotNull Context context, @NotNull CharSequence label, @NotNull ClipContent[] contents) {
+    public static void copyContents(@NonNull Context context, @NonNull CharSequence label, @NonNull ClipContent[] contents) {
         if (contents.length <= 0) return;
 
         String[] mimeTypes = new String[contents.length];
@@ -289,7 +288,7 @@ public class Clipboardx {
     /**
      * Copy multi type content
      */
-    public static void copyContents(@NotNull Context context, @NotNull ClipContent[] contents) {
+    public static void copyContents(@NonNull Context context, @NonNull ClipContent[] contents) {
         copyContents(context, "contents", contents);
     }
 
@@ -297,7 +296,7 @@ public class Clipboardx {
      * Get current clip data
      */
     @Nullable
-    public static ClipData get(@NotNull Context context) {
+    public static ClipData get(@NonNull Context context) {
         return Contextx.clipboardManager(context).getPrimaryClip();
     }
 
@@ -305,7 +304,7 @@ public class Clipboardx {
      * Get current clip label
      */
     @Nullable
-    public static CharSequence getLabel(@NotNull Context context) {
+    public static CharSequence getLabel(@NonNull Context context) {
         ClipData data = get(context);
         return data != null ? data.getDescription().getLabel() : null;
     }
@@ -314,7 +313,7 @@ public class Clipboardx {
      * Get current clip all content
      */
     @Nullable
-    public static ClipContent[] getContents(@NotNull Context context) {
+    public static ClipContent[] getContents(@NonNull Context context) {
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -345,7 +344,7 @@ public class Clipboardx {
      * Get current clip text data
      */
     @Nullable
-    public static CharSequence getText(@NotNull Context context) {
+    public static CharSequence getText(@NonNull Context context) {
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -361,7 +360,7 @@ public class Clipboardx {
      * Get current clip all text data
      */
     @Nullable
-    public static CharSequence[] getTexts(@NotNull Context context) {
+    public static CharSequence[] getTexts(@NonNull Context context) {
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -384,7 +383,7 @@ public class Clipboardx {
      */
     @Nullable
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static ClipHtmlText getHtmlText(@NotNull Context context) {
+    public static ClipHtmlText getHtmlText(@NonNull Context context) {
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -403,7 +402,7 @@ public class Clipboardx {
      */
     @Nullable
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN)
-    public static ClipHtmlText[] getHtmlTexts(@NotNull Context context) {
+    public static ClipHtmlText[] getHtmlTexts(@NonNull Context context) {
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -426,7 +425,7 @@ public class Clipboardx {
      * Get current clip intent data
      */
     @Nullable
-    public static Intent getIntent(@NotNull Context context) {
+    public static Intent getIntent(@NonNull Context context) {
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -442,7 +441,7 @@ public class Clipboardx {
      * Get current clip all intent data
      */
     @Nullable
-    public static Intent[] getIntents(@NotNull Context context) {
+    public static Intent[] getIntents(@NonNull Context context) {
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -464,7 +463,7 @@ public class Clipboardx {
      * Get current clip uri data
      */
     @Nullable
-    public static ClipUri getUri(@NotNull Context context) {
+    public static ClipUri getUri(@NonNull Context context) {
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -483,7 +482,7 @@ public class Clipboardx {
      * Get current clip all uri data
      */
     @Nullable
-    public static ClipUri[] getUris(@NotNull Context context) {
+    public static ClipUri[] getUris(@NonNull Context context) {
         ClipData data = get(context);
         if (data == null || data.getItemCount() <= 0 || data.getDescription().getMimeTypeCount() <= 0)
             return null;
@@ -507,14 +506,14 @@ public class Clipboardx {
     /**
      * Add primary clip changed listener
      */
-    public static void addPrimaryClipChangedListener(@NotNull Context context, @NotNull ClipboardManager.OnPrimaryClipChangedListener listener) {
+    public static void addPrimaryClipChangedListener(@NonNull Context context, @NonNull ClipboardManager.OnPrimaryClipChangedListener listener) {
         Contextx.clipboardManager(context).addPrimaryClipChangedListener(listener);
     }
 
     /**
      * Remove primary clip changed listener
      */
-    public static void removePrimaryClipChangedListener(@NotNull Context context, @NotNull ClipboardManager.OnPrimaryClipChangedListener listener) {
+    public static void removePrimaryClipChangedListener(@NonNull Context context, @NonNull ClipboardManager.OnPrimaryClipChangedListener listener) {
         Contextx.clipboardManager(context).removePrimaryClipChangedListener(listener);
     }
 
@@ -523,7 +522,7 @@ public class Clipboardx {
      * Clean clip data
      */
     @RequiresApi(Build.VERSION_CODES.P)
-    public static void clear(@NotNull Context context) {
+    public static void clear(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             Contextx.clipboardManager(context).clearPrimaryClip();
         }

@@ -24,7 +24,6 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.SparseArray;
 
-import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -122,209 +121,209 @@ public class AndroidxText {
         SparseArray<List<Predicate<String>>> array = new SparseArray<>();
         array.append(Build.VERSION_CODES.JELLY_BEAN, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastJ();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast16();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast4_1();
             }
         }));
         array.append(Build.VERSION_CODES.JELLY_BEAN_MR1, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastJMR1();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast17();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast4_2();
             }
         }));
         array.append(Build.VERSION_CODES.JELLY_BEAN_MR2, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastJMR2();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast18();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast4_3();
             }
         }));
         array.append(Build.VERSION_CODES.KITKAT, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastK();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast19();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast4_4();
             }
         }));
         array.append(Build.VERSION_CODES.KITKAT_WATCH, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastKW();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast20();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast4_4_W();
             }
         }));
         array.append(Build.VERSION_CODES.LOLLIPOP, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastL();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast21();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast5_0();
             }
         }));
         array.append(Build.VERSION_CODES.LOLLIPOP_MR1, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastLMR1();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast22();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast5_1();
             }
         }));
         array.append(Build.VERSION_CODES.M, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastM();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast23();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast6_0();
             }
         }));
         array.append(Build.VERSION_CODES.N, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastN();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast24();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast7_0();
             }
         }));
         array.append(Build.VERSION_CODES.N_MR1, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastNMR1();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast25();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast7_1();
             }
         }));
         array.append(Build.VERSION_CODES.O, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastO();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast26();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast8_0();
             }
         }));
         array.append(Build.VERSION_CODES.O_MR1, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastOMR1();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast27();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast8_1();
             }
         }));
         array.append(Build.VERSION_CODES.P, Collectionx.listOf(new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastP();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast28();
             }
         }, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeast9_0();
             }
         }));

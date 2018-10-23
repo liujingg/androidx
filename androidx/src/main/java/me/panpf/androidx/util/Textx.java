@@ -26,8 +26,6 @@ import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 
-import org.jetbrains.annotations.NotNull;
-
 import me.panpf.androidx.graphics.Paintx;
 
 @SuppressWarnings("WeakerAccess")
@@ -89,14 +87,14 @@ public class Textx {
     /**
      * 使用 Html 的方式给字符串添加颜色标记
      */
-    public static String toHtmlColorFlag(@NotNull String string, @NonNull String color) {
+    public static String toHtmlColorFlag(@NonNull String string, @NonNull String color) {
         return "<font color=\"" + color + "\">" + string + "</font>";
     }
 
     /**
      * 使用 Html 的方式给字符串添加红色标记
      */
-    public static String toHtmlRedFlag(@NotNull String string) {
+    public static String toHtmlRedFlag(@NonNull String string) {
         return toHtmlColorFlag(string, "red");
     }
 

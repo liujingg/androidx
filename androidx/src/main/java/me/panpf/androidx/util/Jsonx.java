@@ -19,7 +19,6 @@ package me.panpf.androidx.util;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,7 +78,7 @@ public class Jsonx {
     }
 
 
-    @NotNull
+    @NonNull
     public static List<String> toStringList(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() <= 0) {
             return new ArrayList<>(0);
@@ -93,13 +92,13 @@ public class Jsonx {
         return dataList;
     }
 
-    @NotNull
+    @NonNull
     public static List<String> toStringList(@Nullable String json) throws JSONException {
         return !isEmpty(json) ? toStringList(new JSONArray(json)) : new ArrayList<String>(0);
     }
 
 
-    @NotNull
+    @NonNull
     public static String[] toStringArray(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
             return new String[0];
@@ -113,13 +112,13 @@ public class Jsonx {
         return dataStrings;
     }
 
-    @NotNull
+    @NonNull
     public static String[] toStringArray(@Nullable String json) throws JSONException {
         return !isEmpty(json) ? toStringArray(new JSONArray(json)) : new String[0];
     }
 
 
-    @NotNull
+    @NonNull
     public static int[] toIntArray(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
             return new int[0];
@@ -133,13 +132,13 @@ public class Jsonx {
         return dataInts;
     }
 
-    @NotNull
+    @NonNull
     public static int[] toIntArray(@Nullable String json) throws JSONException {
         return !isEmpty(json) ? toIntArray(new JSONArray(json)) : new int[0];
     }
 
 
-    @NotNull
+    @NonNull
     public static <Bean> ArrayList<Bean> toBeanList(@Nullable JSONArray jsonArray, @NonNull BeanParser<Bean> parser) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
             return new ArrayList<>(0);
@@ -159,7 +158,7 @@ public class Jsonx {
         return commentList;
     }
 
-    @NotNull
+    @NonNull
     public static <Bean> ArrayList<Bean> toBeanList(@Nullable String jsonArrayString, @NonNull BeanParser<Bean> parser) throws JSONException {
         if (isEmpty(jsonArrayString)) return new ArrayList<>(0);
         return toBeanList(new JSONArray(jsonArrayString), parser);
@@ -179,7 +178,7 @@ public class Jsonx {
     }
 
 
-    @NotNull
+    @NonNull
     public static String optString(@NonNull JSONObject jsonObject, @NonNull String[] keys, @NonNull String defaultValue) {
         Object value;
         for (String key : keys) {
@@ -193,7 +192,7 @@ public class Jsonx {
         return defaultValue;
     }
 
-    @NotNull
+    @NonNull
     public static String optString(@NonNull JSONObject jsonObject, @NonNull String[] keys) {
         return optString(jsonObject, keys, "");
     }
@@ -262,19 +261,19 @@ public class Jsonx {
         return null;
     }
 
-    @NotNull
+    @NonNull
     public static String format(@Nullable JSONObject jsonObject) {
         if (jsonObject == null) return "{}";
         return appendJsonObject(new StringBuilder(), jsonObject, 0).toString();
     }
 
-    @NotNull
+    @NonNull
     public static String format(@Nullable JSONArray jsonArray) {
         if (jsonArray == null || jsonArray.length() <= 0) return "[]";
         return appendJsonArray(new StringBuilder(), jsonArray, 0).toString();
     }
 
-    @NotNull
+    @NonNull
     public static String format(@Nullable String json) {
         if (isEmpty(json)) {
             return "{}";

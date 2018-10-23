@@ -25,8 +25,6 @@ import android.os.storage.StorageVolume;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -42,14 +40,14 @@ import me.panpf.javax.util.Transformer;
 @SuppressWarnings({"WeakerAccess", "unused"})
 public class StorageManagerCompat {
 
-    @NotNull
+    @NonNull
     private StorageManager manager;
 
-    public StorageManagerCompat(@NotNull StorageManager manager) {
+    public StorageManagerCompat(@NonNull StorageManager manager) {
         this.manager = manager;
     }
 
-    public StorageManagerCompat(@NotNull Context context) {
+    public StorageManagerCompat(@NonNull Context context) {
         this(Contextx.storageManager(context));
     }
 
@@ -57,9 +55,9 @@ public class StorageManagerCompat {
     public List<StorageVolumeCompat> getVolumeList() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return Collectionx.map(manager.getStorageVolumes(), new Transformer<StorageVolume, StorageVolumeCompat>() {
-                @NotNull
+                @NonNull
                 @Override
-                public StorageVolumeCompat transform(@NotNull StorageVolume storageVolume) {
+                public StorageVolumeCompat transform(@NonNull StorageVolume storageVolume) {
                     return new StorageVolumeCompat(storageVolume);
                 }
             });
@@ -71,9 +69,9 @@ public class StorageManagerCompat {
                 e.printStackTrace();
             }
             return storageVolumes != null ? Arrayx.map(storageVolumes, new Transformer<StorageVolume, StorageVolumeCompat>() {
-                @NotNull
+                @NonNull
                 @Override
-                public StorageVolumeCompat transform(@NotNull StorageVolume storageVolume) {
+                public StorageVolumeCompat transform(@NonNull StorageVolume storageVolume) {
                     return new StorageVolumeCompat(storageVolume);
                 }
             }) : new ArrayList<StorageVolumeCompat>(0);
@@ -108,8 +106,8 @@ public class StorageManagerCompat {
      * {@link Environment#MEDIA_MOUNTED_READ_ONLY}, {@link Environment#MEDIA_SHARED},
      * {@link Environment#MEDIA_BAD_REMOVAL}, or {@link Environment#MEDIA_UNMOUNTABLE}.
      */
-    @NotNull
-    public String getVolumeState(@NotNull String mountPoint) {
+    @NonNull
+    public String getVolumeState(@NonNull String mountPoint) {
         Object result = null;
         try {
             result = Classx.callMethod(manager, "getVolumeState", mountPoint);
@@ -124,7 +122,7 @@ public class StorageManagerCompat {
      */
     @SuppressLint("NewApi")
     @Nullable
-    public StorageVolumeCompat getVolume(@NotNull File file) {
+    public StorageVolumeCompat getVolume(@NonNull File file) {
         StorageVolume storageVolume = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             // Sometimes the file is right or the StorageVolume is not available.
@@ -144,7 +142,7 @@ public class StorageManagerCompat {
     }
 
     @Nullable
-    private StorageVolumeCompat matchVolume(@NotNull List<StorageVolumeCompat> volumes, @Nullable File file) {
+    private StorageVolumeCompat matchVolume(@NonNull List<StorageVolumeCompat> volumes, @Nullable File file) {
         if (file == null) return null;
         File canonicalFile;
         try {

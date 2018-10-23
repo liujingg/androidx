@@ -2,26 +2,24 @@
 //
 //import android.support.annotation.Nullable;
 //
-//import org.jetbrains.annotations.NotNull;
-//
 //import java.io.Serializable;
 //
 //import me.panpf.javax.util.Comparisonx;
 //
 //public final class TestSerializable implements Serializable {
-//    @NotNull
+//    @NonNull
 //    private final String tag;
 //
-//    @NotNull
+//    @NonNull
 //    public final String getTag() {
 //        return this.tag;
 //    }
 //
-//    public TestSerializable(@NotNull String tag) {
+//    public TestSerializable(@NonNull String tag) {
 //        this.tag = tag;
 //    }
 //
-//    @NotNull
+//    @NonNull
 //    public String toString() {
 //        return "TestSerializable(tag=" + this.tag + ")";
 //    }

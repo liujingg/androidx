@@ -19,26 +19,25 @@ package me.panpf.androidx.content;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
-
-import org.jetbrains.annotations.NotNull;
 
 public class ClipHtmlText extends ClipContent {
 
-    @NotNull
+    @NonNull
     public CharSequence text;
 
-    @NotNull
+    @NonNull
     public String htmlText;
 
-    ClipHtmlText(@NotNull String mimeType, @NotNull CharSequence text, @NotNull String htmlText) {
+    ClipHtmlText(@NonNull String mimeType, @NonNull CharSequence text, @NonNull String htmlText) {
         super(mimeType);
         this.text = text;
         this.htmlText = htmlText;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public ClipHtmlText(@NotNull CharSequence text, @NotNull String htmlText) {
+    public ClipHtmlText(@NonNull CharSequence text, @NonNull String htmlText) {
         this(ClipDescription.MIMETYPE_TEXT_HTML, text, htmlText);
     }
 

@@ -20,9 +20,8 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
 import android.os.storage.StorageVolume;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import java.io.File;
 
@@ -32,10 +31,10 @@ import me.panpf.javax.lang.Classx;
 @SuppressWarnings("WeakerAccess")
 public class StorageVolumeCompat {
 
-    @NotNull
+    @NonNull
     private StorageVolume storageVolume;
 
-    public StorageVolumeCompat(@NotNull StorageVolume storageVolume) {
+    public StorageVolumeCompat(@NonNull StorageVolume storageVolume) {
         this.storageVolume = storageVolume;
     }
 
@@ -162,8 +161,8 @@ public class StorageVolumeCompat {
      * {@link Environment#MEDIA_MOUNTED_READ_ONLY}, {@link Environment#MEDIA_SHARED},
      * {@link Environment#MEDIA_BAD_REMOVAL}, or {@link Environment#MEDIA_UNMOUNTABLE}.
      */
-    @NotNull
-    public String getState(@NotNull Context context) {
+    @NonNull
+    public String getState(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return storageVolume.getState();
         } else {

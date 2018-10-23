@@ -21,9 +21,7 @@ import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 import java.lang.ref.WeakReference;
 import java.lang.reflect.Modifier;
@@ -49,7 +47,7 @@ import me.panpf.androidx.app.Fragmentx;
 @SuppressWarnings("WeakerAccess")
 public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends AsyncTask<Param, Progress, Result> {
 
-    @NotNull
+    @NonNull
     private WeakReference<Page> reference;
 
     public WeakAsyncTask(@NonNull Page page) {
@@ -97,7 +95,7 @@ public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends Async
         }
     }
 
-    protected void onPreExecute(@NotNull Page page) {
+    protected void onPreExecute(@NonNull Page page) {
 
     }
 
@@ -108,7 +106,7 @@ public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends Async
     }
 
     @Nullable
-    protected abstract Result doInBackground(@NotNull Page page, @NotNull Param[] params);
+    protected abstract Result doInBackground(@NonNull Page page, @NonNull Param[] params);
 
     @Override
     protected final void onProgressUpdate(Progress[] values) {
@@ -119,7 +117,7 @@ public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends Async
         }
     }
 
-    protected void onProgressUpdate(@NotNull Page page, @NotNull Progress[] values) {
+    protected void onProgressUpdate(@NonNull Page page, @NonNull Progress[] values) {
 
     }
 
@@ -132,6 +130,6 @@ public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends Async
         }
     }
 
-    protected void onPostExecute(@NotNull Page page, @Nullable Result result) {
+    protected void onPostExecute(@NonNull Page page, @Nullable Result result) {
     }
 }

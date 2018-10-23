@@ -21,8 +21,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.jetbrains.annotations.NotNull;
-
 import me.panpf.androidx.util.WeakAsyncTask;
 
 public class WeakAsyncTaskTestActivity extends Activity {
@@ -42,7 +40,7 @@ public class WeakAsyncTaskTestActivity extends Activity {
         }
 
         @Override
-        protected Integer doInBackground(@NotNull WeakAsyncTaskTestActivity weakAsyncTaskTestActivity, @NonNull Integer[] integers) {
+        protected Integer doInBackground(@NonNull WeakAsyncTaskTestActivity weakAsyncTaskTestActivity, @NonNull Integer[] integers) {
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException e) {
@@ -52,7 +50,7 @@ public class WeakAsyncTaskTestActivity extends Activity {
         }
 
         @Override
-        protected void onPostExecute(@NotNull WeakAsyncTaskTestActivity weakAsyncTaskTestActivity, @Nullable Integer integer) {
+        protected void onPostExecute(@NonNull WeakAsyncTaskTestActivity weakAsyncTaskTestActivity, @Nullable Integer integer) {
             super.onPostExecute(weakAsyncTaskTestActivity, integer);
             weakAsyncTaskTestActivity.result = "onPostExecute";
         }

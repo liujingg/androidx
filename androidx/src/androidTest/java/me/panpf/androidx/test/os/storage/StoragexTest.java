@@ -18,10 +18,10 @@ package me.panpf.androidx.test.os.storage;
 
 import android.content.Context;
 import android.os.Environment;
+import android.support.annotation.NonNull;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -162,7 +162,7 @@ public class StoragexTest {
         final File sdcard = Environment.getExternalStorageDirectory();
         assertNotNull(Arrayx.find(Storagex.getExternalStorageDirectorys(context), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 try {
                     return file.getCanonicalPath().equals(sdcard.getCanonicalPath());
                 } catch (IOException e) {
@@ -173,7 +173,7 @@ public class StoragexTest {
         }));
         assertNull(Arrayx.find(Storagex.getExternalStorageDirectorys(context, true), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 try {
                     return file.getCanonicalPath().equals(sdcard.getCanonicalPath());
                 } catch (IOException e) {
@@ -184,7 +184,7 @@ public class StoragexTest {
         }));
         assertNotNull(Arrayx.find(Storagex.getMountedExternalStorageDirectorys(context), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 try {
                     return file.getCanonicalPath().equals(sdcard.getCanonicalPath());
                 } catch (IOException e) {
@@ -195,7 +195,7 @@ public class StoragexTest {
         }));
         assertNull(Arrayx.find(Storagex.getMountedExternalStorageDirectorys(context, true), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 try {
                     return file.getCanonicalPath().equals(sdcard.getCanonicalPath());
                 } catch (IOException e) {
@@ -213,7 +213,7 @@ public class StoragexTest {
         final File sdcard = new File(Environment.getExternalStorageDirectory(), childPath);
         assertNotNull(Arrayx.find(Storagex.getExternalStorageDirectorysWithPath(context, childPath), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 try {
                     return file.getCanonicalPath().equals(sdcard.getCanonicalPath());
                 } catch (IOException e) {
@@ -224,7 +224,7 @@ public class StoragexTest {
         }));
         assertNull(Arrayx.find(Storagex.getExternalStorageDirectorysWithPath(context, childPath, true), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 try {
                     return file.getCanonicalPath().equals(sdcard.getCanonicalPath());
                 } catch (IOException e) {
@@ -235,7 +235,7 @@ public class StoragexTest {
         }));
         assertNotNull(Arrayx.find(Storagex.getMountedExternalStorageDirectorysWithPath(context, childPath), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 try {
                     return file.getCanonicalPath().equals(sdcard.getCanonicalPath());
                 } catch (IOException e) {
@@ -246,7 +246,7 @@ public class StoragexTest {
         }));
         assertNull(Arrayx.find(Storagex.getMountedExternalStorageDirectorysWithPath(context, childPath, true), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 try {
                     return file.getCanonicalPath().equals(sdcard.getCanonicalPath());
                 } catch (IOException e) {
@@ -279,14 +279,14 @@ public class StoragexTest {
         File[] appExternalCacheDirs = Storagex.getAppExternalCacheDirs(context);
         assertTrue(appExternalCacheDirs.length >= 1 && Arrayx.all(appExternalCacheDirs, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/data/" + context.getPackageName() + "/cache");
             }
         }));
         File[] appExternalCacheDirs2 = Storagex.getAppExternalCacheDirs(context, "com.github.panpf.test");
         assertTrue(appExternalCacheDirs2.length >= 1 && Arrayx.all(appExternalCacheDirs2, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/data/com.github.panpf.test/cache");
             }
         }));
@@ -306,24 +306,24 @@ public class StoragexTest {
         File[] appCacheDirs = Storagex.getAppCacheDirs(context);
         assertTrue(appCacheDirs.length >= 2 && Arrayx.any(appCacheDirs, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/data/" + context.getPackageName() + "/cache");
             }
         }) && Arrayx.any(appCacheDirs, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return file.getPath().startsWith("/data/") && file.getPath().endsWith(context.getPackageName() + "/cache");
             }
         }));
         File[] appCacheDirs2 = Storagex.getAppCacheDirs(context, "com.github.panpf.test");
         assertTrue(appCacheDirs2.length >= 2 && Arrayx.any(appCacheDirs2, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/data/com.github.panpf.test/cache");
             }
         }) && Arrayx.any(appCacheDirs2, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return file.getPath().startsWith("/data/") && file.getPath().endsWith("com.github.panpf.test/cache");
             }
         }));
@@ -363,14 +363,14 @@ public class StoragexTest {
         File[] appExternalFilesDirs = Storagex.getAppExternalFilesDirs(context);
         assertTrue(appExternalFilesDirs.length >= 1 && Arrayx.all(appExternalFilesDirs, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/data/" + context.getPackageName() + "/files");
             }
         }));
         File[] appExternalFilesDirs2 = Storagex.getAppExternalFilesDirs(context, "com.github.panpf.test");
         assertTrue(appExternalFilesDirs2.length >= 1 && Arrayx.all(appExternalFilesDirs2, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/data/com.github.panpf.test/files");
             }
         }));
@@ -390,24 +390,24 @@ public class StoragexTest {
         File[] appFilesDirs = Storagex.getAppFilesDirs(context);
         assertTrue(appFilesDirs.length >= 2 && Arrayx.any(appFilesDirs, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/data/" + context.getPackageName() + "/files");
             }
         }) && Arrayx.any(appFilesDirs, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return file.getPath().startsWith("/data/") && file.getPath().endsWith(context.getPackageName() + "/files");
             }
         }));
         File[] appFilesDirs2 = Storagex.getAppFilesDirs(context, "com.github.panpf.test");
         assertTrue(appFilesDirs2.length >= 2 && Arrayx.any(appFilesDirs2, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/data/com.github.panpf.test/files");
             }
         }) && Arrayx.any(appFilesDirs2, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return file.getPath().startsWith("/data/") && file.getPath().endsWith("com.github.panpf.test/files");
             }
         }));
@@ -447,14 +447,14 @@ public class StoragexTest {
         File[] appObbDirs = Storagex.getAppObbDirs(context);
         assertTrue(appObbDirs.length >= 1 && Arrayx.all(appObbDirs, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/obb/" + context.getPackageName());
             }
         }));
         File[] appObbDirs2 = Storagex.getAppObbDirs(context, "com.github.panpf.test");
         assertTrue(appObbDirs2.length >= 1 && Arrayx.all(appObbDirs2, new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return !file.getPath().startsWith("/data/") && file.getPath().endsWith("Android/obb/com.github.panpf.test");
             }
         }));

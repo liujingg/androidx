@@ -24,8 +24,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -143,8 +141,8 @@ public class Storagex {
     /**
      * Returns volume state for given path
      */
-    @NotNull
-    public static String getVolumeState(@NotNull Context context, @NotNull File path) {
+    @NonNull
+    public static String getVolumeState(@NonNull Context context, @NonNull File path) {
         StorageVolumeCompat volumeCompat = getVolume(context, path);
         return volumeCompat != null ? volumeCompat.getState(context) : "unknown";
     }
@@ -152,7 +150,7 @@ public class Storagex {
     /**
      * Returns true if the state of the volume at which the given path is mounted
      */
-    public static boolean isVolumeMounted(@NotNull Context context, @NotNull File path) {
+    public static boolean isVolumeMounted(@NonNull Context context, @NonNull File path) {
         return Environment.MEDIA_MOUNTED.equals(getVolumeState(context, path));
     }
 
@@ -160,7 +158,7 @@ public class Storagex {
     /**
      * Return true if the volume of the given path is the primary volume
      */
-    public static boolean isPrimaryVolume(@NotNull Context context, @NotNull File path) {
+    public static boolean isPrimaryVolume(@NonNull Context context, @NonNull File path) {
         StorageVolumeCompat volumeCompat = getVolume(context, path);
         return volumeCompat != null && volumeCompat.isPrimary();
     }
@@ -168,7 +166,7 @@ public class Storagex {
     /**
      * Return true if the volume of the given path is the emulated volume
      */
-    public static boolean isVolumeEmulated(@NotNull Context context, @NotNull File path) {
+    public static boolean isVolumeEmulated(@NonNull Context context, @NonNull File path) {
         StorageVolumeCompat volumeCompat = getVolume(context, path);
         return volumeCompat != null && volumeCompat.isEmulated();
     }
@@ -176,7 +174,7 @@ public class Storagex {
     /**
      * Return true if the volume of the given path is the removable volume
      */
-    public static boolean isVolumeRemovable(@NotNull Context context, @NotNull File path) {
+    public static boolean isVolumeRemovable(@NonNull Context context, @NonNull File path) {
         StorageVolumeCompat volumeCompat = getVolume(context, path);
         return volumeCompat != null && volumeCompat.isRemovable();
     }
@@ -185,19 +183,19 @@ public class Storagex {
     /**
      * Returns list of path for all volumes.
      */
-    @NotNull
-    public static String[] getVolumePaths(@NotNull Context context) {
+    @NonNull
+    public static String[] getVolumePaths(@NonNull Context context) {
         return Contextx.storageManagerCompat(context).getVolumePaths();
     }
 
     /**
      * Returns list of path for all mounted volumes.
      */
-    @NotNull
-    public static String[] getMountedVolumePaths(@NotNull final Context context) {
+    @NonNull
+    public static String[] getMountedVolumePaths(@NonNull final Context context) {
         return Arrayx.filter(getVolumePaths(context), new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String path) {
+            public boolean accept(@NonNull String path) {
                 return isVolumeMounted(context, new File(path));
             }
         }).toArray(new String[0]);
@@ -207,12 +205,12 @@ public class Storagex {
     /**
      * Returns list of files for all volumes.
      */
-    @NotNull
-    public static File[] getVolumeFiles(@NotNull Context context) {
+    @NonNull
+    public static File[] getVolumeFiles(@NonNull Context context) {
         return Arrayx.map(getVolumePaths(context), new Transformer<String, File>() {
-            @NotNull
+            @NonNull
             @Override
-            public File transform(@NotNull String volumePath) {
+            public File transform(@NonNull String volumePath) {
                 return new File(volumePath);
             }
         }).toArray(new File[0]);
@@ -221,11 +219,11 @@ public class Storagex {
     /**
      * Returns list of files for all mounted volumes.
      */
-    @NotNull
-    public static File[] getMountedVolumeFiles(@NotNull final Context context) {
+    @NonNull
+    public static File[] getMountedVolumeFiles(@NonNull final Context context) {
         return Arrayx.filter(getVolumeFiles(context), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return isVolumeMounted(context, file);
             }
         }).toArray(new File[0]);
@@ -235,19 +233,19 @@ public class Storagex {
     /**
      * Returns list of StorageVolume for all volumes.
      */
-    @NotNull
-    public static List<StorageVolumeCompat> getVolumeList(@NotNull Context context) {
+    @NonNull
+    public static List<StorageVolumeCompat> getVolumeList(@NonNull Context context) {
         return Contextx.storageManagerCompat(context).getVolumeList();
     }
 
     /**
      * Returns list of StorageVolume for all mounted volumes.
      */
-    @NotNull
-    public static List<StorageVolumeCompat> getMountedVolumeList(@NotNull final Context context) {
+    @NonNull
+    public static List<StorageVolumeCompat> getMountedVolumeList(@NonNull final Context context) {
         return Collectionx.filter(getVolumeList(context), new Predicate<StorageVolumeCompat>() {
             @Override
-            public boolean accept(@NotNull StorageVolumeCompat storageVolumeCompat) {
+            public boolean accept(@NonNull StorageVolumeCompat storageVolumeCompat) {
                 return Environment.MEDIA_MOUNTED.equals(storageVolumeCompat.getState(context));
             }
         });
@@ -256,19 +254,19 @@ public class Storagex {
     /**
      * Returns array of StorageVolume for all volumes.
      */
-    @NotNull
-    public static StorageVolumeCompat[] getVolumes(@NotNull Context context) {
+    @NonNull
+    public static StorageVolumeCompat[] getVolumes(@NonNull Context context) {
         return Contextx.storageManagerCompat(context).getVolumes();
     }
 
     /**
      * Returns array of StorageVolume for all mounted volumes.
      */
-    @NotNull
-    public static StorageVolumeCompat[] getMountedVolumes(@NotNull final Context context) {
+    @NonNull
+    public static StorageVolumeCompat[] getMountedVolumes(@NonNull final Context context) {
         return Arrayx.filter(getVolumes(context), new Predicate<StorageVolumeCompat>() {
             @Override
-            public boolean accept(@NotNull StorageVolumeCompat storageVolumeCompat) {
+            public boolean accept(@NonNull StorageVolumeCompat storageVolumeCompat) {
                 return Environment.MEDIA_MOUNTED.equals(storageVolumeCompat.getState(context));
             }
         }).toArray(new StorageVolumeCompat[0]);
@@ -279,7 +277,7 @@ public class Storagex {
      * Returns StorageVolume for path.
      */
     @Nullable
-    public static StorageVolumeCompat getVolume(@NotNull Context context, @NotNull File path) {
+    public static StorageVolumeCompat getVolume(@NonNull Context context, @NonNull File path) {
         return Contextx.storageManagerCompat(context).getVolume(path);
     }
 
@@ -298,8 +296,8 @@ public class Storagex {
      * {@link Environment#MEDIA_BAD_REMOVAL}, or {@link Environment#MEDIA_UNMOUNTABLE}.
      * @see #getExternalStorageDirectory()
      */
-    @NotNull
-    public static String getExternalStorageState(@NonNull Context context, @NotNull File path) {
+    @NonNull
+    public static String getExternalStorageState(@NonNull Context context, @NonNull File path) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return Environment.getExternalStorageState(path);
         } else {
@@ -310,7 +308,7 @@ public class Storagex {
     /**
      * Return true if the state of the given path is MOUNTED
      */
-    public static boolean isExternalStorageMounted(@NonNull Context context, @NotNull File path) {
+    public static boolean isExternalStorageMounted(@NonNull Context context, @NonNull File path) {
         return Environment.MEDIA_MOUNTED.equals(getExternalStorageState(context, path));
     }
 
@@ -324,7 +322,7 @@ public class Storagex {
      * {@link Environment#MEDIA_BAD_REMOVAL}, or {@link Environment#MEDIA_UNMOUNTABLE}.
      * @see #getExternalStorageDirectory()
      */
-    @NotNull
+    @NonNull
     public static String getExternalStorageState() {
         return Environment.getExternalStorageState();
     }
@@ -339,14 +337,14 @@ public class Storagex {
     /**
      * Return true if the path is the primary volume
      */
-    public static boolean isPrimaryExternalStorage(@NotNull Context context, @NotNull File path) {
+    public static boolean isPrimaryExternalStorage(@NonNull Context context, @NonNull File path) {
         return isPrimaryVolume(context, path);
     }
 
     /**
      * Return true if the volume of the given path is emulated
      */
-    public static boolean isExternalStorageEmulated(@NotNull Context context, @NotNull File path) {
+    public static boolean isExternalStorageEmulated(@NonNull Context context, @NonNull File path) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return Environment.isExternalStorageEmulated(path);
         } else {
@@ -365,7 +363,7 @@ public class Storagex {
     /**
      * Return true if the state of the given path is REMOVED
      */
-    public static boolean isExternalStorageRemovable(@NotNull Context context, @NotNull File path) {
+    public static boolean isExternalStorageRemovable(@NonNull Context context, @NonNull File path) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             return Environment.isExternalStorageRemovable(path);
         } else {
@@ -454,7 +452,7 @@ public class Storagex {
     public static File[] getMountedExternalStorageDirectorys(@NonNull final Context context, final boolean ignorePrimary) {
         return Arrayx.filter(getExternalStorageDirectorys(context, ignorePrimary), new Predicate<File>() {
             @Override
-            public boolean accept(@NotNull File file) {
+            public boolean accept(@NonNull File file) {
                 return isExternalStorageMounted(context, file);
             }
         }).toArray(new File[0]);
@@ -560,13 +558,13 @@ public class Storagex {
     /**
      * Get the all app external cache directory
      */
-    @NotNull
+    @NonNull
     public static File[] getAppExternalCacheDirs(@NonNull final Context context) {
         File[] externalCacheDirs = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
             externalCacheDirs = Arrayx.filter(context.getExternalCacheDirs(), new Predicate<File>() {
                 @Override
-                public boolean accept(@NotNull File file) {
+                public boolean accept(@NonNull File file) {
                     //noinspection ConstantConditions
                     return file != null;
                 }
@@ -576,9 +574,9 @@ public class Storagex {
             return externalCacheDirs;
         } else {
             return Arrayx.map(getMountedExternalStorageDirectorys(context), new Transformer<File, File>() {
-                @NotNull
+                @NonNull
                 @Override
-                public File transform(@NotNull File file) {
+                public File transform(@NonNull File file) {
                     return new File(file, "Android/data/" + context.getPackageName() + "/cache");
                 }
             }).toArray(new File[0]);
@@ -590,12 +588,12 @@ public class Storagex {
      *
      * @param packageName App package name
      */
-    @NotNull
+    @NonNull
     public static File[] getAppExternalCacheDirs(@NonNull final Context context, @NonNull final String packageName) {
         return Arrayx.map(getAppExternalCacheDirs(context), new Transformer<File, File>() {
-            @NotNull
+            @NonNull
             @Override
-            public File transform(@NotNull File file) {
+            public File transform(@NonNull File file) {
                 return new File(file.getPath().replace(context.getPackageName(), packageName));
             }
         }).toArray(new File[0]);
@@ -605,7 +603,7 @@ public class Storagex {
     /**
      * Get the app internal cache directory
      */
-    @NotNull
+    @NonNull
     public static File getAppInternalCacheDir(@NonNull Context context) {
         return context.getCacheDir();
     }
@@ -615,7 +613,7 @@ public class Storagex {
      *
      * @param packageName App package name
      */
-    @NotNull
+    @NonNull
     public static File getAppInternalCacheDir(@NonNull Context context, @NonNull String packageName) {
         return new File(getAppInternalCacheDir(context).getPath().replace(context.getPackageName(), packageName));
     }
@@ -729,13 +727,13 @@ public class Storagex {
     /**
      * Get the all app external files directory
      */
-    @NotNull
+    @NonNull
     public static File[] getAppExternalFilesDirs(@NonNull final Context context) {
         File[] externalFilesDirs = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
             externalFilesDirs = Arrayx.filter(context.getExternalFilesDirs(null), new Predicate<File>() {
                 @Override
-                public boolean accept(@NotNull File file) {
+                public boolean accept(@NonNull File file) {
                     //noinspection ConstantConditions
                     return file != null;
                 }
@@ -745,9 +743,9 @@ public class Storagex {
             return externalFilesDirs;
         } else {
             return Arrayx.map(getMountedExternalStorageDirectorys(context), new Transformer<File, File>() {
-                @NotNull
+                @NonNull
                 @Override
-                public File transform(@NotNull File file) {
+                public File transform(@NonNull File file) {
                     return new File(file, "Android/data/" + context.getPackageName() + "/files");
                 }
             }).toArray(new File[0]);
@@ -759,12 +757,12 @@ public class Storagex {
      *
      * @param packageName App package name
      */
-    @NotNull
+    @NonNull
     public static File[] getAppExternalFilesDirs(@NonNull final Context context, @NonNull final String packageName) {
         return Arrayx.map(getAppExternalFilesDirs(context), new Transformer<File, File>() {
-            @NotNull
+            @NonNull
             @Override
-            public File transform(@NotNull File file) {
+            public File transform(@NonNull File file) {
                 return new File(file.getPath().replace(context.getPackageName(), packageName));
             }
         }).toArray(new File[0]);
@@ -774,7 +772,7 @@ public class Storagex {
     /**
      * Get the app internal files directory
      */
-    @NotNull
+    @NonNull
     public static File getAppInternalFilesDir(@NonNull Context context) {
         return context.getFilesDir();
     }
@@ -784,7 +782,7 @@ public class Storagex {
      *
      * @param packageName App package name
      */
-    @NotNull
+    @NonNull
     public static File getAppInternalFilesDir(@NonNull Context context, @NonNull String packageName) {
         return new File(getAppInternalFilesDir(context).getPath().replace(context.getPackageName(), packageName));
     }
@@ -898,13 +896,13 @@ public class Storagex {
     /**
      * Get the all app obb directory
      */
-    @NotNull
+    @NonNull
     public static File[] getAppObbDirs(@NonNull final Context context) {
         File[] obbDirs = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
             obbDirs = Arrayx.filter(context.getObbDirs(), new Predicate<File>() {
                 @Override
-                public boolean accept(@NotNull File file) {
+                public boolean accept(@NonNull File file) {
                     //noinspection ConstantConditions
                     return file != null;
                 }
@@ -914,9 +912,9 @@ public class Storagex {
             return obbDirs;
         } else {
             return Arrayx.map(getMountedExternalStorageDirectorys(context), new Transformer<File, File>() {
-                @NotNull
+                @NonNull
                 @Override
-                public File transform(@NotNull File file) {
+                public File transform(@NonNull File file) {
                     return new File(file, "Android/obb/" + context.getPackageName());
                 }
             }).toArray(new File[0]);
@@ -928,12 +926,12 @@ public class Storagex {
      *
      * @param packageName App package name
      */
-    @NotNull
+    @NonNull
     public static File[] getAppObbDirs(@NonNull final Context context, @NonNull final String packageName) {
         return Arrayx.map(getAppObbDirs(context), new Transformer<File, File>() {
-            @NotNull
+            @NonNull
             @Override
-            public File transform(@NotNull File file) {
+            public File transform(@NonNull File file) {
                 return new File(file.getPath().replace(context.getPackageName(), packageName));
             }
         }).toArray(new File[0]);

@@ -19,20 +19,19 @@ package me.panpf.androidx.content;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.Intent;
-
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 public class ClipIntent extends ClipContent {
 
-    @NotNull
+    @NonNull
     public Intent intent;
 
-    ClipIntent(@NotNull String mimeType, @NotNull Intent intent) {
+    ClipIntent(@NonNull String mimeType, @NonNull Intent intent) {
         super(mimeType);
         this.intent = intent;
     }
 
-    public ClipIntent(@NotNull Intent intent) {
+    public ClipIntent(@NonNull Intent intent) {
         this(ClipDescription.MIMETYPE_TEXT_INTENT, intent);
     }
 

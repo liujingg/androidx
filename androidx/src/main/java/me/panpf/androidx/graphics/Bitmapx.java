@@ -33,8 +33,6 @@ import android.support.annotation.Nullable;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -174,8 +172,8 @@ public class Bitmapx {
      * @param bitmap    Source bitmap
      * @param resources setting initial target density based on the display metrics of the resources.
      */
-    @NotNull
-    public static BitmapDrawable toDrawableByColor(@NotNull Bitmap bitmap, @ColorInt int color, @Nullable Resources resources) {
+    @NonNull
+    public static BitmapDrawable toDrawableByColor(@NonNull Bitmap bitmap, @ColorInt int color, @Nullable Resources resources) {
         BitmapDrawable bitmapDrawable = new BitmapDrawable(resources, bitmap);
         if (resources == null) {
             bitmapDrawable.setTargetDensity(bitmap.getDensity());
@@ -189,8 +187,8 @@ public class Bitmapx {
      *
      * @param bitmap Source bitmap
      */
-    @NotNull
-    public static BitmapDrawable toDrawableByColor(@NotNull Bitmap bitmap, @ColorInt int color) {
+    @NonNull
+    public static BitmapDrawable toDrawableByColor(@NonNull Bitmap bitmap, @ColorInt int color) {
         return toDrawableByColor(bitmap, color, null);
     }
 

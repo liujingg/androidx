@@ -27,8 +27,6 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.lang.reflect.Method;
 
 import me.panpf.androidx.content.Contextx;
@@ -85,7 +83,7 @@ public class Displayx {
     }
 
 
-    public static int getRotation(@NotNull Context context) {
+    public static int getRotation(@NonNull Context context) {
         switch (Contextx.windowManager(context).getDefaultDisplay().getRotation()) {
             case Surface.ROTATION_0:
                 return 0;
@@ -106,7 +104,7 @@ public class Displayx {
 
     public static int getRotation(@NonNull final android.app.Fragment fragment) {
         return getRotation(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
-            @NotNull
+            @NonNull
             @Override
             public String get() {
                 return "Fragment " + fragment + " not attached to a context.";
@@ -129,7 +127,7 @@ public class Displayx {
 
     public static boolean isOrientationPortrait(@NonNull final android.app.Fragment fragment) {
         return isOrientationPortrait(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
-            @NotNull
+            @NonNull
             @Override
             public String get() {
                 return "Fragment " + fragment + " not attached to a context.";
@@ -152,7 +150,7 @@ public class Displayx {
 
     public static boolean isOrientationLandscape(@NonNull final android.app.Fragment fragment) {
         return isOrientationLandscape(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
-            @NotNull
+            @NonNull
             @Override
             public String get() {
                 return "Fragment " + fragment + " not attached to a context.";
@@ -175,7 +173,7 @@ public class Displayx {
 
     public static boolean isOrientationUndefined(@NonNull final android.app.Fragment fragment) {
         return isOrientationUndefined(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
-            @NotNull
+            @NonNull
             @Override
             public String get() {
                 return "Fragment " + fragment + " not attached to a context.";
@@ -188,7 +186,7 @@ public class Displayx {
     }
 
 
-    private static int getInternalDimensionSize(@NotNull Resources res, @NotNull String resName) {
+    private static int getInternalDimensionSize(@NonNull Resources res, @NonNull String resName) {
         int result = 0;
         int resourceId = res.getIdentifier(resName, "dimen", "android");
         if (resourceId > 0) {
@@ -203,7 +201,7 @@ public class Displayx {
      *
      * @return The height of the status bar (in pixels).
      */
-    public static int getStatusBarHeight(@NotNull Context context) {
+    public static int getStatusBarHeight(@NonNull Context context) {
         return getInternalDimensionSize(context.getResources(), "status_bar_height");
     }
 
@@ -211,7 +209,7 @@ public class Displayx {
     /**
      * Whether you have a navigation bar
      */
-    public static boolean hasNavigationBar(@NotNull Context context) {
+    public static boolean hasNavigationBar(@NonNull Context context) {
         Resources res = context.getResources();
         int resourceId = res.getIdentifier("config_showNavigationBar", "bool", "android");
         if (resourceId != 0) {
@@ -231,7 +229,7 @@ public class Displayx {
     /**
      * Get the height of the navigation bar
      */
-    public static int getNavigationBarHeight(@NotNull Context context) {
+    public static int getNavigationBarHeight(@NonNull Context context) {
         Resources res = context.getResources();
         if (hasNavigationBar(context)) {
             if ((res.getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
@@ -246,7 +244,7 @@ public class Displayx {
     /**
      * Get the width of the navigation bar
      */
-    public static int getNavigationBarWidth(@NotNull Context context) {
+    public static int getNavigationBarWidth(@NonNull Context context) {
         if (hasNavigationBar(context)) {
             return getInternalDimensionSize(context.getResources(), "navigation_bar_width");
         } else {

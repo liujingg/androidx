@@ -26,8 +26,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import org.jetbrains.annotations.NotNull;
-
 import me.panpf.androidx.graphics.Colorx;
 import me.panpf.javax.util.LazyValue;
 import me.panpf.javax.util.Premisex;
@@ -42,12 +40,12 @@ public class Drawablex {
      * @param config      Bitmap configuration, default value Bitmap.Config.ARGB_8888
      * @param reuseBitmap Reusable Bitmap
      */
-    @NotNull
+    @NonNull
     public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config, @Nullable Bitmap reuseBitmap) {
         final int intrinsicWidth = drawable.getIntrinsicWidth();
         final int intrinsicHeight = drawable.getIntrinsicHeight();
         Premisex.require(intrinsicWidth > 0 && intrinsicHeight > 0, new LazyValue<String>() {
-            @NotNull
+            @NonNull
             @Override
             public String get() {
                 return "Both drawable intrinsicWidth and intrinsicHeight must be greater than 0";
@@ -76,7 +74,7 @@ public class Drawablex {
      * @param drawable Source Drawable
      * @param config   Bitmap configuration, default value Bitmap.Config.ARGB_8888
      */
-    @NotNull
+    @NonNull
     public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config) {
         return toBitmapWithIntrinsicSize(drawable, config, null);
     }
@@ -87,7 +85,7 @@ public class Drawablex {
      * @param drawable    Source Drawable
      * @param reuseBitmap Reusable Bitmap
      */
-    @NotNull
+    @NonNull
     public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable, @Nullable Bitmap reuseBitmap) {
         return toBitmapWithIntrinsicSize(drawable, null, reuseBitmap);
     }
@@ -97,7 +95,7 @@ public class Drawablex {
      *
      * @param drawable Source Drawable
      */
-    @NotNull
+    @NonNull
     public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable) {
         return toBitmapWithIntrinsicSize(drawable, null, null);
     }
@@ -110,7 +108,7 @@ public class Drawablex {
      * @param config      Bitmap configuration, default value Bitmap.Config.ARGB_8888
      * @param reuseBitmap Reusable Bitmap
      */
-    @NotNull
+    @NonNull
     public static Bitmap toBitmapWithBoundsSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config, @Nullable Bitmap reuseBitmap) {
         Rect originBounds = new Rect(drawable.getBounds());
         if (originBounds.isEmpty()) throw new IllegalStateException("drawable bounds is empty");
@@ -138,7 +136,7 @@ public class Drawablex {
      * @param drawable Source Drawable
      * @param config   Bitmap configuration, default value Bitmap.Config.ARGB_8888
      */
-    @NotNull
+    @NonNull
     public static Bitmap toBitmapWithBoundsSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config) {
         return toBitmapWithBoundsSize(drawable, config, null);
     }
@@ -149,7 +147,7 @@ public class Drawablex {
      * @param drawable    Source Drawable
      * @param reuseBitmap Reusable Bitmap
      */
-    @NotNull
+    @NonNull
     public static Bitmap toBitmapWithBoundsSize(@NonNull Drawable drawable, @Nullable Bitmap reuseBitmap) {
         return toBitmapWithBoundsSize(drawable, null, reuseBitmap);
     }
@@ -159,7 +157,7 @@ public class Drawablex {
      *
      * @param drawable Source Drawable
      */
-    @NotNull
+    @NonNull
     public static Bitmap toBitmapWithBoundsSize(@NonNull Drawable drawable) {
         return toBitmapWithBoundsSize(drawable, null, null);
     }
@@ -168,8 +166,8 @@ public class Drawablex {
     /**
      * Change the color of the drawable
      */
-    @NotNull
-    public static <T extends Drawable> T toDrawableByColor(@NotNull T drawable, @ColorInt int color) {
+    @NonNull
+    public static <T extends Drawable> T toDrawableByColor(@NonNull T drawable, @ColorInt int color) {
         //noinspection unchecked
         T newDrawable = (T) drawable.mutate();
         newDrawable.setColorFilter(Colorx.createMatrixColorFilter(color));
@@ -181,8 +179,8 @@ public class Drawablex {
      *
      * @param resId Drawable resource id
      */
-    @NotNull
-    public static Drawable toDrawableByColorFromDrawableRes(@NotNull Context context, @DrawableRes int resId, @ColorInt int color) {
+    @NonNull
+    public static Drawable toDrawableByColorFromDrawableRes(@NonNull Context context, @DrawableRes int resId, @ColorInt int color) {
         return toDrawableByColor(context.getResources().getDrawable(resId), color);
     }
 }

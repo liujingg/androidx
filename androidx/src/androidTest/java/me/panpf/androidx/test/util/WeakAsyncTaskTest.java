@@ -20,7 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
-import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -46,7 +45,7 @@ public class WeakAsyncTaskTest {
         try {
             new WeakAsyncTask<WeakAsyncTaskTest, Integer, Integer, Integer>(this) {
                 @Override
-                protected Integer doInBackground(@NotNull WeakAsyncTaskTest weakAsyncTaskTest, @NonNull Integer[] integers) {
+                protected Integer doInBackground(@NonNull WeakAsyncTaskTest weakAsyncTaskTest, @NonNull Integer[] integers) {
                     return null;
                 }
             };
@@ -111,7 +110,7 @@ public class WeakAsyncTaskTest {
         }
 
         @Override
-        protected Integer doInBackground(@NotNull WeakAsyncTaskTest weakAsyncTaskTest, @NonNull Integer[] integers) {
+        protected Integer doInBackground(@NonNull WeakAsyncTaskTest weakAsyncTaskTest, @NonNull Integer[] integers) {
             return null;
         }
     }

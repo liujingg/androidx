@@ -20,27 +20,26 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ContentResolver;
 import android.net.Uri;
-
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 import me.panpf.javax.util.Arrayx;
 
 public class ClipUri extends ClipContent {
 
-    @NotNull
+    @NonNull
     public Uri uri;
 
-    public ClipUri(@NotNull String mimeType, @NotNull Uri uri) {
+    public ClipUri(@NonNull String mimeType, @NonNull Uri uri) {
         super(mimeType);
         this.uri = uri;
     }
 
-    public ClipUri(@NotNull Uri uri) {
+    public ClipUri(@NonNull Uri uri) {
         super(ClipDescription.MIMETYPE_TEXT_URILIST);
         this.uri = uri;
     }
 
-    public ClipUri(@NotNull ContentResolver resolver, @NotNull Uri uri) {
+    public ClipUri(@NonNull ContentResolver resolver, @NonNull Uri uri) {
         super(getMimeTypes(resolver, uri)[0]);
         this.uri = uri;
     }

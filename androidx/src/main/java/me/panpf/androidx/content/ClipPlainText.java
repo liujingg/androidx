@@ -18,20 +18,19 @@ package me.panpf.androidx.content;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
-
-import org.jetbrains.annotations.NotNull;
+import android.support.annotation.NonNull;
 
 public class ClipPlainText extends ClipContent {
 
-    @NotNull
+    @NonNull
     public CharSequence text;
 
-    ClipPlainText(@NotNull String mimeType, @NotNull CharSequence text) {
+    ClipPlainText(@NonNull String mimeType, @NonNull CharSequence text) {
         super(mimeType);
         this.text = text;
     }
 
-    public ClipPlainText(@NotNull CharSequence text) {
+    public ClipPlainText(@NonNull CharSequence text) {
         this(ClipDescription.MIMETYPE_TEXT_PLAIN, text);
     }
 
