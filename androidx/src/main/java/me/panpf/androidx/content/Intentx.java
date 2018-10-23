@@ -17,8 +17,6 @@
 package me.panpf.androidx.content;
 
 import android.Manifest;
-import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -30,8 +28,6 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
-
-import java.util.List;
 
 /**
  * Intent tool method
@@ -249,82 +245,5 @@ public class Intentx {
 
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
         return intent;
-    }
-
-    /**
-     * Test if you can start Activity
-     */
-    public static boolean canStartActivity(@NonNull Context context, @NonNull Intent intent) {
-        if (!(context instanceof Activity)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-
-        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(intent, 0);
-        return resolveInfoList != null && resolveInfoList.size() > 0;
-    }
-
-    /**
-     * Test if you can start Activity
-     */
-    public static boolean canStartActivity(@NonNull android.support.v4.app.Fragment fragment, @NonNull Intent intent) {
-        Activity activity = fragment.getActivity();
-        if (activity == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
-        }
-
-        return Intentx.canStartActivity(activity, intent);
-    }
-
-    /**
-     * Test if you can start Activity
-     */
-    public static boolean canStartActivity(@NonNull android.app.Fragment fragment, @NonNull Intent intent) {
-        Activity activity = fragment.getActivity();
-        if (activity == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
-        }
-
-        return Intentx.canStartActivity(activity, intent);
-    }
-
-    /**
-     * Safely launch an Activity, catch ActivityNotFoundException and return false
-     */
-    public static boolean safeStartActivity(@NonNull Context context, @NonNull Intent intent) {
-        if (!(context instanceof Activity)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
-
-        try {
-            context.startActivity(intent);
-            return true;
-        } catch (ActivityNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * Safely launch an Activity, catch ActivityNotFoundException and return false
-     */
-    public static boolean safeStartActivity(@NonNull android.support.v4.app.Fragment fragment, @NonNull Intent intent) {
-        Activity activity = fragment.getActivity();
-        if (activity == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
-        }
-
-        return Intentx.safeStartActivity(activity, intent);
-    }
-
-    /**
-     * Safely launch an Activity, catch ActivityNotFoundException and return false
-     */
-    public static boolean safeStartActivity(@NonNull android.app.Fragment fragment, @NonNull Intent intent) {
-        Activity activity = fragment.getActivity();
-        if (activity == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to Activity");
-        }
-
-        return Intentx.safeStartActivity(activity, intent);
     }
 }

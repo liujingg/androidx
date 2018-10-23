@@ -51,7 +51,7 @@ Dependencies:
 ### app
 * Activity: [Activityx.java] ([Test][ActivityxTest.java]) | [Activityx.kt] ([Test][ActivityxTest.kt])
     * isDestroyedCompat, convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
-    * appContext, read\*Arg, read\*UriArg, read\*UriIntentArg, read\*IntentUriArg
+    * appContext, canStart, safeStart, read\*Arg, read\*UriArg, read\*UriIntentArg, read\*IntentUriArg
 * Dialog: [Dialogx.java] | [Dialogx.kt]
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] | [Fragmentx.kt]
@@ -81,7 +81,7 @@ Dependencies:
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
     * createLaunchAppIntent, createAppDetailInSystemIntent, createActivityIntentByResolveInfo, createTakePhotoIntent,
-    * createPickImageIntent, createCropImageIntent, canStartActivity, safeStartActivity
+    * createPickImageIntent, createCropImageIntent
 * Preference: [Preferencex.java] | [Preferencex.kt]
     * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
     * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear

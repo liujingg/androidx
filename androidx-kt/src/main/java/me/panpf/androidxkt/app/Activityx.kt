@@ -20,6 +20,7 @@ package me.panpf.androidxkt.app
 
 import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.FragmentActivity
@@ -74,6 +75,23 @@ inline fun <T> Activity.getImplWithParent(clazz: Class<T>): T? = Activityx.getIm
 
 
 inline fun Activity.appContext(): Context = Activityx.appContext(this)
+
+
+/**
+ * Test if you can start Activity
+ */
+inline fun Context.canStartActivity(intent: Intent): Boolean = Activityx.canStart(this, intent)
+
+
+/**
+ * Safely launch an Activity, catch ActivityNotFoundException and return false
+ */
+inline fun Context.safeStartActivity(intent: Intent, options: Bundle): Boolean = Activityx.safeStart(this, intent, options)
+
+/**
+ * Safely launch an Activity, catch ActivityNotFoundException and return false
+ */
+inline fun Context.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart(this, intent)
 
 
 /* ************************************* Intent Args ***************************************** */

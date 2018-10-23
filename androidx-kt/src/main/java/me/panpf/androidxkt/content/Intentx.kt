@@ -128,33 +128,3 @@ inline fun createPickImageIntent(): Intent = Intentx.createPickImageIntent()
  */
 inline fun createCropImageIntent(sourceFileUri: Uri, targetWidth: Int, targetHeight: Int, saveFileUri: Uri?): Intent =
         Intentx.createCropImageIntent(sourceFileUri, targetWidth, targetHeight, saveFileUri)
-
-/**
- * Test if you can start Activity
- */
-inline fun Context.canStartActivity(intent: Intent): Boolean = Intentx.canStartActivity(this, intent)
-
-/**
- * Test if you can start Activity
- */
-inline fun android.support.v4.app.Fragment.canStartActivity(intent: Intent): Boolean = Intentx.canStartActivity(this, intent)
-
-/**
- * Test if you can start Activity
- */
-inline fun android.app.Fragment.canStartActivity(intent: Intent): Boolean = Intentx.canStartActivity(this, intent)
-
-/**
- * Safely launch an Activity, catch ActivityNotFoundException and return false
- */
-inline fun Context.safeStartActivity(intent: Intent): Boolean = Intentx.safeStartActivity(this, intent)
-
-/**
- * Safely launch an Activity, catch ActivityNotFoundException and return false
- */
-inline fun android.support.v4.app.Fragment.safeStartActivity(intent: Intent): Boolean = Intentx.safeStartActivity(this, intent)
-
-/**
- * Safely launch an Activity, catch ActivityNotFoundException and return false
- */
-inline fun android.app.Fragment.safeStartActivity(intent: Intent): Boolean = Intentx.safeStartActivity(this, intent)

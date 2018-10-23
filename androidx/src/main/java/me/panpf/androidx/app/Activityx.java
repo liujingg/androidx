@@ -19,8 +19,10 @@ package me.panpf.androidx.app;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.arch.lifecycle.Lifecycle;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -35,6 +37,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.List;
 
 import me.panpf.javax.lang.Classx;
 import me.panpf.javax.lang.Stringx;
@@ -166,6 +169,95 @@ public class Activityx {
     public static Context appContext(@NonNull Activity activity) {
         return activity.getApplicationContext();
     }
+
+
+    /**
+     * Test if you can start Activity
+     */
+    public static boolean canStart(@NonNull Context context, @NonNull Intent intent) {
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
+        List<ResolveInfo> resolveInfoList = context.getPackageManager().queryIntentActivities(intent, 0);
+        return resolveInfoList != null && resolveInfoList.size() > 0;
+    }
+
+
+    /**
+     * Safely launch an Activity, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull Context context, @NonNull Intent intent, @NotNull Bundle options) {
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
+        try {
+            context.startActivity(intent, options);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    /**
+     * Safely launch an Activity, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull Context context, @NonNull Intent intent) {
+        if (!(context instanceof Activity)) {
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+
+        try {
+            context.startActivity(intent);
+            return true;
+        } catch (ActivityNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+//    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
+//        safeStart(new Intent(context, clazz), bundle);
+//    }
+//
+//    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz) {
+//        activity.startActivity(new Intent(activity, clazz));
+//    }
+//
+//    public static void start(@NotNull android.support.v4.app.Fragment fragment, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
+//        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz), bundle);
+//    }
+//
+//    public static void start(@NotNull android.support.v4.app.Fragment fragment, @NotNull Class<? extends Activity> clazz) {
+//        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz));
+//    }
+//
+//    public static void start(@NotNull android.app.Fragment fragment, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
+//        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz), bundle);
+//    }
+//
+//    public static void start(@NotNull android.app.Fragment fragment, @NotNull Class<? extends Activity> clazz) {
+//        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz));
+//    }
+//
+//    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
+//        Intentx.safeStartActivity(new Intent(context, clazz), bundle);
+//    }
+//
+//    public static void start(@NotNull Context context, @NotNull Class<? extends Activity> clazz) {
+//        activity.startActivity(new Intent(activity, clazz));
+//    }
+//
+//    public static void start(@NotNull View view, @NotNull Class<? extends Activity> clazz, @NotNull Bundle bundle) {
+//        activity.startActivity(new Intent(activity, clazz), bundle);
+//    }
+//
+//    public static void start(@NotNull View view, @NotNull Class<? extends Activity> clazz) {
+//        activity.startActivity(new Intent(activity, clazz));
+//    }
 
 
     /* ************************************* Intent Args ***************************************** */
