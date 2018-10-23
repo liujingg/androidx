@@ -1,6 +1,7 @@
 ## v0.4.0
 
 * :zap: Romx support Flyme 7.0.1
+* :sparkles: Fragmentx adds requireContext, requireAppContent method
 
 
 ## v0.3.2

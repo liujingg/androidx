@@ -18,6 +18,7 @@
 
 package me.panpf.androidxkt.app
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
@@ -41,6 +42,7 @@ inline fun android.app.Fragment.isDestroyedCompat(): Boolean = Fragmentx.isDestr
  */
 inline fun android.support.v4.app.Fragment.isDestroyedCompat(): Boolean = Fragmentx.isDestroyedCompat(this)
 
+
 /**
  * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
  */
@@ -50,6 +52,7 @@ inline fun <T> android.support.v4.app.Fragment.getImplWithParent(clazz: Class<T>
  * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
  */
 inline fun <T> android.app.Fragment.getImplWithParent(clazz: Class<T>): T? = Fragmentx.getImplWithParent(this, clazz)
+
 
 /**
  * Instantiate a Fragment and set arguments
@@ -87,6 +90,7 @@ inline fun FragmentActivity?.findUserVisibleChildFragment(): android.support.v4.
  */
 inline fun android.support.v4.app.Fragment?.findUserVisibleChildFragment(): android.support.v4.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
 
+
 /**
  * Find the target fragment from the specified fragment list based on the current Item of ViewPager
  */
@@ -101,6 +105,14 @@ inline fun FragmentActivity?.findFragmentByViewPagerCurrentItem(viewPagerCurrent
  * Find the target fragment from the specified fragment list based on the current Item of ViewPager
  */
 inline fun android.support.v4.app.Fragment?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): android.support.v4.app.Fragment? = Fragmentx.findFragmentByViewPagerCurrentItem(this, viewPagerCurrentItem)
+
+
+fun android.app.Fragment.requireContext(): Context = Fragmentx.requireContext(this)
+
+
+inline fun android.support.v4.app.Fragment.requireAppContext(): Context = Fragmentx.requireAppContext(this)
+
+inline fun android.app.Fragment.requireAppContext(): Context = Fragmentx.requireAppContext(this)
 
 
 /* ************************************* SupportFragment Args ***************************************** */

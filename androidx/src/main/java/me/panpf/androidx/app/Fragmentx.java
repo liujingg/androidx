@@ -18,6 +18,7 @@ package me.panpf.androidx.app;
 
 import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
@@ -36,8 +37,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.panpf.javax.util.LazyValue;
+import me.panpf.javax.util.Premisex;
+
 @SuppressWarnings("WeakerAccess")
 public class Fragmentx {
+
 
     /**
      * Return true if the fragment has been destroyed
@@ -52,6 +57,7 @@ public class Fragmentx {
     public static boolean isDestroyedCompat(@NonNull android.support.v4.app.Fragment fragment) {
         return fragment.getLifecycle().getCurrentState() == Lifecycle.State.DESTROYED;
     }
+
 
     /**
      * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
@@ -109,6 +115,7 @@ public class Fragmentx {
         return null;
     }
 
+
     /**
      * Instantiate a Fragment and set arguments
      */
@@ -161,6 +168,7 @@ public class Fragmentx {
         return instanceOrigin(clas, null);
     }
 
+
     /**
      * Find the visible fragments visible to the current user from the fragment list
      */
@@ -201,6 +209,7 @@ public class Fragmentx {
         return findUserVisibleChildFragment(fragment != null ? fragment.getChildFragmentManager().getFragments() : null);
     }
 
+
     /**
      * Find the target fragment from the specified fragment list based on the current Item of ViewPager
      */
@@ -236,6 +245,45 @@ public class Fragmentx {
     @Nullable
     public static android.support.v4.app.Fragment findFragmentByViewPagerCurrentItem(@Nullable android.support.v4.app.Fragment fragment, int viewPagerCurrentItem) {
         return findFragmentByViewPagerCurrentItem(fragment != null ? fragment.getChildFragmentManager().getFragments() : null, viewPagerCurrentItem);
+    }
+
+
+    @NotNull
+    public static Context requireContext(@Nullable android.support.v4.app.Fragment fragment) {
+        return Premisex.requireNotNull(fragment, new LazyValue<String>() {
+            @NotNull
+            @Override
+            public String get() {
+                return "Fragment is null";
+            }
+        }).requireContext();
+    }
+
+    @NotNull
+    public static Context requireContext(@Nullable android.app.Fragment fragment) {
+        Context context = Premisex.requireNotNull(fragment, new LazyValue<String>() {
+            @NotNull
+            @Override
+            public String get() {
+                return "Fragment is null";
+            }
+        }).getActivity();
+        if (context == null) {
+            throw new IllegalStateException("Fragment " + fragment + " not attached to a context.");
+        } else {
+            return context;
+        }
+    }
+
+
+    @NotNull
+    public static Context requireAppContext(@Nullable android.support.v4.app.Fragment fragment) {
+        return requireContext(fragment).getApplicationContext();
+    }
+
+    @NotNull
+    public static Context requireAppContext(@Nullable android.app.Fragment fragment) {
+        return requireContext(fragment).getApplicationContext();
     }
 
 

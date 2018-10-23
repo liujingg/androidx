@@ -56,7 +56,7 @@ Dependencies:
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] | [Fragmentx.kt]
     * isDestroyedCompat, getImplWithParent, instance, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
-    * read\*Arg
+    * requireContext, requireAppContent, read\*Arg
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
 * Service: [Servicex.java] | [Servicex.kt]
