@@ -37,9 +37,6 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import me.panpf.javax.util.LazyValue;
-import me.panpf.javax.util.Premisex;
-
 @SuppressWarnings("WeakerAccess")
 public class Fragmentx {
 
@@ -249,25 +246,13 @@ public class Fragmentx {
 
 
     @NotNull
-    public static Context requireContext(@Nullable android.support.v4.app.Fragment fragment) {
-        return Premisex.requireNotNull(fragment, new LazyValue<String>() {
-            @NotNull
-            @Override
-            public String get() {
-                return "Fragment is null";
-            }
-        }).requireContext();
+    public static Context requireContext(@NotNull android.support.v4.app.Fragment fragment) {
+        return fragment.requireContext();
     }
 
     @NotNull
-    public static Context requireContext(@Nullable android.app.Fragment fragment) {
-        Context context = Premisex.requireNotNull(fragment, new LazyValue<String>() {
-            @NotNull
-            @Override
-            public String get() {
-                return "Fragment is null";
-            }
-        }).getActivity();
+    public static Context requireContext(@NotNull android.app.Fragment fragment) {
+        Context context = fragment.getActivity();
         if (context == null) {
             throw new IllegalStateException("Fragment " + fragment + " not attached to a context.");
         } else {
@@ -277,12 +262,12 @@ public class Fragmentx {
 
 
     @NotNull
-    public static Context requireAppContext(@Nullable android.support.v4.app.Fragment fragment) {
+    public static Context requireAppContext(@NotNull android.support.v4.app.Fragment fragment) {
         return requireContext(fragment).getApplicationContext();
     }
 
     @NotNull
-    public static Context requireAppContext(@Nullable android.app.Fragment fragment) {
+    public static Context requireAppContext(@NotNull android.app.Fragment fragment) {
         return requireContext(fragment).getApplicationContext();
     }
 
