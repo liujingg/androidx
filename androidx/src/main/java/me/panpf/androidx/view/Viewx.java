@@ -28,10 +28,18 @@ import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
+import org.jetbrains.annotations.NotNull;
+
 import me.panpf.androidx.widget.Toastx;
 
 @SuppressWarnings("WeakerAccess")
 public class Viewx {
+
+    @NotNull
+    public static Context appContext(@NonNull View view) {
+        return view.getContext().getApplicationContext();
+    }
+
 
     public static void setLongClickToastHint(@NonNull final View view, final String hintContent) {
         view.setOnLongClickListener(new OnLongClickListener() {
@@ -136,6 +144,7 @@ public class Viewx {
             view.setLayoutParams(layoutParams);
         }
     }
+
 
     @NonNull
     public static Bitmap toBitmap(@NonNull View view, @NonNull Bitmap.Config config, float scale) {

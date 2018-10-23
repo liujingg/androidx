@@ -30,6 +30,9 @@ import me.panpf.androidx.view.Viewx
  */
 
 
+fun View.appContext(): Context = Viewx.appContext(this)
+
+
 inline fun View.setLongClickToastHint(hintContent: String) = Viewx.setLongClickToastHint(this, hintContent)
 
 inline fun View.setLongClickToastHint(hintContentId: Int) = Viewx.setLongClickToastHint(this, hintContentId)
@@ -55,6 +58,7 @@ inline fun View.addLayoutHeight(addHeight: Int) = Viewx.addLayoutHeight(this, ad
 inline fun View.addLayoutSize(addWidth: Int, addHeight: Int) = Viewx.addLayoutSize(this, addWidth, addHeight)
 
 inline fun View.addLayoutMarginTop(addMarinTop: Int) = Viewx.addLayoutMarginTop(this, addMarinTop)
+
 
 inline fun View.toBitmap(config: Bitmap.Config, scale: Float): Bitmap = Viewx.toBitmap(this, config, scale)
 

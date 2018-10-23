@@ -176,7 +176,7 @@ Dependencies:
 * View: [Viewx.java] | [Viewx.kt]
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
-    * toBitmapByMaxHeight, inflateLayout
+    * toBitmapByMaxHeight, inflateLayout, appContext
 <!--* Window: [Windowx.java] | [Windowx.kt]-->
 
 ### widget
