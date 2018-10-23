@@ -131,7 +131,14 @@ public class Romx {
     private static String[] checkFlyme() {
         if ("flyme".equalsIgnoreCase(getBuildProperties("ro.build.user")) || Stringx.isSafe(getBuildProperties("ro.flyme.published"))) {
             String displayId = getBuildProperties("ro.build.display.id");
-            String versionName = displayId.startsWith("Flyme OS ") ? displayId.substring("Flyme OS ".length()) : displayId;
+            String versionName;
+            if (displayId.startsWith("Flyme OS ")) {
+                versionName = displayId.substring("Flyme OS ".length());
+            } else if (displayId.startsWith("Flyme ")) {
+                versionName = displayId.substring("Flyme ".length());
+            } else {
+                versionName = displayId;
+            }
             String versionIncremental = getBuildProperties("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, "", versionIncremental);
         } else {

@@ -1,3 +1,8 @@
+## v0.4.0
+
+* :zap: Romx support Flyme 7.0.1
+
+
 ## v0.3.2
 
 * :arrow_up: Javax upgrade to 0.8.0

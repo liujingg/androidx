@@ -40,8 +40,6 @@ class ActivityxTest {
 
     @Test
     fun testActivityDestroyed() {
-        "".byteInputStream().use {  }
-
         val activity = activityTestRule.activity
 
         Assert.assertFalse(activity.isDestroyedCompat())
