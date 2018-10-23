@@ -19,6 +19,7 @@
 package me.panpf.androidxkt.app
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.v4.app.FragmentActivity
@@ -70,6 +71,9 @@ inline fun Activity.convertToTranslucentCompat(): Boolean = Activityx.convertToT
  * If the own or parent activity implements the specified [clazz], it returns its implementation.
  */
 inline fun <T> Activity.getImplWithParent(clazz: Class<T>): T? = Activityx.getImplWithParent(this, clazz)
+
+
+inline fun Activity.appContext(): Context = Activityx.appContext(this)
 
 
 /* ************************************* Intent Args ***************************************** */

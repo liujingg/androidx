@@ -19,6 +19,7 @@ package me.panpf.androidx.app;
 import android.app.Activity;
 import android.app.ActivityOptions;
 import android.arch.lifecycle.Lifecycle;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -79,6 +80,7 @@ public class Activityx {
     public static boolean isDestroyedCompat(@NonNull FragmentActivity activity) {
         return activity.getLifecycle().getCurrentState() == Lifecycle.State.DESTROYED;
     }
+
 
     /**
      * Convert a translucent themed Activity
@@ -141,6 +143,7 @@ public class Activityx {
         }
     }
 
+
     /**
      * If the own or parent activity implements the specified [clazz], it returns its implementation.
      */
@@ -156,6 +159,12 @@ public class Activityx {
             }
         }
         return null;
+    }
+
+
+    @NotNull
+    public static Context appContext(@NonNull Activity activity) {
+        return activity.getApplicationContext();
     }
 
 

@@ -51,7 +51,7 @@ Dependencies:
 ### app
 * Activity: [Activityx.java] ([Test][ActivityxTest.java]) | [Activityx.kt] ([Test][ActivityxTest.kt])
     * isDestroyedCompat, convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
-    * read\*Arg, read\*UriArg, read\*UriIntentArg, read\*IntentUriArg
+    * appContext, read\*Arg, read\*UriArg, read\*UriIntentArg, read\*IntentUriArg
 * Dialog: [Dialogx.java] | [Dialogx.kt]
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] | [Fragmentx.kt]
