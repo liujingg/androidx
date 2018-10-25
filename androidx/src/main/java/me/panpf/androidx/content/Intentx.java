@@ -246,4 +246,81 @@ public class Intentx {
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
         return intent;
     }
+
+
+    /**
+     * Create an Intent to send text
+     */
+    public static Intent createSendTextIntent(@NonNull String text, @NonNull String subject) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        return intent;
+    }
+
+    /**
+     * Create an Intent to send text
+     */
+    public static Intent createSendTextIntent(@NonNull String text) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, text);
+        return intent;
+    }
+
+    /**
+     * Create an Intent to send text
+     */
+    public static Intent createSendTextFileIntent(@NonNull Uri textFileUri, @NonNull String subject) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_STREAM, textFileUri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        return intent;
+    }
+
+    /**
+     * Create an Intent to send text
+     */
+    public static Intent createSendTextFileIntent(@NonNull Uri textFileUri) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_STREAM, textFileUri);
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        return intent;
+    }
+
+    /**
+     * Create an Intent to send image
+     */
+    public static Intent createSendImageFileIntent(@NonNull Uri imageFileUri) {
+        return new Intent(Intent.ACTION_SEND)
+                .setType("image/*")
+                .putExtra(Intent.EXTRA_STREAM, imageFileUri)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    }
+
+    /**
+     * Create an Intent to send image
+     */
+    public static Intent createSendImageFileIntent(@NonNull Uri imageFileUri, @NonNull String subType) {
+        int index = subType.indexOf("/");
+        final String finalSubType = index != -1 ? subType.substring(index + 1) : subType;
+        return new Intent(Intent.ACTION_SEND)
+                .setType("image/" + finalSubType)
+                .putExtra(Intent.EXTRA_STREAM, imageFileUri)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    }
+
+    /**
+     * Create an Intent to send image
+     */
+    public static Intent createSendFileIntent(@NonNull Uri imageFileUri, @NonNull String mimeType) {
+        return new Intent(Intent.ACTION_SEND)
+                .setType(mimeType)
+                .putExtra(Intent.EXTRA_STREAM, imageFileUri)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    }
 }

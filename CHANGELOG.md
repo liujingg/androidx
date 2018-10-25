@@ -12,6 +12,7 @@
 * :zap: Networkx getWifiState and setWifiEnabled method compatible WifiManager is null
 * :sparkles: Networkx adds getGateway, getDNS1, getDNS2 method
 * :art: Contextx.kt and Viewx.kt partial method changed to inline
+* :sparkles: Intentx adds createSendTextIntent, createSendTextFileIntent, createSendImageFileIntent, createSendFileIntent method
 
 
 ## v0.3.2

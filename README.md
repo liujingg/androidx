@@ -82,7 +82,8 @@ Dependencies:
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
     * createLaunchAppIntent, createAppDetailInSystemIntent, createActivityIntentByResolveInfo, createTakePhotoIntent,
-    * createPickImageIntent, createCropImageIntent
+    * createPickImageIntent, createCropImageIntent, createSendTextIntent, createSendTextFileIntent,
+    * createSendImageFileIntent, createSendFileIntent
 * Preference: [Preferencex.java] | [Preferencex.kt]
     * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
     * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear

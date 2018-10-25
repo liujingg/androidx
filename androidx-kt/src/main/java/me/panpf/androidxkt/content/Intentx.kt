@@ -128,3 +128,39 @@ inline fun createPickImageIntent(): Intent = Intentx.createPickImageIntent()
  */
 inline fun createCropImageIntent(sourceFileUri: Uri, targetWidth: Int, targetHeight: Int, saveFileUri: Uri?): Intent =
         Intentx.createCropImageIntent(sourceFileUri, targetWidth, targetHeight, saveFileUri)
+
+
+/**
+ * Create an Intent to send text
+ */
+inline fun String.createSendTextIntent(subject: String): Intent = Intentx.createSendTextIntent(this, subject)
+
+/**
+ * Create an Intent to send text
+ */
+inline fun String.createSendTextIntent(): Intent = Intentx.createSendTextIntent(this)
+
+/**
+ * Create an Intent to send text
+ */
+inline fun Uri.createSendTextFileIntent(subject: String): Intent = Intentx.createSendTextFileIntent(this, subject)
+
+/**
+ * Create an Intent to send text
+ */
+inline fun Uri.createSendTextFileIntent(): Intent = Intentx.createSendTextFileIntent(this)
+
+/**
+ * Create an Intent to send image
+ */
+inline fun Uri.createSendImageFileIntent(): Intent = Intentx.createSendImageFileIntent(this)
+
+/**
+ * Create an Intent to send image
+ */
+inline fun Uri.createSendImageFileIntent(subType: String): Intent = Intentx.createSendImageFileIntent(this, subType)
+
+/**
+ * Create an Intent to send image
+ */
+inline fun Uri.createSendFileIntent(mimeType: String): Intent = Intentx.createSendFileIntent(this, mimeType)
