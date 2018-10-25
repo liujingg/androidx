@@ -10,6 +10,7 @@
 * :arrow_up: Javax upgrade to 0.8.1
 * :fire: Jsonx.kt format method rename to formatJson
 * :zap: Networkx getWifiState and setWifiEnabled method compatible WifiManager is null
+* :sparkles: Networkx adds getGateway, getDNS1, getDNS2 method
 
 
 ## v0.3.2

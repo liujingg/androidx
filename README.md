@@ -120,7 +120,7 @@ Dependencies:
     * getState, isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated,
     * isBluetoothActivated, getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName,
     * getSubtypeName, getExtraInfo, getNetworkInfo, getConnectivity, getWifiState,
-    * isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled
+    * isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getGateway, getDNS1, getDNS2
 
 ### os
 * Storage: [Storagex.java] | [Storagex.kt]

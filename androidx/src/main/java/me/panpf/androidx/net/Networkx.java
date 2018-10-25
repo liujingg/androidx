@@ -17,8 +17,10 @@
 package me.panpf.androidx.net;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.DhcpInfo;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.support.annotation.NonNull;
@@ -161,7 +163,7 @@ public class Networkx {
     @NonNull
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public static ConnectivityManager getConnectivity(@NonNull Context context) {
-        return NetworkState.get(context).getConnectivity();
+        return Contextx.connectivityManager(context);
     }
 
     /**
@@ -213,6 +215,55 @@ public class Networkx {
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    /**
+     * Gateway
+     */
+    @NonNull
+    @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
+    public static String getGateway(@NonNull Context context) {
+        WifiManager wifiManager = Contextx.wifiManagerOrNull(context);
+        DhcpInfo dhcpInfo = wifiManager != null ? wifiManager.getDhcpInfo() : null;
+        if (dhcpInfo == null) return "";
+        long longIPV4Value = dhcpInfo.gateway;
+        return String.valueOf((int) (longIPV4Value & 0xff)) +
+                '.' +
+                String.valueOf((int) ((longIPV4Value >> 8) & 0xff)) +
+                '.' +
+                String.valueOf((int) ((longIPV4Value >> 16) & 0xff)) +
+                '.' +
+                String.valueOf((int) ((longIPV4Value >> 24) & 0xff));
+    }
+
+    /**
+     * DNS1
+     */
+    @SuppressLint("PrivateApi")
+    @NonNull
+    public static String getDNS1() {
+        try {
+            //noinspection ConstantConditions
+            return (String) Classx.callStaticMethod(Class.forName("android.os.SystemProperties"), "get", "net.dns1");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+    }
+
+    /**
+     * DNS2
+     */
+    @SuppressLint("PrivateApi")
+    @NonNull
+    public static String getDNS2() {
+        try {
+            //noinspection ConstantConditions
+            return (String) Classx.callStaticMethod(Class.forName("android.os.SystemProperties"), "get", "net.dns2");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
         }
     }
 }

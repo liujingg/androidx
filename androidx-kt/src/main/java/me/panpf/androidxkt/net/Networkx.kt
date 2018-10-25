@@ -153,3 +153,9 @@ inline fun Context.isMobileEnabled(): Boolean = Networkx.isMobileEnabled(this)
  */
 @RequiresPermission(Manifest.permission.CHANGE_NETWORK_STATE)
 inline fun Context.setMobileEnabled(enabled: Boolean): Boolean = Networkx.setMobileEnabled(this, enabled)
+
+/**
+ * Gateway
+ */
+@RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
+inline fun Context.getGateway(): String = Networkx.getGateway(this)
