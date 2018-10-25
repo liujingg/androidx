@@ -98,8 +98,8 @@ inline fun JSONObject.optLong(keys: Array<String>, defaultValue: Long): Long = J
 inline fun JSONObject.optLong(keys: Array<String>): Long = Jsonx.optLong(this, keys)
 
 
-inline fun JSONObject?.format(): String = Jsonx.format(this)
+inline fun JSONObject?.formatJson(): String = Jsonx.format(this)
 
-inline fun JSONArray?.format(): String = Jsonx.format(this)
+inline fun JSONArray?.formatJson(): String = Jsonx.format(this)
 
-inline fun String?.format(): String = Jsonx.format(this)
+inline fun String?.formatJson(): String = Jsonx.format(this)

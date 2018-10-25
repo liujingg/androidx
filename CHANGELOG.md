@@ -8,6 +8,7 @@
 * :sparkles: Activityx adds start method
 * :hammer: @NotNull replace to @NonNull
 * :arrow_up: Javax upgrade to 0.8.1
+* :fire: Jsonx.kt format method rename to formatJson
 
 
 ## v0.3.2
