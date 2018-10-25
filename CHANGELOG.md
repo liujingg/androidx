@@ -1,18 +1,23 @@
 ## v0.4.0
 
-* :zap: Romx support Flyme 7.0.1
+Renamed or deleted the following:
+* :fire: Jsonx.kt format method rename to formatJson
+* :fire: Intentx canStartActivity and safeStartActivity method removed to Activityx and rename to canStart and safeStart
+
+New
+* :sparkles: Romx support Flyme 7.0.1
 * :sparkles: Fragmentx adds requireContext, requireAppContent method
 * :sparkles: Activityx adds appContext method
 * :sparkles: Viewx adds appContext method
-* :fire: Intentx canStartActivity and safeStartActivity method removed to Activityx and rename to canStart and safeStart
 * :sparkles: Activityx adds start method
+* :sparkles: Networkx adds getGateway, getDNS1, getDNS2 method
+* :sparkles: Intentx adds createSendTextIntent, createSendTextFileIntent, createSendImageFileIntent, createSendFileIntent method
+
+Other
+* :zap: Networkx getWifiState and setWifiEnabled method compatible WifiManager is null
+* :art: Contextx.kt and Viewx.kt partial method changed to inline
 * :hammer: @NotNull replace to @NonNull
 * :arrow_up: Javax upgrade to 0.8.1
-* :fire: Jsonx.kt format method rename to formatJson
-* :zap: Networkx getWifiState and setWifiEnabled method compatible WifiManager is null
-* :sparkles: Networkx adds getGateway, getDNS1, getDNS2 method
-* :art: Contextx.kt and Viewx.kt partial method changed to inline
-* :sparkles: Intentx adds createSendTextIntent, createSendTextFileIntent, createSendImageFileIntent, createSendFileIntent method
 
 
 ## v0.3.2
