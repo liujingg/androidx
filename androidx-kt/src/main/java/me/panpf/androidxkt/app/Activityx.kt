@@ -215,14 +215,16 @@ inline fun Activity.readCharSequenceArgOrNull(argName: String): CharSequence? = 
 
 inline fun Activity.readCharSequenceArrayArg(argName: String): Array<CharSequence> = Activityx.readCharSequenceArrayArg(this, argName)
 
-inline fun Activity.readCharSequenceArrayArgOr(argName: String, defaultValue: Array<CharSequence>): Array<CharSequence> = Activityx.readCharSequenceArrayArgOr(this, argName, defaultValue)
+inline fun Activity.readCharSequenceArrayArgOr(argName: String, defaultValue: Array<CharSequence>): Array<CharSequence> =
+        Activityx.readCharSequenceArrayArgOr(this, argName, defaultValue)
 
 inline fun Activity.readCharSequenceArrayArgOrNull(argName: String): Array<CharSequence>? = Activityx.readCharSequenceArrayArgOrNull(this, argName)
 
 
 inline fun Activity.readCharSequenceArrayListArg(argName: String): ArrayList<CharSequence> = Activityx.readCharSequenceArrayListArg(this, argName)
 
-inline fun Activity.readCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> = Activityx.readCharSequenceArrayListArgOr(this, argName, defaultValue)
+inline fun Activity.readCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> =
+        Activityx.readCharSequenceArrayListArgOr(this, argName, defaultValue)
 
 inline fun Activity.readCharSequenceArrayListArgOrNull(argName: String): ArrayList<CharSequence>? = Activityx.readCharSequenceArrayListArgOrNull(this, argName)
 
@@ -243,7 +245,8 @@ inline fun Activity.readStringArrayArgOrNull(argName: String): Array<String>? = 
 
 inline fun Activity.readStringArrayListArg(argName: String): ArrayList<String> = Activityx.readStringArrayListArg(this, argName)
 
-inline fun Activity.readStringArrayListArgOr(argName: String, defaultValue: ArrayList<String>): ArrayList<String> = Activityx.readStringArrayListArgOr(this, argName, defaultValue)
+inline fun Activity.readStringArrayListArgOr(argName: String, defaultValue: ArrayList<String>): ArrayList<String> =
+        Activityx.readStringArrayListArgOr(this, argName, defaultValue)
 
 inline fun Activity.readStringArrayListArgOrNull(argName: String): ArrayList<String>? = Activityx.readStringArrayListArgOrNull(this, argName)
 
@@ -257,14 +260,16 @@ inline fun <V : Parcelable> Activity.readParcelableArgOrNull(argName: String): V
 
 inline fun <V : Parcelable> Activity.readParcelableArrayArg(argName: String): Array<V> = Activityx.readParcelableArrayArg(this, argName)
 
-inline fun <V : Parcelable> Activity.readParcelableArrayArgOr(argName: String, defaultValue: Array<V>): Array<V> = Activityx.readParcelableArrayArgOr(this, argName, defaultValue)
+inline fun <V : Parcelable> Activity.readParcelableArrayArgOr(argName: String, defaultValue: Array<V>): Array<V> =
+        Activityx.readParcelableArrayArgOr(this, argName, defaultValue)
 
 inline fun <V : Parcelable> Activity.readParcelableArrayArgOrNull(argName: String): Array<V>? = Activityx.readParcelableArrayArgOrNull(this, argName)
 
 
 inline fun <V : Parcelable> Activity.readParcelableArrayListArg(argName: String): ArrayList<V> = Activityx.readParcelableArrayListArg(this, argName)
 
-inline fun <V : Parcelable> Activity.readParcelableArrayListArgOr(argName: String, defaultValue: ArrayList<V>): ArrayList<V> = Activityx.readParcelableArrayListArgOr(this, argName, defaultValue)
+inline fun <V : Parcelable> Activity.readParcelableArrayListArgOr(argName: String, defaultValue: ArrayList<V>): ArrayList<V> =
+        Activityx.readParcelableArrayListArgOr(this, argName, defaultValue)
 
 inline fun <V : Parcelable> Activity.readParcelableArrayListArgOrNull(argName: String): ArrayList<V>? = Activityx.readParcelableArrayListArgOrNull(this, argName)
 

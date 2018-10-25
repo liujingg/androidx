@@ -25,12 +25,13 @@ import android.view.View
 import android.view.ViewGroup
 import me.panpf.androidx.view.Viewx
 
+
 /*
  * View related extension method
  */
 
 
-fun View.appContext(): Context = Viewx.appContext(this)
+inline fun View.appContext(): Context = Viewx.appContext(this)
 
 
 inline fun View.setLongClickToastHint(hintContent: String) = Viewx.setLongClickToastHint(this, hintContent)
