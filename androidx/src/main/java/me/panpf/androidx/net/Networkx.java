@@ -171,7 +171,8 @@ public class Networkx {
      */
     @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
     public static int getWifiState(@NonNull Context context) {
-        return Contextx.wifiManager(context).getWifiState();
+        WifiManager wifiManager = Contextx.wifiManagerOrNull(context);
+        return wifiManager != null ? wifiManager.getWifiState() : WifiManager.WIFI_STATE_UNKNOWN;
     }
 
     /**
@@ -188,7 +189,8 @@ public class Networkx {
      */
     @RequiresPermission(allOf = {Manifest.permission.ACCESS_WIFI_STATE, Manifest.permission.CHANGE_WIFI_STATE})
     public static boolean setWifiEnabled(@NonNull Context context, boolean enable) {
-        return Contextx.wifiManager(context).setWifiEnabled(enable);
+        WifiManager wifiManager = Contextx.wifiManagerOrNull(context);
+        return wifiManager != null && wifiManager.setWifiEnabled(enable);
     }
 
     /**

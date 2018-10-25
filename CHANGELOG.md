@@ -9,6 +9,7 @@
 * :hammer: @NotNull replace to @NonNull
 * :arrow_up: Javax upgrade to 0.8.1
 * :fire: Jsonx.kt format method rename to formatJson
+* :zap: Networkx getWifiState and setWifiEnabled method compatible WifiManager is null
 
 
 ## v0.3.2
