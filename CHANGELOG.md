@@ -7,6 +7,7 @@
 * :fire: Intentx canStartActivity and safeStartActivity method removed to Activityx and rename to canStart and safeStart
 * :sparkles: Activityx adds start method
 * :hammer: @NotNull replace to @NonNull
+* :arrow_up: Javax upgrade to 0.8.1
 
 
 ## v0.3.2
