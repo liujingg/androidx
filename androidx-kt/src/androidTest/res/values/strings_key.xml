@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="byte_required">byte_required</string>
+    <string name="byte_array_required">byte_array_required</string>
+    <string name="byte_array_optional">byte_array_optional</string>
+
+    <string name="string_required">string_required</string>
+    <string name="string_optional">string_optional</string>
+    <string name="string_array_required">string_array_required</string>
+    <string name="string_array_optional">string_array_optional</string>
+    <string name="string_array_list_required">string_array_list_required</string>
+    <string name="string_array_list_optional">string_array_list_optional</string>
+</resources>

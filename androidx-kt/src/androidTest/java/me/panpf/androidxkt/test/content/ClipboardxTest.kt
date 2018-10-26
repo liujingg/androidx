@@ -28,7 +28,7 @@ import me.panpf.androidx.content.ClipIntent
 import me.panpf.androidx.content.ClipPlainText
 import me.panpf.androidx.content.ClipUri
 import me.panpf.androidxkt.content.*
-import me.panpf.androidxkt.test.app.ActivityxTestActivity
+import me.panpf.androidxkt.test.app.activity.ActivityxTestActivity
 import me.panpf.androidxkt.test.widget.ToastxTestActivity
 import org.junit.Assert
 import org.junit.Test

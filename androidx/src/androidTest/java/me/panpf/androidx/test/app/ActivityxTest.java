@@ -28,6 +28,9 @@ import org.junit.runner.RunWith;
 
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Activityx;
+import me.panpf.androidx.test.app.activity.ActivityxTestActivity;
+import me.panpf.androidx.test.app.activity.ActivityxTestFragmentActivity;
+import me.panpf.androidx.test.app.activity.ImplTestInterface;
 
 @RunWith(AndroidJUnit4.class)
 public class ActivityxTest {

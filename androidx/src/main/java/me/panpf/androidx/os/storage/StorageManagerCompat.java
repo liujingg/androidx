@@ -37,7 +37,7 @@ import me.panpf.javax.util.Arrayx;
 import me.panpf.javax.util.Collectionx;
 import me.panpf.javax.util.Transformer;
 
-@SuppressWarnings({"WeakerAccess", "unused"})
+@SuppressWarnings({"WeakerAccess"})
 public class StorageManagerCompat {
 
     @NonNull

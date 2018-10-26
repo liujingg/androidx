@@ -9,7 +9,6 @@ Extensions to the Android standard library and support libraries and some basic 
 
 #### Child module
 * [androidx-kt-arch]: Kotlin extension to Android Architecture related libraries
-* [androidx-kt-args]: Extension of Activity and Fragment parameters based on Kotlin features
 
 ## Getting Started
 
@@ -53,6 +52,12 @@ Dependencies:
     * isDestroyedCompat, convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
     * appContext, canStart, safeStart, read\*Arg, read\*UriArg, read\*UriIntentArg, read\*IntentUriArg
     * start
+* Args: [Argsx.java] | [Argsx.kt]
+    * read\*Arg, read\*ArgOr, read\*UriArg, read\*UriArgOr, read\*IntentUriArg, read\*IntentUriArgOr,
+    * read\*UriIntentArg, read\*UriIntentArgOr
+* ArgsBinder: [ArgsBinder.kt] ([Test][ArgsBinderTest.kt])
+    * bind\*Arg, bind\*ArgOr, bind\*UriArg, bind\*UriArgOr, bind\*IntentUriArg, bind\*IntentUriArgOr,
+    * bind\*UriIntentArg, bind\*UriIntentArgOr
 * Dialog: [Dialogx.java] | [Dialogx.kt]
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] | [Fragmentx.kt]
@@ -237,6 +242,16 @@ Please view the [CHANGELOG.md] file
 [ActivityxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/ActivityxTest.java
 [Activityx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Activityx.kt
 [ActivityxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ActivityxTest.kt
+
+[Argsx.java]: androidx/src/main/java/me/panpf/androidx/app/Argsx.java
+[ArgsxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/ArgsxTest.java
+[Argsx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Argsx.kt
+[ArgsxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ArgsxTest.kt
+
+[ArgsBinder.java]: androidx/src/main/java/me/panpf/androidx/app/ArgsBinder.java
+[ArgsBinderTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/ArgsBinderTest.java
+[ArgsBinder.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/ArgsBinder.kt
+[ArgsBinderTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ArgsBinderTest.kt
 
 [Dialogx.java]: androidx/src/main/java/me/panpf/androidx/app/Dialogx.java
 [DialogxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/DialogxTest.java

@@ -1,3 +1,11 @@
+## v0.5.0
+
+* :fire: Activityx.read\*Arg, Fragmentx.read\*Arg merge to Argsx
+* :fire: Deleted androidx-kt-args module, bind\*Arg method moved to androidx-kt module ArgsBinder.kt
+* :sparkles: Argsx.read\*Arg method supported string res
+* :sparkles: ArgsBinder.bind\*Arg method supported string res
+
+
 ## v0.4.0
 
 Renamed or deleted the following:

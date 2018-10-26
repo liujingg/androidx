@@ -23,6 +23,9 @@ import me.panpf.androidxkt.app.convertFromTranslucentCompat
 import me.panpf.androidxkt.app.convertToTranslucentCompat
 import me.panpf.androidxkt.app.getImplWithParent
 import me.panpf.androidxkt.app.isDestroyedCompat
+import me.panpf.androidxkt.test.app.activity.ActivityxTestActivity
+import me.panpf.androidxkt.test.app.activity.ActivityxTestFragmentActivity
+import me.panpf.androidxkt.test.app.activity.ImplTestInterface
 import me.panpf.androidxkt.waitRunInUI
 import org.junit.Assert
 import org.junit.Rule

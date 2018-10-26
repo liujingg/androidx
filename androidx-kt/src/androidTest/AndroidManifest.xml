@@ -11,9 +11,11 @@
 
     <application>
         <activity android:name="me.panpf.androidxkt.test.widget.ToastxTestActivity" />
-        <activity android:name="me.panpf.androidxkt.test.app.ActivityxTestActivity" />
-        <activity android:name="me.panpf.androidxkt.test.app.ActivityxTestFragmentActivity" />
-        <activity android:name="me.panpf.androidxkt.test.app.FragmentxTestActivity" />
-        <activity android:name="me.panpf.androidxkt.test.app.FragmentxTestFragmentActivity" />
+        <activity android:name="me.panpf.androidxkt.test.app.activity.ActivityxTestActivity" />
+        <activity android:name="me.panpf.androidxkt.test.app.activity.ActivityxTestFragmentActivity" />
+        <activity android:name="me.panpf.androidxkt.test.app.fragment.FragmentxTestActivity" />
+        <activity android:name="me.panpf.androidxkt.test.app.fragment.FragmentxTestFragmentActivity" />
+        <activity android:name="me.panpf.androidxkt.test.app.args.ArgsBinderTestActivity" />
+        <activity android:name="me.panpf.androidxkt.test.app.args.ArgsBinderResTestActivity" />
     </application>
 </manifest>

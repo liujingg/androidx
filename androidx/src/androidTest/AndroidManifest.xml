@@ -12,10 +12,10 @@
     <application>
         <activity android:name="me.panpf.androidx.test.widget.ToastxTestActivity" />
         <activity android:name="me.panpf.androidx.test.util.WeakAsyncTaskTestActivity" />
-        <activity android:name="me.panpf.androidx.test.app.ActivityxTestActivity" />
-        <activity android:name="me.panpf.androidx.test.app.ActivityxTestFragmentActivity" />
+        <activity android:name="me.panpf.androidx.test.app.activity.ActivityxTestActivity" />
+        <activity android:name="me.panpf.androidx.test.app.activity.ActivityxTestFragmentActivity" />
         <!--<activity android:name="me.panpf.androidx.test.app.ActivityxArgsTestActivity" />-->
-        <activity android:name="me.panpf.androidx.test.app.FragmentxTestActivity" />
-        <activity android:name="me.panpf.androidx.test.app.FragmentxTestFragmentActivity" />
+        <activity android:name="me.panpf.androidx.test.app.fragment.FragmentxTestActivity" />
+        <activity android:name="me.panpf.androidx.test.app.fragment.FragmentxTestFragmentActivity" />
     </application>
 </manifest>

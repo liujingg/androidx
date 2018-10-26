@@ -19,6 +19,8 @@ package me.panpf.androidxkt.test.app
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.app.isDestroyedCompat
+import me.panpf.androidxkt.test.app.fragment.FragmentxTestActivity
+import me.panpf.androidxkt.test.app.fragment.FragmentxTestFragmentActivity
 
 import org.junit.Assert
 import org.junit.Rule

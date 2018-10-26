@@ -26,6 +26,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import me.panpf.androidx.app.Fragmentx;
+import me.panpf.androidx.test.app.fragment.FragmentxTestActivity;
+import me.panpf.androidx.test.app.fragment.FragmentxTestFragmentActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class FragmentxTest {
