@@ -7,6 +7,9 @@
 
 Extensions to the Android standard library and support libraries and some basic tools
 
+### `Warning`
+`Currently in the development stage, some APIs have not been tested yet, please use them carefully`
+
 #### Child module
 * [androidx-kt-arch]: Kotlin extension to Android Architecture related libraries
 
@@ -55,7 +58,7 @@ Dependencies:
 * Args: [Argsx.java] | [Argsx.kt]
     * read\*Arg, read\*ArgOr, read\*UriArg, read\*UriArgOr, read\*IntentUriArg, read\*IntentUriArgOr,
     * read\*UriIntentArg, read\*UriIntentArgOr
-* ArgsBinder: [ArgsBinder.kt] ([Test][ArgsBinderTest.kt])
+* ArgsBinder: [ArgsBinder.kt]
     * bind\*Arg, bind\*ArgOr, bind\*UriArg, bind\*UriArgOr, bind\*IntentUriArg, bind\*IntentUriArgOr,
     * bind\*UriIntentArg, bind\*UriIntentArgOr
 * Dialog: [Dialogx.java] | [Dialogx.kt]
@@ -129,7 +132,7 @@ Dependencies:
     * isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getGateway, getDNS1, getDNS2
 
 ### os
-* Storage: [Storagex.java] | [Storagex.kt]
+* Storage: [Storagex.java] ([Test][StoragexTest.java])  | [Storagex.kt] ([Test][StoragexTest.kt])
     * getFreeBytes, getTotalBytes, getAvailableBytes, getVolumeState, isVolumeMounted, isPrimaryVolume,
     * isVolumeEmulated, isVolumeRemovable, getVolumePaths, getMountedVolumePaths, getVolumeFiles,
     * getMountedVolumeFiles, getVolumeList, getMountedVolumeList, getVolumes, getMountedVolumes, getVolume,
