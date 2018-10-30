@@ -18,17 +18,22 @@ package me.panpf.androidx.test.graphics;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import java.io.InputStream;
 
 import me.panpf.androidx.graphics.Bitmapx;
 import me.panpf.androidx.graphics.Colorx;
 import me.panpf.androidx.graphics.drawable.Drawablex;
+import me.panpf.javax.io.IOStreamx;
 import me.panpf.javax.util.Premisex;
 
 @RunWith(AndroidJUnit4.class)
@@ -97,5 +102,28 @@ public class BitmapxTest {
         centerCrop1Bitmap.recycle();
 
         operaBitmap.recycle();
+    }
+
+    @Test
+    public void testInSampleSize(){
+        Context context = InstrumentationRegistry.getContext();
+        InputStream inputStream = context.getResources().openRawResource(me.panpf.androidx.test.R.drawable.rect);
+        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+        IOStreamx.safeClose(inputStream);
+
+        Bitmap newBitmap = Bitmapx.centerCrop(bitmap, 99, 55);
+        bitmap.recycle();
+        byte[] bytes = Bitmapx.toByteArray(newBitmap, Bitmap.CompressFormat.JPEG, 100);
+        newBitmap.recycle();
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        Bitmap finalBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+        int finalBitmapWidth = finalBitmap.getWidth();
+        int finalBitmapHeight = finalBitmap.getHeight();
+        finalBitmap.recycle();
+
+        Assert.assertTrue("image size is 99x55, inSampleSize is 2, actual bitmap size is 49x27",
+                finalBitmapWidth == 49 && finalBitmapHeight == 27);
     }
 }
