@@ -5,6 +5,7 @@
 * :sparkles: Argsx.read\*Arg method supported string res
 * :sparkles: ArgsBinder.bind\*Arg method supported string res
 * :sparkles: Bitmapx adds calculateSamplingSize, calculateSamplingSizeForRegion method
+* :bug: Fix bug where Contextx's captioningManager method crashes in non-main thread
 
 
 ## v0.4.0

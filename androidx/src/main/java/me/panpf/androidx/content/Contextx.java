@@ -91,6 +91,7 @@ import android.view.textservice.TextServicesManager;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.os.storage.StorageManagerCompat;
 import me.panpf.androidx.util.NullableResultRunnable;
+import me.panpf.androidx.util.ResultRunnable;
 import me.panpf.javax.util.Premisex;
 
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
@@ -106,10 +107,52 @@ public class Contextx {
         return Premisex.requireNotNull((T) context.getApplicationContext().getSystemService(serviceName), serviceName);
     }
 
+    /**
+     * All Managers need to be created when they are first acquired, and some Managers create Handlers when they are created, so if the current environment is executed on a non-main thread, it involves the problem of creating a Handler on a non-main thread.
+     */
+    @NonNull
+    public static <T> T systemServiceInUI(@NonNull final Context context, @NonNull final String serviceName) {
+        if (Androidx.isMainThread()) {
+            //noinspection unchecked
+            return Premisex.requireNotNull((T) context.getApplicationContext().getSystemService(serviceName), serviceName);
+        } else {
+            final Context appContext = context.getApplicationContext();
+            return Androidx.waitRunInUI(new ResultRunnable<T>() {
+                @NonNull
+                @Override
+                public T run() {
+                    //noinspection unchecked
+                    return Premisex.requireNotNull((T) appContext.getApplicationContext().getSystemService(serviceName), serviceName);
+                }
+            });
+        }
+    }
+
     @Nullable
     public static <T> T systemServiceOrNull(@NonNull Context context, @NonNull String serviceName) {
         //noinspection unchecked
         return (T) context.getApplicationContext().getSystemService(serviceName);
+    }
+
+    /**
+     * All Managers need to be created when they are first acquired, and some Managers create Handlers when they are created, so if the current environment is executed on a non-main thread, it involves the problem of creating a Handler on a non-main thread.
+     */
+    @Nullable
+    public static <T> T systemServiceOrNullInUI(@NonNull final Context context, @NonNull final String serviceName) {
+        if (Androidx.isMainThread()) {
+            //noinspection unchecked
+            return (T) context.getApplicationContext().getSystemService(serviceName);
+        } else {
+            final Context appContext = context.getApplicationContext();
+            return Androidx.waitRunInUI(new NullableResultRunnable<T>() {
+                @Nullable
+                @Override
+                public T run() {
+                    //noinspection unchecked
+                    return (T) appContext.getApplicationContext().getSystemService(serviceName);
+                }
+            });
+        }
     }
 
     @NonNull
@@ -160,7 +203,7 @@ public class Contextx {
     @NonNull
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static CaptioningManager captioningManager(@NonNull Context context) {
-        return systemService(context, Context.CAPTIONING_SERVICE);
+        return systemServiceInUI(context, Context.CAPTIONING_SERVICE);
     }
 
     @NonNull
@@ -320,22 +363,7 @@ public class Contextx {
 
     @NonNull
     public static ClipboardManager clipboardManager(@NonNull Context context) {
-        if (Androidx.isMainThread()) {
-            return systemService(context, Context.CLIPBOARD_SERVICE);
-        } else {
-            /*
-             * 首次获取 ClipboardManager 时会创建 ClipboardManager，并创建 Handler，
-             * 如果当前环境是在非主线程执行的，这里就涉及到了在非主线程创建 Handler 的问题
-             */
-            final Context appContext = context.getApplicationContext();
-            return Premisex.requireNotNull(Androidx.waitRunInUI(new NullableResultRunnable<ClipboardManager>() {
-                @Nullable
-                @Override
-                public ClipboardManager run() {
-                    return systemServiceOrNull(appContext, Context.CLIPBOARD_SERVICE);
-                }
-            }), Context.CLIPBOARD_SERVICE);
-        }
+        return systemServiceInUI(context, Context.CLIPBOARD_SERVICE);
     }
 
     @NonNull
