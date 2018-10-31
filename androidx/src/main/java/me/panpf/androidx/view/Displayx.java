@@ -27,9 +27,8 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewConfiguration;
 
-import java.lang.reflect.Method;
-
 import me.panpf.androidx.content.Contextx;
+import me.panpf.javax.lang.Classx;
 import me.panpf.javax.util.LazyValue;
 import me.panpf.javax.util.Premisex;
 
@@ -40,9 +39,7 @@ public class Displayx {
     static {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             try {
-                Method m = Class.forName("android.os.SystemProperties").getDeclaredMethod("get", String.class);
-                m.setAccessible(true);
-                sNavBarOverride = (String) m.invoke(null, "qemu.hw.mainkeys");
+                sNavBarOverride = (String) Classx.callStaticMethod("android.os.SystemProperties", "get", "qemu.hw.mainkeys");
             } catch (Throwable e) {
                 sNavBarOverride = null;
             }

@@ -248,7 +248,7 @@ public class Networkx {
     public static String getDNS1() {
         try {
             //noinspection ConstantConditions
-            return (String) Classx.callStaticMethod(Class.forName("android.os.SystemProperties"), "get", "net.dns1");
+            return (String) Classx.callStaticMethod("android.os.SystemProperties", "get", "net.dns1");
         } catch (Exception e) {
             e.printStackTrace();
             return "";
@@ -263,7 +263,7 @@ public class Networkx {
     public static String getDNS2() {
         try {
             //noinspection ConstantConditions
-            return (String) Classx.callStaticMethod(Class.forName("android.os.SystemProperties"), "get", "net.dns2");
+            return (String) Classx.callStaticMethod("android.os.SystemProperties", "get", "net.dns2");
         } catch (Exception e) {
             e.printStackTrace();
             return "";

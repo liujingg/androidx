@@ -60,7 +60,7 @@ public class Romx {
 
         Method getMethod = null;
         try {
-            getMethod = Classx.getMethodWithParent(Class.forName("android.os.SystemProperties"), "get", String.class);
+            getMethod = Classx.getMethodWithParent("android.os.SystemProperties", "get", String.class);
         } catch (NoSuchMethodException e1) {
             e1.printStackTrace();
         } catch (ClassNotFoundException e1) {

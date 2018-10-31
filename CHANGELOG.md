@@ -7,6 +7,7 @@
 * :sparkles: Bitmapx adds calculateSamplingSize, calculateSamplingSizeForRegion method
 * :bug: Fix bug where Contextx's captioningManager method crashes in non-main thread
 * :fire: Hardwordx's getPhoneNumber, getDeviceId, getAndroidId, getSubscriberId, getSimSerialNumber, getIMEI, getIMSI methods now return 'unknown' by default
+* :arrow_up: Javax upgrade to 0.8.3
 
 
 ## v0.4.0
