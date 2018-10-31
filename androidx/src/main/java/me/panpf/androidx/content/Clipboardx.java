@@ -35,6 +35,9 @@ import me.panpf.javax.util.Rangex;
 @SuppressWarnings("WeakerAccess")
 public class Clipboardx {
 
+    private Clipboardx() {
+    }
+
     /**
      * copy
      */

@@ -35,6 +35,9 @@ import android.support.annotation.RequiresPermission;
 @SuppressWarnings("WeakerAccess")
 public class Intentx {
 
+    private Intentx() {
+    }
+
     /**
      * Create an Intent that opens the recording page
      */

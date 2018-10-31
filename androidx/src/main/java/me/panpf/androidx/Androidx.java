@@ -39,6 +39,9 @@ import me.panpf.javax.util.Premisex;
 @SuppressWarnings("WeakerAccess")
 public class Androidx {
 
+    private Androidx() {
+    }
+
     /**
      * Get the main thread Handler
      */

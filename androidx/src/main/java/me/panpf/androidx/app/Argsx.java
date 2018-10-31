@@ -57,6 +57,8 @@ public class Argsx {
         }
     };
 
+    private Argsx() {
+    }
 
     /* ************************************* Activity Intent Args ***************************************** */
 

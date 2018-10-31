@@ -40,6 +40,9 @@ import me.panpf.javax.util.Premisex;
 @SuppressWarnings("WeakerAccess")
 public class Packagex {
 
+    private Packagex() {
+    }
+
     /**
      * 是否已安装指定包名的 app
      *

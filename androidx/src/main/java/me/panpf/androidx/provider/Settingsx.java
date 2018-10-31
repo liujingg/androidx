@@ -39,6 +39,9 @@ import me.panpf.androidx.content.Contextx;
 @SuppressWarnings("WeakerAccess")
 public class Settingsx {
 
+    private Settingsx() {
+    }
+
     /**
      * Return true if screen brightness auto mode is on
      */

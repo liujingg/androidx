@@ -32,6 +32,8 @@ public class Jsonx {
 
     private static final String INDENTATION = "    ";
 
+    private Jsonx() {
+    }
 
     public static boolean isEmpty(@Nullable String json) {
         if (json == null) return true;

@@ -35,6 +35,9 @@ public class ViewAnimx {
      */
     public static final long DEFAULT_ANIMATION_DURATION = 400;
 
+    private ViewAnimx() {
+    }
+
     /**
      * 透明度动画
      *

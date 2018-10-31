@@ -35,6 +35,9 @@ import me.panpf.javax.io.IOStreamx;
  */
 public class Assetx {
 
+    private Assetx() {
+    }
+
     @NonNull
     public static InputStream openInput(@NonNull Context context, @NonNull String fileName) throws IOException {
         return context.getAssets().open(fileName);

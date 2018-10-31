@@ -29,6 +29,10 @@ import me.panpf.javax.util.Predicate;
  * Permission related tool methods
  */
 public class Permissionx {
+
+    private Permissionx() {
+    }
+
     /**
      * Return true if all specified permissions have been granted, false otherwise
      */

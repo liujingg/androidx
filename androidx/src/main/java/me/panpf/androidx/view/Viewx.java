@@ -33,6 +33,9 @@ import me.panpf.androidx.widget.Toastx;
 @SuppressWarnings("WeakerAccess")
 public class Viewx {
 
+    private Viewx() {
+    }
+
     @NonNull
     public static Context appContext(@NonNull View view) {
         return view.getContext().getApplicationContext();

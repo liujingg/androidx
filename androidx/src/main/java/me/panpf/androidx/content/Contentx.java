@@ -34,6 +34,9 @@ import me.panpf.javax.io.IOStreamx;
 
 public class Contentx {
 
+    private Contentx() {
+    }
+
     @Nullable
     public static InputStream openInput(@NonNull Context context, @NonNull Uri uri) throws IOException {
         return context.getContentResolver().openInputStream(uri);

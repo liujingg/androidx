@@ -30,6 +30,9 @@ import java.io.InputStream;
 @SuppressWarnings("WeakerAccess")
 public class Imagex {
 
+    private Imagex() {
+    }
+
     /* ************************************** getMimeType ******************************************  */
 
     /**

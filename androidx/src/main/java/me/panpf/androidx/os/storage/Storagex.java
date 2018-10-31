@@ -44,6 +44,8 @@ import me.panpf.javax.util.Transformer;
 @SuppressWarnings({"WeakerAccess", "InfiniteRecursion"})
 public class Storagex {
 
+    private Storagex() {
+    }
 
     /* ******************************************* Bytes *******************************************/
 

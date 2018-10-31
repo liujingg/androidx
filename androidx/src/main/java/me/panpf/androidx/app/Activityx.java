@@ -39,6 +39,9 @@ import me.panpf.javax.lang.Classx;
 @SuppressWarnings({"WeakerAccess"})
 public class Activityx {
 
+    private Activityx() {
+    }
+
     /**
      * Return true if the activity has been destroyed
      */

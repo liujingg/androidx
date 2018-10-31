@@ -115,6 +115,9 @@ public class Romx {
         }
     }
 
+    private Romx() {
+    }
+
     @Nullable
     private static String[] checkMIUI() {
         String versionName = getBuildProperties("ro.miui.ui.version.name");

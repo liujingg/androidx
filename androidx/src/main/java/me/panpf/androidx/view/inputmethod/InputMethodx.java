@@ -28,6 +28,9 @@ import me.panpf.androidx.content.Contextx;
 @SuppressWarnings("WeakerAccess")
 public class InputMethodx {
 
+    private InputMethodx() {
+    }
+
     public static void showSoftInput(@NonNull EditText editText, boolean moveCursorToEnd) {
         editText.requestFocus();
 

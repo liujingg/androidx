@@ -31,6 +31,9 @@ import me.panpf.androidx.graphics.Paintx;
 @SuppressWarnings("WeakerAccess")
 public class Textx {
 
+    private Textx() {
+    }
+
     /**
      * 获取一张文字位图
      *

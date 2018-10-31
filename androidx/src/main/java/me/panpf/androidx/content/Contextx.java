@@ -97,6 +97,8 @@ import me.panpf.javax.util.Premisex;
 @SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
 public class Contextx {
 
+    private Contextx() {
+    }
 
     /* ******************************************* SystemService *******************************************/
 

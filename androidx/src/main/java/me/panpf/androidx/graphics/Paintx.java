@@ -23,6 +23,10 @@ import android.support.annotation.NonNull;
 
 @SuppressWarnings("WeakerAccess")
 public class Paintx {
+
+    private Paintx() {
+    }
+
     /**
      * 获取给定文字的宽度
      *

@@ -31,6 +31,9 @@ import me.panpf.androidx.content.Contextx;
 @SuppressWarnings("WeakerAccess")
 public class Servicex {
 
+    private Servicex() {
+    }
+
     /**
      * Return true if the service specifying Class is running
      */

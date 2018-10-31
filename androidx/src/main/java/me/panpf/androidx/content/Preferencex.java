@@ -28,6 +28,9 @@ import java.util.Set;
 @SuppressWarnings("WeakerAccess")
 public class Preferencex {
 
+    private Preferencex() {
+    }
+
     public static SharedPreferences getPreference(@NonNull Context context, @Nullable String name) {
         if (name == null) {
             return PreferenceManager.getDefaultSharedPreferences(context);

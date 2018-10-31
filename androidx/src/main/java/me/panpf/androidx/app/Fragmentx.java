@@ -30,6 +30,8 @@ import java.util.List;
 @SuppressWarnings("WeakerAccess")
 public class Fragmentx {
 
+    private Fragmentx() {
+    }
 
     /**
      * Return true if the fragment has been destroyed

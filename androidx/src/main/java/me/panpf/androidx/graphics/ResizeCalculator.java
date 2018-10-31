@@ -22,6 +22,9 @@ import android.widget.ImageView;
 
 public class ResizeCalculator {
 
+    private ResizeCalculator() {
+    }
+
     public static Rect srcMappingStartRect(int originalImageWidth, int originalImageHeight, int targetImageWidth, int targetImageHeight) {
         float widthScale = (float) originalImageWidth / targetImageWidth;
         float heightScale = (float) originalImageHeight / targetImageHeight;

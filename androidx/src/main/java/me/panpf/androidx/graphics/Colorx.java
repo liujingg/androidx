@@ -26,6 +26,7 @@ import android.support.annotation.IntRange;
 
 @SuppressWarnings("WeakerAccess")
 public class Colorx {
+
     /**
      * White
      */
@@ -370,6 +371,10 @@ public class Colorx {
      * 低光
      */
     public static final int LOW_LIGHT = 0x33000000;
+
+
+    private Colorx() {
+    }
 
     /**
      * Get color alpha value

@@ -33,6 +33,9 @@ import me.panpf.javax.lang.Classx;
 @SuppressWarnings("WeakerAccess")
 public class Networkx {
 
+    private Networkx() {
+    }
+
     /**
      * Get network state
      */

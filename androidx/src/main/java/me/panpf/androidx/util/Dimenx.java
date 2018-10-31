@@ -30,6 +30,8 @@ import java.lang.annotation.Target;
 @SuppressWarnings("WeakerAccess")
 public class Dimenx {
 
+    private Dimenx() {
+    }
 
     /* ************************************* Context ***************************************** */
 

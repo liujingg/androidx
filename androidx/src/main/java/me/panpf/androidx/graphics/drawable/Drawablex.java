@@ -33,6 +33,9 @@ import me.panpf.javax.util.Premisex;
 @SuppressWarnings("WeakerAccess")
 public class Drawablex {
 
+    private Drawablex() {
+    }
+
     /**
      * Convert Drawable to bitmap, use intrinsic size as the size of the new bitmap
      *

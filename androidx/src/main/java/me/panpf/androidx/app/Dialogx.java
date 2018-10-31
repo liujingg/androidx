@@ -27,6 +27,9 @@ import me.panpf.javax.lang.Classx;
 @SuppressWarnings("WeakerAccess")
 public class Dialogx {
 
+    private Dialogx() {
+    }
+
     /**
      * Whether to automatically close the dialog box when setting the click button
      */

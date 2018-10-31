@@ -34,6 +34,9 @@ import me.panpf.androidx.content.Contextx;
 
 public class OpenGlx {
 
+    private OpenGlx() {
+    }
+
     /**
      * Get the version of OpenGL
      */

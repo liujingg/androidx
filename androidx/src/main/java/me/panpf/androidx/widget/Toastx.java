@@ -26,6 +26,8 @@ import me.panpf.androidx.Androidx;
 
 public class Toastx {
 
+    private Toastx() {
+    }
 
     /* ************************************* Context ***************************************** */
 

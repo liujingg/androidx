@@ -25,6 +25,9 @@ import android.support.annotation.NonNull;
  */
 public class StatFsx {
 
+    private StatFsx() {
+    }
+
     public static long getAvailableBytesCompat(@NonNull StatFs statFs) {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2 ? statFs.getAvailableBytes() : (long) statFs.getAvailableBlocks() * (long) statFs.getBlockSize();
     }

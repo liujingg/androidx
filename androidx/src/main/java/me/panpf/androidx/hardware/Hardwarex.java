@@ -42,6 +42,9 @@ import me.panpf.javax.util.Transformer;
 @SuppressWarnings("WeakerAccess")
 public class Hardwarex {
 
+    private Hardwarex() {
+    }
+
     @NonNull
     public static String getDeviceModel() {
         return Stringx.orEmpty(Build.MODEL);

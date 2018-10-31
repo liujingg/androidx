@@ -49,6 +49,9 @@ public class Displayx {
         }
     }
 
+    private Displayx() {
+    }
+
     @NonNull
     public static Point getScreenSize(@NonNull Context context) {
         Point point = new Point();
