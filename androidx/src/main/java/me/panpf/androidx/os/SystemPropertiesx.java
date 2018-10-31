@@ -105,6 +105,10 @@ public class SystemPropertiesx {
         private static final Method METHOD;
 
         static {
+            /*
+             * 为何不采用读取 /root/build.prop 文件的方式？
+             * 因为在 MIUI 上没有读取这个文件的权限，在华为 EMUI 上读取的属性不全
+             */
             Method getMethod = null;
             try {
                 getMethod = Classx.getMethodWithParent("android.os.SystemProperties", "get", String.class);

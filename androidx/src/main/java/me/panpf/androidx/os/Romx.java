@@ -19,9 +19,6 @@ package me.panpf.androidx.os;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
-import java.lang.reflect.Method;
-
-import me.panpf.javax.lang.Classx;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Arrayx;
 
@@ -40,9 +37,6 @@ public class Romx {
     public static final int TYPE_SAMSUNG = 10;
     public static final int TYPE_UNKNOWN = 999;
 
-    @Nullable
-    private static final Method GET_BUILD_PROP_METHOD;
-
     private static final int TYPE;
     @NonNull
     private static final String TYPE_NAME;
@@ -53,21 +47,6 @@ public class Romx {
     private static final String VERSION_INCREMENTAL;
 
     static {
-        /*
-         * 为何不采用读取 /root/build.prop 文件的方式？
-         * 因为在 MIUI 上没有读取这个文件的权限，在华为 EMUI 上读取的属性不全
-         */
-
-        Method getMethod = null;
-        try {
-            getMethod = Classx.getMethodWithParent("android.os.SystemProperties", "get", String.class);
-        } catch (NoSuchMethodException e1) {
-            e1.printStackTrace();
-        } catch (ClassNotFoundException e1) {
-            e1.printStackTrace();
-        }
-        GET_BUILD_PROP_METHOD = getMethod;
-
         String[] versionInfos;
         if ((versionInfos = checkMIUI()) != null) {
             TYPE = TYPE_MIUI;
@@ -120,10 +99,10 @@ public class Romx {
 
     @Nullable
     private static String[] checkMIUI() {
-        String versionName = getBuildProperties("ro.miui.ui.version.name");
+        String versionName = SystemPropertiesx.get("ro.miui.ui.version.name");
         if (Stringx.isSafe(versionName)) {
-            String versionCode = getBuildProperties("ro.miui.ui.version.code");
-            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+            String versionCode = SystemPropertiesx.get("ro.miui.ui.version.code");
+            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, versionCode, versionIncremental);
         } else {
             return null;
@@ -132,8 +111,8 @@ public class Romx {
 
     @Nullable
     private static String[] checkFlyme() {
-        if ("flyme".equalsIgnoreCase(getBuildProperties("ro.build.user")) || Stringx.isSafe(getBuildProperties("ro.flyme.published"))) {
-            String displayId = getBuildProperties("ro.build.display.id");
+        if ("flyme".equalsIgnoreCase(SystemPropertiesx.get("ro.build.user")) || Stringx.isSafe(SystemPropertiesx.get("ro.flyme.published"))) {
+            String displayId = SystemPropertiesx.get("ro.build.display.id");
             String versionName;
             if (displayId.startsWith("Flyme OS ")) {
                 versionName = displayId.substring("Flyme OS ".length());
@@ -142,7 +121,7 @@ public class Romx {
             } else {
                 versionName = displayId;
             }
-            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, "", versionIncremental);
         } else {
             return null;
@@ -151,9 +130,9 @@ public class Romx {
 
     @Nullable
     private static String[] checkColorOS() {
-        String versionName = getBuildProperties("ro.build.version.opporom");
+        String versionName = SystemPropertiesx.get("ro.build.version.opporom");
         if (Stringx.isSafe(versionName)) {
-            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, "", versionIncremental);
         } else {
             return null;
@@ -162,10 +141,10 @@ public class Romx {
 
     @Nullable
     private static String[] checkEMUI() {
-        String versionName = getBuildProperties("ro.build.version.emui");
+        String versionName = SystemPropertiesx.get("ro.build.version.emui");
         versionName = versionName.startsWith("EmotionUI_") ? versionName.substring("EmotionUI_".length()) : versionName;
-        String versionCode = getBuildProperties("ro.oppo.version"); // oppo rom 的 build_prop 文件中定义了 ro.oppo.version 属性，但是值始终是空的
-        String versionIncremental = getBuildProperties("ro.build.version.incremental");
+        String versionCode = SystemPropertiesx.get("ro.oppo.version"); // oppo rom 的 build_prop 文件中定义了 ro.oppo.version 属性，但是值始终是空的
+        String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
         if (Stringx.isSafe(versionName)) {
             return Arrayx.arrayOf(versionName, versionCode, versionIncremental);
         } else {
@@ -175,10 +154,10 @@ public class Romx {
 
     @Nullable
     private static String[] checkFuntouchOS() {
-        if ("Funtouch".equalsIgnoreCase(getBuildProperties("ro.vivo.os.name"))) {
-            String versionName = getBuildProperties("ro.vivo.os.version");
-            String versionCode = getBuildProperties("ro.vivo.product.version");
-            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+        if ("Funtouch".equalsIgnoreCase(SystemPropertiesx.get("ro.vivo.os.name"))) {
+            String versionName = SystemPropertiesx.get("ro.vivo.os.version");
+            String versionCode = SystemPropertiesx.get("ro.vivo.product.version");
+            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, versionCode, versionIncremental);
         } else {
             return null;
@@ -187,10 +166,10 @@ public class Romx {
 
     @Nullable
     private static String[] checkSmartisanOS() {
-        String versionName = getBuildProperties("ro.smartisan.version");
+        String versionName = SystemPropertiesx.get("ro.smartisan.version");
         if (Stringx.isSafe(versionName)) {
             versionName = Arrayx.firstOrNull(versionName.split("-"));
-            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, "", versionIncremental);
         } else {
             return null;
@@ -199,12 +178,12 @@ public class Romx {
 
     @Nullable
     private static String[] checkH2OS() {
-        if (getBuildProperties("ro.build.user").toLowerCase().contains("oneplus")) {
-            String versionName = getBuildProperties("ro.rom.version");
+        if (SystemPropertiesx.get("ro.build.user").toLowerCase().contains("oneplus")) {
+            String versionName = SystemPropertiesx.get("ro.rom.version");
             if (versionName.toLowerCase().startsWith("H2OS V".toLowerCase())) {
                 versionName = versionName.substring("H2OS V".length());
             }
-            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, "", versionIncremental);
         } else {
             return null;
@@ -213,9 +192,9 @@ public class Romx {
 
     @Nullable
     private static String[] checkLineageOS() {
-        if ("lineage".equalsIgnoreCase(getBuildProperties("ro.build.user"))) {
-            String versionName = getBuildProperties("ro.cm.build.version");
-            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+        if ("lineage".equalsIgnoreCase(SystemPropertiesx.get("ro.build.user"))) {
+            String versionName = SystemPropertiesx.get("ro.cm.build.version");
+            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, "", versionIncremental);
         } else {
             return null;
@@ -224,10 +203,10 @@ public class Romx {
 
     @Nullable
     private static String[] checkAndroid() {
-        if ("android-build".equalsIgnoreCase(getBuildProperties("ro.build.user"))) {
-            String versionName = getBuildProperties("ro.build.version.release");
-            String versionCode = getBuildProperties("ro.build.version.sdk");
-            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+        if ("android-build".equalsIgnoreCase(SystemPropertiesx.get("ro.build.user"))) {
+            String versionName = SystemPropertiesx.get("ro.build.version.release");
+            String versionCode = SystemPropertiesx.get("ro.build.version.sdk");
+            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, versionCode, versionIncremental);
         } else {
             return null;
@@ -236,22 +215,12 @@ public class Romx {
 
     @Nullable
     private static String[] checkSamsung() {
-        if ("dpi".equalsIgnoreCase(getBuildProperties("ro.build.user"))) {
-            String versionName = getBuildProperties("ro.build.display.id");
-            String versionIncremental = getBuildProperties("ro.build.version.incremental");
+        if ("dpi".equalsIgnoreCase(SystemPropertiesx.get("ro.build.user"))) {
+            String versionName = SystemPropertiesx.get("ro.build.display.id");
+            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
             return Arrayx.arrayOf(versionName, "", versionIncremental);
         } else {
             return null;
-        }
-    }
-
-    @NonNull
-    public static String getBuildProperties(@NonNull String key) {
-        if (GET_BUILD_PROP_METHOD != null) {
-            //noinspection ConstantConditions
-            return Stringx.orEmpty((String) Classx.callStaticMethod(GET_BUILD_PROP_METHOD, key));
-        } else {
-            return "";
         }
     }
 

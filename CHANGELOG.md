@@ -12,6 +12,7 @@
 * :fire: Hardwordx.kt removed getDeviceModel, getDeviceName, getHardware, getSupportedAbis, getSerial method
 * :sparkles: Hardwordx's adds getProduct, getBrand method
 * :sparkles: Add SystemPropertiesx
+* :fire: Romx removed getBuildProperties method
 
 
 ## v0.4.0

@@ -28,6 +28,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
 
 import me.panpf.androidx.content.Contextx;
+import me.panpf.androidx.os.SystemPropertiesx;
 import me.panpf.javax.lang.Classx;
 
 @SuppressWarnings("WeakerAccess")
@@ -246,13 +247,7 @@ public class Networkx {
     @SuppressLint("PrivateApi")
     @NonNull
     public static String getDNS1() {
-        try {
-            //noinspection ConstantConditions
-            return (String) Classx.callStaticMethod("android.os.SystemProperties", "get", "net.dns1");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
+        return SystemPropertiesx.get("net.dns1");
     }
 
     /**
@@ -261,12 +256,6 @@ public class Networkx {
     @SuppressLint("PrivateApi")
     @NonNull
     public static String getDNS2() {
-        try {
-            //noinspection ConstantConditions
-            return (String) Classx.callStaticMethod("android.os.SystemProperties", "get", "net.dns2");
-        } catch (Exception e) {
-            e.printStackTrace();
-            return "";
-        }
+        return SystemPropertiesx.get("net.dns2");
     }
 }
