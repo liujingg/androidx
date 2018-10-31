@@ -272,4 +272,16 @@ public class Bitmapx {
 
         return newBitmap;
     }
+
+
+    /* ************************************** other ******************************************  */
+
+
+    public static int calculateSamplingSize(int size, int inSampleSize) {
+        return (int) Math.ceil(size / (float) inSampleSize);
+    }
+
+    public static int calculateSamplingSizeForRegion(int size, int inSampleSize) {
+        return (int) Math.floor(size / (float) inSampleSize);
+    }
 }

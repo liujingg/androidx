@@ -4,6 +4,7 @@
 * :fire: Deleted androidx-kt-args module, bind\*Arg method moved to androidx-kt module ArgsBinder.kt
 * :sparkles: Argsx.read\*Arg method supported string res
 * :sparkles: ArgsBinder.bind\*Arg method supported string res
+* :sparkles: Bitmapx adds calculateSamplingSize, calculateSamplingSizeForRegion method
 
 
 ## v0.4.0

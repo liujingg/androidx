@@ -19,7 +19,9 @@ package me.panpf.androidx.test.graphics;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapRegionDecoder;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
@@ -28,6 +30,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import me.panpf.androidx.graphics.Bitmapx;
@@ -105,13 +108,14 @@ public class BitmapxTest {
     }
 
     @Test
-    public void testInSampleSize(){
+    public void testInSampleSize() {
         Context context = InstrumentationRegistry.getContext();
         InputStream inputStream = context.getResources().openRawResource(me.panpf.androidx.test.R.drawable.rect);
         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
         IOStreamx.safeClose(inputStream);
 
-        Bitmap newBitmap = Bitmapx.centerCrop(bitmap, 99, 55);
+        final int bitmapWidth = 99, bitmapHeight = 55;
+        Bitmap newBitmap = Bitmapx.centerCrop(bitmap, bitmapWidth, bitmapHeight);
         bitmap.recycle();
         byte[] bytes = Bitmapx.toByteArray(newBitmap, Bitmap.CompressFormat.JPEG, 100);
         newBitmap.recycle();
@@ -123,7 +127,43 @@ public class BitmapxTest {
         int finalBitmapHeight = finalBitmap.getHeight();
         finalBitmap.recycle();
 
-        Assert.assertTrue("image size is 99x55, inSampleSize is 2, actual bitmap size is 49x27",
-                finalBitmapWidth == 49 && finalBitmapHeight == 27);
+        final int expectedBitmapWidth = Bitmapx.calculateSamplingSize(bitmapWidth, options.inSampleSize);
+        final int expectedBitmapHeight = Bitmapx.calculateSamplingSize(bitmapHeight, options.inSampleSize);
+
+        Assert.assertTrue("testInSampleSize: image size is " + bitmapWidth + "x" + bitmapHeight
+                        + ", inSampleSize is " + options.inSampleSize
+                        + ", expected bitmap size is " + expectedBitmapWidth + "x" + expectedBitmapHeight
+                        + ", actual bitmap size is " + finalBitmapWidth + "x" + finalBitmapHeight,
+                finalBitmapWidth == expectedBitmapWidth && finalBitmapHeight == expectedBitmapHeight);
+    }
+
+    @Test
+    public void testRegionInSampleSize() throws IOException {
+        Context context = InstrumentationRegistry.getContext();
+        InputStream inputStream = context.getResources().openRawResource(me.panpf.androidx.test.R.drawable.rect);
+
+        BitmapRegionDecoder regionDecoder = BitmapRegionDecoder.newInstance(inputStream, false);
+
+        final int bitmapWidth = 99, bitmapHeight = 55;
+
+        final int left = (regionDecoder.getWidth() - bitmapWidth) / 2;
+        final int top = (regionDecoder.getHeight() - bitmapHeight) / 2;
+
+
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        Bitmap finalBitmap = regionDecoder.decodeRegion(new Rect(left, top, left + bitmapWidth, top + bitmapHeight), options);
+        int finalBitmapWidth = finalBitmap.getWidth();
+        int finalBitmapHeight = finalBitmap.getHeight();
+        finalBitmap.recycle();
+
+        final int expectedBitmapWidth = Bitmapx.calculateSamplingSizeForRegion(bitmapWidth, options.inSampleSize);
+        final int expectedBitmapHeight = Bitmapx.calculateSamplingSizeForRegion(bitmapHeight, options.inSampleSize);
+
+        Assert.assertTrue("testRegionInSampleSize: image size is " + bitmapWidth + "x" + bitmapHeight
+                        + ", inSampleSize is " + options.inSampleSize
+                        + ", expected bitmap size is " + expectedBitmapWidth + "x" + expectedBitmapHeight
+                        + ", actual bitmap size is " + finalBitmapWidth + "x" + finalBitmapHeight,
+                finalBitmapWidth == expectedBitmapWidth && finalBitmapHeight == expectedBitmapHeight);
     }
 }
