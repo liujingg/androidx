@@ -9,7 +9,7 @@
 * :fire: Hardwordx's getPhoneNumber, getDeviceId, getAndroidId, getSubscriberId, getSimSerialNumber, getIMEI, getIMSI methods now return 'unknown' by default
 * :arrow_up: Javax upgrade to 0.8.3
 * :fire: Hardwordx.java getDeviceModel rename to getModel and getDeviceName rename to getDevice
-* :fire: Hardwordx.kt removed getDeviceModel, getDeviceName, getHardware, getSupportedAbis method
+* :fire: Hardwordx.kt removed getDeviceModel, getDeviceName, getHardware, getSupportedAbis, getSerial method
 * :sparkles: Hardwordx's adds getProduct, getBrand method
 * :sparkles: Add SystemPropertiesx
 

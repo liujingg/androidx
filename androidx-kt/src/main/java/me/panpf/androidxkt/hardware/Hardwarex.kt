@@ -54,10 +54,6 @@ inline fun Context.getSubscriberId(): String = Hardwarex.getSubscriberId(this)
 @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
 inline fun Context.getSimSerialNumber(): String = Hardwarex.getSimSerialNumber(this)
 
-@SuppressLint("MissingPermission", "HardwareIds")
-@RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-inline fun getSerial(): String = Hardwarex.getSerial()
-
 /**
  * 获取国际移动设备身份码
  */

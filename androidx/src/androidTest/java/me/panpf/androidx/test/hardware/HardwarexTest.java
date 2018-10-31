@@ -29,6 +29,7 @@ import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Permissionx;
 import me.panpf.androidx.hardware.Hardwarex;
 import me.panpf.javax.lang.Stringx;
+import me.panpf.javax.net.Netx;
 import me.panpf.javax.util.Comparisonx;
 
 
@@ -162,7 +163,7 @@ public class HardwarexTest {
             }
         } else {
             String macAddress = Hardwarex.getMacAddress(context);
-            Assert.assertTrue("macAddress: " + macAddress, Stringx.isSafe(macAddress));
+            Assert.assertTrue("macAddress: " + macAddress, Netx.isMacAddress(macAddress));
         }
     }
 }
