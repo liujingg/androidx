@@ -46,18 +46,28 @@ public class Hardwarex {
     }
 
     @NonNull
-    public static String getDeviceModel() {
+    public static String getProduct() {
+        return Stringx.orEmpty(Build.PRODUCT);
+    }
+
+    @NonNull
+    public static String getBrand() {
+        return Stringx.orEmpty(Build.BRAND);
+    }
+
+    @NonNull
+    public static String getModel() {
         return Stringx.orEmpty(Build.MODEL);
     }
 
     @NonNull
-    public static String getDeviceName() {
+    public static String getDevice() {
         return Stringx.orEmpty(Build.DEVICE);
     }
 
     @NonNull
     public static String getHardware() {
-        return Build.HARDWARE;
+        return Stringx.orEmpty(Build.HARDWARE);
     }
 
     @NonNull

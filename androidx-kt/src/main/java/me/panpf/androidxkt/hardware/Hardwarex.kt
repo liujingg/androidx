@@ -29,14 +29,6 @@ import me.panpf.androidx.hardware.Hardwarex
  */
 
 
-inline fun getDeviceModel(): String = Hardwarex.getDeviceModel()
-
-inline fun getDeviceName(): String = Hardwarex.getDeviceName()
-
-inline fun getHardware(): String = Hardwarex.getHardware()
-
-inline fun getSupportedAbis(): Array<out String> = Hardwarex.getSupportedAbis()
-
 @SuppressLint("HardwareIds")
 @RequiresPermission(anyOf = [(Manifest.permission.READ_PHONE_STATE), (Manifest.permission.READ_SMS), (Manifest.permission.READ_PHONE_NUMBERS)])
 inline fun Context.getPhoneNumber(): String = Hardwarex.getPhoneNumber(this)

@@ -36,18 +36,28 @@ import me.panpf.javax.util.Comparisonx;
 public class HardwarexTest {
 
     @Test
-    public final void testDeviceModel() {
-        Assert.assertTrue(Hardwarex.getDeviceModel().length() > 0);
+    public final void testModel() {
+        Assert.assertTrue(Stringx.isSafe(Hardwarex.getModel()));
     }
 
     @Test
-    public final void testDeviceName() {
-        Assert.assertTrue(Hardwarex.getDeviceName().length() > 0);
+    public final void testName() {
+        Assert.assertTrue(Stringx.isSafe(Hardwarex.getDevice()));
     }
 
     @Test
     public final void testHardware() {
-        Assert.assertTrue(Hardwarex.getHardware().length() > 0);
+        Assert.assertTrue(Stringx.isSafe(Hardwarex.getHardware()));
+    }
+
+    @Test
+    public final void testProduct() {
+        Assert.assertTrue(Stringx.isSafe(Hardwarex.getProduct()));
+    }
+
+    @Test
+    public final void testBrand() {
+        Assert.assertTrue(Stringx.isSafe(Hardwarex.getBrand()));
     }
 
     @Test

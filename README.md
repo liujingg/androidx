@@ -117,7 +117,7 @@ Dependencies:
 
 ### hardware
 * Hardware: [Hardwarex.java] ([Test][HardwarexTest.java]) | [Hardwarex.kt] ([Test][HardwarexTest.kt])
-    * getDeviceModel, getDeviceName, getHardware, getSupportedAbis, getPhoneNumber, getDeviceId,
+    * getProduct, getBrand, getModel, getDevice, getHardware, getSupportedAbis, getPhoneNumber, getDeviceId,
     * getAndroidId, getSubscriberId, getSimSerialNumber, getSerial, getIMEI, getIMSI, getMacAddress
 
 ### net
