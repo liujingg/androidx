@@ -19,9 +19,13 @@ package me.panpf.androidxkt.test.hardware
 import android.Manifest
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import me.panpf.androidx.Androidx.isAtLeastP
+import me.panpf.androidx.Androidx
+import me.panpf.androidx.app.Permissionx
+import me.panpf.androidx.hardware.Hardwarex
 import me.panpf.androidxkt.app.isGrantPermissions
 import me.panpf.androidxkt.hardware.*
+import me.panpf.javax.lang.Stringx
+import me.panpf.javax.util.Comparisonx
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -52,66 +56,101 @@ class HardwarexTest {
     @Test
     fun testDeviceId() {
         val context = InstrumentationRegistry.getContext()
-
-        if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
-            Assert.assertTrue(context.getDeviceId().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+        if (Androidx.isAtLeast6_0()) {
+            if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
+                val deviceId = context.getDeviceId()
+                Assert.assertTrue("deviceId: $deviceId", Stringx.isSafe(deviceId)
+                        && !Comparisonx.areEqual(deviceId, "unknown")
+                        && !Comparisonx.areEqual(deviceId, "PermissionDenied"))
+            } else {
+                val deviceId = context.getDeviceId()
+                Assert.assertEquals("deviceId: $deviceId", deviceId, "PermissionDenied")
+            }
         } else {
-            Assert.assertEquals(context.getDeviceId(), "PermissionDenied")
+            val deviceId = context.getDeviceId()
+            Assert.assertTrue("deviceId: $deviceId", Stringx.isSafe(deviceId))
         }
     }
 
     @Test
     fun testAndroidId() {
-        val context = InstrumentationRegistry.getContext()
-
-        Assert.assertTrue(context.getAndroidId().isNotEmpty())
+        val androidId = Hardwarex.getAndroidId(InstrumentationRegistry.getContext())
+        Assert.assertTrue("androidId: $androidId", Stringx.isSafe(androidId))
     }
 
     @Test
     fun testSubscriberId() {
         val context = InstrumentationRegistry.getContext()
-
-        if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
-            Assert.assertNotNull(context.getSubscriberId())
+        if (Androidx.isAtLeast6_0()) {
+            if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
+                val subscriberId = context.getSubscriberId()
+                Assert.assertTrue("subscriberId: $subscriberId", Stringx.isSafe(subscriberId)
+                        && !Comparisonx.areEqual(subscriberId, "unknown")
+                        && !Comparisonx.areEqual(subscriberId, "PermissionDenied"))
+            } else {
+                val subscriberId = context.getSubscriberId()
+                Assert.assertEquals("subscriberId: $subscriberId", subscriberId, "PermissionDenied")
+            }
         } else {
-            Assert.assertEquals(context.getSubscriberId(), "PermissionDenied")
+            val subscriberId = context.getSubscriberId()
+            Assert.assertTrue("subscriberId: $subscriberId", Stringx.isSafe(subscriberId))
         }
     }
 
     @Test
     fun testSimSerialNumber() {
         val context = InstrumentationRegistry.getContext()
-
-        if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
-            Assert.assertNotNull(context.getSimSerialNumber())
+        if (Androidx.isAtLeast6_0()) {
+            if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
+                val simSerialNumber = context.getSimSerialNumber()
+                Assert.assertTrue("simSerialNumber: $simSerialNumber", Stringx.isSafe(simSerialNumber)
+                        && !Comparisonx.areEqual(simSerialNumber, "unknown")
+                        && !Comparisonx.areEqual(simSerialNumber, "PermissionDenied"))
+            } else {
+                val simSerialNumber = context.getSimSerialNumber()
+                Assert.assertEquals("simSerialNumber: $simSerialNumber", simSerialNumber, "PermissionDenied")
+            }
         } else {
-            Assert.assertEquals(context.getSimSerialNumber(), "PermissionDenied")
+            val simSerialNumber = context.getSimSerialNumber()
+            Assert.assertTrue("simSerialNumber: $simSerialNumber", Stringx.isSafe(simSerialNumber))
         }
     }
 
     @Test
     fun testSerial() {
-        if (isAtLeastP()) {
-            val context = InstrumentationRegistry.getContext()
-
+        val context = InstrumentationRegistry.getContext()
+        if (Androidx.isAtLeastP()) {
             if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
-                Assert.assertTrue(getSerial().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+                val serial = Hardwarex.getSerial()
+                Assert.assertTrue("serial: $serial", Stringx.isSafe(serial)
+                        && !Comparisonx.areEqual(serial, "unknown")
+                        && !Comparisonx.areEqual(serial, "PermissionDenied"))
             } else {
-                Assert.assertEquals(getSerial(), "PermissionDenied")
+                val serial = Hardwarex.getSerial()
+                Assert.assertEquals("serial: $serial", serial, "PermissionDenied")
             }
         } else {
-            Assert.assertTrue(getSerial().isNotEmpty())
+            val serial = Hardwarex.getSerial()
+            Assert.assertTrue("serial: $serial", Stringx.isSafe(serial))
         }
     }
 
     @Test
     fun testMacAddress() {
         val context = InstrumentationRegistry.getContext()
-
-        if (context.isGrantPermissions(Manifest.permission.ACCESS_WIFI_STATE)) {
-            Assert.assertTrue(context.getMacAddress().let { it.isNotEmpty() && it != "unknown" && it != "PermissionDenied" })
+        if (Androidx.isAtLeast6_0()) {
+            if (context.isGrantPermissions(Manifest.permission.ACCESS_WIFI_STATE)) {
+                val macAddress = context.getMacAddress()
+                Assert.assertTrue("macAddress: $macAddress", Stringx.isSafe(macAddress)
+                        && !Comparisonx.areEqual(macAddress, "unknown")
+                        && !Comparisonx.areEqual(macAddress, "PermissionDenied"))
+            } else {
+                val macAddress = context.getMacAddress()
+                Assert.assertEquals("macAddress: $macAddress", macAddress, "PermissionDenied")
+            }
         } else {
-            Assert.assertEquals(context.getMacAddress(), "PermissionDenied")
+            val macAddress = context.getMacAddress()
+            Assert.assertTrue("macAddress: $macAddress", Stringx.isSafe(macAddress))
         }
     }
 }

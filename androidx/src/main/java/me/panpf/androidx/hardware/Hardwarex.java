@@ -82,10 +82,10 @@ public class Hardwarex {
     public static String getPhoneNumber(@NonNull Context context) {
         try {
             TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
-            return Stringx.orEmpty(manager != null ? manager.getLine1Number() : null);
+            return Stringx.isNotSafeOr(manager != null ? manager.getLine1Number() : null, "unknown");
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.orEmpty(e instanceof SecurityException ? "PermissionDenied" : null);
+            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
         }
     }
 
@@ -95,17 +95,17 @@ public class Hardwarex {
     public static String getDeviceId(@NonNull Context context) {
         try {
             TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
-            return Stringx.orEmpty(manager != null ? (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? manager.getImei() : manager.getDeviceId()) : null);
+            return Stringx.isNotSafeOr(manager != null ? (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? manager.getImei() : manager.getDeviceId()) : null, "unknown");
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.orEmpty(e instanceof SecurityException ? "PermissionDenied" : null);
+            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
         }
     }
 
     @NonNull
     @SuppressLint("HardwareIds")
     public static String getAndroidId(@NonNull Context context) {
-        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        return Stringx.isNotSafeOr(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID), "unknown");
     }
 
     /**
@@ -117,10 +117,10 @@ public class Hardwarex {
     public static String getSubscriberId(@NonNull Context context) {
         try {
             TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
-            return Stringx.orEmpty(manager != null ? manager.getSubscriberId() : null);
+            return Stringx.isNotSafeOr(manager != null ? manager.getSubscriberId() : null, "unknown");
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.orEmpty(e instanceof SecurityException ? "PermissionDenied" : null);
+            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
         }
     }
 
@@ -133,10 +133,10 @@ public class Hardwarex {
     public static String getSimSerialNumber(@NonNull Context context) {
         try {
             TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
-            return Stringx.orEmpty(manager != null ? manager.getSimSerialNumber() : null);
+            return Stringx.isNotSafeOr(manager != null ? manager.getSimSerialNumber() : null, "unknown");
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.orEmpty(e instanceof SecurityException ? "PermissionDenied" : null);
+            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
         }
     }
 
@@ -145,14 +145,10 @@ public class Hardwarex {
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getSerial() {
         try {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                return Build.getSerial();
-            } else {
-                return Build.SERIAL;
-            }
+            return Stringx.isNotSafeOr(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? Build.getSerial() : Build.SERIAL, "unknown");
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.orEmpty(e instanceof SecurityException ? "PermissionDenied" : null);
+            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
         }
     }
 

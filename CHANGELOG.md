@@ -6,6 +6,7 @@
 * :sparkles: ArgsBinder.bind\*Arg method supported string res
 * :sparkles: Bitmapx adds calculateSamplingSize, calculateSamplingSizeForRegion method
 * :bug: Fix bug where Contextx's captioningManager method crashes in non-main thread
+* :fire: Hardwordx's getPhoneNumber, getDeviceId, getAndroidId, getSubscriberId, getSimSerialNumber, getIMEI, getIMSI methods now return 'unknown' by default
 
 
 ## v0.4.0
