@@ -154,6 +154,8 @@ Dependencies:
 * Rom: [Romx.java] ([Test][RomxTest.java])
     * getType, isType, isMiuiType, isEmuiType, isFlymeType, isColorType, isFuntouchOSType, isSmartisanOSType,
     * isH2OSType, getTypeName, getVersionName, getVersionCode, getVersionIncremental
+* SystemProperties: [SystemPropertiesx.java] ([Test][SystemPropertiesxTest.java])
+    * get, getInt, getLong, getBoolean, set, addChangeCallbacks, callChangeCallbacks
 
 ### provider
 * Settings: [Settingsx.java] | [Settingsx.kt]
@@ -380,6 +382,11 @@ Please view the [CHANGELOG.md] file
 [StatFsxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/StatFsxTest.java
 [StatFsx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/StatFsx.kt
 [StatFsxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/StatFsxTest.kt
+
+[SystemPropertiesx.java]: androidx/src/main/java/me/panpf/androidx/os/SystemPropertiesx.java
+[SystemPropertiesxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/SystemPropertiesxTest.java
+[SystemPropertiesx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/SystemPropertiesx.kt
+[SystemPropertiesxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/SystemPropertiesxTest.kt
 
 [Romx.java]: androidx/src/main/java/me/panpf/androidx/os/Romx.java
 [RomxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/RomxTest.java
