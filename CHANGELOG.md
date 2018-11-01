@@ -1,18 +1,25 @@
 ## v0.5.0
 
+Fix bug
+* :bug: Fix bug where Contextx's captioningManager method crashes in non-main thread
+
+Renamed or deleted the following:
 * :fire: Activityx.read\*Arg, Fragmentx.read\*Arg merge to Argsx
 * :fire: Deleted androidx-kt-args module, bind\*Arg method moved to androidx-kt module ArgsBinder.kt
-* :sparkles: Argsx.read\*Arg method supported string res
-* :sparkles: ArgsBinder.bind\*Arg method supported string res
-* :sparkles: Bitmapx adds calculateSamplingSize, calculateSamplingSizeForRegion method
-* :bug: Fix bug where Contextx's captioningManager method crashes in non-main thread
 * :fire: Hardwordx's getPhoneNumber, getDeviceId, getAndroidId, getSubscriberId, getSimSerialNumber, getIMEI, getIMSI methods now return 'unknown' by default
-* :arrow_up: Javax upgrade to 0.8.3
 * :fire: Hardwordx.java getDeviceModel rename to getModel and getDeviceName rename to getDevice
 * :fire: Hardwordx.kt removed getDeviceModel, getDeviceName, getHardware, getSupportedAbis, getSerial method
+* :fire: Romx removed getBuildProperties method
+
+New
+* :sparkles: Bitmapx adds calculateSamplingSize, calculateSamplingSizeForRegion method
+* :sparkles: Argsx.read\*Arg method supported string res
+* :sparkles: ArgsBinder.bind\*Arg method supported string res
 * :sparkles: Hardwordx's adds getProduct, getBrand method
 * :sparkles: Add SystemPropertiesx
-* :fire: Romx removed getBuildProperties method
+
+Other
+* :arrow_up: Javax upgrade to 0.8.3
 
 
 ## v0.4.0
