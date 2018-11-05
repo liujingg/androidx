@@ -1,3 +1,7 @@
+## v0.5.1
+
+* :arrow_up: Javax upgrade to 0.8.4
+
 ## v0.5.0
 
 Fix bug

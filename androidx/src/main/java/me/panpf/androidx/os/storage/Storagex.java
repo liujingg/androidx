@@ -680,7 +680,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppCacheDirs(@NonNull Context context) {
         for (File file : getAppCacheDirs(context)) {
-            Filex.cleanDir(file);
+            Filex.cleanRecursively(file);
         }
     }
 
@@ -692,7 +692,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppCacheDirs(@NonNull Context context, @NonNull String packageName) {
         for (File file : getAppCacheDirs(context, packageName)) {
-            Filex.cleanDir(file);
+            Filex.cleanRecursively(file);
         }
     }
 
@@ -849,7 +849,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppFilesDirs(@NonNull Context context) {
         for (File file : getAppFilesDirs(context)) {
-            Filex.cleanDir(file);
+            Filex.cleanRecursively(file);
         }
     }
 
@@ -861,7 +861,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppFilesDirs(@NonNull Context context, @NonNull String packageName) {
         for (File file : getAppFilesDirs(context, packageName)) {
-            Filex.cleanDir(file);
+            Filex.cleanRecursively(file);
         }
     }
 
@@ -972,7 +972,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppObbDirs(@NonNull Context context) {
         for (File file : getAppObbDirs(context)) {
-            Filex.cleanDir(file);
+            Filex.cleanRecursively(file);
         }
     }
 
@@ -984,7 +984,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppObbDirs(@NonNull Context context, @NonNull String packageName) {
         for (File file : getAppObbDirs(context, packageName)) {
-            Filex.cleanDir(file);
+            Filex.cleanRecursively(file);
         }
     }
 
@@ -1004,7 +1004,7 @@ public class Storagex {
         return Arrayx.find(paths, new Predicate<File>() {
             @Override
             public boolean accept(@NonNull File path1) {
-                Filex.mkdirsCheck(path1);
+                Filex.mkdirsOrCheck(path1);
                 return path1.isDirectory() && getAvailableBytes(path1, 0) >= minBytes;
             }
         });
