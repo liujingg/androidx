@@ -50,7 +50,7 @@ public final class PermissionxTest {
     @Test
     public final void testMultiPermission() {
         Context context = InstrumentationRegistry.getContext();
-        Assert.assertTrue(Permissionx.filterDeniedPermissions(context, Manifest.permission.INTERNET, Manifest.permission.VIBRATE).length == 0);
+        Assert.assertEquals(0, Permissionx.filterDeniedPermissions(context, Manifest.permission.INTERNET, Manifest.permission.VIBRATE).length);
     }
 
     @Test

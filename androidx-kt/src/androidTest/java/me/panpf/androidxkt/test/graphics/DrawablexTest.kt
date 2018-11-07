@@ -23,6 +23,7 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.graphics.drawable.toBitmapWithBoundsSize
 import me.panpf.androidxkt.graphics.drawable.toBitmapWithIntrinsicSize
+import me.panpf.androidxkt.graphics.drawable.toDrawableByColor
 import me.panpf.androidxkt.graphics.drawable.toDrawableByColorFromDrawableRes
 import me.panpf.androidxkt.test.R
 import org.junit.Assert
@@ -141,8 +142,12 @@ class DrawablexTest {
     fun testModifyColor() {
         val context = InstrumentationRegistry.getContext()
 
-        val drawable = context.toDrawableByColorFromDrawableRes(R.drawable.ic_opera, Color.parseColor("#0000FF"))
+        val drawable = context.resources.getDrawable(R.drawable.ic_opera).toDrawableByColor(Color.parseColor("#0000FF"))
         val bitmap = drawable.toBitmapWithIntrinsicSize()
         bitmap.recycle()
+
+        val drawable2 = context.toDrawableByColorFromDrawableRes(R.drawable.ic_opera, Color.parseColor("#0000FF"))
+        val bitmap2 = drawable2.toBitmapWithIntrinsicSize()
+        bitmap2.recycle()
     }
 }

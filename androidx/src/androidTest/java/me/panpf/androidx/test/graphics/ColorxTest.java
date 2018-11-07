@@ -74,4 +74,9 @@ public class ColorxTest {
         // 不同设备存在色差，因此无法准确对比
         Assert.assertNotNull(String.valueOf(Colorx.argbEvaluate(Color.RED, Color.GREEN, 0.6f)));
     }
+
+    @Test
+    public void testCreateMatrixColorFilter() {
+        Colorx.createMatrixColorFilter(Color.parseColor("#C0C0C0"));
+    }
 }

@@ -101,7 +101,7 @@ Dependencies:
 * Bitmap: [Bitmapx.java] | [Bitmapx.kt]
     * centerCrop, centerCropTo, circular, circularTo, tint, createByColor, toByteArray,
     * writeToFile, readBitmap, toDrawableByColor, use, calculateSamplingSize, calculateSamplingSizeForRegion
-* Image: [Imagex.java] ([Test][ImagexTest.java])   | [Imagex.kt] ([Test][ImagexTest.kt])
+* Image: [Imagex.java] | [Imagex.kt]
     * getMimeType, getMimeSubType
 * Color: [Colorx.java] ([Test][ColorxTest.java]) | [Colorx.kt] ([Test][ColorxTest.kt])
     * WHITE/BLACK/RED..., getAlpha, setAlpha, addAlpha, getHSVHue, setHSVHue, getHSVSaturation,

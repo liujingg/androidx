@@ -141,8 +141,12 @@ public class DrawablexTest {
     public void testModifyColor() {
         Context context = InstrumentationRegistry.getContext();
 
-        Drawable drawable = Drawablex.toDrawableByColorFromDrawableRes(context, R.drawable.ic_opera, Color.parseColor("#0000FF"));
+        Drawable drawable = Drawablex.toDrawableByColor(context.getResources().getDrawable(R.drawable.ic_opera), Color.parseColor("#0000FF"));
         Bitmap bitmap = Drawablex.toBitmapWithIntrinsicSize(drawable);
         bitmap.recycle();
+
+        Drawable drawable2 = Drawablex.toDrawableByColorFromDrawableRes(context, R.drawable.ic_opera, Color.parseColor("#0000FF"));
+        Bitmap bitmap2 = Drawablex.toBitmapWithIntrinsicSize(drawable2);
+        bitmap2.recycle();
     }
 }

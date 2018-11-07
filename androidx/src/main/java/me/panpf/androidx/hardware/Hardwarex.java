@@ -76,6 +76,7 @@ public class Hardwarex {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 return Build.SUPPORTED_ABIS;
             } else {
+                //noinspection deprecation
                 return Collectionx.filter(Collectionx.listOf(Build.CPU_ABI, Build.CPU_ABI2), new Predicate<String>() {
                     @Override
                     public boolean accept(@NonNull String s) {
@@ -90,7 +91,7 @@ public class Hardwarex {
     }
 
     @NonNull
-    @SuppressLint({"HardwareIds"})
+    @SuppressLint({"HardwareIds", "InlinedApi"})
     @RequiresPermission(anyOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
     public static String getPhoneNumber(@NonNull Context context) {
         try {

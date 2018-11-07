@@ -32,6 +32,12 @@ import org.junit.runner.RunWith
 class HardwarexTest {
 
     @Test
+    fun testPhoneNumber() {
+        val context = InstrumentationRegistry.getContext()
+        Assert.assertNotNull(context.getPhoneNumber())
+    }
+
+    @Test
     fun testDeviceId() {
         val context = InstrumentationRegistry.getContext()
         if (Androidx.isAtLeast6_0()) {
@@ -91,6 +97,34 @@ class HardwarexTest {
         } else {
             val simSerialNumber = context.getSimSerialNumber()
             Assert.assertTrue("simSerialNumber: $simSerialNumber", simSerialNumber.isSafe())
+        }
+    }
+
+    @Test
+    fun testIMEI() {
+        val context = InstrumentationRegistry.getContext()
+        if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
+            val imei = context.getIMEI()
+            Assert.assertTrue("imei: $imei", imei.isSafe()
+                    && imei != "unknown"
+                    && imei != "PermissionDenied")
+        } else {
+            val imei = context.getIMEI()
+            Assert.assertEquals("imei: $imei", imei, "PermissionDenied")
+        }
+    }
+
+    @Test
+    fun testIMSI() {
+        val context = InstrumentationRegistry.getContext()
+        if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
+            val imsi = context.getIMSI()
+            Assert.assertTrue("imsi: $imsi", imsi.isSafe()
+                    && imsi != "unknown"
+                    && imsi != "PermissionDenied")
+        } else {
+            val imsi = context.getIMSI()
+            Assert.assertEquals("imsi: $imsi", imsi, "PermissionDenied")
         }
     }
 

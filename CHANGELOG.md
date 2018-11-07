@@ -8,6 +8,7 @@
 * :sparkles: Activityx adds safeStart(\*, Class, Bundle) and safeStart(\*, Class) method
 * :white_check_mark: Improve Activityx testing
 * :fire: ResizeCalculator rename to Resizex
+* :white_check_mark: Improve Colorx, Drawablex, Hardwarex, Toastx testing
 
 
 ## v0.5.1

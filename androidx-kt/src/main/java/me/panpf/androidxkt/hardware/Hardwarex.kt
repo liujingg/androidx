@@ -29,7 +29,7 @@ import me.panpf.androidx.hardware.Hardwarex
  */
 
 
-@SuppressLint("HardwareIds")
+@SuppressLint("HardwareIds", "InlinedApi")
 @RequiresPermission(anyOf = [(Manifest.permission.READ_PHONE_STATE), (Manifest.permission.READ_SMS), (Manifest.permission.READ_PHONE_NUMBERS)])
 inline fun Context.getPhoneNumber(): String = Hardwarex.getPhoneNumber(this)
 
