@@ -17,14 +17,26 @@
 package me.panpf.androidx.test.app.activity;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+
+import me.panpf.androidx.test.app.fragment.TestSupportFragment;
+import me.panpf.javax.util.Premisex;
 
 public class ActivityxTestFragmentActivity extends FragmentActivity {
     public boolean finished;
     public boolean finishedActivity;
     public boolean finishedActivityFromChild;
     public boolean destoryed;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new TestSupportFragment()).commit();
+    }
 
     @Override
     public void finish() {
@@ -48,5 +60,14 @@ public class ActivityxTestFragmentActivity extends FragmentActivity {
     protected void onDestroy() {
         super.onDestroy();
         destoryed = true;
+    }
+
+    @NonNull
+    public android.support.v4.app.Fragment getFragment(){
+        return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(android.R.id.content));
+    }
+
+    public View getView(){
+        return findViewById(android.R.id.content);
     }
 }

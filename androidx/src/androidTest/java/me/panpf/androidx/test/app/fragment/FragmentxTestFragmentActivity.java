@@ -29,7 +29,4 @@ public class FragmentxTestFragmentActivity extends FragmentActivity {
         getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new TestSupportFragment()).commit();
     }
 
-    public static class TestSupportFragment extends android.support.v4.app.Fragment {
-
-    }
 }

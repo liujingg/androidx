@@ -17,13 +17,22 @@
 package me.panpf.androidxkt.test.app.activity
 
 import android.app.Activity
+import android.os.Bundle
 import android.support.v4.app.FragmentActivity
+import android.view.View
+import me.panpf.androidxkt.test.app.fragment.TestSupportFragment
+import me.panpf.javaxkt.util.requireNotNull
 
 class ActivityxTestFragmentActivity : FragmentActivity(){
     var finished: Boolean = false
     var finishedActivity: Boolean = false
     var finishedActivityFromChild: Boolean = false
     var destoryed: Boolean = false
+
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        supportFragmentManager.beginTransaction().replace(android.R.id.content, TestSupportFragment()).commit()
+    }
 
     override fun finish() {
         super.finish()
@@ -43,5 +52,13 @@ class ActivityxTestFragmentActivity : FragmentActivity(){
     override fun onDestroy() {
         super.onDestroy()
         destoryed = true
+    }
+
+    fun getFragment(): android.support.v4.app.Fragment {
+        return supportFragmentManager.findFragmentById(android.R.id.content).requireNotNull()
+    }
+
+    fun getView(): View {
+        return findViewById(android.R.id.content)
     }
 }

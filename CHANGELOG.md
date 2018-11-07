@@ -6,6 +6,7 @@
 * :fire: Activityx remove safeStart(Context, Intent, Bundle) method
 * :fire: The parameters of the Bundle type of the Activityx start(\*, Class, Bundle) method are now used as pass parameters
 * :sparkles: Activityx adds safeStart(\*, Class, Bundle) and safeStart(\*, Class) method
+* :white_check_mark: Improve Activityx testing
 
 
 ## v0.5.1

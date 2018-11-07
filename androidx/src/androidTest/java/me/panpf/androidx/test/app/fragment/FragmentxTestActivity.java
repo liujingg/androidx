@@ -21,14 +21,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 public class FragmentxTestActivity extends Activity {
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         getFragmentManager().beginTransaction().replace(android.R.id.content, new TestOriginFragment()).commit();
-    }
-
-    public static class TestOriginFragment extends android.app.Fragment {
-
     }
 }

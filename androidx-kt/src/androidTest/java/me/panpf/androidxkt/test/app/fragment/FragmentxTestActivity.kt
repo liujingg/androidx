@@ -26,5 +26,4 @@ class FragmentxTestActivity : Activity() {
         fragmentManager.beginTransaction().replace(android.R.id.content, TestOriginFragment()).commit()
     }
 
-    class TestOriginFragment : android.app.Fragment()
 }

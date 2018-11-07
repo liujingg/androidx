@@ -17,12 +17,20 @@
 package me.panpf.androidxkt.test.app.activity
 
 import android.app.Activity
+import android.os.Bundle
+import android.view.View
+import me.panpf.androidxkt.test.app.fragment.TestOriginFragment
 
 class ActivityxTestActivity : Activity(), ImplTestInterface {
     var finished: Boolean = false
     var finishedActivity: Boolean = false
     var finishedActivityFromChild: Boolean = false
     var destoryed: Boolean = false
+
+    public override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fragmentManager.beginTransaction().replace(android.R.id.content, TestOriginFragment()).commit()
+    }
 
     override fun finish() {
         super.finish()
@@ -42,5 +50,13 @@ class ActivityxTestActivity : Activity(), ImplTestInterface {
     override fun onDestroy() {
         super.onDestroy()
         destoryed = true
+    }
+
+    fun getFragment(): android.app.Fragment {
+        return fragmentManager.findFragmentById(android.R.id.content)
+    }
+
+    fun getView(): View {
+        return findViewById(android.R.id.content)
     }
 }

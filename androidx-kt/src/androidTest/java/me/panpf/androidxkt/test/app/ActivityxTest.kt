@@ -14,19 +14,24 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package me.panpf.androidxkt.test.app
 
+import android.app.Activity
+import android.app.Application
 import android.arch.lifecycle.ViewModelStoreOwner
+import android.content.Intent
+import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
-import me.panpf.androidxkt.app.convertFromTranslucentCompat
-import me.panpf.androidxkt.app.convertToTranslucentCompat
-import me.panpf.androidxkt.app.getImplWithParent
-import me.panpf.androidxkt.app.isDestroyedCompat
+import me.panpf.androidxkt.app.*
+import me.panpf.androidxkt.test.app.activity.ActivityxNoRegisterTestActivity
 import me.panpf.androidxkt.test.app.activity.ActivityxTestActivity
 import me.panpf.androidxkt.test.app.activity.ActivityxTestFragmentActivity
 import me.panpf.androidxkt.test.app.activity.ImplTestInterface
-import me.panpf.androidxkt.waitRunInUI
+import me.panpf.androidxkt.waitRunInUIResult
+import me.panpf.javax.lang.Throwablex
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -115,7 +120,7 @@ class ActivityxTest {
             e.printStackTrace()
         }
 
-        waitRunInUI { activity.convertToTranslucentCompat() }
+        Assert.assertTrue(waitRunInUIResult { activity.convertToTranslucentCompat() })
 
         try {
             Thread.sleep(2000)
@@ -123,8 +128,7 @@ class ActivityxTest {
             e.printStackTrace()
         }
 
-
-        waitRunInUI { activity.convertFromTranslucentCompat() }
+        Assert.assertTrue(waitRunInUIResult { activity.convertFromTranslucentCompat() })
 
         try {
             Thread.sleep(2000)
@@ -135,7 +139,7 @@ class ActivityxTest {
     }
 
     @Test
-    fun testImpl() {
+    fun testGetImplWithParent() {
         val activity = activityTestRule.activity
         Assert.assertNotNull(activity.getImplWithParent(ImplTestInterface::class.java))
         Assert.assertNull(activity.getImplWithParent(ViewModelStoreOwner::class.java))
@@ -143,5 +147,226 @@ class ActivityxTest {
         val activity2 = fragmentActivityTestRule.activity
         Assert.assertNull(activity2.getImplWithParent(ImplTestInterface::class.java))
         Assert.assertNotNull(activity2.getImplWithParent(ViewModelStoreOwner::class.java))
+    }
+
+    @Test
+    fun testAppContext() {
+        val activity = activityTestRule.activity
+        Assert.assertTrue(activity.appContext() is Application)
+        Assert.assertFalse(activity.appContext() is Activity)
+    }
+
+    @Test
+    fun testCanStart() {
+        val context = InstrumentationRegistry.getContext()
+
+        Assert.assertFalse(context.canStartActivity(Intent(context, ActivityxTest::class.java)))
+        Assert.assertTrue(context.canStartActivity(Intent(context, ActivityxTestActivity::class.java)))
+    }
+
+    @Test
+    fun testStartActivityByIntentActivity() {
+        val activity = activityTestRule.activity
+
+        try {
+            activity.startActivity(Intent(activity, ActivityxTestActivity::class.java))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.appContext().startActivity(Intent(activity, ActivityxTest::class.java))
+            Assert.fail()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        try {
+            activity.startActivity(ActivityxTestActivity::class.java, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.startActivity(ActivityxTestActivity::class.java)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.appContext().startActivity(ActivityxNoRegisterTestActivity::class.java)
+            Assert.fail()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    @Test
+    fun testStartActivityByIntentSupportFragment() {
+        val activity = fragmentActivityTestRule.activity
+
+        try {
+            activity.getFragment().startActivity(Intent(activity, ActivityxTestActivity::class.java))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.getFragment().startActivity(Intent(activity, ActivityxTest::class.java))
+            Assert.fail()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        try {
+            activity.getFragment().startActivity(ActivityxTestActivity::class.java, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.getFragment().startActivity(ActivityxTestActivity::class.java)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.getFragment().startActivity(ActivityxNoRegisterTestActivity::class.java)
+            Assert.fail()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    @Test
+    fun testStartActivityByIntentOriginFragment() {
+        val activity = activityTestRule.activity
+
+        try {
+            activity.getFragment().startActivity(Intent(activity, ActivityxTestActivity::class.java))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.getFragment().startActivity(Intent(activity, ActivityxTest::class.java))
+            Assert.fail()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        try {
+            activity.getFragment().startActivity(ActivityxTestActivity::class.java, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.getFragment().startActivity(ActivityxTestActivity::class.java)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.getFragment().startActivity(ActivityxNoRegisterTestActivity::class.java)
+            Assert.fail()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+    }
+
+    @Test
+    fun testStartActivityByIntentView() {
+        val activity = activityTestRule.activity
+
+        try {
+            activity.getView().startActivity(Intent(activity, ActivityxTestActivity::class.java))
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.getView().startActivity(Intent(activity, ActivityxTest::class.java))
+            Assert.fail()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        try {
+            activity.getView().startActivity(ActivityxTestActivity::class.java, null)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.getView().startActivity(ActivityxTestActivity::class.java)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Assert.fail(Throwablex.stackTraceToString(e))
+        }
+
+        try {
+            activity.getView().startActivity(ActivityxNoRegisterTestActivity::class.java)
+            Assert.fail()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    @Test
+    fun testSafeStartActivityByIntentActivity() {
+        val activity = activityTestRule.activity
+
+        Assert.assertTrue(activity.safeStartActivity(Intent(activity, ActivityxTestActivity::class.java)))
+        Assert.assertFalse(activity.appContext().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
+        Assert.assertTrue(activity.safeStartActivity(ActivityxTestActivity::class.java, null))
+        Assert.assertTrue(activity.safeStartActivity(ActivityxTestActivity::class.java))
+        Assert.assertFalse(activity.appContext().safeStartActivity(ActivityxNoRegisterTestActivity::class.java))
+    }
+
+    @Test
+    fun testSafeStartActivityByIntentSupportFragment() {
+        val activity = fragmentActivityTestRule.activity
+
+        Assert.assertTrue(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTestActivity::class.java)))
+        Assert.assertFalse(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(ActivityxTestActivity::class.java, null))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(ActivityxTestActivity::class.java))
+        Assert.assertFalse(activity.getFragment().safeStartActivity(ActivityxNoRegisterTestActivity::class.java))
+    }
+
+    @Test
+    fun testSafeStartActivityByIntentOriginFragment() {
+        val activity = activityTestRule.activity
+
+        Assert.assertTrue(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTestActivity::class.java)))
+        Assert.assertFalse(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(ActivityxTestActivity::class.java, null))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(ActivityxTestActivity::class.java))
+        Assert.assertFalse(activity.getFragment().safeStartActivity(ActivityxNoRegisterTestActivity::class.java))
+    }
+
+    @Test
+    fun testSafeStartActivityByIntentView() {
+        val activity = activityTestRule.activity
+
+        Assert.assertTrue(activity.getView().safeStartActivity(Intent(activity, ActivityxTestActivity::class.java)))
+        Assert.assertFalse(activity.getView().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
+        Assert.assertTrue(activity.getView().safeStartActivity(ActivityxTestActivity::class.java, null))
+        Assert.assertTrue(activity.getView().safeStartActivity(ActivityxTestActivity::class.java))
+        Assert.assertFalse(activity.getView().safeStartActivity(ActivityxNoRegisterTestActivity::class.java))
     }
 }

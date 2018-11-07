@@ -27,5 +27,4 @@ class FragmentxTestFragmentActivity : FragmentActivity() {
         supportFragmentManager.beginTransaction().replace(android.R.id.content, TestSupportFragment()).commit()
     }
 
-    class TestSupportFragment : android.support.v4.app.Fragment()
 }
