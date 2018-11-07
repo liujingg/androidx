@@ -88,7 +88,7 @@ public class Androidx {
      * Execute the specified code block in the main thread
      */
     @NonNull
-    public static <T> T waitRunInUI(@NonNull final ResultRunnable<T> block) {
+    public static <T> T waitRunInUIResult(@NonNull final ResultRunnable<T> block) {
         if (isMainThread()) {
             return block.run();
         } else {
@@ -115,7 +115,7 @@ public class Androidx {
      * Execute the specified code block in the main thread
      */
     @Nullable
-    public static <T> T waitRunInUI(@NonNull final NullableResultRunnable<T> block) {
+    public static <T> T waitRunInUINullableResult(@NonNull final NullableResultRunnable<T> block) {
         if (isMainThread()) {
             return block.run();
         } else {

@@ -62,16 +62,16 @@ class AndroidxText {
         waitRunInUI { results[0] = if (Androidx.isMainThread()) "MainThread2" else "NoMainThread2" }
         Assert.assertEquals(results[0], "MainThread2")
 
-        results[0] = waitResultRunInUI(ResultRunnable { if (Androidx.isMainThread()) "MainThread3-" else "NoMainThread3-" })
+        results[0] = waitRunInUIResult(ResultRunnable { if (Androidx.isMainThread()) "MainThread3-" else "NoMainThread3-" })
         Assert.assertEquals(results[0], "MainThread3-")
 
-        results[0] = waitResultRunInUI { if (Androidx.isMainThread()) "MainThread3" else "NoMainThread3" }
+        results[0] = waitRunInUIResult { if (Androidx.isMainThread()) "MainThread3" else "NoMainThread3" }
         Assert.assertEquals(results[0], "MainThread3")
 
-        results[0] = waitNullableResultRunInUI(NullableResultRunnable { if (Androidx.isMainThread()) "MainThread4-" else null })
+        results[0] = waitRunInUINullableResult(NullableResultRunnable { if (Androidx.isMainThread()) "MainThread4-" else null })
         Assert.assertEquals(results[0], "MainThread4-")
 
-        results[0] = waitNullableResultRunInUI { if (Androidx.isMainThread()) "MainThread4" else null }
+        results[0] = waitRunInUINullableResult { if (Androidx.isMainThread()) "MainThread4" else null }
         Assert.assertEquals(results[0], "MainThread4")
     }
 

@@ -72,7 +72,7 @@ public class AndroidxText {
         });
         Assert.assertEquals(results[0], "MainThread2");
 
-        results[0] = Androidx.waitRunInUI(new ResultRunnable<String>() {
+        results[0] = Androidx.waitRunInUIResult(new ResultRunnable<String>() {
             @NonNull
             @Override
             public String run() {
@@ -81,7 +81,7 @@ public class AndroidxText {
         });
         Assert.assertEquals(results[0], "MainThread3");
 
-        results[0] = Androidx.waitRunInUI(new NullableResultRunnable<String>() {
+        results[0] = Androidx.waitRunInUINullableResult(new NullableResultRunnable<String>() {
             @Nullable
             @Override
             public String run() {

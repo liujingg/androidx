@@ -48,24 +48,24 @@ inline fun waitRunInUI(noinline block: () -> Unit) = Androidx.waitRunInUI(block)
 /**
  * Execute the specified code block in the main thread
  */
-inline fun <T> waitResultRunInUI(block: ResultRunnable<T>): T = Androidx.waitRunInUI(block)
+inline fun <T> waitRunInUIResult(block: ResultRunnable<T>): T = Androidx.waitRunInUIResult(block)
 
 /**
  * Execute the specified code block in the main thread
  */
-inline fun <T> waitResultRunInUI(noinline block: () -> T): T = Androidx.waitRunInUI(ResultRunnable { block() })
-
-
-/**
- * Execute the specified code block in the main thread
- */
-inline fun <T> waitNullableResultRunInUI(block: NullableResultRunnable<T>): T? = Androidx.waitRunInUI(block)
+inline fun <T> waitRunInUIResult(noinline block: () -> T): T = Androidx.waitRunInUIResult { block() }
 
 
 /**
  * Execute the specified code block in the main thread
  */
-inline fun <T> waitNullableResultRunInUI(noinline block: () -> T?): T? = Androidx.waitRunInUI(NullableResultRunnable { block() })
+inline fun <T> waitRunInUINullableResult(block: NullableResultRunnable<T>): T? = Androidx.waitRunInUINullableResult(block)
+
+
+/**
+ * Execute the specified code block in the main thread
+ */
+inline fun <T> waitRunInUINullableResult(noinline block: () -> T?): T? = Androidx.waitRunInUINullableResult { block() }
 
 
 /**

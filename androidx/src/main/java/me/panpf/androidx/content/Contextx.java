@@ -119,7 +119,7 @@ public class Contextx {
             return Premisex.requireNotNull((T) context.getApplicationContext().getSystemService(serviceName), serviceName);
         } else {
             final Context appContext = context.getApplicationContext();
-            return Androidx.waitRunInUI(new ResultRunnable<T>() {
+            return Androidx.waitRunInUIResult(new ResultRunnable<T>() {
                 @NonNull
                 @Override
                 public T run() {
@@ -146,7 +146,7 @@ public class Contextx {
             return (T) context.getApplicationContext().getSystemService(serviceName);
         } else {
             final Context appContext = context.getApplicationContext();
-            return Androidx.waitRunInUI(new NullableResultRunnable<T>() {
+            return Androidx.waitRunInUINullableResult(new NullableResultRunnable<T>() {
                 @Nullable
                 @Override
                 public T run() {

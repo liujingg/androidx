@@ -47,8 +47,8 @@ Dependencies:
 ## Index
 
 * Android: [Androidx.java] ([Test][AndroidxTest.java]) | [Androidx.kt] ([Test][AndroidxTest.kt])
-    * getMainHandler, runInUI, isRooted, isMainThread, getInProcessName,
-    * getInProcessNameSuffix, isMainProcess, isAtLeast\*, getVersionName, getVersionCodeName
+    * getMainHandler, runInUI, waitRunInUI, waitRunInUIResult, waitRunInUINullableResult, isRooted, isMainThread,
+    * getInProcessName, getInProcessNameSuffix, isMainProcess, isAtLeast\*, getVersionName, getVersionCodeName
 
 ### app
 * Activity: [Activityx.java] ([Test][ActivityxTest.java]) | [Activityx.kt] ([Test][ActivityxTest.kt])
