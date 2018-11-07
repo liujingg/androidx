@@ -46,13 +46,16 @@ Dependencies:
 
 ## Index
 
+:warning: Representatives with the `(Test)` tag have passed the test and can be used with confidence.
+
+### android
 * Android: [Androidx.java] ([Test][AndroidxTest.java]) | [Androidx.kt] ([Test][AndroidxTest.kt])
     * getMainHandler, runInUI, waitRunInUI, waitRunInUIResult, waitRunInUINullableResult, isRooted, isMainThread,
     * getInProcessName, getInProcessNameSuffix, isMainProcess, isAtLeast\*, getVersionName, getVersionCodeName
 
 ### app
 * Activity: [Activityx.java] ([Test][ActivityxTest.java]) | [Activityx.kt] ([Test][ActivityxTest.kt])
-    * isDestroyedCompat, convertActivityFromTranslucent, convertActivityToTranslucent, getImplWithParent
+    * isDestroyedCompat, convertToTranslucentCompat, convertFromTranslucentCompat, getImplWithParent
     * appContext, canStart, start, safeStart
 * Args: [Argsx.java] | [Argsx.kt]
     * read\*Arg, read\*ArgOr, read\*UriArg, read\*UriArgOr, read\*IntentUriArg, read\*IntentUriArgOr,

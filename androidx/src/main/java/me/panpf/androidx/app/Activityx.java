@@ -27,6 +27,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
@@ -66,28 +67,6 @@ public class Activityx {
 
     /**
      * Convert a translucent themed Activity
-     * [android.R.attr.windowIsTranslucent] to a fullscreen opaque
-     * Activity.
-     * <p>
-     * Call this whenever the background of a translucent Activity has changed
-     * to become opaque. Doing so will allow the [android.view.Surface] of
-     * the Activity behind to be released.
-     * <p>
-     * This call has no effect on non-translucent activities or on activities
-     * with the [android.R.attr.windowIsFloating] attribute.
-     */
-    public static boolean convertFromTranslucent(@NonNull Activity activity) {
-        try {
-            Classx.callMethod(activity, "convertFromTranslucent");
-            return true;
-        } catch (NoSuchMethodException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
-
-    /**
-     * Convert a translucent themed Activity
      * [android.R.attr.windowIsTranslucent] back from opaque to
      * translucent following a call to
      * [.convertActivityFromTranslucent] .
@@ -100,7 +79,8 @@ public class Activityx {
      * This call has no effect on non-translucent activities or on activities
      * with the [android.R.attr.windowIsFloating] attribute.
      */
-    public static boolean convertToTranslucent(@NonNull Activity activity) {
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
+    public static boolean convertToTranslucentCompat(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             try {
                 ActivityOptions options = (ActivityOptions) Classx.callMethod(activity, "getActivityOptions");
@@ -112,7 +92,7 @@ public class Activityx {
                 e.printStackTrace();
                 return false;
             }
-        } else {
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             try {
                 Field mTranslucentCallbackField = Classx.getFieldWithParent(activity, "mTranslucentCallback");
                 Method method = Classx.getMethodWithParent(activity, "convertToTranslucent", mTranslucentCallbackField.getType());
@@ -122,6 +102,35 @@ public class Activityx {
                 e.printStackTrace();
                 return false;
             }
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Convert a translucent themed Activity
+     * [android.R.attr.windowIsTranslucent] to a fullscreen opaque
+     * Activity.
+     * <p>
+     * Call this whenever the background of a translucent Activity has changed
+     * to become opaque. Doing so will allow the [android.view.Surface] of
+     * the Activity behind to be released.
+     * <p>
+     * This call has no effect on non-translucent activities or on activities
+     * with the [android.R.attr.windowIsFloating] attribute.
+     */
+    @RequiresApi(Build.VERSION_CODES.KITKAT)
+    public static boolean convertFromTranslucentCompat(@NonNull Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                Classx.callMethod(activity, "convertFromTranslucent");
+                return true;
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+                return false;
+            }
+        } else {
+            return false;
         }
     }
 
@@ -341,7 +350,7 @@ public class Activityx {
      * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
      */
     public static boolean safeStart(@NonNull android.support.v4.app.Fragment fragment,
-                             @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+                                    @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
         Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
         if (args != null) intent.putExtras(args);
         return safeStart(fragment, intent);
@@ -351,7 +360,7 @@ public class Activityx {
      * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
      */
     public static boolean safeStart(@NonNull android.support.v4.app.Fragment fragment,
-                             @NonNull Class<? extends Activity> clazz) {
+                                    @NonNull Class<? extends Activity> clazz) {
         return safeStart(fragment, clazz, null);
     }
 
@@ -359,7 +368,7 @@ public class Activityx {
      * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
      */
     public static boolean safeStart(@NonNull android.app.Fragment fragment,
-                             @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+                                    @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
         Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
         if (args != null) intent.putExtras(args);
         return safeStart(fragment, intent);
@@ -369,7 +378,7 @@ public class Activityx {
      * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
      */
     public static boolean safeStart(@NonNull android.app.Fragment fragment,
-                             @NonNull Class<? extends Activity> clazz) {
+                                    @NonNull Class<? extends Activity> clazz) {
         return safeStart(fragment, clazz, null);
     }
 

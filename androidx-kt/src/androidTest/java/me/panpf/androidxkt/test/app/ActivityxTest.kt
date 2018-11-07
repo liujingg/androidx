@@ -22,6 +22,7 @@ import android.app.Activity
 import android.app.Application
 import android.arch.lifecycle.ViewModelStoreOwner
 import android.content.Intent
+import android.os.Build
 import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
@@ -120,7 +121,12 @@ class ActivityxTest {
             e.printStackTrace()
         }
 
-        Assert.assertTrue(waitRunInUIResult { activity.convertToTranslucentCompat() })
+        var result = waitRunInUIResult { activity.convertToTranslucentCompat() }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Assert.assertTrue(result)
+        } else {
+            Assert.assertFalse(result)
+        }
 
         try {
             Thread.sleep(2000)
@@ -128,7 +134,12 @@ class ActivityxTest {
             e.printStackTrace()
         }
 
-        Assert.assertTrue(waitRunInUIResult { activity.convertFromTranslucentCompat() })
+        result = waitRunInUIResult { activity.convertFromTranslucentCompat() }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Assert.assertTrue(result)
+        } else {
+            Assert.assertFalse(result)
+        }
 
         try {
             Thread.sleep(2000)

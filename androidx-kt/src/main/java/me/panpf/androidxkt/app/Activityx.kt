@@ -21,7 +21,9 @@ package me.panpf.androidxkt.app
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
+import android.support.annotation.RequiresApi
 import android.support.v4.app.FragmentActivity
 import android.view.View
 import me.panpf.androidx.app.Activityx
@@ -38,20 +40,6 @@ inline fun FragmentActivity.isDestroyedCompat(): Boolean = Activityx.isDestroyed
 
 /**
  * Convert a translucent themed Activity
- * [android.R.attr.windowIsTranslucent] to a fullscreen opaque
- * Activity.
- *
- * Call this whenever the background of a translucent Activity has changed
- * to become opaque. Doing so will allow the [android.view.Surface] of
- * the Activity behind to be released.
- *
- * This call has no effect on non-translucent activities or on activities
- * with the [android.R.attr.windowIsFloating] attribute.
- */
-inline fun Activity.convertFromTranslucentCompat(): Boolean = Activityx.convertFromTranslucent(this)
-
-/**
- * Convert a translucent themed Activity
  * [android.R.attr.windowIsTranslucent] back from opaque to
  * translucent following a call to
  * [.convertActivityFromTranslucent] .
@@ -64,7 +52,23 @@ inline fun Activity.convertFromTranslucentCompat(): Boolean = Activityx.convertF
  * This call has no effect on non-translucent activities or on activities
  * with the [android.R.attr.windowIsFloating] attribute.
  */
-inline fun Activity.convertToTranslucentCompat(): Boolean = Activityx.convertToTranslucent(this)
+@RequiresApi(Build.VERSION_CODES.KITKAT)
+inline fun Activity.convertToTranslucentCompat(): Boolean = Activityx.convertToTranslucentCompat(this)
+
+/**
+ * Convert a translucent themed Activity
+ * [android.R.attr.windowIsTranslucent] to a fullscreen opaque
+ * Activity.
+ *
+ * Call this whenever the background of a translucent Activity has changed
+ * to become opaque. Doing so will allow the [android.view.Surface] of
+ * the Activity behind to be released.
+ *
+ * This call has no effect on non-translucent activities or on activities
+ * with the [android.R.attr.windowIsFloating] attribute.
+ */
+@RequiresApi(Build.VERSION_CODES.KITKAT)
+inline fun Activity.convertFromTranslucentCompat(): Boolean = Activityx.convertFromTranslucentCompat(this)
 
 /**
  * If the own or parent activity implements the specified [clazz], it returns its implementation.

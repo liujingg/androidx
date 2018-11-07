@@ -21,6 +21,7 @@ import android.app.Application;
 import android.arch.lifecycle.ViewModelStoreOwner;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
@@ -135,13 +136,18 @@ public class ActivityxTest {
             e.printStackTrace();
         }
 
-        Assert.assertTrue(Androidx.waitRunInUIResult(new ResultRunnable<Boolean>() {
+        boolean result = Androidx.waitRunInUIResult(new ResultRunnable<Boolean>() {
             @NonNull
             @Override
             public Boolean run() {
-                return Activityx.convertToTranslucent(activity);
+                return Activityx.convertToTranslucentCompat(activity);
             }
-        }));
+        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Assert.assertTrue(result);
+        } else {
+            Assert.assertFalse(result);
+        }
 
         try {
             Thread.sleep(2000);
@@ -149,14 +155,18 @@ public class ActivityxTest {
             e.printStackTrace();
         }
 
-
-        Assert.assertTrue(Androidx.waitRunInUIResult(new ResultRunnable<Boolean>() {
+        result = Androidx.waitRunInUIResult(new ResultRunnable<Boolean>() {
             @NonNull
             @Override
             public Boolean run() {
-                return Activityx.convertFromTranslucent(activity);
+                return Activityx.convertFromTranslucentCompat(activity);
             }
-        }));
+        });
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            Assert.assertTrue(result);
+        } else {
+            Assert.assertFalse(result);
+        }
 
         try {
             Thread.sleep(2000);
