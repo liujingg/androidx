@@ -209,7 +209,7 @@ public class Bitmapx {
         canvas.drawCircle(newBitmapRadius, newBitmapRadius, newBitmapRadius, paint);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        ResizeCalculator.Result result = ResizeCalculator.calculator(srcBitmap.getWidth(), srcBitmap.getHeight(),
+        Resizex.Result result = Resizex.calculator(srcBitmap.getWidth(), srcBitmap.getHeight(),
                 dstBitmap.getWidth(), dstBitmap.getHeight(), ImageView.ScaleType.CENTER_CROP, false);
         canvas.drawBitmap(srcBitmap, result.srcRect, result.destRect, paint);
 
@@ -243,7 +243,7 @@ public class Bitmapx {
         Paint paint = new Paint();
         Canvas canvas = new Canvas(dstBitmap);
 
-        ResizeCalculator.Result result = ResizeCalculator.calculator(srcBitmap.getWidth(), srcBitmap.getHeight(),
+        Resizex.Result result = Resizex.calculator(srcBitmap.getWidth(), srcBitmap.getHeight(),
                 dstBitmap.getWidth(), dstBitmap.getHeight(), ImageView.ScaleType.CENTER_CROP, false);
         canvas.drawBitmap(srcBitmap, result.srcRect, result.destRect, paint);
 

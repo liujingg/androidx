@@ -20,9 +20,9 @@ import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
-public class ResizeCalculator {
+public class Resizex {
 
-    private ResizeCalculator() {
+    private Resizex() {
     }
 
     public static Rect srcMappingStartRect(int originalImageWidth, int originalImageHeight, int targetImageWidth, int targetImageHeight) {
