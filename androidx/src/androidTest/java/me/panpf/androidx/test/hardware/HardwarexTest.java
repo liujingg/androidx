@@ -159,9 +159,7 @@ public class HardwarexTest {
         Context context = InstrumentationRegistry.getContext();
         if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
             String imei = Hardwarex.getIMEI(context);
-            Assert.assertTrue("imei: " + imei, Stringx.isSafe(imei)
-                    && !Comparisonx.areEqual(imei, "unknown")
-                    && !Comparisonx.areEqual(imei, "PermissionDenied"));
+            Assert.assertTrue("imei: " + imei, Stringx.isSafe(imei) && !Comparisonx.areEqual(imei, "PermissionDenied"));
         } else {
             String imei = Hardwarex.getIMEI(context);
             Assert.assertEquals("imei: " + imei, imei, "PermissionDenied");
@@ -173,9 +171,7 @@ public class HardwarexTest {
         Context context = InstrumentationRegistry.getContext();
         if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
             String imsi = Hardwarex.getIMSI(context);
-            Assert.assertTrue("imsi: " + imsi, Stringx.isSafe(imsi)
-                    && !Comparisonx.areEqual(imsi, "unknown")
-                    && !Comparisonx.areEqual(imsi, "PermissionDenied"));
+            Assert.assertTrue("imsi: " + imsi, Stringx.isSafe(imsi) && !Comparisonx.areEqual(imsi, "PermissionDenied"));
         } else {
             String imsi = Hardwarex.getIMSI(context);
             Assert.assertEquals("imsi: " + imsi, imsi, "PermissionDenied");

@@ -105,9 +105,7 @@ class HardwarexTest {
         val context = InstrumentationRegistry.getContext()
         if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
             val imei = context.getIMEI()
-            Assert.assertTrue("imei: $imei", imei.isSafe()
-                    && imei != "unknown"
-                    && imei != "PermissionDenied")
+            Assert.assertTrue("imei: $imei", imei.isSafe() && imei != "PermissionDenied")
         } else {
             val imei = context.getIMEI()
             Assert.assertEquals("imei: $imei", imei, "PermissionDenied")
@@ -119,9 +117,7 @@ class HardwarexTest {
         val context = InstrumentationRegistry.getContext()
         if (context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE)) {
             val imsi = context.getIMSI()
-            Assert.assertTrue("imsi: $imsi", imsi.isSafe()
-                    && imsi != "unknown"
-                    && imsi != "PermissionDenied")
+            Assert.assertTrue("imsi: $imsi", imsi.isSafe() && imsi != "PermissionDenied")
         } else {
             val imsi = context.getIMSI()
             Assert.assertEquals("imsi: $imsi", imsi, "PermissionDenied")
