@@ -26,6 +26,9 @@ Perfect test:
 * :white_check_mark: Improve Hardwarex testing
 * :white_check_mark: Improve Toastx testing
 
+Upgrade
+* :arrow_up: Upgrade Javax 0.8.5
+
 
 ## v0.5.1
 
@@ -51,8 +54,8 @@ New
 * :sparkles: Hardwordx's adds getProduct, getBrand method
 * :sparkles: Add SystemPropertiesx
 
-Other
-* :arrow_up: Javax upgrade to 0.8.3
+Upgrade
+* :arrow_up: Upgrade Javax 0.8.3
 
 
 ## v0.4.0
@@ -74,14 +77,18 @@ Other
 * :zap: Networkx getWifiState and setWifiEnabled method compatible WifiManager is null
 * :art: Contextx.kt and Viewx.kt partial method changed to inline
 * :hammer: @NotNull replace to @NonNull
-* :arrow_up: Javax upgrade to 0.8.1
+
+Upgrade
+* :arrow_up: Upgrade Javax 0.8.1
 
 
 ## v0.3.2
 
-* :arrow_up: Javax upgrade to 0.8.0
 * :fire: Networkx removed getLocalIpAddress, getLocalIpV4Address method
 * :sparkles: Bitmapx.kt adds use method
+
+Upgrade
+* :arrow_up: Upgrade Javax0.8.0
 
 
 ## v.0.3.1
@@ -103,6 +110,7 @@ ANDROIDX-KT-ARGS
 
 ## v0.3.0
 
+Upgrade
 * :arrow_up: Kotlin upgrade to 1.2.71
 * :arrow_up: Javax upgrade to 0.7.0
 * :arrow_up: support-fragment upgrade to 28.0.0
