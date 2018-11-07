@@ -126,7 +126,7 @@ public class Intentx {
      */
     @NonNull
     public static Intent createUninstallAppIntent(@NonNull String packageName) {
-        return new Intent(Intent.ACTION_DELETE, Uri.parse("package: " + packageName));
+        return new Intent(Intent.ACTION_DELETE, Uri.fromParts("package", packageName, null));
     }
 
     /**
