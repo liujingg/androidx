@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("NOTHING_TO_INLINE")
+@file:Suppress("NOTHING_TO_INLINE", "DEPRECATION")
 
 package me.panpf.androidxkt.app
 
@@ -85,32 +85,112 @@ inline fun Context.canStartActivity(intent: Intent): Boolean = Activityx.canStar
 
 
 /**
- * Safely launch an Activity, catch ActivityNotFoundException and return false
+ * Start the activity of the specified Class
  */
-inline fun Context.safeStartActivity(intent: Intent, options: Bundle): Boolean = Activityx.safeStart(this, intent, options)
+inline fun View.startActivity(intent: Intent) = Activityx.start(this, intent)
+
+
+/**
+ * Start the activity of the specified Class
+ */
+inline fun Context.startActivity(clazz: Class<out Activity>, args: Bundle?) = Activityx.start(this, clazz, args)
+
+/**
+ * Start the activity of the specified Class
+ */
+inline fun Context.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+
+/**
+ * Start the activity of the specified Class
+ */
+inline fun android.support.v4.app.Fragment.startActivity(clazz: Class<out Activity>, args: Bundle?) = Activityx.start(this, clazz, args)
+
+/**
+ * Start the activity of the specified Class
+ */
+inline fun android.support.v4.app.Fragment.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+
+/**
+ * Start the activity of the specified Class
+ */
+inline fun android.app.Fragment.startActivity(clazz: Class<out Activity>, args: Bundle?) = Activityx.start(this, clazz, args)
+
+/**
+ * Start the activity of the specified Class
+ */
+inline fun android.app.Fragment.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+
+/**
+ * Start the activity of the specified Class
+ */
+inline fun View.startActivity(clazz: Class<out Activity>, args: Bundle?) = Activityx.start(this, clazz, args)
+
+/**
+ * Start the activity of the specified Class
+ */
+inline fun View.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+
+
+/* ************************************* safeStart ***************************************** */
+
 
 /**
  * Safely launch an Activity, catch ActivityNotFoundException and return false
  */
 inline fun Context.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart(this, intent)
 
+/**
+ * Safely launch an Activity, catch ActivityNotFoundException and return false
+ */
+inline fun android.support.v4.app.Fragment.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart(this, intent)
 
-inline fun Context.startActivity(clazz: Class<out Activity>, options: Bundle) = Activityx.start(this, clazz, options)
+/**
+ * Safely launch an Activity, catch ActivityNotFoundException and return false
+ */
+inline fun android.app.Fragment.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart(this, intent)
 
-inline fun Context.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+/**
+ * Safely launch an Activity, catch ActivityNotFoundException and return false
+ */
+inline fun View.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart(this, intent)
 
-inline fun android.support.v4.app.Fragment.startActivity(clazz: Class<out Activity>, options: Bundle) = Activityx.start(this, clazz, options)
 
-inline fun android.support.v4.app.Fragment.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+/**
+ * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+ */
+inline fun Context.safeStartActivity(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStart(this, clazz, args)
 
-inline fun android.app.Fragment.startActivity(clazz: Class<out Activity>, options: Bundle) = Activityx.start(this, clazz, options)
+/**
+ * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+ */
+inline fun Context.safeStartActivity(clazz: Class<out Activity>): Boolean = Activityx.safeStart(this, clazz)
 
-inline fun android.app.Fragment.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+/**
+ * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+ */
+inline fun android.support.v4.app.Fragment.safeStartActivity(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStart(this, clazz, args)
 
-inline fun View.startActivity(clazz: Class<out Activity>, options: Bundle) = Activityx.start(this, clazz, options)
+/**
+ * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+ */
+inline fun android.support.v4.app.Fragment.safeStartActivity(clazz: Class<out Activity>): Boolean = Activityx.safeStart(this, clazz)
 
-inline fun View.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+/**
+ * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+ */
+inline fun android.app.Fragment.safeStartActivity(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStart(this, clazz, args)
 
-inline fun View.startActivity(intent: Intent, options: Bundle) = Activityx.start(this, intent, options)
+/**
+ * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+ */
+inline fun android.app.Fragment.safeStartActivity(clazz: Class<out Activity>): Boolean = Activityx.safeStart(this, clazz)
 
-inline fun View.startActivity(intent: Intent) = Activityx.start(this, intent)
+/**
+ * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+ */
+inline fun View.safeStartActivity(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStart(this, clazz, args)
+
+/**
+ * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+ */
+inline fun View.safeStartActivity(clazz: Class<out Activity>): Boolean = Activityx.safeStart(this, clazz)

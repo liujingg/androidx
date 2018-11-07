@@ -150,7 +150,7 @@ public class Activityx {
     }
 
 
-    /* ************************************* start ***************************************** */
+    /* ************************************* canStart ***************************************** */
 
 
     /**
@@ -166,22 +166,109 @@ public class Activityx {
     }
 
 
-    /**
-     * Safely launch an Activity, catch ActivityNotFoundException and return false
-     */
-    public static boolean safeStart(@NonNull Context context, @NonNull Intent intent, @NonNull Bundle options) {
-        if (!(context instanceof Activity)) {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        }
+    /* ************************************* start ***************************************** */
 
-        try {
-            context.startActivity(intent, options);
-            return true;
-        } catch (ActivityNotFoundException e) {
-            e.printStackTrace();
-            return false;
-        }
+
+    /**
+     * Start the activity of the specified intent
+     */
+    public static void start(@NonNull Context context, @NonNull Intent intent) {
+        context.startActivity(intent);
     }
+
+    /**
+     * Start the activity of the specified intent
+     */
+    public static void start(@NonNull android.support.v4.app.Fragment fragment, @NonNull Intent intent) {
+        fragment.startActivity(intent);
+    }
+
+    /**
+     * Start the activity of the specified intent
+     */
+    public static void start(@NonNull android.app.Fragment fragment, @NonNull Intent intent) {
+        fragment.startActivity(intent);
+    }
+
+    /**
+     * Start the activity of the specified intent
+     */
+    public static void start(@NonNull View view, @NonNull Intent intent) {
+        view.getContext().startActivity(intent);
+    }
+
+
+    /**
+     * Start the activity of the specified Class
+     */
+    public static void start(@NonNull Context context, @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+        Intent intent = new Intent(context, clazz);
+        if (args != null) intent.putExtras(args);
+        context.startActivity(intent);
+    }
+
+    /**
+     * Start the activity of the specified Class
+     */
+    public static void start(@NonNull Context context, @NonNull Class<? extends Activity> clazz) {
+        start(context, clazz, null);
+    }
+
+    /**
+     * Start the activity of the specified Class
+     */
+    public static void start(@NonNull android.support.v4.app.Fragment fragment,
+                             @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+        Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
+        if (args != null) intent.putExtras(args);
+        fragment.startActivity(intent);
+    }
+
+    /**
+     * Start the activity of the specified Class
+     */
+    public static void start(@NonNull android.support.v4.app.Fragment fragment,
+                             @NonNull Class<? extends Activity> clazz) {
+        start(fragment, clazz, null);
+    }
+
+    /**
+     * Start the activity of the specified Class
+     */
+    public static void start(@NonNull android.app.Fragment fragment,
+                             @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+        Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
+        if (args != null) intent.putExtras(args);
+        fragment.startActivity(intent);
+    }
+
+    /**
+     * Start the activity of the specified Class
+     */
+    public static void start(@NonNull android.app.Fragment fragment,
+                             @NonNull Class<? extends Activity> clazz) {
+        start(fragment, clazz, null);
+    }
+
+    /**
+     * Start the activity of the specified Class
+     */
+    public static void start(@NonNull View view, @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+        Intent intent = new Intent(view.getContext(), clazz);
+        if (args != null) intent.putExtras(args);
+        view.getContext().startActivity(intent);
+    }
+
+    /**
+     * Start the activity of the specified Class
+     */
+    public static void start(@NonNull View view, @NonNull Class<? extends Activity> clazz) {
+        start(view, clazz, null);
+    }
+
+
+    /* ************************************* safeStart ***************************************** */
+
 
     /**
      * Safely launch an Activity, catch ActivityNotFoundException and return false
@@ -200,44 +287,105 @@ public class Activityx {
         }
     }
 
-
-    public static void start(@NonNull Context context, @NonNull Class<? extends Activity> clazz, @NonNull Bundle options) {
-        safeStart(context, new Intent(context, clazz), options);
+    /**
+     * Safely launch an Activity, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull android.support.v4.app.Fragment fragment, @NonNull Intent intent) {
+        try {
+            fragment.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public static void start(@NonNull Context context, @NonNull Class<? extends Activity> clazz) {
-        safeStart(context, new Intent(context, clazz));
+    /**
+     * Safely launch an Activity, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull android.app.Fragment fragment, @NonNull Intent intent) {
+        try {
+            fragment.startActivity(intent);
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
-    public static void start(@NonNull android.support.v4.app.Fragment fragment, @NonNull Class<? extends Activity> clazz, @NonNull Bundle options) {
-        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz), options);
+    /**
+     * Safely launch an Activity, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull View view, @NonNull Intent intent) {
+        return safeStart(view.getContext(), intent);
     }
 
-    public static void start(@NonNull android.support.v4.app.Fragment fragment, @NonNull Class<? extends Activity> clazz) {
-        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz));
+
+    /**
+     * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull Context context, @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+        Intent intent = new Intent(context, clazz);
+        if (args != null) intent.putExtras(args);
+        return safeStart(context, intent);
     }
 
-    public static void start(@NonNull android.app.Fragment fragment, @NonNull Class<? extends Activity> clazz, @NonNull Bundle options) {
-        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz), options);
+    /**
+     * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull Context context, @NonNull Class<? extends Activity> clazz) {
+        return safeStart(context, clazz, null);
     }
 
-    public static void start(@NonNull android.app.Fragment fragment, @NonNull Class<? extends Activity> clazz) {
-        fragment.startActivity(new Intent(Fragmentx.requireContext(fragment), clazz));
+    /**
+     * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull android.support.v4.app.Fragment fragment,
+                             @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+        Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
+        if (args != null) intent.putExtras(args);
+        return safeStart(fragment, intent);
     }
 
-    public static void start(@NonNull View view, @NonNull Class<? extends Activity> clazz, @NonNull Bundle options) {
-        safeStart(view.getContext(), new Intent(view.getContext(), clazz), options);
+    /**
+     * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull android.support.v4.app.Fragment fragment,
+                             @NonNull Class<? extends Activity> clazz) {
+        return safeStart(fragment, clazz, null);
     }
 
-    public static void start(@NonNull View view, @NonNull Class<? extends Activity> clazz) {
-        safeStart(view.getContext(), new Intent(view.getContext(), clazz));
+    /**
+     * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull android.app.Fragment fragment,
+                             @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+        Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
+        if (args != null) intent.putExtras(args);
+        return safeStart(fragment, intent);
     }
 
-    public static void start(@NonNull View view, @NonNull Intent intent, @NonNull Bundle options) {
-        safeStart(view.getContext(), intent, options);
+    /**
+     * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull android.app.Fragment fragment,
+                             @NonNull Class<? extends Activity> clazz) {
+        return safeStart(fragment, clazz, null);
     }
 
-    public static void start(@NonNull View view, @NonNull Intent intent) {
-        safeStart(view.getContext(), intent);
+    /**
+     * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull View view, @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
+        Intent intent = new Intent(view.getContext(), clazz);
+        if (args != null) intent.putExtras(args);
+        return safeStart(view, intent);
+    }
+
+    /**
+     * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
+     */
+    public static boolean safeStart(@NonNull View view, @NonNull Class<? extends Activity> clazz) {
+        return safeStart(view, clazz, null);
     }
 }
