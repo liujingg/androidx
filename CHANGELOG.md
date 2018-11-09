@@ -1,3 +1,7 @@
+## v...
+
+* :sparkles: Add PackageInfox
+
 ## v0.6.0
 
 Fix bug:

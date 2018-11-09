@@ -74,6 +74,11 @@ Dependencies:
     * isRunning, start, tryStart, stop, tryStop
 
 ### content
+* PackageInfo: [PackageInfox.java] ([Test][PackageInfoxTest.java]) | [PackageInfox.kt] ([Test][PackageInfoxTest.kt])
+    * findActivityInfo, findActivityInfoByName, findServiceInfo, findServiceInfoByName
+    * findReceiverInfo, findReceiverInfoByName, findProviderInfo, findProviderInfoByName
+    * findPermissionInfo, findPermissionInfoByName, findRequestedPermission, findRequestedPermissionByName
+    * findMetaDataWithName, findMetaDataByName, findMetaDataWithValue, findMetaDataByValue
 * Package: [Packagex.java] | [Packagex.kt]
     * isInstalled, getVersionCode, getVersionName, getPackage, isSystemApp, getAllAppIdAndVersionCodeMap,
     * getAllAppIdAndVersionCodeSet, getAllAppId, getAllApp, getOne, count, getAppPackageFile,
