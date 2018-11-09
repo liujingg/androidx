@@ -19,15 +19,21 @@ package me.panpf.androidx.content;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageInfo;
+import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresPermission;
+import android.support.v4.content.FileProvider;
+
+import java.io.File;
+
+import me.panpf.androidx.content.pm.PackageInfox;
 
 /**
  * Intent tool method
@@ -38,14 +44,44 @@ public class Intentx {
     private Intentx() {
     }
 
+
+    /**
+     * Get the shared file uri
+     *
+     * @param authority FileProvider authority
+     */
+    @NonNull
+    public static Uri getShareFileUri(@NonNull Context context, @NonNull File file, @NonNull String authority) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return FileProvider.getUriForFile(context, authority, file);
+        } else {
+            return Uri.fromFile(file);
+        }
+    }
+
+    /**
+     * Get the shared file uri. Read the authority of provider 'android.support.v4.content.FileProvider' from AndroidManifest to generate file uri
+     */
+    @NonNull
+    public static Uri getShareFileUri(@NonNull Context context, @NonNull File file) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            ProviderInfo fileProviderInfo = PackageInfox.findSelfProviderInfoByName(context, FileProvider.class.getName());
+            if (fileProviderInfo == null) {
+                throw new IllegalStateException("Please configure the provider 'android.support.v4.content.FileProvider' in the AndroidManifest.xml file");
+            }
+            return FileProvider.getUriForFile(context, fileProviderInfo.authority, file);
+        } else {
+            return Uri.fromFile(file);
+        }
+    }
+
+
     /**
      * Create an Intent that opens the recording page
      */
     @NonNull
     public static Intent createRecordingIntent() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("audio/amr");
-        return intent;
+        return new Intent(Intent.ACTION_GET_CONTENT).setType("audio/amr");
     }
 
     /**
@@ -54,7 +90,6 @@ public class Intentx {
      * @param phoneNumber Target phone number
      */
     @NonNull
-    @RequiresPermission(Manifest.permission.CALL_PHONE)
     public static Intent createLaunchDialingIntent(@NonNull String phoneNumber) {
         return new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + phoneNumber));
     }
@@ -78,9 +113,8 @@ public class Intentx {
      */
     @NonNull
     public static Intent createLaunchSendSmsIntent(@NonNull String phoneNumber, String messageContent) {
-        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumber));
-        intent.putExtra("sms_body", messageContent);
-        return intent;
+        return new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + phoneNumber))
+                .putExtra("sms_body", messageContent);
     }
 
     /**
@@ -98,9 +132,16 @@ public class Intentx {
      */
     @NonNull
     public static Intent createScanFileBroadcastIntent(@NonNull Uri fileUri) {
-        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, fileUri);
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
-        return intent;
+        return new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, fileUri)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
+    }
+
+    /**
+     * Create a broadcast Intent that lets System Explorer scan the specified file uri
+     */
+    @NonNull
+    public static Intent createScanFileBroadcastIntent(@NonNull Context context, @NonNull File file) {
+        return createScanFileBroadcastIntent(getShareFileUri(context, file));
     }
 
 
@@ -111,12 +152,17 @@ public class Intentx {
      */
     @NonNull
     public static Intent createInstallAppIntent(@NonNull Uri apkFileUri) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.addCategory(Intent.CATEGORY_DEFAULT);
-        intent.setDataAndType(apkFileUri, "application/vnd.android.package-archive");
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        return intent;
+        return new Intent(Intent.ACTION_VIEW).addCategory(Intent.CATEGORY_DEFAULT)
+                .setDataAndType(apkFileUri, "application/vnd.android.package-archive")
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION); // Prepare for FileProvider on Android N
+    }
+
+    /**
+     * Create an Intent that opens the specified app install page
+     */
+    @NonNull
+    public static Intent createInstallAppIntent(@NonNull Context context, @NonNull File apkFile) {
+        return createInstallAppIntent(getShareFileUri(context, apkFile));
     }
 
     /**
@@ -136,28 +182,7 @@ public class Intentx {
      */
     @Nullable
     public static Intent createLaunchAppIntent(@NonNull Context context, @NonNull String packageName) {
-        try {
-            Intent intent = context.getPackageManager().getLaunchIntentForPackage(packageName);
-            if (intent != null) {
-                intent = intent.cloneFilter();
-                // Instagram must add FLAG_ACTIVITY_NEW_TASK
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                return intent;
-            }
-
-            PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, 0);
-            if (packageInfo != null) {
-                if (packageInfo.activities != null && packageInfo.activities.length == 1) {
-                    intent = new Intent(Intent.ACTION_MAIN);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.setClassName(packageInfo.packageName, packageInfo.activities[0].name);
-                    return intent;
-                }
-            }
-        } catch (Exception e) {
-            return null;
-        }
-        return null;
+        return context.getPackageManager().getLaunchIntentForPackage(packageName);
     }
 
     /**
@@ -167,11 +192,8 @@ public class Intentx {
      */
     @NonNull
     public static Intent createAppDetailInSystemIntent(@NonNull String packageName) {
-        Intent intent = new Intent();
-        intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", packageName, null);
-        intent.setData(uri);
-        return intent;
+        return new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                .setData(Uri.fromParts("package", packageName, null));
     }
 
     /**
@@ -191,6 +213,7 @@ public class Intentx {
         return resolveIntent;
     }
 
+
     /**
      * Create an Intent to take a photo with your camera
      *
@@ -208,14 +231,23 @@ public class Intentx {
     }
 
     /**
+     * Create an Intent to take a photo with your camera
+     *
+     * @param saveFile Save the image to file, If null, get the image from the returned Intent at onActivityResult,
+     *                 for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
+     */
+    @NonNull
+    public static Intent createTakePhotoIntent(@NonNull Context context, @Nullable File saveFile) {
+        return createTakePhotoIntent(saveFile != null ? getShareFileUri(context, saveFile) : null);
+    }
+
+    /**
      * Create an Intent that selects a picture from the system album, And then get the image uri from the returned Intent at onActivityResult,
      * for example: Uri imageUri = (Bitmap) intent.getData()
      */
     @NonNull
     public static Intent createPickImageIntent() {
-        Intent intent = new Intent(Intent.ACTION_PICK);
-        intent.setType("image/*");
-        return intent;
+        return new Intent(Intent.ACTION_PICK).setType("image/*");
     }
 
     /**
@@ -255,55 +287,56 @@ public class Intentx {
      * Create an Intent to send text
      */
     public static Intent createSendTextIntent(@NonNull String text, @NonNull String subject) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_TEXT, text);
-        return intent;
+        return new Intent(Intent.ACTION_SEND)
+                .setType("text/plain")
+                .putExtra(Intent.EXTRA_SUBJECT, subject)
+                .putExtra(Intent.EXTRA_TEXT, text);
     }
 
     /**
      * Create an Intent to send text
      */
     public static Intent createSendTextIntent(@NonNull String text) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, text);
-        return intent;
+        return new Intent(Intent.ACTION_SEND)
+                .setType("text/plain")
+                .putExtra(Intent.EXTRA_TEXT, text);
     }
 
     /**
      * Create an Intent to send text
      */
     public static Intent createSendTextFileIntent(@NonNull Uri textFileUri, @NonNull String subject) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
-        intent.putExtra(Intent.EXTRA_STREAM, textFileUri);
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        return intent;
+        return new Intent(Intent.ACTION_SEND)
+                .setType("text/plain")
+                .putExtra(Intent.EXTRA_SUBJECT, subject)
+                .putExtra(Intent.EXTRA_STREAM, textFileUri)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
     }
 
     /**
      * Create an Intent to send text
      */
     public static Intent createSendTextFileIntent(@NonNull Uri textFileUri) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_STREAM, textFileUri);
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        return intent;
+        return new Intent(Intent.ACTION_SEND)
+                .setType("text/plain")
+                .putExtra(Intent.EXTRA_STREAM, textFileUri)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
     }
 
     /**
-     * Create an Intent to send image
+     * Create an Intent to send text
      */
-    public static Intent createSendImageFileIntent(@NonNull Uri imageFileUri) {
-        return new Intent(Intent.ACTION_SEND)
-                .setType("image/*")
-                .putExtra(Intent.EXTRA_STREAM, imageFileUri)
-                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    public static Intent createSendTextFileIntent(@NonNull Context context, @NonNull File textFile, @NonNull String subject) {
+        return createSendTextFileIntent(getShareFileUri(context, textFile), subject);
     }
+
+    /**
+     * Create an Intent to send text
+     */
+    public static Intent createSendTextFileIntent(@NonNull Context context, @NonNull File textFile) {
+        return createSendTextFileIntent(getShareFileUri(context, textFile));
+    }
+
 
     /**
      * Create an Intent to send image
@@ -320,10 +353,42 @@ public class Intentx {
     /**
      * Create an Intent to send image
      */
-    public static Intent createSendFileIntent(@NonNull Uri imageFileUri, @NonNull String mimeType) {
+    public static Intent createSendImageFileIntent(@NonNull Uri imageFileUri) {
         return new Intent(Intent.ACTION_SEND)
-                .setType(mimeType)
+                .setType("image/*")
                 .putExtra(Intent.EXTRA_STREAM, imageFileUri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    }
+
+    /**
+     * Create an Intent to send image
+     */
+    public static Intent createSendImageFileIntent(@NonNull Context context, @NonNull File imageFile, @NonNull String subType) {
+        return createSendImageFileIntent(getShareFileUri(context, imageFile), subType);
+    }
+
+    /**
+     * Create an Intent to send image
+     */
+    public static Intent createSendImageFileIntent(@NonNull Context context, @NonNull File imageFile) {
+        return createSendImageFileIntent(getShareFileUri(context, imageFile));
+    }
+
+
+    /**
+     * Create an Intent to send image
+     */
+    public static Intent createSendFileIntent(@NonNull Uri fileUri, @NonNull String mimeType) {
+        return new Intent(Intent.ACTION_SEND)
+                .setType(mimeType)
+                .putExtra(Intent.EXTRA_STREAM, fileUri)
+                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+    }
+
+    /**
+     * Create an Intent to send image
+     */
+    public static Intent createSendFileIntent(@NonNull Context context, @NonNull File file, @NonNull String mimeType) {
+        return createSendFileIntent(getShareFileUri(context, file), mimeType);
     }
 }

@@ -1,6 +1,8 @@
 ## v...
 
 * :sparkles: Add PackageInfox
+* :sparkles: Intentx adds getShareFileUri adds
+* :white_check_mark: Perfect Intentx testing
 
 ## v0.6.0
 
@@ -24,11 +26,11 @@ Add:
 * :sparkles: Activityx adds safeStart(\*, Class, Bundle) and safeStart(\*, Class) method
 
 Perfect test:
-* :white_check_mark: Improve Activityx testing
-* :white_check_mark: Improve Colorx testing
-* :white_check_mark: Improve Drawablex testing
-* :white_check_mark: Improve Hardwarex testing
-* :white_check_mark: Improve Toastx testing
+* :white_check_mark: Perfect Activityx testing
+* :white_check_mark: Perfect Colorx testing
+* :white_check_mark: Perfect Drawablex testing
+* :white_check_mark: Perfect Hardwarex testing
+* :white_check_mark: Perfect Toastx testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.8.5

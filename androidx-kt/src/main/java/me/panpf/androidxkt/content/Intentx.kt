@@ -25,63 +25,81 @@ import android.content.pm.ResolveInfo
 import android.net.Uri
 import android.support.annotation.RequiresPermission
 import me.panpf.androidx.content.Intentx
+import java.io.File
 
 
 /**
- * Create an Intent that opens the recording page
+ * Get the shared file uri
+ *
+ * @param authority FileProvider authority
  */
-inline fun createRecordingIntent(): Intent = Intentx.createRecordingIntent()
+inline fun Context.getShareFileUri(file: File, authority: String): Uri = Intentx.getShareFileUri(this, file, authority)
+
+/**
+ * Get the shared file uri. Read the authority of provider 'android.support.v4.content.FileProvider' from AndroidManifest to generate file uri
+ */
+inline fun Context.getShareFileUri(file: File): Uri = Intentx.getShareFileUri(this, file)
+
 
 /**
  * Create an Intent that opens the dialing page and displays the specified phone number
  *
- * @param phoneNumber Target phone number
+ * @receiver Target phone number
  */
-@RequiresPermission(Manifest.permission.CALL_PHONE)
-inline fun createLaunchDialingIntent(phoneNumber: String): Intent = Intentx.createLaunchDialingIntent(phoneNumber)
+inline fun String.createLaunchDialingIntent(): Intent = Intentx.createLaunchDialingIntent(this)
 
 /**
  * Create an Intent that can call the specified phone number
  *
- * @param phoneNumber Target phone number
+ * @receiver Target phone number
  */
 @RequiresPermission(Manifest.permission.CALL_PHONE)
-inline fun createCallPhoneIntent(phoneNumber: String): Intent = Intentx.createCallPhoneIntent(phoneNumber)
+inline fun String.createCallPhoneIntent(): Intent = Intentx.createCallPhoneIntent(this)
 
 /**
  * Create an Intent that can start sending SMS pages
  *
- * @param phoneNumber    Target phone number
+ * @receiver    Target phone number
  * @param messageContent SMS content
  */
-inline fun createLaunchSendSmsIntent(phoneNumber: String, messageContent: String): Intent = Intentx.createLaunchSendSmsIntent(phoneNumber, messageContent)
+inline fun String.createLaunchSendSmsIntent(messageContent: String): Intent = Intentx.createLaunchSendSmsIntent(this, messageContent)
 
 /**
  * Create an Intent that opens the specified web page
  *
- * @param url Web page url
+ * @receiver Web page url
  */
-inline fun createLaunchWebBrowserIntent(url: String): Intent = Intentx.createLaunchWebBrowserIntent(url)
+inline fun String.createLaunchWebBrowserIntent(): Intent = Intentx.createLaunchWebBrowserIntent(this)
 
 /**
  * Create a broadcast Intent that lets System Explorer scan the specified file uri
  */
-inline fun createScanFileBroadcastIntent(fileUri: Uri): Intent = Intentx.createScanFileBroadcastIntent(fileUri)
+inline fun Uri.createScanFileBroadcastIntent(): Intent = Intentx.createScanFileBroadcastIntent(this)
+
+/**
+ * Create a broadcast Intent that lets System Explorer scan the specified file uri
+ */
+inline fun Context.createScanFileBroadcastIntent(file: File): Intent = Intentx.createScanFileBroadcastIntent(this, file)
 
 
 /**
  * Create an Intent that opens the specified app install page
  *
- * @param apkFileUri APK file uri
+ * @receiver APK file uri
  */
-inline fun createInstallAppIntent(apkFileUri: Uri): Intent = Intentx.createInstallAppIntent(apkFileUri)
+inline fun Uri.createInstallAppIntent(): Intent = Intentx.createInstallAppIntent(this)
+
+/**
+ * Create an Intent that opens the specified app install page
+ */
+inline fun Context.createInstallAppIntent(apkFile: File): Intent = Intentx.createInstallAppIntent(this, apkFile)
 
 /**
  * Create an Intent that opens the specified app uninstall page
  *
- * @param packageName App package name
+ * @receiver App package name
  */
-inline fun createUninstallAppIntent(packageName: String): Intent = Intentx.createUninstallAppIntent(packageName)
+inline fun String.createUninstallAppIntent(): Intent = Intentx.createUninstallAppIntent(this)
 
 /**
  * Create an intent that opens the specified app
@@ -93,41 +111,44 @@ inline fun Context.createLaunchAppIntent(packageName: String): Intent? = Intentx
 /**
  * Create an Intent that opens the specified app details page
  *
- * @param packageName App package name
+ * @receiver App package name
  */
-inline fun createAppDetailInSystemIntent(packageName: String): Intent = Intentx.createAppDetailInSystemIntent(packageName)
+inline fun String.createAppDetailInSystemIntent(): Intent = Intentx.createAppDetailInSystemIntent(this)
 
 /**
  * Create an Intent based on the source Intent and the ResolveInfo found with it
  */
-inline fun createActivityIntentByResolveInfo(sourceIntent: Intent, resolveInfo: ResolveInfo): Intent =
-        Intentx.createActivityIntentByResolveInfo(sourceIntent, resolveInfo)
+inline fun Intent.createActivityIntentByResolveInfo(resolveInfo: ResolveInfo): Intent =
+        Intentx.createActivityIntentByResolveInfo(this, resolveInfo)
+
 
 /**
  * Create an Intent to take a photo with your camera
  *
- * @param saveFileUri Save the image to the specified uri, If null, get the image from the returned Intent at onActivityResult,
+ * @receiver Save the image to the specified uri, If null, get the image from the returned Intent at onActivityResult,
  * for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
  */
-inline fun createTakePhotoIntent(saveFileUri: Uri?): Intent = Intentx.createTakePhotoIntent(saveFileUri)
+inline fun Uri?.createTakePhotoIntent(): Intent = Intentx.createTakePhotoIntent(this)
 
 /**
- * Create an Intent that selects a picture from the system album, And then get the image uri from the returned Intent at onActivityResult,
- * for example: Uri imageUri = (Bitmap) intent.getData()
+ * Create an Intent to take a photo with your camera
+ *
+ * @param saveFile Save the image to file, If null, get the image from the returned Intent at onActivityResult,
+ * for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
  */
-inline fun createPickImageIntent(): Intent = Intentx.createPickImageIntent()
+inline fun Context.createTakePhotoIntent(saveFile: File?): Intent = Intentx.createTakePhotoIntent(this, saveFile)
 
 /**
  * Create an intent that crops the image
  *
- * @param sourceFileUri Picture uri
+ * @receiver Picture uri
  * @param targetWidth   Target width
  * @param targetHeight  Target height
  * @param saveFileUri   Save the image to the specified uri, If null, get the image from the returned Intent at onActivityResult,
  * for example: Bitmap bitmap = (Bitmap) intent.getExtras().get("data")
  */
-inline fun createCropImageIntent(sourceFileUri: Uri, targetWidth: Int, targetHeight: Int, saveFileUri: Uri?): Intent =
-        Intentx.createCropImageIntent(sourceFileUri, targetWidth, targetHeight, saveFileUri)
+inline fun Uri.createCropImageIntent(targetWidth: Int, targetHeight: Int, saveFileUri: Uri?): Intent =
+        Intentx.createCropImageIntent(this, targetWidth, targetHeight, saveFileUri)
 
 
 /**
@@ -151,6 +172,17 @@ inline fun Uri.createSendTextFileIntent(subject: String): Intent = Intentx.creat
 inline fun Uri.createSendTextFileIntent(): Intent = Intentx.createSendTextFileIntent(this)
 
 /**
+ * Create an Intent to send text
+ */
+inline fun Context.createSendTextFileIntent(textFile: File, subject: String): Intent = Intentx.createSendTextFileIntent(this, textFile, subject)
+
+/**
+ * Create an Intent to send text
+ */
+inline fun Context.createSendTextFileIntent(textFile: File): Intent = Intentx.createSendTextFileIntent(this, textFile)
+
+
+/**
  * Create an Intent to send image
  */
 inline fun Uri.createSendImageFileIntent(): Intent = Intentx.createSendImageFileIntent(this)
@@ -163,4 +195,20 @@ inline fun Uri.createSendImageFileIntent(subType: String): Intent = Intentx.crea
 /**
  * Create an Intent to send image
  */
+inline fun Context.createSendImageFileIntent(imageFile: File, subType: String): Intent = Intentx.createSendImageFileIntent(this, imageFile, subType)
+
+/**
+ * Create an Intent to send image
+ */
+inline fun Context.createSendImageFileIntent(imageFile: File): Intent = Intentx.createSendImageFileIntent(this, imageFile)
+
+
+/**
+ * Create an Intent to send image
+ */
 inline fun Uri.createSendFileIntent(mimeType: String): Intent = Intentx.createSendFileIntent(this, mimeType)
+
+/**
+ * Create an Intent to send image
+ */
+inline fun Context.createSendFileIntent(file: File, mimeType: String): Intent = Intentx.createSendFileIntent(this, file, mimeType)

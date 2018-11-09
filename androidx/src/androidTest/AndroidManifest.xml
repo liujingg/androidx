@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <permission android:name="me.panpf.androidx.tes.share" />
 
@@ -25,6 +26,17 @@
         <provider
             android:name=".TestProvider"
             android:authorities="me.panpf.androidx.test.provider" />
+
+        <!-- 适配 7.0 应用间共享文件 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="me.panpf.androidx.test.file.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
 
         <meta-data
             android:name="meta_test_name"

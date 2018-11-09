@@ -26,6 +26,17 @@
             android:name=".TestProvider"
             android:authorities="me.panpf.androidxkt.test.provider" />
 
+        <!-- 适配 7.0 应用间共享文件 -->
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="me.panpf.androidxkt.test.file.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
         <meta-data
             android:name="meta_test_name"
             android:value="meta_test_value" />

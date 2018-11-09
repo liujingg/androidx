@@ -93,12 +93,12 @@ Dependencies:
     * openInput, readBytes, readText, readLines, readBitmap
 * Context: [Contextx.java] ([Test][ContextxTest.java]) | [Contextx.kt] ([Test][ContextxTest.kt])
     * systemService, systemServiceOrNull, \*Manager
-* Intent: [Intentx.java] | [Intentx.kt]
+* Intent: [Intentx.java] ([Test][IntentxTest.java] | [Intentx.kt] ([Test][IntentxTest.kt])
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
     * createLaunchAppIntent, createAppDetailInSystemIntent, createActivityIntentByResolveInfo, createTakePhotoIntent,
     * createPickImageIntent, createCropImageIntent, createSendTextIntent, createSendTextFileIntent,
-    * createSendImageFileIntent, createSendFileIntent
+    * createSendImageFileIntent, createSendFileIntent, getShareFileUri
 * Preference: [Preferencex.java] | [Preferencex.kt]
     * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
     * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
