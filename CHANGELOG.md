@@ -4,6 +4,7 @@
 * :sparkles: Intentx adds getShareFileUri adds
 * :white_check_mark: Perfect Intentx testing
 * :sparkles: Adds LifecycleBroadcastReceiver
+* :white_check_mark: Perfect Dialogx testing
 
 ## v0.6.0
 

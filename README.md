@@ -63,7 +63,7 @@ Dependencies:
 * ArgsBinder: [ArgsBinder.kt]
     * bind\*Arg, bind\*ArgOr, bind\*UriArg, bind\*UriArgOr, bind\*IntentUriArg, bind\*IntentUriArgOr,
     * bind\*UriIntentArg, bind\*UriIntentArgOr
-* Dialog: [Dialogx.java] | [Dialogx.kt]
+* Dialog: [Dialogx.java] ([Test][DialogxTest.java]) | [Dialogx.kt] ([Test][DialogxTest.kt])
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] | [Fragmentx.kt]
     * isDestroyedCompat, getImplWithParent, instance, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
