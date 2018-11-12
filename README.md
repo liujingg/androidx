@@ -99,6 +99,7 @@ Dependencies:
     * createLaunchAppIntent, createAppDetailInSystemIntent, createActivityIntentByResolveInfo, createTakePhotoIntent,
     * createPickImageIntent, createCropImageIntent, createSendTextIntent, createSendTextFileIntent,
     * createSendImageFileIntent, createSendFileIntent, getShareFileUri
+* LifecycleBroadcastReceiver: [LifecycleBroadcastReceiver.java]
 * Preference: [Preferencex.java] | [Preferencex.kt]
     * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
     * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
@@ -314,6 +315,9 @@ Please view the [CHANGELOG.md] file
 [IntentxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/IntentxTest.java
 [Intentx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Intentx.kt
 [IntentxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/IntentxTest.kt
+
+[LifecycleBroadcastReceiver.java]: androidx/src/main/java/me/panpf/androidx/content/LifecycleBroadcastReceiver.java
+[LifecycleBroadcastReceiverTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/LifecycleBroadcastReceiverTest.java
 
 [Preferencex.java]: androidx/src/main/java/me/panpf/androidx/content/Preferencex.java
 [PreferencexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/PreferencexTest.java

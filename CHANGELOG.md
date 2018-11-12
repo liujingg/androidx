@@ -3,6 +3,7 @@
 * :sparkles: Add PackageInfox
 * :sparkles: Intentx adds getShareFileUri adds
 * :white_check_mark: Perfect Intentx testing
+* :sparkles: Adds LifecycleBroadcastReceiver
 
 ## v0.6.0
 
