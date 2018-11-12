@@ -1,0 +1,20 @@
+def localProperties = new Properties()
+try {
+    localProperties.load(project.file("local.properties").newDataInputStream())
+} catch (IOException e) {
+    e.printStackTrace()
+}
+if (!localProperties.isEmpty()) {
+    apply plugin: "guru.stefma.bintrayrelease"
+
+    version = android.defaultConfig.versionName
+    group = 'me.panpf'
+    publish {
+        artifactId = 'androidx'
+        desc = 'Adnroid, Tool'
+        website = 'https://github.com/panpf/androidx'
+        userOrg = localProperties.getProperty("bintray.userOrg", "default")
+        bintrayUser = localProperties.getProperty("bintray.user")
+        bintrayKey = localProperties.getProperty("bintray.apikey")
+    }
+}

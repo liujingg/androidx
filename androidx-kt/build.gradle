@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: '../build_kotlin.gradle'
 apply from: '../build_test.gradle'
-apply plugin: "guru.stefma.bintrayrelease"
 //apply plugin: 'jacoco'
 
 android {
@@ -31,15 +30,4 @@ dependencies {
     api project(":androidx")
 }
 
-version = android.defaultConfig.versionName
-group = 'me.panpf'
-publish {
-    artifactId = 'androidx-kt'
-    desc = 'Adnroid, Tool, Kotlin'
-    website = 'https://github.com/panpf/androidx'
-    def properties = new Properties()
-    properties.load(project.file("local.properties").newDataInputStream())
-    userOrg = properties.getProperty("bintray.userOrg")
-    bintrayUser = properties.getProperty("bintray.user")
-    bintrayKey = properties.getProperty("bintray.apikey")
-}
+apply from: 'build_upload.gradle'
