@@ -99,7 +99,7 @@ Dependencies:
     * createLaunchAppIntent, createAppDetailInSystemIntent, createActivityIntentByResolveInfo, createTakePhotoIntent,
     * createPickImageIntent, createCropImageIntent, createSendTextIntent, createSendTextFileIntent,
     * createSendImageFileIntent, createSendFileIntent, getShareFileUri
-* LifecycleBroadcastReceiver: [LifecycleBroadcastReceiver.java]
+* LifecycleBroadcastReceiver: [LifecycleBroadcastReceiver.java] ([Test][LifecycleBroadcastReceiverTest.java])
 * Preference: [Preferencex.java] | [Preferencex.kt]
     * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
     * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear

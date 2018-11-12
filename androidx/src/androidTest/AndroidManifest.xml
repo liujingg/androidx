@@ -20,6 +20,7 @@
         <!--<activity android:name="me.panpf.androidx.test.app.ActivityxArgsTestActivity" />-->
         <activity android:name="me.panpf.androidx.test.app.fragment.FragmentxTestActivity" />
         <activity android:name="me.panpf.androidx.test.app.fragment.FragmentxTestFragmentActivity" />
+        <activity android:name=".content.LifecycleBroadcastReceiverTest$TestFragmentActivity"/>
 
         <service android:name=".TestService" />
         <receiver android:name=".TestReceiver" />
