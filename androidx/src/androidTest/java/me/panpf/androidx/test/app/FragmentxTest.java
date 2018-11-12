@@ -16,9 +16,13 @@
 
 package me.panpf.androidx.test.app;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.app.FragmentActivity;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -26,27 +30,25 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import me.panpf.androidx.app.Fragmentx;
-import me.panpf.androidx.test.app.fragment.FragmentxTestActivity;
-import me.panpf.androidx.test.app.fragment.FragmentxTestFragmentActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class FragmentxTest {
 
     @NonNull
-    private final ActivityTestRule<FragmentxTestActivity> activityTestRule = new ActivityTestRule<>(FragmentxTestActivity.class);
+    private final ActivityTestRule<TestActivity> activityTestRule = new ActivityTestRule<>(TestActivity.class);
 
     @NonNull
-    private final ActivityTestRule<FragmentxTestFragmentActivity> fragmentActivityTestRule = new ActivityTestRule<>(FragmentxTestFragmentActivity.class);
+    private final ActivityTestRule<TestFragmentActivity> fragmentActivityTestRule = new ActivityTestRule<>(TestFragmentActivity.class);
 
     @Rule
     @NonNull
-    public ActivityTestRule<FragmentxTestActivity> getActivityTestRule() {
+    public ActivityTestRule<TestActivity> getActivityTestRule() {
         return activityTestRule;
     }
 
     @Rule
     @NonNull
-    public ActivityTestRule<FragmentxTestFragmentActivity> getFragmentActivityTestRule() {
+    public ActivityTestRule<TestFragmentActivity> getFragmentActivityTestRule() {
         return fragmentActivityTestRule;
     }
 
@@ -104,5 +106,26 @@ public class FragmentxTest {
         }
 
         Assert.assertFalse(Fragmentx.isDestroyedCompat(fragment));
+    }
+
+    public static class TestActivity extends Activity {
+
+        @Override
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            getFragmentManager().beginTransaction().replace(android.R.id.content, new android.app.Fragment()).commit();
+        }
+    }
+
+    public static class TestFragmentActivity extends FragmentActivity {
+
+        @Override
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new android.support.v4.app.Fragment()).commit();
+        }
+
     }
 }

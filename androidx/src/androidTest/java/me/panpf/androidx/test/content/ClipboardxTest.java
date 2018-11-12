@@ -16,6 +16,7 @@
 
 package me.panpf.androidx.test.content;
 
+import android.app.Activity;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -24,6 +25,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.app.FragmentActivity;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -35,8 +37,6 @@ import me.panpf.androidx.content.ClipIntent;
 import me.panpf.androidx.content.ClipPlainText;
 import me.panpf.androidx.content.ClipUri;
 import me.panpf.androidx.content.Clipboardx;
-import me.panpf.androidx.test.util.WeakAsyncTaskTestActivity;
-import me.panpf.androidx.test.widget.ToastxTestActivity;
 
 @RunWith(AndroidJUnit4.class)
 public class ClipboardxTest {
@@ -131,13 +131,13 @@ public class ClipboardxTest {
     public void testIntent() {
         Context context = InstrumentationRegistry.getContext();
 
-        Intent intent = new Intent(context, ToastxTestActivity.class);
+        Intent intent = new Intent(context, Activity.class);
         Clipboardx.copyIntent(context, intent);
 
         Intent result = Clipboardx.getIntent(context);
         Assert.assertEquals(result.getComponent().toString(), intent.getComponent().toString());
 
-        Intent intent2 = new Intent(context, WeakAsyncTaskTestActivity.class);
+        Intent intent2 = new Intent(context, FragmentActivity.class);
         Clipboardx.copyIntent(context, new Intent[]{intent, intent2});
 
         Intent[] results = Clipboardx.getIntents(context);
@@ -248,7 +248,7 @@ public class ClipboardxTest {
 
         ClipPlainText text = new ClipPlainText(TEST_TEXT);
         ClipHtmlText htmlText = new ClipHtmlText(TEST_HTML_TEXT, TEST_HTML_HTML);
-        ClipIntent intent = new ClipIntent(new Intent(context, ToastxTestActivity.class));
+        ClipIntent intent = new ClipIntent(new Intent(context, Activity.class));
         ClipUri uri = new ClipUri("app/android", Uri.parse("https://www.youtube.com"));
 
         Clipboardx.copyContents(context, new ClipContent[]{text, htmlText, intent, uri});

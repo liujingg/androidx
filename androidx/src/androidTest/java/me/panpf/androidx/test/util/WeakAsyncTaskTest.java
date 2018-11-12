@@ -16,7 +16,10 @@
 
 package me.panpf.androidx.test.util;
 
+import android.app.Activity;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -31,11 +34,11 @@ import me.panpf.androidx.util.WeakAsyncTask;
 public class WeakAsyncTaskTest {
 
     @NonNull
-    private final ActivityTestRule<WeakAsyncTaskTestActivity> activityTestRule = new ActivityTestRule<>(WeakAsyncTaskTestActivity.class);
+    private final ActivityTestRule<TestActivity> activityTestRule = new ActivityTestRule<>(TestActivity.class);
 
     @Rule
     @NonNull
-    public ActivityTestRule<WeakAsyncTaskTestActivity> getActivityTestRule() {
+    public ActivityTestRule<TestActivity> getActivityTestRule() {
         return activityTestRule;
     }
 
@@ -77,7 +80,7 @@ public class WeakAsyncTaskTest {
 
     @Test
     public void testDestroyed() {
-        WeakAsyncTaskTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
         activityTestRule.finishActivity();
 
@@ -92,7 +95,7 @@ public class WeakAsyncTaskTest {
 
     @Test
     public void testNormal() {
-        WeakAsyncTaskTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
         try {
             Thread.sleep(4000);
@@ -112,6 +115,40 @@ public class WeakAsyncTaskTest {
         @Override
         protected Integer doInBackground(@NonNull WeakAsyncTaskTest weakAsyncTaskTest, @NonNull Integer[] integers) {
             return null;
+        }
+    }
+
+    public static class TestActivity extends Activity {
+
+        public String result = "None";
+
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            new LoadDataTask(this).execute(0);
+        }
+
+        private static class LoadDataTask extends WeakAsyncTask<TestActivity, Integer, Integer, Integer> {
+
+            LoadDataTask(@NonNull TestActivity testActivity) {
+                super(testActivity);
+            }
+
+            @Override
+            protected Integer doInBackground(@NonNull TestActivity testActivity, @NonNull Integer[] integers) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(@NonNull TestActivity testActivity, @Nullable Integer integer) {
+                super.onPostExecute(testActivity, integer);
+                testActivity.result = "onPostExecute";
+            }
         }
     }
 }

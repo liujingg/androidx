@@ -16,6 +16,7 @@
 
 package me.panpf.androidxkt.test.content
 
+import android.app.Activity
 import android.content.ClipDescription
 import android.content.ClipboardManager
 import android.content.Intent
@@ -23,13 +24,12 @@ import android.net.Uri
 import android.os.Build
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import android.support.v4.app.FragmentActivity
 import me.panpf.androidx.content.ClipHtmlText
 import me.panpf.androidx.content.ClipIntent
 import me.panpf.androidx.content.ClipPlainText
 import me.panpf.androidx.content.ClipUri
 import me.panpf.androidxkt.content.*
-import me.panpf.androidxkt.test.app.activity.ActivityxTestActivity
-import me.panpf.androidxkt.test.widget.ToastxTestActivity
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -85,13 +85,13 @@ class ClipboardxTest {
     fun testIntent() {
         val context = InstrumentationRegistry.getContext()
 
-        val intent = Intent(context, ToastxTestActivity::class.java)
+        val intent = Intent(context, Activity::class.java)
         context.copyIntent(intent)
 
         val result = context.getClipIntent()
         Assert.assertEquals(result?.getComponent().toString(), intent.component.toString())
 
-        val intent2 = Intent(context, ActivityxTestActivity::class.java)
+        val intent2 = Intent(context, FragmentActivity::class.java)
         context.copyIntent(arrayOf(intent, intent2))
 
         val results = context.getClipIntents()
@@ -199,7 +199,7 @@ class ClipboardxTest {
 
         val text = ClipPlainText(TEST_TEXT)
         val htmlText = ClipHtmlText(TEST_HTML_TEXT, TEST_HTML_HTML)
-        val intent = ClipIntent(Intent(context, ToastxTestActivity::class.java))
+        val intent = ClipIntent(Intent(context, Activity::class.java))
         val uri = ClipUri("app/android", Uri.parse("https://www.youtube.com"))
 
         context.copyContents(arrayOf(text, htmlText, intent, uri))

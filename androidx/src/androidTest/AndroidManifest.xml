@@ -13,14 +13,15 @@
     <permission android:name="me.panpf.androidx.tes.share" />
 
     <application>
-        <activity android:name="me.panpf.androidx.test.widget.ToastxTestActivity" />
-        <activity android:name="me.panpf.androidx.test.util.WeakAsyncTaskTestActivity" />
-        <activity android:name="me.panpf.androidx.test.app.activity.ActivityxTestActivity" />
-        <activity android:name="me.panpf.androidx.test.app.activity.ActivityxTestFragmentActivity" />
-        <!--<activity android:name="me.panpf.androidx.test.app.ActivityxArgsTestActivity" />-->
-        <activity android:name="me.panpf.androidx.test.app.fragment.FragmentxTestActivity" />
-        <activity android:name="me.panpf.androidx.test.app.fragment.FragmentxTestFragmentActivity" />
-        <activity android:name=".content.LifecycleBroadcastReceiverTest$TestFragmentActivity"/>
+        <activity android:name=".app.ActivityxTest$TestActivity" />
+        <activity android:name=".app.ActivityxTest$TestFragmentActivity" />
+        <activity android:name=".app.FragmentxTest$TestActivity" />
+        <activity android:name=".app.FragmentxTest$TestFragmentActivity" />
+        <activity android:name=".content.PackageInfoxTest$TestActivity" />
+        <activity android:name=".content.LifecycleBroadcastReceiverTest$TestFragmentActivity" />
+        <activity android:name=".util.WeakAsyncTaskTest$TestActivity" />
+        <activity android:name=".widget.ToastxTest$TestActivity" />
+        <activity android:name=".widget.ToastxTest$TestFragmentActivity" />
 
         <service android:name=".TestService" />
         <receiver android:name=".TestReceiver" />

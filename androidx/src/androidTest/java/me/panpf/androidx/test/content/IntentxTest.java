@@ -81,7 +81,7 @@ public class IntentxTest {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 Uri uri = Intentx.getShareFileUri(context, file);
                 ProviderInfo fileProviderInfo = PackageInfox.findSelfProviderInfoByName(context, FileProvider.class.getName());
-                Assert.assertEquals("content://" + (fileProviderInfo != null ? fileProviderInfo.authority : "") + "/files/testGetShareFileUriByAuthority.txt", uri.toString());
+                Assert.assertEquals("content://" + (fileProviderInfo != null ? fileProviderInfo.authority : "") + "/files/testGetShareFileUri.txt", uri.toString());
             } else {
                 Uri uri = Intentx.getShareFileUri(context, file);
                 Assert.assertEquals(Uri.fromFile(file).toString(), uri.toString());

@@ -1,5 +1,6 @@
 package me.panpf.androidx.test.content;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
@@ -18,7 +19,6 @@ import me.panpf.androidx.content.pm.PackageInfox;
 import me.panpf.androidx.test.TestProvider;
 import me.panpf.androidx.test.TestReceiver;
 import me.panpf.androidx.test.TestService;
-import me.panpf.androidx.test.app.activity.ActivityxTestActivity;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Pair;
 import me.panpf.javax.util.Predicate;
@@ -29,7 +29,7 @@ public class PackageInfoxTest {
     @Test
     public void testFindActivityInfo() throws PackageManager.NameNotFoundException {
         Context context = InstrumentationRegistry.getContext();
-        final String activityName = ActivityxTestActivity.class.getName();
+        final String activityName = TestActivity.class.getName();
 
         ActivityInfo activityInfo1 = PackageInfox.findActivityInfo(context, context.getPackageName(), new Predicate<ActivityInfo>() {
             @Override
@@ -354,5 +354,8 @@ public class PackageInfoxTest {
         }
 
         Assert.assertNull(PackageInfox.findSelfMetaDataByValue(context, metaDataValue + "1"));
+    }
+
+    public static class TestActivity extends Activity {
     }
 }

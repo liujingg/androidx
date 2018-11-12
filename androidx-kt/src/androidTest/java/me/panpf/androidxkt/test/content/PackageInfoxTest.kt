@@ -1,5 +1,6 @@
 package me.panpf.androidxkt.test.content
 
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
@@ -7,7 +8,6 @@ import me.panpf.androidxkt.content.pm.*
 import me.panpf.androidxkt.test.TestProvider
 import me.panpf.androidxkt.test.TestReceiver
 import me.panpf.androidxkt.test.TestService
-import me.panpf.androidxkt.test.app.activity.ActivityxTestActivity
 import me.panpf.javax.lang.Stringx
 import me.panpf.javax.util.Predicate
 import org.junit.Assert
@@ -21,7 +21,7 @@ class PackageInfoxTest {
     @Throws(PackageManager.NameNotFoundException::class)
     fun testFindActivityInfo() {
         val context = InstrumentationRegistry.getContext()
-        val activityName = ActivityxTestActivity::class.java.name
+        val activityName = TestActivity::class.java.name
 
         val activityInfo1 = context.findActivityInfo(context.packageName, Predicate { activityInfo -> Stringx.equals(activityInfo.name, activityName) })
         Assert.assertNotNull(activityInfo1)
@@ -338,4 +338,6 @@ class PackageInfoxTest {
 
         Assert.assertNull(context.findSelfMetaDataByValue(metaDataValue + "1"))
     }
+
+    class TestActivity : Activity()
 }

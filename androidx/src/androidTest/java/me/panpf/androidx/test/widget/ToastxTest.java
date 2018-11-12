@@ -17,10 +17,13 @@
 package me.panpf.androidx.test.widget;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import org.junit.Rule;
@@ -28,19 +31,18 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import me.panpf.androidx.test.R;
-import me.panpf.androidx.test.app.activity.ActivityxTestActivity;
-import me.panpf.androidx.test.app.activity.ActivityxTestFragmentActivity;
 import me.panpf.androidx.view.Viewx;
 import me.panpf.androidx.widget.Toastx;
+import me.panpf.javax.util.Premisex;
 
 @RunWith(AndroidJUnit4.class)
 public class ToastxTest {
 
     @NonNull
-    private final ActivityTestRule<ActivityxTestActivity> activityRule = new ActivityTestRule<>(ActivityxTestActivity.class);
+    private final ActivityTestRule<TestActivity> activityRule = new ActivityTestRule<>(TestActivity.class);
 
     @NonNull
-    private final ActivityTestRule<ActivityxTestFragmentActivity> fragmentActivityRule = new ActivityTestRule<>(ActivityxTestFragmentActivity.class);
+    private final ActivityTestRule<TestFragmentActivity> fragmentActivityRule = new ActivityTestRule<>(TestFragmentActivity.class);
 
     @Rule
     @NonNull
@@ -114,5 +116,39 @@ public class ToastxTest {
     public final void testWithViewToast() {
         Toastx.showLongWithView(Viewx.inflateLayout(InstrumentationRegistry.getContext(), R.layout.view_toast));
         Toastx.showShortWithView(Viewx.inflateLayout(InstrumentationRegistry.getContext(), R.layout.view_toast));
+    }
+
+    public static class TestActivity extends Activity {
+
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            this.getFragmentManager().beginTransaction().replace(android.R.id.content, new android.app.Fragment()).commit();
+        }
+
+        @NonNull
+        public android.app.Fragment getFragment() {
+            return Premisex.requireNotNull(getFragmentManager().findFragmentById(android.R.id.content));
+        }
+
+        public View getView() {
+            return findViewById(android.R.id.content);
+        }
+    }
+
+    public static class TestFragmentActivity extends FragmentActivity {
+
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            this.getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new android.support.v4.app.Fragment()).commit();
+        }
+
+        @NonNull
+        public android.support.v4.app.Fragment getFragment() {
+            return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(android.R.id.content));
+        }
+
+        public View getView() {
+            return findViewById(android.R.id.content);
+        }
     }
 }

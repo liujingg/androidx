@@ -16,17 +16,20 @@
 
 package me.panpf.androidxkt.test.widget
 
+import android.app.Activity
+import android.os.Bundle
 import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.support.v4.app.FragmentActivity
+import android.view.View
 import me.panpf.androidxkt.test.R
-import me.panpf.androidxkt.test.app.activity.ActivityxTestActivity
-import me.panpf.androidxkt.test.app.activity.ActivityxTestFragmentActivity
 import me.panpf.androidxkt.view.inflateLayout
 import me.panpf.androidxkt.widget.showLongToast
 import me.panpf.androidxkt.widget.showLongToastWithSelf
 import me.panpf.androidxkt.widget.showShortToast
 import me.panpf.androidxkt.widget.showShortToastWithSelf
+import me.panpf.javax.util.Premisex
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -35,10 +38,10 @@ import org.junit.runner.RunWith
 class ToastxTest {
 
     @get:Rule
-    val activityRule: ActivityTestRule<ActivityxTestActivity> = ActivityTestRule<ActivityxTestActivity>(ActivityxTestActivity::class.java)
+    val activityRule: ActivityTestRule<TestActivity> = ActivityTestRule<TestActivity>(TestActivity::class.java)
 
     @get:Rule
-    val fragmentActivityRule: ActivityTestRule<ActivityxTestFragmentActivity> = ActivityTestRule<ActivityxTestFragmentActivity>(ActivityxTestFragmentActivity::class.java)
+    val fragmentActivityRule: ActivityTestRule<TestFragmentActivity> = ActivityTestRule<TestFragmentActivity>(TestFragmentActivity::class.java)
 
     @Test
     fun testContextToast() {
@@ -57,7 +60,7 @@ class ToastxTest {
 
     @Test
     fun testSupportFragmentToast() {
-        val fragment = fragmentActivityRule.activity.getFragment()
+        val fragment = fragmentActivityRule.activity.fragment
 
         fragment.showLongToast("今天是2018年10月18号")
         fragment.showLongToast("今天是%d年%d月%d号", 2018, 10, 18)
@@ -72,7 +75,7 @@ class ToastxTest {
 
     @Test
     fun testOriginFragmentToast() {
-        val fragment = activityRule.activity.getFragment()
+        val fragment = activityRule.activity.fragment
 
         fragment.showLongToast("今天是2018年10月18号")
         fragment.showLongToast("今天是%d年%d月%d号", 2018, 10, 18)
@@ -87,7 +90,7 @@ class ToastxTest {
 
     @Test
     fun testViewToast() {
-        val view = fragmentActivityRule.activity.getView()
+        val view = fragmentActivityRule.activity.view
 
         view.showLongToast("今天是2018年10月18号")
         view.showLongToast("今天是%d年%d月%d号", 2018, 10, 18)
@@ -105,5 +108,33 @@ class ToastxTest {
         InstrumentationRegistry.getContext().inflateLayout(R.layout.view_toast).showLongToastWithSelf()
 
         InstrumentationRegistry.getContext().inflateLayout(R.layout.view_toast).showShortToastWithSelf()
+    }
+
+    class TestActivity : Activity() {
+
+        val fragment: android.app.Fragment
+            get() = Premisex.requireNotNull(fragmentManager.findFragmentById(android.R.id.content))
+
+//        val view: View
+//            get() = findViewById(android.R.id.content)
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            this.fragmentManager.beginTransaction().replace(android.R.id.content, android.app.Fragment()).commit()
+        }
+    }
+
+    class TestFragmentActivity : FragmentActivity() {
+
+        val fragment: android.support.v4.app.Fragment
+            get() = Premisex.requireNotNull(supportFragmentManager.findFragmentById(android.R.id.content))
+
+        val view: View
+            get() = findViewById(android.R.id.content)
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            this.supportFragmentManager.beginTransaction().replace(android.R.id.content, android.support.v4.app.Fragment()).commit()
+        }
     }
 }

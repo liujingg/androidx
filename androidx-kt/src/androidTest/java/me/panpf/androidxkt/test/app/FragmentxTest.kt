@@ -16,12 +16,12 @@
 
 package me.panpf.androidxkt.test.app
 
+import android.app.Activity
+import android.os.Bundle
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.support.v4.app.FragmentActivity
 import me.panpf.androidxkt.app.isDestroyedCompat
-import me.panpf.androidxkt.test.app.fragment.FragmentxTestActivity
-import me.panpf.androidxkt.test.app.fragment.FragmentxTestFragmentActivity
-
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -31,10 +31,10 @@ import org.junit.runner.RunWith
 class FragmentxTest {
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(FragmentxTestActivity::class.java)
+    val activityTestRule = ActivityTestRule(TestActivity::class.java)
 
     @get:Rule
-    val fragmentActivityTestRule = ActivityTestRule(FragmentxTestFragmentActivity::class.java)
+    val fragmentActivityTestRule = ActivityTestRule(TestFragmentActivity::class.java)
 
     @Test
     fun testActivityDestroyed() {
@@ -90,5 +90,24 @@ class FragmentxTest {
         }
 
         Assert.assertFalse(fragment?.isDestroyedCompat() ?: false)
+    }
+
+    class TestActivity : Activity() {
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+
+            fragmentManager.beginTransaction().replace(android.R.id.content, android.app.Fragment()).commit()
+        }
+
+    }
+
+    class TestFragmentActivity : FragmentActivity() {
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+
+            supportFragmentManager.beginTransaction().replace(android.R.id.content, android.support.v4.app.Fragment()).commit()
+        }
+
     }
 }

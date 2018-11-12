@@ -23,16 +23,16 @@ import android.app.Application
 import android.arch.lifecycle.ViewModelStoreOwner
 import android.content.Intent
 import android.os.Build
+import android.os.Bundle
 import android.support.test.InstrumentationRegistry
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.support.v4.app.FragmentActivity
+import android.view.View
 import me.panpf.androidxkt.app.*
-import me.panpf.androidxkt.test.app.activity.ActivityxNoRegisterTestActivity
-import me.panpf.androidxkt.test.app.activity.ActivityxTestActivity
-import me.panpf.androidxkt.test.app.activity.ActivityxTestFragmentActivity
-import me.panpf.androidxkt.test.app.activity.ImplTestInterface
 import me.panpf.androidxkt.waitRunInUIResult
 import me.panpf.javax.lang.Throwablex
+import me.panpf.javaxkt.util.requireNotNull
 import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
@@ -42,10 +42,10 @@ import org.junit.runner.RunWith
 class ActivityxTest {
 
     @get:Rule
-    val activityTestRule = ActivityTestRule(ActivityxTestActivity::class.java)
+    val activityTestRule = ActivityTestRule(TestActivity::class.java)
 
     @get:Rule
-    val fragmentActivityTestRule = ActivityTestRule(ActivityxTestFragmentActivity::class.java)
+    val fragmentActivityTestRule = ActivityTestRule(TestFragmentActivity::class.java)
 
     @Test
     fun testActivityDestroyed() {
@@ -172,7 +172,7 @@ class ActivityxTest {
         val context = InstrumentationRegistry.getContext()
 
         Assert.assertFalse(context.canStartActivity(Intent(context, ActivityxTest::class.java)))
-        Assert.assertTrue(context.canStartActivity(Intent(context, ActivityxTestActivity::class.java)))
+        Assert.assertTrue(context.canStartActivity(Intent(context, TestActivity::class.java)))
     }
 
     @Test
@@ -180,7 +180,7 @@ class ActivityxTest {
         val activity = activityTestRule.activity
 
         try {
-            activity.startActivity(Intent(activity, ActivityxTestActivity::class.java))
+            activity.startActivity(Intent(activity, TestActivity::class.java))
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
@@ -194,21 +194,21 @@ class ActivityxTest {
         }
 
         try {
-            activity.startActivity(ActivityxTestActivity::class.java, null)
+            activity.startActivity(TestActivity::class.java, null)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.startActivity(ActivityxTestActivity::class.java)
+            activity.startActivity(TestActivity::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.appContext().startActivity(ActivityxNoRegisterTestActivity::class.java)
+            activity.appContext().startActivity(NoRegisterTestActivity::class.java)
             Assert.fail()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -220,7 +220,7 @@ class ActivityxTest {
         val activity = fragmentActivityTestRule.activity
 
         try {
-            activity.getFragment().startActivity(Intent(activity, ActivityxTestActivity::class.java))
+            activity.getFragment().startActivity(Intent(activity, TestActivity::class.java))
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
@@ -234,21 +234,21 @@ class ActivityxTest {
         }
 
         try {
-            activity.getFragment().startActivity(ActivityxTestActivity::class.java, null)
+            activity.getFragment().startActivity(TestActivity::class.java, null)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getFragment().startActivity(ActivityxTestActivity::class.java)
+            activity.getFragment().startActivity(TestActivity::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getFragment().startActivity(ActivityxNoRegisterTestActivity::class.java)
+            activity.getFragment().startActivity(NoRegisterTestActivity::class.java)
             Assert.fail()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -261,7 +261,7 @@ class ActivityxTest {
         val activity = activityTestRule.activity
 
         try {
-            activity.getFragment().startActivity(Intent(activity, ActivityxTestActivity::class.java))
+            activity.getFragment().startActivity(Intent(activity, TestActivity::class.java))
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
@@ -275,21 +275,21 @@ class ActivityxTest {
         }
 
         try {
-            activity.getFragment().startActivity(ActivityxTestActivity::class.java, null)
+            activity.getFragment().startActivity(TestActivity::class.java, null)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getFragment().startActivity(ActivityxTestActivity::class.java)
+            activity.getFragment().startActivity(TestActivity::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getFragment().startActivity(ActivityxNoRegisterTestActivity::class.java)
+            activity.getFragment().startActivity(NoRegisterTestActivity::class.java)
             Assert.fail()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -302,7 +302,7 @@ class ActivityxTest {
         val activity = activityTestRule.activity
 
         try {
-            activity.getView().startActivity(Intent(activity, ActivityxTestActivity::class.java))
+            activity.getView().startActivity(Intent(activity, TestActivity::class.java))
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
@@ -316,21 +316,21 @@ class ActivityxTest {
         }
 
         try {
-            activity.getView().startActivity(ActivityxTestActivity::class.java, null)
+            activity.getView().startActivity(TestActivity::class.java, null)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getView().startActivity(ActivityxTestActivity::class.java)
+            activity.getView().startActivity(TestActivity::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getView().startActivity(ActivityxNoRegisterTestActivity::class.java)
+            activity.getView().startActivity(NoRegisterTestActivity::class.java)
             Assert.fail()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -341,43 +341,152 @@ class ActivityxTest {
     fun testSafeStartActivityByIntentActivity() {
         val activity = activityTestRule.activity
 
-        Assert.assertTrue(activity.safeStartActivity(Intent(activity, ActivityxTestActivity::class.java)))
+        Assert.assertTrue(activity.safeStartActivity(Intent(activity, TestActivity::class.java)))
         Assert.assertFalse(activity.appContext().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
-        Assert.assertTrue(activity.safeStartActivity(ActivityxTestActivity::class.java, null))
-        Assert.assertTrue(activity.safeStartActivity(ActivityxTestActivity::class.java))
-        Assert.assertFalse(activity.appContext().safeStartActivity(ActivityxNoRegisterTestActivity::class.java))
+        Assert.assertTrue(activity.safeStartActivity(TestActivity::class.java, null))
+        Assert.assertTrue(activity.safeStartActivity(TestActivity::class.java))
+        Assert.assertFalse(activity.appContext().safeStartActivity(NoRegisterTestActivity::class.java))
     }
 
     @Test
     fun testSafeStartActivityByIntentSupportFragment() {
         val activity = fragmentActivityTestRule.activity
 
-        Assert.assertTrue(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTestActivity::class.java)))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(Intent(activity, TestActivity::class.java)))
         Assert.assertFalse(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
-        Assert.assertTrue(activity.getFragment().safeStartActivity(ActivityxTestActivity::class.java, null))
-        Assert.assertTrue(activity.getFragment().safeStartActivity(ActivityxTestActivity::class.java))
-        Assert.assertFalse(activity.getFragment().safeStartActivity(ActivityxNoRegisterTestActivity::class.java))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(TestActivity::class.java, null))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(TestActivity::class.java))
+        Assert.assertFalse(activity.getFragment().safeStartActivity(NoRegisterTestActivity::class.java))
     }
 
     @Test
     fun testSafeStartActivityByIntentOriginFragment() {
         val activity = activityTestRule.activity
 
-        Assert.assertTrue(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTestActivity::class.java)))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(Intent(activity, TestActivity::class.java)))
         Assert.assertFalse(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
-        Assert.assertTrue(activity.getFragment().safeStartActivity(ActivityxTestActivity::class.java, null))
-        Assert.assertTrue(activity.getFragment().safeStartActivity(ActivityxTestActivity::class.java))
-        Assert.assertFalse(activity.getFragment().safeStartActivity(ActivityxNoRegisterTestActivity::class.java))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(TestActivity::class.java, null))
+        Assert.assertTrue(activity.getFragment().safeStartActivity(TestActivity::class.java))
+        Assert.assertFalse(activity.getFragment().safeStartActivity(NoRegisterTestActivity::class.java))
     }
 
     @Test
     fun testSafeStartActivityByIntentView() {
         val activity = activityTestRule.activity
 
-        Assert.assertTrue(activity.getView().safeStartActivity(Intent(activity, ActivityxTestActivity::class.java)))
+        Assert.assertTrue(activity.getView().safeStartActivity(Intent(activity, TestActivity::class.java)))
         Assert.assertFalse(activity.getView().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
-        Assert.assertTrue(activity.getView().safeStartActivity(ActivityxTestActivity::class.java, null))
-        Assert.assertTrue(activity.getView().safeStartActivity(ActivityxTestActivity::class.java))
-        Assert.assertFalse(activity.getView().safeStartActivity(ActivityxNoRegisterTestActivity::class.java))
+        Assert.assertTrue(activity.getView().safeStartActivity(TestActivity::class.java, null))
+        Assert.assertTrue(activity.getView().safeStartActivity(TestActivity::class.java))
+        Assert.assertFalse(activity.getView().safeStartActivity(NoRegisterTestActivity::class.java))
+    }
+
+    interface ImplTestInterface
+
+    class TestActivity : Activity(), ImplTestInterface {
+        var finished: Boolean = false
+        var finishedActivity: Boolean = false
+        var finishedActivityFromChild: Boolean = false
+        var destoryed: Boolean = false
+
+        public override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            fragmentManager.beginTransaction().replace(android.R.id.content, android.app.Fragment()).commit()
+        }
+
+        override fun finish() {
+            super.finish()
+            finished = true
+        }
+
+        override fun finishActivity(requestCode: Int) {
+            super.finishActivity(requestCode)
+            finishedActivity = true
+        }
+
+        override fun finishActivityFromChild(child: Activity, requestCode: Int) {
+            super.finishActivityFromChild(child, requestCode)
+            finishedActivityFromChild = true
+        }
+
+        override fun onDestroy() {
+            super.onDestroy()
+            destoryed = true
+        }
+
+        fun getFragment(): android.app.Fragment {
+            return fragmentManager.findFragmentById(android.R.id.content)
+        }
+
+        fun getView(): View {
+            return findViewById(android.R.id.content)
+        }
+    }
+
+    class TestFragmentActivity : FragmentActivity(){
+        var finished: Boolean = false
+        var finishedActivity: Boolean = false
+        var finishedActivityFromChild: Boolean = false
+        var destoryed: Boolean = false
+
+        public override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            supportFragmentManager.beginTransaction().replace(android.R.id.content, android.support.v4.app.Fragment()).commit()
+        }
+
+        override fun finish() {
+            super.finish()
+            finished = true
+        }
+
+        override fun finishActivity(requestCode: Int) {
+            super.finishActivity(requestCode)
+            finishedActivity = true
+        }
+
+        override fun finishActivityFromChild(child: Activity, requestCode: Int) {
+            super.finishActivityFromChild(child, requestCode)
+            finishedActivityFromChild = true
+        }
+
+        override fun onDestroy() {
+            super.onDestroy()
+            destoryed = true
+        }
+
+        fun getFragment(): android.support.v4.app.Fragment {
+            return supportFragmentManager.findFragmentById(android.R.id.content).requireNotNull()
+        }
+
+        fun getView(): View {
+            return findViewById(android.R.id.content)
+        }
+    }
+
+    class NoRegisterTestActivity : Activity(), ImplTestInterface {
+        var finished: Boolean = false
+        var finishedActivity: Boolean = false
+        var finishedActivityFromChild: Boolean = false
+        var destoryed: Boolean = false
+
+        override fun finish() {
+            super.finish()
+            finished = true
+        }
+
+        override fun finishActivity(requestCode: Int) {
+            super.finishActivity(requestCode)
+            finishedActivity = true
+        }
+
+        override fun finishActivityFromChild(child: Activity, requestCode: Int) {
+            super.finishActivityFromChild(child, requestCode)
+            finishedActivityFromChild = true
+        }
+
+        override fun onDestroy() {
+            super.onDestroy()
+            destoryed = true
+        }
     }
 }

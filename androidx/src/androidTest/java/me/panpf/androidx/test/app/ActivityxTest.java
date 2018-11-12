@@ -22,10 +22,14 @@ import android.arch.lifecycle.ViewModelStoreOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -34,37 +38,34 @@ import org.junit.runner.RunWith;
 
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Activityx;
-import me.panpf.androidx.test.app.activity.ActivityxNoRegisterTestActivity;
-import me.panpf.androidx.test.app.activity.ActivityxTestActivity;
-import me.panpf.androidx.test.app.activity.ActivityxTestFragmentActivity;
-import me.panpf.androidx.test.app.activity.ImplTestInterface;
 import me.panpf.androidx.util.ResultRunnable;
 import me.panpf.javax.lang.Throwablex;
+import me.panpf.javax.util.Premisex;
 
 @RunWith(AndroidJUnit4.class)
 public class ActivityxTest {
 
     @NonNull
-    private final ActivityTestRule<ActivityxTestActivity> activityTestRule = new ActivityTestRule<>(ActivityxTestActivity.class);
+    private final ActivityTestRule<TestActivity> activityTestRule = new ActivityTestRule<>(TestActivity.class);
 
     @NonNull
-    private final ActivityTestRule<ActivityxTestFragmentActivity> fragmentActivityTestRule = new ActivityTestRule<>(ActivityxTestFragmentActivity.class);
+    private final ActivityTestRule<TestFragmentActivity> fragmentActivityTestRule = new ActivityTestRule<>(TestFragmentActivity.class);
 
     @Rule
     @NonNull
-    public ActivityTestRule<ActivityxTestActivity> getActivityTestRule() {
+    public ActivityTestRule<TestActivity> getActivityTestRule() {
         return activityTestRule;
     }
 
     @Rule
     @NonNull
-    public ActivityTestRule<ActivityxTestFragmentActivity> getFragmentActivityTestRule() {
+    public ActivityTestRule<TestFragmentActivity> getFragmentActivityTestRule() {
         return fragmentActivityTestRule;
     }
 
     @Test
     public void testActivityDestroyed() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
         Assert.assertFalse(Activityx.isDestroyedCompat(activity));
 
@@ -81,7 +82,7 @@ public class ActivityxTest {
 
     @Test
     public void testActivityNormal() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
         Assert.assertFalse(Activityx.isDestroyedCompat(activity));
 
@@ -96,7 +97,7 @@ public class ActivityxTest {
 
     @Test
     public void testFragmentActivityDestroyed() {
-        ActivityxTestFragmentActivity activity = fragmentActivityTestRule.getActivity();
+        TestFragmentActivity activity = fragmentActivityTestRule.getActivity();
 
         Assert.assertFalse(Activityx.isDestroyedCompat(activity));
 
@@ -113,7 +114,7 @@ public class ActivityxTest {
 
     @Test
     public void testFragmentActivityNormal() {
-        ActivityxTestFragmentActivity activity = fragmentActivityTestRule.getActivity();
+        TestFragmentActivity activity = fragmentActivityTestRule.getActivity();
 
         Assert.assertFalse(Activityx.isDestroyedCompat(activity));
 
@@ -128,7 +129,7 @@ public class ActivityxTest {
 
     @Test
     public void testConvertTranslucent() {
-        final ActivityxTestActivity activity = activityTestRule.getActivity();
+        final TestActivity activity = activityTestRule.getActivity();
 
         try {
             Thread.sleep(2000);
@@ -177,18 +178,18 @@ public class ActivityxTest {
 
     @Test
     public void testGetImplWithParent() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
         Assert.assertNotNull(Activityx.getImplWithParent(activity, ImplTestInterface.class));
         Assert.assertNull(Activityx.getImplWithParent(activity, ViewModelStoreOwner.class));
 
-        ActivityxTestFragmentActivity activity2 = fragmentActivityTestRule.getActivity();
+        TestFragmentActivity activity2 = fragmentActivityTestRule.getActivity();
         Assert.assertNull(Activityx.getImplWithParent(activity2, ImplTestInterface.class));
         Assert.assertNotNull(Activityx.getImplWithParent(activity2, ViewModelStoreOwner.class));
     }
 
     @Test
     public void testAppContext() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
         Assert.assertTrue(Activityx.appContext(activity) instanceof Application);
         Assert.assertFalse(Activityx.appContext(activity) instanceof Activity);
     }
@@ -198,15 +199,15 @@ public class ActivityxTest {
         Context context = InstrumentationRegistry.getContext();
 
         Assert.assertFalse(Activityx.canStart(context, new Intent(context, ActivityxTest.class)));
-        Assert.assertTrue(Activityx.canStart(context, new Intent(context, ActivityxTestActivity.class)));
+        Assert.assertTrue(Activityx.canStart(context, new Intent(context, TestActivity.class)));
     }
 
     @Test
     public void testStartActivityByIntentActivity() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
         try {
-            Activityx.start(activity, new Intent(activity, ActivityxTestActivity.class));
+            Activityx.start(activity, new Intent(activity, TestActivity.class));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
@@ -220,21 +221,21 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(activity, ActivityxTestActivity.class, null);
+            Activityx.start(activity, TestActivity.class, null);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity, ActivityxTestActivity.class);
+            Activityx.start(activity, TestActivity.class);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(Activityx.appContext(activity), ActivityxNoRegisterTestActivity.class);
+            Activityx.start(Activityx.appContext(activity), NoRegisterTestActivity.class);
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -243,10 +244,10 @@ public class ActivityxTest {
 
     @Test
     public void testStartActivityByIntentSupportFragment() {
-        ActivityxTestFragmentActivity activity = fragmentActivityTestRule.getActivity();
+        TestFragmentActivity activity = fragmentActivityTestRule.getActivity();
 
         try {
-            Activityx.start(activity.getFragment(), new Intent(activity, ActivityxTestActivity.class));
+            Activityx.start(activity.getFragment(), new Intent(activity, TestActivity.class));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
@@ -260,21 +261,21 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(activity.getFragment(), ActivityxTestActivity.class, null);
+            Activityx.start(activity.getFragment(), TestActivity.class, null);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getFragment(), ActivityxTestActivity.class);
+            Activityx.start(activity.getFragment(), TestActivity.class);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getFragment(), ActivityxNoRegisterTestActivity.class);
+            Activityx.start(activity.getFragment(), NoRegisterTestActivity.class);
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -283,10 +284,10 @@ public class ActivityxTest {
 
     @Test
     public void testStartActivityByIntentOriginFragment() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
         try {
-            Activityx.start(activity.getFragment(), new Intent(activity, ActivityxTestActivity.class));
+            Activityx.start(activity.getFragment(), new Intent(activity, TestActivity.class));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
@@ -300,21 +301,21 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(activity.getFragment(), ActivityxTestActivity.class, null);
+            Activityx.start(activity.getFragment(), TestActivity.class, null);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getFragment(), ActivityxTestActivity.class);
+            Activityx.start(activity.getFragment(), TestActivity.class);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getFragment(), ActivityxNoRegisterTestActivity.class);
+            Activityx.start(activity.getFragment(), NoRegisterTestActivity.class);
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -323,10 +324,10 @@ public class ActivityxTest {
 
     @Test
     public void testStartActivityByIntentView() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
         try {
-            Activityx.start(activity.getView(), new Intent(activity, ActivityxTestActivity.class));
+            Activityx.start(activity.getView(), new Intent(activity, TestActivity.class));
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
@@ -340,21 +341,21 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(activity.getView(), ActivityxTestActivity.class, null);
+            Activityx.start(activity.getView(), TestActivity.class, null);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getView(), ActivityxTestActivity.class);
+            Activityx.start(activity.getView(), TestActivity.class);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getView(), ActivityxNoRegisterTestActivity.class);
+            Activityx.start(activity.getView(), NoRegisterTestActivity.class);
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -363,45 +364,177 @@ public class ActivityxTest {
 
     @Test
     public void testSafeStartActivityByIntentActivity() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
-        Assert.assertTrue(Activityx.safeStart(activity, new Intent(activity, ActivityxTestActivity.class)));
+        Assert.assertTrue(Activityx.safeStart(activity, new Intent(activity, TestActivity.class)));
         Assert.assertFalse(Activityx.safeStart(Activityx.appContext(activity), new Intent(activity, ActivityxTest.class)));
-        Assert.assertTrue(Activityx.safeStart(activity, ActivityxTestActivity.class, null));
-        Assert.assertTrue(Activityx.safeStart(activity, ActivityxTestActivity.class));
-        Assert.assertFalse(Activityx.safeStart(Activityx.appContext(activity), ActivityxNoRegisterTestActivity.class));
+        Assert.assertTrue(Activityx.safeStart(activity, TestActivity.class, null));
+        Assert.assertTrue(Activityx.safeStart(activity, TestActivity.class));
+        Assert.assertFalse(Activityx.safeStart(Activityx.appContext(activity), NoRegisterTestActivity.class));
     }
 
     @Test
     public void testSafeStartActivityByIntentSupportFragment() {
-        ActivityxTestFragmentActivity activity = fragmentActivityTestRule.getActivity();
+        TestFragmentActivity activity = fragmentActivityTestRule.getActivity();
 
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), new Intent(activity, ActivityxTestActivity.class)));
+        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), new Intent(activity, TestActivity.class)));
         Assert.assertFalse(Activityx.safeStart(activity.getFragment(), new Intent(activity, ActivityxTest.class)));
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), ActivityxTestActivity.class, null));
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), ActivityxTestActivity.class));
-        Assert.assertFalse(Activityx.safeStart(activity.getFragment(), ActivityxNoRegisterTestActivity.class));
+        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), TestActivity.class, null));
+        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), TestActivity.class));
+        Assert.assertFalse(Activityx.safeStart(activity.getFragment(), NoRegisterTestActivity.class));
     }
 
     @Test
     public void testSafeStartActivityByIntentOriginFragment() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), new Intent(activity, ActivityxTestActivity.class)));
+        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), new Intent(activity, TestActivity.class)));
         Assert.assertFalse(Activityx.safeStart(activity.getFragment(), new Intent(activity, ActivityxTest.class)));
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), ActivityxTestActivity.class, null));
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), ActivityxTestActivity.class));
-        Assert.assertFalse(Activityx.safeStart(activity.getFragment(), ActivityxNoRegisterTestActivity.class));
+        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), TestActivity.class, null));
+        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), TestActivity.class));
+        Assert.assertFalse(Activityx.safeStart(activity.getFragment(), NoRegisterTestActivity.class));
     }
 
     @Test
     public void testSafeStartActivityByIntentView() {
-        ActivityxTestActivity activity = activityTestRule.getActivity();
+        TestActivity activity = activityTestRule.getActivity();
 
-        Assert.assertTrue(Activityx.safeStart(activity.getView(), new Intent(activity, ActivityxTestActivity.class)));
+        Assert.assertTrue(Activityx.safeStart(activity.getView(), new Intent(activity, TestActivity.class)));
         Assert.assertFalse(Activityx.safeStart(activity.getView(), new Intent(activity, ActivityxTest.class)));
-        Assert.assertTrue(Activityx.safeStart(activity.getView(), ActivityxTestActivity.class, null));
-        Assert.assertTrue(Activityx.safeStart(activity.getView(), ActivityxTestActivity.class));
-        Assert.assertFalse(Activityx.safeStart(activity.getView(), ActivityxNoRegisterTestActivity.class));
+        Assert.assertTrue(Activityx.safeStart(activity.getView(), TestActivity.class, null));
+        Assert.assertTrue(Activityx.safeStart(activity.getView(), TestActivity.class));
+        Assert.assertFalse(Activityx.safeStart(activity.getView(), NoRegisterTestActivity.class));
+    }
+
+    public interface ImplTestInterface {
+    }
+
+    public static class TestActivity extends Activity implements ImplTestInterface {
+        public boolean finished;
+        public boolean finishedActivity;
+        public boolean finishedActivityFromChild;
+        public boolean destoryed;
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            getFragmentManager().beginTransaction().replace(android.R.id.content, new android.app.Fragment()).commit();
+        }
+
+        @Override
+        public void finish() {
+            super.finish();
+            finished = true;
+        }
+
+        @Override
+        public void finishActivity(int requestCode) {
+            super.finishActivity(requestCode);
+            finishedActivity = true;
+        }
+
+        @Override
+        public void finishActivityFromChild(@NonNull Activity child, int requestCode) {
+            super.finishActivityFromChild(child, requestCode);
+            finishedActivityFromChild = true;
+        }
+
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            destoryed = true;
+        }
+
+        @NonNull
+        public android.app.Fragment getFragment() {
+            return getFragmentManager().findFragmentById(android.R.id.content);
+        }
+
+        public View getView() {
+            return findViewById(android.R.id.content);
+        }
+    }
+
+    public static class TestFragmentActivity extends FragmentActivity {
+        public boolean finished;
+        public boolean finishedActivity;
+        public boolean finishedActivityFromChild;
+        public boolean destoryed;
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new android.support.v4.app.Fragment()).commit();
+        }
+
+        @Override
+        public void finish() {
+            super.finish();
+            finished = true;
+        }
+
+        @Override
+        public void finishActivity(int requestCode) {
+            super.finishActivity(requestCode);
+            finishedActivity = true;
+        }
+
+        @Override
+        public void finishActivityFromChild(@NonNull Activity child, int requestCode) {
+            super.finishActivityFromChild(child, requestCode);
+            finishedActivityFromChild = true;
+        }
+
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            destoryed = true;
+        }
+
+        @NonNull
+        public android.support.v4.app.Fragment getFragment() {
+            return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(android.R.id.content));
+        }
+
+//        public View getView() {
+//            return findViewById(android.R.id.content);
+//        }
+    }
+
+    public static class NoRegisterTestActivity extends Activity implements ImplTestInterface {
+        public boolean finished;
+        public boolean finishedActivity;
+        public boolean finishedActivityFromChild;
+        public boolean destoryed;
+
+        @Override
+        public void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            getFragmentManager().beginTransaction().replace(android.R.id.content, new android.app.Fragment()).commit();
+        }
+
+        @Override
+        public void finish() {
+            super.finish();
+            finished = true;
+        }
+
+        @Override
+        public void finishActivity(int requestCode) {
+            super.finishActivity(requestCode);
+            finishedActivity = true;
+        }
+
+        @Override
+        public void finishActivityFromChild(@NonNull Activity child, int requestCode) {
+            super.finishActivityFromChild(child, requestCode);
+            finishedActivityFromChild = true;
+        }
+
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            destoryed = true;
+        }
     }
 }

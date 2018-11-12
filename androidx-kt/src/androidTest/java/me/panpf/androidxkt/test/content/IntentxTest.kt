@@ -72,7 +72,7 @@ class IntentxTest {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 val uri = context.getShareFileUri(file)
                 val fileProviderInfo = context.findSelfProviderInfoByName(FileProvider::class.java.name)
-                Assert.assertEquals("content://" + (if (fileProviderInfo != null) fileProviderInfo.authority else "") + "/files/testGetShareFileUriByAuthority.txt", uri.toString())
+                Assert.assertEquals("content://" + (if (fileProviderInfo != null) fileProviderInfo.authority else "") + "/files/testGetShareFileUri.txt", uri.toString())
             } else {
                 val uri = context.getShareFileUri(file)
                 Assert.assertEquals(Uri.fromFile(file).toString(), uri.toString())
