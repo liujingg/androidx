@@ -23,7 +23,6 @@ import me.panpf.androidx.app.Fragmentx;
  * }.registerCreateDestroy(new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION))
  * </pre>
  */
-// TODO: 2018/11/12 补充测试
 public abstract class LifecycleBroadcastReceiver extends BroadcastReceiver {
 
     @NonNull
@@ -61,7 +60,7 @@ public abstract class LifecycleBroadcastReceiver extends BroadcastReceiver {
         return false;
     }
 
-    public synchronized boolean registeStartStop(@NonNull IntentFilter filter) {
+    public synchronized boolean registerStartStop(@NonNull IntentFilter filter) {
         if (lifecycleObserver == null) {
             try {
                 if (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
