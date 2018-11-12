@@ -20,10 +20,10 @@
         <!--<activity android:name="me.panpf.androidx.test.app.ActivityxArgsTestActivity" />-->
         <activity android:name="me.panpf.androidx.test.app.fragment.FragmentxTestActivity" />
         <activity android:name="me.panpf.androidx.test.app.fragment.FragmentxTestFragmentActivity" />
-        <activity android:name="me.panpf.androidx.test.app.dialog.DialogxTestActivity" />
-        <activity android:name="me.panpf.androidx.test.app.dialog.DialogxTestFragmentActivity" />
+        <activity android:name=".app.DialogxTest$DialogxTestActivity" />
+        <activity android:name=".app.DialogxTest$DialogxTestFragmentActivity" />
 
-        <activity android:name=".content.LifecycleBroadcastReceiverTest$TestFragmentActivity"/>
+        <activity android:name=".content.LifecycleBroadcastReceiverTest$TestFragmentActivity" />
 
         <service android:name=".TestService" />
         <receiver android:name=".TestReceiver" />

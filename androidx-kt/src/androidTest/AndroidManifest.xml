@@ -19,6 +19,8 @@
         <activity android:name="me.panpf.androidxkt.test.app.fragment.FragmentxTestFragmentActivity" />
         <activity android:name="me.panpf.androidxkt.test.app.args.ArgsBinderTestActivity" />
         <activity android:name="me.panpf.androidxkt.test.app.args.ArgsBinderResTestActivity" />
+        <activity android:name="me.panpf.androidxkt.test.app.DialogxTest$DialogxTestActivity" />
+        <activity android:name="me.panpf.androidxkt.test.app.DialogxTest$DialogxTestFragmentActivity" />
 
         <service android:name=".TestService" />
         <receiver android:name=".TestReceiver" />
