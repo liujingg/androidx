@@ -15,10 +15,12 @@
     <application>
         <activity android:name=".app.ActivityxTest$TestActivity" />
         <activity android:name=".app.ActivityxTest$TestFragmentActivity" />
-        <activity android:name=".app.FragmentxTest$TestActivity" />
-        <activity android:name=".app.FragmentxTest$TestFragmentActivity" />
         <activity android:name=".app.ArgsBinderTest$TestActivity" />
         <activity android:name=".app.ArgsBinderTest$ResTestActivity" />
+        <activity android:name=".app.DialogxTest$TestActivity" />
+        <activity android:name=".app.DialogxTest$TestFragmentActivity" />
+        <activity android:name=".app.FragmentxTest$TestActivity" />
+        <activity android:name=".app.FragmentxTest$TestFragmentActivity" />
         <activity android:name=".content.PackageInfoxTest$TestActivity" />
         <activity android:name=".widget.ToastxTest$TestActivity" />
         <activity android:name=".widget.ToastxTest$TestActivity" />
