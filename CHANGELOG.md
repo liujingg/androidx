@@ -5,6 +5,7 @@
 * :white_check_mark: Perfect Intentx testing
 * :sparkles: Adds LifecycleBroadcastReceiver
 * :white_check_mark: Perfect Dialogx testing
+* :sparkles: Adds BundleBuilder
 
 ## v0.6.0
 
