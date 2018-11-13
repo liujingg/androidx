@@ -65,7 +65,7 @@ Dependencies:
     * bind\*UriIntentArg, bind\*UriIntentArgOr
 * Dialog: [Dialogx.java] ([Test][DialogxTest.java]) | [Dialogx.kt] ([Test][DialogxTest.kt])
     * setClickButtonClosable, showProgressDialog
-* Fragment: [Fragmentx.java] | [Fragmentx.kt]
+* Fragment: [Fragmentx.java] ([Test][FragmentxTest.java]) | [Fragmentx.kt] ([Test][FragmentxTest.kt])
     * isDestroyedCompat, getImplWithParent, instantiate, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
     * requireContext, requireAppContent, read\*Arg
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
