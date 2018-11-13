@@ -18,7 +18,7 @@
         <activity android:name=".app.DialogxTest$TestActivity" />
         <activity android:name=".app.DialogxTest$TestFragmentActivity" />
         <activity android:name=".app.FragmentxTest$TestActivity" />
-        <activity android:name=".app.FragmentxTest$TestFragmentActivity" />
+        <activity android:name=".app.FragmentxTest$TestFindUserVisibleChildActivity" />
         <activity android:name=".content.PackageInfoxTest$TestActivity" />
         <activity android:name=".content.LifecycleBroadcastReceiverTest$TestFragmentActivity" />
         <activity android:name=".util.WeakAsyncTaskTest$TestActivity" />

@@ -7,6 +7,7 @@
 * :white_check_mark: Perfect Dialogx testing
 * :sparkles: Adds BundleBuilder
 * :fire: Fragmentx instance rename to instantiate, instanceOrigin rename to instantiateOrigin
+* :white_check_mark: Perfect Fragmentx testing
 
 ## v0.6.0
 
