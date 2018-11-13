@@ -2,9 +2,9 @@
 
 buildscript {
     repositories {
-        maven { url 'https://mirrors.huaweicloud.com/repository/maven/' } // Huawei Maven mirrors
         google()
         jcenter()
+        maven { url 'https://mirrors.huaweicloud.com/repository/maven/' } // Huawei Maven mirrors
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -18,9 +18,9 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url 'https://mirrors.huaweicloud.com/repository/maven/' } // Huawei Maven mirrors
         google()
         jcenter()
+        maven { url 'https://mirrors.huaweicloud.com/repository/maven/' } // Huawei Maven mirrors
     }
 }
 
