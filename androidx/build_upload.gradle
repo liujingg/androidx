@@ -1,8 +1,12 @@
 def localProperties = new Properties()
+def inputStream
 try {
-    localProperties.load(project.file("local.properties").newDataInputStream())
+    inputStream = project.file("local.properties").newDataInputStream()
+    localProperties.load(inputStream)
 } catch (IOException e) {
     e.printStackTrace()
+} finally {
+    if (inputStream != null) inputStream.close()
 }
 if (!localProperties.isEmpty()) {
     apply plugin: "guru.stefma.bintrayrelease"
