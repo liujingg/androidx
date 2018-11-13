@@ -36,215 +36,25 @@ class ArgsBinderTest {
     @Test
     fun testBindActivity() {
         val activity = testRule.activity
-
-        Assert.assertTrue(activity.booleanRequired)
-        Assert.assertTrue(activity.booleanArrayRequired[0] && !activity.booleanArrayRequired[1])
-        Assert.assertTrue(!(activity.booleanArrayOptional?.get(0) == true)
-                && activity.booleanArrayOptional?.get(1) ?: false)
-
-        Assert.assertTrue(activity.byteRequired == 2.toByte())
-        Assert.assertTrue(activity.byteArrayRequired[0] == 2.toByte()
-                && activity.byteArrayRequired[1] == (-2).toByte())
-        Assert.assertTrue(activity.byteArrayOptional?.get(0) ?: 0.toByte() == (-2).toByte()
-                && activity.byteArrayOptional?.get(1) ?: 0.toByte() == 2.toByte())
-
-        Assert.assertTrue(activity.charRequired == 'a')
-        Assert.assertTrue(activity.charArrayRequired[0] == 'a'
-                && activity.charArrayRequired[1] == 'b')
-        Assert.assertTrue(activity.charArrayOptional?.get(0) ?: 0.toByte() == 'b'
-                && activity.charArrayOptional?.get(1) ?: 0.toByte() == 'a')
-
-        Assert.assertTrue(activity.shortRequired == 3.toShort())
-        Assert.assertTrue(activity.shortArrayRequired[0] == 3.toShort()
-                && activity.shortArrayRequired[1] == (-3).toShort())
-        Assert.assertTrue(activity.shortArrayOptional?.get(0) ?: 0.toShort() == (-3).toShort()
-                && activity.shortArrayOptional?.get(1) ?: 0.toShort() == 3.toShort())
-
-        Assert.assertTrue(activity.floatRequired == 4f)
-        Assert.assertTrue(activity.floatArrayRequired[0] == 4f
-                && activity.floatArrayRequired[1] == (-4f))
-        Assert.assertTrue(activity.floatArrayOptional?.get(0) ?: 0f == (-4f)
-                && activity.floatArrayOptional?.get(1) ?: 0f == 4f)
-
-        Assert.assertTrue(activity.longRequired == 1000L)
-        Assert.assertTrue(activity.longArrayRequired[0] == 1000L
-                && activity.longArrayRequired[1] == (-1000L))
-        Assert.assertTrue(activity.longArrayOptional?.get(0) ?: 0L == (-1000L)
-                && activity.longArrayOptional?.get(1) ?: 0L == 1000L)
-
-        Assert.assertTrue(activity.intRequired == 500)
-        Assert.assertTrue(activity.intArrayRequired[0] == 500
-                && activity.intArrayRequired[1] == (-500))
-        Assert.assertTrue(activity.intArrayOptional?.get(0) ?: 0 == (-500)
-                && activity.intArrayOptional?.get(1) ?: 0 == 500)
-        Assert.assertTrue(activity.intArrayListRequired[0] == 500
-                && activity.intArrayListRequired[1] == (-500))
-        Assert.assertTrue(activity.intArrayListOptional?.get(0) ?: 0 == (-500)
-                && activity.intArrayListOptional?.get(1) ?: 0 == 500)
-
-        Assert.assertTrue(activity.doubleRequired == 6.toDouble())
-        Assert.assertTrue(activity.doubleArrayRequired[0] == 6.toDouble()
-                && activity.doubleArrayRequired[1] == (-6).toDouble())
-        Assert.assertTrue(activity.doubleArrayOptional?.get(0) ?: 0.toDouble() == (-6).toDouble()
-                && activity.doubleArrayOptional?.get(1) ?: 0.toDouble() == 6.toDouble())
-
-        Assert.assertTrue(activity.stringRequired == "stringRequired")
-        Assert.assertTrue(activity.stringOptional == "stringOptional")
-        Assert.assertTrue(activity.stringArrayRequired[0] == "stringRequired"
-                && activity.stringArrayRequired[1] == "stringOptional")
-        Assert.assertTrue(activity.stringArrayOptional?.get(0) == "stringOptional"
-                && activity.stringArrayOptional?.get(1) == "stringRequired")
-        Assert.assertTrue(activity.stringArrayListRequired[0] == "stringRequired"
-                && activity.stringArrayListRequired[1] == "stringOptional")
-        Assert.assertTrue(activity.stringArrayListOptional?.get(0) == "stringOptional"
-                && activity.stringArrayListOptional?.get(1) == "stringRequired")
-
-        Assert.assertTrue(activity.charSequenceRequired == "stringRequired")
-        Assert.assertTrue(activity.charSequenceOptional == "stringOptional")
-        Assert.assertTrue(activity.charSequenceArrayRequired[0] == "stringRequired"
-                && activity.stringArrayRequired[1] == "stringOptional")
-        Assert.assertTrue(activity.charSequenceArrayOptional?.get(0) == "stringOptional"
-                && activity.stringArrayOptional?.get(1) == "stringRequired")
-
-        Assert.assertTrue(activity.parcelableRequired == TestParcelable("parcelableRequired"))
-        Assert.assertTrue(activity.parcelableOptional == TestParcelable("parcelableOptional"))
-        Assert.assertTrue(activity.parcelableArrayRequired[0] == TestParcelable("parcelableRequired")
-                && activity.parcelableArrayRequired[1] == TestParcelable("parcelableOptional"))
-        Assert.assertTrue(activity.parcelableArrayOptional?.get(0) == TestParcelable("parcelableOptional")
-                && activity.parcelableArrayOptional?.get(1) == TestParcelable("parcelableRequired"))
-        Assert.assertTrue(activity.parcelableArrayListRequired[0] == TestParcelable("parcelableRequired")
-                && activity.parcelableArrayListRequired[1] == TestParcelable("parcelableOptional"))
-        Assert.assertTrue(activity.parcelableArrayListOptional?.get(0) == TestParcelable("parcelableOptional")
-                && activity.parcelableArrayListOptional?.get(1) == TestParcelable("parcelableRequired"))
-
-        Assert.assertTrue(activity.serializableRequired == TestSerializable("serializableRequired"))
-        Assert.assertTrue(activity.serializableOptional == TestSerializable("serializableOptional"))
-
-        Assert.assertTrue(activity.bundleRequired.getString("bundle") == "bundleRequired")
-        Assert.assertTrue(activity.bundleOptional?.getString("bundle") == "bundleOptional")
+        activity.assert()
     }
 
     @Test
     fun testBindFragment() {
         val fragment = testRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.test.R.id.testAt_frame) as TestFragment
-
-        Assert.assertTrue(fragment.booleanRequired)
-        Assert.assertTrue(fragment.booleanArrayRequired[0] && !fragment.booleanArrayRequired[1])
-        Assert.assertTrue(!(fragment.booleanArrayOptional?.get(0) == true)
-                && fragment.booleanArrayOptional?.get(1) ?: false)
-
-        Assert.assertTrue(fragment.byteRequired == 2.toByte())
-        Assert.assertTrue(fragment.byteArrayRequired[0] == 2.toByte()
-                && fragment.byteArrayRequired[1] == (-2).toByte())
-        Assert.assertTrue(fragment.byteArrayOptional?.get(0) ?: 0.toByte() == (-2).toByte()
-                && fragment.byteArrayOptional?.get(1) ?: 0.toByte() == 2.toByte())
-
-        Assert.assertTrue(fragment.charRequired == 'a')
-        Assert.assertTrue(fragment.charArrayRequired[0] == 'a'
-                && fragment.charArrayRequired[1] == 'b')
-        Assert.assertTrue(fragment.charArrayOptional?.get(0) ?: 0.toByte() == 'b'
-                && fragment.charArrayOptional?.get(1) ?: 0.toByte() == 'a')
-
-        Assert.assertTrue(fragment.shortRequired == 3.toShort())
-        Assert.assertTrue(fragment.shortArrayRequired[0] == 3.toShort()
-                && fragment.shortArrayRequired[1] == (-3).toShort())
-        Assert.assertTrue(fragment.shortArrayOptional?.get(0) ?: 0.toShort() == (-3).toShort()
-                && fragment.shortArrayOptional?.get(1) ?: 0.toShort() == 3.toShort())
-
-        Assert.assertTrue(fragment.floatRequired == 4f)
-        Assert.assertTrue(fragment.floatArrayRequired[0] == 4f
-                && fragment.floatArrayRequired[1] == (-4f))
-        Assert.assertTrue(fragment.floatArrayOptional?.get(0) ?: 0f == (-4f)
-                && fragment.floatArrayOptional?.get(1) ?: 0f == 4f)
-
-        Assert.assertTrue(fragment.longRequired == 1000L)
-        Assert.assertTrue(fragment.longArrayRequired[0] == 1000L
-                && fragment.longArrayRequired[1] == (-1000L))
-        Assert.assertTrue(fragment.longArrayOptional?.get(0) ?: 0L == (-1000L)
-                && fragment.longArrayOptional?.get(1) ?: 0L == 1000L)
-
-        Assert.assertTrue(fragment.intRequired == 500)
-        Assert.assertTrue(fragment.intArrayRequired[0] == 500
-                && fragment.intArrayRequired[1] == (-500))
-        Assert.assertTrue(fragment.intArrayOptional?.get(0) ?: 0 == (-500)
-                && fragment.intArrayOptional?.get(1) ?: 0 == 500)
-        Assert.assertTrue(fragment.intArrayListRequired[0] == 500
-                && fragment.intArrayListRequired[1] == (-500))
-        Assert.assertTrue(fragment.intArrayListOptional?.get(0) ?: 0 == (-500)
-                && fragment.intArrayListOptional?.get(1) ?: 0 == 500)
-
-        Assert.assertTrue(fragment.doubleRequired == 6.toDouble())
-        Assert.assertTrue(fragment.doubleArrayRequired[0] == 6.toDouble()
-                && fragment.doubleArrayRequired[1] == (-6).toDouble())
-        Assert.assertTrue(fragment.doubleArrayOptional?.get(0) ?: 0.toDouble() == (-6).toDouble()
-                && fragment.doubleArrayOptional?.get(1) ?: 0.toDouble() == 6.toDouble())
-
-        Assert.assertTrue(fragment.stringRequired == "stringRequired")
-        Assert.assertTrue(fragment.stringOptional == "stringOptional")
-        Assert.assertTrue(fragment.stringArrayRequired[0] == "stringRequired"
-                && fragment.stringArrayRequired[1] == "stringOptional")
-        Assert.assertTrue(fragment.stringArrayOptional?.get(0) == "stringOptional"
-                && fragment.stringArrayOptional?.get(1) == "stringRequired")
-        Assert.assertTrue(fragment.stringArrayListRequired[0] == "stringRequired"
-                && fragment.stringArrayListRequired[1] == "stringOptional")
-        Assert.assertTrue(fragment.stringArrayListOptional?.get(0) == "stringOptional"
-                && fragment.stringArrayListOptional?.get(1) == "stringRequired")
-
-        Assert.assertTrue(fragment.charSequenceRequired == "stringRequired")
-        Assert.assertTrue(fragment.charSequenceOptional == "stringOptional")
-        Assert.assertTrue(fragment.charSequenceArrayRequired[0] == "stringRequired"
-                && fragment.stringArrayRequired[1] == "stringOptional")
-        Assert.assertTrue(fragment.charSequenceArrayOptional?.get(0) == "stringOptional"
-                && fragment.stringArrayOptional?.get(1) == "stringRequired")
-
-        Assert.assertTrue(fragment.parcelableRequired == TestParcelable("parcelableRequired"))
-        Assert.assertTrue(fragment.parcelableOptional == TestParcelable("parcelableOptional"))
-        Assert.assertTrue(fragment.parcelableArrayRequired[0] == TestParcelable("parcelableRequired")
-                && fragment.parcelableArrayRequired[1] == TestParcelable("parcelableOptional"))
-        Assert.assertTrue(fragment.parcelableArrayOptional?.get(0) == TestParcelable("parcelableOptional")
-                && fragment.parcelableArrayOptional?.get(1) == TestParcelable("parcelableRequired"))
-        Assert.assertTrue(fragment.parcelableArrayListRequired[0] == TestParcelable("parcelableRequired")
-                && fragment.parcelableArrayListRequired[1] == TestParcelable("parcelableOptional"))
-        Assert.assertTrue(fragment.parcelableArrayListOptional?.get(0) == TestParcelable("parcelableOptional")
-                && fragment.parcelableArrayListOptional?.get(1) == TestParcelable("parcelableRequired"))
-
-        Assert.assertTrue(fragment.serializableRequired == TestSerializable("serializableRequired"))
-        Assert.assertTrue(fragment.serializableOptional == TestSerializable("serializableOptional"))
-
-        Assert.assertTrue(fragment.bundleRequired.getString("bundle") == "bundleRequired")
-        Assert.assertTrue(fragment.bundleOptional?.getString("bundle") == "bundleOptional")
+        fragment.assert()
     }
 
     @Test
     fun testBindResActivity() {
         val activity = resTestRule.activity
-
-        Assert.assertTrue(activity.stringRequired == "stringRequired")
-        Assert.assertTrue(activity.stringOptional == "stringOptional")
-        Assert.assertTrue(activity.stringArrayRequired[0] == "stringRequired"
-                && activity.stringArrayRequired[1] == "stringOptional")
-        Assert.assertTrue(activity.stringArrayOptional?.get(0) == "stringOptional"
-                && activity.stringArrayOptional?.get(1) == "stringRequired")
-        Assert.assertTrue(activity.stringArrayListRequired[0] == "stringRequired"
-                && activity.stringArrayListRequired[1] == "stringOptional")
-        Assert.assertTrue(activity.stringArrayListOptional?.get(0) == "stringOptional"
-                && activity.stringArrayListOptional?.get(1) == "stringRequired")
+        activity.assert()
     }
 
     @Test
     fun testBindResFragment() {
         val fragment = resTestRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.test.R.id.testAt_frame) as ResTestFragment
-
-        Assert.assertTrue(fragment.stringRequired == "stringRequired")
-        Assert.assertTrue(fragment.stringOptional == "stringOptional")
-        Assert.assertTrue(fragment.stringArrayRequired[0] == "stringRequired"
-                && fragment.stringArrayRequired[1] == "stringOptional")
-        Assert.assertTrue(fragment.stringArrayOptional?.get(0) == "stringOptional"
-                && fragment.stringArrayOptional?.get(1) == "stringRequired")
-        Assert.assertTrue(fragment.stringArrayListRequired[0] == "stringRequired"
-                && fragment.stringArrayListRequired[1] == "stringOptional")
-        Assert.assertTrue(fragment.stringArrayListOptional?.get(0) == "stringOptional"
-                && fragment.stringArrayListOptional?.get(1) == "stringRequired")
+        fragment.assert()
     }
 
     class ResTestActivity : FragmentActivity() {
@@ -262,12 +72,25 @@ class ArgsBinderTest {
             }
         }
 
-        val stringRequired by bindStringArg(me.panpf.androidxkt.test.R.string.string_required)
-        val stringOptional by bindStringArgOrNull(me.panpf.androidxkt.test.R.string.string_optional)
-        val stringArrayRequired by bindStringArrayArg(me.panpf.androidxkt.test.R.string.string_array_required)
-        val stringArrayOptional by bindStringArrayArgOrNull(me.panpf.androidxkt.test.R.string.string_array_optional)
-        val stringArrayListRequired by bindStringArrayListArg(me.panpf.androidxkt.test.R.string.string_array_list_required)
-        val stringArrayListOptional by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.string_array_list_optional)
+        private val stringRequired by bindStringArg(me.panpf.androidxkt.test.R.string.string_required)
+        private val stringOptional by bindStringArgOrNull(me.panpf.androidxkt.test.R.string.string_optional)
+        private val stringArrayRequired by bindStringArrayArg(me.panpf.androidxkt.test.R.string.string_array_required)
+        private val stringArrayOptional by bindStringArrayArgOrNull(me.panpf.androidxkt.test.R.string.string_array_optional)
+        private val stringArrayListRequired by bindStringArrayListArg(me.panpf.androidxkt.test.R.string.string_array_list_required)
+        private val stringArrayListOptional by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.string_array_list_optional)
+
+        fun assert(){
+            Assert.assertTrue(stringRequired == "stringRequired")
+            Assert.assertTrue(stringOptional == "stringOptional")
+            Assert.assertTrue(stringArrayRequired[0] == "stringRequired"
+                    && stringArrayRequired[1] == "stringOptional")
+            Assert.assertTrue(stringArrayOptional?.get(0) == "stringOptional"
+                    && stringArrayOptional?.get(1) == "stringRequired")
+            Assert.assertTrue(stringArrayListRequired[0] == "stringRequired"
+                    && stringArrayListRequired[1] == "stringOptional")
+            Assert.assertTrue(stringArrayListOptional?.get(0) == "stringOptional"
+                    && stringArrayListOptional?.get(1) == "stringRequired")
+        }
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -282,12 +105,25 @@ class ArgsBinderTest {
 
     class ResTestFragment : Fragment() {
 
-        val stringRequired by bindStringArg(me.panpf.androidxkt.test.R.string.string_required)
-        val stringOptional by bindStringArgOrNull(me.panpf.androidxkt.test.R.string.string_optional)
-        val stringArrayRequired by bindStringArrayArg(me.panpf.androidxkt.test.R.string.string_array_required)
-        val stringArrayOptional by bindStringArrayArgOrNull(me.panpf.androidxkt.test.R.string.string_array_optional)
-        val stringArrayListRequired by bindStringArrayListArg(me.panpf.androidxkt.test.R.string.string_array_list_required)
-        val stringArrayListOptional by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.string_array_list_optional)
+        private val stringRequired by bindStringArg(me.panpf.androidxkt.test.R.string.string_required)
+        private val stringOptional by bindStringArgOrNull(me.panpf.androidxkt.test.R.string.string_optional)
+        private val stringArrayRequired by bindStringArrayArg(me.panpf.androidxkt.test.R.string.string_array_required)
+        private val stringArrayOptional by bindStringArrayArgOrNull(me.panpf.androidxkt.test.R.string.string_array_optional)
+        private val stringArrayListRequired by bindStringArrayListArg(me.panpf.androidxkt.test.R.string.string_array_list_required)
+        private val stringArrayListOptional by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.string_array_list_optional)
+
+        fun assert(){
+            Assert.assertTrue(stringRequired == "stringRequired")
+            Assert.assertTrue(stringOptional == "stringOptional")
+            Assert.assertTrue(stringArrayRequired[0] == "stringRequired"
+                    && stringArrayRequired[1] == "stringOptional")
+            Assert.assertTrue(stringArrayOptional?.get(0) == "stringOptional"
+                    && stringArrayOptional?.get(1) == "stringRequired")
+            Assert.assertTrue(stringArrayListRequired[0] == "stringRequired"
+                    && stringArrayListRequired[1] == "stringOptional")
+            Assert.assertTrue(stringArrayListOptional?.get(0) == "stringOptional"
+                    && stringArrayListOptional?.get(1) == "stringRequired")
+        }
 
         companion object {
             fun createArguments(context: Context): Bundle = Bundle().apply {
@@ -372,6 +208,94 @@ class ArgsBinderTest {
             supportFragmentManager.beginTransaction().replace(me.panpf.androidxkt.test.R.id.testAt_frame, fragment).commit()
         }
 
+        fun assert() {
+            Assert.assertTrue(booleanRequired)
+            Assert.assertTrue(booleanArrayRequired[0] && !booleanArrayRequired[1])
+            Assert.assertTrue(booleanArrayOptional?.get(0) != true
+                    && booleanArrayOptional?.get(1) ?: false)
+
+            Assert.assertTrue(byteRequired == 2.toByte())
+            Assert.assertTrue(byteArrayRequired[0] == 2.toByte()
+                    && byteArrayRequired[1] == (-2).toByte())
+            Assert.assertTrue(byteArrayOptional?.get(0) ?: 0.toByte() == (-2).toByte()
+                    && byteArrayOptional?.get(1) ?: 0.toByte() == 2.toByte())
+
+            Assert.assertTrue(charRequired == 'a')
+            Assert.assertTrue(charArrayRequired[0] == 'a'
+                    && charArrayRequired[1] == 'b')
+            Assert.assertTrue(charArrayOptional?.get(0) ?: 0.toByte() == 'b'
+                    && charArrayOptional?.get(1) ?: 0.toByte() == 'a')
+
+            Assert.assertTrue(shortRequired == 3.toShort())
+            Assert.assertTrue(shortArrayRequired[0] == 3.toShort()
+                    && shortArrayRequired[1] == (-3).toShort())
+            Assert.assertTrue(shortArrayOptional?.get(0) ?: 0.toShort() == (-3).toShort()
+                    && shortArrayOptional?.get(1) ?: 0.toShort() == 3.toShort())
+
+            Assert.assertTrue(floatRequired == 4f)
+            Assert.assertTrue(floatArrayRequired[0] == 4f
+                    && floatArrayRequired[1] == (-4f))
+            Assert.assertTrue(floatArrayOptional?.get(0) ?: 0f == (-4f)
+                    && floatArrayOptional?.get(1) ?: 0f == 4f)
+
+            Assert.assertTrue(longRequired == 1000L)
+            Assert.assertTrue(longArrayRequired[0] == 1000L
+                    && longArrayRequired[1] == (-1000L))
+            Assert.assertTrue(longArrayOptional?.get(0) ?: 0L == (-1000L)
+                    && longArrayOptional?.get(1) ?: 0L == 1000L)
+
+            Assert.assertTrue(intRequired == 500)
+            Assert.assertTrue(intArrayRequired[0] == 500
+                    && intArrayRequired[1] == (-500))
+            Assert.assertTrue(intArrayOptional?.get(0) ?: 0 == (-500)
+                    && intArrayOptional?.get(1) ?: 0 == 500)
+            Assert.assertTrue(intArrayListRequired[0] == 500
+                    && intArrayListRequired[1] == (-500))
+            Assert.assertTrue(intArrayListOptional?.get(0) ?: 0 == (-500)
+                    && intArrayListOptional?.get(1) ?: 0 == 500)
+
+            Assert.assertTrue(doubleRequired == 6.toDouble())
+            Assert.assertTrue(doubleArrayRequired[0] == 6.toDouble()
+                    && doubleArrayRequired[1] == (-6).toDouble())
+            Assert.assertTrue(doubleArrayOptional?.get(0) ?: 0.toDouble() == (-6).toDouble()
+                    && doubleArrayOptional?.get(1) ?: 0.toDouble() == 6.toDouble())
+
+            Assert.assertTrue(stringRequired == "stringRequired")
+            Assert.assertTrue(stringOptional == "stringOptional")
+            Assert.assertTrue(stringArrayRequired[0] == "stringRequired"
+                    && stringArrayRequired[1] == "stringOptional")
+            Assert.assertTrue(stringArrayOptional?.get(0) == "stringOptional"
+                    && stringArrayOptional?.get(1) == "stringRequired")
+            Assert.assertTrue(stringArrayListRequired[0] == "stringRequired"
+                    && stringArrayListRequired[1] == "stringOptional")
+            Assert.assertTrue(stringArrayListOptional?.get(0) == "stringOptional"
+                    && stringArrayListOptional?.get(1) == "stringRequired")
+
+            Assert.assertTrue(charSequenceRequired == "stringRequired")
+            Assert.assertTrue(charSequenceOptional == "stringOptional")
+            Assert.assertTrue(charSequenceArrayRequired[0] == "stringRequired"
+                    && stringArrayRequired[1] == "stringOptional")
+            Assert.assertTrue(charSequenceArrayOptional?.get(0) == "stringOptional"
+                    && stringArrayOptional?.get(1) == "stringRequired")
+
+            Assert.assertTrue(parcelableRequired == TestParcelable("parcelableRequired"))
+            Assert.assertTrue(parcelableOptional == TestParcelable("parcelableOptional"))
+            Assert.assertTrue(parcelableArrayRequired[0] == TestParcelable("parcelableRequired")
+                    && parcelableArrayRequired[1] == TestParcelable("parcelableOptional"))
+            Assert.assertTrue(parcelableArrayOptional?.get(0) == TestParcelable("parcelableOptional")
+                    && parcelableArrayOptional?.get(1) == TestParcelable("parcelableRequired"))
+            Assert.assertTrue(parcelableArrayListRequired[0] == TestParcelable("parcelableRequired")
+                    && parcelableArrayListRequired[1] == TestParcelable("parcelableOptional"))
+            Assert.assertTrue(parcelableArrayListOptional?.get(0) == TestParcelable("parcelableOptional")
+                    && parcelableArrayListOptional?.get(1) == TestParcelable("parcelableRequired"))
+
+            Assert.assertTrue(serializableRequired == TestSerializable("serializableRequired"))
+            Assert.assertTrue(serializableOptional == TestSerializable("serializableOptional"))
+
+            Assert.assertTrue(bundleRequired.getString("bundle") == "bundleRequired")
+            Assert.assertTrue(bundleOptional?.getString("bundle") == "bundleOptional")
+        }
+
         companion object {
             fun createIntent(context: Context): Intent {
                 return Intent(context, TestActivity::class.java).apply {
@@ -441,64 +365,152 @@ class ArgsBinderTest {
 
     class TestFragment : Fragment() {
 
-        val byteRequired by bindByteArgOr("byteRequired")
-        val byteArrayRequired by bindByteArrayArg("byteArrayRequired")
-        val byteArrayOptional by bindByteArrayArgOrNull("byteArrayOptional")
+        private val byteRequired by bindByteArgOr("byteRequired")
+        private val byteArrayRequired by bindByteArrayArg("byteArrayRequired")
+        private val byteArrayOptional by bindByteArrayArgOrNull("byteArrayOptional")
 
-        val shortRequired by bindShortArgOr("shortRequired")
-        val shortArrayRequired by bindShortArrayArg("shortArrayRequired")
-        val shortArrayOptional by bindShortArrayArgOrNull("shortArrayOptional")
+        private val shortRequired by bindShortArgOr("shortRequired")
+        private val shortArrayRequired by bindShortArrayArg("shortArrayRequired")
+        private val shortArrayOptional by bindShortArrayArgOrNull("shortArrayOptional")
 
-        val intRequired by bindIntArgOr("intRequired")
-        val intArrayRequired by bindIntArrayArg("intArrayRequired")
-        val intArrayOptional by bindIntArrayArgOrNull("intArrayOptional")
-        val intArrayListRequired by bindIntArrayListArg("intArrayListRequired")
-        val intArrayListOptional by bindIntArrayListArgOrNull("intArrayListOptional")
+        private val intRequired by bindIntArgOr("intRequired")
+        private val intArrayRequired by bindIntArrayArg("intArrayRequired")
+        private val intArrayOptional by bindIntArrayArgOrNull("intArrayOptional")
+        private val intArrayListRequired by bindIntArrayListArg("intArrayListRequired")
+        private val intArrayListOptional by bindIntArrayListArgOrNull("intArrayListOptional")
 
-        val longRequired by bindLongArgOr("longRequired")
-        val longArrayRequired by bindLongArrayArg("longArrayRequired")
-        val longArrayOptional by bindLongArrayArgOrNull("longArrayOptional")
+        private val longRequired by bindLongArgOr("longRequired")
+        private val longArrayRequired by bindLongArrayArg("longArrayRequired")
+        private val longArrayOptional by bindLongArrayArgOrNull("longArrayOptional")
 
-        val floatRequired by bindFloatArgOr("floatRequired")
-        val floatArrayRequired by bindFloatArrayArg("floatArrayRequired")
-        val floatArrayOptional by bindFloatArrayArgOrNull("floatArrayOptional")
+        private val floatRequired by bindFloatArgOr("floatRequired")
+        private val floatArrayRequired by bindFloatArrayArg("floatArrayRequired")
+        private val floatArrayOptional by bindFloatArrayArgOrNull("floatArrayOptional")
 
-        val doubleRequired by bindDoubleArgOr("doubleRequired")
-        val doubleArrayRequired by bindDoubleArrayArg("doubleArrayRequired")
-        val doubleArrayOptional by bindDoubleArrayArgOrNull("doubleArrayOptional")
+        private val doubleRequired by bindDoubleArgOr("doubleRequired")
+        private val doubleArrayRequired by bindDoubleArrayArg("doubleArrayRequired")
+        private val doubleArrayOptional by bindDoubleArrayArgOrNull("doubleArrayOptional")
 
-        val booleanRequired by bindBooleanArgOr("booleanRequired")
-        val booleanArrayRequired by bindBooleanArrayArg("booleanArrayRequired")
-        val booleanArrayOptional by bindBooleanArrayArgOrNull("booleanArrayOptional")
+        private val booleanRequired by bindBooleanArgOr("booleanRequired")
+        private val booleanArrayRequired by bindBooleanArrayArg("booleanArrayRequired")
+        private val booleanArrayOptional by bindBooleanArrayArgOrNull("booleanArrayOptional")
 
-        val charRequired by bindCharArgOr("charRequired")
-        val charArrayRequired by bindCharArrayArg("charArrayRequired")
-        val charArrayOptional by bindCharArrayArgOrNull("charArrayOptional")
+        private val charRequired by bindCharArgOr("charRequired")
+        private val charArrayRequired by bindCharArrayArg("charArrayRequired")
+        private val charArrayOptional by bindCharArrayArgOrNull("charArrayOptional")
 
-        val charSequenceRequired by bindCharSequenceArg("charSequenceRequired")
-        val charSequenceOptional by bindCharSequenceArgOrNull("charSequenceOptional")
-        val charSequenceArrayRequired by bindCharSequenceArrayArg("charSequenceArrayRequired")
-        val charSequenceArrayOptional by bindCharSequenceArrayArgOrNull("charSequenceArrayOptional")
+        private val charSequenceRequired by bindCharSequenceArg("charSequenceRequired")
+        private val charSequenceOptional by bindCharSequenceArgOrNull("charSequenceOptional")
+        private val charSequenceArrayRequired by bindCharSequenceArrayArg("charSequenceArrayRequired")
+        private val charSequenceArrayOptional by bindCharSequenceArrayArgOrNull("charSequenceArrayOptional")
 
-        val stringRequired by bindStringArg("stringRequired")
-        val stringOptional by bindStringArgOrNull("stringOptional")
-        val stringArrayRequired by bindStringArrayArg("stringArrayRequired")
-        val stringArrayOptional by bindStringArrayArgOrNull("stringArrayOptional")
-        val stringArrayListRequired by bindStringArrayListArg("stringArrayListRequired")
-        val stringArrayListOptional by bindStringArrayListArgOrNull("stringArrayListOptional")
+        private val stringRequired by bindStringArg("stringRequired")
+        private val stringOptional by bindStringArgOrNull("stringOptional")
+        private val stringArrayRequired by bindStringArrayArg("stringArrayRequired")
+        private val stringArrayOptional by bindStringArrayArgOrNull("stringArrayOptional")
+        private val stringArrayListRequired by bindStringArrayListArg("stringArrayListRequired")
+        private val stringArrayListOptional by bindStringArrayListArgOrNull("stringArrayListOptional")
 
-        val parcelableRequired by bindParcelableArg<TestParcelable>("parcelableRequired")
-        val parcelableOptional by bindParcelableArgOrNull<TestParcelable>("parcelableOptional")
-        val parcelableArrayRequired by bindParcelableArrayArg<Parcelable>("parcelableArrayRequired")
-        val parcelableArrayOptional by bindParcelableArrayArgOrNull<Parcelable>("parcelableArrayOptional")
-        val parcelableArrayListRequired by bindParcelableArrayListArg<TestParcelable>("parcelableArrayListRequired")
-        val parcelableArrayListOptional by bindParcelableArrayListArgOrNull<TestParcelable>("parcelableArrayListOptional")
+        private val parcelableRequired by bindParcelableArg<TestParcelable>("parcelableRequired")
+        private val parcelableOptional by bindParcelableArgOrNull<TestParcelable>("parcelableOptional")
+        private val parcelableArrayRequired by bindParcelableArrayArg<Parcelable>("parcelableArrayRequired")
+        private val parcelableArrayOptional by bindParcelableArrayArgOrNull<Parcelable>("parcelableArrayOptional")
+        private val parcelableArrayListRequired by bindParcelableArrayListArg<TestParcelable>("parcelableArrayListRequired")
+        private val parcelableArrayListOptional by bindParcelableArrayListArgOrNull<TestParcelable>("parcelableArrayListOptional")
 
-        val serializableRequired by bindSerializableArg<TestSerializable>("serializableRequired")
-        val serializableOptional by bindSerializableArgOrNull<TestSerializable>("serializableOptional")
+        private val serializableRequired by bindSerializableArg<TestSerializable>("serializableRequired")
+        private val serializableOptional by bindSerializableArgOrNull<TestSerializable>("serializableOptional")
 
-        val bundleRequired by bindBundleArg("bundleRequired")
-        val bundleOptional by bindBundleArgOrNull("bundleOptional")
+        private val bundleRequired by bindBundleArg("bundleRequired")
+        private val bundleOptional by bindBundleArgOrNull("bundleOptional")
+
+        fun assert(){
+            Assert.assertTrue(booleanRequired)
+            Assert.assertTrue(booleanArrayRequired[0] && !booleanArrayRequired[1])
+            Assert.assertTrue(booleanArrayOptional?.get(0) != true
+                    && booleanArrayOptional?.get(1) ?: false)
+
+            Assert.assertTrue(byteRequired == 2.toByte())
+            Assert.assertTrue(byteArrayRequired[0] == 2.toByte()
+                    && byteArrayRequired[1] == (-2).toByte())
+            Assert.assertTrue(byteArrayOptional?.get(0) ?: 0.toByte() == (-2).toByte()
+                    && byteArrayOptional?.get(1) ?: 0.toByte() == 2.toByte())
+
+            Assert.assertTrue(charRequired == 'a')
+            Assert.assertTrue(charArrayRequired[0] == 'a'
+                    && charArrayRequired[1] == 'b')
+            Assert.assertTrue(charArrayOptional?.get(0) ?: 0.toByte() == 'b'
+                    && charArrayOptional?.get(1) ?: 0.toByte() == 'a')
+
+            Assert.assertTrue(shortRequired == 3.toShort())
+            Assert.assertTrue(shortArrayRequired[0] == 3.toShort()
+                    && shortArrayRequired[1] == (-3).toShort())
+            Assert.assertTrue(shortArrayOptional?.get(0) ?: 0.toShort() == (-3).toShort()
+                    && shortArrayOptional?.get(1) ?: 0.toShort() == 3.toShort())
+
+            Assert.assertTrue(floatRequired == 4f)
+            Assert.assertTrue(floatArrayRequired[0] == 4f
+                    && floatArrayRequired[1] == (-4f))
+            Assert.assertTrue(floatArrayOptional?.get(0) ?: 0f == (-4f)
+                    && floatArrayOptional?.get(1) ?: 0f == 4f)
+
+            Assert.assertTrue(longRequired == 1000L)
+            Assert.assertTrue(longArrayRequired[0] == 1000L
+                    && longArrayRequired[1] == (-1000L))
+            Assert.assertTrue(longArrayOptional?.get(0) ?: 0L == (-1000L)
+                    && longArrayOptional?.get(1) ?: 0L == 1000L)
+
+            Assert.assertTrue(intRequired == 500)
+            Assert.assertTrue(intArrayRequired[0] == 500
+                    && intArrayRequired[1] == (-500))
+            Assert.assertTrue(intArrayOptional?.get(0) ?: 0 == (-500)
+                    && intArrayOptional?.get(1) ?: 0 == 500)
+            Assert.assertTrue(intArrayListRequired[0] == 500
+                    && intArrayListRequired[1] == (-500))
+            Assert.assertTrue(intArrayListOptional?.get(0) ?: 0 == (-500)
+                    && intArrayListOptional?.get(1) ?: 0 == 500)
+
+            Assert.assertTrue(doubleRequired == 6.toDouble())
+            Assert.assertTrue(doubleArrayRequired[0] == 6.toDouble()
+                    && doubleArrayRequired[1] == (-6).toDouble())
+            Assert.assertTrue(doubleArrayOptional?.get(0) ?: 0.toDouble() == (-6).toDouble()
+                    && doubleArrayOptional?.get(1) ?: 0.toDouble() == 6.toDouble())
+
+            Assert.assertTrue(stringRequired == "stringRequired")
+            Assert.assertTrue(stringOptional == "stringOptional")
+            Assert.assertTrue(stringArrayRequired[0] == "stringRequired"
+                    && stringArrayRequired[1] == "stringOptional")
+            Assert.assertTrue(stringArrayOptional?.get(0) == "stringOptional"
+                    && stringArrayOptional?.get(1) == "stringRequired")
+            Assert.assertTrue(stringArrayListRequired[0] == "stringRequired"
+                    && stringArrayListRequired[1] == "stringOptional")
+            Assert.assertTrue(stringArrayListOptional?.get(0) == "stringOptional"
+                    && stringArrayListOptional?.get(1) == "stringRequired")
+
+            Assert.assertTrue(charSequenceRequired == "stringRequired")
+            Assert.assertTrue(charSequenceOptional == "stringOptional")
+            Assert.assertTrue(charSequenceArrayRequired[0] == "stringRequired"
+                    && stringArrayRequired[1] == "stringOptional")
+            Assert.assertTrue(charSequenceArrayOptional?.get(0) == "stringOptional"
+                    && stringArrayOptional?.get(1) == "stringRequired")
+
+            Assert.assertTrue(parcelableRequired == TestParcelable("parcelableRequired"))
+            Assert.assertTrue(parcelableOptional == TestParcelable("parcelableOptional"))
+            Assert.assertTrue(parcelableArrayRequired[0] == TestParcelable("parcelableRequired")
+                    && parcelableArrayRequired[1] == TestParcelable("parcelableOptional"))
+            Assert.assertTrue(parcelableArrayOptional?.get(0) == TestParcelable("parcelableOptional")
+                    && parcelableArrayOptional?.get(1) == TestParcelable("parcelableRequired"))
+            Assert.assertTrue(parcelableArrayListRequired[0] == TestParcelable("parcelableRequired")
+                    && parcelableArrayListRequired[1] == TestParcelable("parcelableOptional"))
+            Assert.assertTrue(parcelableArrayListOptional?.get(0) == TestParcelable("parcelableOptional")
+                    && parcelableArrayListOptional?.get(1) == TestParcelable("parcelableRequired"))
+
+            Assert.assertTrue(serializableRequired == TestSerializable("serializableRequired"))
+            Assert.assertTrue(serializableOptional == TestSerializable("serializableOptional"))
+
+            Assert.assertTrue(bundleRequired.getString("bundle") == "bundleRequired")
+            Assert.assertTrue(bundleOptional?.getString("bundle") == "bundleOptional")
+        }
 
         companion object {
             fun createArguments(activity: TestActivity): Bundle = Bundle().apply {
