@@ -48,22 +48,22 @@ inline fun <T> android.app.Fragment.getImplWithParent(clazz: Class<T>): T? = Fra
 /**
  * Instantiate a Fragment and set arguments
  */
-inline fun Class<out android.support.v4.app.Fragment>.instance(arguments: Bundle): android.support.v4.app.Fragment = Fragmentx.instance(this, arguments)
+inline fun Class<out android.support.v4.app.Fragment>.instantiate(arguments: Bundle): android.support.v4.app.Fragment = Fragmentx.instantiate(this, arguments)
 
 /**
  * Instantiate a Fragment and set arguments
  */
-inline fun Class<out android.support.v4.app.Fragment>.instance(): android.support.v4.app.Fragment = Fragmentx.instance(this)
+inline fun Class<out android.support.v4.app.Fragment>.instantiate(): android.support.v4.app.Fragment = Fragmentx.instantiate(this)
 
 /**
  * Instantiate a Fragment and set arguments
  */
-inline fun Class<out android.app.Fragment>.instanceOrigin(arguments: Bundle): android.app.Fragment = Fragmentx.instanceOrigin(this, arguments)
+inline fun Class<out android.app.Fragment>.instantiateOrigin(arguments: Bundle): android.app.Fragment = Fragmentx.instantiateOrigin(this, arguments)
 
 /**
  * Instantiate a Fragment and set arguments
  */
-inline fun Class<out android.app.Fragment>.instanceOrigin(): android.app.Fragment = Fragmentx.instanceOrigin(this)
+inline fun Class<out android.app.Fragment>.instantiateOrigin(): android.app.Fragment = Fragmentx.instantiateOrigin(this)
 
 
 /**

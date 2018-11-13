@@ -108,7 +108,7 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static android.support.v4.app.Fragment instance(@NonNull Class<? extends android.support.v4.app.Fragment> clas, @Nullable Bundle arguments) {
+    public static android.support.v4.app.Fragment instantiate(@NonNull Class<? extends android.support.v4.app.Fragment> clas, @Nullable Bundle arguments) {
         android.support.v4.app.Fragment fragment;
         //noinspection TryWithIdenticalCatches
         try {
@@ -127,14 +127,14 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static android.support.v4.app.Fragment instance(@NonNull Class<? extends android.support.v4.app.Fragment> clas) {
-        return instance(clas, null);
+    public static android.support.v4.app.Fragment instantiate(@NonNull Class<? extends android.support.v4.app.Fragment> clas) {
+        return instantiate(clas, null);
     }
 
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static android.app.Fragment instanceOrigin(@NonNull Class<? extends android.app.Fragment> clas, @Nullable Bundle arguments) {
+    public static android.app.Fragment instantiateOrigin(@NonNull Class<? extends android.app.Fragment> clas, @Nullable Bundle arguments) {
         android.app.Fragment fragment;
         //noinspection TryWithIdenticalCatches
         try {
@@ -153,8 +153,8 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static android.app.Fragment instanceOrigin(@NonNull Class<? extends android.app.Fragment> clas) {
-        return instanceOrigin(clas, null);
+    public static android.app.Fragment instantiateOrigin(@NonNull Class<? extends android.app.Fragment> clas) {
+        return instantiateOrigin(clas, null);
     }
 
 
