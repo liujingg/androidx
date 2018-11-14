@@ -70,7 +70,7 @@ Dependencies:
     * requireContext, requireAppContent, read\*Arg
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
-* Service: [Servicex.java] | [Servicex.kt]
+* Service: [Servicex.java] ([Test][ServicexTest.java]) | [Servicex.kt] ([Test][ServicexTest.kt])
     * isRunning, start, startIfNoRunning, stop, topIfRunning
 
 ### content

@@ -9,6 +9,7 @@
 * :fire: Fragmentx instance rename to instantiate, instanceOrigin rename to instantiateOrigin
 * :white_check_mark: Perfect Fragmentx testing
 * :fire: Serevicex tryStart rename to startIfNoRunning, tryStop rename to stopIfRunning
+* :white_check_mark: Perfect Servicex testing
 
 ## v0.6.0
 
