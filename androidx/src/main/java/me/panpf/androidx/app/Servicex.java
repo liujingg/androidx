@@ -22,7 +22,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -60,9 +59,9 @@ public class Servicex {
     /**
      * Start Service
      */
-    public static void start(@NonNull Context context, @NonNull Class<? extends Service> serviceClass, @Nullable Bundle extras) {
+    public static void start(@NonNull Context context, @NonNull Class<? extends Service> serviceClass, @NonNull Bundle extras) {
         Intent intent = new Intent(context, serviceClass);
-        if (extras != null) intent.putExtras(extras);
+        intent.putExtras(extras);
         context.startService(intent);
     }
 
@@ -70,28 +69,27 @@ public class Servicex {
      * Start Service
      */
     public static void start(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
-        start(context, serviceClass, null);
+        context.startService(new Intent(context, serviceClass));
     }
 
     /**
      * Start the service if the specified Class is not running.
      */
-    public static boolean tryStart(@NonNull Context context, @NonNull Class<? extends Service> serviceClass, @Nullable Bundle extras) {
-        if (!isRunning(context, serviceClass)) {
-            Intent intent = new Intent(context, serviceClass);
-            if (extras != null) intent.putExtras(extras);
-            context.startService(intent);
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean startIfNoRunning(@NonNull Context context, @NonNull Class<? extends Service> serviceClass, @NonNull Bundle extras) {
+        if (isRunning(context, serviceClass)) return false;
+        Intent intent = new Intent(context, serviceClass);
+        intent.putExtras(extras);
+        context.startService(intent);
+        return true;
     }
 
     /**
      * Start the service if the specified Class is not running.
      */
-    public static boolean tryStart(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
-        return tryStart(context, serviceClass, null);
+    public static boolean startIfNoRunning(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
+        if (isRunning(context, serviceClass)) return false;
+        context.startService(new Intent(context, serviceClass));
+        return true;
     }
 
     /**
@@ -104,12 +102,9 @@ public class Servicex {
     /**
      * Stop it if the Service for the specified Class is running
      */
-    public static boolean tryStop(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
-        if (isRunning(context, serviceClass)) {
-            context.stopService(new Intent(context, serviceClass));
-            return true;
-        } else {
-            return false;
-        }
+    public static boolean stopIfRunning(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
+        if (!isRunning(context, serviceClass)) return false;
+        context.stopService(new Intent(context, serviceClass));
+        return true;
     }
 }

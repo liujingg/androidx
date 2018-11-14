@@ -71,7 +71,7 @@ Dependencies:
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
 * Service: [Servicex.java] | [Servicex.kt]
-    * isRunning, start, tryStart, stop, tryStop
+    * isRunning, start, startIfNoRunning, stop, topIfRunning
 
 ### content
 * PackageInfo: [PackageInfox.java] ([Test][PackageInfoxTest.java]) | [PackageInfox.kt] ([Test][PackageInfoxTest.kt])
