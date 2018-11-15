@@ -10,6 +10,7 @@
 * :white_check_mark: Perfect Fragmentx testing
 * :fire: Serevicex tryStart rename to startIfNoRunning, tryStop rename to stopIfRunning
 * :white_check_mark: Perfect Servicex testing
+* :white_check_mark: Perfect Assetx testing
 
 ## v0.6.0
 

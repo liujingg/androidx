@@ -83,7 +83,7 @@ Dependencies:
     * isInstalled, getVersionCode, getVersionName, getPackage, isSystemApp, getAllAppIdAndVersionCodeMap,
     * getAllAppIdAndVersionCodeSet, getAllAppId, getAllApp, getOne, count, getAppPackageFile,
     * getAppSignatureBytes, getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
-* Asset: [Assetx.java] | [Assetx.kt]
+* Asset: [Assetx.java] ([Test][AssetxTest.java]) | [Assetx.kt] ([Test][AssetxTest.kt])
     * openInput, readBytes, readText, readLines, readBitmap
 * Clipboard: [Clipboardx.java] ([Test][ClipboardxTest.java]) | [Clipboardx.kt] ([Test][ClipboardxTest.kt])
     * copy, copyText, copyHtmlText, copyIntent, copyUri, copyRawUri, copyMimeTypeUri, copyContents,
@@ -293,9 +293,9 @@ Please view the [CHANGELOG.md] file
 [PackagexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/pm/PackagexTest.kt
 
 [Assetx.java]: androidx/src/main/java/me/panpf/androidx/content/res/Assetx.java
-[AssetxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/res/AssetxTest.java
+[AssetxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/AssetxTest.java
 [Assetx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/res/Assetx.kt
-[AssetxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/res/AssetxTest.kt
+[AssetxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/AssetxTest.kt
 
 [Contentx.java]: androidx/src/main/java/me/panpf/androidx/content/Contentx.java
 [ContentxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContentxTest.java
