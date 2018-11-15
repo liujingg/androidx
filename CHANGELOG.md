@@ -11,6 +11,7 @@
 * :fire: Serevicex tryStart rename to startIfNoRunning, tryStop rename to stopIfRunning
 * :white_check_mark: Perfect Servicex testing
 * :white_check_mark: Perfect Assetx testing
+* :fire: Remove Assetx
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0
