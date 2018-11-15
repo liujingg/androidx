@@ -12,6 +12,7 @@
 * :white_check_mark: Perfect Servicex testing
 * :white_check_mark: Perfect Assetx testing
 * :fire: Remove Assetx
+* :fire: Remove Contentx
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

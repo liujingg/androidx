@@ -87,8 +87,6 @@ Dependencies:
     * copy, copyText, copyHtmlText, copyIntent, copyUri, copyRawUri, copyMimeTypeUri, copyContents,
     * get, getLabel, getContents, getText, getHtmlText, getIntent, getUri, addPrimaryClipChangedListener,
     * removePrimaryClipChangedListener, clear
-* Content: [Contentx.java] | [Contentx.kt]
-    * openInput, readBytes, readText, readLines, readBitmap
 * Context: [Contextx.java] ([Test][ContextxTest.java]) | [Contextx.kt] ([Test][ContextxTest.kt])
     * systemService, systemServiceOrNull, \*Manager
 * Intent: [Intentx.java] ([Test][IntentxTest.java] | [Intentx.kt] ([Test][IntentxTest.kt])
@@ -289,11 +287,6 @@ Please view the [CHANGELOG.md] file
 [PackagexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/pm/PackagexTest.java
 [Packagex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/pm/Packagex.kt
 [PackagexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/pm/PackagexTest.kt
-
-[Contentx.java]: androidx/src/main/java/me/panpf/androidx/content/Contentx.java
-[ContentxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContentxTest.java
-[Contentx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Contentx.kt
-[ContentxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ContentxTest.kt
 
 [Contextx.java]: androidx/src/main/java/me/panpf/androidx/content/Contextx.java
 [ContextxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContextxTest.java
