@@ -60,7 +60,7 @@ public class LifecycleBroadcastReceiverTest {
         TestFragment fragment = Premisex.requireNotNull(activity.getTestFragment());
 
         activity.sendBroadcast(new Intent(INTENT_ACTION).putExtra("event", "send1"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         Assert.assertEquals("[send1]", activity.createReceiver.getEventArrayString());
         Assert.assertEquals("[send1]", activity.startReceiver.getEventArrayString());
         Assert.assertEquals("[send1]", activity.resumeReceiver.getEventArrayString());
@@ -68,16 +68,16 @@ public class LifecycleBroadcastReceiverTest {
         Assert.assertEquals("[send1]", fragment.createReceiver.getEventArrayString());
 
         activityTestRule.finishActivity();
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         activity.sendBroadcast(new Intent(INTENT_ACTION).putExtra("event", "send2"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
         Assert.assertEquals("[send1]", activity.createReceiver.getEventArrayString());
         Assert.assertEquals("[send1]", activity.startReceiver.getEventArrayString());
         Assert.assertEquals("[send1]", activity.resumeReceiver.getEventArrayString());
         Assert.assertEquals("[send1]", fragment.createReceiver.getEventArrayString());
 
         activity.sendBroadcast(new Intent(INTENT_ACTION).putExtra("event", "throwCrash"));
-        Thread.sleep(2000);
+        Thread.sleep(1000);
     }
 
     public static class TestFragmentActivity extends FragmentActivity {
