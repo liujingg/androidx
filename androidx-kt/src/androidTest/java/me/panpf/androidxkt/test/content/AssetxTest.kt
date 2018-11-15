@@ -23,8 +23,8 @@ import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import me.panpf.androidx.graphics.Bitmapx
 import me.panpf.androidxkt.content.res.*
-import me.panpf.javax.util.Collectionx
-import me.panpf.javaxkt.io.safeClose
+import me.panpf.javax.collections.Collectionx
+import me.panpf.javaxkt.io.closeQuietly
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -47,7 +47,7 @@ class AssetxTest {
             e.printStackTrace()
             Assert.fail()
         } finally {
-            inputStream.safeClose()
+            inputStream.closeQuietly()
         }
 
         try {
@@ -116,7 +116,6 @@ class AssetxTest {
     }
 
     companion object {
-
-        private val TEST_TXT_CONTENT = "1\n2\n3\n4\n5\n6\n7\n8\n9"
+        private const val TEST_TXT_CONTENT = "1\n2\n3\n4\n5\n6\n7\n8\n9"
     }
 }

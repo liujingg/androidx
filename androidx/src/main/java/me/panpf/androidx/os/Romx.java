@@ -20,7 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.util.Arrayx;
+import me.panpf.javax.collections.Arrayx;
 
 @SuppressWarnings("WeakerAccess")
 public class Romx {

@@ -32,8 +32,8 @@ import me.panpf.androidxkt.os.storage.getAppExternalFilesDir
 import me.panpf.androidxkt.test.BuildConfig
 import me.panpf.javax.io.UnableCreateDirException
 import me.panpf.javax.io.UnableCreateFileException
+import me.panpf.javaxkt.io.closeQuietly
 import me.panpf.javaxkt.io.createNewFileOrThrow
-import me.panpf.javaxkt.io.safeClose
 import me.panpf.javaxkt.util.requireNotNull
 import org.junit.Assert
 import org.junit.Test
@@ -153,10 +153,10 @@ class IntentxTest {
         //        try {
         //            InputStream inputStream = context.getResources().openRawResource(me.panpf.androidx.test.R.drawable.rect);
         //            try {
-        //                byte[] bytes = IOStreamx.readBytes(inputStream);
+        //                byte[] bytes = Streamx.readBytes(inputStream);
         //                file.writeBytes(, bytes);
         //            } finally {
-        //                IOStreamx.safeClose(inputStream);
+        //                Streamx.closeQuietly(inputStream);
         //            }
 
         val scanFileIntent1 = context.getShareFileUri(file).createScanFileBroadcastIntent()
@@ -354,7 +354,7 @@ class IntentxTest {
                 val bytes = inputStream.readBytes()
                 sourceFile.writeBytes(bytes)
             } finally {
-                inputStream.safeClose()
+                inputStream.closeQuietly()
             }
 
             val sourceFileUri = context.getShareFileUri(sourceFile)
@@ -473,7 +473,7 @@ class IntentxTest {
                 val bytes = inputStream.readBytes()
                 imageFile.writeBytes(bytes)
             } finally {
-                inputStream.safeClose()
+                inputStream.closeQuietly()
             }
 
             val intent1 = context.getShareFileUri(imageFile).createSendImageFileIntent("bmp")

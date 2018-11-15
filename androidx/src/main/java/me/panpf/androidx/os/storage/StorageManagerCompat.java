@@ -33,8 +33,8 @@ import java.util.List;
 
 import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Classx;
-import me.panpf.javax.util.Arrayx;
-import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.collections.Arrayx;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Transformer;
 
 @SuppressWarnings({"WeakerAccess"})

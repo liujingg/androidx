@@ -44,11 +44,11 @@ import me.panpf.androidx.content.pm.Packagex;
 import me.panpf.androidx.os.storage.Storagex;
 import me.panpf.androidx.test.BuildConfig;
 import me.panpf.javax.io.Filex;
-import me.panpf.javax.io.IOStreamx;
+import me.panpf.javax.io.Streamx;
 import me.panpf.javax.io.UnableCreateDirException;
 import me.panpf.javax.io.UnableCreateFileException;
 import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Premisex;
 
@@ -162,10 +162,10 @@ public class IntentxTest {
 //        try {
 //            InputStream inputStream = context.getResources().openRawResource(me.panpf.androidx.test.R.drawable.rect);
 //            try {
-//                byte[] bytes = IOStreamx.readBytes(inputStream);
+//                byte[] bytes = Streamx.readBytes(inputStream);
 //                Filex.writeBytes(file, bytes);
 //            } finally {
-//                IOStreamx.safeClose(inputStream);
+//                Streamx.closeQuietly(inputStream);
 //            }
 
         Intent scanFileIntent1 = Intentx.createScanFileBroadcastIntent(Intentx.getShareFileUri(context, file));
@@ -373,10 +373,10 @@ public class IntentxTest {
 
             InputStream inputStream = context.getResources().openRawResource(me.panpf.androidx.test.R.drawable.rect);
             try {
-                byte[] bytes = IOStreamx.readBytes(inputStream);
+                byte[] bytes = Streamx.readBytes(inputStream);
                 Filex.writeBytes(sourceFile, bytes);
             } finally {
-                IOStreamx.safeClose(inputStream);
+                Streamx.closeQuietly(inputStream);
             }
 
             Uri sourceFileUri = Intentx.getShareFileUri(context, sourceFile);
@@ -490,10 +490,10 @@ public class IntentxTest {
             Filex.createNewFileOrThrow(imageFile);
             InputStream inputStream = context.getResources().openRawResource(me.panpf.androidx.test.R.drawable.rect);
             try {
-                byte[] bytes = IOStreamx.readBytes(inputStream);
+                byte[] bytes = Streamx.readBytes(inputStream);
                 Filex.writeBytes(imageFile, bytes);
             } finally {
-                IOStreamx.safeClose(inputStream);
+                Streamx.closeQuietly(inputStream);
             }
 
             Intent intent1 = Intentx.createSendImageFileIntent(Intentx.getShareFileUri(context, imageFile), "bmp");

@@ -42,7 +42,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import me.panpf.javax.io.Filex;
-import me.panpf.javax.io.IOStreamx;
+import me.panpf.javax.io.Streamx;
 
 @SuppressWarnings("WeakerAccess")
 public class Bitmapx {
@@ -152,7 +152,7 @@ public class Bitmapx {
             bm.compress(format, quality, bos);
         } finally {
             //noinspection ResultOfMethodCallIgnored
-            IOStreamx.safeClose(bos);
+            Streamx.closeQuietly(bos);
         }
     }
 

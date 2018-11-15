@@ -12,6 +12,9 @@
 * :white_check_mark: Perfect Servicex testing
 * :white_check_mark: Perfect Assetx testing
 
+Upgrade
+* :arrow_up: Upgrade Javax 0.9.0
+
 ## v0.6.0
 
 Fix bug:

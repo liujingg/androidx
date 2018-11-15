@@ -34,8 +34,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 import me.panpf.androidx.os.BundleBuilder;
-import me.panpf.javax.util.Arrayx;
-import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.collections.Arrayx;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Premisex;
 
 @SuppressWarnings("UnnecessaryBoxing")

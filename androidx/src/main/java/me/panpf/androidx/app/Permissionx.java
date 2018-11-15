@@ -21,8 +21,8 @@ import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 
-import me.panpf.javax.util.Arrayx;
-import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.collections.Arrayx;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Predicate;
 
 /**

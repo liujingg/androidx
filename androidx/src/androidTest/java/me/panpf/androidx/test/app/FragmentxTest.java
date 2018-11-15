@@ -144,6 +144,7 @@ public class FragmentxTest {
         TestFindUserVisibleChildActivity activity = findUserVisibleChildActivityRule.getActivity();
         // 定义多少个 ActivityTestRule 测试方法执行的时候就会启动多少个 ActivityTestRule 为了让 findUserVisibleChildActivityRule 处于 resumed 状态
         activityTestRule.finishActivity();
+        // 此测试要求手机处于屏幕解锁状态
 
         android.support.v4.app.Fragment fragmentFromActivity = Premisex.requireNotNull(Fragmentx.findUserVisibleChildFragment(activity));
         Assert.assertEquals(TestFindUserVisibleChildFragment.class.getName(), fragmentFromActivity.getClass().getName());
@@ -161,6 +162,7 @@ public class FragmentxTest {
         TestFindUserVisibleChildActivity activity = findUserVisibleChildActivityRule.getActivity();
         // 定义多少个 ActivityTestRule 测试方法执行的时候就会启动多少个 ActivityTestRule 为了让 findUserVisibleChildActivityRule 处于 resumed 状态
         activityTestRule.finishActivity();
+        // 此测试要求手机处于屏幕解锁状态
 
         android.support.v4.app.Fragment fragmentFromActivity = Premisex.requireNotNull(Fragmentx.findFragmentByViewPagerCurrentItem(activity, 2));
         Assert.assertEquals(TestFindUserVisibleChildFragment.class.getName(), fragmentFromActivity.getClass().getName());

@@ -120,6 +120,7 @@ class FragmentxTest {
         val activity = findUserVisibleChildActivityRule.activity
         // 定义多少个 ActivityTestRule 测试方法执行的时候就会启动多少个 ActivityTestRule 为了让 findUserVisibleChildActivityRule 处于 resumed 状态
         activityTestRule.finishActivity()
+        // 此测试要求手机处于屏幕解锁状态
 
         val fragmentFromActivity = activity.findUserVisibleChildFragment().requireNotNull()
         Assert.assertEquals(TestFindUserVisibleChildFragment::class.java.name, fragmentFromActivity::class.java.name)
@@ -137,6 +138,7 @@ class FragmentxTest {
         val activity = findUserVisibleChildActivityRule.activity
         // 定义多少个 ActivityTestRule 测试方法执行的时候就会启动多少个 ActivityTestRule 为了让 findUserVisibleChildActivityRule 处于 resumed 状态
         activityTestRule.finishActivity()
+        // 此测试要求手机处于屏幕解锁状态
 
         val fragmentFromActivity = activity.findFragmentByViewPagerCurrentItem(2).requireNotNull()
         Assert.assertEquals(TestFindUserVisibleChildFragment::class.java.name, fragmentFromActivity::class.java.name)

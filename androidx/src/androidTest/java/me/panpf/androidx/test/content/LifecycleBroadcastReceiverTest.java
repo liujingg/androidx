@@ -38,7 +38,7 @@ import java.util.List;
 import me.panpf.androidx.content.LifecycleBroadcastReceiver;
 import me.panpf.androidx.test.BuildConfig;
 import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Premisex;
 
 @RunWith(AndroidJUnit4.class)

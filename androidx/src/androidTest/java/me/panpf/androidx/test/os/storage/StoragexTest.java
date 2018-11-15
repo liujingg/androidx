@@ -30,7 +30,7 @@ import java.io.IOException;
 
 import me.panpf.androidx.os.storage.StorageVolumeCompat;
 import me.panpf.androidx.os.storage.Storagex;
-import me.panpf.javax.util.Arrayx;
+import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.util.Predicate;
 
 import static org.junit.Assert.assertEquals;

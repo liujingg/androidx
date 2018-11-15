@@ -30,7 +30,7 @@ import android.support.annotation.RequiresApi;
 import java.util.LinkedList;
 import java.util.List;
 
-import me.panpf.javax.util.Rangex;
+import me.panpf.javax.ranges.Rangex;
 
 @SuppressWarnings("WeakerAccess")
 public class Clipboardx {

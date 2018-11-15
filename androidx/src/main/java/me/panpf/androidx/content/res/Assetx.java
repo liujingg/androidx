@@ -28,7 +28,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import me.panpf.javax.io.IOStreamx;
+import me.panpf.javax.io.Streamx;
 
 /**
  * Asset resource-related tool methods
@@ -47,9 +47,9 @@ public class Assetx {
     public static byte[] readBytes(@NonNull Context context, @NonNull String fileName) throws IOException {
         InputStream inputStream = context.getAssets().open(fileName);
         try {
-            return IOStreamx.readBytes(inputStream);
+            return Streamx.readBytes(inputStream);
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -57,9 +57,9 @@ public class Assetx {
     public static String readText(@NonNull Context context, @NonNull String fileName, @NonNull Charset charset) throws IOException {
         InputStream inputStream = context.getAssets().open(fileName);
         try {
-            return IOStreamx.readText(IOStreamx.bufferedReader(inputStream, charset));
+            return Streamx.readText(Streamx.bufferedReader(inputStream, charset));
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -67,9 +67,9 @@ public class Assetx {
     public static String readText(@NonNull Context context, @NonNull String fileName) throws IOException {
         InputStream inputStream = context.getAssets().open(fileName);
         try {
-            return IOStreamx.readText(IOStreamx.bufferedReader(inputStream));
+            return Streamx.readText(Streamx.bufferedReader(inputStream));
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -77,9 +77,9 @@ public class Assetx {
     public static List<String> readLines(@NonNull Context context, @NonNull String fileName, @NonNull Charset charset) throws IOException {
         InputStream inputStream = context.getAssets().open(fileName);
         try {
-            return IOStreamx.readLines(IOStreamx.bufferedReader(inputStream, charset));
+            return Streamx.readLines(Streamx.bufferedReader(inputStream, charset));
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -87,9 +87,9 @@ public class Assetx {
     public static List<String> readLines(@NonNull Context context, @NonNull String fileName) throws IOException {
         InputStream inputStream = context.getAssets().open(fileName);
         try {
-            return IOStreamx.readLines(IOStreamx.bufferedReader(inputStream));
+            return Streamx.readLines(Streamx.bufferedReader(inputStream));
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -99,7 +99,7 @@ public class Assetx {
         try {
             return BitmapFactory.decodeStream(inputStream, outPadding, options);
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -109,7 +109,7 @@ public class Assetx {
         try {
             return BitmapFactory.decodeStream(inputStream);
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 }

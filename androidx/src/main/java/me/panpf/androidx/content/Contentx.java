@@ -30,7 +30,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.List;
 
-import me.panpf.javax.io.IOStreamx;
+import me.panpf.javax.io.Streamx;
 
 public class Contentx {
 
@@ -46,9 +46,9 @@ public class Contentx {
     public static byte[] readBytes(@NonNull Context context, @NonNull Uri uri) throws IOException {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         try {
-            return inputStream != null ? IOStreamx.readBytes(inputStream) : null;
+            return inputStream != null ? Streamx.readBytes(inputStream) : null;
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -56,9 +56,9 @@ public class Contentx {
     public static String readText(@NonNull Context context, @NonNull Uri uri, @NonNull Charset charset) throws IOException {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         try {
-            return inputStream != null ? IOStreamx.readText(IOStreamx.bufferedReader(inputStream, charset)) : null;
+            return inputStream != null ? Streamx.readText(Streamx.bufferedReader(inputStream, charset)) : null;
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -66,9 +66,9 @@ public class Contentx {
     public static String readText(@NonNull Context context, @NonNull Uri uri) throws IOException {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         try {
-            return inputStream != null ? IOStreamx.readText(IOStreamx.bufferedReader(inputStream)) : null;
+            return inputStream != null ? Streamx.readText(Streamx.bufferedReader(inputStream)) : null;
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -76,9 +76,9 @@ public class Contentx {
     public static List<String> readLines(@NonNull Context context, @NonNull Uri uri, @NonNull Charset charset) throws IOException {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         try {
-            return inputStream != null ? IOStreamx.readLines(IOStreamx.bufferedReader(inputStream, charset)) : null;
+            return inputStream != null ? Streamx.readLines(Streamx.bufferedReader(inputStream, charset)) : null;
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -86,9 +86,9 @@ public class Contentx {
     public static List<String> readLines(@NonNull Context context, @NonNull Uri uri) throws IOException {
         InputStream inputStream = context.getContentResolver().openInputStream(uri);
         try {
-            return inputStream != null ? IOStreamx.readLines(IOStreamx.bufferedReader(inputStream)) : null;
+            return inputStream != null ? Streamx.readLines(Streamx.bufferedReader(inputStream)) : null;
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -99,7 +99,7 @@ public class Contentx {
         try {
             return inputStream != null ? BitmapFactory.decodeStream(inputStream, outPadding, options) : null;
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 
@@ -109,7 +109,7 @@ public class Contentx {
         try {
             return inputStream != null ? BitmapFactory.decodeStream(inputStream) : null;
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
     }
 }

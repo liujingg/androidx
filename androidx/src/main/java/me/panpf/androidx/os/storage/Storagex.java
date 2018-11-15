@@ -33,8 +33,8 @@ import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.StatFsx;
 import me.panpf.javax.io.Filex;
 import me.panpf.javax.io.UnableCreateDirException;
-import me.panpf.javax.util.Arrayx;
-import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.collections.Arrayx;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Transformer;
 

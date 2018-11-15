@@ -33,8 +33,8 @@ import java.nio.charset.Charset;
 
 import me.panpf.androidx.content.res.Assetx;
 import me.panpf.androidx.graphics.Bitmapx;
-import me.panpf.javax.io.IOStreamx;
-import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.io.Streamx;
+import me.panpf.javax.collections.Collectionx;
 
 @RunWith(AndroidJUnit4.class)
 public class AssetxTest {
@@ -53,7 +53,7 @@ public class AssetxTest {
             e.printStackTrace();
             Assert.fail();
         } finally {
-            IOStreamx.safeClose(inputStream);
+            Streamx.closeQuietly(inputStream);
         }
 
         try {
