@@ -291,6 +291,11 @@ Please view the [CHANGELOG.md] file
 [Servicex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Servicex.kt
 [ServicexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ServicexTest.kt
 
+[PackageInfox.java]: androidx/src/main/java/me/panpf/androidx/app/PackageInfox.java
+[PackageInfoxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/PackageInfoxTest.java
+[PackageInfox.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/PackageInfox.kt
+[PackageInfoxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/PackageInfoxTest.kt
+
 [Packagex.java]: androidx/src/main/java/me/panpf/androidx/content/pm/Packagex.java
 [PackagexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/pm/PackagexTest.java
 [Packagex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/pm/Packagex.kt
