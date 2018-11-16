@@ -178,8 +178,8 @@ Dependencies:
     * setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
 
 ### util
-* Dimen: [Dimenx.java] | [Dimenx.kt]
-    * dp2px, px2dp, sp2px, px2sp, unit2px
+* Dimen: [Dimenx.java] ([Test][DimenxTest.java]) | [Dimenx.kt] ([Test][DimenxTest.kt])
+    * dp2px, px2dp, sp2px, px2sp, applyDimension
 * Json: [Jsonx.java] | [Jsonx.kt]
     * isEmpty, isNotEmpty, toJsonArray, toJson, toStringList, toStringArray, toIntArray,
     * toBeanList, toBean, optString, optInt, optLong, format
@@ -202,7 +202,6 @@ Dependencies:
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
     * toBitmapByMaxHeight, inflateLayout, appContext
-<!--* Window: [Windowx.java] | [Windowx.kt]-->
 
 ### widget
 * Toast: [Toastx.java] ([Test][ToastxTest.java]) | [Toastx.kt] ([Test][ToastxTest.kt])

@@ -17,6 +17,8 @@
 * :white_check_mark: Prefect Preferencex testing
 * :fire: Refactoring Packagex
 * :white_check_mark: Prefect Packagex testing
+* :white_check_mark: Prefect Dimenx testing
+* :fire: Dimenx unit2px rename to applyDimension
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0
