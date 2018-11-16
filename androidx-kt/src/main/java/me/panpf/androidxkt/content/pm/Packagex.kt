@@ -18,202 +18,192 @@
 
 package me.panpf.androidxkt.content.pm
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.support.annotation.WorkerThread
 import android.support.v4.util.ArrayMap
 import android.util.Pair
 import me.panpf.androidx.content.pm.AppPackage
 import me.panpf.androidx.content.pm.Packagex
 import java.io.File
 
+
 /*
  * APP Package related extension methods or properties
  */
 
+
 /**
- * Whether the app with the specified package name is installed
- *
- * @param packageName App package name
+ * Return true if the app with the specified packageName is installed
  */
 inline fun Context.isPackageInstalled(packageName: String): Boolean = Packagex.isInstalled(this, packageName)
 
+
 /**
- * Get the version number of the installed APP
- *
- * @param packageName App package name
- * @return -1: Not Installed
+ * Get the versionCode of the app for the specified packageName
  */
+@Throws(PackageManager.NameNotFoundException::class)
 inline fun Context.getPackageVersionCode(packageName: String): Int = Packagex.getVersionCode(this, packageName)
 
 /**
- * Get the version name of the installed APP
- *
- * @param packageName App package name
+ * Get the versionCode of the app for the specified packageName, return to defaultValue if not installed
  */
-inline fun Context.getPackageVersionName(packageName: String): String? = Packagex.getVersionName(this, packageName)
+inline fun Context.getPackageVersionCodeOr(packageName: String, defaultValue: Int): Int = Packagex.getVersionCodeOr(this, packageName, defaultValue)
+
 
 /**
- * Get information of the installed APP
- *
- * @param packageName App package name
- * @return null：Not Installed
+ * Get the versionName of the app for the specified packageName
  */
-inline fun Context.getPackage(packageName: String): AppPackage? = Packagex.getPackage(this, packageName)
+@Throws(PackageManager.NameNotFoundException::class)
+inline fun Context.getPackageVersionName(packageName: String): String = Packagex.getVersionName(this, packageName)
 
 /**
- * 是否是系统 app
+ * Get the versionName of the app for the specified packageName, return to defaultValue if not installed
+ */
+inline fun Context.getPackageVersionNameOr(packageName: String, defaultValue: String): String = Packagex.getVersionNameOr(this, packageName, defaultValue)
+
+/**
+ * Get the versionName of the app for the specified packageName, return to null if not installed
+ */
+inline fun Context.getPackageVersionNameOrNull(packageName: String): String? = Packagex.getVersionNameOrNull(this, packageName)
+
+
+/**
+ * Get information about the app with the specified packageName
+ */
+inline fun Context.getPackage(packageName: String): AppPackage = Packagex.getPackage(this, packageName)
+
+/**
+ * Get information about the app with the specified packageName, return to null if not installed
+ */
+inline fun Context.getPackageOrNull(packageName: String): AppPackage? = Packagex.getPackageOrNull(this, packageName)
+
+
+/**
+ * Return true if it is a system APP
  */
 inline fun ApplicationInfo.isSystemApp(): Boolean = Packagex.isSystemApp(this)
 
 /**
- * 判断指定包名的已安装 app 是否是系统 app
- *
- * @param packageName    app 包名
- * @return null: 未安装
+ * Return true if the app with the specified packageName is the system APP
  */
-inline fun PackageManager.isSystemApp(packageName: String): Boolean? = Packagex.isSystemApp(this, packageName)
+@Throws(PackageManager.NameNotFoundException::class)
+inline fun Context.isSystemApp(packageName: String): Boolean = Packagex.isSystemApp(this, packageName)
+
+/**
+ * Return true if the app with the specified packageName is the system APP, return to defaultValue if not installed
+ */
+inline fun Context.isSystemAppOr(packageName: String, defaultValue: Boolean): Boolean = Packagex.isSystemAppOr(this, packageName, defaultValue)
 
 
 /**
- * 判断指定包名的已安装 app 是否是系统 app
+ * List the packageName and versionCode of all installed APPs
  *
- * @param packageName app 包名
- * @return null: 未安装
+ * @param excludeSystemApp If true, exclude yourself exclude system apps
+ * @param excludeSelf      If true, exclude yourself
  */
-inline fun Context.isSystemApp(packageName: String): Boolean? = Packagex.isSystemApp(this, packageName)
-
-/**
- * 获取所有已安装 app 的包名和版本号集合
- *
- * @param excludeSystemApp 是否排除系统应用
- * @param excludeSelf      是否排除自己
- * @return 所有已安装 app 的包名和版本号集合
- */
-@WorkerThread
-inline fun Context.listAppIdAndVersionCode(excludeSystemApp: Boolean, excludeSelf: Boolean): List<Pair<String, Int>>? = Packagex.listAppIdAndVersionCode(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackageNameAndVersionCode(excludeSystemApp: Boolean, excludeSelf: Boolean): List<Pair<String, Int>> = Packagex.listPackageNameAndVersionCode(this, excludeSystemApp, excludeSelf)
 
 
 /**
- * 获取所有已安装 app 的包名和版本号 Map
+ * Get the packageName and versionCode of all installed apps Map
  *
- * @param excludeSystemApp 是否排除系统应用
- * @param excludeSelf      是否排除自己
- * @return 所有已安装 app 的包名和版本号集合
+ * @param excludeSystemApp If true, exclude yourself exclude system apps
+ * @param excludeSelf      If true, exclude yourself
  */
-@WorkerThread
-inline fun Context.listAppIdAndVersionCodeToMap(excludeSystemApp: Boolean, excludeSelf: Boolean): ArrayMap<String, Int>? = Packagex.listAppIdAndVersionCodeToMap(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackageNameAndVersionCodeMap(excludeSystemApp: Boolean, excludeSelf: Boolean): ArrayMap<String, Int> = Packagex.listPackageNameAndVersionCodeMap(this, excludeSystemApp, excludeSelf)
 
 /**
- * 获取所有已安装 app 的包名
+ * List the packageName of all installed apps
  *
- * @param excludeSystemApp 是否排除系统应用
- * @param excludeSelf      是否排除自己
- * @return 所有已安装 app 的包名集合
+ * @param excludeSystemApp If true, exclude yourself exclude system apps
+ * @param excludeSelf      If true, exclude yourself
  */
-@WorkerThread
-inline fun Context.listAppId(excludeSystemApp: Boolean, excludeSelf: Boolean): List<String>? = Packagex.listAppId(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackageName(excludeSystemApp: Boolean, excludeSelf: Boolean): List<String> = Packagex.listPackageName(this, excludeSystemApp, excludeSelf)
 
 /**
- * Get all installed apps
+ * List information for all installed apps
  *
- * @param excludeSystemApp Exclude system apps
- * @param excludeSelf      Exclude yourself
- * @param size             最多取多少个应用
- * @return Installed app list
+ * @param excludeSystemApp If true, exclude yourself exclude system apps
+ * @param excludeSelf      If true, exclude yourself
+ * @param size             How many apps to get. -1: all
  */
-@WorkerThread
-inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean, size: Int): List<AppPackage>? = Packagex.listPackage(this, excludeSystemApp, excludeSelf, size)
+inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean, size: Int): List<AppPackage> = Packagex.listPackage(this, excludeSystemApp, excludeSelf, size)
 
 /**
- * Get all installed apps
+ * List information for all installed apps
  *
- * @param excludeSystemApp Exclude system applications
- * @param excludeSelf      Exclude yourself
- * @return Installed app list
+ * @param excludeSystemApp If true, exclude yourself exclude system apps
+ * @param excludeSelf      If true, exclude yourself
  */
-@WorkerThread
-inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean): List<AppPackage>? = Packagex.listPackage(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean): List<AppPackage> = Packagex.listPackage(this, excludeSystemApp, excludeSelf)
+
 
 /**
- * Get information about the first app
+ * Get information about an app
  *
- * @param excludeSystemApp Exclude system applications
- * @param excludeSelf      Exclude yourself
- * @return null：Not Installed
+ * @param excludeSystemApp If true, exclude yourself exclude system apps
+ * @param excludeSelf      If true, exclude yourself
  */
-inline fun Context.getFirstPackage(excludeSystemApp: Boolean, excludeSelf: Boolean): AppPackage? = Packagex.getFirstPackage(this, excludeSystemApp, excludeSelf)
+inline fun Context.getOnePackage(excludeSystemApp: Boolean, excludeSelf: Boolean): AppPackage? = Packagex.getOnePackage(this, excludeSystemApp, excludeSelf)
+
 
 /**
- * 统计已安装 app 个数
+ * Get the number of installed apps
  *
- * @param excludeSystemApp 是否排除系统应用
- * @param excludeSelf      是否排除自己
- * @return 已安装 app 个数
+ * @param excludeSystemApp If true, exclude yourself exclude system apps
+ * @param excludeSelf      If true, exclude yourself
  */
-@WorkerThread
 inline fun Context.countPackage(excludeSystemApp: Boolean, excludeSelf: Boolean): Int = Packagex.count(this, excludeSystemApp, excludeSelf)
 
-inline fun PackageInfo.packageInfoToAppPackage(packageManager: PackageManager): AppPackage = Packagex.packageInfoToAppPackage(this, packageManager)
 
 /**
- * 获取指定 app 的安装包文件
- *
- * @param packageName app 包名
- * @return app 的安装包文件
+ * Get the apk file of the app with the specified packageName
  */
-@WorkerThread
-inline fun Context.getPackageFile(packageName: String): File? = Packagex.getPackageFile(this, packageName)
+@Throws(PackageManager.NameNotFoundException::class)
+inline fun Context.getPackageApkFile(packageName: String): File = Packagex.getPackageApkFile(this, packageName)
 
 /**
- * 获取指定 app 的签名字节数组
- *
- * @param packageName app 包名
- * @return app 的签名字节数组
+ * Get the apk file of the app with the specified packageName, return to null if not installed
  */
-@SuppressLint("PackageManagerGetSignatures")
-@WorkerThread
-inline fun Context.getAppSignatureBytes(packageName: String): ByteArray? = Packagex.getAppSignatureBytes(this, packageName)
+inline fun Context.getPackageApkFileOrNull(packageName: String): File? = Packagex.getPackageApkFileOrNull(this, packageName)
+
 
 /**
- * 获取已安装 app 图标的 Drawable 版本
- *
- * @param packageName app 包名
- * @param versionCode app 版本号，如果版本号小于等于 0 则不匹配版本，否则版本必须一致才能返回图标
- * @return app 图标
+ * Get the signature data of the app with the specified packageName
  */
-@WorkerThread
+@Throws(PackageManager.NameNotFoundException::class)
+inline fun Context.getAppSignatureBytes(packageName: String): ByteArray = Packagex.getAppSignatureBytes(this, packageName)
+
+/**
+ * Get the signature data of the app with the specified packageName, return to null if not installed
+ */
+inline fun Context.getAppSignatureBytesOrNull(packageName: String): ByteArray? = Packagex.getAppSignatureBytesOrNull(this, packageName)
+
+
+/**
+ * Get the icon Drawable of the app of the specified packageName
+ *
+ * @param versionCode App versionCode. Returns null if versionCode is inconsistent, -1: ignores versionCode
+ */
 inline fun Context.getAppIconDrawable(packageName: String, versionCode: Int): Drawable? = Packagex.getAppIconDrawable(this, packageName, versionCode)
 
 /**
- * 获取已安装 app 图标的 bitmap 版本，如果图标不是 BitmapDrawable 则创建新的 bitmap
+ * Get the icon Bitmap of the app of the specified packageName
  *
- * @param packageName app 包名
- * @param versionCode app 版本号，如果版本号小于等于 0 则不匹配版本，否则版本必须一致才能返回图标
- * @return app 图标
+ * @param versionCode App versionCode. Returns null if versionCode is inconsistent, -1: ignores versionCode
  */
-@WorkerThread
 inline fun Context.getAppIconBitmap(packageName: String, versionCode: Int): Bitmap? = Packagex.getAppIconBitmap(this, packageName, versionCode)
 
+
 /**
- * 获取指定 apk 文件的图标的 Drawable 版本
- *
- * @param apkFilePath apk 文件路径
- * @return apk 文件的图标
+ * Get the icon Drawable of the specified apk file
  */
-@WorkerThread
 inline fun Context.getApkIconDrawable(apkFilePath: String): Drawable? = Packagex.getApkIconDrawable(this, apkFilePath)
 
 /**
- * 获取指定 apk 文件的图标的 bitmap 版本，如果图标不是 BitmapDrawable 则创建新的 bitmap
- *
- * @param apkFilePath apk 文件路径
- * @return apk 文件的图标
+ * Get the icon Bitmap of the specified apk file
  */
-@WorkerThread
 inline fun Context.getApkIconBitmap(apkFilePath: String): Bitmap? = Packagex.getApkIconBitmap(this, apkFilePath)

@@ -27,7 +27,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.support.v4.content.FileProvider
 import me.panpf.androidxkt.content.*
 import me.panpf.androidxkt.content.pm.findSelfProviderInfoByName
-import me.panpf.androidxkt.content.pm.getPackageFile
+import me.panpf.androidxkt.content.pm.getPackageApkFile
 import me.panpf.androidxkt.os.storage.getAppExternalFilesDir
 import me.panpf.androidxkt.test.BuildConfig
 import me.panpf.javax.io.UnableCreateDirException
@@ -186,10 +186,9 @@ class IntentxTest {
     fun testCreateInstallAppIntent() {
         val context = InstrumentationRegistry.getContext()
 
-        val file = context.getPackageFile(context.packageName)
-        Assert.assertNotNull(file)
+        val file = context.getPackageApkFile(context.packageName)
 
-        val installAppIntent1 = context.getShareFileUri(file!!).createInstallAppIntent()
+        val installAppIntent1 = context.getShareFileUri(file).createInstallAppIntent()
         Assert.assertEquals(Intent.ACTION_VIEW, installAppIntent1.action)
         Assert.assertEquals(Intent.CATEGORY_DEFAULT, installAppIntent1.categories.find { s -> s == Intent.CATEGORY_DEFAULT })
         Assert.assertEquals(context.getShareFileUri(file).toString(),

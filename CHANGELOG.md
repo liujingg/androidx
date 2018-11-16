@@ -15,6 +15,8 @@
 * :fire: Remove Contentx
 * :fire: Refactoring Preferencex
 * :white_check_mark: Prefect Preferencex testing
+* :fire: Refactoring Packagex
+* :white_check_mark: Prefect Packagex testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

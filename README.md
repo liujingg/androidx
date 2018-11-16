@@ -79,10 +79,12 @@ Dependencies:
     * findReceiverInfo, findReceiverInfoByName, findProviderInfo, findProviderInfoByName
     * findPermissionInfo, findPermissionInfoByName, findRequestedPermission, findRequestedPermissionByName
     * findMetaDataWithName, findMetaDataByName, findMetaDataWithValue, findMetaDataByValue
-* Package: [Packagex.java] | [Packagex.kt]
-    * isInstalled, getVersionCode, getVersionName, getPackage, isSystemApp, getAllAppIdAndVersionCodeMap,
-    * getAllAppIdAndVersionCodeSet, getAllAppId, getAllApp, getOne, count, getAppPackageFile,
-    * getAppSignatureBytes, getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
+* Package: [Packagex.java] ([Test][PackagexTest.java]) | [Packagex.kt] ([Test][PackagexTest.kt])
+    * isInstalled, getVersionCode, getVersionCodeOr, getVersionName, getVersionNameOr, getVersionNameOrNull,
+    * getPackage, getPackageOrNull, isSystemApp, isSystemAppOr, listPackageNameAndVersionCode,
+    * listPackageNameAndVersionCodeMap, listPackageName, listPackage, getOnePackage, count, getPackageApkFile,
+    * getPackageApkFileOrNull, getAppSignatureBytes, getAppSignatureBytesOrNull,
+    * getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
 * Clipboard: [Clipboardx.java] ([Test][ClipboardxTest.java]) | [Clipboardx.kt] ([Test][ClipboardxTest.kt])
     * copy, copyText, copyHtmlText, copyIntent, copyUri, copyRawUri, copyMimeTypeUri, copyContents,
     * get, getLabel, getContents, getText, getHtmlText, getIntent, getUri, addPrimaryClipChangedListener,

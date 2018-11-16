@@ -18,6 +18,7 @@ package me.panpf.androidx.test.content;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
@@ -192,11 +193,10 @@ public class IntentxTest {
     }
 
     @Test
-    public void testCreateInstallAppIntent() {
+    public void testCreateInstallAppIntent() throws PackageManager.NameNotFoundException {
         Context context = InstrumentationRegistry.getContext();
 
-        File file = Packagex.getPackageFile(context, context.getPackageName());
-        Assert.assertNotNull(file);
+        File file = Packagex.getPackageApkFile(context, context.getPackageName());
 
         Intent installAppIntent1 = Intentx.createInstallAppIntent(Intentx.getShareFileUri(context, file));
         Assert.assertEquals(Intent.ACTION_VIEW, installAppIntent1.getAction());
