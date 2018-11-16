@@ -91,7 +91,7 @@ Dependencies:
     * removePrimaryClipChangedListener, clear
 * Context: [Contextx.java] ([Test][ContextxTest.java]) | [Contextx.kt] ([Test][ContextxTest.kt])
     * systemService, systemServiceOrNull, \*Manager
-* Intent: [Intentx.java] ([Test][IntentxTest.java] | [Intentx.kt] ([Test][IntentxTest.kt])
+* Intent: [Intentx.java] ([Test][IntentxTest.java]) | [Intentx.kt] ([Test][IntentxTest.kt])
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
     * createLaunchAppIntent, createAppDetailInSystemIntent, createActivityIntentByResolveInfo, createTakePhotoIntent,
