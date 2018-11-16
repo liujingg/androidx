@@ -96,7 +96,7 @@ Dependencies:
     * createPickImageIntent, createCropImageIntent, createSendTextIntent, createSendTextFileIntent,
     * createSendImageFileIntent, createSendFileIntent, getShareFileUri
 * LifecycleBroadcastReceiver: [LifecycleBroadcastReceiver.java] ([Test][LifecycleBroadcastReceiverTest.java])
-* Preference: [Preferencex.java] | [Preferencex.kt]
+* Preference: [Preferencex.java] ([Test][PreferencexTest.java]) | [Preferencex.kt] ([Test][PreferencexTest.kt])
     * getPreferences, getDefaultPreferences, putIntTo, putInt, putIntsTo, putInts, putLongTo, putLong, putLongsTo, putLongs,
     * putBooleanTo, putBoolean, putBooleansTo, putBooleans, putFloatTo, putFloat, putFloatsTo, putFloats,
     * putStringTo, putString, putStringsTo, putStrings, putStringSetTo, putStringSet, putStringSetsTo, putStringSets,
