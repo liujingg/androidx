@@ -13,6 +13,8 @@
 * :white_check_mark: Perfect Assetx testing
 * :fire: Remove Assetx
 * :fire: Remove Contentx
+* :fire: Refactoring Preferencex
+* :white_check_mark: Prefect Preferencex testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

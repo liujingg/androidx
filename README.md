@@ -97,8 +97,14 @@ Dependencies:
     * createSendImageFileIntent, createSendFileIntent, getShareFileUri
 * LifecycleBroadcastReceiver: [LifecycleBroadcastReceiver.java] ([Test][LifecycleBroadcastReceiverTest.java])
 * Preference: [Preferencex.java] | [Preferencex.kt]
-    * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
-    * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
+    * getPreferences, getDefaultPreferences, putIntTo, putInt, putIntsTo, putInts, putLongTo, putLong, putLongsTo, putLongs,
+    * putBooleanTo, putBoolean, putBooleansTo, putBooleans, putFloatTo, putFloat, putFloatsTo, putFloats,
+    * putStringTo, putString, putStringsTo, putStrings, putStringSetTo, putStringSet, putStringSetsTo, putStringSets,
+    * getIntFrom, getInt, getLongFrom, getLong, getBooleanFrom, getBoolean, getFloatFrom, getFloat,
+    * getStringFrom, getStringOrNullFrom, getString, getStringOrNull, getStringSetFrom, getStringSetOrNullFrom,
+    * getStringSet, getStringSetOrNull, getAllFrom, getAll, removeFrom, remove, contains, containsAny, containsAll,
+    * containsFrom, containsAnyFrom, containsAllFrom, isEmpty, isEmptyFrom, clear,
+    * registerOnChangeListener, registerOnChangeListenerTo, unregisterOnChangeListener, unregisterOnChangeListenerFrom
 
 ### graphics
 * Drawable: [Drawablex.java] ([Test][DrawablexTest.java]) | [Drawablex.kt] ([Test][DrawablexTest.kt])
