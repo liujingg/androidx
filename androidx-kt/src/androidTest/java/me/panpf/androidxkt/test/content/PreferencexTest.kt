@@ -20,7 +20,6 @@ import android.content.SharedPreferences
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.content.*
-import me.panpf.javax.collections.Collectionx
 import me.panpf.javax.collections.Mapx
 import me.panpf.javaxkt.lang.getFieldValue
 import me.panpf.javaxkt.util.requireNotNull
@@ -163,28 +162,28 @@ class PreferencexTest {
             Assert.assertEquals("2f", context.getStringPreferenceFrom(name, "stringKey2", "-1f"))
 
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(context.getStringSetPreference("stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
+            Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetKey", listOf("-1", "-2").toSet()).sorted().joinToString())
             Assert.assertNull(context.getStringSetPreferenceOrNull("stringSetKey"))
-            context.putStringSetPreference("stringSetKey", Collectionx.toSet(Collectionx.listOf("1", "2")))
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("1", "2"))), Collectionx.joinToString(context.getStringSetPreference("stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
+            context.putStringSetPreference("stringSetKey", listOf("1", "2").toSet())
+            Assert.assertEquals(listOf("1", "2").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetKey", listOf("-1", "-2").toSet()).sorted().joinToString())
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(context.getStringSetPreferenceFrom(name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
+            Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetKey", listOf("-1", "-2").toSet()).sorted().joinToString())
             Assert.assertNull(context.getStringSetPreferenceOrNullFrom(name, "stringSetKey"))
-            context.putStringSetPreferenceTo(name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("1", "2")))
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("1", "2"))), Collectionx.joinToString(context.getStringSetPreferenceFrom(name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
+            context.putStringSetPreferenceTo(name, "stringSetKey", listOf("1", "2").toSet())
+            Assert.assertEquals(listOf("1", "2").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetKey", listOf("-1", "-2").toSet()).sorted().joinToString())
 
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(context.getStringSetPreference("stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(context.getStringSetPreference("stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
-            context.putStringSetsPreference(Mapx.builder("stringSetsKey1", Collectionx.toSet(Collectionx.listOf("1", "2"))).put("stringSetsKey2", Collectionx.toSet(Collectionx.listOf("3", "4"))).build())
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("1", "2"))), Collectionx.joinToString(context.getStringSetPreference("stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("4", "3"))), Collectionx.joinToString(context.getStringSetPreference("stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
+            Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetsKey1", listOf("-1", "-2").toSet()).sorted().joinToString())
+            Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetsKey2", listOf("-1", "-2").toSet()).sorted().joinToString())
+            context.putStringSetsPreference(Mapx.builder("stringSetsKey1", listOf("1", "2").toSet()).put("stringSetsKey2", listOf("3", "4").toSet()).build())
+            Assert.assertEquals(listOf("1", "2").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetsKey1", listOf("-1", "-2").toSet()).sorted().joinToString())
+            Assert.assertEquals(listOf("4", "3").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetsKey2", listOf("-1", "-2").toSet()).sorted().joinToString())
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(context.getStringSetPreferenceFrom(name, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(context.getStringSetPreferenceFrom(name, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
-            context.putStringSetsPreferenceTo(name, Mapx.builder("stringSetsKey1", Collectionx.toSet(Collectionx.listOf("1", "2"))).put("stringSetsKey2", Collectionx.toSet(Collectionx.listOf("3", "4"))).build())
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("1", "2"))), Collectionx.joinToString(context.getStringSetPreferenceFrom(name, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("4", "3"))), Collectionx.joinToString(context.getStringSetPreferenceFrom(name, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2")))))
+            Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetsKey1", listOf("-1", "-2").toSet()).sorted().joinToString())
+            Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetsKey2", listOf("-1", "-2").toSet()).sorted().joinToString())
+            context.putStringSetsPreferenceTo(name, Mapx.builder("stringSetsKey1", listOf("1", "2").toSet()).put("stringSetsKey2", listOf("3", "4").toSet()).build())
+            Assert.assertEquals(listOf("1", "2").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetsKey1", listOf("-1", "-2").toSet()).sorted().joinToString())
+            Assert.assertEquals(listOf("4", "3").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetsKey2", listOf("-1", "-2").toSet()).sorted().joinToString())
         } finally {
             context.clearPreferences()
             context.clearPreferencesFrom(name)

@@ -31,11 +31,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.Arrays;
 
+import me.panpf.androidx.Androidx;
 import me.panpf.androidx.os.BundleBuilder;
 import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.collections.Collectionx;
+import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Premisex;
 
 @SuppressWarnings("UnnecessaryBoxing")
@@ -44,15 +46,11 @@ public class BundleBuilderTest {
 
     @Test
     public void testBase() {
-        PersistableBundle persistableBundle = new PersistableBundle();
-        persistableBundle.putString("persistableBundle1", "5");
-        persistableBundle.putString("persistableBundle2", "6");
-
         Bundle bundle1 = new Bundle();
         bundle1.putString("bundle1", "7");
         bundle1.putString("bundle2", "8");
 
-        Bundle bundle = new BundleBuilder()
+        BundleBuilder builder = new BundleBuilder()
                 .putByte("byte", (byte) 1)
                 .putByteArray("byteArray", new byte[]{(byte) 1, (byte) 2})
                 .putShort("short", (short) 1)
@@ -77,11 +75,16 @@ public class BundleBuilderTest {
                 .putBoolean("boolean", true)
                 .putBooleanArray("booleanArray", new boolean[]{false, true})
                 .putBundle("bundle", new BundleBuilder().putString("key", "4").build())
-                .putAll(persistableBundle)
-                .putAll(bundle1)
-                .build();
+                .putAll(bundle1);
+        if (Androidx.isAtLeastL()) {
+            PersistableBundle persistableBundle = new PersistableBundle();
+            persistableBundle.putString("persistableBundle1", "5");
+            persistableBundle.putString("persistableBundle2", "6");
+            builder.putAll(persistableBundle);
+        }
+        Bundle bundle = builder.build();
 
-        Assert.assertEquals(28, bundle.size());
+        Assert.assertEquals(Androidx.isAtLeastL() ? 28 : 26, bundle.size());
 
         Assert.assertEquals((byte) 1, bundle.getByte("byte"));
         Assert.assertArrayEquals(new byte[]{(byte) 1, (byte) 2}, bundle.getByteArray("byteArray"));
@@ -117,9 +120,10 @@ public class BundleBuilderTest {
         Assert.assertArrayEquals(new boolean[]{false, true}, bundle.getBooleanArray("booleanArray"));
 
         Assert.assertEquals("4", Premisex.requireNotNull(bundle.getBundle("bundle")).getString("key"));
-
-        Assert.assertEquals("5", bundle.getString("persistableBundle1"));
-        Assert.assertEquals("6", bundle.getString("persistableBundle2"));
+        if (Androidx.isAtLeastL()) {
+            Assert.assertEquals("5", bundle.getString("persistableBundle1"));
+            Assert.assertEquals("6", bundle.getString("persistableBundle2"));
+        }
         Assert.assertEquals("7", bundle.getString("bundle1"));
         Assert.assertEquals("8", bundle.getString("bundle2"));
     }
@@ -226,13 +230,12 @@ public class BundleBuilderTest {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             TestParcelable that = (TestParcelable) o;
-            return Objects.equals(key, that.key);
+            return Stringx.equals(key, that.key);
         }
 
         @Override
         public int hashCode() {
-
-            return Objects.hash(key);
+            return Arrays.hashCode(new String[]{key});
         }
     }
 }

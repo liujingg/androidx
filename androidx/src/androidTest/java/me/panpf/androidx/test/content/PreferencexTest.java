@@ -170,28 +170,28 @@ public class PreferencexTest {
             Assert.assertEquals("2f", Preferencex.getStringFrom(context, name, "stringKey2", "-1f"));
 
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(Preferencex.getStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
             Assert.assertNull(Preferencex.getStringSetOrNull(context, "stringSetKey"));
             Preferencex.putStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.listOf("1", "2")));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("1", "2"))), Collectionx.joinToString(Preferencex.getStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(Preferencex.getStringSetFrom(context, name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
             Assert.assertNull(Preferencex.getStringSetOrNullFrom(context, name, "stringSetKey"));
             Preferencex.putStringSetTo(context, name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("1", "2")));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("1", "2"))), Collectionx.joinToString(Preferencex.getStringSetFrom(context, name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
 
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(Preferencex.getStringSet(context, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(Preferencex.getStringSet(context, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
             Preferencex.putStringSets(context, Mapx.builder("stringSetsKey1", Collectionx.toSet(Collectionx.listOf("1", "2"))).put("stringSetsKey2", Collectionx.toSet(Collectionx.listOf("3", "4"))).build());
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("1", "2"))), Collectionx.joinToString(Preferencex.getStringSet(context, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("4", "3"))), Collectionx.joinToString(Preferencex.getStringSet(context, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("4", "3")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(Preferencex.getStringSetFrom(context, name, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("-1", "-2"))), Collectionx.joinToString(Preferencex.getStringSetFrom(context, name, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
             Preferencex.putStringSetsTo(context, name, Mapx.builder("stringSetsKey1", Collectionx.toSet(Collectionx.listOf("1", "2"))).put("stringSetsKey2", Collectionx.toSet(Collectionx.listOf("3", "4"))).build());
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("1", "2"))), Collectionx.joinToString(Preferencex.getStringSetFrom(context, name, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.listOf("4", "3"))), Collectionx.joinToString(Preferencex.getStringSetFrom(context, name, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2")))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("4", "3")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
         } finally {
             Preferencex.clear(context);
             Preferencex.clearFrom(context, name);
