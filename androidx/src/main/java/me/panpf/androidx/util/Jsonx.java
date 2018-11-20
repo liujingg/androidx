@@ -24,6 +24,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -35,17 +36,33 @@ public class Jsonx {
     private Jsonx() {
     }
 
+
+    /* ************************************* check ***************************************** */
+
+
+    /**
+     * If the given json string is empty, for empty example: ' ', 'null', '{}', '[]' returns true
+     */
     public static boolean isEmpty(@Nullable String json) {
         if (json == null) return true;
         json = json.trim();
         return "".equals(json) || "null".equalsIgnoreCase(json) || "{}".equalsIgnoreCase(json) || "[]".equals(json);
     }
 
+    /**
+     * If the given json string is not empty, for empty example: ' ', 'null', '{}', '[]' returns true
+     */
     public static boolean isNotEmpty(@Nullable String json) {
         return !isEmpty(json);
     }
 
 
+    /* ************************************* toJson ***************************************** */
+
+
+    /**
+     * Convert a list of strings to a JSONArray
+     */
     @NonNull
     public static JSONArray toJsonArray(@Nullable List<String> stringList) {
         JSONArray jsonArray = new JSONArray();
@@ -57,6 +74,9 @@ public class Jsonx {
         return jsonArray;
     }
 
+    /**
+     * Convert a array of int to a JSONArray
+     */
     @NonNull
     public static JSONArray toJsonArray(@Nullable int[] ints) {
         JSONArray jsonArray = new JSONArray();
@@ -69,17 +89,29 @@ public class Jsonx {
     }
 
 
+    /**
+     * Convert a list of strings to a json
+     */
     @NonNull
     public static String toJson(@Nullable List<String> stringList) {
         return toJsonArray(stringList).toString();
     }
 
+    /**
+     * Convert a list of strings to a json
+     */
     @NonNull
     public static String toJson(@Nullable int[] ints) {
         return toJsonArray(ints).toString();
     }
 
 
+    /* ************************************* parse ***************************************** */
+
+
+    /**
+     * Convert a JSONArray to a String list
+     */
     @NonNull
     public static List<String> toStringList(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() <= 0) {
@@ -94,12 +126,18 @@ public class Jsonx {
         return dataList;
     }
 
+    /**
+     * Convert a json to a String list
+     */
     @NonNull
     public static List<String> toStringList(@Nullable String json) throws JSONException {
         return !isEmpty(json) ? toStringList(new JSONArray(json)) : new ArrayList<String>(0);
     }
 
 
+    /**
+     * Convert a JSONArray to a String array
+     */
     @NonNull
     public static String[] toStringArray(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
@@ -114,12 +152,18 @@ public class Jsonx {
         return dataStrings;
     }
 
+    /**
+     * Convert a json to a String array
+     */
     @NonNull
     public static String[] toStringArray(@Nullable String json) throws JSONException {
         return !isEmpty(json) ? toStringArray(new JSONArray(json)) : new String[0];
     }
 
 
+    /**
+     * Convert a JSONArray to a int array
+     */
     @NonNull
     public static int[] toIntArray(@Nullable JSONArray jsonArray) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
@@ -134,12 +178,18 @@ public class Jsonx {
         return dataInts;
     }
 
+    /**
+     * Convert a json to a int array
+     */
     @NonNull
     public static int[] toIntArray(@Nullable String json) throws JSONException {
         return !isEmpty(json) ? toIntArray(new JSONArray(json)) : new int[0];
     }
 
 
+    /**
+     * Convert JSONArray to the Bean list
+     */
     @NonNull
     public static <Bean> ArrayList<Bean> toBeanList(@Nullable JSONArray jsonArray, @NonNull BeanParser<Bean> parser) throws JSONException {
         if (jsonArray == null || jsonArray.length() == 0) {
@@ -160,6 +210,9 @@ public class Jsonx {
         return commentList;
     }
 
+    /**
+     * Convert json to the Bean list
+     */
     @NonNull
     public static <Bean> ArrayList<Bean> toBeanList(@Nullable String jsonArrayString, @NonNull BeanParser<Bean> parser) throws JSONException {
         if (isEmpty(jsonArrayString)) return new ArrayList<>(0);
@@ -167,12 +220,18 @@ public class Jsonx {
     }
 
 
+    /**
+     * Convert JSONArray to the Bean
+     */
     @Nullable
     public static <Bean> Bean toBean(@Nullable JSONObject jsonObject, @NonNull BeanParser<Bean> parser) throws JSONException {
         if (jsonObject == null) return null;
         return parser.parse(jsonObject);
     }
 
+    /**
+     * Convert json to the Bean
+     */
     @Nullable
     public static <Bean> Bean toBean(@Nullable String jsonString, @NonNull BeanParser<Bean> parser) throws JSONException {
         if (isEmpty(jsonString)) return null;
@@ -180,59 +239,312 @@ public class Jsonx {
     }
 
 
+    /* ************************************* opt and get ***************************************** */
+
+
+    /**
+     * Returns the value mapped by keys, or defaultValue if no such mapping exists.
+     */
     @NonNull
-    public static String optString(@NonNull JSONObject jsonObject, @NonNull String[] keys, @NonNull String defaultValue) {
-        Object value;
-        for (String key : keys) {
-            value = jsonObject.opt(key);
-            if (value != null && value != JSONObject.NULL) {
-                //noinspection ConstantConditions
-                return value.toString();
+    public static String optString(@Nullable JSONObject jsonObject, @NonNull String[] keys, @NonNull String defaultValue) {
+        if (jsonObject != null) {
+            Object value;
+            for (String key : keys) {
+                value = jsonObject.opt(key);
+                if (value != null && value != JSONObject.NULL) {
+                    //noinspection ConstantConditions
+                    return value.toString();
+                }
             }
         }
 
         return defaultValue;
     }
 
+    /**
+     * Returns the value mapped by keys, or empty string if no such mapping exists.
+     */
     @NonNull
-    public static String optString(@NonNull JSONObject jsonObject, @NonNull String[] keys) {
+    public static String optString(@Nullable JSONObject jsonObject, @NonNull String[] keys) {
         return optString(jsonObject, keys, "");
     }
 
-    public static int optInt(@NonNull JSONObject jsonObject, @NonNull String[] keys, int defaultValue) {
-        Object value;
-        for (String key : keys) {
-            value = jsonObject.opt(key);
-            if (value != null && value != JSONObject.NULL) {
-                //noinspection ConstantConditions
-                return toInteger(value);
+    /**
+     * Returns the value mapped by keys, or defaultValue if no such mapping exists.
+     */
+    public static int optInt(@Nullable JSONObject jsonObject, @NonNull String[] keys, int defaultValue) {
+        if (jsonObject != null) {
+            Object value;
+            for (String key : keys) {
+                value = jsonObject.opt(key);
+                if (value != null && value != JSONObject.NULL) {
+                    Integer integerValue = toInteger(value);
+                    if (integerValue != null) return integerValue;
+                }
             }
         }
 
         return defaultValue;
     }
 
-    public static int optInt(@NonNull JSONObject jsonObject, @NonNull String[] keys) {
+    /**
+     * Returns the value mapped by keys, or 0 if no such mapping exists.
+     */
+    public static int optInt(@Nullable JSONObject jsonObject, @NonNull String[] keys) {
         return optInt(jsonObject, keys, 0);
     }
 
-    public static long optLong(@NonNull JSONObject jsonObject, @NonNull String[] keys, long defaultValue) {
-        Object value;
-        for (String key : keys) {
-            value = jsonObject.opt(key);
-            if (value != null && value != JSONObject.NULL) {
-                //noinspection ConstantConditions
-                return toLong(value);
+    /**
+     * Returns the value mapped by keys, or defaultValue if no such mapping exists.
+     */
+    public static long optLong(@Nullable JSONObject jsonObject, @NonNull String[] keys, long defaultValue) {
+        if (jsonObject != null) {
+            Object value;
+            for (String key : keys) {
+                value = jsonObject.opt(key);
+                if (value != null && value != JSONObject.NULL) {
+                    Long longValue = toLong(value);
+                    if (longValue != null) return longValue;
+                }
             }
         }
 
         return defaultValue;
     }
 
-    public static long optLong(@NonNull JSONObject jsonObject, @NonNull String[] keys) {
+    /**
+     * Returns the value mapped by keys, or 0L if no such mapping exists.
+     */
+    public static long optLong(@Nullable JSONObject jsonObject, @NonNull String[] keys) {
         return optLong(jsonObject, keys, 0L);
     }
 
+    /**
+     * Returns the value mapped by keys, or defaultValue if no such mapping exists.
+     */
+    public static boolean optBoolean(@Nullable JSONObject jsonObject, @NonNull String[] keys, boolean defaultValue) {
+        if (jsonObject != null) {
+            Object value;
+            for (String key : keys) {
+                value = jsonObject.opt(key);
+                if (value != null && value != JSONObject.NULL) {
+                    Boolean booleanValue = toBoolean(value);
+                    if (booleanValue != null) return booleanValue;
+                }
+            }
+        }
+
+        return defaultValue;
+    }
+
+    /**
+     * Returns the value mapped by keys, or false if no such mapping exists.
+     */
+    public static boolean optBoolean(@Nullable JSONObject jsonObject, @NonNull String[] keys) {
+        return optBoolean(jsonObject, keys, false);
+    }
+
+    /**
+     * Returns the value mapped by keys, or defaultValue if no such mapping exists.
+     */
+    public static double optDouble(@Nullable JSONObject jsonObject, @NonNull String[] keys, double defaultValue) {
+        if (jsonObject != null) {
+            Object value;
+            for (String key : keys) {
+                value = jsonObject.opt(key);
+                if (value != null && value != JSONObject.NULL) {
+                    Double doubleValue = toDouble(value);
+                    if (doubleValue != null) return doubleValue;
+                }
+            }
+        }
+
+        return defaultValue;
+    }
+
+    /**
+     * Returns the value mapped by keys, or 0.0 if no such mapping exists.
+     */
+    public static double optDouble(@Nullable JSONObject jsonObject, @NonNull String[] keys) {
+        return optDouble(jsonObject, keys, 0.0);
+    }
+
+    /**
+     * Returns the value mapped by keys, or null if no such mapping exists.
+     */
+    @Nullable
+    public static JSONObject optJSONObject(@Nullable JSONObject jsonObject, @NonNull String[] keys) {
+        if (jsonObject != null) {
+            JSONObject value;
+            for (String key : keys) {
+                value = jsonObject.optJSONObject(key);
+                if (value != null && value != JSONObject.NULL) {
+                    return value;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Returns the value mapped by keys, or null if no such mapping exists.
+     */
+    @Nullable
+    public static JSONArray optJSONArray(@Nullable JSONObject jsonObject, @NonNull String[] keys) {
+        if (jsonObject != null) {
+            JSONArray value;
+            for (String key : keys) {
+                value = jsonObject.optJSONArray(key);
+                if (value != null && value != JSONObject.NULL) {
+                    return value;
+                }
+            }
+        }
+
+        return null;
+    }
+
+
+    /**
+     * Returns the value mapped by keys if it exists, coercing it if necessary, or throws if no such mapping exists.
+     *
+     * @throws JSONException if no such mapping exists.
+     */
+    @NonNull
+    public static String getString(@Nullable JSONObject jsonObject, @NonNull String[] keys) throws JSONException {
+        if (jsonObject != null) {
+            for (String key : keys) {
+                try {
+                    return jsonObject.getString(key);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        throw new JSONException("No value for " + Arrays.toString(keys));
+    }
+
+    /**
+     * Returns the value mapped by keys if it exists, coercing it if necessary, or throws if no such mapping exists.
+     *
+     * @throws JSONException if no such mapping exists.
+     */
+    public static int getInt(@Nullable JSONObject jsonObject, @NonNull String[] keys) throws JSONException {
+        if (jsonObject != null) {
+            for (String key : keys) {
+                try {
+                    return jsonObject.getInt(key);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        throw new JSONException("No value for " + Arrays.toString(keys));
+    }
+
+    /**
+     * Returns the value mapped by keys if it exists, coercing it if necessary, or throws if no such mapping exists.
+     *
+     * @throws JSONException if no such mapping exists.
+     */
+    public static long getLong(@Nullable JSONObject jsonObject, @NonNull String[] keys) throws JSONException {
+        if (jsonObject != null) {
+            for (String key : keys) {
+                try {
+                    return jsonObject.getLong(key);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        throw new JSONException("No value for " + Arrays.toString(keys));
+    }
+
+    /**
+     * Returns the value mapped by keys if it exists, coercing it if necessary, or throws if no such mapping exists.
+     *
+     * @throws JSONException if no such mapping exists.
+     */
+    public static boolean getBoolean(@Nullable JSONObject jsonObject, @NonNull String[] keys) throws JSONException {
+        if (jsonObject != null) {
+            for (String key : keys) {
+                try {
+                    return jsonObject.getBoolean(key);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        throw new JSONException("No value for " + Arrays.toString(keys));
+    }
+
+    /**
+     * Returns the value mapped by keys if it exists, coercing it if necessary, or throws if no such mapping exists.
+     *
+     * @throws JSONException if no such mapping exists.
+     */
+    public static double getDouble(@Nullable JSONObject jsonObject, @NonNull String[] keys) throws JSONException {
+        if (jsonObject != null) {
+            for (String key : keys) {
+                try {
+                    return jsonObject.getDouble(key);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        throw new JSONException("No value for " + Arrays.toString(keys));
+    }
+
+    /**
+     * Returns the value mapped by keys if it exists, coercing it if necessary, or throws if no such mapping exists.
+     *
+     * @throws JSONException if no such mapping exists.
+     */
+    @NonNull
+    public static JSONArray getJSONArray(@Nullable JSONObject jsonObject, @NonNull String[] keys) throws JSONException {
+        if (jsonObject != null) {
+            for (String key : keys) {
+                try {
+                    return jsonObject.getJSONArray(key);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        throw new JSONException("No value for " + Arrays.toString(keys));
+    }
+
+    /**
+     * Returns the value mapped by keys if it exists, coercing it if necessary, or throws if no such mapping exists.
+     *
+     * @throws JSONException if no such mapping exists.
+     */
+    @NonNull
+    public static JSONObject getJSONObject(@Nullable JSONObject jsonObject, @NonNull String[] keys) throws JSONException {
+        if (jsonObject != null) {
+            for (String key : keys) {
+                try {
+                    return jsonObject.getJSONObject(key);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        throw new JSONException("No value for " + Arrays.toString(keys));
+    }
+
+    /**
+     * Object to Integer
+     */
     @Nullable
     public static Integer toInteger(@Nullable Object value) {
         if (value instanceof Integer) {
@@ -248,6 +560,9 @@ public class Jsonx {
         return null;
     }
 
+    /**
+     * Object to Long
+     */
     @Nullable
     public static Long toLong(@Nullable Object value) {
         if (value instanceof Long) {
@@ -263,18 +578,80 @@ public class Jsonx {
         return null;
     }
 
+    /**
+     * Object to Boolean
+     */
+    @Nullable
+    public static Boolean toBoolean(Object value) {
+        if (value instanceof Boolean) {
+            return (Boolean) value;
+        } else if (value instanceof String) {
+            String stringValue = (String) value;
+            if ("true".equalsIgnoreCase(stringValue)) {
+                return true;
+            } else if ("false".equalsIgnoreCase(stringValue)) {
+                return false;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Object to Double
+     */
+    @Nullable
+    public static Double toDouble(Object value) {
+        if (value instanceof Double) {
+            return (Double) value;
+        } else if (value instanceof Number) {
+            return ((Number) value).doubleValue();
+        } else if (value instanceof String) {
+            try {
+                return Double.valueOf((String) value);
+            } catch (NumberFormatException ignored) {
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Object to String
+     */
+    @Nullable
+    public static String toString(Object value) {
+        if (value instanceof String) {
+            return (String) value;
+        } else if (value != null) {
+            return String.valueOf(value);
+        }
+        return null;
+    }
+
+
+    /* ************************************* format ***************************************** */
+
+
+    /**
+     * Formatted output for easy viewing
+     */
     @NonNull
     public static String format(@Nullable JSONObject jsonObject) {
         if (jsonObject == null) return "{}";
         return appendJsonObject(new StringBuilder(), jsonObject, 0).toString();
     }
 
+    /**
+     * Formatted output for easy viewing
+     */
     @NonNull
     public static String format(@Nullable JSONArray jsonArray) {
         if (jsonArray == null || jsonArray.length() <= 0) return "[]";
         return appendJsonArray(new StringBuilder(), jsonArray, 0).toString();
     }
 
+    /**
+     * Formatted output for easy viewing
+     */
     @NonNull
     public static String format(@Nullable String json) {
         if (isEmpty(json)) {
@@ -379,6 +756,7 @@ public class Jsonx {
             builder.append(INDENTATION);
         }
     }
+
 
     public interface BeanParser<T> {
         @Nullable

@@ -19,6 +19,7 @@
 * :white_check_mark: Prefect Packagex testing
 * :white_check_mark: Prefect Dimenx testing
 * :fire: Dimenx unit2px rename to applyDimension
+* :white_check_mark: Prefect Jsonx testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

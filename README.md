@@ -180,9 +180,10 @@ Dependencies:
 ### util
 * Dimen: [Dimenx.java] ([Test][DimenxTest.java]) | [Dimenx.kt] ([Test][DimenxTest.kt])
     * dp2px, px2dp, sp2px, px2sp, applyDimension
-* Json: [Jsonx.java] | [Jsonx.kt]
+* Json: [Jsonx.java] ([Test][JsonxTest.java]) | [Jsonx.kt] ([Test][JsonxTest.kt])
     * isEmpty, isNotEmpty, toJsonArray, toJson, toStringList, toStringArray, toIntArray,
-    * toBeanList, toBean, optString, optInt, optLong, format
+    * toBeanList, toBean, optString, optInt, optLong, optBoolean, optDouble, optJSONObject, optJSONArray,
+    * getString, getInt, getLong, getBoolean, getDouble, getJSONObject, getJSONArray, format
 * Text: [Textx.java] | [Textx.kt]
     * textToBitmap, toHtmlColorFlag, toHtmlRedFlag, keywordMadeColorByHtml, keywordMadeRedByHtml,
     * keywordMadeColorBySpannable, keywordMadeRedBySpannable
