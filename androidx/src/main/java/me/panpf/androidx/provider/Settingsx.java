@@ -17,19 +17,15 @@
 package me.panpf.androidx.provider;
 
 import android.Manifest;
-import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresPermission;
-import android.view.Window;
-import android.view.WindowManager;
 
 import me.panpf.androidx.content.Contextx;
 

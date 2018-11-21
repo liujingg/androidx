@@ -19,9 +19,7 @@
 package me.panpf.androidxkt.provider
 
 import android.Manifest
-import android.app.Activity
 import android.content.Context
-import android.support.annotation.FloatRange
 import android.support.annotation.IntRange
 import android.support.annotation.RequiresPermission
 import me.panpf.androidx.provider.Settingsx
@@ -58,27 +56,6 @@ inline fun Context.getScreenBrightness(): Int = Settingsx.getScreenBrightness(th
 @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
 inline fun Context.setScreenBrightness(@IntRange(from = 0, to = 255) brightness: Int): Boolean = Settingsx.setScreenBrightness(this, brightness)
 
-/**
- * This can be used to override the user's preferred brightness of the screen.
- * A value of less than 0, the default, means to use the preferred screen brightness.
- * 0 to 1 adjusts the brightness from dark to full bright.
- */
-@FloatRange(from = -1.0, to = 1.0)
-inline fun Activity.getWindowBrightness(): Float = Settingsx.getWindowBrightness(this)
-
-/**
- * Set the brightness of the Activity window (you can see the effect, the brightness of the system will not change)
- *
- * @param brightness This can be used to override the user's preferred brightness of the screen.
- * A value of less than 0, the default, means to use the preferred screen brightness.
- * 0 to 1 adjusts the brightness from dark to full bright.
- */
-inline fun Activity.setWindowBrightness(@FloatRange(from = -1.0, to = 1.0) brightness: Float) = Settingsx.setWindowBrightness(this, brightness)
-
-/**
- * Return true if the current window use the preferred screen brightness.
- */
-inline fun Activity.isWindowBrightnessFlowSystem(): Boolean = Settingsx.isWindowBrightnessFlowSystem(this)
 
 /**
  * Get screen off timeout in milliseconds

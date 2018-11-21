@@ -21,6 +21,7 @@
 * :fire: Dimenx unit2px rename to applyDimension
 * :white_check_mark: Prefect Jsonx testing
 * :white_check_mark: Prefect Textx testing
+* :fire: Settingsx getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem move to Windowx
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

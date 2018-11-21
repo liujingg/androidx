@@ -23,6 +23,7 @@
         <activity android:name=".app.FragmentxTest$TestFindUserVisibleChildActivity" />
         <activity android:name=".content.PackageInfoxTest$TestActivity" />
         <activity android:name=".util.DimenxTest$TestActivity" />
+        <activity android:name=".view.WindowxTest$TestActivity" />
         <activity android:name=".widget.ToastxTest$TestActivity" />
         <activity android:name=".widget.ToastxTest$TestActivity" />
         <activity android:name=".widget.ToastxTest$TestFragmentActivity" />
