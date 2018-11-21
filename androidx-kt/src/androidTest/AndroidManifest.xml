@@ -25,6 +25,51 @@
         <activity android:name=".widget.ToastxTest$TestActivity" />
         <activity android:name=".widget.ToastxTest$TestActivity" />
         <activity android:name=".widget.ToastxTest$TestFragmentActivity" />
+        <activity android:name=".app.ArgsBinderTest$TestNoExtrasActivity" />
+
+        <activity android:name=".app.ArgsBinderTest$TestUriActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx"
+                    android:scheme="https" />
+            </intent-filter>
+
+        </activity>
+
+        <activity android:name=".app.ArgsBinderTest$ResTestUriActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/res"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".app.ArgsBinderTest$TestOnlyUriNoIntentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/uri"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".app.ArgsBinderTest$TestOnlyIntentNoUriActivity"/>
+        <activity android:name=".app.ArgsBinderTest$TestBothIntentUriActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/uri/intent"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".app.ArgsBinderTest$TestNoIntentUriActivity"/>
 
         <service android:name=".TestService" />
         <receiver android:name=".TestReceiver" />
