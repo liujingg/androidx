@@ -24,57 +24,74 @@ import me.panpf.androidx.util.Textx
 
 
 /**
- * 获取一张文字位图
+ * Text to Bitmap
  *
- * @param text       文字
- * @param textColor  文字颜色
- * @param textSize   文字大小
- * @param leftBitmap 可以在文字的左边放置一张图片
+ * @param compact If true, use FontMetrics.descent - ascent to calculate the bitmap height, otherwise use FontMetrics.bottom - top
  */
-inline fun textToBitmap(text: String, textColor: Int, textSize: Float, leftBitmap: Bitmap? = null): Bitmap =
-        Textx.textToBitmap(text, textColor, textSize, leftBitmap)
+inline fun String.textToBitmap(textColor: Int, textSize: Float, compact: Boolean, leftBitmap: Bitmap? = null): Bitmap =
+        Textx.textToBitmap(this, textColor, textSize, compact, leftBitmap)
 
 /**
- * 使用 Html 的方式给字符串添加颜色标记
- */
-inline fun String.toHtmlColorFlag(color: String): String = Textx.toHtmlColorFlag(this, color)
-
-/**
- * 使用 Html 的方式给字符串添加红色标记
- */
-inline fun String.toHtmlRedFlag(): String = Textx.toHtmlRedFlag(this)
-
-/**
- * 使用 Html 的方式将字符串中所有关键字标记颜色
+ * Text to Bitmap
  *
- * @receiver 字符串
- * @param keyword      关键字
- * @param color        html 支持的颜色
+ * @param compact If true, use FontMetrics.descent - ascent to calculate the bitmap height, otherwise use FontMetrics.bottom - top
  */
-inline fun String.keywordMadeColorByHtml(keyword: String, color: String): String = Textx.keywordMadeColorByHtml(this, keyword, color)
+inline fun String.textToBitmap(textColor: Int, textSize: Float, compact: Boolean): Bitmap =
+        Textx.textToBitmap(this, textColor, textSize, compact)
 
 /**
- * 使用 Html 的方式将字符串中所有关键字标记成红色
- *
- * @receiver 字符串
- * @param keyword      关键字
+ * Text to Bitmap
  */
-inline fun String.keywordMadeRedByHtml(keyword: String): String = Textx.keywordMadeRedByHtml(this, keyword)
+inline fun String.textToBitmap(textColor: Int, textSize: Float, leftBitmap: Bitmap? = null): Bitmap =
+        Textx.textToBitmap(this, textColor, textSize, leftBitmap)
 
 /**
- * 使用 Spannable 的方式将字符串中所有的关键字标记颜色
- *
- * @receiver 字符串
- * @param keyword      关键字
- * @param color        颜色
+ * Text to Bitmap
  */
-inline fun String.keywordMadeColorBySpannable(keyword: String, color: Int): SpannableStringBuilder =
-        Textx.keywordMadeColorBySpannable(this, keyword, color)
+inline fun String.textToBitmap(textColor: Int, textSize: Float): Bitmap =
+        Textx.textToBitmap(this, textColor, textSize)
+
 
 /**
- * 使用 Spannable 的方式将字符串中所有的关键字标记成红色
- *
- * @receiver 字符串
- * @param keyword      关键字
+ * Modify the display color of a string using Html
  */
-inline fun String.keywordMadeRedBySpannable(keyword: String): SpannableStringBuilder = Textx.keywordMadeRedBySpannable(this, keyword)
+inline fun String.changeColorByHtml(color: String): String = Textx.changeColorByHtml(this, color)
+
+/**
+ * Modify the display red color of a string using Html
+ */
+inline fun String.changeColorToRedByHtml(): String = Textx.changeColorToRedByHtml(this)
+
+
+/**
+ * Use Html to modify the display color of all specified keywords in a string
+ */
+inline fun String.changeKeywordColorByHtml(keyword: String, color: String): String = Textx.changeKeywordColorByHtml(this, keyword, color)
+
+/**
+ * Use Html to modify the display color of all specified keywords in a string
+ */
+inline fun String.changeKeywordColorToRedByHtml(keyword: String): String = Textx.changeKeywordColorToRedByHtml(this, keyword)
+
+
+/**
+ * Use Spannable to modify the display color of a string
+ */
+inline fun String.changeColorBySpannable(color: Int): SpannableStringBuilder = Textx.changeColorBySpannable(this, color)
+
+/**
+ * Use Spannable to modify the display color of a string
+ */
+inline fun String.changeColorToRedBySpannable(): SpannableStringBuilder = Textx.changeColorToRedBySpannable(this)
+
+
+/**
+ * Use Spannable to modify the display color of all specified keywords in a string
+ */
+inline fun String.changeKeywordColorBySpannable(keyword: String, color: Int): SpannableStringBuilder =
+        Textx.changeKeywordColorBySpannable(this, keyword, color)
+
+/**
+ * Use Spannable to modify the display color of all specified keywords in a string
+ */
+inline fun String.changeKeywordColorToRedBySpannable(keyword: String): SpannableStringBuilder = Textx.changeKeywordColorToRedBySpannable(this, keyword)

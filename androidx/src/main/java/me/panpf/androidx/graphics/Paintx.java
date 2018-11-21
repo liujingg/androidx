@@ -52,16 +52,26 @@ public class Paintx {
     }
 
     /**
+     * 获取给定画笔的文字高度
+     *
+     * @param paint 给定的画笔
+     * @return 文字的高度
+     */
+    public static float getTextHeightCompact(@NonNull Paint paint) {
+        FontMetrics fm = paint.getFontMetrics();
+        return fm.descent - fm.ascent;
+    }
+
+    /**
      * 获取给定尺寸的文字的高度
      *
      * @param textSize 给定尺寸
      * @return 文字的高度
      */
-    public static float getTextHeight(float textSize) {
+    public static float getTextHeightCompact(float textSize) {
         Paint paint = new Paint();
         paint.setTextSize(textSize);
-        FontMetrics fm = paint.getFontMetrics();
-        return fm.descent - fm.ascent;
+        return getTextHeightCompact(paint);
     }
 
     /**
@@ -72,7 +82,19 @@ public class Paintx {
      */
     public static float getTextHeight(@NonNull Paint paint) {
         FontMetrics fm = paint.getFontMetrics();
-        return fm.descent - fm.ascent;
+        return fm.bottom - fm.top;
+    }
+
+    /**
+     * 获取给定尺寸的文字的高度
+     *
+     * @param textSize 给定尺寸
+     * @return 文字的高度
+     */
+    public static float getTextHeight(float textSize) {
+        Paint paint = new Paint();
+        paint.setTextSize(textSize);
+        return getTextHeight(paint);
     }
 
     /**
@@ -113,5 +135,23 @@ public class Paintx {
     public static float getTextLeading(@NonNull Paint paint) {
         FontMetrics fm = paint.getFontMetrics();
         return fm.leading - fm.ascent;
+    }
+
+    /**
+     * 获取绘制文字时垂直居中的的基线位置，使用 bottom 和 top 计算
+     * @param rectTop 绘制面板的顶部位置
+     * @param rectBottom 绘制面板的底部位置
+     */
+    public static float getDrawTextVerticalCenterBaseLine(@NonNull Paint paint, float rectTop, float rectBottom) {
+        return (rectBottom + rectTop - paint.getFontMetrics().bottom - paint.getFontMetrics().top) / 2;
+    }
+
+    /**
+     * 获取绘制文字时垂直居中的的基线位置，使用 descent 和 ascent 计算
+     * @param rectTop 绘制面板的顶部位置
+     * @param rectBottom 绘制面板的底部位置
+     */
+    public static float getDrawTextVerticalCenterBaseLineCompact(@NonNull Paint paint, float rectTop, float rectBottom) {
+        return (rectBottom + rectTop - paint.getFontMetrics().descent - paint.getFontMetrics().ascent) / 2;
     }
 }

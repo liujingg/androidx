@@ -38,19 +38,18 @@ inline fun String.getTextWidth(textSize: Float): Float = Paintx.getTextWidth(thi
 inline fun String.getTextWidth(paint: Paint): Float = Paintx.getTextWidth(this, paint)
 
 /**
- * 获取给定尺寸的文字的高度
+ * 获取给定画笔的文字高度
  *
- * @param textSize 给定尺寸
  * @return 文字的高度
  */
-inline fun getTextHeight(textSize: Float): Float = Paintx.getTextHeight(textSize)
+inline fun Paint.getTextHeight(): Float = Paintx.getTextHeight(this)
 
 /**
  * 获取给定画笔的文字高度
  *
  * @return 文字的高度
  */
-inline fun Paint.getTextHeight(): Float = Paintx.getTextHeight(this)
+inline fun Paint.getTextHeightCompact(): Float = Paintx.getTextHeightCompact(this)
 
 /**
  * 获取给定文字的宽度
@@ -74,3 +73,17 @@ inline fun String.getTextHeightByBounds(textSize: Float): Int = Paintx.getTextHe
  * @return 返回指定笔离文字顶部的基准距离
  */
 inline fun Paint.getTextLeading(): Float = Paintx.getTextLeading(this)
+
+/**
+ * 获取绘制文字时垂直居中的的基线位置，使用 bottom 和 top 计算
+ * @param rectTop 绘制面板的顶部位置
+ * @param rectBottom 绘制面板的底部位置
+ */
+inline fun Paint.getDrawTextVerticalCenterBaseLine(rectTop: Float, rectBottom: Float): Float = Paintx.getDrawTextVerticalCenterBaseLine(this, rectTop, rectBottom)
+
+/**
+ * 获取绘制文字时垂直居中的的基线位置，使用 descent 和 ascent 计算
+ * @param rectTop 绘制面板的顶部位置
+ * @param rectBottom 绘制面板的底部位置
+ */
+inline fun Paint.getDrawTextVerticalCenterBaseLineCompact(rectTop: Float, rectBottom: Float): Float = Paintx.getDrawTextVerticalCenterBaseLineCompact(this, rectTop, rectBottom)

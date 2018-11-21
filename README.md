@@ -184,9 +184,9 @@ Dependencies:
     * isEmpty, isNotEmpty, toJsonArray, toJson, toStringList, toStringArray, toIntArray,
     * toBeanList, toBean, optString, optInt, optLong, optBoolean, optDouble, optJSONObject, optJSONArray,
     * getString, getInt, getLong, getBoolean, getDouble, getJSONObject, getJSONArray, format
-* Text: [Textx.java] | [Textx.kt]
-    * textToBitmap, toHtmlColorFlag, toHtmlRedFlag, keywordMadeColorByHtml, keywordMadeRedByHtml,
-    * keywordMadeColorBySpannable, keywordMadeRedBySpannable
+* Text: [Textx.java] ([Test][TextxTest.java]) | [Textx.kt] ([Test][TextxTest.kt])
+    * textToBitmap, changeColorByHtml, changeColorToRedByHtml, changeKeywordColorByHtml, changeKeywordColorToRedByHtml,
+    * changeColorBySpannable, changeColorToRedBySpannable, changeKeywordColorBySpannable, changeKeywordColorToRedBySpannable
 * WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java]) | [WeakAsyncTask.kt] ([Test][WeakAsyncTaskTest.kt])
 
 ### view

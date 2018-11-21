@@ -35,15 +35,12 @@ public class Textx {
     }
 
     /**
-     * 获取一张文字位图
+     * Text to Bitmap
      *
-     * @param text       文字
-     * @param textColor  文字颜色
-     * @param textSize   文字大小
-     * @param leftBitmap 可以在文字的左边放置一张图片
+     * @param compact If true, use FontMetrics.descent - ascent to calculate the bitmap height, otherwise use FontMetrics.bottom - top
      */
     @NonNull
-    public static Bitmap textToBitmap(@NonNull String text, int textColor, float textSize, @Nullable Bitmap leftBitmap) {
+    public static Bitmap textToBitmap(@NonNull String text, int textColor, float textSize, boolean compact, @Nullable Bitmap leftIcon) {
         Paint paint = new Paint();
         paint.setColor(textColor);
         paint.setTextSize(textSize);
@@ -51,23 +48,24 @@ public class Textx {
         paint.setFilterBitmap(true);
 
         float textWidth = Paintx.getTextWidth(text, paint);
-        float textHeight = Paintx.getTextHeight(paint);
+        float textHeight = compact ? Paintx.getTextHeightCompact(paint) : Paintx.getTextHeight(paint);
 
         int newBitmapWidth = textWidth % 1 == 0 ? (int) textWidth : (int) textWidth + 1;
         int newBitmapHeight = textHeight % 1 == 0 ? (int) textHeight : (int) textHeight + 1;
 
-        if (leftBitmap != null) {
-            newBitmapWidth += leftBitmap.getWidth();
-            newBitmapHeight = leftBitmap.getHeight() > newBitmapHeight ? leftBitmap.getHeight() : newBitmapHeight;
+        if (leftIcon != null) {
+            newBitmapWidth += leftIcon.getWidth();
+            newBitmapHeight = leftIcon.getHeight() > newBitmapHeight ? leftIcon.getHeight() : newBitmapHeight;
         }
 
         Bitmap bitmap = Bitmap.createBitmap(newBitmapWidth, newBitmapHeight, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(bitmap);
-        if (leftBitmap != null) {
-            canvas.drawBitmap(leftBitmap, 0, (newBitmapHeight - leftBitmap.getHeight()) / 2, paint);
-            canvas.drawText(text, leftBitmap.getWidth(), (newBitmapHeight - textHeight) / 2 + Paintx.getTextLeading(paint), paint);
+        float y = compact ? Paintx.getDrawTextVerticalCenterBaseLineCompact(paint, 0, newBitmapHeight) : Paintx.getDrawTextVerticalCenterBaseLine(paint, 0, newBitmapHeight);
+        if (leftIcon != null) {
+            canvas.drawBitmap(leftIcon, 0, (newBitmapHeight - leftIcon.getHeight()) / 2, paint);
+            canvas.drawText(text, leftIcon.getWidth(), y, paint);
         } else {
-            canvas.drawText(text, 0, (newBitmapHeight - textHeight) / 2 + Paintx.getTextLeading(paint), paint);
+            canvas.drawText(text, 0, y, paint);
         }
         canvas.save();
 
@@ -75,63 +73,84 @@ public class Textx {
     }
 
     /**
-     * 获取一张文字位图
+     * Text to Bitmap
      *
-     * @param text      文字
-     * @param textColor 文字颜色
-     * @param textSize  文字大小
-     * @return 文字位图
+     * @param compact If true, use FontMetrics.descent - ascent to calculate the bitmap height, otherwise use FontMetrics.bottom - top
      */
     @NonNull
-    public static Bitmap textToBitmap(@NonNull String text, int textColor, float textSize) {
-        return textToBitmap(text, textColor, textSize, null);
+    public static Bitmap textToBitmap(@NonNull String text, int textColor, float textSize, boolean compact) {
+        return textToBitmap(text, textColor, textSize, compact, null);
     }
 
     /**
-     * 使用 Html 的方式给字符串添加颜色标记
+     * Text to Bitmap
      */
-    public static String toHtmlColorFlag(@NonNull String string, @NonNull String color) {
+    @NonNull
+    public static Bitmap textToBitmap(@NonNull String text, int textColor, float textSize, @Nullable Bitmap leftIcon) {
+        return textToBitmap(text, textColor, textSize, false, leftIcon);
+    }
+
+    /**
+     * Text to Bitmap
+     */
+    @NonNull
+    public static Bitmap textToBitmap(@NonNull String text, int textColor, float textSize) {
+        return textToBitmap(text, textColor, textSize, false, null);
+    }
+
+
+    /**
+     * Modify the display color of a string using Html
+     */
+    public static String changeColorByHtml(@NonNull String string, @NonNull String color) {
         return "<font color=\"" + color + "\">" + string + "</font>";
     }
 
     /**
-     * 使用 Html 的方式给字符串添加红色标记
+     * Modify the display red color of a string using Html
      */
-    public static String toHtmlRedFlag(@NonNull String string) {
-        return toHtmlColorFlag(string, "red");
+    public static String changeColorToRedByHtml(@NonNull String string) {
+        return changeColorByHtml(string, "red");
     }
 
+
     /**
-     * 使用 Html 的方式将字符串中所有关键字标记颜色
-     *
-     * @param sourceString 字符串
-     * @param keyword      关键字
-     * @param color        html 支持的颜色
+     * Use Html to modify the display color of all specified keywords in a string
      */
-    public static String keywordMadeColorByHtml(@NonNull String sourceString, @NonNull String keyword, @NonNull String color) {
+    public static String changeKeywordColorByHtml(@NonNull String sourceString, @NonNull String keyword, @NonNull String color) {
         return sourceString.replaceAll(keyword, "<font color=\"" + color + "\">" + keyword + "</font>");
     }
 
     /**
-     * 使用 Html 的方式将字符串中所有关键字标记成红色
-     *
-     * @param sourceString 字符串
-     * @param keyword      关键字
+     * Use Html to modify the display color of all specified keywords in a string
      */
-    public static String keywordMadeRedByHtml(@NonNull String sourceString, @NonNull String keyword) {
-        return keywordMadeColorByHtml(sourceString, keyword, "red");
+    public static String changeKeywordColorToRedByHtml(@NonNull String sourceString, @NonNull String keyword) {
+        return changeKeywordColorByHtml(sourceString, keyword, "red");
+    }
+
+
+    /**
+     * Use Spannable to modify the display color of a string
+     */
+    public static SpannableStringBuilder changeColorBySpannable(@NonNull String sourceString, int color) {
+        SpannableStringBuilder builder = new SpannableStringBuilder(sourceString);
+        builder.setSpan(new ForegroundColorSpan(color), 0, sourceString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
+        return builder;
     }
 
     /**
-     * 使用 Spannable 的方式将字符串中所有的关键字标记颜色
-     *
-     * @param sourceString 字符串
-     * @param keyword      关键字
-     * @param color        颜色
+     * Use Spannable to modify the display color of a string
      */
-    public static SpannableStringBuilder keywordMadeColorBySpannable(@NonNull String sourceString, @NonNull String keyword, int color) {
-        SpannableStringBuilder builder = new SpannableStringBuilder(sourceString);
+    public static SpannableStringBuilder changeColorToRedBySpannable(@NonNull String sourceString) {
+        return changeColorBySpannable(sourceString, Color.RED);
+    }
 
+
+    /**
+     * Use Spannable to modify the display color of all specified keywords in a string
+     */
+    public static SpannableStringBuilder changeKeywordColorBySpannable(@NonNull String sourceString, @NonNull String keyword, int color) {
+        SpannableStringBuilder builder = new SpannableStringBuilder(sourceString);
         int fromIndex = 0;
         while (fromIndex < sourceString.length()) {
             int index = sourceString.indexOf(keyword, fromIndex);
@@ -143,17 +162,13 @@ public class Textx {
                 break;
             }
         }
-
         return builder;
     }
 
     /**
-     * 使用 Spannable 的方式将字符串中所有的关键字标记成红色
-     *
-     * @param sourceString 字符串
-     * @param keyword      关键字
+     * Use Spannable to modify the display color of all specified keywords in a string
      */
-    public static SpannableStringBuilder keywordMadeRedBySpannable(@NonNull String sourceString, @NonNull String keyword) {
-        return keywordMadeColorBySpannable(sourceString, keyword, Color.RED);
+    public static SpannableStringBuilder changeKeywordColorToRedBySpannable(@NonNull String sourceString, @NonNull String keyword) {
+        return changeKeywordColorBySpannable(sourceString, keyword, Color.RED);
     }
 }
