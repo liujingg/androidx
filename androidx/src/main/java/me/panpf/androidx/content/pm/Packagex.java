@@ -22,39 +22,31 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
-import android.text.TextUtils;
 import android.util.Pair;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.panpf.androidx.graphics.drawable.Drawablex;
+import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Premisex;
 
-@SuppressWarnings("WeakerAccess")
 public class Packagex {
 
     private Packagex() {
     }
 
+
     /**
-     * 是否已安装指定包名的 app
-     *
-     * @param context     {@link Context}
-     * @param packageName app 包名
+     * Return true if the app with the specified packageName is installed
      */
     public static boolean isInstalled(@NonNull Context context, @NonNull String packageName) {
-        //noinspection ConstantConditions
-        if (TextUtils.isEmpty(packageName) || context == null) {
-            return false;
-        }
-
         try {
             context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_UNINSTALLED_PACKAGES);
             return true;
@@ -63,33 +55,59 @@ public class Packagex {
         }
     }
 
+
     /**
-     * 获取已安装版本号
-     *
-     * @param context     {@link Context}
-     * @param packageName app 包名
-     * @return -1: 未安装
+     * Get the versionCode of the app for the specified packageName
      */
-    public static int getVersionCode(@NonNull Context context, @NonNull String packageName) {
+    public static int getVersionCode(@NonNull Context context, @NonNull String packageName) throws NameNotFoundException {
+        return context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_META_DATA).versionCode;
+    }
+
+    /**
+     * Get the versionCode of the app for the specified packageName, return to defaultValue if not installed
+     */
+    public static int getVersionCodeOr(@NonNull Context context, @NonNull String packageName, int defaultValue) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo;
         try {
             packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_META_DATA);
         } catch (NameNotFoundException e) {
-            return -1;
+            return defaultValue;
         }
 
         return packageInfo.versionCode;
     }
 
+
     /**
-     * 获取已安装版本名称
-     *
-     * @param context     {@link Context}
-     * @param packageName app 包名
+     * Get the versionName of the app for the specified packageName
+     */
+    @NonNull
+    public static String getVersionName(@NonNull Context context, @NonNull String packageName) throws NameNotFoundException {
+        return context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_META_DATA).versionName;
+    }
+
+    /**
+     * Get the versionName of the app for the specified packageName, return to defaultValue if not installed
+     */
+    @NonNull
+    public static String getVersionNameOr(@NonNull Context context, @NonNull String packageName, @NotNull String defaultValue) {
+        PackageManager packageManager = context.getPackageManager();
+        PackageInfo packageInfo;
+        try {
+            packageInfo = packageManager.getPackageInfo(packageName, PackageManager.GET_META_DATA);
+        } catch (NameNotFoundException e) {
+            return defaultValue;
+        }
+
+        return packageInfo.versionName;
+    }
+
+    /**
+     * Get the versionName of the app for the specified packageName, return to null if not installed
      */
     @Nullable
-    public static String getVersionName(@NonNull Context context, @NonNull String packageName) {
+    public static String getVersionNameOrNull(@NonNull Context context, @NonNull String packageName) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo;
         try {
@@ -101,15 +119,20 @@ public class Packagex {
         return packageInfo.versionName;
     }
 
+
     /**
-     * 获取已安装的指定包名 app 的信息
-     *
-     * @param context     {@link Context}
-     * @param packageName app 包名
-     * @return null：未安装
+     * Get information about the app with the specified packageName
+     */
+    @NonNull
+    public static AppPackage getPackage(@NonNull Context context, @NonNull String packageName) throws NameNotFoundException {
+        return packageInfoToAppPackage(context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_META_DATA), context.getPackageManager());
+    }
+
+    /**
+     * Get information about the app with the specified packageName, return to null if not installed
      */
     @Nullable
-    public static AppPackage getPackage(@NonNull Context context, @NonNull String packageName) {
+    public static AppPackage getPackageOrNull(@NonNull Context context, @NonNull String packageName) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo;
         try {
@@ -121,65 +144,45 @@ public class Packagex {
         return packageInfoToAppPackage(packageInfo, packageManager);
     }
 
+
     /**
-     * 根据标记信息判断是否是系统 app
-     *
-     * @param appFlags app 标记信息，来自 {@link ApplicationInfo}
+     * Return true if it is a system APP
      */
-    public static boolean isSystemApp(int appFlags) {
-        return (appFlags & ApplicationInfo.FLAG_SYSTEM) == 1;
+    public static boolean isSystemApp(@NonNull ApplicationInfo applicationInfo) {
+        return (applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1;
     }
 
     /**
-     * 是否是系统 app
-     *
-     * @param appInfo {@link ApplicationInfo}
+     * Return true if the app with the specified packageName is the system APP
      */
-    public static boolean isSystemApp(@NonNull ApplicationInfo appInfo) {
-        return isSystemApp(appInfo.flags);
+    public static boolean isSystemApp(@NonNull Context context, @NonNull String packageName) throws NameNotFoundException {
+        ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+        return (applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1;
     }
 
     /**
-     * 判断指定包名的已安装 app 是否是系统 app
-     *
-     * @param packageManager {@link PackageManager}
-     * @param packageName    app 包名
-     * @return false: 未安装或不是系统 app
+     * Return true if the app with the specified packageName is the system APP, return to defaultValue if not installed
      */
-    public static Boolean isSystemApp(@NonNull PackageManager packageManager, @NonNull String packageName) {
+    public static boolean isSystemAppOr(@NonNull Context context, @NonNull String packageName, boolean defaultValue) {
         ApplicationInfo applicationInfo;
         try {
-            applicationInfo = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+            applicationInfo = context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
         } catch (NameNotFoundException e) {
             e.printStackTrace();
-            return null;
+            return defaultValue;
         }
-        return isSystemApp(applicationInfo.flags);
-    }
-
-    /**
-     * 判断指定包名的已安装 app 是否是系统 app
-     *
-     * @param context     {@link Context}
-     * @param packageName app 包名
-     * @return false: 未安装或不是系统 app
-     */
-    public static Boolean isSystemApp(@NonNull Context context, @NonNull String packageName) {
-        return isSystemApp(context.getPackageManager(), packageName);
+        return (applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 1;
     }
 
 
     /**
-     * 获取所有已安装 app 的包名和版本号集合
+     * List the packageName and versionCode of all installed APPs
      *
-     * @param context          {@link Context}
-     * @param excludeSystemApp 是否排除系统应用
-     * @param excludeSelf      是否排除自己
-     * @return 所有已安装 app 的包名和版本号集合
+     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSelf      If true, exclude yourself
      */
-    @Nullable
-    @WorkerThread
-    public static List<Pair<String, Integer>> listAppIdAndVersionCode(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    @NonNull
+    public static List<Pair<String, Integer>> listPackageNameAndVersionCode(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -188,7 +191,7 @@ public class Packagex {
             // ApplicationPackageManager crashes internally on dazen X7 4.4.4 and Coolpad Y803-8 5.1 models
         }
         if (packageInfoList == null || packageInfoList.isEmpty()) {
-            return null;
+            return new ArrayList<>(0);
         }
 
         List<Pair<String, Integer>> appsSet = new ArrayList<>(packageInfoList.size());
@@ -197,7 +200,7 @@ public class Packagex {
                 continue;
             }
 
-            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo.flags)) {
+            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
                 continue;
             }
 
@@ -207,16 +210,13 @@ public class Packagex {
     }
 
     /**
-     * 获取所有已安装 app 的包名和版本号 Map
+     * Get the packageName and versionCode of all installed apps Map
      *
-     * @param context          {@link Context}
-     * @param excludeSystemApp 是否排除系统应用
-     * @param excludeSelf      是否排除自己
-     * @return 所有已安装 app 的包名和版本号集合
+     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSelf      If true, exclude yourself
      */
-    @Nullable
-    @WorkerThread
-    public static android.support.v4.util.ArrayMap<String, Integer> listAppIdAndVersionCodeToMap(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    @NonNull
+    public static android.support.v4.util.ArrayMap<String, Integer> listPackageNameAndVersionCodeMap(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -225,7 +225,7 @@ public class Packagex {
             // ApplicationPackageManager crashes internally on dazen X7 4.4.4 and Coolpad Y803-8 5.1 models
         }
         if (packageInfoList == null || packageInfoList.isEmpty()) {
-            return null;
+            return new android.support.v4.util.ArrayMap<>(0);
         }
 
         android.support.v4.util.ArrayMap<String, Integer> appsSet = new android.support.v4.util.ArrayMap<>();
@@ -234,7 +234,7 @@ public class Packagex {
                 continue;
             }
 
-            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo.flags)) {
+            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
                 continue;
             }
 
@@ -244,16 +244,13 @@ public class Packagex {
     }
 
     /**
-     * 获取所有已安装 app 的包名
+     * List the packageName of all installed apps
      *
-     * @param context          {@link Context}
-     * @param excludeSystemApp 是否排除系统应用
-     * @param excludeSelf      是否排除自己
-     * @return 所有已安装 app 的包名集合
+     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSelf      If true, exclude yourself
      */
-    @Nullable
-    @WorkerThread
-    public static List<String> listAppId(Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
+    @NonNull
+    public static List<String> listPackageName(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -268,7 +265,7 @@ public class Packagex {
                     continue;
                 }
 
-                if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo.flags)) {
+                if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
                     continue;
                 }
 
@@ -276,23 +273,19 @@ public class Packagex {
             }
             return appsSet;
         } else {
-            return null;
+            return new ArrayList<>(0);
         }
     }
 
     /**
-     * 获取所有已安装 app
+     * List information for all installed apps
      *
-     * @param context          {@link Context}
-     * @param excludeSystemApp 是否排除系统应用
-     * @param excludeSelf      是否排除自己
-     * @param size             最多取多少个应用
-     * @return 所有已安装 app 列表
+     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSelf      If true, exclude yourself
+     * @param size             How many apps to get. -1: all
      */
-    @SuppressWarnings("WeakerAccess")
-    @Nullable
-    @WorkerThread
-    public static List<AppPackage> listPackage(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf, int size) {
+    @NonNull
+    public static List<AppPackage> listPackage(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf, int size) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> packageInfoList = null;
         try {
@@ -302,7 +295,7 @@ public class Packagex {
             // ApplicationPackageManager crashes internally on dazen X7 4.4.4 and Coolpad Y803-8 5.1 models
         }
         if (packageInfoList == null || packageInfoList.isEmpty()) {
-            return null;
+            return new ArrayList<>(0);
         }
 
         ArrayList<AppPackage> packageArrayList = new ArrayList<>(size > 0 ? size : packageInfoList.size());
@@ -312,7 +305,7 @@ public class Packagex {
                 continue;
             }
 
-            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo.flags)) {
+            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
                 continue;
             }
 
@@ -327,44 +320,37 @@ public class Packagex {
     }
 
     /**
-     * 获取所有已安装 app
+     * List information for all installed apps
      *
-     * @param context          {@link Context}
-     * @param excludeSystemApp 是否排除系统应用
-     * @param excludeSelf      是否排除自己
-     * @return 所有已安装 app 列表
+     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSelf      If true, exclude yourself
      */
-    @Nullable
-    @WorkerThread
-    public static List<AppPackage> listPackage(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
+    @NonNull
+    public static List<AppPackage> listPackage(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
         return listPackage(context, excludeSystemApp, excludeSelf, -1);
     }
 
-    /**
-     * 获取第一个 app 的信息
-     *
-     * @param context          {@link Context}
-     * @param excludeSystemApp 是否排除系统应用
-     * @param excludeSelf      是否排除自己
-     * @return null：未安装
-     */
-    @Nullable
-    @SuppressWarnings("WeakerAccess")
-    public static AppPackage getFirstPackage(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
-        List<AppPackage> appPackageList = listPackage(context, excludeSystemApp, excludeSelf, 1);
-        return appPackageList != null && appPackageList.size() >= 1 ? appPackageList.get(0) : null;
-    }
 
     /**
-     * 统计已安装 app 个数
+     * Get information about an app
      *
-     * @param context          {@link Context}
-     * @param excludeSystemApp 是否排除系统应用
-     * @param excludeSelf      是否排除自己
-     * @return 已安装 app 个数
+     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSelf      If true, exclude yourself
      */
-    @WorkerThread
-    public static int count(@NonNull Context context, @SuppressWarnings("SameParameterValue") boolean excludeSystemApp, boolean excludeSelf) {
+    @Nullable
+    public static AppPackage getOnePackage(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+        List<AppPackage> appPackageList = listPackage(context, excludeSystemApp, excludeSelf, 1);
+        return appPackageList.size() >= 1 ? appPackageList.get(0) : null;
+    }
+
+
+    /**
+     * Get the number of installed apps
+     *
+     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSelf      If true, exclude yourself
+     */
+    public static int count(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> packageInfoList = null;
         try {
@@ -383,7 +369,7 @@ public class Packagex {
                 continue;
             }
 
-            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo.flags)) {
+            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
                 continue;
             }
 
@@ -392,28 +378,33 @@ public class Packagex {
         return count;
     }
 
-    @NonNull
-    public static AppPackage packageInfoToAppPackage(@NonNull PackageInfo packageInfo, @NonNull PackageManager packageManager) {
-        ApplicationInfo applicationInfo = packageInfo.applicationInfo;
-        Premisex.checkNotNull(applicationInfo, "applicationInfo");
 
+    @NonNull
+    @SuppressWarnings("WeakerAccess")
+    public static AppPackage packageInfoToAppPackage(@NonNull PackageInfo packageInfo, @NonNull PackageManager packageManager) {
+        ApplicationInfo applicationInfo = Premisex.checkNotNull(packageInfo.applicationInfo, "applicationInfo");
         CharSequence label = applicationInfo.loadLabel(packageManager);
         File packageFile = new File(applicationInfo.sourceDir);
-        return new AppPackage(label.toString(), applicationInfo.packageName, packageInfo.versionCode,
-                packageInfo.versionName, packageFile.getPath(), packageFile.length(),
-                packageFile.lastModified(), isSystemApp(applicationInfo.flags), applicationInfo.enabled);
+        return new AppPackage(label.toString(), Stringx.orEmpty(applicationInfo.packageName), packageInfo.versionCode,
+                Stringx.orEmpty(packageInfo.versionName), packageFile.getPath(), packageFile.length(),
+                packageFile.lastModified(), isSystemApp(applicationInfo), applicationInfo.enabled);
+    }
+
+
+    /**
+     * Get the apk file of the app with the specified packageName
+     */
+    @NonNull
+    public static File getPackageApkFile(@NonNull Context context, @NonNull String packageName) throws NameNotFoundException {
+        ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
+        return new File(applicationInfo.sourceDir);
     }
 
     /**
-     * 获取指定 app 的安装包文件
-     *
-     * @param context     {@link Context}
-     * @param packageName app 包名
-     * @return app 的安装包文件
+     * Get the apk file of the app with the specified packageName, return to null if not installed
      */
     @Nullable
-    @WorkerThread
-    public static File getPackageFile(@NonNull Context context, @NonNull String packageName) {
+    public static File getPackageApkFileOrNull(@NonNull Context context, @NonNull String packageName) {
         ApplicationInfo applicationInfo;
         try {
             applicationInfo = context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
@@ -424,16 +415,25 @@ public class Packagex {
         return new File(applicationInfo.sourceDir);
     }
 
+
     /**
-     * 获取指定 app 的签名字节数组
-     *
-     * @param context     {@link Context}
-     * @param packageName app 包名
-     * @return app 的签名字节数组
+     * Get the signature data of the app with the specified packageName
+     */
+    @NonNull
+    public static byte[] getAppSignatureBytes(@NonNull Context context, @NonNull String packageName) throws NameNotFoundException {
+        PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
+        if (packageInfo.signatures != null && packageInfo.signatures.length > 0) {
+            return packageInfo.signatures[0].toByteArray();
+        } else {
+            throw new IllegalArgumentException(packageName + " signatures is empty");
+        }
+    }
+
+    /**
+     * Get the signature data of the app with the specified packageName, return to null if not installed
      */
     @Nullable
-    @WorkerThread
-    public static byte[] getAppSignatureBytes(@NonNull Context context, @NonNull String packageName) {
+    public static byte[] getAppSignatureBytesOrNull(@NonNull Context context, @NonNull String packageName) {
         try {
             PackageInfo packageInfo = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_SIGNATURES);
             if (packageInfo.signatures != null && packageInfo.signatures.length > 0) {
@@ -447,16 +447,13 @@ public class Packagex {
         }
     }
 
+
     /**
-     * 获取已安装 app 图标的 Drawable 版本
+     * Get the icon Drawable of the app of the specified packageName
      *
-     * @param context     {@link Context}
-     * @param packageName app 包名
-     * @param versionCode app 版本号，如果版本号小于等于 0 则不匹配版本，否则版本必须一致才能返回图标
-     * @return app 图标
+     * @param versionCode App versionCode. Returns null if versionCode is inconsistent, -1: ignores versionCode
      */
     @Nullable
-    @WorkerThread
     public static Drawable getAppIconDrawable(@NonNull Context context, @NonNull String packageName, int versionCode) {
         PackageManager pm = context.getPackageManager();
         PackageInfo packageInfo;
@@ -474,42 +471,22 @@ public class Packagex {
     }
 
     /**
-     * 获取已安装 app 图标的 bitmap 版本，如果图标不是 BitmapDrawable 则创建新的 bitmap
+     * Get the icon Bitmap of the app of the specified packageName
      *
-     * @param context     {@link Context}
-     * @param packageName app 包名
-     * @param versionCode app 版本号，如果版本号小于等于 0 则不匹配版本，否则版本必须一致才能返回图标
-     * @return app 图标
+     * @param versionCode App versionCode. Returns null if versionCode is inconsistent, -1: ignores versionCode
      */
     @Nullable
-    @WorkerThread
     public static Bitmap getAppIconBitmap(@NonNull Context context, @NonNull String packageName, int versionCode) {
         Drawable drawable = getAppIconDrawable(context, packageName, versionCode);
-        if (drawable == null || drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            return null;
-        }
-
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable) drawable).getBitmap();
-        }
-
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.draw(canvas);
-        return bitmap;
+        return drawable == null || drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0 ? null
+                : Drawablex.toBitmapWithIntrinsicSize(drawable);
     }
 
+
     /**
-     * 获取指定 apk 文件的图标的 Drawable 版本
-     *
-     * @param context     {@link Context}
-     * @param apkFilePath apk 文件路径
-     * @return apk 文件的图标
+     * Get the icon Drawable of the specified apk file
      */
     @Nullable
-    @WorkerThread
     public static Drawable getApkIconDrawable(@NonNull Context context, @NonNull String apkFilePath) {
         PackageManager pm = context.getPackageManager();
         PackageInfo packageInfo = pm.getPackageArchiveInfo(apkFilePath, PackageManager.GET_META_DATA);
@@ -523,29 +500,12 @@ public class Packagex {
     }
 
     /**
-     * 获取指定 apk 文件的图标的 bitmap 版本，如果图标不是 BitmapDrawable 则创建新的 bitmap
-     *
-     * @param context     {@link Context}
-     * @param apkFilePath apk 文件路径
-     * @return apk 文件的图标
+     * Get the icon Bitmap of the specified apk file
      */
     @Nullable
-    @WorkerThread
     public static Bitmap getApkIconBitmap(@NonNull Context context, @NonNull String apkFilePath) {
         Drawable drawable = getApkIconDrawable(context, apkFilePath);
-        if (drawable == null || drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
-            return null;
-        }
-
-        if (drawable instanceof BitmapDrawable) {
-            return ((BitmapDrawable) drawable).getBitmap();
-        }
-
-        drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());
-
-        Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        drawable.draw(canvas);
-        return bitmap;
+        return drawable == null || drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0 ? null
+                : Drawablex.toBitmapWithIntrinsicSize(drawable);
     }
 }

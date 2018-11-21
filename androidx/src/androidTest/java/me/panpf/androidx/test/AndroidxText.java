@@ -34,9 +34,9 @@ import java.util.concurrent.CountDownLatch;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.androidx.util.ResultRunnable;
-import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Predicate;
-import me.panpf.javax.util.Rangex;
+import me.panpf.javax.ranges.Rangex;
 
 @RunWith(AndroidJUnit4.class)
 public class AndroidxText {

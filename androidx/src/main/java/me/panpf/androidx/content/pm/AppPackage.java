@@ -33,17 +33,21 @@ public class AppPackage implements Parcelable {
             return new AppPackage[size];
         }
     };
+    @NonNull
     public String name;
+    @NonNull
     public String packageName;
     public int versionCode;
+    @NonNull
     public String versionName;
+    @NonNull
     public String packageFilePath;
     public long packageSize;
     public long packageLastModifiedTime;
     public boolean systemApp;
     public boolean enabled;
 
-    public AppPackage(String name, String packageName, int versionCode, String versionName, String packageFilePath,
+    public AppPackage(@NonNull String name, @NonNull String packageName, int versionCode, @NonNull String versionName, @NonNull String packageFilePath,
                       long packageSize, long packageLastModifiedTime, boolean systemApp, boolean enabled) {
         this.name = name;
         this.packageName = packageName;
@@ -56,6 +60,7 @@ public class AppPackage implements Parcelable {
         this.enabled = enabled;
     }
 
+    @SuppressWarnings("ConstantConditions")
     protected AppPackage(Parcel in) {
         name = in.readString();
         packageName = in.readString();

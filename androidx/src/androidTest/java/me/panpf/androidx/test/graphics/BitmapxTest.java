@@ -36,7 +36,7 @@ import java.io.InputStream;
 import me.panpf.androidx.graphics.Bitmapx;
 import me.panpf.androidx.graphics.Colorx;
 import me.panpf.androidx.graphics.drawable.Drawablex;
-import me.panpf.javax.io.IOStreamx;
+import me.panpf.javax.io.Streamx;
 import me.panpf.javax.util.Premisex;
 
 @RunWith(AndroidJUnit4.class)
@@ -112,7 +112,7 @@ public class BitmapxTest {
         Context context = InstrumentationRegistry.getContext();
         InputStream inputStream = context.getResources().openRawResource(me.panpf.androidx.test.R.drawable.rect);
         Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-        IOStreamx.safeClose(inputStream);
+        Streamx.closeQuietly(inputStream);
 
         final int bitmapWidth = 99, bitmapHeight = 55;
         Bitmap newBitmap = Bitmapx.centerCrop(bitmap, bitmapWidth, bitmapHeight);

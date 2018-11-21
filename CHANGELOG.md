@@ -5,6 +5,24 @@
 * :white_check_mark: Perfect Intentx testing
 * :sparkles: Adds LifecycleBroadcastReceiver
 * :white_check_mark: Perfect Dialogx testing
+* :sparkles: Adds BundleBuilder
+* :fire: Fragmentx instance rename to instantiate, instanceOrigin rename to instantiateOrigin
+* :white_check_mark: Perfect Fragmentx testing
+* :fire: Serevicex tryStart rename to startIfNoRunning, tryStop rename to stopIfRunning
+* :white_check_mark: Perfect Servicex testing
+* :white_check_mark: Perfect Assetx testing
+* :fire: Remove Assetx
+* :fire: Remove Contentx
+* :fire: Refactoring Preferencex
+* :white_check_mark: Prefect Preferencex testing
+* :fire: Refactoring Packagex
+* :white_check_mark: Prefect Packagex testing
+* :white_check_mark: Prefect Dimenx testing
+* :fire: Dimenx unit2px rename to applyDimension
+* :white_check_mark: Prefect Jsonx testing
+
+Upgrade
+* :arrow_up: Upgrade Javax 0.9.0
 
 ## v0.6.0
 

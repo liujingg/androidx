@@ -22,7 +22,7 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
-import me.panpf.javax.util.Arrayx;
+import me.panpf.javax.collections.Arrayx;
 
 public class ClipUri extends ClipContent {
 

@@ -37,43 +37,39 @@ public class Dimenx {
 
 
     public static int dp2px(@NonNull Context context, float dpValue) {
-        return (int) ((double) (dpValue * context.getResources().getDisplayMetrics().density) + 0.5D);
+        return (int) (dpValue * context.getResources().getDisplayMetrics().density + 0.5f);
     }
 
     public static int dp2px(@NonNull Context context, int dpValue) {
-        return dp2px(context, (float) dpValue);
+        return (int) ((float) dpValue * context.getResources().getDisplayMetrics().density + 0.5f);
     }
 
-    public static float px2dp(@NonNull Context context, float px) {
-        return px / context.getResources().getDisplayMetrics().density + 0.5F;
-    }
 
     public static float px2dp(@NonNull Context context, int px) {
-        return px2dp(context, (float) px);
+        return ((float) px) / context.getResources().getDisplayMetrics().density + 0.5f;
     }
 
+
     public static int sp2px(@NonNull Context context, float dpValue) {
-        return (int) ((double) (dpValue * context.getResources().getDisplayMetrics().scaledDensity) + 0.5D);
+        return (int) (dpValue * context.getResources().getDisplayMetrics().scaledDensity + 0.5f);
     }
 
     public static int sp2px(@NonNull Context context, int dpValue) {
-        return sp2px(context, (float) dpValue);
+        return (int) ((float) dpValue * context.getResources().getDisplayMetrics().scaledDensity + 0.5f);
     }
 
-    public static float px2sp(@NonNull Context context, float px) {
-        return px / context.getResources().getDisplayMetrics().scaledDensity + 0.5F;
-    }
 
     public static float px2sp(@NonNull Context context, int px) {
-        return px2sp(context, (float) px);
+        return ((float) px) / context.getResources().getDisplayMetrics().scaledDensity + 0.5f;
     }
 
-    public static float unit2px(@NonNull Context context, @DimenUnit int unit, float value) {
+
+    public static float applyDimension(@NonNull Context context, @DimenUnit int unit, float value) {
         return TypedValue.applyDimension(unit, value, context.getResources().getDisplayMetrics());
     }
 
-    public static float unit2px(@NonNull Context context, @DimenUnit int unit, int value) {
-        return unit2px(context, unit, (float) value);
+    public static float applyDimension(@NonNull Context context, @DimenUnit int unit, int value) {
+        return TypedValue.applyDimension(unit, (float) value, context.getResources().getDisplayMetrics());
     }
 
 
@@ -81,43 +77,39 @@ public class Dimenx {
 
 
     public static int dp2px(@NonNull android.support.v4.app.Fragment fragment, float dpValue) {
-        return (int) ((double) (dpValue * fragment.getResources().getDisplayMetrics().density) + 0.5D);
+        return (int) (dpValue * fragment.getResources().getDisplayMetrics().density + 0.5f);
     }
 
     public static int dp2px(@NonNull android.support.v4.app.Fragment fragment, int dpValue) {
-        return dp2px(fragment, (float) dpValue);
+        return (int) ((float) dpValue * fragment.getResources().getDisplayMetrics().density + 0.5f);
     }
 
-    public static float px2dp(@NonNull android.support.v4.app.Fragment fragment, float px) {
-        return px / fragment.getResources().getDisplayMetrics().density + 0.5F;
-    }
 
     public static float px2dp(@NonNull android.support.v4.app.Fragment fragment, int px) {
-        return px2dp(fragment, (float) px);
+        return ((float) px) / fragment.getResources().getDisplayMetrics().density + 0.5f;
     }
 
+
     public static int sp2px(@NonNull android.support.v4.app.Fragment fragment, float dpValue) {
-        return (int) ((double) (dpValue * fragment.getResources().getDisplayMetrics().scaledDensity) + 0.5D);
+        return (int) (dpValue * fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f);
     }
 
     public static int sp2px(@NonNull android.support.v4.app.Fragment fragment, int dpValue) {
-        return sp2px(fragment, (float) dpValue);
+        return (int) ((float) dpValue * fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f);
     }
 
-    public static float px2sp(@NonNull android.support.v4.app.Fragment fragment, float px) {
-        return px / fragment.getResources().getDisplayMetrics().scaledDensity + 0.5F;
-    }
 
     public static float px2sp(@NonNull android.support.v4.app.Fragment fragment, int px) {
-        return px2sp(fragment, (float) px);
+        return ((float) px) / fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f;
     }
 
-    public static float unit2px(@NonNull android.support.v4.app.Fragment fragment, @DimenUnit int unit, float value) {
+
+    public static float applyDimension(@NonNull android.support.v4.app.Fragment fragment, @DimenUnit int unit, float value) {
         return TypedValue.applyDimension(unit, value, fragment.getResources().getDisplayMetrics());
     }
 
-    public static float unit2px(@NonNull android.support.v4.app.Fragment fragment, @DimenUnit int unit, int value) {
-        return unit2px(fragment, unit, (float) value);
+    public static float applyDimension(@NonNull android.support.v4.app.Fragment fragment, @DimenUnit int unit, int value) {
+        return TypedValue.applyDimension(unit, (float) value, fragment.getResources().getDisplayMetrics());
     }
 
 
@@ -125,43 +117,39 @@ public class Dimenx {
 
 
     public static int dp2px(@NonNull android.app.Fragment fragment, float dpValue) {
-        return (int) ((double) (dpValue * fragment.getResources().getDisplayMetrics().density) + 0.5D);
+        return (int) (dpValue * fragment.getResources().getDisplayMetrics().density + 0.5f);
     }
 
     public static int dp2px(@NonNull android.app.Fragment fragment, int dpValue) {
-        return dp2px(fragment, (float) dpValue);
+        return (int) ((float) dpValue * fragment.getResources().getDisplayMetrics().density + 0.5f);
     }
 
-    public static float px2dp(@NonNull android.app.Fragment fragment, float px) {
-        return px / fragment.getResources().getDisplayMetrics().density + 0.5F;
-    }
 
     public static float px2dp(@NonNull android.app.Fragment fragment, int px) {
-        return px2dp(fragment, (float) px);
+        return ((float) px) / fragment.getResources().getDisplayMetrics().density + 0.5f;
     }
 
+
     public static int sp2px(@NonNull android.app.Fragment fragment, float dpValue) {
-        return (int) ((double) (dpValue * fragment.getResources().getDisplayMetrics().scaledDensity) + 0.5D);
+        return (int) (dpValue * fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f);
     }
 
     public static int sp2px(@NonNull android.app.Fragment fragment, int dpValue) {
-        return sp2px(fragment, (float) dpValue);
+        return (int) ((float) dpValue * fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f);
     }
 
-    public static float px2sp(@NonNull android.app.Fragment fragment, float px) {
-        return px / fragment.getResources().getDisplayMetrics().scaledDensity + 0.5F;
-    }
 
     public static float px2sp(@NonNull android.app.Fragment fragment, int px) {
-        return px2sp(fragment, (float) px);
+        return ((float) px) / fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f;
     }
 
-    public static float unit2px(@NonNull android.app.Fragment fragment, @DimenUnit int unit, float value) {
+
+    public static float applyDimension(@NonNull android.app.Fragment fragment, @DimenUnit int unit, float value) {
         return TypedValue.applyDimension(unit, value, fragment.getResources().getDisplayMetrics());
     }
 
-    public static float unit2px(@NonNull android.app.Fragment fragment, @DimenUnit int unit, int value) {
-        return unit2px(fragment, unit, (float) value);
+    public static float applyDimension(@NonNull android.app.Fragment fragment, @DimenUnit int unit, int value) {
+        return TypedValue.applyDimension(unit, (float) value, fragment.getResources().getDisplayMetrics());
     }
 
 
@@ -169,43 +157,39 @@ public class Dimenx {
 
 
     public static int dp2px(@NonNull View view, float dpValue) {
-        return (int) ((double) (dpValue * view.getResources().getDisplayMetrics().density) + 0.5D);
+        return (int) (dpValue * view.getResources().getDisplayMetrics().density + 0.5f);
     }
 
     public static int dp2px(@NonNull View view, int dpValue) {
-        return dp2px(view, (float) dpValue);
+        return (int) ((float) dpValue * view.getResources().getDisplayMetrics().density + 0.5f);
     }
 
-    public static float px2dp(@NonNull View view, float px) {
-        return px / view.getResources().getDisplayMetrics().density + 0.5F;
-    }
 
     public static float px2dp(@NonNull View view, int px) {
-        return px2dp(view, (float) px);
+        return ((float) px) / view.getResources().getDisplayMetrics().density + 0.5f;
     }
 
+
     public static int sp2px(@NonNull View view, float dpValue) {
-        return (int) ((double) (dpValue * view.getResources().getDisplayMetrics().scaledDensity) + 0.5D);
+        return (int) (dpValue * view.getResources().getDisplayMetrics().scaledDensity + 0.5f);
     }
 
     public static int sp2px(@NonNull View view, int dpValue) {
-        return sp2px(view, (float) dpValue);
+        return (int) ((float) dpValue * view.getResources().getDisplayMetrics().scaledDensity + 0.5f);
     }
 
-    public static float px2sp(@NonNull View view, float px) {
-        return px / view.getResources().getDisplayMetrics().scaledDensity + 0.5F;
-    }
 
     public static float px2sp(@NonNull View view, int px) {
-        return px2sp(view, (float) px);
+        return ((float) px) / view.getResources().getDisplayMetrics().scaledDensity + 0.5f;
     }
 
-    public static float unit2px(@NonNull View view, @DimenUnit int unit, float value) {
+
+    public static float applyDimension(@NonNull View view, @DimenUnit int unit, float value) {
         return TypedValue.applyDimension(unit, value, view.getResources().getDisplayMetrics());
     }
 
-    public static float unit2px(@NonNull View view, @DimenUnit int unit, int value) {
-        return unit2px(view, unit, (float) value);
+    public static float applyDimension(@NonNull View view, @DimenUnit int unit, int value) {
+        return TypedValue.applyDimension(unit, (float) value, view.getResources().getDisplayMetrics());
     }
 
 

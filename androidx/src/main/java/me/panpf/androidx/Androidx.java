@@ -32,7 +32,7 @@ import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.androidx.util.ResultRunnable;
 import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.util.Collectionx;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Premisex;
 

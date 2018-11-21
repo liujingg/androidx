@@ -25,7 +25,7 @@ Please replace `$lastVersion` with the latest version: [![Download][version_java
 
 Dependencies:
 * [com.android.support:support-fragment][support_fragment]: [28.0.0][support_fragment_versions]
-* [me.panpf:javax][javax]: [0.8.5][javax_versions]
+* [me.panpf:javax][javax]: [0.9.0][javax_versions]
 
 ### Kotlin Expansion:
 
@@ -40,7 +40,7 @@ Please replace `$lastVersion` with the latest version: [![Download][version_kotl
 Dependencies:
 * [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.2.71][kotlin_versions]
 * [com.android.support:support-fragment][support_fragment]: [28.0.0][support_fragment_versions]
-* [me.panpf:javax-kt][javax]: [0.8.5][javax_versions]
+* [me.panpf:javax-kt][javax]: [0.9.0][javax_versions]
 
 `androidx-kt is a androidx extension on the Kotlin platform that allows you to use androidx more comfortably on Kotlin`
 
@@ -65,13 +65,13 @@ Dependencies:
     * bind\*UriIntentArg, bind\*UriIntentArgOr
 * Dialog: [Dialogx.java] ([Test][DialogxTest.java]) | [Dialogx.kt] ([Test][DialogxTest.kt])
     * setClickButtonClosable, showProgressDialog
-* Fragment: [Fragmentx.java] | [Fragmentx.kt]
-    * isDestroyedCompat, getImplWithParent, instance, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
+* Fragment: [Fragmentx.java] ([Test][FragmentxTest.java]) | [Fragmentx.kt] ([Test][FragmentxTest.kt])
+    * isDestroyedCompat, getImplWithParent, instantiate, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
     * requireContext, requireAppContent, read\*Arg
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
-* Service: [Servicex.java] | [Servicex.kt]
-    * isRunning, start, tryStart, stop, tryStop
+* Service: [Servicex.java] ([Test][ServicexTest.java]) | [Servicex.kt] ([Test][ServicexTest.kt])
+    * isRunning, start, startIfNoRunning, stop, topIfRunning
 
 ### content
 * PackageInfo: [PackageInfox.java] ([Test][PackageInfoxTest.java]) | [PackageInfox.kt] ([Test][PackageInfoxTest.kt])
@@ -79,30 +79,34 @@ Dependencies:
     * findReceiverInfo, findReceiverInfoByName, findProviderInfo, findProviderInfoByName
     * findPermissionInfo, findPermissionInfoByName, findRequestedPermission, findRequestedPermissionByName
     * findMetaDataWithName, findMetaDataByName, findMetaDataWithValue, findMetaDataByValue
-* Package: [Packagex.java] | [Packagex.kt]
-    * isInstalled, getVersionCode, getVersionName, getPackage, isSystemApp, getAllAppIdAndVersionCodeMap,
-    * getAllAppIdAndVersionCodeSet, getAllAppId, getAllApp, getOne, count, getAppPackageFile,
-    * getAppSignatureBytes, getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
-* Asset: [Assetx.java] | [Assetx.kt]
-    * openInput, readBytes, readText, readLines, readBitmap
+* Package: [Packagex.java] ([Test][PackagexTest.java]) | [Packagex.kt] ([Test][PackagexTest.kt])
+    * isInstalled, getVersionCode, getVersionCodeOr, getVersionName, getVersionNameOr, getVersionNameOrNull,
+    * getPackage, getPackageOrNull, isSystemApp, isSystemAppOr, listPackageNameAndVersionCode,
+    * listPackageNameAndVersionCodeMap, listPackageName, listPackage, getOnePackage, count, getPackageApkFile,
+    * getPackageApkFileOrNull, getAppSignatureBytes, getAppSignatureBytesOrNull,
+    * getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
 * Clipboard: [Clipboardx.java] ([Test][ClipboardxTest.java]) | [Clipboardx.kt] ([Test][ClipboardxTest.kt])
     * copy, copyText, copyHtmlText, copyIntent, copyUri, copyRawUri, copyMimeTypeUri, copyContents,
     * get, getLabel, getContents, getText, getHtmlText, getIntent, getUri, addPrimaryClipChangedListener,
     * removePrimaryClipChangedListener, clear
-* Content: [Contentx.java] | [Contentx.kt]
-    * openInput, readBytes, readText, readLines, readBitmap
 * Context: [Contextx.java] ([Test][ContextxTest.java]) | [Contextx.kt] ([Test][ContextxTest.kt])
     * systemService, systemServiceOrNull, \*Manager
-* Intent: [Intentx.java] ([Test][IntentxTest.java] | [Intentx.kt] ([Test][IntentxTest.kt])
+* Intent: [Intentx.java] ([Test][IntentxTest.java]) | [Intentx.kt] ([Test][IntentxTest.kt])
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
     * createLaunchAppIntent, createAppDetailInSystemIntent, createActivityIntentByResolveInfo, createTakePhotoIntent,
     * createPickImageIntent, createCropImageIntent, createSendTextIntent, createSendTextFileIntent,
     * createSendImageFileIntent, createSendFileIntent, getShareFileUri
 * LifecycleBroadcastReceiver: [LifecycleBroadcastReceiver.java] ([Test][LifecycleBroadcastReceiverTest.java])
-* Preference: [Preferencex.java] | [Preferencex.kt]
-    * getPreference, putInt, putLong, putBoolean, putFloat, putString, putStringSet,
-    * getInt, getLong,getBoolean, getFloat, getString, getStringSet, getAll, remove, clear
+* Preference: [Preferencex.java] ([Test][PreferencexTest.java]) | [Preferencex.kt] ([Test][PreferencexTest.kt])
+    * getPreferences, getDefaultPreferences, putIntTo, putInt, putIntsTo, putInts, putLongTo, putLong, putLongsTo, putLongs,
+    * putBooleanTo, putBoolean, putBooleansTo, putBooleans, putFloatTo, putFloat, putFloatsTo, putFloats,
+    * putStringTo, putString, putStringsTo, putStrings, putStringSetTo, putStringSet, putStringSetsTo, putStringSets,
+    * getIntFrom, getInt, getLongFrom, getLong, getBooleanFrom, getBoolean, getFloatFrom, getFloat,
+    * getStringFrom, getStringOrNullFrom, getString, getStringOrNull, getStringSetFrom, getStringSetOrNullFrom,
+    * getStringSet, getStringSetOrNull, getAllFrom, getAll, removeFrom, remove, contains, containsAny, containsAll,
+    * containsFrom, containsAnyFrom, containsAllFrom, isEmpty, isEmptyFrom, clear,
+    * registerOnChangeListener, registerOnChangeListenerTo, unregisterOnChangeListener, unregisterOnChangeListenerFrom
 
 ### graphics
 * Drawable: [Drawablex.java] ([Test][DrawablexTest.java]) | [Drawablex.kt] ([Test][DrawablexTest.kt])
@@ -159,6 +163,7 @@ Dependencies:
     * getVolumeList, getVolumes, getVolumePaths, getVolumeState, getVolume
 * StorageVolumeCompat: [StorageVolumeCompat.java] ([Test][StorageVolumeCompatTest.java]) | [StorageVolumeCompat.kt] ([Test][StorageVolumeCompatTest.kt])
     * getPath, getPathFile, isPrimary, isRemovable, isEmulated, getState, allowMassStorage, getMaxFileSize,
+* BundleBuilder: [BundleBuilder.java] ([Test][BundleBuilderTest.java])
 * Rom: [Romx.java] ([Test][RomxTest.java])
     * getType, isType, isMiuiType, isEmuiType, isFlymeType, isColorType, isFuntouchOSType, isSmartisanOSType,
     * isH2OSType, getTypeName, getVersionName, getVersionCode, getVersionIncremental
@@ -173,11 +178,12 @@ Dependencies:
     * setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
 
 ### util
-* Dimen: [Dimenx.java] | [Dimenx.kt]
-    * dp2px, px2dp, sp2px, px2sp, unit2px
-* Json: [Jsonx.java] | [Jsonx.kt]
+* Dimen: [Dimenx.java] ([Test][DimenxTest.java]) | [Dimenx.kt] ([Test][DimenxTest.kt])
+    * dp2px, px2dp, sp2px, px2sp, applyDimension
+* Json: [Jsonx.java] ([Test][JsonxTest.java]) | [Jsonx.kt] ([Test][JsonxTest.kt])
     * isEmpty, isNotEmpty, toJsonArray, toJson, toStringList, toStringArray, toIntArray,
-    * toBeanList, toBean, optString, optInt, optLong, format
+    * toBeanList, toBean, optString, optInt, optLong, optBoolean, optDouble, optJSONObject, optJSONArray,
+    * getString, getInt, getLong, getBoolean, getDouble, getJSONObject, getJSONArray, format
 * Text: [Textx.java] | [Textx.kt]
     * textToBitmap, toHtmlColorFlag, toHtmlRedFlag, keywordMadeColorByHtml, keywordMadeRedByHtml,
     * keywordMadeColorBySpannable, keywordMadeRedBySpannable
@@ -197,7 +203,6 @@ Dependencies:
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
     * toBitmapByMaxHeight, inflateLayout, appContext
-<!--* Window: [Windowx.java] | [Windowx.kt]-->
 
 ### widget
 * Toast: [Toastx.java] ([Test][ToastxTest.java]) | [Toastx.kt] ([Test][ToastxTest.kt])
@@ -286,20 +291,15 @@ Please view the [CHANGELOG.md] file
 [Servicex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Servicex.kt
 [ServicexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ServicexTest.kt
 
+[PackageInfox.java]: androidx/src/main/java/me/panpf/androidx/content/pm//PackageInfox.java
+[PackageInfoxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/PackageInfoxTest.java
+[PackageInfox.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/pm/PackageInfox.kt
+[PackageInfoxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/PackageInfoxTest.kt
+
 [Packagex.java]: androidx/src/main/java/me/panpf/androidx/content/pm/Packagex.java
 [PackagexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/pm/PackagexTest.java
 [Packagex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/pm/Packagex.kt
 [PackagexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/pm/PackagexTest.kt
-
-[Assetx.java]: androidx/src/main/java/me/panpf/androidx/content/res/Assetx.java
-[AssetxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/res/AssetxTest.java
-[Assetx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/res/Assetx.kt
-[AssetxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/res/AssetxTest.kt
-
-[Contentx.java]: androidx/src/main/java/me/panpf/androidx/content/Contentx.java
-[ContentxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContentxTest.java
-[Contentx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/Contentx.kt
-[ContentxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/ContentxTest.kt
 
 [Contextx.java]: androidx/src/main/java/me/panpf/androidx/content/Contextx.java
 [ContextxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContextxTest.java
@@ -398,6 +398,9 @@ Please view the [CHANGELOG.md] file
 [SystemPropertiesxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/SystemPropertiesxTest.java
 [SystemPropertiesx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/SystemPropertiesx.kt
 [SystemPropertiesxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/SystemPropertiesxTest.kt
+
+[BundleBuilder.java]: androidx/src/main/java/me/panpf/androidx/os/BundleBuilder.java
+[BundleBuilderTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/BundleBuilderTest.java
 
 [Romx.java]: androidx/src/main/java/me/panpf/androidx/os/Romx.java
 [RomxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/RomxTest.java

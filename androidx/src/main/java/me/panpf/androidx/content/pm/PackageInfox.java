@@ -31,7 +31,7 @@ import android.support.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 
 import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.util.Arrayx;
+import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.util.Pair;
 import me.panpf.javax.util.Predicate;
 
