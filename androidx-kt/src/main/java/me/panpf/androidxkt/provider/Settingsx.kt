@@ -24,9 +24,24 @@ import android.support.annotation.IntRange
 import android.support.annotation.RequiresPermission
 import me.panpf.androidx.provider.Settingsx
 
+
 /*
  * System setup tool method
  */
+
+
+/**
+ * Checks if the specified app can modify system settings. As of API
+ * level 23, an app cannot modify system settings unless it declares the
+ * [android.Manifest.permission.WRITE_SETTINGS]
+ * permission in its manifest, *and* the user specifically grants
+ * the app this capability. To prompt the user to grant this approval,
+ * the app must send an intent with the action [ ][android.provider.Settings.ACTION_MANAGE_WRITE_SETTINGS], which causes
+ * the system to display a permission management screen.
+ *
+ * @return true if the calling app can write to system settings, false otherwise
+ */
+inline fun Context.canWrite(): Boolean = Settingsx.canWrite(this)
 
 
 /**
@@ -40,6 +55,7 @@ inline fun Context.isScreenBrightnessModeAutomatic(): Boolean = Settingsx.isScre
  */
 @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
 inline fun Context.setScreenBrightnessModeAutomatic(automatic: Boolean): Boolean = Settingsx.setScreenBrightnessModeAutomatic(this, automatic)
+
 
 /**
  * Get system brightness, the range is 0-255
@@ -69,6 +85,7 @@ inline fun Context.getScreenOffTimeout(): Int = Settingsx.getScreenOffTimeout(th
 @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
 inline fun Context.setScreenOffTimeout(millis: Int): Boolean = Settingsx.setScreenOffTimeout(this, millis)
 
+
 /**
  * Return true if airplane mode is on
  */
@@ -81,17 +98,6 @@ inline fun Context.isAirplaneModeOn(): Boolean = Settingsx.isAirplaneModeOn(this
 @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
 inline fun Context.setAirplaneModeOn(enable: Boolean): Boolean = Settingsx.setAirplaneModeOn(this, enable)
 
-/**
- * Return true if Bluetooth is on or is being turned on
- */
-@RequiresPermission(Manifest.permission.BLUETOOTH)
-inline fun isBluetoothOn(): Boolean = Settingsx.isBluetoothOn()
-
-/**
- * Turn Bluetooth on or off
- */
-@RequiresPermission(allOf = [(Manifest.permission.BLUETOOTH), (Manifest.permission.BLUETOOTH_ADMIN)])
-inline fun setBluetiithOn(enable: Boolean) = Settingsx.setBluetoothOn(enable)
 
 /**
  * Get the media volume, the value range is 0-15
@@ -105,6 +111,7 @@ inline fun Context.getMediaVolume(): Int = Settingsx.getMediaVolume(this)
  */
 @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
 inline fun Context.setMediaVolume(@IntRange(from = 0, to = 15) mediaVolume: Int): Boolean = Settingsx.setMediaVolume(this, mediaVolume)
+
 
 /**
  * Get the ringer volume, the range is 0-7

@@ -22,6 +22,7 @@
 * :white_check_mark: Prefect Jsonx testing
 * :white_check_mark: Prefect Textx testing
 * :fire: Settingsx getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem move to Windowx
+* :white_check_mark: Prefect Settingsx testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

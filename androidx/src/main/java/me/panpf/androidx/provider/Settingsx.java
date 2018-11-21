@@ -32,11 +32,32 @@ import me.panpf.androidx.content.Contextx;
 /**
  * System setup tool method
  */
-@SuppressWarnings("WeakerAccess")
 public class Settingsx {
 
     private Settingsx() {
     }
+
+    /**
+     * Checks if the specified app can modify system settings. As of API
+     * level 23, an app cannot modify system settings unless it declares the
+     * {@link android.Manifest.permission#WRITE_SETTINGS}
+     * permission in its manifest, <em>and</em> the user specifically grants
+     * the app this capability. To prompt the user to grant this approval,
+     * the app must send an intent with the action {@link
+     * android.provider.Settings#ACTION_MANAGE_WRITE_SETTINGS}, which causes
+     * the system to display a permission management screen.
+     *
+     * @return true if the calling app can write to system settings, false otherwise
+     */
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public static boolean canWrite(@NonNull Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return Settings.System.canWrite(context);
+        } else {
+            return true;
+        }
+    }
+
 
     /**
      * Return true if screen brightness auto mode is on
@@ -82,38 +103,6 @@ public class Settingsx {
         return Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_BRIGHTNESS, brightness);
     }
 
-    /**
-     * This can be used to override the user's preferred brightness of the screen.
-     * A value of less than 0, the default, means to use the preferred screen brightness.
-     * 0 to 1 adjusts the brightness from dark to full bright.
-     */
-    @FloatRange(from = -1f, to = 1)
-    public static float getWindowBrightness(@NonNull Activity activity) {
-        Window window = activity.getWindow();
-        WindowManager.LayoutParams params = window.getAttributes();
-        return params.screenBrightness;
-    }
-
-    /**
-     * Set the brightness of the Activity window (you can see the effect, the brightness of the system will not change)
-     *
-     * @param brightness This can be used to override the user's preferred brightness of the screen.
-     *                   A value of less than 0, the default, means to use the preferred screen brightness.
-     *                   0 to 1 adjusts the brightness from dark to full bright.
-     */
-    public static void setWindowBrightness(@NonNull Activity activity, @FloatRange(from = -1f, to = 1) float brightness) {
-        Window window = activity.getWindow();
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.screenBrightness = brightness;
-        window.setAttributes(params);
-    }
-
-    /**
-     * Return true if the current window use the preferred screen brightness.
-     */
-    public static boolean isWindowBrightnessFlowSystem(@NonNull Activity activity) {
-        return getWindowBrightness(activity) < 0;
-    }
 
     /**
      * Get screen off timeout in milliseconds
@@ -135,6 +124,7 @@ public class Settingsx {
         return Settings.System.putInt(context.getContentResolver(), Settings.System.SCREEN_OFF_TIMEOUT, millis);
     }
 
+
     /**
      * Return true if airplane mode is on
      */
@@ -143,6 +133,7 @@ public class Settingsx {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             return Settings.Global.getInt(context.getContentResolver(), Settings.Global.AIRPLANE_MODE_ON, 0) == 1;
         } else {
+            //noinspection deprecation
             return Settings.System.getInt(context.getContentResolver(), Settings.System.AIRPLANE_MODE_ON, 0) == 1;
         }
     }
@@ -163,6 +154,13 @@ public class Settingsx {
     }
 
     /**
+     * Return true if Bluetooth is available
+     */
+    public static boolean haveBluetooth(){
+        return BluetoothAdapter.getDefaultAdapter() != null;
+    }
+
+    /**
      * Return true if Bluetooth is on or is being turned on
      */
     @RequiresPermission(Manifest.permission.BLUETOOTH)
@@ -176,7 +174,7 @@ public class Settingsx {
      * Turn Bluetooth on or off
      */
     @RequiresPermission(allOf = {Manifest.permission.BLUETOOTH, Manifest.permission.BLUETOOTH_ADMIN})
-    public static void setBluetoothOn(boolean enable) {
+    public static boolean setBluetoothOn(boolean enable) {
         BluetoothAdapter bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         if (bluetoothAdapter != null) {
             if (enable) {
@@ -184,8 +182,11 @@ public class Settingsx {
             } else {
                 bluetoothAdapter.disable();
             }
+            return true;
         }
+        return false;
     }
+
 
     /**
      * Get the media volume, the value range is 0-15
@@ -216,6 +217,7 @@ public class Settingsx {
             return Settings.System.putInt(context.getContentResolver(), "volume_music", mediaVolume);
         }
     }
+
 
     /**
      * Get the ringer volume, the range is 0-7

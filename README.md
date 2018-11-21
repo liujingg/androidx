@@ -171,11 +171,10 @@ Dependencies:
     * get, getInt, getLong, getBoolean, set, addChangeCallbacks, callChangeCallbacks
 
 ### provider
-* Settings: [Settingsx.java] | [Settingsx.kt]
+* Settings: [Settingsx.java] ([Test][SettingsxTest.java])  | [Settingsx.kt] ([Test][SettingsxTest.kt])
     * isScreenBrightnessModeAutomatic, setScreenBrightnessModeAutomatic, getScreenBrightness,
-    * setScreenBrightness, getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem,
-    * getScreenOffTimeout, setScreenOffTimeout, isAirplaneModeOn, setAirplaneModeOn, isBluetoothOn,
-    * setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
+    * setScreenBrightness, getScreenOffTimeout, setScreenOffTimeout, isAirplaneModeOn, setAirplaneModeOn,
+    * isBluetoothOn, setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
 
 ### util
 * Dimen: [Dimenx.java] ([Test][DimenxTest.java]) | [Dimenx.kt] ([Test][DimenxTest.kt])
