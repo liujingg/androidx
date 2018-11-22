@@ -197,7 +197,7 @@ Dependencies:
 * ViewAnim: [ViewAnimx.java] | [ViewAnimx.kt]
     * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
     * goneByAnimAlpha, visibleByAnimAlpha,
-* View: [Viewx.java] | [Viewx.kt]
+* View: [Viewx.java] ([Test][ViewxTest.java]) | [Viewx.kt] ([Test][ViewxTest.kt])
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
     * toBitmapByMaxHeight, inflateLayout

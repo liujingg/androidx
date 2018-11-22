@@ -30,13 +30,15 @@ import android.view.ViewGroup;
 
 import me.panpf.androidx.widget.Toastx;
 
-@SuppressWarnings("WeakerAccess")
 public class Viewx {
 
     private Viewx() {
     }
 
 
+    /**
+     * Set a long press listener to the View to display the specified text when a long press is triggered
+     */
     public static void setLongClickToastHint(@NonNull final View view, final String hintContent) {
         view.setOnLongClickListener(new OnLongClickListener() {
             @Override
@@ -47,21 +49,17 @@ public class Viewx {
         });
     }
 
+    /**
+     * Set a long press listener to the View to display the specified text when a long press is triggered
+     */
     public static void setLongClickToastHint(@NonNull View view, final int hintContentId) {
         setLongClickToastHint(view, view.getResources().getString(hintContentId));
     }
 
 
-    public static void setLayoutWidth(@NonNull View view, int newWidth, int initHeight) {
-        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        if (layoutParams == null) {
-            layoutParams = new ViewGroup.LayoutParams(newWidth, initHeight);
-        } else {
-            layoutParams.width = newWidth;
-        }
-        view.setLayoutParams(layoutParams);
-    }
-
+    /**
+     * Set the Layout width of the given View, if there is no LayoutParams, it will not be set
+     */
     public static void setLayoutWidth(@NonNull View view, int newWidth) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null) {
@@ -70,16 +68,22 @@ public class Viewx {
         }
     }
 
-    public static void setLayoutHeight(@NonNull View view, int newHeight, int initWidth) {
+    /**
+     * Set the Layout width of the given View, if there is no LayoutParams, create a new LayoutParams and set it up
+     */
+    public static void setLayoutWidthOrInitSize(@NonNull View view, int newWidth, int newHeight) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams == null) {
-            layoutParams = new ViewGroup.LayoutParams(initWidth, newHeight);
+            layoutParams = new ViewGroup.LayoutParams(newWidth, newHeight);
         } else {
-            layoutParams.height = newHeight;
+            layoutParams.width = newWidth;
         }
         view.setLayoutParams(layoutParams);
     }
 
+    /**
+     * Set the Layout height of the given View, if there is no LayoutParams, it will not be set
+     */
     public static void setLayoutHeight(@NonNull View view, int newHeight) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null) {
@@ -88,6 +92,22 @@ public class Viewx {
         }
     }
 
+    /**
+     * Set the Layout height of the given View, if there is no LayoutParams, create a new LayoutParams and set it up
+     */
+    public static void setLayoutHeightOrInitSize(@NonNull View view, int newWidth, int newHeight) {
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        if (layoutParams == null) {
+            layoutParams = new ViewGroup.LayoutParams(newWidth, newHeight);
+        } else {
+            layoutParams.height = newHeight;
+        }
+        view.setLayoutParams(layoutParams);
+    }
+
+    /**
+     * Set the Layout width and height of the given View, if there is no LayoutParams, it will not be set
+     */
     public static void setLayoutSize(@NonNull View view, int width, int height) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams == null) {
@@ -99,6 +119,9 @@ public class Viewx {
         view.setLayoutParams(layoutParams);
     }
 
+    /**
+     * Set the Layout top margin of the given View, if there is no LayoutParams, it will not be set
+     */
     public static void setLayoutMarginTop(@NonNull View view, int newMarinTop) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
@@ -107,15 +130,9 @@ public class Viewx {
         }
     }
 
-
-    public static void addLayoutHeight(@NonNull View view, int addHeight) {
-        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-        if (layoutParams != null) {
-            layoutParams.height += addHeight;
-            view.setLayoutParams(layoutParams);
-        }
-    }
-
+    /**
+     * Increase the layout width of the given View, if there is no LayoutParams, it will not be set
+     */
     public static void addLayoutWidth(@NonNull View view, int addWidth) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null) {
@@ -124,6 +141,20 @@ public class Viewx {
         }
     }
 
+    /**
+     * Increase the layout height of the given View, if there is no LayoutParams, it will not be set
+     */
+    public static void addLayoutHeight(@NonNull View view, int addHeight) {
+        ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+        if (layoutParams != null) {
+            layoutParams.height += addHeight;
+            view.setLayoutParams(layoutParams);
+        }
+    }
+
+    /**
+     * Increase the layout width and height of the given View, if there is no LayoutParams, it will not be set
+     */
     public static void addLayoutSize(@NonNull View view, int addWidth, int addHeight) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams != null) {
@@ -133,6 +164,9 @@ public class Viewx {
         }
     }
 
+    /**
+     * Increase the layout top margin of the given View, if there is no LayoutParams, it will not be set
+     */
     public static void addLayoutMarginTop(@NonNull View view, int addMarinTop) {
         ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
         if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
@@ -142,52 +176,105 @@ public class Viewx {
     }
 
 
+    /**
+     * Convert View to Bitmap
+     *
+     * @param scale scaling ratio
+     */
     @NonNull
     public static Bitmap toBitmap(@NonNull View view, @NonNull Bitmap.Config config, float scale) {
         int bitmapWidth = view.getWidth();
         int bitmapHeight = view.getHeight();
-        Matrix matrix = new Matrix();
+        Matrix matrix = null;
         if (scale > (float) 0) {
             bitmapWidth = (int) ((float) bitmapWidth * scale);
             bitmapHeight = (int) ((float) bitmapHeight * scale);
+            matrix = new Matrix();
             matrix.setScale(scale, scale);
         }
 
         Bitmap bitmap = Bitmap.createBitmap(bitmapWidth, bitmapHeight, config);
         Canvas canvas = new Canvas(bitmap);
-        canvas.setMatrix(matrix);
+        if (matrix != null) {
+            canvas.setMatrix(matrix);
+        }
         view.draw(canvas);
         return bitmap;
     }
 
+    /**
+     * Convert View to Bitmap
+     */
     @NonNull
     public static Bitmap toBitmap(@NonNull View view, @NonNull Bitmap.Config config) {
         return toBitmap(view, config, 1.0f);
     }
 
+    /**
+     * Convert View to Bitmap, The maximum Bitmap width is [maxWidth] and the height is scaled accordingly.
+     */
     @NonNull
     public static Bitmap toBitmapByMaxWidth(@NonNull View view, @NonNull Bitmap.Config config, int maxWidth) {
         return toBitmap(view, config, Math.min((float) maxWidth / (float) view.getWidth(), 1.0F));
     }
 
+    /**
+     * Convert View to Bitmap, The maximum Bitmap height is [maxHeight] and the width is scaled accordingly.
+     */
     @NonNull
     public static Bitmap toBitmapByMaxHeight(@NonNull View view, @NonNull Bitmap.Config config, int maxHeight) {
         return toBitmap(view, config, Math.min((float) maxHeight / (float) view.getHeight(), 1.0F));
     }
 
 
+    /**
+     * Inflate a new view hierarchy from the specified xml resource. Throws {@link android.view.InflateException} if there is an error.
+     *
+     * @param resource ID for an XML layout resource to load (e.g.,
+     *        <code>R.layout.main_page</code>)
+     * @param root Optional view to be the parent of the generated hierarchy (if
+     *        <em>attachToRoot</em> is true), or else simply an object that
+     *        provides a set of LayoutParams values for root of the returned
+     *        hierarchy (if <em>attachToRoot</em> is false.)
+     * @param attachToRoot Whether the inflated hierarchy should be attached to
+     *        the root parameter? If false, root is only used to create the
+     *        correct subclass of LayoutParams for the root view in the XML.
+     * @return The root View of the inflated hierarchy. If root was supplied and
+     *         attachToRoot is true, this is root; otherwise it is the root of
+     *         the inflated XML file.
+     */
     @NonNull
-    public static View inflateLayout(@NonNull Context context, @LayoutRes int id, @Nullable ViewGroup parent, boolean attachToRoot) {
-        return LayoutInflater.from(context).inflate(id, parent, attachToRoot);
+    public static View inflateLayout(@NonNull Context context, @LayoutRes int resource, @Nullable ViewGroup root, boolean attachToRoot) {
+        return LayoutInflater.from(context).inflate(resource, root, attachToRoot);
     }
 
+    /**
+     * Inflate a new view hierarchy from the specified xml resource. Throws {@link android.view.InflateException} if there is an error.
+     *
+     * @param resource ID for an XML layout resource to load (e.g.,
+     *        <code>R.layout.main_page</code>)
+     * @param root Optional view to be the parent of the generated hierarchy (if
+     *        <em>attachToRoot</em> is true), or else simply an object that
+     *        provides a set of LayoutParams values for root of the returned
+     *        hierarchy (if <em>attachToRoot</em> is false.)
+     * @return The root View of the inflated hierarchy. If root was supplied and
+     *         attachToRoot is true, this is root; otherwise it is the root of
+     *         the inflated XML file.
+     */
     @NonNull
-    public static View inflateLayout(@NonNull Context context, @LayoutRes int id, @Nullable ViewGroup parent) {
-        return LayoutInflater.from(context).inflate(id, parent, false);
+    public static View inflateLayout(@NonNull Context context, @LayoutRes int resource, @Nullable ViewGroup root) {
+        return LayoutInflater.from(context).inflate(resource, root, false);
     }
 
+    /**
+     * Inflate a new view hierarchy from the specified xml resource. Throws {@link android.view.InflateException} if there is an error.
+     *
+     * @return The root View of the inflated hierarchy. If root was supplied and
+     *         attachToRoot is true, this is root; otherwise it is the root of
+     *         the inflated XML file.
+     */
     @NonNull
-    public static View inflateLayout(@NonNull Context context, @LayoutRes int id) {
-        return LayoutInflater.from(context).inflate(id, null, false);
+    public static View inflateLayout(@NonNull Context context, @LayoutRes int resource) {
+        return LayoutInflater.from(context).inflate(resource, null, false);
     }
 }
