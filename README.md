@@ -190,7 +190,7 @@ Dependencies:
 ### view
 * InputMethod: [InputMethodx.java] | [InputMethodx.kt]
     * showSoftInput, delayShowSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
-* Display: [Displayx.java] | [Displayx.kt]
+* Display: [Displayx.java] ([Test][DisplayxTest.java]) | [Displayx.kt] ([Test][DisplayxTest.kt])
     * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity, getDisplayRotation
     * getDensityDpi, isOrientationPortrait, isOrientationLandscape, isOrientationUndefined, getRotation
     * hasNavigationBar, getStatusBarHeight, getNavigationBarHeight, getNavigationBarWidth
