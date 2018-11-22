@@ -96,7 +96,7 @@ import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.androidx.util.ResultRunnable;
 import me.panpf.javax.util.Premisex;
 
-@SuppressWarnings({"UnusedReturnValue", "WeakerAccess"})
+@SuppressWarnings({"UnusedReturnValue"})
 public class Contextx {
 
     private Contextx() {

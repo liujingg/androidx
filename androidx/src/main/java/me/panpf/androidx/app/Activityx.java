@@ -38,7 +38,6 @@ import java.util.List;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Classx;
 
-@SuppressWarnings({"WeakerAccess"})
 public class Activityx {
 
     private Activityx() {

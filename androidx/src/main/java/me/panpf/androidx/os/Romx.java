@@ -22,7 +22,6 @@ import android.support.annotation.Nullable;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.collections.Arrayx;
 
-@SuppressWarnings("WeakerAccess")
 public class Romx {
 
     public static final int TYPE_MIUI = 1;

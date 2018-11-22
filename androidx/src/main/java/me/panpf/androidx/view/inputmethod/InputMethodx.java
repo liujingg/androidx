@@ -25,7 +25,6 @@ import android.widget.EditText;
 
 import me.panpf.androidx.content.Contextx;
 
-@SuppressWarnings("WeakerAccess")
 public class InputMethodx {
 
     private InputMethodx() {

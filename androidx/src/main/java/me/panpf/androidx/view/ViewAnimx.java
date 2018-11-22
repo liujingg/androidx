@@ -28,7 +28,6 @@ import android.view.animation.TranslateAnimation;
 /**
  * View animation tool method
  */
-@SuppressWarnings("WeakerAccess")
 public class ViewAnimx {
     /**
      * 默认动画持续时间

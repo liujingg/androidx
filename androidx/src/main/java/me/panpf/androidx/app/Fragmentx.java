@@ -26,7 +26,6 @@ import android.support.v4.app.FragmentActivity;
 
 import java.util.List;
 
-@SuppressWarnings("WeakerAccess")
 public class Fragmentx {
 
     private Fragmentx() {

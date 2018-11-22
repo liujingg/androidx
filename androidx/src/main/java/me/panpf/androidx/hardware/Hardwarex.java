@@ -39,7 +39,6 @@ import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Transformer;
 
-@SuppressWarnings("WeakerAccess")
 public class Hardwarex {
 
     private Hardwarex() {

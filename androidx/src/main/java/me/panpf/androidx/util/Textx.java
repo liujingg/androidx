@@ -28,7 +28,6 @@ import android.text.style.ForegroundColorSpan;
 
 import me.panpf.androidx.graphics.Paintx;
 
-@SuppressWarnings("WeakerAccess")
 public class Textx {
 
     private Textx() {

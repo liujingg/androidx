@@ -36,7 +36,6 @@ import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Premisex;
 
-@SuppressWarnings("WeakerAccess")
 public class Androidx {
 
     private Androidx() {

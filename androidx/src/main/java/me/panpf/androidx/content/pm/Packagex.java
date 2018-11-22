@@ -380,7 +380,6 @@ public class Packagex {
 
 
     @NonNull
-    @SuppressWarnings("WeakerAccess")
     public static AppPackage packageInfoToAppPackage(@NonNull PackageInfo packageInfo, @NonNull PackageManager packageManager) {
         ApplicationInfo applicationInfo = Premisex.checkNotNull(packageInfo.applicationInfo, "applicationInfo");
         CharSequence label = applicationInfo.loadLabel(packageManager);

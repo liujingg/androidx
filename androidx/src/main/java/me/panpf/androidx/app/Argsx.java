@@ -39,7 +39,6 @@ import me.panpf.javax.util.Comparisonx;
 import me.panpf.javax.util.LazyValue;
 import me.panpf.javax.util.Premisex;
 
-@SuppressWarnings({"WeakerAccess"})
 public class Argsx {
 
     private static final LazyValue<String> ACTION_NOT_VIEW = new LazyValue<String>() {

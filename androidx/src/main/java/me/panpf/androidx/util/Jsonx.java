@@ -28,7 +28,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
-@SuppressWarnings("WeakerAccess")
 public class Jsonx {
 
     private static final String INDENTATION = "    ";

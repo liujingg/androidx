@@ -27,7 +27,6 @@ import java.util.ArrayList;
 
 import me.panpf.androidx.content.Contextx;
 
-@SuppressWarnings("WeakerAccess")
 public class Servicex {
 
     private Servicex() {

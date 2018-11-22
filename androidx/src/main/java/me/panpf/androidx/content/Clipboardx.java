@@ -32,7 +32,6 @@ import java.util.List;
 
 import me.panpf.javax.ranges.Rangex;
 
-@SuppressWarnings("WeakerAccess")
 public class Clipboardx {
 
     private Clipboardx() {

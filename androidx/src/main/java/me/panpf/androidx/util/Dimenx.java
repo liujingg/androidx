@@ -27,7 +27,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@SuppressWarnings("WeakerAccess")
 public class Dimenx {
 
     private Dimenx() {

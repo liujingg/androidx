@@ -24,7 +24,6 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.FloatRange;
 import android.support.annotation.IntRange;
 
-@SuppressWarnings("WeakerAccess")
 public class Colorx {
 
     /**

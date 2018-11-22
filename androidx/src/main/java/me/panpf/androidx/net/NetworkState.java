@@ -30,7 +30,6 @@ import me.panpf.androidx.content.Contextx;
 /**
  * A tool class that determines the state of the network, which can satisfy whether there is a network and what type of network at one time.
  */
-@SuppressWarnings("WeakerAccess")
 public class NetworkState {
 
     @NonNull

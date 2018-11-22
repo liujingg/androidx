@@ -30,7 +30,6 @@ import me.panpf.androidx.graphics.Colorx;
 import me.panpf.javax.util.LazyValue;
 import me.panpf.javax.util.Premisex;
 
-@SuppressWarnings("WeakerAccess")
 public class Drawablex {
 
     private Drawablex() {

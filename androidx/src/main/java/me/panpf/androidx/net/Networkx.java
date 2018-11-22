@@ -31,7 +31,6 @@ import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.SystemPropertiesx;
 import me.panpf.javax.lang.Classx;
 
-@SuppressWarnings("WeakerAccess")
 public class Networkx {
 
     private Networkx() {

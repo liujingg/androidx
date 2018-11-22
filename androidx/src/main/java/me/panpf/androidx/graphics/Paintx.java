@@ -21,7 +21,6 @@ import android.graphics.Paint.FontMetrics;
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
 
-@SuppressWarnings("WeakerAccess")
 public class Paintx {
 
     private Paintx() {

@@ -44,7 +44,6 @@ import java.io.InputStream;
 import me.panpf.javax.io.Filex;
 import me.panpf.javax.io.Streamx;
 
-@SuppressWarnings("WeakerAccess")
 public class Bitmapx {
 
     private Bitmapx() {
