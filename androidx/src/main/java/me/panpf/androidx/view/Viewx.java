@@ -207,7 +207,7 @@ public class Viewx {
      */
     @NonNull
     public static Bitmap toBitmap(@NonNull View view, @NonNull Bitmap.Config config) {
-        return toBitmap(view, config, 1.0f);
+        return toBitmap(view, config, 0f);
     }
 
     /**

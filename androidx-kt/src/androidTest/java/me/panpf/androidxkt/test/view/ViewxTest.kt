@@ -198,7 +198,7 @@ class ViewxTest {
         val activity = activityRule.activity
         val view = activity.view
 
-        val bitmap = view.toBitmap(Bitmap.Config.ARGB_8888, 0f)
+        val bitmap = view.toBitmap(Bitmap.Config.ARGB_8888)
         val bitmapWidth = bitmap.width
         val bitmapHeight = bitmap.height
         try {

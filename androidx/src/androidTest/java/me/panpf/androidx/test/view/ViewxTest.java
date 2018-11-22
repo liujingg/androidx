@@ -331,7 +331,7 @@ public class ViewxTest {
         final TestActivity activity = activityRule.getActivity();
         final View view = activity.getView();
 
-        Bitmap bitmap = Viewx.toBitmap(view, Bitmap.Config.ARGB_8888, 0);
+        Bitmap bitmap = Viewx.toBitmap(view, Bitmap.Config.ARGB_8888);
         int bitmapWidth = bitmap.getWidth();
         int bitmapHeight = bitmap.getHeight();
         try {
