@@ -16,18 +16,90 @@
 
 package me.panpf.androidxkt.test.content
 
+import android.app.Activity
+import android.app.Application
 import android.content.Context
 import android.os.Build
+import android.os.Bundle
 import android.support.test.InstrumentationRegistry
+import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
+import android.support.v4.app.FragmentActivity
+import android.view.View
 import android.view.accessibility.AccessibilityManager
 import me.panpf.androidxkt.content.*
+import me.panpf.androidxkt.test.R
+import me.panpf.javax.util.Premisex
 import org.junit.Assert
+import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ContextxTest {
+
+    private val activityRule = ActivityTestRule<TestActivity>(TestActivity::class.java)
+
+    @Rule
+    fun getActivityRule(): ActivityTestRule<*> {
+        return this.activityRule
+    }
+
+    @Test
+    fun testAppContext() {
+        val activity = activityRule.activity
+
+        Assert.assertTrue(activity.appContext() is Application)
+        Assert.assertFalse(activity.appContext() is Activity)
+
+        Assert.assertNotNull(activity.originFragment.requireContext())
+        Assert.assertFalse(activity.originFragment.requireContext() is Application)
+        Assert.assertTrue(activity.originFragment.requireContext() is Activity)
+        Assert.assertNotNull(activity.supportFragment.requireContext())
+        Assert.assertFalse(activity.supportFragment.requireContext() is Application)
+        Assert.assertTrue(activity.supportFragment.requireContext() is Activity)
+
+        Assert.assertNotNull(activity.originFragment.requireAppContext())
+        Assert.assertTrue(activity.originFragment.requireAppContext() is Application)
+        Assert.assertFalse(activity.originFragment.requireAppContext() is Activity)
+        Assert.assertNotNull(activity.supportFragment.requireAppContext())
+        Assert.assertTrue(activity.supportFragment.requireAppContext() is Application)
+        Assert.assertFalse(activity.supportFragment.requireAppContext() is Activity)
+
+        Assert.assertTrue(activity.view.appContext() is Application)
+        Assert.assertFalse(activity.view.appContext() is Activity)
+
+        activityRule.finishActivity()
+        try {
+            Thread.sleep(1000)
+        } catch (e: InterruptedException) {
+            e.printStackTrace()
+        }
+
+        try {
+            activity.originFragment.requireContext()
+            Assert.fail()
+        } catch (ignored: Exception) {
+        }
+
+        try {
+            activity.supportFragment.requireContext()
+            Assert.fail()
+        } catch (ignored: Exception) {
+        }
+
+        try {
+            activity.originFragment.requireAppContext()
+            Assert.fail()
+        } catch (ignored: Exception) {
+        }
+
+        try {
+            activity.supportFragment.requireAppContext()
+            Assert.fail()
+        } catch (ignored: Exception) {
+        }
+    }
 
     @Test
     fun testSystemService() {
@@ -201,6 +273,32 @@ class ContextxTest {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             Assert.assertNotNull(context.crossProfileApps())
+        }
+    }
+
+    class TestActivity : FragmentActivity() {
+
+        val originFragment: android.app.Fragment
+            get() = fragmentManager.findFragmentById(R.id.multiFrameAt_frame1)
+
+        val supportFragment: android.support.v4.app.Fragment
+            get() =
+                Premisex.requireNotNull(supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2))
+
+        val view: View
+            get() = findViewById(android.R.id.content)
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.at_multi_frame)
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.multiFrameAt_frame1, android.app.Fragment())
+                    .commit()
+
+            supportFragmentManager.beginTransaction()
+                    .replace(R.id.multiFrameAt_frame2, android.support.v4.app.Fragment())
+                    .commit()
         }
     }
 }

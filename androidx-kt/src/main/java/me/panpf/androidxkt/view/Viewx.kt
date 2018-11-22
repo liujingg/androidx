@@ -31,9 +31,6 @@ import me.panpf.androidx.view.Viewx
  */
 
 
-inline fun View.appContext(): Context = Viewx.appContext(this)
-
-
 inline fun View.setLongClickToastHint(hintContent: String) = Viewx.setLongClickToastHint(this, hintContent)
 
 inline fun View.setLongClickToastHint(hintContentId: Int) = Viewx.setLongClickToastHint(this, hintContentId)

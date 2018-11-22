@@ -17,6 +17,7 @@
 package me.panpf.androidx.content;
 
 import android.accounts.AccountManager;
+import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.AlarmManager;
 import android.app.AppOpsManager;
@@ -81,6 +82,7 @@ import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
 import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.accessibility.AccessibilityManager;
 import android.view.accessibility.CaptioningManager;
@@ -98,6 +100,64 @@ import me.panpf.javax.util.Premisex;
 public class Contextx {
 
     private Contextx() {
+    }
+
+    /* ******************************************* Context *******************************************/
+
+
+    /**
+     * Get Application Context
+     */
+    @NonNull
+    public static Context appContext(@NonNull Activity activity) {
+        return activity.getApplicationContext();
+    }
+
+
+    /**
+     * Get Context, Throw an exception if Fragment is dead
+     */
+    @NonNull
+    public static Context requireContext(@NonNull android.support.v4.app.Fragment fragment) {
+        return fragment.requireContext();
+    }
+
+    /**
+     * Get Context, Throw an exception if Fragment is dead
+     */
+    @NonNull
+    public static Context requireContext(@NonNull android.app.Fragment fragment) {
+        Context context = fragment.getActivity();
+        if (context == null) {
+            throw new IllegalStateException("Fragment " + fragment + " not attached to a context.");
+        } else {
+            return context;
+        }
+    }
+
+
+    /**
+     * Get Application Context, Throw an exception if Fragment is dead
+     */
+    @NonNull
+    public static Context requireAppContext(@NonNull android.support.v4.app.Fragment fragment) {
+        return requireContext(fragment).getApplicationContext();
+    }
+
+    /**
+     * Get Application Context, Throw an exception if Fragment is dead
+     */
+    @NonNull
+    public static Context requireAppContext(@NonNull android.app.Fragment fragment) {
+        return requireContext(fragment).getApplicationContext();
+    }
+
+    /**
+     * Get Application Context
+     */
+    @NonNull
+    public static Context appContext(@NonNull View view) {
+        return view.getContext().getApplicationContext();
     }
 
     /* ******************************************* SystemService *******************************************/

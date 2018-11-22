@@ -23,6 +23,7 @@
 * :white_check_mark: Prefect Textx testing
 * :fire: Settingsx getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem move to Windowx
 * :white_check_mark: Prefect Settingsx testing
+* :fire: Activityx appContext, Fragmentx requireContext and requireAppContext, Viewx appContext move to Contextx
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

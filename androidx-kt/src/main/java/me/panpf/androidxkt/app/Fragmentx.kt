@@ -99,11 +99,3 @@ inline fun FragmentActivity?.findFragmentByViewPagerCurrentItem(viewPagerCurrent
  */
 inline fun android.support.v4.app.Fragment?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): android.support.v4.app.Fragment? =
         Fragmentx.findFragmentByViewPagerCurrentItem(this, viewPagerCurrentItem)
-
-
-inline fun android.app.Fragment.requireContext(): Context = Fragmentx.requireContext(this)
-
-
-inline fun android.support.v4.app.Fragment.requireAppContext(): Context = Fragmentx.requireAppContext(this)
-
-inline fun android.app.Fragment.requireAppContext(): Context = Fragmentx.requireAppContext(this)

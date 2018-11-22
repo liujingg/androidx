@@ -19,7 +19,6 @@
 package me.panpf.androidxkt.test.app
 
 import android.app.Activity
-import android.app.Application
 import android.arch.lifecycle.ViewModelStoreOwner
 import android.content.Intent
 import android.os.Build
@@ -30,6 +29,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.support.v4.app.FragmentActivity
 import android.view.View
 import me.panpf.androidxkt.app.*
+import me.panpf.androidxkt.content.appContext
 import me.panpf.androidxkt.waitRunInUIResult
 import me.panpf.javax.lang.Throwablex
 import me.panpf.javaxkt.util.requireNotNull
@@ -158,13 +158,6 @@ class ActivityxTest {
         val activity2 = fragmentActivityTestRule.activity
         Assert.assertNull(activity2.getImplWithParent(ImplTestInterface::class.java))
         Assert.assertNotNull(activity2.getImplWithParent(ViewModelStoreOwner::class.java))
-    }
-
-    @Test
-    fun testAppContext() {
-        val activity = activityTestRule.activity
-        Assert.assertTrue(activity.appContext() is Application)
-        Assert.assertFalse(activity.appContext() is Activity)
     }
 
     @Test

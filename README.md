@@ -67,7 +67,6 @@ Dependencies:
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] ([Test][FragmentxTest.java]) | [Fragmentx.kt] ([Test][FragmentxTest.kt])
     * isDestroyedCompat, getImplWithParent, instantiate, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
-    * requireContext, requireAppContent, read\*Arg
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
 * Service: [Servicex.java] ([Test][ServicexTest.java]) | [Servicex.kt] ([Test][ServicexTest.kt])
@@ -90,7 +89,7 @@ Dependencies:
     * get, getLabel, getContents, getText, getHtmlText, getIntent, getUri, addPrimaryClipChangedListener,
     * removePrimaryClipChangedListener, clear
 * Context: [Contextx.java] ([Test][ContextxTest.java]) | [Contextx.kt] ([Test][ContextxTest.kt])
-    * systemService, systemServiceOrNull, \*Manager
+    * requireContext, requireAppContext, appContext, systemService, systemServiceOrNull, \*Manager
 * Intent: [Intentx.java] ([Test][IntentxTest.java]) | [Intentx.kt] ([Test][IntentxTest.kt])
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
@@ -201,7 +200,7 @@ Dependencies:
 * View: [Viewx.java] | [Viewx.kt]
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
-    * toBitmapByMaxHeight, inflateLayout, appContext
+    * toBitmapByMaxHeight, inflateLayout
 * Window: [Windowx.java] ([Test][WindowxTest.java]) | [Windowx.kt] ([Test][WindowxTest.kt])
     * getBrightness, setBrightness, isBrightnessFlowSystem
 

@@ -25,6 +25,7 @@
         <activity android:name=".app.FragmentxTest$TestActivity" />
         <activity android:name=".app.FragmentxTest$TestFindUserVisibleChildActivity" />
         <activity android:name=".provider.SettingsxTest$RequestPermissionTestActivity" />
+        <activity android:name=".content.ContextxTest$TestActivity" />
         <activity android:name=".content.PackageInfoxTest$TestActivity" />
         <activity android:name=".util.DimenxTest$TestActivity" />
         <activity android:name=".view.WindowxTest$TestActivity" />

@@ -36,11 +36,6 @@ public class Viewx {
     private Viewx() {
     }
 
-    @NonNull
-    public static Context appContext(@NonNull View view) {
-        return view.getContext().getApplicationContext();
-    }
-
 
     public static void setLongClickToastHint(@NonNull final View view, final String hintContent) {
         view.setOnLongClickListener(new OnLongClickListener() {
