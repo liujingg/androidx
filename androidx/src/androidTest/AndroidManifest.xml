@@ -29,6 +29,7 @@
         <activity android:name=".util.DimenxTest$TestActivity" />
         <activity android:name=".util.WeakAsyncTaskTest$TestActivity" />
         <activity android:name=".view.DisplayxTest$TestActivity" />
+        <activity android:name=".view.ViewAnimxTest$TestActivity" />
         <activity android:name=".view.ViewxTest$TestActivity" />
         <activity android:name=".view.WindowxTest$TestActivity" />
         <activity android:name=".widget.ToastxTest$TestActivity" />

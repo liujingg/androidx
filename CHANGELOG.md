@@ -26,6 +26,7 @@
 * :fire: Activityx appContext, Fragmentx requireContext and requireAppContext, Viewx appContext move to Contextx
 * :white_check_mark: Prefect Viewx testing
 * :white_check_mark: Prefect Displayx testing
+* :white_check_mark: Prefect ViewAnimx testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

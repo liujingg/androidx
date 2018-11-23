@@ -194,7 +194,7 @@ Dependencies:
     * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity, getDisplayRotation
     * getDensityDpi, isOrientationPortrait, isOrientationLandscape, isOrientationUndefined, getRotation
     * hasNavigationBar, getStatusBarHeight, getNavigationBarHeight, getNavigationBarWidth
-* ViewAnim: [ViewAnimx.java] | [ViewAnimx.kt]
+* ViewAnim: [ViewAnimx.java] ([Test][ViewAnimxTest.java]) | [ViewAnimx.kt] ([Test][ViewAnimxTest.kt])
     * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
     * goneByAnimAlpha, visibleByAnimAlpha,
 * View: [Viewx.java] ([Test][ViewxTest.java]) | [Viewx.kt] ([Test][ViewxTest.kt])
