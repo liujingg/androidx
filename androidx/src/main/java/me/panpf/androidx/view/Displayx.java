@@ -317,4 +317,22 @@ public class Displayx {
             return 0;
         }
     }
+
+//    /**
+//     * Get the height of the navigation bar from default display
+//     */
+//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+//    public static int getNavigationBarHeightFromDisplay(@NonNull Context context) {
+//        Display display = Contextx.windowManager(context).getDefaultDisplay();
+//
+//        // Get the available sizes for the APP
+//        Point appSize = new Point();
+//        display.getSize(appSize);
+//
+//        // Get the size of the screen
+//        Point logicalSize = new Point();
+//        display.getRealSize(logicalSize);
+//
+//        return logicalSize.y - appSize.y;
+//    }
 }

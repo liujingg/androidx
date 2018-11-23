@@ -188,7 +188,7 @@ Dependencies:
 * WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java]) | [WeakAsyncTask.kt] ([Test][WeakAsyncTaskTest.kt])
 
 ### view
-* InputMethod: [InputMethodx.java] | [InputMethodx.kt]
+* InputMethod: [InputMethodx.java] ([Test][InputMethodxTest.java]) | [InputMethodx.kt] ([Test][InputMethodxTest.kt])
     * showSoftInput, delayShowSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
 * Display: [Displayx.java] ([Test][DisplayxTest.java]) | [Displayx.kt] ([Test][DisplayxTest.kt])
     * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity, getDisplayRotation
@@ -428,9 +428,9 @@ Please view the [CHANGELOG.md] file
 [TextxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/TextxTest.kt
 
 [InputMethodx.java]: androidx/src/main/java/me/panpf/androidx/view/inputmethod/InputMethodx.java
-[InputMethodxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/inputmethod/InputMethodxTest.java
+[InputMethodxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/InputMethodxTest.java
 [InputMethodx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/inputmethod/InputMethodx.kt
-[InputMethodxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/inputmethod/InputMethodxTest.kt
+[InputMethodxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/InputMethodxTest.kt
 
 [Displayx.java]: androidx/src/main/java/me/panpf/androidx/view/Displayx.java
 [DisplayxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/DisplayxTest.java

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-@file:Suppress("NOTHING_TO_INLINE")
+@file:Suppress("NOTHING_TO_INLINE", "DEPRECATION")
 
 package me.panpf.androidxkt.view.inputmethod
 
@@ -23,26 +23,90 @@ import android.widget.EditText
 import me.panpf.androidx.view.inputmethod.InputMethodx
 
 /*
- * 输入法相关的扩展方法或属性
+ * Input method related extension methods or properties
  */
 
-inline fun EditText.showSoftInput(moveCursorToEnd: Boolean = false) = InputMethodx.showSoftInput(this, moveCursorToEnd)
 
-inline fun EditText.delayShowSoftInput(moveCursorToEnd: Boolean = false, delayMillisecond: Long = 100) =
-        InputMethodx.delayShowSoftInput(this, moveCursorToEnd, delayMillisecond)
+/**
+ * Return true if the soft keyboard has been popped up, Not applicable to landscape
+ */
+inline fun Activity.isSoftInputShowing(): Boolean = InputMethodx.isSoftInputShowing(this)
 
+
+/**
+ * Display soft keyboard and move the cursor to the end of the EditText
+ */
+inline fun EditText.showSoftInputAndMoveCursorToEnd() = InputMethodx.showSoftInputAndMoveCursorToEnd(this)
+
+/**
+ * Display soft keyboard
+ */
+inline fun EditText.showSoftInput() = InputMethodx.showSoftInput(this)
+
+
+/**
+ * Delay display soft keyboard and move the cursor to the end of the EditText
+ *
+ * @param delayMillisecond Delay milliseconds
+ */
+inline fun EditText.delayShowSoftInputAndMoveCursorToEnd(delayMillisecond: Long) =
+        InputMethodx.delayShowSoftInputAndMoveCursorToEnd(this, delayMillisecond)
+
+/**
+ * Delay display soft keyboard and move the cursor to the end of the EditText
+ */
+inline fun EditText.delayShowSoftInputAndMoveCursorToEnd() =
+        InputMethodx.delayShowSoftInputAndMoveCursorToEnd(this)
+
+/**
+ * Delay display soft keyboard
+ *
+ * @param delayMillisecond Delay milliseconds
+ */
+inline fun EditText.delayShowSoftInput(delayMillisecond: Long) =
+        InputMethodx.delayShowSoftInput(this, delayMillisecond)
+
+/**
+ * Delay display soft keyboard
+ */
+inline fun EditText.delayShowSoftInput() =
+        InputMethodx.delayShowSoftInput(this)
+
+
+/**
+ * Hide soft keyboard
+ */
 inline fun Activity.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
+/**
+ * Hide soft keyboard
+ */
 inline fun android.support.v4.app.Fragment.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
+/**
+ * Hide soft keyboard
+ */
 inline fun android.app.Fragment.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
+/**
+ * Hide soft keyboard
+ */
 inline fun EditText.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
+
+/**
+ * Move the cursor to the end of the EditText
+ */
 inline fun EditText.moveCursorToEnd() = InputMethodx.moveCursorToEnd(this)
 
+/**
+ * Move the cursor to the start of the EditText
+ */
 inline fun EditText.moveCursorToStart() = InputMethodx.moveCursorToStart(this)
 
+/**
+ * Move the cursor to the specified index of the EditText
+ */
 inline fun EditText.moveCursorTo(index: Int) = InputMethodx.moveCursorTo(this, index)
 
 

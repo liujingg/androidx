@@ -27,6 +27,7 @@
 * :white_check_mark: Prefect Viewx testing
 * :white_check_mark: Prefect Displayx testing
 * :white_check_mark: Prefect ViewAnimx testing
+* :white_check_mark: Prefect InputMethodx testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0
