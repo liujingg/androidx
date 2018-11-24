@@ -14,14 +14,24 @@
  * limitations under the License.
  */
 
-@file:Suppress("NOTHING_TO_INLINE")
+package me.panpf.androidx.test.graphics;
 
-package me.panpf.androidxkt.graphics
+import android.content.Context;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 
-import android.content.Context
-import me.panpf.androidx.graphics.OpenGlx
+import org.junit.Assert;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-/**
- * Get the version of OpenGL
- */
-inline fun Context.getOpenGlVersion(): String = OpenGlx.getVersion(this)
+import me.panpf.androidx.graphics.OpenGlx;
+
+@RunWith(AndroidJUnit4.class)
+public class OpenGlxTest {
+
+    @Test
+    public void testGetVersion() {
+        Context context = InstrumentationRegistry.getContext();
+        Assert.assertNotNull(OpenGlx.getVersion(context));
+    }
+}

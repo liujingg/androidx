@@ -14,14 +14,21 @@
  * limitations under the License.
  */
 
-@file:Suppress("NOTHING_TO_INLINE")
+package me.panpf.androidxkt.test.graphics
 
-package me.panpf.androidxkt.graphics
+import android.support.test.InstrumentationRegistry
+import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidxkt.graphics.getOpenGlVersion
+import org.junit.Assert
+import org.junit.Test
+import org.junit.runner.RunWith
 
-import android.content.Context
-import me.panpf.androidx.graphics.OpenGlx
+@RunWith(AndroidJUnit4::class)
+class OpenGlxTest {
 
-/**
- * Get the version of OpenGL
- */
-inline fun Context.getOpenGlVersion(): String = OpenGlx.getVersion(this)
+    @Test
+    fun testGetVersion() {
+        val context = InstrumentationRegistry.getContext()
+        Assert.assertNotNull(context.getOpenGlVersion())
+    }
+}

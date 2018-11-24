@@ -121,7 +121,7 @@ Dependencies:
     * createMatrixColorFilter, argbEvaluate
 * Matrix: [Matrixx.java] ([Test][MatrixxTest.java]) | [Matrixx.kt] ([Test][MatrixxTest.kt])
     * getValue, getScale
-* OpenGl: [OpenGlx.java] | [OpenGlx.kt]
+* OpenGl: [OpenGlx.java] ([Test][OpenGlxTest.java]) | [OpenGlx.kt] [Matrixx.kt] ([Test][OpenGlxTest.kt])
     * getVersion, getMaxTextureSize,
 * Paint: [Paintx.java] | [Paintx.kt]
     * getTextWidth, getTextHeight, getTextWidthByBounds, getTextHeightByBounds, getTextLeading
