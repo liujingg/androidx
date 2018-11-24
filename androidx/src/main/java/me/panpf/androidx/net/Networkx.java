@@ -97,7 +97,7 @@ public class Networkx {
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public static boolean isMetered(@NonNull Context context) {
-        return NetworkState.get(context).isVPNActivated();
+        return NetworkState.get(context).isMetered();
     }
 
     /**
