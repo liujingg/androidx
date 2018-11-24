@@ -42,6 +42,7 @@
 * :fire: Drawablex toDrawableByColor rename to changeColor, toDrawableByColorFromDrawableRes rename to changeResDrawableColor
 * :fire: Bitmapx remove toDrawableByColor
 * :sparkles: Bitmapx adds toDrawable
+* :white_check_mark: Prefect Resizex testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

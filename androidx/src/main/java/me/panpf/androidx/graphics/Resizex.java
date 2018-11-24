@@ -16,143 +16,206 @@
 
 package me.panpf.androidx.graphics;
 
+import android.graphics.Point;
 import android.graphics.Rect;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.widget.ImageView;
+
+import java.util.Arrays;
 
 public class Resizex {
 
     private Resizex() {
     }
 
-    public static Rect srcMappingStartRect(int originalImageWidth, int originalImageHeight, int targetImageWidth, int targetImageHeight) {
-        float widthScale = (float) originalImageWidth / targetImageWidth;
-        float heightScale = (float) originalImageHeight / targetImageHeight;
+
+    @NonNull
+    public static Rect srcMappingStartRect(int originalWidth, int originalHeight, int targetWidth, int targetHeight) {
+        float widthScale = (float) originalWidth / targetWidth;
+        float heightScale = (float) originalHeight / targetHeight;
         float finalScale = widthScale < heightScale ? widthScale : heightScale;
-        int srcWidth = (int) (targetImageWidth * finalScale);
-        int srcHeight = (int) (targetImageHeight * finalScale);
+        int srcWidth = (int) (targetWidth * finalScale);
+        int srcHeight = (int) (targetHeight * finalScale);
         int srcLeft = 0;
         int srcTop = 0;
         return new Rect(srcLeft, srcTop, srcLeft + srcWidth, srcTop + srcHeight);
     }
 
-    public static Rect srcMappingCenterRect(int originalImageWidth, int originalImageHeight, int targetImageWidth, int targetImageHeight) {
-        float widthScale = (float) originalImageWidth / targetImageWidth;
-        float heightScale = (float) originalImageHeight / targetImageHeight;
+    @NonNull
+    public static Rect srcMappingCenterRect(int originalWidth, int originalHeight, int targetWidth, int targetHeight) {
+        float widthScale = (float) originalWidth / targetWidth;
+        float heightScale = (float) originalHeight / targetHeight;
         float finalScale = widthScale < heightScale ? widthScale : heightScale;
-        int srcWidth = (int) (targetImageWidth * finalScale);
-        int srcHeight = (int) (targetImageHeight * finalScale);
-        int srcLeft = (originalImageWidth - srcWidth) / 2;
-        int srcTop = (originalImageHeight - srcHeight) / 2;
+        int srcWidth = (int) (targetWidth * finalScale);
+        int srcHeight = (int) (targetHeight * finalScale);
+        int srcLeft = (originalWidth - srcWidth) / 2;
+        int srcTop = (originalHeight - srcHeight) / 2;
         return new Rect(srcLeft, srcTop, srcLeft + srcWidth, srcTop + srcHeight);
     }
 
-    public static Rect srcMappingEndRect(int originalImageWidth, int originalImageHeight, int targetImageWidth, int targetImageHeight) {
-        float widthScale = (float) originalImageWidth / targetImageWidth;
-        float heightScale = (float) originalImageHeight / targetImageHeight;
+    @NonNull
+    public static Rect srcMappingEndRect(int originalWidth, int originalHeight, int targetWidth, int targetHeight) {
+        float widthScale = (float) originalWidth / targetWidth;
+        float heightScale = (float) originalHeight / targetHeight;
         float finalScale = widthScale < heightScale ? widthScale : heightScale;
-        int srcWidth = (int) (targetImageWidth * finalScale);
-        int srcHeight = (int) (targetImageHeight * finalScale);
+        int srcWidth = (int) (targetWidth * finalScale);
+        int srcHeight = (int) (targetHeight * finalScale);
 
         int srcLeft;
         int srcTop;
-        if (originalImageWidth > originalImageHeight) {
-            srcLeft = originalImageWidth - srcWidth;
-            srcTop = originalImageHeight - srcHeight;
+        if (originalWidth > originalHeight) {
+            srcLeft = originalWidth - srcWidth;
+            srcTop = originalHeight - srcHeight;
         } else {
-            srcLeft = originalImageWidth - srcWidth;
-            srcTop = originalImageHeight - srcHeight;
+            srcLeft = originalWidth - srcWidth;
+            srcTop = originalHeight - srcHeight;
         }
         return new Rect(srcLeft, srcTop, srcLeft + srcWidth, srcTop + srcHeight);
     }
 
-    public static Rect srcMatrixRect(int originalImageWidth, int originalImageHeight, int targetImageWidth, int targetImageHeight) {
-        if (originalImageWidth > targetImageWidth && originalImageHeight > targetImageHeight) {
-            return new Rect(0, 0, targetImageWidth, targetImageHeight);
+    @NonNull
+    public static Rect srcMatrixRect(int originalWidth, int originalHeight, int targetWidth, int targetHeight) {
+        if (originalWidth > targetWidth && originalHeight > targetHeight) {
+            return new Rect(0, 0, targetWidth, targetHeight);
         } else {
-            float scale = targetImageWidth - originalImageWidth > targetImageHeight - originalImageHeight ? (float) targetImageWidth / originalImageWidth : (float) targetImageHeight / originalImageHeight;
-            int srcWidth = (int) (targetImageWidth / scale);
-            int srcHeight = (int) (targetImageHeight / scale);
+            float scale = targetWidth - originalWidth > targetHeight - originalHeight ? (float) targetWidth / originalWidth : (float) targetHeight / originalHeight;
+            int srcWidth = (int) (targetWidth / scale);
+            int srcHeight = (int) (targetHeight / scale);
             int srcLeft = 0;
             int srcTop = 0;
             return new Rect(srcLeft, srcTop, srcLeft + srcWidth, srcTop + srcHeight);
         }
     }
 
-    public static int[] scaleTargetSize(int originalImageWidth, int originalImageHeight, int targetImageWidth, int targetImageHeight) {
-        if (targetImageWidth > originalImageWidth || targetImageHeight > originalImageHeight) {
-            float scale = Math.abs(targetImageWidth - originalImageWidth) < Math.abs(targetImageHeight - originalImageHeight)
-                    ? (float) targetImageWidth / originalImageWidth : (float) targetImageHeight / originalImageHeight;
-            targetImageWidth = Math.round(targetImageWidth / scale);
-            targetImageHeight = Math.round(targetImageHeight / scale);
+    @NonNull
+    public static Point scaleTargetSize(int originalWidth, int originalHeight, int targetWidth, int targetHeight) {
+        if (targetWidth > originalWidth || targetHeight > originalHeight) {
+            float scale = Math.abs(targetWidth - originalWidth) < Math.abs(targetHeight - originalHeight)
+                    ? (float) targetWidth / originalWidth : (float) targetHeight / originalHeight;
+            return new Point(Math.round(targetWidth / scale), Math.round(targetHeight / scale));
+        } else {
+            return new Point(targetWidth, targetHeight);
         }
-
-        return new int[]{targetImageWidth, targetImageHeight};
     }
 
     /**
-     * 计算
+     * Calculation
      *
-     * @param imageWidth   图片原始宽
-     * @param imageHeight  图片原始高
-     * @param resizeWidth  目标宽
-     * @param resizeHeight 目标高
-     * @param scaleType    缩放类型
-     * @param exactlySame  强制使新图片的尺寸和 resizeWidth、resizeHeight 一致
-     * @return 计算结果
+     * @param scaleType Zoom type
+     * @param forceSame Force the size of the new image to match the resizeWidth and resizeHeight
      */
     @NonNull
     public static Result calculator(int imageWidth, int imageHeight, int resizeWidth, int resizeHeight,
-                                    @NonNull ImageView.ScaleType scaleType, boolean exactlySame) {
+                                    @NonNull ImageView.ScaleType scaleType, boolean forceSame) {
         if (imageWidth == resizeWidth && imageHeight == resizeHeight) {
-            Result result = new Result();
-            result.imageWidth = imageWidth;
-            result.imageHeight = imageHeight;
-            result.srcRect = new Rect(0, 0, imageWidth, imageHeight);
-            result.destRect = result.srcRect;
-            return result;
+            return new Result(imageWidth, imageHeight, new Rect(0, 0, imageWidth, imageHeight), new Rect(0, 0, imageWidth, imageHeight));
         }
 
-        int newImageWidth;
-        int newImageHeight;
-        if (exactlySame) {
-            newImageWidth = resizeWidth;
-            newImageHeight = resizeHeight;
+        int newWidth;
+        int newHeight;
+        if (forceSame) {
+            newWidth = resizeWidth;
+            newHeight = resizeHeight;
         } else {
-            int[] finalImageSize = scaleTargetSize(imageWidth, imageHeight, resizeWidth, resizeHeight);
-            newImageWidth = finalImageSize[0];
-            newImageHeight = finalImageSize[1];
+            Point finalSize = scaleTargetSize(imageWidth, imageHeight, resizeWidth, resizeHeight);
+            newWidth = finalSize.x;
+            newHeight = finalSize.y;
         }
         Rect srcRect;
-        Rect destRect = new Rect(0, 0, newImageWidth, newImageHeight);
+        Rect destRect = new Rect(0, 0, newWidth, newHeight);
         if (scaleType == ImageView.ScaleType.CENTER || scaleType == ImageView.ScaleType.CENTER_CROP || scaleType == ImageView.ScaleType.CENTER_INSIDE) {
-            srcRect = srcMappingCenterRect(imageWidth, imageHeight, newImageWidth, newImageHeight);
+            srcRect = srcMappingCenterRect(imageWidth, imageHeight, newWidth, newHeight);
         } else if (scaleType == ImageView.ScaleType.FIT_START) {
-            srcRect = srcMappingStartRect(imageWidth, imageHeight, newImageWidth, newImageHeight);
+            srcRect = srcMappingStartRect(imageWidth, imageHeight, newWidth, newHeight);
         } else if (scaleType == ImageView.ScaleType.FIT_CENTER) {
-            srcRect = srcMappingCenterRect(imageWidth, imageHeight, newImageWidth, newImageHeight);
+            srcRect = srcMappingCenterRect(imageWidth, imageHeight, newWidth, newHeight);
         } else if (scaleType == ImageView.ScaleType.FIT_END) {
-            srcRect = srcMappingEndRect(imageWidth, imageHeight, newImageWidth, newImageHeight);
+            srcRect = srcMappingEndRect(imageWidth, imageHeight, newWidth, newHeight);
         } else if (scaleType == ImageView.ScaleType.FIT_XY) {
             srcRect = new Rect(0, 0, imageWidth, imageHeight);
         } else if (scaleType == ImageView.ScaleType.MATRIX) {
-            srcRect = srcMatrixRect(imageWidth, imageHeight, newImageWidth, newImageHeight);
+            srcRect = srcMatrixRect(imageWidth, imageHeight, newWidth, newHeight);
         } else {
-            srcRect = srcMappingCenterRect(imageWidth, imageHeight, newImageWidth, newImageHeight);
+            srcRect = srcMappingCenterRect(imageWidth, imageHeight, newWidth, newHeight);
         }
 
-        Result result = new Result();
-        result.imageWidth = newImageWidth;
-        result.imageHeight = newImageHeight;
-        result.srcRect = srcRect;
-        result.destRect = destRect;
-        return result;
+        return new Result(newWidth, newHeight, srcRect, destRect);
     }
 
-    public static class Result {
-        public int imageWidth;
-        public int imageHeight;
-        public Rect srcRect;
-        public Rect destRect;
+    @SuppressWarnings("WeakerAccess")
+    public static class Result implements Parcelable {
+        public static final Creator<Result> CREATOR = new Creator<Result>() {
+            @Override
+            public Result createFromParcel(Parcel in) {
+                return new Result(in);
+            }
+
+            @Override
+            public Result[] newArray(int size) {
+                return new Result[size];
+            }
+        };
+        public final int width;
+        public final int height;
+        @NonNull
+        public final Rect srcRect;
+        public final Rect destRect;
+
+        public Result(int width, int height, @NonNull Rect srcRect, @NonNull Rect destRect) {
+            this.width = width;
+            this.height = height;
+            this.srcRect = srcRect;
+            this.destRect = destRect;
+        }
+
+        protected Result(Parcel in) {
+            width = in.readInt();
+            height = in.readInt();
+            //noinspection ConstantConditions
+            srcRect = in.readParcelable(Rect.class.getClassLoader());
+            destRect = in.readParcelable(Rect.class.getClassLoader());
+        }
+
+        @Override
+        public int describeContents() {
+            return 0;
+        }
+
+        @Override
+        public void writeToParcel(Parcel dest, int flags) {
+            dest.writeInt(width);
+            dest.writeInt(height);
+            dest.writeParcelable(srcRect, flags);
+            dest.writeParcelable(destRect, flags);
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Result result = (Result) o;
+            return width == result.width &&
+                    height == result.height &&
+                    srcRect.equals(result.srcRect) &&
+                    destRect.equals(result.destRect);
+        }
+
+        @Override
+        public int hashCode() {
+            return Arrays.hashCode(new Object[]{width, height, srcRect, destRect});
+        }
+
+        @NonNull
+        @Override
+        public String toString() {
+            return "Result{" +
+                    "width=" + width +
+                    ", height=" + height +
+                    ", srcRect=" + srcRect +
+                    ", destRect=" + destRect +
+                    '}';
+        }
     }
 }

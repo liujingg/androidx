@@ -125,6 +125,9 @@ Dependencies:
     * getVersion, getMaxTextureSize,
 * Paint: [Paintx.java] ([Test][PaintxTest.java]) | [Paintx.kt] ([Test][PaintxTest.kt])
     * getTextWidth, getTextHeight, getTextWidthByBounds, getTextHeightByBounds, getTextLeading
+* Resize: [Resizex.java] ([Test][ResizexTest.java])
+    * srcMappingStartRect, srcMappingCenterRect, srcMappingEndRect, srcMatrixRect,
+    * scaleTargetSize, calculator
 
 ### hardware
 * Hardware: [Hardwarex.java] ([Test][HardwarexTest.java]) | [Hardwarex.kt] ([Test][HardwarexTest.kt])
@@ -358,6 +361,11 @@ Please view the [CHANGELOG.md] file
 [PaintxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/PaintxTest.java
 [Paintx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Paintx.kt
 [PaintxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/PaintxTest.kt
+
+[Resizex.java]: androidx/src/main/java/me/panpf/androidx/graphics/Resizex.java
+[ResizexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/ResizexTest.java
+[Resizex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Resizex.kt
+[ResizexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/ResizexTest.kt
 
 [Hardwarex.java]: androidx/src/main/java/me/panpf/androidx/hardware/Hardwarex.java
 [HardwarexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/hardware/HardwarexTest.java
