@@ -19,71 +19,44 @@
 package me.panpf.androidxkt.graphics
 
 import android.graphics.Paint
+import android.graphics.Rect
 import me.panpf.androidx.graphics.Paintx
 
-/**
- * 获取给定文字的宽度
- *
- * @param textSize 文字大小
- * @return 给定文字的宽度
- */
-inline fun String.getTextWidth(textSize: Float): Float = Paintx.getTextWidth(this, textSize)
 
 /**
- * 获取当给定的文字使用给定的画笔绘制时的宽度
- *
- * @param paint 指定的画笔
- * @return 当给定的文字使用给定的画笔绘制时的宽度
+ * Get the width of the given text
  */
-inline fun String.getTextWidth(paint: Paint): Float = Paintx.getTextWidth(this, paint)
+inline fun Paint.getTextWidth(text: String): Float = Paintx.getTextWidth(this, text)
+
 
 /**
- * 获取给定画笔的文字高度
- *
- * @return 文字的高度
+ * Get the text height of a given patin (bottom - top)
  */
 inline fun Paint.getTextHeight(): Float = Paintx.getTextHeight(this)
 
 /**
- * 获取给定画笔的文字高度
- *
- * @return 文字的高度
+ * Get the text height of a given paint (descent - ascent)
  */
 inline fun Paint.getTextHeightCompact(): Float = Paintx.getTextHeightCompact(this)
 
 /**
- * 获取给定文字的宽度
- *
- * @param textSize 文字大小
- * @return 文字的宽度
+ * Get the bounds of a given text
  */
-inline fun String.getTextWidthByBounds(textSize: Float): Int = Paintx.getTextWidthByBounds(this, textSize)
+inline fun Paint.getTextBounds(text: String): Rect = Paintx.getTextBounds(this, text)
+
 
 /**
- * 获取给定文字的高度
+ * Get the baseline position of the vertical center when drawing the text, using bottom and top
  *
- * @param textSize 文字大小
- * @return 文字的高度
- */
-inline fun String.getTextHeightByBounds(textSize: Float): Int = Paintx.getTextHeightByBounds(this, textSize)
-
-/**
- * 获取指定画笔的文字离顶部的基准距离
- *
- * @return 返回指定笔离文字顶部的基准距离
- */
-inline fun Paint.getTextLeading(): Float = Paintx.getTextLeading(this)
-
-/**
- * 获取绘制文字时垂直居中的的基线位置，使用 bottom 和 top 计算
- * @param rectTop 绘制面板的顶部位置
- * @param rectBottom 绘制面板的底部位置
+ * @param rectTop    Draw the top position of the panel
+ * @param rectBottom Draw the bottom position of the panel
  */
 inline fun Paint.getDrawTextVerticalCenterBaseLine(rectTop: Float, rectBottom: Float): Float = Paintx.getDrawTextVerticalCenterBaseLine(this, rectTop, rectBottom)
 
 /**
- * 获取绘制文字时垂直居中的的基线位置，使用 descent 和 ascent 计算
- * @param rectTop 绘制面板的顶部位置
- * @param rectBottom 绘制面板的底部位置
+ * Get the baseline position of the vertical center when drawing the text, using descent and ascent
+ *
+ * @param rectTop    Draw the top position of the panel
+ * @param rectBottom Draw the bottom position of the panel
  */
 inline fun Paint.getDrawTextVerticalCenterBaseLineCompact(rectTop: Float, rectBottom: Float): Float = Paintx.getDrawTextVerticalCenterBaseLineCompact(this, rectTop, rectBottom)

@@ -36,6 +36,7 @@
 * :white_check_mark: Prefect NetworkState testing
 * :white_check_mark: Prefect Matrixx testing
 * :white_check_mark: Prefect OpenGlx testing
+* :white_check_mark: Prefect Paintx testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

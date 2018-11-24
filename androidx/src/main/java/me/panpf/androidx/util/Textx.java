@@ -46,7 +46,7 @@ public class Textx {
         paint.setAntiAlias(true);
         paint.setFilterBitmap(true);
 
-        float textWidth = Paintx.getTextWidth(text, paint);
+        float textWidth = Paintx.getTextWidth(paint, text);
         float textHeight = compact ? Paintx.getTextHeightCompact(paint) : Paintx.getTextHeight(paint);
 
         int newBitmapWidth = textWidth % 1 == 0 ? (int) textWidth : (int) textWidth + 1;

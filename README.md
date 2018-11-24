@@ -123,7 +123,7 @@ Dependencies:
     * getValue, getScale
 * OpenGl: [OpenGlx.java] ([Test][OpenGlxTest.java]) | [OpenGlx.kt] [Matrixx.kt] ([Test][OpenGlxTest.kt])
     * getVersion, getMaxTextureSize,
-* Paint: [Paintx.java] | [Paintx.kt]
+* Paint: [Paintx.java] ([Test][PaintxTest.java]) | [Paintx.kt] ([Test][PaintxTest.kt])
     * getTextWidth, getTextHeight, getTextWidthByBounds, getTextHeightByBounds, getTextLeading
 
 ### hardware
