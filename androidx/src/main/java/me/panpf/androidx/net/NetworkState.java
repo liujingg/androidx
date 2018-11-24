@@ -131,7 +131,7 @@ public class NetworkState {
      */
     @NonNull
     public String getTypeName() {
-        return networkInfo != null ? networkInfo.getTypeName() : "Unknown";
+        return networkInfo != null ? networkInfo.getTypeName() : "unknown";
     }
 
     /**
@@ -139,7 +139,7 @@ public class NetworkState {
      */
     @NonNull
     public String getSubtypeName() {
-        return networkInfo != null ? networkInfo.getSubtypeName() : "Unknown";
+        return networkInfo != null ? networkInfo.getSubtypeName() : "unknown";
     }
 
     /**
@@ -147,7 +147,7 @@ public class NetworkState {
      */
     @NonNull
     public String getExtraInfo() {
-        return networkInfo != null ? networkInfo.getExtraInfo() : "Unknown";
+        return networkInfo != null ? networkInfo.getExtraInfo() : "unknown";
     }
 
     /**
