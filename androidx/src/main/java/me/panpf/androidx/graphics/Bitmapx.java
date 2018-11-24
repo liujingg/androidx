@@ -53,66 +53,105 @@ public class Bitmapx {
     /* ************************************** read ******************************************  */
 
 
+    /**
+     * Read bitmap from file
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull File file, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeFile(file.getPath(), options);
     }
 
+    /**
+     * Read bitmap from file
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull File file) {
         return BitmapFactory.decodeFile(file.getPath());
     }
 
+    /**
+     * Read bitmap from InputStream
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull InputStream inputStream, @Nullable Rect outPadding, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeStream(inputStream, outPadding, options);
     }
 
+    /**
+     * Read bitmap from InputStream
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull InputStream inputStream) {
         return BitmapFactory.decodeStream(inputStream);
     }
 
+    /**
+     * Read bitmap from byte array
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull byte[] data, int offset, int length, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeByteArray(data, offset, length, options);
     }
 
+    /**
+     * Read bitmap from byte array
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull byte[] data, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeByteArray(data, 0, data.length, options);
     }
 
+    /**
+     * Read bitmap from byte array
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull byte[] data, int offset, int length) {
         return BitmapFactory.decodeByteArray(data, offset, length);
     }
 
+    /**
+     * Read bitmap from byte array
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull byte[] data) {
         return BitmapFactory.decodeByteArray(data, 0, data.length);
     }
 
+    /**
+     * Read bitmap from FileDescriptor
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull FileDescriptor fileDescriptor, @Nullable Rect outPadding, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeFileDescriptor(fileDescriptor, outPadding, options);
     }
 
+    /**
+     * Read bitmap from FileDescriptor
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull FileDescriptor fileDescriptor) {
         return BitmapFactory.decodeFileDescriptor(fileDescriptor);
     }
 
+    /**
+     * Read bitmap from resource
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull Resources resources, @DrawableRes int resId, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeResource(resources, resId, options);
     }
 
+    /**
+     * Read bitmap from resource
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull Resources resources, @DrawableRes int resId) {
         return BitmapFactory.decodeResource(resources, resId);
     }
 
+    /**
+     * Read bitmap from resource
+     */
     @Nullable
     public static Bitmap readBitmap(@NonNull Resources res, @Nullable TypedValue value, @Nullable InputStream is, @Nullable Rect pad, @Nullable BitmapFactory.Options options) {
         return BitmapFactory.decodeResourceStream(res, value, is, pad, options);
@@ -122,22 +161,31 @@ public class Bitmapx {
     /* ************************************** create ******************************************  */
 
 
-    public static Bitmap createByColor(int width, int height, @ColorInt int color, Bitmap.Config config) {
+    /**
+     * Create a Bitmap of the specified color
+     */
+    public static Bitmap createByColor(int width, int height, @NonNull Bitmap.Config config, @ColorInt int color) {
         Bitmap bitmap = Bitmap.createBitmap(width, height, config);
         Canvas canvas = new Canvas(bitmap);
         canvas.drawColor(color);
         return bitmap;
     }
 
+    /**
+     * Create a Bitmap of the specified color
+     */
     public static Bitmap createByColor(int width, int height, @ColorInt int color) {
-        return createByColor(width, height, color, Bitmap.Config.ARGB_8888);
+        return createByColor(width, height, Bitmap.Config.ARGB_8888, color);
     }
 
 
     /* ************************************** save ******************************************  */
 
 
-    public static void writeToFile(Bitmap bm, File file, Bitmap.CompressFormat format, int quality) throws IOException {
+    /**
+     * Save Bitmap to file
+     */
+    public static void writeToFile(@NonNull Bitmap bitmap, @NonNull File file, @NonNull Bitmap.CompressFormat format, int quality) throws IOException {
         Filex.createNewFileOrThrow(file);
         BufferedOutputStream bos;
         try {
@@ -148,7 +196,7 @@ public class Bitmapx {
             throw e;
         }
         try {
-            bm.compress(format, quality, bos);
+            bitmap.compress(format, quality, bos);
         } finally {
             //noinspection ResultOfMethodCallIgnored
             Streamx.closeQuietly(bos);
@@ -156,45 +204,48 @@ public class Bitmapx {
     }
 
 
-    /* ************************************** to ******************************************  */
+    /* ************************************** toByteArray ******************************************  */
 
 
+    /**
+     * Convert to byte array
+     */
     public static byte[] toByteArray(Bitmap bitmap, Bitmap.CompressFormat format, int quality) {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(format, quality, outputStream);
         return outputStream.toByteArray();
     }
 
+
+    /* ************************************** toDrawable ******************************************  */
+
     /**
      * Change the color of the bitmap
-     *
-     * @param bitmap    Source bitmap
-     * @param resources setting initial target density based on the display metrics of the resources.
      */
     @NonNull
-    public static BitmapDrawable toDrawableByColor(@NonNull Bitmap bitmap, @ColorInt int color, @Nullable Resources resources) {
+    public static BitmapDrawable toDrawable(@NonNull Bitmap bitmap, @Nullable Resources resources) {
         BitmapDrawable bitmapDrawable = new BitmapDrawable(resources, bitmap);
         if (resources == null) {
             bitmapDrawable.setTargetDensity(bitmap.getDensity());
         }
-        bitmapDrawable.setColorFilter(Colorx.createMatrixColorFilter(color));
         return bitmapDrawable;
     }
 
     /**
      * Change the color of the bitmap
-     *
-     * @param bitmap Source bitmap
      */
     @NonNull
-    public static BitmapDrawable toDrawableByColor(@NonNull Bitmap bitmap, @ColorInt int color) {
-        return toDrawableByColor(bitmap, color, null);
+    public static BitmapDrawable toDrawable(@NonNull Bitmap bitmap) {
+        return toDrawable(bitmap, null);
     }
 
 
     /* ************************************** process ******************************************  */
 
 
+    /**
+     * Change to circular Bitmap
+     */
     @NonNull
     public static Bitmap circularTo(@NonNull Bitmap srcBitmap, @NonNull Bitmap dstBitmap) {
         final Paint paint = new Paint();
@@ -215,28 +266,43 @@ public class Bitmapx {
         return dstBitmap;
     }
 
+    /**
+     * Change to circular Bitmap
+     */
     @NonNull
     public static Bitmap circular(@NonNull Bitmap srcBitmap, int newSize, @NonNull Bitmap.Config config) {
         return circularTo(srcBitmap, Bitmap.createBitmap(newSize, newSize, config));
     }
 
+    /**
+     * Change to circular Bitmap
+     */
     @NonNull
     public static Bitmap circular(@NonNull Bitmap srcBitmap, int newSize) {
         return circularTo(srcBitmap, Bitmap.createBitmap(newSize, newSize, Bitmap.Config.ARGB_8888));
     }
 
+    /**
+     * Change to circular Bitmap
+     */
     @NonNull
     public static Bitmap circular(@NonNull Bitmap srcBitmap, @NonNull Bitmap.Config config) {
         final int newBitmapSize = Math.min(srcBitmap.getWidth(), srcBitmap.getHeight());
         return circularTo(srcBitmap, Bitmap.createBitmap(newBitmapSize, newBitmapSize, config));
     }
 
+    /**
+     * Change to circular Bitmap
+     */
     @NonNull
     public static Bitmap circular(@NonNull Bitmap srcBitmap) {
         return circular(srcBitmap, Bitmap.Config.ARGB_8888);
     }
 
 
+    /**
+     * Zoom in and then center cropped Bitmap
+     */
     @NonNull
     public static Bitmap centerCropTo(@NonNull Bitmap srcBitmap, @NonNull Bitmap dstBitmap) {
         Paint paint = new Paint();
@@ -249,17 +315,26 @@ public class Bitmapx {
         return dstBitmap;
     }
 
+    /**
+     * Zoom in and then center cropped Bitmap
+     */
     @NonNull
     public static Bitmap centerCrop(@NonNull Bitmap srcBitmap, int newWidth, int newHeight, @NonNull Bitmap.Config config) {
         return centerCropTo(srcBitmap, Bitmap.createBitmap(newWidth, newHeight, config));
     }
 
+    /**
+     * Zoom in and then center cropped Bitmap
+     */
     @NonNull
     public static Bitmap centerCrop(@NonNull Bitmap srcBitmap, int newWidth, int newHeight) {
         return centerCropTo(srcBitmap, Bitmap.createBitmap(newWidth, newHeight, Bitmap.Config.ARGB_8888));
     }
 
 
+    /**
+     * Change Bitmap color
+     */
     @NonNull
     public static Bitmap tint(@NonNull Bitmap srcBitmap, @ColorInt int color) {
         Paint mPaint = new Paint();
@@ -276,10 +351,16 @@ public class Bitmapx {
     /* ************************************** other ******************************************  */
 
 
+    /**
+     * Calculate the value after inSampleSize
+     */
     public static int calculateSamplingSize(int size, int inSampleSize) {
         return (int) Math.ceil(size / (float) inSampleSize);
     }
 
+    /**
+     * Calculate the value after inSampleSize
+     */
     public static int calculateSamplingSizeForRegion(int size, int inSampleSize) {
         return (int) Math.floor(size / (float) inSampleSize);
     }

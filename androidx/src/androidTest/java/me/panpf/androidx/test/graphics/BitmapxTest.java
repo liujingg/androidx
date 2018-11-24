@@ -22,7 +22,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Color;
 import android.graphics.Rect;
-import android.graphics.drawable.Drawable;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 
@@ -30,12 +30,17 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import me.panpf.androidx.graphics.Bitmapx;
 import me.panpf.androidx.graphics.Colorx;
-import me.panpf.androidx.graphics.drawable.Drawablex;
+import me.panpf.androidx.os.storage.Storagex;
+import me.panpf.androidx.test.R;
+import me.panpf.javax.io.Filex;
 import me.panpf.javax.io.Streamx;
 import me.panpf.javax.util.Premisex;
 
@@ -43,14 +48,212 @@ import me.panpf.javax.util.Premisex;
 public class BitmapxTest {
 
     @Test
-    public void testModifyColorBitmap() {
+    public void testRead() throws IOException {
+        Context context = InstrumentationRegistry.getContext();
+        File file = Premisex.requireNotNull(Storagex.getFileIn(Storagex.getAppExternalCacheDirs(context), "rect.jpeg", 0));
+
+        try {
+            InputStream rectFileInputStream = null;
+            OutputStream rectFileOutputStream = null;
+            try {
+                rectFileInputStream = context.getResources().openRawResource(R.drawable.rect);
+                rectFileOutputStream = Filex.outputStream(file);
+                Streamx.copyTo(rectFileInputStream, rectFileOutputStream);
+            } finally {
+                Streamx.closeQuietly(rectFileOutputStream);
+                Streamx.closeQuietly(rectFileInputStream);
+            }
+
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 2;
+
+            // file
+            Bitmap bitmap1 = null;
+            Bitmap bitmap2 = null;
+            try {
+                bitmap1 = Premisex.requireNotNull(Bitmapx.readBitmap(file));
+                bitmap2 = Premisex.requireNotNull(Bitmapx.readBitmap(file, options));
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getWidth(), options.inSampleSize), bitmap2.getWidth());
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getHeight(), options.inSampleSize), bitmap2.getHeight());
+            } finally {
+                if (bitmap1 != null) bitmap1.recycle();
+                if (bitmap2 != null) bitmap2.recycle();
+                bitmap1 = null;
+                bitmap2 = null;
+            }
+
+            // InputStream
+            InputStream fileInputStream = null;
+            try {
+                try {
+                    fileInputStream = Filex.inputStream(file);
+                    bitmap1 = Premisex.requireNotNull(Bitmapx.readBitmap(fileInputStream));
+                } finally {
+                    Streamx.closeQuietly(fileInputStream);
+                }
+                InputStream fileInputStream2 = null;
+                try {
+                    fileInputStream2 = Filex.inputStream(file);
+                    bitmap2 = Premisex.requireNotNull(Bitmapx.readBitmap(fileInputStream2, null, options));
+                } finally {
+                    Streamx.closeQuietly(fileInputStream2);
+                }
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getWidth(), options.inSampleSize), bitmap2.getWidth());
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getHeight(), options.inSampleSize), bitmap2.getHeight());
+            } finally {
+                if (bitmap1 != null) bitmap1.recycle();
+                if (bitmap2 != null) bitmap2.recycle();
+                bitmap1 = null;
+                bitmap2 = null;
+            }
+
+            // byte array
+            byte[] fileBytes = Filex.readBytes(file);
+            try {
+                bitmap1 = Premisex.requireNotNull(Bitmapx.readBitmap(fileBytes, 0, fileBytes.length));
+                bitmap2 = Premisex.requireNotNull(Bitmapx.readBitmap(fileBytes, 0, fileBytes.length, options));
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getWidth(), options.inSampleSize), bitmap2.getWidth());
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getHeight(), options.inSampleSize), bitmap2.getHeight());
+
+                bitmap1 = Premisex.requireNotNull(Bitmapx.readBitmap(fileBytes));
+                bitmap2 = Premisex.requireNotNull(Bitmapx.readBitmap(fileBytes, options));
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getWidth(), options.inSampleSize), bitmap2.getWidth());
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getHeight(), options.inSampleSize), bitmap2.getHeight());
+            } finally {
+                if (bitmap1 != null) bitmap1.recycle();
+                if (bitmap2 != null) bitmap2.recycle();
+                bitmap1 = null;
+                bitmap2 = null;
+            }
+
+            // FileDescriptor
+            FileInputStream fileInputStream2 = null;
+            try {
+                fileInputStream2 = Filex.inputStream(file);
+                bitmap1 = Premisex.requireNotNull(Bitmapx.readBitmap(fileInputStream2.getFD()));
+                bitmap2 = Premisex.requireNotNull(Bitmapx.readBitmap(fileInputStream2.getFD(), null, options));
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getWidth(), options.inSampleSize), bitmap2.getWidth());
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getHeight(), options.inSampleSize), bitmap2.getHeight());
+            } finally {
+                if (bitmap1 != null) bitmap1.recycle();
+                if (bitmap2 != null) bitmap2.recycle();
+                bitmap1 = null;
+                bitmap2 = null;
+                Streamx.closeQuietly(fileInputStream2);
+            }
+
+            // Resources
+            try {
+                bitmap1 = Premisex.requireNotNull(Bitmapx.readBitmap(context.getResources(), R.drawable.rect));
+                bitmap2 = Premisex.requireNotNull(Bitmapx.readBitmap(context.getResources(), R.drawable.rect, options));
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getWidth(), options.inSampleSize), bitmap2.getWidth());
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.getHeight(), options.inSampleSize), bitmap2.getHeight());
+            } finally {
+                if (bitmap1 != null) bitmap1.recycle();
+                if (bitmap2 != null) bitmap2.recycle();
+                bitmap1 = null;
+                //noinspection UnusedAssignment
+                bitmap2 = null;
+            }
+
+            InputStream resInputStream = null;
+            try {
+                resInputStream = context.getResources().openRawResource(R.drawable.rect);
+                bitmap1 = Premisex.requireNotNull(Bitmapx.readBitmap(context.getResources(), null, resInputStream, null, null));
+            } finally {
+                if (bitmap1 != null) bitmap1.recycle();
+                Streamx.closeQuietly(resInputStream);
+            }
+        } finally {
+            Filex.deleteRecursively(file);
+        }
+    }
+
+    @Test
+    public void testCreateByColor() {
+        Bitmap bitmap = Bitmapx.createByColor(100, 200, Bitmap.Config.ARGB_4444, Colorx.FUCHSIA);
+        try {
+            Assert.assertEquals(100, bitmap.getWidth());
+            Assert.assertEquals(200, bitmap.getHeight());
+            Assert.assertEquals(Bitmap.Config.ARGB_4444, bitmap.getConfig());
+            Assert.assertEquals(Colorx.FUCHSIA, bitmap.getPixel(0, 0));
+        } finally {
+            bitmap.recycle();
+        }
+
+        Bitmap bitmap2 = Bitmapx.createByColor(300, 600, Colorx.CYAN);
+        try {
+            Assert.assertEquals(300, bitmap2.getWidth());
+            Assert.assertEquals(600, bitmap2.getHeight());
+            Assert.assertEquals(Bitmap.Config.ARGB_8888, bitmap2.getConfig());
+            Assert.assertEquals(Colorx.CYAN, bitmap2.getPixel(0, 0));
+        } finally {
+            bitmap2.recycle();
+        }
+    }
+
+    @Test
+    public void testWriteToFile() {
+        Context context = InstrumentationRegistry.getContext();
+
+        Bitmap bitmap = Bitmapx.createByColor(200, 200, Bitmap.Config.ARGB_8888, Colorx.FUCHSIA);
+        File saveFile = Premisex.requireNotNull(Storagex.getFileIn(Storagex.getAppExternalCacheDirs(context), "testWriteToFile.jpeg", 0));
+        try {
+            Bitmapx.writeToFile(bitmap, saveFile, Bitmap.CompressFormat.JPEG, 100);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Assert.fail();
+        } finally {
+            bitmap.recycle();
+        }
+
+        Bitmap bitmap1 = Bitmapx.readBitmap(saveFile);
+        try {
+            Assert.assertNotNull(bitmap1);
+            Assert.assertFalse(bitmap1.isRecycled());
+        } finally {
+            if (bitmap1 != null) {
+                bitmap1.recycle();
+            }
+            Filex.deleteRecursively(saveFile);
+        }
+    }
+
+    @Test
+    public void testToByteArray() {
+        Bitmap bitmap = Bitmapx.createByColor(200, 200, Bitmap.Config.ARGB_8888, Colorx.FUCHSIA);
+        byte[] bytes;
+        try {
+            bytes = Bitmapx.toByteArray(bitmap, Bitmap.CompressFormat.JPEG, 100);
+        } finally {
+            bitmap.recycle();
+        }
+
+        Bitmap bitmap1 = Bitmapx.readBitmap(bytes);
+        try {
+            Assert.assertNotNull(bitmap1);
+            Assert.assertFalse(bitmap1.isRecycled());
+        } finally {
+            if (bitmap1 != null) {
+                bitmap1.recycle();
+            }
+        }
+    }
+
+    @Test
+    public void tesToDrawable() {
+        Context context = InstrumentationRegistry.getContext();
+
         Bitmap sourceBitmap = Bitmapx.createByColor(100, 100, Color.parseColor("#FF0000"));
+        try {
+            BitmapDrawable drawable = Bitmapx.toDrawable(sourceBitmap, context.getResources());
+            Assert.assertNotNull(drawable);
 
-        Drawable drawable = Bitmapx.toDrawableByColor(sourceBitmap, Color.parseColor("#0000FF"));
-        Bitmap bitmap = Drawablex.toBitmapWithIntrinsicSize(drawable);
-
-        sourceBitmap.recycle();
-        bitmap.recycle();
+            BitmapDrawable drawable2 = Bitmapx.toDrawable(sourceBitmap);
+            Assert.assertNotNull(drawable2);
+        } finally {
+            sourceBitmap.recycle();
+        }
     }
 
     @Test

@@ -38,26 +38,69 @@ import java.io.InputStream
 /* ************************************** read ******************************************  */
 
 
+/**
+ * Read bitmap from file
+ */
 inline fun File.readBitmap(options: BitmapFactory.Options? = null): Bitmap? = Bitmapx.readBitmap(this, options)
 
+/**
+ * Read bitmap from file
+ */
 inline fun File.readBitmap(): Bitmap? = Bitmapx.readBitmap(this)
 
+/**
+ * Read bitmap from InputStream
+ */
 inline fun InputStream.readBitmap(outPadding: Rect?, options: BitmapFactory.Options?): Bitmap? = Bitmapx.readBitmap(this, outPadding, options)
 
+/**
+ * Read bitmap from InputStream
+ */
 inline fun InputStream.readBitmap(): Bitmap? = Bitmapx.readBitmap(this)
 
-inline fun ByteArray.readBitmap(offset: Int, length: Int, options: BitmapFactory.Options?): Bitmap? = Bitmapx.readBitmap(this, offset, length, options)
+/**
+ * Read bitmap from byte array
+ */
+inline fun ByteArray.readBitmap(offset: Int, length: Int, options: BitmapFactory.Options): Bitmap? = Bitmapx.readBitmap(this, offset, length, options)
 
+/**
+ * Read bitmap from byte array
+ */
+inline fun ByteArray.readBitmap(options: BitmapFactory.Options): Bitmap? = Bitmapx.readBitmap(this, options)
+
+/**
+ * Read bitmap from byte array
+ */
 inline fun ByteArray.readBitmap(offset: Int, length: Int): Bitmap? = Bitmapx.readBitmap(this, offset, length)
 
+/**
+ * Read bitmap from byte array
+ */
+inline fun ByteArray.readBitmap(): Bitmap? = Bitmapx.readBitmap(this)
+
+/**
+ * Read bitmap from FileDescriptor
+ */
 inline fun FileDescriptor.readBitmap(outPadding: Rect?, options: BitmapFactory.Options?): Bitmap? = Bitmapx.readBitmap(this, outPadding, options)
 
+/**
+ * Read bitmap from FileDescriptor
+ */
 inline fun FileDescriptor.readBitmap(): Bitmap? = Bitmapx.readBitmap(this)
 
+/**
+ * Read bitmap from resource
+ */
 inline fun Resources.readBitmap(resId: Int, options: BitmapFactory.Options?): Bitmap? = Bitmapx.readBitmap(this, resId, options)
 
+/**
+ * Read bitmap from resource
+ */
 inline fun Resources.readBitmap(resId: Int): Bitmap? = Bitmapx.readBitmap(this, resId)
 
+/**
+ * Read bitmap from resource
+ */
 inline fun Resources.readBitmap(value: TypedValue?, inputStream: InputStream?, pad: Rect?, options: BitmapFactory.Options?): Bitmap? =
         Bitmapx.readBitmap(this, value, inputStream, pad, options)
 
@@ -65,44 +108,82 @@ inline fun Resources.readBitmap(value: TypedValue?, inputStream: InputStream?, p
 /* ************************************** save ******************************************  */
 
 
+/**
+ * Save Bitmap to file
+ */
 inline fun Bitmap.writeToFile(file: File, format: Bitmap.CompressFormat, quality: Int) = Bitmapx.writeToFile(this, file, format, quality)
 
 
-/* ************************************** to ******************************************  */
+/* ************************************** toByteArray ******************************************  */
 
 
+/**
+ * Convert to byte array
+ */
 inline fun Bitmap.toByteArray(format: Bitmap.CompressFormat, quality: Int): ByteArray = Bitmapx.toByteArray(this, format, quality)
+
+
+/* ************************************** toDrawable ******************************************  */
 
 /**
  * Change the color of the bitmap
- *
- * @receiver Source bitmap
- * @param resources setting initial target density based on the display metrics of the resources.
  */
-inline fun Bitmap.toDrawableByColor(@ColorInt color: Int, resources: Resources? = null): BitmapDrawable = Bitmapx.toDrawableByColor(this, color, resources)
+inline fun Bitmap.toDrawable(resources: Resources): BitmapDrawable = Bitmapx.toDrawable(this, resources)
+
+/**
+ * Change the color of the bitmap
+ */
+inline fun Bitmap.toDrawable(): BitmapDrawable = Bitmapx.toDrawable(this)
 
 
 /* ************************************** process ******************************************  */
 
 
+/**
+ * Change to circular Bitmap
+ */
 inline fun Bitmap.circularTo(dstBitmap: Bitmap): Bitmap = Bitmapx.circularTo(this, dstBitmap)
 
+/**
+ * Change to circular Bitmap
+ */
 inline fun Bitmap.circular(newSize: Int, config: Bitmap.Config): Bitmap = Bitmapx.circular(this, newSize, config)
 
+/**
+ * Change to circular Bitmap
+ */
 inline fun Bitmap.circular(newSize: Int): Bitmap = Bitmapx.circular(this, newSize)
 
+/**
+ * Change to circular Bitmap
+ */
 inline fun Bitmap.circular(config: Bitmap.Config): Bitmap = Bitmapx.circular(this, config)
 
+/**
+ * Change to circular Bitmap
+ */
 inline fun Bitmap.circular(): Bitmap = Bitmapx.circular(this)
 
 
+/**
+ * Zoom in and then center cropped Bitmap
+ */
 inline fun Bitmap.centerCropTo(dstBitmap: Bitmap): Bitmap = Bitmapx.centerCropTo(this, dstBitmap)
 
+/**
+ * Zoom in and then center cropped Bitmap
+ */
 inline fun Bitmap.centerCrop(newWidth: Int, newHeight: Int, config: Bitmap.Config): Bitmap = Bitmapx.centerCrop(this, newWidth, newHeight, config)
 
+/**
+ * Zoom in and then center cropped Bitmap
+ */
 inline fun Bitmap.centerCrop(newWidth: Int, newHeight: Int): Bitmap = Bitmapx.centerCrop(this, newWidth, newHeight)
 
 
+/**
+ * Change Bitmap color
+ */
 inline fun Bitmap.tint(@ColorInt color: Int): Bitmap = Bitmapx.tint(this, color)
 
 

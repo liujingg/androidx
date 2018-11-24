@@ -40,6 +40,8 @@
 * :white_check_mark: Prefect Colorx testing
 * :white_check_mark: Prefect Imagex testing
 * :fire: Drawablex toDrawableByColor rename to changeColor, toDrawableByColorFromDrawableRes rename to changeResDrawableColor
+* :fire: Bitmapx remove toDrawableByColor
+* :sparkles: Bitmapx adds toDrawable
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0
