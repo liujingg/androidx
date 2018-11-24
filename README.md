@@ -132,7 +132,7 @@ Dependencies:
     * getAndroidId, getSubscriberId, getSimSerialNumber, getSerial, getIMEI, getIMSI, getMacAddress
 
 ### net
-* NetworkState: [NetworkState.java] | [NetworkState.kt]
+* NetworkState: [NetworkState.java] ([Test][NetworkStateTest.java])
     * isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated, isBluetoothActivated,
     * getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName, getSubtypeName,
     * getExtraInfo, getNetworkInfo, getConnectivity
