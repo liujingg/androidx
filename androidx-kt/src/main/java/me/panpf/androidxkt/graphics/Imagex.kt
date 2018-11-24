@@ -91,7 +91,7 @@ inline fun ByteArray?.getImageMimeSubType(): String? = Imagex.getMimeSubType(thi
 /**
  * Get the MimeType sub type of the image, for example 'jpeg'
  */
-inline fun FileDescriptor?.getMimeSubType(): String? = Imagex.getMimeSubType(this)
+inline fun FileDescriptor?.getImageMimeSubType(): String? = Imagex.getMimeSubType(this)
 
 /**
  * Get the MimeType sub type of the image, for example 'jpeg'
