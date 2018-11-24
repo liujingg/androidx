@@ -20,7 +20,6 @@ package me.panpf.androidxkt.net
 
 import android.Manifest
 import android.content.Context
-import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.support.annotation.RequiresPermission
 import me.panpf.androidx.net.NetworkState
@@ -115,12 +114,6 @@ inline fun Context.getNetworkExtraInfo(): String = Networkx.getExtraInfo(this)
  */
 @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
 inline fun Context.getNetworkInfo(): NetworkInfo? = Networkx.getNetworkInfo(this)
-
-/**
- * Get network connection
- */
-@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-inline fun Context.getNetworkConnectivity(): ConnectivityManager? = Networkx.getConnectivity(this)
 
 /**
  * Get the status of Wi-Fi

@@ -161,15 +161,6 @@ public class Networkx {
     }
 
     /**
-     * Get network connection
-     */
-    @NonNull
-    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static ConnectivityManager getConnectivity(@NonNull Context context) {
-        return Contextx.connectivityManager(context);
-    }
-
-    /**
      * Get the status of Wi-Fi
      *
      * @return The value is one of WIFI_STATE_ENABLED, WIFI_STATE_ENABLING, WIFI_STATE_DISABLED, WIFI_STATE_DISABLING, WIFI_STATE_UNKNOWN in WifiManager.
