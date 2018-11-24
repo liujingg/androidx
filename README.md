@@ -109,7 +109,7 @@ Dependencies:
 
 ### graphics
 * Drawable: [Drawablex.java] ([Test][DrawablexTest.java]) | [Drawablex.kt] ([Test][DrawablexTest.kt])
-    * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, toDrawableByColor, toDrawableByColorFromDrawableRes
+    * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, changeColor, changeResDrawableColor
 * Bitmap: [Bitmapx.java] | [Bitmapx.kt]
     * centerCrop, centerCropTo, circular, circularTo, tint, createByColor, toByteArray,
     * writeToFile, readBitmap, toDrawableByColor, use, calculateSamplingSize, calculateSamplingSizeForRegion

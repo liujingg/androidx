@@ -21,10 +21,10 @@ import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidxkt.graphics.drawable.changeColor
+import me.panpf.androidxkt.graphics.drawable.changeResDrawableColor
 import me.panpf.androidxkt.graphics.drawable.toBitmapWithBoundsSize
 import me.panpf.androidxkt.graphics.drawable.toBitmapWithIntrinsicSize
-import me.panpf.androidxkt.graphics.drawable.toDrawableByColor
-import me.panpf.androidxkt.graphics.drawable.toDrawableByColorFromDrawableRes
 import me.panpf.androidxkt.test.R
 import org.junit.Assert
 import org.junit.Test
@@ -139,14 +139,14 @@ class DrawablexTest {
     }
 
     @Test
-    fun testModifyColor() {
+    fun testChangeColor() {
         val context = InstrumentationRegistry.getContext()
 
-        val drawable = context.resources.getDrawable(R.drawable.ic_opera).toDrawableByColor(Color.parseColor("#0000FF"))
+        val drawable = context.resources.getDrawable(R.drawable.ic_opera).changeColor(Color.parseColor("#0000FF"))
         val bitmap = drawable.toBitmapWithIntrinsicSize()
         bitmap.recycle()
 
-        val drawable2 = context.toDrawableByColorFromDrawableRes(R.drawable.ic_opera, Color.parseColor("#0000FF"))
+        val drawable2 = context.changeResDrawableColor(R.drawable.ic_opera, Color.parseColor("#0000FF"))
         val bitmap2 = drawable2.toBitmapWithIntrinsicSize()
         bitmap2.recycle()
     }
