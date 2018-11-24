@@ -68,28 +68,6 @@ public class InputMethodxTest {
         Thread.sleep(500);
         if (Displayx.isOrientationPortrait(activity)) Assert.assertTrue(InputMethodx.isSoftInputShowing(activity));
         Assert.assertEquals(0, Selection.getSelectionEnd(originEditText.getText()));
-
-        // hide
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodx.hideSoftInput(activity);
-            }
-        });
-        Thread.sleep(500);
-
-        // show
-        if (Displayx.isOrientationPortrait(activity)) Assert.assertFalse(InputMethodx.isSoftInputShowing(activity));
-        Assert.assertEquals(0, Selection.getSelectionEnd(originEditText.getText()));
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodx.showSoftInputAndMoveCursorToEnd(originEditText);
-            }
-        });
-        Thread.sleep(500);
-        if (Displayx.isOrientationPortrait(activity)) Assert.assertTrue(InputMethodx.isSoftInputShowing(activity));
-        Assert.assertEquals(originEditText.length(), Selection.getSelectionEnd(originEditText.getText()));
     }
 
     @Test
@@ -115,28 +93,6 @@ public class InputMethodxTest {
             @Override
             public void run() {
                 InputMethodx.hideSoftInput(activity);
-            }
-        });
-        Thread.sleep(500);
-
-        // show
-        if (Displayx.isOrientationPortrait(activity)) Assert.assertFalse(InputMethodx.isSoftInputShowing(activity));
-        Assert.assertEquals(0, Selection.getSelectionEnd(supportEditText.getText()));
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodx.delayShowSoftInputAndMoveCursorToEnd(supportEditText);
-            }
-        });
-        Thread.sleep(500);
-        if (Displayx.isOrientationPortrait(activity)) Assert.assertTrue(InputMethodx.isSoftInputShowing(activity));
-        Assert.assertEquals(supportEditText.length(), Selection.getSelectionEnd(supportEditText.getText()));
-
-        // hide
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodx.hideSoftInput(activity);
                 InputMethodx.moveCursorToStart(supportEditText);
             }
         });
@@ -154,28 +110,6 @@ public class InputMethodxTest {
         Thread.sleep(500 + 500);
         if (Displayx.isOrientationPortrait(activity)) Assert.assertTrue(InputMethodx.isSoftInputShowing(activity));
         Assert.assertEquals(0, Selection.getSelectionEnd(supportEditText.getText()));
-
-        // hide
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodx.hideSoftInput(activity);
-            }
-        });
-        Thread.sleep(500);
-
-        // show
-        if (Displayx.isOrientationPortrait(activity)) Assert.assertFalse(InputMethodx.isSoftInputShowing(activity));
-        Assert.assertEquals(0, Selection.getSelectionEnd(supportEditText.getText()));
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                InputMethodx.delayShowSoftInputAndMoveCursorToEnd(supportEditText, 500);
-            }
-        });
-        Thread.sleep(500 + 500);
-        if (Displayx.isOrientationPortrait(activity)) Assert.assertTrue(InputMethodx.isSoftInputShowing(activity));
-        Assert.assertEquals(supportEditText.length(), Selection.getSelectionEnd(supportEditText.getText()));
     }
 
     @Test

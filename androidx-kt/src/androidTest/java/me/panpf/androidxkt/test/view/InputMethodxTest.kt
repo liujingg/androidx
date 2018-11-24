@@ -60,18 +60,6 @@ class InputMethodxTest {
         Thread.sleep(500)
         if (activity.isOrientationPortrait()) Assert.assertTrue(activity.isSoftInputShowing())
         Assert.assertEquals(0, Selection.getSelectionEnd(originEditText.text).toLong())
-
-        // hide
-        runInUI { activity.hideSoftInput() }
-        Thread.sleep(500)
-
-        // show
-        if (activity.isOrientationPortrait()) Assert.assertFalse(activity.isSoftInputShowing())
-        Assert.assertEquals(0, Selection.getSelectionEnd(originEditText.text).toLong())
-        runInUI { originEditText.showSoftInputAndMoveCursorToEnd() }
-        Thread.sleep(500)
-        if (activity.isOrientationPortrait()) Assert.assertTrue(activity.isSoftInputShowing())
-        Assert.assertEquals(originEditText.length().toLong(), Selection.getSelectionEnd(originEditText.text).toLong())
     }
 
     @Test
@@ -89,18 +77,6 @@ class InputMethodxTest {
         Assert.assertEquals(0, Selection.getSelectionEnd(supportEditText.text).toLong())
 
         // hide
-        runInUI { activity.hideSoftInput() }
-        Thread.sleep(500)
-
-        // show
-        if (activity.isOrientationPortrait()) Assert.assertFalse(activity.isSoftInputShowing())
-        Assert.assertEquals(0, Selection.getSelectionEnd(supportEditText.text).toLong())
-        runInUI { supportEditText.delayShowSoftInputAndMoveCursorToEnd() }
-        Thread.sleep(500)
-        if (activity.isOrientationPortrait()) Assert.assertTrue(activity.isSoftInputShowing())
-        Assert.assertEquals(supportEditText.length().toLong(), Selection.getSelectionEnd(supportEditText.text).toLong())
-
-        // hide
         runInUI {
             activity.hideSoftInput()
             supportEditText.moveCursorToStart()
@@ -114,18 +90,6 @@ class InputMethodxTest {
         Thread.sleep((500 + 500).toLong())
         if (activity.isOrientationPortrait()) Assert.assertTrue(activity.isSoftInputShowing())
         Assert.assertEquals(0, Selection.getSelectionEnd(supportEditText.text).toLong())
-
-        // hide
-        runInUI { activity.hideSoftInput() }
-        Thread.sleep(500)
-
-        // show
-        if (activity.isOrientationPortrait()) Assert.assertFalse(activity.isSoftInputShowing())
-        Assert.assertEquals(0, Selection.getSelectionEnd(supportEditText.text).toLong())
-        runInUI { supportEditText.delayShowSoftInputAndMoveCursorToEnd(500) }
-        Thread.sleep((500 + 500).toLong())
-        if (activity.isOrientationPortrait()) Assert.assertTrue(activity.isSoftInputShowing())
-        Assert.assertEquals(supportEditText.length().toLong(), Selection.getSelectionEnd(supportEditText.text).toLong())
     }
 
     @Test

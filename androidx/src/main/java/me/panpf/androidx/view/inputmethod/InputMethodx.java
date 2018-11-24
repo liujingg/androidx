@@ -65,48 +65,12 @@ public class InputMethodx {
         }
     }
 
-
-    /**
-     * Display soft keyboard and move the cursor to the end of the EditText
-     */
-    public static void showSoftInputAndMoveCursorToEnd(@NonNull EditText editText) {
-        moveCursorToEnd(editText);
-
-        editText.requestFocus();
-        Contextx.inputMethodManager(editText.getContext()).toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-    }
-
     /**
      * Display soft keyboard
      */
     public static void showSoftInput(@NonNull EditText editText) {
         editText.requestFocus();
         Contextx.inputMethodManager(editText.getContext()).toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
-    }
-
-
-    /**
-     * Delay display soft keyboard and move the cursor to the end of the EditText
-     *
-     * @param delayMillisecond Delay milliseconds
-     */
-    public static void delayShowSoftInputAndMoveCursorToEnd(final EditText editText, long delayMillisecond) {
-        // Position the cursor to the end of the entered text, the positioning cursor can not be delayed, or you can clearly see the change of the cursor
-        InputMethodx.moveCursorToEnd(editText);
-
-        editText.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                showSoftInput(editText);
-            }
-        }, delayMillisecond);
-    }
-
-    /**
-     * Delay display soft keyboard and move the cursor to the end of the EditText
-     */
-    public static void delayShowSoftInputAndMoveCursorToEnd(final EditText editText) {
-        delayShowSoftInputAndMoveCursorToEnd(editText, 100);
     }
 
     /**

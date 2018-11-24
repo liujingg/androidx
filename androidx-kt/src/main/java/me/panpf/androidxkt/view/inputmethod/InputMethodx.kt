@@ -34,43 +34,22 @@ inline fun Activity.isSoftInputShowing(): Boolean = InputMethodx.isSoftInputShow
 
 
 /**
- * Display soft keyboard and move the cursor to the end of the EditText
- */
-inline fun EditText.showSoftInputAndMoveCursorToEnd() = InputMethodx.showSoftInputAndMoveCursorToEnd(this)
-
-/**
  * Display soft keyboard
  */
 inline fun EditText.showSoftInput() = InputMethodx.showSoftInput(this)
 
 
 /**
- * Delay display soft keyboard and move the cursor to the end of the EditText
- *
- * @param delayMillisecond Delay milliseconds
- */
-inline fun EditText.delayShowSoftInputAndMoveCursorToEnd(delayMillisecond: Long) =
-        InputMethodx.delayShowSoftInputAndMoveCursorToEnd(this, delayMillisecond)
-
-/**
- * Delay display soft keyboard and move the cursor to the end of the EditText
- */
-inline fun EditText.delayShowSoftInputAndMoveCursorToEnd() =
-        InputMethodx.delayShowSoftInputAndMoveCursorToEnd(this)
-
-/**
  * Delay display soft keyboard
  *
  * @param delayMillisecond Delay milliseconds
  */
-inline fun EditText.delayShowSoftInput(delayMillisecond: Long) =
-        InputMethodx.delayShowSoftInput(this, delayMillisecond)
+inline fun EditText.delayShowSoftInput(delayMillisecond: Long) = InputMethodx.delayShowSoftInput(this, delayMillisecond)
 
 /**
  * Delay display soft keyboard
  */
-inline fun EditText.delayShowSoftInput() =
-        InputMethodx.delayShowSoftInput(this)
+inline fun EditText.delayShowSoftInput() = InputMethodx.delayShowSoftInput(this)
 
 
 /**
