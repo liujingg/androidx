@@ -119,7 +119,7 @@ Dependencies:
     * WHITE/BLACK/RED..., getAlpha, setAlpha, addAlpha, getHSVHue, setHSVHue, getHSVSaturation,
     * setHSVSaturation, addHSVSaturation, getHSVValue, setHSVValue, addHSVValue, isLight,
     * createMatrixColorFilter, argbEvaluate
-* Matrix: [Matrixx.java] | [Matrixx.kt]
+* Matrix: [Matrixx.java] ([Test][MatrixxTest.java]) | [Matrixx.kt] ([Test][MatrixxTest.kt])
     * getValue, getScale
 * OpenGl: [OpenGlx.java] | [OpenGlx.kt]
     * getVersion, getMaxTextureSize,
