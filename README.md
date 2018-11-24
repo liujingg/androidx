@@ -136,7 +136,7 @@ Dependencies:
     * isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated, isBluetoothActivated,
     * getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName, getSubtypeName,
     * getExtraInfo, getNetworkInfo, getConnectivity
-* Network: [Networkx.java] | [Networkx.kt]
+* Network: [Networkx.java] ([Test][NetworkxTest.java]) | [Networkx.kt] ([Test][NetworkxTest.kt])
     * getState, isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated,
     * isBluetoothActivated, getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName,
     * getSubtypeName, getExtraInfo, getNetworkInfo, getConnectivity, getWifiState,

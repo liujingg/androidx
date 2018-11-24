@@ -28,6 +28,11 @@
 * :white_check_mark: Prefect Displayx testing
 * :white_check_mark: Prefect ViewAnimx testing
 * :white_check_mark: Prefect InputMethodx testing
+* :fire: Networkx remove getConnectivity method
+* :bug: Fix a bug where Networkx isMetered actually called the isVPNActivated method
+* :fire: Networkx.kt isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getGateway method rename to isWifiNetworkEnabled, setWifiNetworkEnabled, isMobileNetworkEnabled, setMobileNetworkEnabled, getNetworkGateway
+* :fire: The default return value for some methods of NetworkState is changed from 'Unknown' to 'unknown'
+* :white_check_mark: Prefect Networkx testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0
