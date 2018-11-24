@@ -23,13 +23,36 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import java.util.List;
+import java.util.Set;
+
 import me.panpf.androidx.graphics.Colorx;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.lang.Mathx;
 
 @RunWith(AndroidJUnit4.class)
 public class ColorxTest {
 
     private static final int COLOR = Color.parseColor("#89BB8713");
+
+    @Test
+    public void testColors() {
+        List<Integer> colorList = Collectionx.listOf(Colorx.WHITE, Colorx.WHITE_TRANSLUCENT, Colorx.BLACK, Colorx.BLACK_TRANSLUCENT,
+                Colorx.TRANSPARENT, Colorx.RED, Colorx.RED_TRANSLUCENT, Colorx.RED_DARK, Colorx.RED_DARK_TRANSLUCENT, Colorx.GREEN,
+                Colorx.GREEN_TRANSLUCENT, Colorx.GREEN_DARK, Colorx.GREEN_DARK_TRANSLUCENT, Colorx.GREEN_LIGHT, Colorx.GREEN_LIGHT_TRANSLUCENT,
+                Colorx.BLUE, Colorx.BLUE_TRANSLUCENT, Colorx.BLUE_DARK, Colorx.BLUE_DARK_TRANSLUCENT, Colorx.BLUE_LIGHT, Colorx.BLUE_LIGHT_TRANSLUCENT,
+                Colorx.SKY_BLUE, Colorx.SKY_BLUE_TRANSLUCENT, Colorx.SKY_BLUE_DARK, Colorx.SKY_BLUE_DARK_TRANSLUCENT, Colorx.SKY_BLUE_LIGHT,
+                Colorx.SKY_BLUE_LIGHT_TRANSLUCENT, Colorx.GRAY, Colorx.GRAY_TRANSLUCENT, Colorx.GRAY_DARK, Colorx.GRAY_DARK_TRANSLUCENT, Colorx.GRAY_DIM,
+                Colorx.GRAY_DIM_TRANSLUCENT, Colorx.GRAY_LIGHT, Colorx.GRAY_LIGHT_TRANSLUCENT, Colorx.ORANGE, Colorx.ORANGE_TRANSLUCENT, Colorx.ORANGE_DARK,
+                Colorx.ORANGE_DARK_TRANSLUCENT, Colorx.ORANGE_LIGHT, Colorx.ORANGE_LIGHT_TRANSLUCENT, Colorx.GOLD, Colorx.GOLD_TRANSLUCENT, Colorx.PINK,
+                Colorx.PINK_TRANSLUCENT, Colorx.FUCHSIA, Colorx.FUCHSIA_TRANSLUCENT, Colorx.GRAY_WHITE, Colorx.GRAY_WHITE_TRANSLUCENT, Colorx.PURPLE,
+                Colorx.PURPLE_TRANSLUCENT, Colorx.CYAN, Colorx.CYAN_TRANSLUCENT, Colorx.CYAN_DARK, Colorx.CYAN_DARK_TRANSLUCENT, Colorx.YELLOW,
+                Colorx.YELLOW_TRANSLUCENT, Colorx.YELLOW_LIGHT, Colorx.YELLOW_LIGHT_TRANSLUCENT, Colorx.CHOCOLATE, Colorx.CHOCOLATE_TRANSLUCENT, Colorx.TOMATO,
+                Colorx.TOMATO_TRANSLUCENT, Colorx.ORANGE_RED, Colorx.ORANGE_RED_TRANSLUCENT, Colorx.SILVER, Colorx.SILVER_TRANSLUCENT,
+                Colorx.HIGH_LIGHT, Colorx.LOW_LIGHT);
+        Set<Integer> colorSet = Collectionx.toSet(colorList);
+        Assert.assertEquals(colorList.size(), colorSet.size());
+    }
 
     @Test
     public void testAlpha() {
