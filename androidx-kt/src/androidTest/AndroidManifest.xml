@@ -72,6 +72,28 @@
         </activity>
         <activity android:name=".app.ArgsBinderTest$TestNoIntentUriActivity"/>
 
+        <activity android:name=".app.ArgsBinderTest$ResTestOnlyUriNoIntentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/res/uri"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".app.ArgsBinderTest$ResTestOnlyIntentNoUriActivity"/>
+        <activity android:name=".app.ArgsBinderTest$ResTestBothIntentUriActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/res/uri/intent"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".app.ArgsBinderTest$ResTestNoIntentUriActivity"/>
+
         <service android:name=".TestService" />
         <receiver android:name=".TestReceiver" />
         <provider

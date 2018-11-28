@@ -598,16 +598,16 @@ fun Activity.bindBundleArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty
 /* ************************************* Activity Intent Uri Arg ***************************************** */
 
 
-fun Activity.bindByteIntentUriArgOr(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<Activity, Byte> =
+fun Activity.bindByteIntentUriArgOr(argName: String, defaultValue: Byte): ReadOnlyProperty<Activity, Byte> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readByteIntentUriArgOr(argName, defaultValue) }
 
-fun Activity.bindShortIntentUriArgOr(argName: String, defaultValue: Short = 0): ReadOnlyProperty<Activity, Short> =
+fun Activity.bindShortIntentUriArgOr(argName: String, defaultValue: Short): ReadOnlyProperty<Activity, Short> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readShortIntentUriArgOr(argName, defaultValue) }
 
-fun Activity.bindIntIntentUriArgOr(argName: String, defaultValue: Int = 0): ReadOnlyProperty<Activity, Int> =
+fun Activity.bindIntIntentUriArgOr(argName: String, defaultValue: Int): ReadOnlyProperty<Activity, Int> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntIntentUriArgOr(argName, defaultValue) }
 
-fun Activity.bindLongIntentUriArgOr(argName: String, defaultValue: Long = 0): ReadOnlyProperty<Activity, Long> =
+fun Activity.bindLongIntentUriArgOr(argName: String, defaultValue: Long): ReadOnlyProperty<Activity, Long> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readLongIntentUriArgOr(argName, defaultValue) }
 
 fun Activity.bindFloatIntentUriArgOr(argName: String, defaultValue: Float): ReadOnlyProperty<Activity, Float> =
@@ -629,16 +629,16 @@ fun Activity.bindStringIntentUriArgOrNull(argName: String): ReadOnlyProperty<Act
         ArgLazy(argName) { _, _: KProperty<*> -> this.readStringIntentUriArgOrNull(argName) }
 
 
-fun Activity.bindByteIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Byte = 0): ReadOnlyProperty<Activity, Byte> =
+fun Activity.bindByteIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Byte): ReadOnlyProperty<Activity, Byte> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteIntentUriArgOr(argNameResId, defaultValue) }
 
-fun Activity.bindShortIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Short = 0): ReadOnlyProperty<Activity, Short> =
+fun Activity.bindShortIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Short): ReadOnlyProperty<Activity, Short> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortIntentUriArgOr(argNameResId, defaultValue) }
 
-fun Activity.bindIntIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Int = 0): ReadOnlyProperty<Activity, Int> =
+fun Activity.bindIntIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Int): ReadOnlyProperty<Activity, Int> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntIntentUriArgOr(argNameResId, defaultValue) }
 
-fun Activity.bindLongIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Long = 0): ReadOnlyProperty<Activity, Long> =
+fun Activity.bindLongIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Long): ReadOnlyProperty<Activity, Long> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongIntentUriArgOr(argNameResId, defaultValue) }
 
 fun Activity.bindFloatIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Float): ReadOnlyProperty<Activity, Float> =

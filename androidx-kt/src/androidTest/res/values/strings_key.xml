@@ -109,8 +109,6 @@
     <string name="sizeF_optional">sizeFOptional</string>
     <string name="sizeF_or_default">sizeFOrDefault</string>
 
-
-
     <string name="byte_uri_required">byteUriRequired</string>
     <string name="byte_uri_optional">byteUriOptional</string>
     <string name="byte_uri_or_default">byteUriOrDefault</string>
@@ -143,4 +141,15 @@
     <string name="string_uri_optional">stringUriOptional</string>
     <string name="string_uri_or_default">stringUriOrDefault</string>
 
+    <string name="byte_intent_uri_or_default">byteIntentUriOrDefault</string>
+    <string name="short_intent_uri_or_default">shortIntentUriOrDefault</string>
+    <string name="int_intent_uri_or_default">intIntentUriOrDefault</string>
+    <string name="long_intent_uri_or_default">longIntentUriOrDefault</string>
+    <string name="float_intent_uri_or_default">floatIntentUriOrDefault</string>
+    <string name="double_intent_uri_or_default">doubleIntentUriOrDefault</string>
+    <string name="boolean_intent_uri_or_default">booleanIntentUriOrDefault</string>
+
+    <string name="string_intent_uri_required">stringIntentUriRequired</string>
+    <string name="string_intent_uri_optional">stringIntentUriOptional</string>
+    <string name="string_intent_uri_or_default">stringIntentUriOrDefault</string>
 </resources>

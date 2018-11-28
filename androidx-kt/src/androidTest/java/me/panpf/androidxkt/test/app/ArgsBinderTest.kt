@@ -61,32 +61,133 @@ class ArgsBinderTest {
     }
 
     @get:Rule
-    val uriOnlyTestOnlyRuleNo: ActivityTestRule<TestOnlyUriNoIntentActivity> = object : ActivityTestRule<TestOnlyUriNoIntentActivity>(TestOnlyUriNoIntentActivity::class.java) {
+    val uriOnlyNoIntenTestRule: ActivityTestRule<TestOnlyUriNoIntentActivity> = object : ActivityTestRule<TestOnlyUriNoIntentActivity>(TestOnlyUriNoIntentActivity::class.java) {
         override fun getActivityIntent(): Intent {
             return TestOnlyUriNoIntentActivity.createIntentWithUri()
         }
     }
 
     @get:Rule
-    val intentOnlyTestRuleNoUri: ActivityTestRule<TestOnlyIntentNoUriActivity> = object : ActivityTestRule<TestOnlyIntentNoUriActivity>(TestOnlyIntentNoUriActivity::class.java) {
+    val intentOnlyNoUriTestRule: ActivityTestRule<TestOnlyIntentNoUriActivity> = object : ActivityTestRule<TestOnlyIntentNoUriActivity>(TestOnlyIntentNoUriActivity::class.java) {
         override fun getActivityIntent(): Intent {
             return TestOnlyIntentNoUriActivity.createIntentWithExtras(InstrumentationRegistry.getContext())
         }
     }
 
     @get:Rule
-    val uriIntentTestRuleUri: ActivityTestRule<TestBothIntentUriActivity> = object : ActivityTestRule<TestBothIntentUriActivity>(TestBothIntentUriActivity::class.java) {
+    val intentUriBothTestRule: ActivityTestRule<TestBothIntentUriActivity> = object : ActivityTestRule<TestBothIntentUriActivity>(TestBothIntentUriActivity::class.java) {
         override fun getActivityIntent(): Intent {
             return TestBothIntentUriActivity.createIntentWithUriAndExtras(InstrumentationRegistry.getContext())
         }
     }
 
     @get:Rule
-    val nothingTestRuleUri: ActivityTestRule<TestNoIntentUriActivity> = object : ActivityTestRule<TestNoIntentUriActivity>(TestNoIntentUriActivity::class.java) {
+    val noIntentUriTestRule: ActivityTestRule<TestNoIntentUriActivity> = object : ActivityTestRule<TestNoIntentUriActivity>(TestNoIntentUriActivity::class.java) {
         override fun getActivityIntent(): Intent {
             return TestNoIntentUriActivity.createIntentWithNothing(InstrumentationRegistry.getContext())
         }
     }
+
+    @get:Rule
+    val resUriOnlyNoIntenTestRule: ActivityTestRule<ResTestOnlyUriNoIntentActivity> = object : ActivityTestRule<ResTestOnlyUriNoIntentActivity>(ResTestOnlyUriNoIntentActivity::class.java) {
+        override fun getActivityIntent(): Intent {
+            return ResTestOnlyUriNoIntentActivity.createIntentWithUri()
+        }
+    }
+
+    @get:Rule
+    val resIntentOnlyNoUriTestRule: ActivityTestRule<ResTestOnlyIntentNoUriActivity> = object : ActivityTestRule<ResTestOnlyIntentNoUriActivity>(ResTestOnlyIntentNoUriActivity::class.java) {
+        override fun getActivityIntent(): Intent {
+            return ResTestOnlyIntentNoUriActivity.createIntentWithExtras(InstrumentationRegistry.getContext())
+        }
+    }
+
+    @get:Rule
+    val resIntentUriBothTestRule: ActivityTestRule<ResTestBothIntentUriActivity> = object : ActivityTestRule<ResTestBothIntentUriActivity>(ResTestBothIntentUriActivity::class.java) {
+        override fun getActivityIntent(): Intent {
+            return ResTestBothIntentUriActivity.createIntentWithUriAndExtras(InstrumentationRegistry.getContext())
+        }
+    }
+
+    @get:Rule
+    val resNoIntentUriTestRule: ActivityTestRule<ResTestNoIntentUriActivity> = object : ActivityTestRule<ResTestNoIntentUriActivity>(ResTestNoIntentUriActivity::class.java) {
+        override fun getActivityIntent(): Intent {
+            return ResTestNoIntentUriActivity.createIntentWithNothing(InstrumentationRegistry.getContext())
+        }
+    }
+
+    /* ************************************* Activity Intent Arg Test ***************************************** */
+
+    @Test
+    fun testBindSupportActivity() {
+        val activity = testRule.activity
+        activity.assert()
+    }
+
+    @Test
+    fun testBindNoExtrasActivity() {
+        val activity = testNoExtrasRule.activity
+        activity.assert()
+    }
+
+
+    @Test
+    fun testBindResActivity() {
+        val activity = resTestRule.activity
+        activity.assert()
+    }
+
+    /* ************************************* Activity Intent Uri Arg Test Start ***************************************** */
+
+    @Test
+    fun testUriOnlyActivity() {
+        val activity = uriOnlyNoIntenTestRule.activity
+        activity.assertByUri()
+    }
+
+    @Test
+    fun testIntentOnlyActivity() {
+        val activity = intentOnlyNoUriTestRule.activity
+        activity.assertByIntent()
+    }
+
+    @Test
+    fun testUriIntentActivity() {
+        val activity = intentUriBothTestRule.activity
+        activity.assertByUriIntent()
+    }
+
+    @Test
+    fun testNothingActivity() {
+        val activity = noIntentUriTestRule.activity
+        activity.assertByNothing()
+    }
+
+    @Test
+    fun testResUriOnlyActivity() {
+        val activity = resUriOnlyNoIntenTestRule.activity
+        activity.assertByUri()
+    }
+
+    @Test
+    fun testResIntentOnlyActivity() {
+        val activity = resIntentOnlyNoUriTestRule.activity
+        activity.assertByIntent()
+    }
+
+    @Test
+    fun testResUriIntentActivity() {
+        val activity = resIntentUriBothTestRule.activity
+        activity.assertByUriIntent()
+    }
+
+    @Test
+    fun testResNothingActivity() {
+        val activity = resNoIntentUriTestRule.activity
+        activity.assertByNothing()
+    }
+
+    /* ************************************* Activity Uri Arg Test ***************************************** */
 
     @Test
     fun testUriActivity() {
@@ -100,71 +201,35 @@ class ArgsBinderTest {
         activity.assert()
     }
 
+    /* ************************************* Activity Uri Intent Test ***************************************** */
+
+    /* ************************************* SupportFragment Arg Test ***************************************** */
+
     @Test
-    fun testUriOnlyActivity() {
-        val activity = uriOnlyTestOnlyRuleNo.activity
-        activity.assertByUri()
+    fun testBindSupportFragment() {
+        val fragment = testRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.test.R.id.testAt_frame) as TestSupportFragment
+        fragment.assert()
     }
 
     @Test
-    fun testIntentOnlyActivity() {
-        val activity = intentOnlyTestRuleNoUri.activity
-        activity.assertByIntent()
+    fun testBindResSupportFragment() {
+        val fragment = resTestRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.test.R.id.testAt_frame) as ResTestSupportFragment
+        fragment.assert()
+    }
+
+    /* ************************************* Origin Fragment Arg Test ***************************************** */
+
+    @Test
+    fun testBindResFragment() {
+        val fragment = resTestRule.activity.fragmentManager.findFragmentById(android.R.id.content) as ResTestFragment
+        fragment.assert()
     }
 
     @Test
-    fun testUriIntentActivity() {
-        val activity = uriIntentTestRuleUri.activity
-        activity.assertByUriIntent()
+    fun testBindFragment() {
+        val fragment = testRule.activity.fragmentManager.findFragmentById(android.R.id.content) as TestFragment
+        fragment.assert()
     }
-
-    @Test
-    fun testNothingActivity() {
-        val activity = nothingTestRuleUri.activity
-        activity.assertByNothing()
-    }
-
-//    @Test
-//    fun testBindSupportActivity() {
-//        val activity = testRule.activity
-//        activity.assert()
-//    }
-//
-//    @Test
-//    fun testBindNoExtrasActivity() {
-//        val activity = testNoExtrasRule.activity
-//        activity.assert()
-//    }
-//
-//    @Test
-//    fun testBindSupportFragment() {
-//        val fragment = testRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.test.R.id.testAt_frame) as TestSupportFragment
-//        fragment.assert()
-//    }
-//
-//    @Test
-//    fun testBindFragment() {
-//        val fragment = testRule.activity.fragmentManager.findFragmentById(android.R.id.content) as TestFragment
-//        fragment.assert()
-//    }
-//
-//    @Test
-//    fun testBindResActivity() {
-//        val activity = resTestRule.activity
-//        activity.assert()
-//    }
-//
-//    @Test
-//    fun testBindResSupportFragment() {
-//        val fragment = resTestRule.activity.supportFragmentManager.findFragmentById(me.panpf.androidxkt.test.R.id.testAt_frame) as ResTestSupportFragment
-//        fragment.assert()
-//    }
-//
-//    @Test
-//    fun testBindResFragment() {
-//        val fragment = resTestRule.activity.fragmentManager.findFragmentById(android.R.id.content) as ResTestFragment
-//        fragment.assert()
-//    }
 
     class ResTestActivity : FragmentActivity() {
 
@@ -2601,11 +2666,6 @@ class ArgsBinderTest {
         private val stringUriOrDefault by bindStringUriArgOr("stringUriOrDefault", "")
         private val stringUriOrDefaultErrKey by bindStringUriArgOr("stringUriOrDefaultErrKey", "stringUriOrDefaultErrKey")
 
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-        }
-
         companion object {
             private val params = StringBuilder()
                     .append("byteUriRequired=").append(1.toByte())
@@ -2729,11 +2789,6 @@ class ArgsBinderTest {
         private val stringUriOrDefault by bindStringUriArgOr(R.string.string_uri_or_default, "")
         private val stringUriOrDefaultErrKey by bindStringUriArgOr(R.string.not_exist_key, "stringUriOrDefaultErrKey")
 
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-        }
-
         companion object {
             private val params = StringBuilder()
                     .append("byteUriRequired=").append(1.toByte())
@@ -2817,10 +2872,10 @@ class ArgsBinderTest {
 
     class TestOnlyUriNoIntentActivity : FragmentActivity() {
 
-        private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault")
-        private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault")
-        private val intIntentUriOrDefault by bindIntIntentUriArgOr("intIntentUriOrDefault")
-        private val longIntentUriOrDefault by bindLongIntentUriArgOr("longIntentUriOrDefault")
+        private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault", 0.toByte())
+        private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault", 0.toShort())
+        private val intIntentUriOrDefault by bindIntIntentUriArgOr("intIntentUriOrDefault", 0)
+        private val longIntentUriOrDefault by bindLongIntentUriArgOr("longIntentUriOrDefault", 0L)
         private val floatIntentUriOrDefault by bindFloatIntentUriArgOr("floatIntentUriOrDefault", 0f)
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr("doubleIntentUriOrDefault", 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr("booleanIntentUriOrDefault", false)
@@ -2870,10 +2925,10 @@ class ArgsBinderTest {
 
     class TestOnlyIntentNoUriActivity : FragmentActivity() {
 
-        private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault")
-        private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault")
-        private val intIntentUriOrDefault by bindIntIntentUriArgOr("intIntentUriOrDefault")
-        private val longIntentUriOrDefault by bindLongIntentUriArgOr("longIntentUriOrDefault")
+        private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault", 0.toByte())
+        private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault", 0.toShort())
+        private val intIntentUriOrDefault by bindIntIntentUriArgOr("intIntentUriOrDefault", 0)
+        private val longIntentUriOrDefault by bindLongIntentUriArgOr("longIntentUriOrDefault", 0L)
         private val floatIntentUriOrDefault by bindFloatIntentUriArgOr("floatIntentUriOrDefault", 0f)
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr("doubleIntentUriOrDefault", 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr("booleanIntentUriOrDefault", false)
@@ -2925,10 +2980,10 @@ class ArgsBinderTest {
 
     class TestBothIntentUriActivity : FragmentActivity() {
 
-        private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault")
-        private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault")
-        private val intIntentUriOrDefault by bindIntIntentUriArgOr("intIntentUriOrDefault")
-        private val longIntentUriOrDefault by bindLongIntentUriArgOr("longIntentUriOrDefault")
+        private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault", 0.toByte())
+        private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault", 0.toShort())
+        private val intIntentUriOrDefault by bindIntIntentUriArgOr("intIntentUriOrDefault", 0)
+        private val longIntentUriOrDefault by bindLongIntentUriArgOr("longIntentUriOrDefault", 0L)
         private val floatIntentUriOrDefault by bindFloatIntentUriArgOr("floatIntentUriOrDefault", 0f)
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr("doubleIntentUriOrDefault", 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr("booleanIntentUriOrDefault", false)
@@ -2995,10 +3050,10 @@ class ArgsBinderTest {
 
     class TestNoIntentUriActivity : FragmentActivity() {
 
-        private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault")
-        private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault")
-        private val intIntentUriOrDefault by bindIntIntentUriArgOr("intIntentUriOrDefault")
-        private val longIntentUriOrDefault by bindLongIntentUriArgOr("longIntentUriOrDefault")
+        private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault", 0.toByte())
+        private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault", 0.toShort())
+        private val intIntentUriOrDefault by bindIntIntentUriArgOr("intIntentUriOrDefault", 0)
+        private val longIntentUriOrDefault by bindLongIntentUriArgOr("longIntentUriOrDefault", 0L)
         private val floatIntentUriOrDefault by bindFloatIntentUriArgOr("floatIntentUriOrDefault", 0f)
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr("doubleIntentUriOrDefault", 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr("booleanIntentUriOrDefault", false)
@@ -3011,6 +3066,223 @@ class ArgsBinderTest {
         companion object {
 
             fun createIntentWithNothing(context: Context) = Intent(context, TestNoIntentUriActivity::class.java).apply {
+                action = Intent.ACTION_VIEW
+                data = Uri.parse("https://github.com/panpf")
+            }
+        }
+
+        fun assertByNothing() {
+            Assert.assertTrue(byteIntentUriOrDefault == 0.toByte())
+            Assert.assertTrue(shortIntentUriOrDefault == 0.toShort())
+            Assert.assertTrue(intIntentUriOrDefault == 0)
+            Assert.assertTrue(longIntentUriOrDefault == 0L)
+            Assert.assertTrue(floatIntentUriOrDefault == 0f)
+            Assert.assertTrue(doubleIntentUriOrDefault == 0.toDouble())
+            Assert.assertTrue(!booleanIntentUriOrDefault)
+
+//            Assert.assertTrue(stringIntentUriOptional == null)
+            Assert.assertTrue(stringIntentUriOrDefault == "default")
+            Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+        }
+
+    }
+
+    class ResTestOnlyUriNoIntentActivity : FragmentActivity() {
+
+        private val byteIntentUriOrDefault by bindByteIntentUriArgOr(R.string.byte_intent_uri_or_default, 0.toByte())
+        private val shortIntentUriOrDefault by bindShortIntentUriArgOr(R.string.short_intent_uri_or_default, 0.toShort())
+        private val intIntentUriOrDefault by bindIntIntentUriArgOr(R.string.int_intent_uri_or_default, 0)
+        private val longIntentUriOrDefault by bindLongIntentUriArgOr(R.string.long_intent_uri_or_default, 0L)
+        private val floatIntentUriOrDefault by bindFloatIntentUriArgOr(R.string.float_intent_uri_or_default, 0f)
+        private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr(R.string.double_intent_uri_or_default, 0.toDouble())
+        private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr(R.string.boolean_intent_uri_or_default, false)
+
+        private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
+        private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
+        private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
+        private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
+
+        companion object {
+            private val params = StringBuilder()
+                    .append("byteIntentUriOrDefault=").append(1.toByte())
+                    .append("&shortIntentUriOrDefault=").append(2.toShort())
+                    .append("&intIntentUriOrDefault=").append(3)
+                    .append("&longIntentUriOrDefault=").append(4L)
+                    .append("&floatIntentUriOrDefault=").append(5.toFloat())
+                    .append("&doubleIntentUriOrDefault=").append(6.toDouble())
+                    .append("&booleanIntentUriOrDefault=").append(true)
+
+                    .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
+                    .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
+                    .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+
+            private val uri = Uri.parse("https://github.com/panpf/androidx/res/uri?$params")
+
+            fun createIntentWithUri() = Intent(Intent.ACTION_VIEW, uri)
+
+        }
+
+        fun assertByUri() {
+            Assert.assertTrue(byteIntentUriOrDefault == 1.toByte())
+            Assert.assertTrue(shortIntentUriOrDefault == 2.toShort())
+            Assert.assertTrue(intIntentUriOrDefault == 3)
+            Assert.assertTrue(longIntentUriOrDefault == 4L)
+            Assert.assertTrue(floatIntentUriOrDefault == 5.toFloat())
+            Assert.assertTrue(doubleIntentUriOrDefault == 6.toDouble())
+            Assert.assertTrue(booleanIntentUriOrDefault)
+
+            Assert.assertTrue(stringIntentUriRequired == "stringIntentUriRequired")
+            Assert.assertTrue(stringIntentUriOptional?.run { this == "stringIntentUriOptional" }
+                    ?: false)
+            Assert.assertTrue(stringIntentUriOrDefault == "stringIntentUriOrDefault")
+            Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+        }
+
+    }
+
+    class ResTestOnlyIntentNoUriActivity : FragmentActivity() {
+
+        private val byteIntentUriOrDefault by bindByteIntentUriArgOr(R.string.byte_intent_uri_or_default, 0.toByte())
+        private val shortIntentUriOrDefault by bindShortIntentUriArgOr(R.string.short_intent_uri_or_default, 0.toShort())
+        private val intIntentUriOrDefault by bindIntIntentUriArgOr(R.string.int_intent_uri_or_default, 0)
+        private val longIntentUriOrDefault by bindLongIntentUriArgOr(R.string.long_intent_uri_or_default, 0L)
+        private val floatIntentUriOrDefault by bindFloatIntentUriArgOr(R.string.float_intent_uri_or_default, 0f)
+        private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr(R.string.double_intent_uri_or_default, 0.toDouble())
+        private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr(R.string.boolean_intent_uri_or_default, false)
+
+        private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
+        private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
+        private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
+        private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
+
+        companion object {
+
+            fun createIntentWithExtras(context: Context) = Intent(context, ResTestOnlyIntentNoUriActivity::class.java).apply {
+
+                action = Intent.ACTION_VIEW
+                data = Uri.parse("https://github.com/panpf")
+
+                putExtra(context.getString(R.string.byte_intent_uri_or_default), (-1).toByte())
+                putExtra(context.getString(R.string.short_intent_uri_or_default), (-2).toShort())
+                putExtra(context.getString(R.string.int_intent_uri_or_default), -3)
+                putExtra(context.getString(R.string.long_intent_uri_or_default), -4L)
+                putExtra(context.getString(R.string.float_intent_uri_or_default), -5f)
+                putExtra(context.getString(R.string.double_intent_uri_or_default), (-6).toDouble())
+                putExtra(context.getString(R.string.boolean_intent_uri_or_default), true)
+
+                putExtra(context.getString(R.string.string_intent_uri_required), "stringIntentRequired")
+                putExtra(context.getString(R.string.string_intent_uri_optional), "stringIntentOptional")
+                putExtra(context.getString(R.string.string_intent_uri_or_default), "stringIntentOrDefault")
+            }
+
+        }
+
+        fun assertByIntent() {
+            Assert.assertTrue(byteIntentUriOrDefault == (-1).toByte())
+            Assert.assertTrue(shortIntentUriOrDefault == (-2).toShort())
+            Assert.assertTrue(intIntentUriOrDefault == -3)
+            Assert.assertTrue(longIntentUriOrDefault == -4L)
+            Assert.assertTrue(floatIntentUriOrDefault == (-5).toFloat())
+            Assert.assertTrue(doubleIntentUriOrDefault == (-6).toDouble())
+            Assert.assertTrue(booleanIntentUriOrDefault)
+
+            Assert.assertTrue(stringIntentUriRequired == "stringIntentRequired")
+            Assert.assertTrue(stringIntentUriOptional?.run { this == "stringIntentOptional" }
+                    ?: false)
+            Assert.assertTrue(stringIntentUriOrDefault == "stringIntentOrDefault")
+            Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+        }
+
+    }
+
+    class ResTestBothIntentUriActivity : FragmentActivity() {
+
+        private val byteIntentUriOrDefault by bindByteIntentUriArgOr(R.string.byte_intent_uri_or_default, 0.toByte())
+        private val shortIntentUriOrDefault by bindShortIntentUriArgOr(R.string.short_intent_uri_or_default, 0.toShort())
+        private val intIntentUriOrDefault by bindIntIntentUriArgOr(R.string.int_intent_uri_or_default, 0)
+        private val longIntentUriOrDefault by bindLongIntentUriArgOr(R.string.long_intent_uri_or_default, 0L)
+        private val floatIntentUriOrDefault by bindFloatIntentUriArgOr(R.string.float_intent_uri_or_default, 0f)
+        private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr(R.string.double_intent_uri_or_default, 0.toDouble())
+        private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr(R.string.boolean_intent_uri_or_default, false)
+
+        private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
+        private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
+        private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
+        private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
+
+        companion object {
+
+            private val params = StringBuilder()
+                    .append("byteIntentUriOrDefault=").append(1.toByte())
+                    .append("&shortIntentUriOrDefault=").append(2.toShort())
+                    .append("&intIntentUriOrDefault=").append(3)
+                    .append("&longIntentUriOrDefault=").append(4L)
+                    .append("&floatIntentUriOrDefault=").append(5.toFloat())
+                    .append("&doubleIntentUriOrDefault=").append(6.toDouble())
+                    .append("&booleanIntentUriOrDefault=").append(true)
+
+                    .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
+                    .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
+                    .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+
+            private val uri = Uri.parse("https://github.com/panpf/androidx/res/uri/intent?$params")
+
+            fun createIntentWithUriAndExtras(context: Context) = Intent(context, ResTestBothIntentUriActivity::class.java).apply {
+
+                action = Intent.ACTION_VIEW
+                data = uri
+
+                putExtra(context.getString(R.string.byte_intent_uri_or_default), (-1).toByte())
+                putExtra(context.getString(R.string.short_intent_uri_or_default), (-2).toShort())
+                putExtra(context.getString(R.string.int_intent_uri_or_default), -3)
+                putExtra(context.getString(R.string.long_intent_uri_or_default), -4L)
+                putExtra(context.getString(R.string.float_intent_uri_or_default), -5f)
+                putExtra(context.getString(R.string.double_intent_uri_or_default), (-6).toDouble())
+                putExtra(context.getString(R.string.boolean_intent_uri_or_default), true)
+
+                putExtra(context.getString(R.string.string_intent_uri_required), "stringIntentRequired")
+                putExtra(context.getString(R.string.string_intent_uri_optional), "stringIntentOptional")
+                putExtra(context.getString(R.string.string_intent_uri_or_default), "stringIntentOrDefault")
+            }
+
+        }
+
+        fun assertByUriIntent() {
+            Assert.assertTrue(byteIntentUriOrDefault == (-1).toByte())
+            Assert.assertTrue(shortIntentUriOrDefault == (-2).toShort())
+            Assert.assertTrue(intIntentUriOrDefault == -3)
+            Assert.assertTrue(longIntentUriOrDefault == -4L)
+            Assert.assertTrue(floatIntentUriOrDefault == (-5).toFloat())
+            Assert.assertTrue(doubleIntentUriOrDefault == (-6).toDouble())
+            Assert.assertTrue(booleanIntentUriOrDefault)
+
+            Assert.assertTrue(stringIntentUriRequired == "stringIntentRequired")
+            Assert.assertTrue(stringIntentUriOptional?.run { this == "stringIntentOptional" }
+                    ?: false)
+            Assert.assertTrue(stringIntentUriOrDefault == "stringIntentOrDefault")
+            Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+        }
+
+    }
+
+    class ResTestNoIntentUriActivity : FragmentActivity() {
+
+        private val byteIntentUriOrDefault by bindByteIntentUriArgOr(R.string.byte_intent_uri_or_default, 0.toByte())
+        private val shortIntentUriOrDefault by bindShortIntentUriArgOr(R.string.short_intent_uri_or_default, 0.toShort())
+        private val intIntentUriOrDefault by bindIntIntentUriArgOr(R.string.int_intent_uri_or_default, 0)
+        private val longIntentUriOrDefault by bindLongIntentUriArgOr(R.string.long_intent_uri_or_default, 0L)
+        private val floatIntentUriOrDefault by bindFloatIntentUriArgOr(R.string.float_intent_uri_or_default, 0f)
+        private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr(R.string.double_intent_uri_or_default, 0.toDouble())
+        private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr(R.string.boolean_intent_uri_or_default, false)
+
+        //        private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
+//        private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
+        private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
+        private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
+
+        companion object {
+
+            fun createIntentWithNothing(context: Context) = Intent(context, ResTestNoIntentUriActivity::class.java).apply {
                 action = Intent.ACTION_VIEW
                 data = Uri.parse("https://github.com/panpf")
             }
