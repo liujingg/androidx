@@ -19,11 +19,11 @@ package me.panpf.androidx.content;
 import android.content.ClipData;
 import android.support.annotation.NonNull;
 
-@SuppressWarnings("WeakerAccess")
 public abstract class ClipContent {
     @NonNull
     public String mimeType;
 
+    @SuppressWarnings("WeakerAccess")
     public ClipContent(@NonNull String mimeType) {
         this.mimeType = mimeType;
     }

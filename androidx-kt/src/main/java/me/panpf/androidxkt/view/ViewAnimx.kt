@@ -19,99 +19,373 @@
 package me.panpf.androidxkt.view
 
 import android.view.View
-import android.view.animation.Animation.AnimationListener
+import android.view.animation.Animation
 import me.panpf.androidx.view.ViewAnimx
-import me.panpf.androidx.view.ViewAnimx.DEFAULT_ANIMATION_DURATION
+
 
 /*
  * View animation related extension methods or properties
  */
 
-/**
- * 透明度动画
- *
- * @param fromAlpha         开始透明度
- * @param toAlpha           结束透明度
- * @param durationMillis    持续时间，毫秒
- * @param isBanClick        在执行动画的过程中是否禁止点击
- * @param listener 动画监听器
- */
-inline fun View.animAlpha(fromAlpha: Float, toAlpha: Float, durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                          isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.animAlpha(this, fromAlpha, toAlpha, durationMillis, isBanClick, listener)
 
 /**
- * 移动动画
+ * Perform alpha animation
  *
- * @param fromXDelta     X轴开始坐标
- * @param toXDelta       X轴结束坐标
- * @param fromYDelta     Y轴开始坐标
- * @param toYDelta       Y轴结束坐标
- * @param cycles         重复
- * @param durationMillis 持续时间
- * @param isBanClick     在执行动画的过程中是否禁止点击
- * @param listener       动画监听器
+ * @param fromAlpha      Initial alpha value
+ * @param toAlpha        End alpha value
+ * @param durationMillis Animation duration, in milliseconds
+ * @param isBanClick     If true, clicks will be disabled during the animation
+ * @param listener       Animation listener
  */
-inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float, cycles: Float,
-                              durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                              isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, durationMillis, isBanClick, listener)
+inline fun View.animAlpha(fromAlpha: Float, toAlpha: Float, durationMillis: Long, isBanClick: Boolean, listener: Animation.AnimationListener?) =
+        ViewAnimx.animAlpha(this, fromAlpha, toAlpha, durationMillis, isBanClick, listener)
 
 /**
- * 视图左右摇晃
+ * Perform alpha animation
  *
- * @param extent         摇晃幅度
- * @param cycles         重复次数
- * @param durationMillis 持续时间
- * @param isBanClick     在执行动画的过程中是否禁止点击
- * @param listener       动画监听器
+ * @param fromAlpha Initial alpha value
+ * @param toAlpha   End alpha value
+ * @param listener  Animation listener
  */
-inline fun View.shake(extent: Float = 10.0f, cycles: Float = 7f, durationMillis: Long = 700,
-                      isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.shake(this, extent, cycles, durationMillis, isBanClick, listener)
+inline fun View.animAlpha(fromAlpha: Float, toAlpha: Float, listener: Animation.AnimationListener?) =
+        ViewAnimx.animAlpha(this, fromAlpha, toAlpha, listener)
 
 /**
- * 视图上下震动
+ * Perform alpha animation
  *
- * @param extent         震动幅度
- * @param cycles         重复次数
- * @param durationMillis 持续时间
- * @param isBanClick     在执行动画的过程中是否禁止点击
- * @param listener       动画监听器
+ * @param fromAlpha  Initial alpha value
+ * @param toAlpha    End alpha value
+ * @param isBanClick If true, clicks will be disabled during the animation
  */
-inline fun View.shock(extent: Float = 10.0f, cycles: Float = 7f, durationMillis: Long = 700,
-                      isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.shock(this, extent, cycles, durationMillis, isBanClick, listener)
+inline fun View.animAlpha(fromAlpha: Float, toAlpha: Float, isBanClick: Boolean) = ViewAnimx.animAlpha(this, fromAlpha, toAlpha, isBanClick)
 
 /**
- * 执行资源中定义的动画
- * @param animId   动画资源 ID
- * @param listener      动画监听器
+ * Perform alpha animation
+ *
+ * @param fromAlpha      Initial alpha value
+ * @param toAlpha        End alpha value
+ * @param durationMillis Animation duration, in milliseconds
  */
-inline fun View.startAnimFromRes(animId: Int, isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.startAnimFromRes(this, animId, isBanClick, listener)
+inline fun View.animAlpha(fromAlpha: Float, toAlpha: Float, durationMillis: Long) = ViewAnimx.animAlpha(this, fromAlpha, toAlpha, durationMillis)
 
 /**
- * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.INVISIBLE
+ * Perform alpha animation
  *
- * @param durationMillis    持续时间，毫秒
- * @param isBanClick        在执行动画的过程中是否禁止点击
- * @param listener          动画监听器
+ * @param fromAlpha Initial alpha value
+ * @param toAlpha   End alpha value
  */
-inline fun View.invisibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                                     isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.invisibleByAnimAlpha(this, durationMillis, isBanClick, listener)
+inline fun View.animAlpha(fromAlpha: Float, toAlpha: Float) = ViewAnimx.animAlpha(this, fromAlpha, toAlpha)
+
 
 /**
- * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.GONE
+ * Perform translate animation
  *
- * @param durationMillis    持续时间，毫秒
- * @param isBanClick        在执行动画的过程中是否禁止点击
- * @param listener          动画监听器
+ * @param fromXDelta     Change in X coordinate to apply at the start of the animation
+ * @param toXDelta       Change in X coordinate to apply at the end of the animation
+ * @param fromYDelta     Change in Y coordinate to apply at the start of the animation
+ * @param toYDelta       Change in Y coordinate to apply at the end of the animation
+ * @param cycles         Number of cycle executions
+ * @param durationMillis Animation duration, in milliseconds
+ * @param isBanClick     If true, clicks will be disabled during the animation
+ * @param listener       Animation listener
  */
-inline fun View.goneByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                                isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.goneByAnimAlpha(this, durationMillis, isBanClick, listener)
+inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float,
+                              cycles: Float, durationMillis: Long, isBanClick: Boolean, listener: Animation.AnimationListener?) =
+        ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, durationMillis, isBanClick, listener)
 
 /**
- * 使用透明度渐变动画显示 View
+ * Perform translate animation
  *
- * @param durationMillis    持续时间，毫秒
- * @param isBanClick        在执行动画的过程中是否禁止点击
- * @param listener          动画监听器
+ * @param fromXDelta Change in X coordinate to apply at the start of the animation
+ * @param toXDelta   Change in X coordinate to apply at the end of the animation
+ * @param fromYDelta Change in Y coordinate to apply at the start of the animation
+ * @param toYDelta   Change in Y coordinate to apply at the end of the animation
+ * @param isBanClick If true, clicks will be disabled during the animation
  */
-inline fun View.visibleByAnimAlpha(durationMillis: Long = DEFAULT_ANIMATION_DURATION,
-                                   isBanClick: Boolean = false, listener: AnimationListener? = null) = ViewAnimx.visibleByAnimAlpha(this, durationMillis, isBanClick, listener)
+inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float, isBanClick: Boolean) =
+        ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta, isBanClick)
+
+/**
+ * Perform translate animation
+ *
+ * @param fromXDelta Change in X coordinate to apply at the start of the animation
+ * @param toXDelta   Change in X coordinate to apply at the end of the animation
+ * @param fromYDelta Change in Y coordinate to apply at the start of the animation
+ * @param toYDelta   Change in Y coordinate to apply at the end of the animation
+ * @param listener   Animation listener
+ */
+inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float, listener: Animation.AnimationListener?) =
+        ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta, listener)
+
+/**
+ * Perform translate animation
+ *
+ * @param fromXDelta     Change in X coordinate to apply at the start of the animation
+ * @param toXDelta       Change in X coordinate to apply at the end of the animation
+ * @param fromYDelta     Change in Y coordinate to apply at the start of the animation
+ * @param toYDelta       Change in Y coordinate to apply at the end of the animation
+ * @param durationMillis Animation duration, in milliseconds
+ */
+inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float, durationMillis: Long) =
+        ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta, durationMillis)
+
+/**
+ * Perform translate animation
+ *
+ * @param fromXDelta Change in X coordinate to apply at the start of the animation
+ * @param toXDelta   Change in X coordinate to apply at the end of the animation
+ * @param fromYDelta Change in Y coordinate to apply at the start of the animation
+ * @param toYDelta   Change in Y coordinate to apply at the end of the animation
+ * @param cycles     Number of cycle executions
+ */
+inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float, cycles: Float) =
+        ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles)
+
+/**
+ * Perform translate animation
+ *
+ * @param fromXDelta Change in X coordinate to apply at the start of the animation
+ * @param toXDelta   Change in X coordinate to apply at the end of the animation
+ * @param fromYDelta Change in Y coordinate to apply at the start of the animation
+ * @param toYDelta   Change in Y coordinate to apply at the end of the animation
+ */
+inline fun View.animTranslate(fromXDelta: Float, toXDelta: Float, fromYDelta: Float, toYDelta: Float) =
+        ViewAnimx.animTranslate(this, fromXDelta, toXDelta, fromYDelta, toYDelta)
+
+
+/**
+ * Shake left and right
+ *
+ * @param extent         Shake amplitude
+ * @param cycles         Number of cycle executions
+ * @param durationMillis Animation duration, in milliseconds
+ * @param isBanClick     If true, clicks will be disabled during the animation
+ * @param listener       Animation listener
+ */
+inline fun View.shakeLandscape(extent: Float, cycles: Float, durationMillis: Long,
+                               isBanClick: Boolean, listener: Animation.AnimationListener?) =
+        ViewAnimx.shakeLandscape(this, extent, cycles, durationMillis, isBanClick, listener)
+
+/**
+ * Shake left and right
+ *
+ * @param listener Animation listener
+ */
+inline fun View.shakeLandscape(listener: Animation.AnimationListener?) = ViewAnimx.shakeLandscape(this, listener)
+
+/**
+ * Shake left and right
+ *
+ * @param isBanClick If true, clicks will be disabled during the animation
+ */
+inline fun View.shakeLandscape(isBanClick: Boolean) = ViewAnimx.shakeLandscape(this, isBanClick)
+
+/**
+ * Shake left and right
+ *
+ * @param durationMillis Animation duration, in milliseconds
+ */
+inline fun View.shakeLandscape(durationMillis: Long) = ViewAnimx.shakeLandscape(this, durationMillis)
+
+/**
+ * Shake left and right
+ *
+ * @param extent Shake amplitude
+ */
+inline fun View.shakeLandscape(extent: Float) = ViewAnimx.shakeLandscape(this, extent)
+
+/**
+ * Shake left and right
+ */
+inline fun View.shakeLandscape() = ViewAnimx.shakeLandscape(this)
+
+
+/**
+ * Shock up and down
+ *
+ * @param extent         Shake amplitude
+ * @param cycles         Number of cycle executions
+ * @param durationMillis Animation duration, in milliseconds
+ * @param isBanClick     If true, clicks will be disabled during the animation
+ * @param listener       Animation listener
+ */
+inline fun View.shakePortrait(extent: Float, cycles: Float, durationMillis: Long, isBanClick: Boolean, listener: Animation.AnimationListener?) =
+        ViewAnimx.shakePortrait(this, extent, cycles, durationMillis, isBanClick, listener)
+
+/**
+ * Shock up and down
+ *
+ * @param listener Animation listener
+ */
+inline fun View.shakePortrait(listener: Animation.AnimationListener?) = ViewAnimx.shakePortrait(this, listener)
+
+/**
+ * Shock up and down
+ *
+ * @param isBanClick If true, clicks will be disabled during the animation
+ */
+inline fun View.shakePortrait(isBanClick: Boolean) = ViewAnimx.shakePortrait(this, isBanClick)
+
+/**
+ * Shock up and down
+ *
+ * @param durationMillis Animation duration, in milliseconds
+ */
+inline fun View.shakePortrait(durationMillis: Long) = ViewAnimx.shakePortrait(this, durationMillis)
+
+/**
+ * Shock up and down
+ *
+ * @param extent Shake amplitude
+ */
+inline fun View.shakePortrait(extent: Float) = ViewAnimx.shakePortrait(this, extent)
+
+/**
+ * Shock up and down
+ */
+inline fun View.shakePortrait() = ViewAnimx.shakePortrait(this)
+
+
+/**
+ * Parse the animation from the resource file and execute
+ *
+ * @param animId     Animation resource ID
+ * @param isBanClick If true, clicks will be disabled during the animation
+ * @param listener   Animation listener
+ */
+inline fun View.startAnimFromRes(animId: Int, isBanClick: Boolean, listener: Animation.AnimationListener?) =
+        ViewAnimx.startAnimFromRes(this, animId, isBanClick, listener)
+
+/**
+ * Parse the animation from the resource file and execute
+ *
+ * @param animId   Animation resource ID
+ * @param listener Animation listener
+ */
+inline fun View.startAnimFromRes(animId: Int, listener: Animation.AnimationListener?) = ViewAnimx.startAnimFromRes(this, animId, listener)
+
+/**
+ * Parse the animation from the resource file and execute
+ *
+ * @param animId     Animation resource ID
+ * @param isBanClick If true, clicks will be disabled during the animation
+ */
+inline fun View.startAnimFromRes(animId: Int, isBanClick: Boolean) = ViewAnimx.startAnimFromRes(this, animId, isBanClick)
+
+/**
+ * Parse the animation from the resource file and execute
+ *
+ * @param animId Animation resource ID
+ */
+inline fun View.startAnimFromRes(animId: Int) = ViewAnimx.startAnimFromRes(this, animId)
+
+
+/**
+ * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
+ *
+ * @param durationMillis Animation duration, in milliseconds
+ * @param isBanClick     If true, clicks will be disabled during the animation
+ * @param listener       Animation listener
+ */
+inline fun View.invisibleByAnimAlpha(durationMillis: Long, isBanClick: Boolean, listener: Animation.AnimationListener?) =
+        ViewAnimx.invisibleByAnimAlpha(this, durationMillis, isBanClick, listener)
+
+/**
+ * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
+ *
+ * @param listener Animation listener
+ */
+inline fun View.invisibleByAnimAlpha(listener: Animation.AnimationListener?) = ViewAnimx.invisibleByAnimAlpha(this, listener)
+
+/**
+ * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
+ *
+ * @param isBanClick If true, clicks will be disabled during the animation
+ */
+inline fun View.invisibleByAnimAlpha(isBanClick: Boolean) = ViewAnimx.invisibleByAnimAlpha(this, isBanClick)
+
+/**
+ * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
+ *
+ * @param durationMillis Animation duration, in milliseconds
+ */
+inline fun View.invisibleByAnimAlpha(durationMillis: Long) = ViewAnimx.invisibleByAnimAlpha(this, durationMillis)
+
+/**
+ * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
+ */
+inline fun View.invisibleByAnimAlpha() = ViewAnimx.invisibleByAnimAlpha(this)
+
+
+/**
+ * Hide the view with a alpha animation, with visibility set to GONE at the end
+ *
+ * @param durationMillis Animation duration, in milliseconds
+ * @param isBanClick     If true, clicks will be disabled during the animation
+ * @param listener       Animation listener
+ */
+inline fun View.goneByAnimAlpha(durationMillis: Long, isBanClick: Boolean, listener: Animation.AnimationListener?) =
+        ViewAnimx.goneByAnimAlpha(this, durationMillis, isBanClick, listener)
+
+/**
+ * Hide the view with a alpha animation, with visibility set to GONE at the end
+ *
+ * @param listener Animation listener
+ */
+inline fun View.goneByAnimAlpha(listener: Animation.AnimationListener?) = ViewAnimx.goneByAnimAlpha(this, listener)
+
+/**
+ * Hide the view with a alpha animation, with visibility set to GONE at the end
+ *
+ * @param isBanClick If true, clicks will be disabled during the animation
+ */
+inline fun View.goneByAnimAlpha(isBanClick: Boolean) = ViewAnimx.goneByAnimAlpha(this, isBanClick)
+
+/**
+ * Hide the view with a alpha animation, with visibility set to GONE at the end
+ *
+ * @param durationMillis Animation duration, in milliseconds
+ */
+inline fun View.goneByAnimAlpha(durationMillis: Long) = ViewAnimx.goneByAnimAlpha(this, durationMillis)
+
+/**
+ * Hide the view with a alpha animation, with visibility set to GONE at the end
+ */
+inline fun View.goneByAnimAlpha() = ViewAnimx.goneByAnimAlpha(this)
+
+
+/**
+ * Use alpha animation to display View
+ *
+ * @param durationMillis Animation duration, in milliseconds
+ * @param isBanClick     If true, clicks will be disabled during the animation
+ * @param listener       Animation listener
+ */
+inline fun View.visibleByAnimAlpha(durationMillis: Long, isBanClick: Boolean, listener: Animation.AnimationListener?) =
+        ViewAnimx.visibleByAnimAlpha(this, durationMillis, isBanClick, listener)
+
+/**
+ * Use alpha animation to display View
+ *
+ * @param listener Animation listener
+ */
+inline fun View.visibleByAnimAlpha(listener: Animation.AnimationListener?) = ViewAnimx.visibleByAnimAlpha(this, listener)
+
+/**
+ * Use alpha animation to display View
+ *
+ * @param isBanClick If true, clicks will be disabled during the animation
+ */
+inline fun View.visibleByAnimAlpha(isBanClick: Boolean) = ViewAnimx.visibleByAnimAlpha(this, isBanClick)
+
+/**
+ * Use alpha animation to display View
+ *
+ * @param durationMillis Animation duration, in milliseconds
+ */
+inline fun View.visibleByAnimAlpha(durationMillis: Long) = ViewAnimx.visibleByAnimAlpha(this, durationMillis)
+
+/**
+ * Use alpha animation to display View
+ */
+inline fun View.visibleByAnimAlpha() = ViewAnimx.visibleByAnimAlpha(this)

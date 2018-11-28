@@ -18,7 +18,6 @@ package me.panpf.androidx.app;
 
 import android.app.Activity;
 import android.arch.lifecycle.Lifecycle;
-import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,7 +26,6 @@ import android.support.v4.app.FragmentActivity;
 
 import java.util.List;
 
-@SuppressWarnings("WeakerAccess")
 public class Fragmentx {
 
     private Fragmentx() {
@@ -234,32 +232,5 @@ public class Fragmentx {
     @Nullable
     public static android.support.v4.app.Fragment findFragmentByViewPagerCurrentItem(@Nullable android.support.v4.app.Fragment fragment, int viewPagerCurrentItem) {
         return findFragmentByViewPagerCurrentItem(fragment != null ? fragment.getChildFragmentManager().getFragments() : null, viewPagerCurrentItem);
-    }
-
-
-    @NonNull
-    public static Context requireContext(@NonNull android.support.v4.app.Fragment fragment) {
-        return fragment.requireContext();
-    }
-
-    @NonNull
-    public static Context requireContext(@NonNull android.app.Fragment fragment) {
-        Context context = fragment.getActivity();
-        if (context == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to a context.");
-        } else {
-            return context;
-        }
-    }
-
-
-    @NonNull
-    public static Context requireAppContext(@NonNull android.support.v4.app.Fragment fragment) {
-        return requireContext(fragment).getApplicationContext();
-    }
-
-    @NonNull
-    public static Context requireAppContext(@NonNull android.app.Fragment fragment) {
-        return requireContext(fragment).getApplicationContext();
     }
 }

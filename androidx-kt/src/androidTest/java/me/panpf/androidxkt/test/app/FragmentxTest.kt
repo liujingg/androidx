@@ -18,7 +18,6 @@
 
 package me.panpf.androidxkt.test.app
 
-import android.app.Activity
 import android.os.Bundle
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
@@ -151,40 +150,6 @@ class FragmentxTest {
         val fragmentFromActivity2 = fragmentFromActivity as TestFindUserVisibleChildFragment
         val fragmentFromChildFragment = fragmentFromActivity2.findFragmentByViewPagerCurrentItem(3).requireNotNull()
         Assert.assertTrue(fragmentFromChildFragment.tag, fragmentFromChildFragment.tag.orEmpty().startsWith("android:switcher") && fragmentFromChildFragment.tag.orEmpty().endsWith(":3"))
-    }
-
-    @Test
-    fun testContext() {
-        val activity = activityTestRule.activity
-
-        Assert.assertNotNull(activity.getOriginFragment().requireContext())
-
-        Assert.assertNotNull(activity.getSupportFragment().requireAppContext())
-        Assert.assertFalse(activity.getSupportFragment().requireAppContext() is Activity)
-
-        Assert.assertNotNull(activity.getOriginFragment().requireAppContext())
-        Assert.assertFalse(activity.getOriginFragment().requireAppContext() is Activity)
-
-        activityTestRule.finishActivity()
-        Thread.sleep(1000)
-
-        try {
-            activity.getOriginFragment().requireContext()
-            Assert.fail()
-        } catch (e: Exception) {
-        }
-
-        try {
-            activity.getOriginFragment().requireAppContext()
-            Assert.fail()
-        } catch (e: Exception) {
-        }
-
-        try {
-            activity.getSupportFragment().requireAppContext()
-            Assert.fail()
-        } catch (e: Exception) {
-        }
     }
 
     class TestActivity : FragmentActivity(), ImplTestInterface {

@@ -35,7 +35,6 @@ import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.util.Pair;
 import me.panpf.javax.util.Predicate;
 
-@SuppressWarnings("WeakerAccess")
 public class PackageInfox {
 
     private PackageInfox() {

@@ -17,7 +17,6 @@
 package me.panpf.androidx.test.app;
 
 import android.app.Activity;
-import android.app.Application;
 import android.arch.lifecycle.ViewModelStoreOwner;
 import android.content.Context;
 import android.content.Intent;
@@ -38,6 +37,7 @@ import org.junit.runner.RunWith;
 
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Activityx;
+import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.util.ResultRunnable;
 import me.panpf.javax.lang.Throwablex;
 import me.panpf.javax.util.Premisex;
@@ -188,13 +188,6 @@ public class ActivityxTest {
     }
 
     @Test
-    public void testAppContext() {
-        TestActivity activity = activityTestRule.getActivity();
-        Assert.assertTrue(Activityx.appContext(activity) instanceof Application);
-        Assert.assertFalse(Activityx.appContext(activity) instanceof Activity);
-    }
-
-    @Test
     public void testCanStart() {
         Context context = InstrumentationRegistry.getContext();
 
@@ -214,7 +207,7 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(Activityx.appContext(activity), new Intent(activity, ActivityxTest.class));
+            Activityx.start(Contextx.appContext(activity), new Intent(activity, ActivityxTest.class));
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -235,7 +228,7 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(Activityx.appContext(activity), NoRegisterTestActivity.class);
+            Activityx.start(Contextx.appContext(activity), NoRegisterTestActivity.class);
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -367,10 +360,10 @@ public class ActivityxTest {
         TestActivity activity = activityTestRule.getActivity();
 
         Assert.assertTrue(Activityx.safeStart(activity, new Intent(activity, TestActivity.class)));
-        Assert.assertFalse(Activityx.safeStart(Activityx.appContext(activity), new Intent(activity, ActivityxTest.class)));
+        Assert.assertFalse(Activityx.safeStart(Contextx.appContext(activity), new Intent(activity, ActivityxTest.class)));
         Assert.assertTrue(Activityx.safeStart(activity, TestActivity.class, null));
         Assert.assertTrue(Activityx.safeStart(activity, TestActivity.class));
-        Assert.assertFalse(Activityx.safeStart(Activityx.appContext(activity), NoRegisterTestActivity.class));
+        Assert.assertFalse(Activityx.safeStart(Contextx.appContext(activity), NoRegisterTestActivity.class));
     }
 
     @Test

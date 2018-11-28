@@ -27,7 +27,6 @@ import java.io.File;
 import java.io.FileDescriptor;
 import java.io.InputStream;
 
-@SuppressWarnings("WeakerAccess")
 public class Imagex {
 
     private Imagex() {

@@ -76,9 +76,6 @@ inline fun Activity.convertFromTranslucentCompat(): Boolean = Activityx.convertF
 inline fun <T> Activity.getImplWithParent(clazz: Class<T>): T? = Activityx.getImplWithParent(this, clazz)
 
 
-inline fun Activity.appContext(): Context = Activityx.appContext(this)
-
-
 /* ************************************* start ***************************************** */
 
 

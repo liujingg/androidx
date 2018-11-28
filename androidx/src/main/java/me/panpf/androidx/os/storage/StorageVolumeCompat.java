@@ -28,7 +28,6 @@ import java.io.File;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Classx;
 
-@SuppressWarnings("WeakerAccess")
 public class StorageVolumeCompat {
 
     @NonNull

@@ -30,7 +30,6 @@ import me.panpf.androidx.content.Contextx;
 /**
  * A tool class that determines the state of the network, which can satisfy whether there is a network and what type of network at one time.
  */
-@SuppressWarnings("WeakerAccess")
 public class NetworkState {
 
     @NonNull
@@ -132,7 +131,7 @@ public class NetworkState {
      */
     @NonNull
     public String getTypeName() {
-        return networkInfo != null ? networkInfo.getTypeName() : "Unknown";
+        return networkInfo != null ? networkInfo.getTypeName() : "unknown";
     }
 
     /**
@@ -140,7 +139,7 @@ public class NetworkState {
      */
     @NonNull
     public String getSubtypeName() {
-        return networkInfo != null ? networkInfo.getSubtypeName() : "Unknown";
+        return networkInfo != null ? networkInfo.getSubtypeName() : "unknown";
     }
 
     /**
@@ -148,7 +147,7 @@ public class NetworkState {
      */
     @NonNull
     public String getExtraInfo() {
-        return networkInfo != null ? networkInfo.getExtraInfo() : "Unknown";
+        return networkInfo != null ? networkInfo.getExtraInfo() : "unknown";
     }
 
     /**

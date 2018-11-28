@@ -20,6 +20,29 @@
 * :white_check_mark: Prefect Dimenx testing
 * :fire: Dimenx unit2px rename to applyDimension
 * :white_check_mark: Prefect Jsonx testing
+* :white_check_mark: Prefect Textx testing
+* :fire: Settingsx getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem move to Windowx
+* :white_check_mark: Prefect Settingsx testing
+* :fire: Activityx appContext, Fragmentx requireContext and requireAppContext, Viewx appContext move to Contextx
+* :white_check_mark: Prefect Viewx testing
+* :white_check_mark: Prefect Displayx testing
+* :white_check_mark: Prefect ViewAnimx testing
+* :white_check_mark: Prefect InputMethodx testing
+* :fire: Networkx remove getConnectivity method
+* :bug: Fix a bug where Networkx isMetered actually called the isVPNActivated method
+* :fire: Networkx.kt isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getGateway method rename to isWifiNetworkEnabled, setWifiNetworkEnabled, isMobileNetworkEnabled, setMobileNetworkEnabled, getNetworkGateway
+* :fire: The default return value for some methods of NetworkState is changed from 'Unknown' to 'unknown'
+* :white_check_mark: Prefect Networkx testing
+* :white_check_mark: Prefect NetworkState testing
+* :white_check_mark: Prefect Matrixx testing
+* :white_check_mark: Prefect OpenGlx testing
+* :white_check_mark: Prefect Paintx testing
+* :white_check_mark: Prefect Colorx testing
+* :white_check_mark: Prefect Imagex testing
+* :fire: Drawablex toDrawableByColor rename to changeColor, toDrawableByColorFromDrawableRes rename to changeResDrawableColor
+* :fire: Bitmapx remove toDrawableByColor
+* :sparkles: Bitmapx adds toDrawable
+* :white_check_mark: Prefect Resizex testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

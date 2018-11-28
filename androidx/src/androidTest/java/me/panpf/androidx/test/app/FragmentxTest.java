@@ -16,7 +16,6 @@
 
 package me.panpf.androidx.test.app;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -175,40 +174,6 @@ public class FragmentxTest {
         TestFindUserVisibleChildFragment fragmentFromActivity2 = (TestFindUserVisibleChildFragment) fragmentFromActivity;
         android.support.v4.app.Fragment fragmentFromChildFragment = Premisex.requireNotNull(Fragmentx.findFragmentByViewPagerCurrentItem(fragmentFromActivity2, 3));
         Assert.assertTrue(fragmentFromChildFragment.getTag(), Stringx.orEmpty(fragmentFromChildFragment.getTag()).startsWith("android:switcher") && Stringx.orEmpty(fragmentFromChildFragment.getTag()).endsWith(":3"));
-    }
-
-    @Test
-    public void testContext() throws InterruptedException {
-        TestActivity activity = activityTestRule.getActivity();
-
-        Assert.assertNotNull(Fragmentx.requireContext(activity.getOriginFragment()));
-
-        Assert.assertNotNull(Fragmentx.requireAppContext(activity.getSupportFragment()));
-        Assert.assertFalse(Fragmentx.requireAppContext(activity.getSupportFragment()) instanceof Activity);
-
-        Assert.assertNotNull(Fragmentx.requireAppContext(activity.getOriginFragment()));
-        Assert.assertFalse(Fragmentx.requireAppContext(activity.getOriginFragment()) instanceof Activity);
-
-        activityTestRule.finishActivity();
-        Thread.sleep(1000);
-
-        try {
-            Fragmentx.requireContext(activity.getOriginFragment());
-            Assert.fail();
-        } catch (Exception ignored) {
-        }
-
-        try {
-            Fragmentx.requireAppContext(activity.getOriginFragment());
-            Assert.fail();
-        } catch (Exception ignored) {
-        }
-
-        try {
-            Fragmentx.requireAppContext(activity.getSupportFragment());
-            Assert.fail();
-        } catch (Exception ignored) {
-        }
     }
 
     public interface ImplTestInterface {

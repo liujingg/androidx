@@ -49,6 +49,10 @@ public class Displayx {
     private Displayx() {
     }
 
+
+    /**
+     * Get screen size
+     */
     @NonNull
     public static Point getScreenSize(@NonNull Context context) {
         Point point = new Point();
@@ -56,12 +60,18 @@ public class Displayx {
         return point;
     }
 
+    /**
+     * Get screen width
+     */
     public static int getScreenWidth(@NonNull Context context) {
         Point point = new Point();
         Contextx.windowManager(context).getDefaultDisplay().getSize(point);
         return point.x;
     }
 
+    /**
+     * Get screen height
+     */
     public static int getScreenHeight(@NonNull Context context) {
         Point point = new Point();
         Contextx.windowManager(context).getDefaultDisplay().getSize(point);
@@ -69,20 +79,31 @@ public class Displayx {
     }
 
 
+    /**
+     * Get DisplayMetrics
+     */
     @NonNull
     public static DisplayMetrics getMetrics(@NonNull Context context) {
         return context.getResources().getDisplayMetrics();
     }
 
+    /**
+     * Get screen density
+     */
     public static float getDensity(@NonNull Context context) {
         return context.getResources().getDisplayMetrics().density;
     }
 
+    /**
+     * Get screen density dpi
+     */
     public static int getDensityDpi(@NonNull Context context) {
         return context.getResources().getDisplayMetrics().densityDpi;
     }
 
-
+    /**
+     * Get the screen rotation angle, 0, 90, 180, 270
+     */
     public static int getRotation(@NonNull Context context) {
         switch (Contextx.windowManager(context).getDefaultDisplay().getRotation()) {
             case Surface.ROTATION_0:
@@ -98,10 +119,16 @@ public class Displayx {
         }
     }
 
+    /**
+     * Get the screen rotation angle, 0, 90, 180, 270
+     */
     public static int getRotation(@NonNull android.support.v4.app.Fragment fragment) {
         return getRotation(fragment.requireContext());
     }
 
+    /**
+     * Get the screen rotation angle, 0, 90, 180, 270
+     */
     public static int getRotation(@NonNull final android.app.Fragment fragment) {
         return getRotation(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
             @NonNull
@@ -112,19 +139,31 @@ public class Displayx {
         }));
     }
 
+    /**
+     * Get the screen rotation angle, 0, 90, 180, 270
+     */
     public static int getRotation(@NonNull View view) {
         return getRotation(view.getContext());
     }
 
 
+    /**
+     * Return true if the current screen orientation is portrait
+     */
     public static boolean isOrientationPortrait(@NonNull Context context) {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
     }
 
+    /**
+     * Return true if the current screen orientation is portrait
+     */
     public static boolean isOrientationPortrait(@NonNull android.support.v4.app.Fragment fragment) {
         return isOrientationPortrait(fragment.requireContext());
     }
 
+    /**
+     * Return true if the current screen orientation is portrait
+     */
     public static boolean isOrientationPortrait(@NonNull final android.app.Fragment fragment) {
         return isOrientationPortrait(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
             @NonNull
@@ -135,19 +174,31 @@ public class Displayx {
         }));
     }
 
+    /**
+     * Return true if the current screen orientation is portrait
+     */
     public static boolean isOrientationPortrait(@NonNull View view) {
         return isOrientationPortrait(view.getContext());
     }
 
 
+    /**
+     * Return true if the current screen orientation is landscape
+     */
     public static boolean isOrientationLandscape(@NonNull Context context) {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
     }
 
+    /**
+     * Return true if the current screen orientation is landscape
+     */
     public static boolean isOrientationLandscape(@NonNull android.support.v4.app.Fragment fragment) {
         return isOrientationLandscape(fragment.requireContext());
     }
 
+    /**
+     * Return true if the current screen orientation is landscape
+     */
     public static boolean isOrientationLandscape(@NonNull final android.app.Fragment fragment) {
         return isOrientationLandscape(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
             @NonNull
@@ -158,19 +209,31 @@ public class Displayx {
         }));
     }
 
+    /**
+     * Return true if the current screen orientation is landscape
+     */
     public static boolean isOrientationLandscape(@NonNull View view) {
         return isOrientationLandscape(view.getContext());
     }
 
 
+    /**
+     * Return true if the current screen orientation is undefined
+     */
     public static boolean isOrientationUndefined(@NonNull Context context) {
         return context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_UNDEFINED;
     }
 
+    /**
+     * Return true if the current screen orientation is undefined
+     */
     public static boolean isOrientationUndefined(@NonNull android.support.v4.app.Fragment fragment) {
         return isOrientationUndefined(fragment.requireContext());
     }
 
+    /**
+     * Return true if the current screen orientation is undefined
+     */
     public static boolean isOrientationUndefined(@NonNull final android.app.Fragment fragment) {
         return isOrientationUndefined(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
             @NonNull
@@ -181,6 +244,9 @@ public class Displayx {
         }));
     }
 
+    /**
+     * Return true if the current screen orientation is undefined
+     */
     public static boolean isOrientationUndefined(@NonNull View view) {
         return isOrientationUndefined(view.getContext());
     }
@@ -251,4 +317,22 @@ public class Displayx {
             return 0;
         }
     }
+
+//    /**
+//     * Get the height of the navigation bar from default display
+//     */
+//    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+//    public static int getNavigationBarHeightFromDisplay(@NonNull Context context) {
+//        Display display = Contextx.windowManager(context).getDefaultDisplay();
+//
+//        // Get the available sizes for the APP
+//        Point appSize = new Point();
+//        display.getSize(appSize);
+//
+//        // Get the size of the screen
+//        Point logicalSize = new Point();
+//        display.getRealSize(logicalSize);
+//
+//        return logicalSize.y - appSize.y;
+//    }
 }

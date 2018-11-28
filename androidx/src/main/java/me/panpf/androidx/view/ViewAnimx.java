@@ -28,24 +28,26 @@ import android.view.animation.TranslateAnimation;
 /**
  * View animation tool method
  */
-@SuppressWarnings("WeakerAccess")
 public class ViewAnimx {
+
     /**
-     * 默认动画持续时间
+     * Default animation duration
      */
     public static final long DEFAULT_ANIMATION_DURATION = 400;
+
 
     private ViewAnimx() {
     }
 
+
     /**
-     * 透明度动画
+     * Perform alpha animation
      *
-     * @param fromAlpha      开始透明度
-     * @param toAlpha        结束透明度
-     * @param durationMillis 持续时间，毫秒
-     * @param isBanClick     在执行动画的过程中是否禁止点击
-     * @param listener       动画监听器
+     * @param fromAlpha      Initial alpha value
+     * @param toAlpha        End alpha value
+     * @param durationMillis Animation duration, in milliseconds
+     * @param isBanClick     If true, clicks will be disabled during the animation
+     * @param listener       Animation listener
      */
     public static void animAlpha(@NonNull final View view, float fromAlpha, float toAlpha, long durationMillis,
                                  final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
@@ -76,60 +78,60 @@ public class ViewAnimx {
     }
 
     /**
-     * 透明度动画
+     * Perform alpha animation
      *
-     * @param fromAlpha      开始透明度
-     * @param toAlpha        结束透明度
-     * @param durationMillis 持续时间，毫秒
-     * @param listener       动画监听器
-     */
-    public static void animAlpha(@NonNull final View view, float fromAlpha, float toAlpha, long durationMillis, @Nullable final Animation.AnimationListener listener) {
-        animAlpha(view, fromAlpha, toAlpha, durationMillis, false, listener);
-    }
-
-    /**
-     * 透明度动画
-     *
-     * @param fromAlpha      开始透明度
-     * @param toAlpha        结束透明度
-     * @param durationMillis 持续时间，毫秒
-     */
-    public static void animAlpha(@NonNull final View view, float fromAlpha, float toAlpha, long durationMillis) {
-        animAlpha(view, fromAlpha, toAlpha, durationMillis, false, null);
-    }
-
-    /**
-     * 透明度动画
-     *
-     * @param fromAlpha 开始透明度
-     * @param toAlpha   结束透明度
-     * @param listener  动画监听器
+     * @param fromAlpha Initial alpha value
+     * @param toAlpha   End alpha value
+     * @param listener  Animation listener
      */
     public static void animAlpha(@NonNull final View view, float fromAlpha, float toAlpha, @Nullable final Animation.AnimationListener listener) {
         animAlpha(view, fromAlpha, toAlpha, DEFAULT_ANIMATION_DURATION, false, listener);
     }
 
     /**
-     * 透明度动画
+     * Perform alpha animation
      *
-     * @param fromAlpha 开始透明度
-     * @param toAlpha   结束透明度
+     * @param fromAlpha  Initial alpha value
+     * @param toAlpha    End alpha value
+     * @param isBanClick If true, clicks will be disabled during the animation
+     */
+    public static void animAlpha(@NonNull final View view, float fromAlpha, float toAlpha, boolean isBanClick) {
+        animAlpha(view, fromAlpha, toAlpha, DEFAULT_ANIMATION_DURATION, isBanClick, null);
+    }
+
+    /**
+     * Perform alpha animation
+     *
+     * @param fromAlpha      Initial alpha value
+     * @param toAlpha        End alpha value
+     * @param durationMillis Animation duration, in milliseconds
+     */
+    public static void animAlpha(@NonNull final View view, float fromAlpha, float toAlpha, long durationMillis) {
+        animAlpha(view, fromAlpha, toAlpha, durationMillis, false, null);
+    }
+
+    /**
+     * Perform alpha animation
+     *
+     * @param fromAlpha Initial alpha value
+     * @param toAlpha   End alpha value
      */
     public static void animAlpha(@NonNull final View view, float fromAlpha, float toAlpha) {
         animAlpha(view, fromAlpha, toAlpha, DEFAULT_ANIMATION_DURATION, false, null);
     }
 
+
     /**
-     * 移动动画
+     * Perform translate animation
      *
-     * @param fromXDelta     X轴开始坐标
-     * @param toXDelta       X轴结束坐标
-     * @param fromYDelta     Y轴开始坐标
-     * @param toYDelta       Y轴结束坐标
-     * @param cycles         重复
-     * @param durationMillis 持续时间
-     * @param isBanClick     在执行动画的过程中是否禁止点击
-     * @param listener       动画监听器
+     * @param fromXDelta     Change in X coordinate to apply at the start of the animation
+     * @param toXDelta       Change in X coordinate to apply at the end of the animation
+     * @param fromYDelta     Change in Y coordinate to apply at the start of the animation
+     * @param toYDelta       Change in Y coordinate to apply at the end of the animation
+     * @param cycles         Number of cycle executions
+     * @param durationMillis Animation duration, in milliseconds
+     * @param isBanClick     If true, clicks will be disabled during the animation
+     * @param listener       Animation listener
      */
     public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
                                      float cycles, long durationMillis, final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
@@ -163,59 +165,52 @@ public class ViewAnimx {
     }
 
     /**
-     * 移动动画
+     * Perform translate animation
      *
-     * @param fromXDelta     X轴开始坐标
-     * @param toXDelta       X轴结束坐标
-     * @param fromYDelta     Y轴开始坐标
-     * @param toYDelta       Y轴结束坐标
-     * @param cycles         重复
-     * @param durationMillis 持续时间
-     * @param listener       动画监听器
+     * @param fromXDelta Change in X coordinate to apply at the start of the animation
+     * @param toXDelta   Change in X coordinate to apply at the end of the animation
+     * @param fromYDelta Change in Y coordinate to apply at the start of the animation
+     * @param toYDelta   Change in Y coordinate to apply at the end of the animation
+     * @param isBanClick If true, clicks will be disabled during the animation
      */
-    public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
-                                     float cycles, long durationMillis, @Nullable final Animation.AnimationListener listener) {
-        animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, durationMillis, false, listener);
+    public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta, final boolean isBanClick) {
+        animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, 0, DEFAULT_ANIMATION_DURATION, isBanClick, null);
     }
 
     /**
-     * 移动动画
+     * Perform translate animation
      *
-     * @param fromXDelta X轴开始坐标
-     * @param toXDelta   X轴结束坐标
-     * @param fromYDelta Y轴开始坐标
-     * @param toYDelta   Y轴结束坐标
-     * @param cycles     重复
-     * @param listener   动画监听器
+     * @param fromXDelta Change in X coordinate to apply at the start of the animation
+     * @param toXDelta   Change in X coordinate to apply at the end of the animation
+     * @param fromYDelta Change in Y coordinate to apply at the start of the animation
+     * @param toYDelta   Change in Y coordinate to apply at the end of the animation
+     * @param listener   Animation listener
      */
-    public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
-                                     float cycles, @Nullable final Animation.AnimationListener listener) {
-        animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, DEFAULT_ANIMATION_DURATION, false, listener);
+    public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta, @Nullable final Animation.AnimationListener listener) {
+        animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, 0, DEFAULT_ANIMATION_DURATION, false, listener);
     }
 
     /**
-     * 移动动画
+     * Perform translate animation
      *
-     * @param fromXDelta     X轴开始坐标
-     * @param toXDelta       X轴结束坐标
-     * @param fromYDelta     Y轴开始坐标
-     * @param toYDelta       Y轴结束坐标
-     * @param cycles         重复
-     * @param durationMillis 持续时间
+     * @param fromXDelta     Change in X coordinate to apply at the start of the animation
+     * @param toXDelta       Change in X coordinate to apply at the end of the animation
+     * @param fromYDelta     Change in Y coordinate to apply at the start of the animation
+     * @param toYDelta       Change in Y coordinate to apply at the end of the animation
+     * @param durationMillis Animation duration, in milliseconds
      */
-    public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
-                                     float cycles, long durationMillis) {
-        animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, cycles, durationMillis, false, null);
+    public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta, long durationMillis) {
+        animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, 0, durationMillis, false, null);
     }
 
     /**
-     * 移动动画
+     * Perform translate animation
      *
-     * @param fromXDelta X轴开始坐标
-     * @param toXDelta   X轴结束坐标
-     * @param fromYDelta Y轴开始坐标
-     * @param toYDelta   Y轴结束坐标
-     * @param cycles     重复
+     * @param fromXDelta Change in X coordinate to apply at the start of the animation
+     * @param toXDelta   Change in X coordinate to apply at the end of the animation
+     * @param fromYDelta Change in Y coordinate to apply at the start of the animation
+     * @param toYDelta   Change in Y coordinate to apply at the end of the animation
+     * @param cycles     Number of cycle executions
      */
     public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta,
                                      float cycles) {
@@ -223,82 +218,140 @@ public class ViewAnimx {
     }
 
     /**
-     * 移动动画
+     * Perform translate animation
      *
-     * @param fromXDelta X轴开始坐标
-     * @param toXDelta   X轴结束坐标
-     * @param fromYDelta Y轴开始坐标
-     * @param toYDelta   Y轴结束坐标
+     * @param fromXDelta Change in X coordinate to apply at the start of the animation
+     * @param toXDelta   Change in X coordinate to apply at the end of the animation
+     * @param fromYDelta Change in Y coordinate to apply at the start of the animation
+     * @param toYDelta   Change in Y coordinate to apply at the end of the animation
      */
     public static void animTranslate(@NonNull final View view, float fromXDelta, float toXDelta, float fromYDelta, float toYDelta) {
         animTranslate(view, fromXDelta, toXDelta, fromYDelta, toYDelta, 0, DEFAULT_ANIMATION_DURATION, false, null);
     }
 
+
     /**
-     * 视图左右摇晃
+     * Shake left and right
      *
-     * @param extent         摇晃幅度
-     * @param cycles         重复次数
-     * @param durationMillis 持续时间
-     * @param isBanClick     在执行动画的过程中是否禁止点击
-     * @param listener       动画监听器
+     * @param extent         Shake amplitude
+     * @param cycles         Number of cycle executions
+     * @param durationMillis Animation duration, in milliseconds
+     * @param isBanClick     If true, clicks will be disabled during the animation
+     * @param listener       Animation listener
      */
-    public static void shake(@NonNull final View view, float extent, float cycles, long durationMillis,
-                             boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
+    public static void shakeLandscape(@NonNull final View view, float extent, float cycles, long durationMillis,
+                                      boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
         animTranslate(view, 0.0f, extent, 0.0f, 0.0f, cycles, durationMillis, isBanClick, listener);
     }
 
     /**
-     * 视图左右摇晃
+     * Shake left and right
      *
-     * @param listener 动画监听器
+     * @param listener Animation listener
      */
-    public static void shake(@NonNull final View view, @Nullable final Animation.AnimationListener listener) {
-        animTranslate(view, 0.0f, 10.0f, 0.0f, 0.0f, 7f, 700, false, listener);
+    public static void shakeLandscape(@NonNull final View view, @Nullable final Animation.AnimationListener listener) {
+        shakeLandscape(view, 10f, 7f, 700, false, listener);
     }
 
     /**
-     * 视图左右摇晃
+     * Shake left and right
+     *
+     * @param isBanClick If true, clicks will be disabled during the animation
      */
-    public static void shake(@NonNull final View view) {
-        animTranslate(view, 0.0f, 10.0f, 0.0f, 0.0f, 7f, 700, false, null);
+    public static void shakeLandscape(@NonNull final View view, boolean isBanClick) {
+        shakeLandscape(view, 10f, 7f, 700, isBanClick, null);
     }
 
     /**
-     * 视图上下震动
+     * Shake left and right
      *
-     * @param extent         震动幅度
-     * @param cycles         重复次数
-     * @param durationMillis 持续时间
-     * @param isBanClick     在执行动画的过程中是否禁止点击
-     * @param listener       动画监听器
+     * @param durationMillis Animation duration, in milliseconds
      */
-    public static void shock(@NonNull final View view, float extent, float cycles, long durationMillis,
-                             boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
+    public static void shakeLandscape(@NonNull final View view, long durationMillis) {
+        shakeLandscape(view, 10f, 7f, durationMillis, false, null);
+    }
+
+    /**
+     * Shake left and right
+     *
+     * @param extent Shake amplitude
+     */
+    public static void shakeLandscape(@NonNull final View view, float extent) {
+        shakeLandscape(view, extent, 7f, 700, false, null);
+    }
+
+    /**
+     * Shake left and right
+     */
+    public static void shakeLandscape(@NonNull final View view) {
+        shakeLandscape(view, 10f, 7, 700, false, null);
+    }
+
+
+    /**
+     * Shock up and down
+     *
+     * @param extent         Shake amplitude
+     * @param cycles         Number of cycle executions
+     * @param durationMillis Animation duration, in milliseconds
+     * @param isBanClick     If true, clicks will be disabled during the animation
+     * @param listener       Animation listener
+     */
+    public static void shakePortrait(@NonNull final View view, float extent, float cycles, long durationMillis,
+                                     boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
         animTranslate(view, 0.0f, 0.0f, 0.0f, extent, cycles, durationMillis, isBanClick, listener);
     }
 
     /**
-     * 视图上下震动
+     * Shock up and down
      *
-     * @param listener 动画监听器
+     * @param listener Animation listener
      */
-    public static void shock(@NonNull final View view, @Nullable final Animation.AnimationListener listener) {
-        animTranslate(view, 0.0f, 0.0f, 0.0f, 10.f, 7f, 700, false, listener);
+    public static void shakePortrait(@NonNull final View view, @Nullable final Animation.AnimationListener listener) {
+        shakePortrait(view, 10.f, 7f, 700, false, listener);
     }
 
     /**
-     * 视图上下震动
+     * Shock up and down
+     *
+     * @param isBanClick If true, clicks will be disabled during the animation
      */
-    public static void shock(@NonNull final View view) {
-        animTranslate(view, 0.0f, 0.0f, 0.0f, 10.f, 7f, 700, false, null);
+    public static void shakePortrait(@NonNull final View view, boolean isBanClick) {
+        shakePortrait(view, 10.f, 7f, 700, isBanClick, null);
     }
 
     /**
-     * 执行资源中定义的动画
+     * Shock up and down
      *
-     * @param animId   动画资源 ID
-     * @param listener 动画监听器
+     * @param durationMillis Animation duration, in milliseconds
+     */
+    public static void shakePortrait(@NonNull final View view, long durationMillis) {
+        shakePortrait(view, 10.f, 7f, durationMillis, false, null);
+    }
+
+    /**
+     * Shock up and down
+     *
+     * @param extent Shake amplitude
+     */
+    public static void shakePortrait(@NonNull final View view, float extent) {
+        shakePortrait(view, extent, 7f, 700, false, null);
+    }
+
+    /**
+     * Shock up and down
+     */
+    public static void shakePortrait(@NonNull final View view) {
+        shakePortrait(view, 10.f, 7f, 700, false, null);
+    }
+
+
+    /**
+     * Parse the animation from the resource file and execute
+     *
+     * @param animId     Animation resource ID
+     * @param isBanClick If true, clicks will be disabled during the animation
+     * @param listener   Animation listener
      */
     public static void startAnimFromRes(@NonNull final View view, int animId, final boolean isBanClick,
                                         @Nullable final Animation.AnimationListener listener) {
@@ -328,30 +381,41 @@ public class ViewAnimx {
     }
 
     /**
-     * 执行资源中定义的动画
+     * Parse the animation from the resource file and execute
      *
-     * @param animId   动画资源 ID
-     * @param listener 动画监听器
+     * @param animId   Animation resource ID
+     * @param listener Animation listener
      */
     public static void startAnimFromRes(@NonNull final View view, int animId, @Nullable final Animation.AnimationListener listener) {
         startAnimFromRes(view, animId, false, listener);
     }
 
     /**
-     * 执行资源中定义的动画
+     * Parse the animation from the resource file and execute
      *
-     * @param animId 动画资源 ID
+     * @param animId     Animation resource ID
+     * @param isBanClick If true, clicks will be disabled during the animation
+     */
+    public static void startAnimFromRes(@NonNull final View view, int animId, final boolean isBanClick) {
+        startAnimFromRes(view, animId, isBanClick, null);
+    }
+
+    /**
+     * Parse the animation from the resource file and execute
+     *
+     * @param animId Animation resource ID
      */
     public static void startAnimFromRes(@NonNull final View view, int animId) {
         startAnimFromRes(view, animId, false, null);
     }
 
+
     /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 INVISIBLE
+     * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
      *
-     * @param durationMillis 持续时间，毫秒
-     * @param isBanClick     在执行动画的过程中是否禁止点击
-     * @param listener       动画监听器
+     * @param durationMillis Animation duration, in milliseconds
+     * @param isBanClick     If true, clicks will be disabled during the animation
+     * @param listener       Animation listener
      */
     public static void invisibleByAnimAlpha(@NonNull final View view, long durationMillis,
                                             final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
@@ -376,46 +440,46 @@ public class ViewAnimx {
     }
 
     /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 INVISIBLE
+     * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
      *
-     * @param durationMillis 持续时间，毫秒
-     * @param listener       动画监听器
-     */
-    public static void invisibleByAnimAlpha(@NonNull final View view, long durationMillis, @Nullable final Animation.AnimationListener listener) {
-        invisibleByAnimAlpha(view, durationMillis, false, listener);
-    }
-
-    /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 INVISIBLE
-     *
-     * @param durationMillis 持续时间，毫秒
-     */
-    public static void invisibleByAnimAlpha(@NonNull final View view, long durationMillis) {
-        invisibleByAnimAlpha(view, durationMillis, false, null);
-    }
-
-    /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 INVISIBLE
-     *
-     * @param listener 动画监听器
+     * @param listener Animation listener
      */
     public static void invisibleByAnimAlpha(@NonNull final View view, @Nullable final Animation.AnimationListener listener) {
         invisibleByAnimAlpha(view, DEFAULT_ANIMATION_DURATION, false, listener);
     }
 
     /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 INVISIBLE
+     * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
+     *
+     * @param isBanClick If true, clicks will be disabled during the animation
+     */
+    public static void invisibleByAnimAlpha(@NonNull final View view, final boolean isBanClick) {
+        invisibleByAnimAlpha(view, DEFAULT_ANIMATION_DURATION, isBanClick, null);
+    }
+
+    /**
+     * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
+     *
+     * @param durationMillis Animation duration, in milliseconds
+     */
+    public static void invisibleByAnimAlpha(@NonNull final View view, long durationMillis) {
+        invisibleByAnimAlpha(view, durationMillis, false, null);
+    }
+
+    /**
+     * Hide the view with a alpha animation, with visibility set to INVISIBLE at the end
      */
     public static void invisibleByAnimAlpha(@NonNull final View view) {
         invisibleByAnimAlpha(view, DEFAULT_ANIMATION_DURATION, false, null);
     }
 
+
     /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.GONE
+     * Hide the view with a alpha animation, with visibility set to GONE at the end
      *
-     * @param durationMillis 持续时间，毫秒
-     * @param isBanClick     在执行动画的过程中是否禁止点击
-     * @param listener       动画监听器
+     * @param durationMillis Animation duration, in milliseconds
+     * @param isBanClick     If true, clicks will be disabled during the animation
+     * @param listener       Animation listener
      */
     public static void goneByAnimAlpha(@NonNull final View view, long durationMillis,
                                        final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
@@ -440,46 +504,46 @@ public class ViewAnimx {
     }
 
     /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.GONE
+     * Hide the view with a alpha animation, with visibility set to GONE at the end
      *
-     * @param durationMillis 持续时间，毫秒
-     * @param listener       动画监听器
-     */
-    public static void goneByAnimAlpha(@NonNull final View view, long durationMillis, @Nullable final Animation.AnimationListener listener) {
-        goneByAnimAlpha(view, durationMillis, false, listener);
-    }
-
-    /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.GONE
-     *
-     * @param durationMillis 持续时间，毫秒
-     */
-    public static void goneByAnimAlpha(@NonNull final View view, long durationMillis) {
-        goneByAnimAlpha(view, durationMillis, false, null);
-    }
-
-    /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.GONE
-     *
-     * @param listener 动画监听器
+     * @param listener Animation listener
      */
     public static void goneByAnimAlpha(@NonNull final View view, @Nullable final Animation.AnimationListener listener) {
         goneByAnimAlpha(view, DEFAULT_ANIMATION_DURATION, false, listener);
     }
 
     /**
-     * 使用透明度渐变动画隐藏 View，结束时 visibility 设为 View.GONE
+     * Hide the view with a alpha animation, with visibility set to GONE at the end
+     *
+     * @param isBanClick If true, clicks will be disabled during the animation
+     */
+    public static void goneByAnimAlpha(@NonNull final View view, final boolean isBanClick) {
+        goneByAnimAlpha(view, DEFAULT_ANIMATION_DURATION, isBanClick, null);
+    }
+
+    /**
+     * Hide the view with a alpha animation, with visibility set to GONE at the end
+     *
+     * @param durationMillis Animation duration, in milliseconds
+     */
+    public static void goneByAnimAlpha(@NonNull final View view, long durationMillis) {
+        goneByAnimAlpha(view, durationMillis, false, null);
+    }
+
+    /**
+     * Hide the view with a alpha animation, with visibility set to GONE at the end
      */
     public static void goneByAnimAlpha(@NonNull final View view) {
         goneByAnimAlpha(view, DEFAULT_ANIMATION_DURATION, false, null);
     }
 
+
     /**
-     * 使用透明度渐变动画显示 View
+     * Use alpha animation to display View
      *
-     * @param durationMillis 持续时间，毫秒
-     * @param isBanClick     在执行动画的过程中是否禁止点击
-     * @param listener       动画监听器
+     * @param durationMillis Animation duration, in milliseconds
+     * @param isBanClick     If true, clicks will be disabled during the animation
+     * @param listener       Animation listener
      */
     public static void visibleByAnimAlpha(@NonNull final View view, long durationMillis,
                                           final boolean isBanClick, @Nullable final Animation.AnimationListener listener) {
@@ -489,35 +553,34 @@ public class ViewAnimx {
     }
 
     /**
-     * 使用透明度渐变动画显示 View
+     * Use alpha animation to display View
      *
-     * @param durationMillis 持续时间，毫秒
-     * @param listener       动画监听器
-     */
-    public static void visibleByAnimAlpha(@NonNull final View view, long durationMillis, @Nullable final Animation.AnimationListener listener) {
-        visibleByAnimAlpha(view, durationMillis, false, listener);
-    }
-
-    /**
-     * 使用透明度渐变动画显示 View
-     *
-     * @param durationMillis 持续时间，毫秒
-     */
-    public static void visibleByAnimAlpha(@NonNull final View view, long durationMillis) {
-        visibleByAnimAlpha(view, durationMillis, false, null);
-    }
-
-    /**
-     * 使用透明度渐变动画显示 View
-     *
-     * @param listener 动画监听器
+     * @param listener Animation listener
      */
     public static void visibleByAnimAlpha(@NonNull final View view, @Nullable final Animation.AnimationListener listener) {
         visibleByAnimAlpha(view, DEFAULT_ANIMATION_DURATION, false, listener);
     }
 
     /**
-     * 使用透明度渐变动画显示 View
+     * Use alpha animation to display View
+     *
+     * @param isBanClick If true, clicks will be disabled during the animation
+     */
+    public static void visibleByAnimAlpha(@NonNull final View view, final boolean isBanClick) {
+        visibleByAnimAlpha(view, DEFAULT_ANIMATION_DURATION, isBanClick, null);
+    }
+
+    /**
+     * Use alpha animation to display View
+     *
+     * @param durationMillis Animation duration, in milliseconds
+     */
+    public static void visibleByAnimAlpha(@NonNull final View view, long durationMillis) {
+        visibleByAnimAlpha(view, durationMillis, false, null);
+    }
+
+    /**
+     * Use alpha animation to display View
      */
     public static void visibleByAnimAlpha(@NonNull final View view) {
         visibleByAnimAlpha(view, DEFAULT_ANIMATION_DURATION, false, null);

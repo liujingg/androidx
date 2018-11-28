@@ -44,7 +44,6 @@ import me.panpf.androidx.app.Fragmentx;
  * @param <Progress>
  * @param <Result>
  */
-@SuppressWarnings("WeakerAccess")
 public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends AsyncTask<Param, Progress, Result> {
 
     @NonNull

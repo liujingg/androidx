@@ -30,7 +30,7 @@ import java.util.Set;
 import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.util.Predicate;
 
-@SuppressWarnings({"WeakerAccess", "JavaDoc"})
+@SuppressWarnings({"JavaDoc"})
 public class Preferencex {
 
     private Preferencex() {

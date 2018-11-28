@@ -14,11 +14,17 @@
  * limitations under the License.
  */
 
+@file:Suppress("DEPRECATION")
+
 package me.panpf.androidxkt.test.net
 
+import android.net.ConnectivityManager
+import android.net.wifi.WifiManager
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
-import me.panpf.androidxkt.net.getGateway
+import me.panpf.androidxkt.content.connectivityManager
+import me.panpf.androidxkt.net.*
+import me.panpf.javax.ranges.Rangex
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -27,7 +33,194 @@ import org.junit.runner.RunWith
 class NetworkxTest {
 
     @Test
+    fun testGetNetworkState() {
+        val context = InstrumentationRegistry.getContext()
+        Assert.assertNotNull(context.getNetworkState())
+    }
+
+    @Test
+    fun testIsActivated() {
+        val context = InstrumentationRegistry.getContext()
+        val networkInfo = context.connectivityManager().activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected) {
+            Assert.assertTrue(context.isNetworkActivated())
+            if (context.isWifiNetworkEnabled() && context.setWifiNetworkEnabled(false)) {
+                Assert.assertFalse(context.isNetworkActivated())
+                context.setWifiNetworkEnabled(true)
+            } else if (context.isMobileNetworkEnabled() && context.setMobileNetworkEnabled(false)) {
+                Assert.assertFalse(context.isNetworkActivated())
+                context.setMobileNetworkEnabled(true)
+            }
+        } else {
+            Assert.assertFalse(context.isNetworkActivated())
+        }
+    }
+
+    @Test
+    fun testIsWifiActivated() {
+        val context = InstrumentationRegistry.getContext()
+        val networkInfo = context.connectivityManager().activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected && networkInfo.type == ConnectivityManager.TYPE_WIFI) {
+            Assert.assertTrue(context.isWifiNetworkActivated())
+            if (context.isWifiNetworkEnabled() && context.setWifiNetworkEnabled(false)) {
+                Assert.assertFalse(context.isNetworkActivated())
+                context.setWifiNetworkEnabled(true)
+            }
+        } else {
+            Assert.assertFalse(context.isWifiNetworkActivated())
+        }
+    }
+
+    @Test
+    fun testIsNoMeteredWifiActivated() {
+        val context = InstrumentationRegistry.getContext()
+        val networkInfo = context.connectivityManager().activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected && networkInfo.type == ConnectivityManager.TYPE_WIFI && context.connectivityManager().isActiveNetworkMetered) {
+            Assert.assertTrue(context.isNoMeteredWifiNetworkActivated())
+        } else {
+            Assert.assertFalse(context.isNoMeteredWifiNetworkActivated())
+        }
+    }
+
+    @Test
+    fun testIsMobileActivated() {
+        val context = InstrumentationRegistry.getContext()
+        val networkInfo = context.connectivityManager().activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected && networkInfo.type == ConnectivityManager.TYPE_MOBILE) {
+            Assert.assertTrue(context.isMobileNetworkActivated())
+            if (context.isMobileNetworkEnabled() && context.setMobileNetworkEnabled(false)) {
+                Assert.assertFalse(context.isNetworkActivated())
+                context.setMobileNetworkEnabled(true)
+            }
+        } else {
+            Assert.assertFalse(context.isMobileNetworkActivated())
+        }
+    }
+
+    @Test
+    fun testIsBluetoothActivated() {
+        val context = InstrumentationRegistry.getContext()
+        val networkInfo = context.connectivityManager().activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected && networkInfo.type == ConnectivityManager.TYPE_BLUETOOTH) {
+            Assert.assertTrue(context.isBluetoothNetworkActivated())
+        } else {
+            Assert.assertFalse(context.isBluetoothNetworkActivated())
+        }
+    }
+
+    @Test
+    fun testIsVPNActivated() {
+        val context = InstrumentationRegistry.getContext()
+        val networkInfo = context.connectivityManager().activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected && networkInfo.type == ConnectivityManager.TYPE_VPN) {
+            Assert.assertTrue(context.isVPNNetworkActivated())
+        } else {
+            Assert.assertFalse(context.isVPNNetworkActivated())
+        }
+    }
+
+    @Test
+    fun testIsMetered() {
+        val context = InstrumentationRegistry.getContext()
+        if (context.connectivityManager().isActiveNetworkMetered) {
+            Assert.assertTrue(context.isNetworkMetered())
+        } else {
+            Assert.assertFalse(context.isNetworkMetered())
+        }
+    }
+
+    @Test
+    fun testIsRoaming() {
+        val context = InstrumentationRegistry.getContext()
+        val networkInfo = context.connectivityManager().activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected && networkInfo.isRoaming) {
+            Assert.assertTrue(context.isNetworkRoaming())
+        } else {
+            Assert.assertFalse(context.isNetworkRoaming())
+        }
+    }
+
+    @Test
+    fun testGetType() {
+        val context = InstrumentationRegistry.getContext()
+        if (context.isWifiNetworkActivated()) {
+            Assert.assertEquals(ConnectivityManager.TYPE_WIFI.toLong(), context.getNetworkType().toLong())
+        } else if (context.isMobileNetworkActivated()) {
+            Assert.assertEquals(ConnectivityManager.TYPE_MOBILE.toLong(), context.getNetworkType().toLong())
+        } else if (context.isBluetoothNetworkActivated()) {
+            Assert.assertEquals(ConnectivityManager.TYPE_BLUETOOTH.toLong(), context.getNetworkType().toLong())
+        } else if (context.isVPNNetworkActivated()) {
+            Assert.assertEquals(ConnectivityManager.TYPE_VPN.toLong(), context.getNetworkType().toLong())
+        } else if (!context.isNetworkActivated()) {
+            Assert.assertEquals(-1, context.getNetworkType().toLong())
+        }
+    }
+
+    @Test
+    fun testGetTypeName() {
+        val context = InstrumentationRegistry.getContext()
+        if (context.isWifiNetworkActivated()) {
+            Assert.assertEquals("WI-FI", context.getNetworkTypeName())
+        } else if (context.isMobileNetworkActivated()) {
+            Assert.assertEquals("Mobile", context.getNetworkTypeName())
+        } else if (context.isBluetoothNetworkActivated()) {
+            Assert.assertEquals("Bluetooth", context.getNetworkTypeName())
+        } else if (context.isVPNNetworkActivated()) {
+            Assert.assertEquals("VPN", context.getNetworkTypeName())
+        } else if (!context.isNetworkActivated()) {
+            Assert.assertEquals("unknown", context.getNetworkTypeName())
+        }
+    }
+
+    @Test
+    fun testGetSubTypeName() {
+        val context = InstrumentationRegistry.getContext()
+        if (context.isNetworkActivated()) {
+            Assert.assertNotNull(context.getNetworkSubtypeName())
+        } else {
+            Assert.assertEquals("unknown", context.getNetworkSubtypeName())
+        }
+    }
+
+    @Test
+    fun testGetExtraInfo() {
+        val context = InstrumentationRegistry.getContext()
+        if (context.isNetworkActivated()) {
+            Assert.assertNotNull(context.getNetworkExtraInfo())
+        } else {
+            Assert.assertEquals("unknown", context.getNetworkExtraInfo())
+        }
+    }
+
+    @Test
+    fun testGetNetworkInfo() {
+        val context = InstrumentationRegistry.getContext()
+        if (context.isNetworkActivated()) {
+            Assert.assertNotNull(context.getNetworkInfo())
+        } else {
+            Assert.assertNull(context.getNetworkInfo())
+        }
+    }
+
+    @Test
+    fun testGetWifiState() {
+        val context = InstrumentationRegistry.getContext()
+        Assert.assertTrue(Rangex.`in`(context.getWifiState(), WifiManager.WIFI_STATE_DISABLING, WifiManager.WIFI_STATE_UNKNOWN))
+    }
+
+    @Test
+    fun testIsFailover() {
+        val context = InstrumentationRegistry.getContext()
+        val networkInfo = context.connectivityManager().activeNetworkInfo
+        if (networkInfo != null && networkInfo.isConnected && networkInfo.isFailover) {
+            Assert.assertTrue(context.isNetworkFailover())
+        } else {
+            Assert.assertFalse(context.isNetworkFailover())
+        }
+    }
+
+    @Test
     fun testGateway() {
-        Assert.assertNotNull(InstrumentationRegistry.getContext().getGateway())
+        Assert.assertNotNull(InstrumentationRegistry.getContext().getNetworkGateway())
     }
 }

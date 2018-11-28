@@ -38,7 +38,6 @@ import me.panpf.androidx.content.pm.PackageInfox;
 /**
  * Intent tool method
  */
-@SuppressWarnings("WeakerAccess")
 public class Intentx {
 
     private Intentx() {

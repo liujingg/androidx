@@ -31,7 +31,6 @@ import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.SystemPropertiesx;
 import me.panpf.javax.lang.Classx;
 
-@SuppressWarnings("WeakerAccess")
 public class Networkx {
 
     private Networkx() {
@@ -98,7 +97,7 @@ public class Networkx {
      */
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public static boolean isMetered(@NonNull Context context) {
-        return NetworkState.get(context).isVPNActivated();
+        return NetworkState.get(context).isMetered();
     }
 
     /**
@@ -159,15 +158,6 @@ public class Networkx {
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     public static NetworkInfo getNetworkInfo(@NonNull Context context) {
         return NetworkState.get(context).getNetworkInfo();
-    }
-
-    /**
-     * Get network connection
-     */
-    @NonNull
-    @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static ConnectivityManager getConnectivity(@NonNull Context context) {
-        return Contextx.connectivityManager(context);
     }
 
     /**

@@ -16,19 +16,95 @@
 
 package me.panpf.androidx.test.content;
 
+import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.test.InstrumentationRegistry;
+import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.app.FragmentActivity;
+import android.view.View;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import me.panpf.androidx.content.Contextx;
+import me.panpf.androidx.test.R;
+import me.panpf.javax.util.Premisex;
 
 @RunWith(AndroidJUnit4.class)
 public class ContextxTest {
+
+    @NonNull
+    private final ActivityTestRule<TestActivity> activityRule = new ActivityTestRule<>(TestActivity.class);
+
+    @Rule
+    @NonNull
+    public final ActivityTestRule getActivityRule() {
+        return this.activityRule;
+    }
+
+    @Test
+    public void testAppContext() {
+        TestActivity activity = activityRule.getActivity();
+
+        Assert.assertTrue(Contextx.appContext(activity) instanceof Application);
+        Assert.assertFalse(Contextx.appContext(activity) instanceof Activity);
+
+        Assert.assertNotNull(Contextx.requireContext(activity.getOriginFragment()));
+        Assert.assertFalse(Contextx.requireContext(activity.getOriginFragment()) instanceof Application);
+        Assert.assertTrue(Contextx.requireContext(activity.getOriginFragment()) instanceof Activity);
+        Assert.assertNotNull(Contextx.requireContext(activity.getSupportFragment()));
+        Assert.assertFalse(Contextx.requireContext(activity.getSupportFragment()) instanceof Application);
+        Assert.assertTrue(Contextx.requireContext(activity.getSupportFragment()) instanceof Activity);
+
+        Assert.assertNotNull(Contextx.requireAppContext(activity.getOriginFragment()));
+        Assert.assertTrue(Contextx.requireAppContext(activity.getOriginFragment()) instanceof Application);
+        Assert.assertFalse(Contextx.requireAppContext(activity.getOriginFragment()) instanceof Activity);
+        Assert.assertNotNull(Contextx.requireAppContext(activity.getSupportFragment()));
+        Assert.assertTrue(Contextx.requireAppContext(activity.getSupportFragment()) instanceof Application);
+        Assert.assertFalse(Contextx.requireAppContext(activity.getSupportFragment()) instanceof Activity);
+
+        Assert.assertTrue(Contextx.appContext(activity.getView()) instanceof Application);
+        Assert.assertFalse(Contextx.appContext(activity.getView()) instanceof Activity);
+
+        activityRule.finishActivity();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Contextx.requireContext(activity.getOriginFragment());
+            Assert.fail();
+        } catch (Exception ignored) {
+        }
+
+        try {
+            Contextx.requireContext(activity.getSupportFragment());
+            Assert.fail();
+        } catch (Exception ignored) {
+        }
+
+        try {
+            Contextx.requireAppContext(activity.getOriginFragment());
+            Assert.fail();
+        } catch (Exception ignored) {
+        }
+
+        try {
+            Contextx.requireAppContext(activity.getSupportFragment());
+            Assert.fail();
+        } catch (Exception ignored) {
+        }
+    }
 
     @Test
     public void testSystemService() {
@@ -199,6 +275,37 @@ public class ContextxTest {
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
             Assert.assertNotNull(Contextx.crossProfileApps(context));
+        }
+    }
+
+    public static class TestActivity extends FragmentActivity {
+
+        @Override
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.at_multi_frame);
+
+            getFragmentManager().beginTransaction()
+                    .replace(R.id.multiFrameAt_frame1, new android.app.Fragment())
+                    .commit();
+
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.multiFrameAt_frame2, new android.support.v4.app.Fragment())
+                    .commit();
+        }
+
+        @NonNull
+        public android.app.Fragment getOriginFragment() {
+            return getFragmentManager().findFragmentById(R.id.multiFrameAt_frame1);
+        }
+
+        @NonNull
+        public android.support.v4.app.Fragment getSupportFragment() {
+            return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(R.id.multiFrameAt_frame2));
+        }
+
+        public View getView() {
+            return findViewById(android.R.id.content);
         }
     }
 }

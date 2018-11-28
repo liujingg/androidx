@@ -20,7 +20,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 
-@SuppressWarnings("WeakerAccess")
 public class AppPackage implements Parcelable {
     public static final Creator<AppPackage> CREATOR = new Creator<AppPackage>() {
         @Override
@@ -47,6 +46,7 @@ public class AppPackage implements Parcelable {
     public boolean systemApp;
     public boolean enabled;
 
+    @SuppressWarnings("WeakerAccess")
     public AppPackage(@NonNull String name, @NonNull String packageName, int versionCode, @NonNull String versionName, @NonNull String packageFilePath,
                       long packageSize, long packageLastModifiedTime, boolean systemApp, boolean enabled) {
         this.name = name;
@@ -60,7 +60,7 @@ public class AppPackage implements Parcelable {
         this.enabled = enabled;
     }
 
-    @SuppressWarnings("ConstantConditions")
+    @SuppressWarnings({"ConstantConditions", "WeakerAccess"})
     protected AppPackage(Parcel in) {
         name = in.readString();
         packageName = in.readString();

@@ -53,12 +53,12 @@ inline fun Drawable.toBitmapWithBoundsSize(config: Bitmap.Config = Bitmap.Config
 /**
  * Change the color of the drawable
  */
-inline fun <T : Drawable> T.toDrawableByColor(@ColorInt color: Int): T = Drawablex.toDrawableByColor(this, color)
+inline fun <T : Drawable> T.changeColor(@ColorInt color: Int): T = Drawablex.changeColor(this, color)
 
 /**
  * Change the color of the resource drawable
  *
  * @param resId Drawable resource id
  */
-inline fun Context.toDrawableByColorFromDrawableRes(@DrawableRes resId: Int, @ColorInt color: Int): Drawable =
-        Drawablex.toDrawableByColorFromDrawableRes(this, resId, color)
+inline fun Context.changeResDrawableColor(@DrawableRes resId: Int, @ColorInt color: Int): Drawable =
+        Drawablex.changeResDrawableColor(this, resId, color)

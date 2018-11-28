@@ -17,36 +17,215 @@
 package me.panpf.androidxkt.test.graphics
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import me.panpf.androidx.graphics.Bitmapx
 import me.panpf.androidx.graphics.Colorx
 import me.panpf.androidxkt.graphics.*
-import me.panpf.androidxkt.graphics.drawable.toBitmapWithIntrinsicSize
-import me.panpf.javax.util.Premisex
+import me.panpf.androidxkt.os.storage.getAppExternalCacheDirs
+import me.panpf.androidxkt.os.storage.getFileIn
+import me.panpf.androidxkt.test.R
+import me.panpf.javaxkt.io.closeQuietly
+import me.panpf.javaxkt.util.requireNotNull
+import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
+import java.io.FileInputStream
+import java.io.IOException
+import java.io.InputStream
+import java.io.OutputStream
 
 @RunWith(AndroidJUnit4::class)
 class BitmapxTest {
 
     @Test
-    fun testModifyColorBitmap() {
+    @Throws(IOException::class)
+    fun testRead() {
+        val context = InstrumentationRegistry.getContext()
+        val file = context.getAppExternalCacheDirs().getFileIn("rect.jpeg", 0).requireNotNull()
+
+        try {
+            var rectFileInputStream: InputStream? = null
+            var rectFileOutputStream: OutputStream? = null
+            try {
+                rectFileInputStream = context.resources.openRawResource(R.drawable.rect)
+                rectFileOutputStream = file.outputStream()
+                rectFileInputStream!!.copyTo(rectFileOutputStream)
+            } finally {
+                rectFileOutputStream.closeQuietly()
+                rectFileInputStream.closeQuietly()
+            }
+
+            val options = BitmapFactory.Options()
+            options.inSampleSize = 2
+
+            // file
+            var bitmap1: Bitmap? = null
+            var bitmap2: Bitmap? = null
+            try {
+                bitmap1 = file.readBitmap().requireNotNull()
+                bitmap2 = file.readBitmap(options).requireNotNull()
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.width, options.inSampleSize).toLong(), bitmap2.width.toLong())
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.height, options.inSampleSize).toLong(), bitmap2.height.toLong())
+            } finally {
+                bitmap1?.recycle()
+                bitmap2?.recycle()
+            }
+
+            // InputStream
+            var fileInputStream: InputStream? = null
+            try {
+                try {
+                    fileInputStream = file.inputStream()
+                    bitmap1 = fileInputStream.readBitmap().requireNotNull()
+                } finally {
+                    fileInputStream.closeQuietly()
+                }
+                var fileInputStream2: InputStream? = null
+                try {
+                    fileInputStream2 = file.inputStream()
+                    bitmap2 = fileInputStream2.readBitmap(null, options).requireNotNull()
+                } finally {
+                    fileInputStream2.closeQuietly()
+                }
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1!!.width, options.inSampleSize).toLong(), bitmap2!!.width.toLong())
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.height, options.inSampleSize).toLong(), bitmap2.height.toLong())
+            } finally {
+                bitmap1?.recycle()
+                bitmap2?.recycle()
+                bitmap1 = null
+                bitmap2 = null
+            }
+
+            // byte array
+            val fileBytes = file.readBytes()
+            try {
+                bitmap1 = fileBytes.readBitmap(0, fileBytes.size).requireNotNull()
+                bitmap2 = fileBytes.readBitmap(0, fileBytes.size, options).requireNotNull()
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.width, options.inSampleSize).toLong(), bitmap2.width.toLong())
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.height, options.inSampleSize).toLong(), bitmap2.height.toLong())
+
+                bitmap1 = fileBytes.readBitmap().requireNotNull()
+                bitmap2 = fileBytes.readBitmap(options).requireNotNull()
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.width, options.inSampleSize).toLong(), bitmap2.width.toLong())
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.height, options.inSampleSize).toLong(), bitmap2.height.toLong())
+            } finally {
+                bitmap1?.recycle()
+                bitmap2?.recycle()
+                bitmap1 = null
+                bitmap2 = null
+            }
+
+            // FileDescriptor
+            var fileInputStream2: FileInputStream? = null
+            try {
+                fileInputStream2 = file.inputStream()
+                bitmap1 = fileInputStream2.fd.readBitmap().requireNotNull()
+                bitmap2 = fileInputStream2.fd.readBitmap(null, options).requireNotNull()
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.width, options.inSampleSize).toLong(), bitmap2.width.toLong())
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.height, options.inSampleSize).toLong(), bitmap2.height.toLong())
+            } finally {
+                bitmap1?.recycle()
+                bitmap2?.recycle()
+                bitmap1 = null
+                bitmap2 = null
+                fileInputStream2.closeQuietly()
+            }
+
+            // Resources
+            try {
+                bitmap1 = context.resources.readBitmap(R.drawable.rect).requireNotNull()
+                bitmap2 = context.resources.readBitmap(R.drawable.rect, options).requireNotNull()
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.width, options.inSampleSize).toLong(), bitmap2.width.toLong())
+                Assert.assertEquals(Bitmapx.calculateSamplingSize(bitmap1.height, options.inSampleSize).toLong(), bitmap2.height.toLong())
+            } finally {
+                bitmap1?.recycle()
+                bitmap2?.recycle()
+                bitmap1 = null
+                @Suppress("UNUSED_VALUE")
+                bitmap2 = null
+            }
+
+            var resInputStream: InputStream? = null
+            try {
+                resInputStream = context.resources.openRawResource(R.drawable.rect)
+                bitmap1 = context.resources.readBitmap(null, resInputStream, null, null).requireNotNull()
+            } finally {
+                bitmap1?.recycle()
+                resInputStream.closeQuietly()
+            }
+        } finally {
+            file.deleteRecursively()
+        }
+    }
+
+    @Test
+    fun testWriteToFile() {
+        val context = InstrumentationRegistry.getContext()
+
+        val bitmap = Bitmapx.createByColor(200, 200, Bitmap.Config.ARGB_8888, Colorx.FUCHSIA)
+        val saveFile = context.getAppExternalCacheDirs().getFileIn("testWriteToFile.jpeg", 0).requireNotNull()
+        try {
+            bitmap.writeToFile(saveFile, Bitmap.CompressFormat.JPEG, 100)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            Assert.fail()
+        } finally {
+            bitmap.recycle()
+        }
+
+        val bitmap1 = saveFile.readBitmap()
+        try {
+            Assert.assertNotNull(bitmap1)
+            Assert.assertFalse(bitmap1!!.isRecycled)
+        } finally {
+            bitmap1?.recycle()
+            saveFile.deleteRecursively()
+        }
+    }
+
+    @Test
+    fun testToByteArray() {
+        val bitmap = Bitmapx.createByColor(200, 200, Bitmap.Config.ARGB_8888, Colorx.FUCHSIA)
+        val bytes: ByteArray
+        try {
+            bytes = bitmap.toByteArray(Bitmap.CompressFormat.JPEG, 100)
+        } finally {
+            bitmap.recycle()
+        }
+
+        val bitmap1 = bytes.readBitmap()
+        try {
+            Assert.assertNotNull(bitmap1)
+            Assert.assertFalse(bitmap1!!.isRecycled)
+        } finally {
+            bitmap1?.recycle()
+        }
+    }
+
+    @Test
+    fun tesToDrawable() {
+        val context = InstrumentationRegistry.getContext()
+
         val sourceBitmap = Bitmapx.createByColor(100, 100, Color.parseColor("#FF0000"))
+        try {
+            val drawable = sourceBitmap.toDrawable(context.resources)
+            Assert.assertNotNull(drawable)
 
-        val drawable = sourceBitmap.toDrawableByColor(Color.parseColor("#0000FF"))
-        val bitmap = drawable.toBitmapWithIntrinsicSize()
-
-        sourceBitmap.recycle()
-        bitmap.recycle()
+            val drawable2 = sourceBitmap.toDrawable()
+            Assert.assertNotNull(drawable2)
+        } finally {
+            sourceBitmap.recycle()
+        }
     }
 
     @Test
     fun testCircular() {
         val context = InstrumentationRegistry.getContext()
 
-        val rectBitmap = Premisex.requireNotNull(context.resources.readBitmap(me.panpf.androidxkt.test.R.drawable.rect))
+        val rectBitmap = context.resources.readBitmap(me.panpf.androidxkt.test.R.drawable.rect).requireNotNull()
 
         val circular1Bitmap = rectBitmap.circular()
         circular1Bitmap.recycle()
@@ -70,7 +249,7 @@ class BitmapxTest {
     fun testCenterCrop() {
         val context = InstrumentationRegistry.getContext()
 
-        val rectBitmap = Premisex.requireNotNull(context.resources.readBitmap(me.panpf.androidxkt.test.R.drawable.rect))
+        val rectBitmap = context.resources.readBitmap(me.panpf.androidxkt.test.R.drawable.rect).requireNotNull()
 
         val centerCrop1Bitmap = rectBitmap.centerCrop(rectBitmap.height / 2, rectBitmap.height)
         centerCrop1Bitmap.recycle()
@@ -88,7 +267,7 @@ class BitmapxTest {
     fun testTint() {
         val context = InstrumentationRegistry.getContext()
 
-        val operaBitmap = Premisex.requireNotNull(context.resources.readBitmap(me.panpf.androidxkt.test.R.drawable.ic_opera))
+        val operaBitmap = context.resources.readBitmap(me.panpf.androidxkt.test.R.drawable.ic_opera).requireNotNull()
 
         val centerCrop1Bitmap = operaBitmap.tint(Colorx.YELLOW)
         centerCrop1Bitmap.recycle()

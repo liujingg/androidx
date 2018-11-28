@@ -35,9 +35,9 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Classx;
 
-@SuppressWarnings({"WeakerAccess"})
 public class Activityx {
 
     private Activityx() {
@@ -153,12 +153,6 @@ public class Activityx {
     }
 
 
-    @NonNull
-    public static Context appContext(@NonNull Activity activity) {
-        return activity.getApplicationContext();
-    }
-
-
     /* ************************************* canStart ***************************************** */
 
 
@@ -228,7 +222,7 @@ public class Activityx {
      */
     public static void start(@NonNull android.support.v4.app.Fragment fragment,
                              @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
-        Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
+        Intent intent = new Intent(Contextx.requireContext(fragment), clazz);
         if (args != null) intent.putExtras(args);
         fragment.startActivity(intent);
     }
@@ -246,7 +240,7 @@ public class Activityx {
      */
     public static void start(@NonNull android.app.Fragment fragment,
                              @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
-        Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
+        Intent intent = new Intent(Contextx.requireContext(fragment), clazz);
         if (args != null) intent.putExtras(args);
         fragment.startActivity(intent);
     }
@@ -351,7 +345,7 @@ public class Activityx {
      */
     public static boolean safeStart(@NonNull android.support.v4.app.Fragment fragment,
                                     @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
-        Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
+        Intent intent = new Intent(Contextx.requireContext(fragment), clazz);
         if (args != null) intent.putExtras(args);
         return safeStart(fragment, intent);
     }
@@ -369,7 +363,7 @@ public class Activityx {
      */
     public static boolean safeStart(@NonNull android.app.Fragment fragment,
                                     @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
-        Intent intent = new Intent(Fragmentx.requireContext(fragment), clazz);
+        Intent intent = new Intent(Contextx.requireContext(fragment), clazz);
         if (args != null) intent.putExtras(args);
         return safeStart(fragment, intent);
     }

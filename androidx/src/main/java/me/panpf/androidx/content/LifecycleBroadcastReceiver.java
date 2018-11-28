@@ -11,8 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 
-import me.panpf.androidx.app.Fragmentx;
-
 /**
  * Listening to Lifecycle implements automatic registration, anti-registration of the broadcast receiver, as follows:
  * <pre class="prettyprint">
@@ -38,7 +36,7 @@ public abstract class LifecycleBroadcastReceiver extends BroadcastReceiver {
     }
 
     public LifecycleBroadcastReceiver(@NonNull Fragment fragment) {
-        this(Fragmentx.requireContext(fragment), fragment.getLifecycle());
+        this(Contextx.requireContext(fragment), fragment.getLifecycle());
     }
 
     public LifecycleBroadcastReceiver(@NonNull FragmentActivity activity) {

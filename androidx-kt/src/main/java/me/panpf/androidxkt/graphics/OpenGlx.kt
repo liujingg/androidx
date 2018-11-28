@@ -25,8 +25,3 @@ import me.panpf.androidx.graphics.OpenGlx
  * Get the version of OpenGL
  */
 inline fun Context.getOpenGlVersion(): String = OpenGlx.getVersion(this)
-
-/**
- * Get the maximum texture size supported by OpenGL
- */
-inline fun getOpenGlMaxTextureSize(): Int = OpenGlx.getMaxTextureSize()

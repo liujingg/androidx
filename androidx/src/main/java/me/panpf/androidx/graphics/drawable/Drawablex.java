@@ -30,7 +30,6 @@ import me.panpf.androidx.graphics.Colorx;
 import me.panpf.javax.util.LazyValue;
 import me.panpf.javax.util.Premisex;
 
-@SuppressWarnings("WeakerAccess")
 public class Drawablex {
 
     private Drawablex() {
@@ -170,7 +169,7 @@ public class Drawablex {
      * Change the color of the drawable
      */
     @NonNull
-    public static <T extends Drawable> T toDrawableByColor(@NonNull T drawable, @ColorInt int color) {
+    public static <T extends Drawable> T changeColor(@NonNull T drawable, @ColorInt int color) {
         //noinspection unchecked
         T newDrawable = (T) drawable.mutate();
         newDrawable.setColorFilter(Colorx.createMatrixColorFilter(color));
@@ -183,7 +182,7 @@ public class Drawablex {
      * @param resId Drawable resource id
      */
     @NonNull
-    public static Drawable toDrawableByColorFromDrawableRes(@NonNull Context context, @DrawableRes int resId, @ColorInt int color) {
-        return toDrawableByColor(context.getResources().getDrawable(resId), color);
+    public static Drawable changeResDrawableColor(@NonNull Context context, @DrawableRes int resId, @ColorInt int color) {
+        return changeColor(context.getResources().getDrawable(resId), color);
     }
 }

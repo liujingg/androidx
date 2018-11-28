@@ -24,7 +24,6 @@ import android.support.annotation.Nullable;
 
 import me.panpf.javax.lang.Classx;
 
-@SuppressWarnings("WeakerAccess")
 public class Dialogx {
 
     private Dialogx() {

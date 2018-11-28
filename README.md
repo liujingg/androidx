@@ -67,7 +67,6 @@ Dependencies:
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] ([Test][FragmentxTest.java]) | [Fragmentx.kt] ([Test][FragmentxTest.kt])
     * isDestroyedCompat, getImplWithParent, instantiate, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
-    * requireContext, requireAppContent, read\*Arg
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
 * Service: [Servicex.java] ([Test][ServicexTest.java]) | [Servicex.kt] ([Test][ServicexTest.kt])
@@ -90,7 +89,7 @@ Dependencies:
     * get, getLabel, getContents, getText, getHtmlText, getIntent, getUri, addPrimaryClipChangedListener,
     * removePrimaryClipChangedListener, clear
 * Context: [Contextx.java] ([Test][ContextxTest.java]) | [Contextx.kt] ([Test][ContextxTest.kt])
-    * systemService, systemServiceOrNull, \*Manager
+    * requireContext, requireAppContext, appContext, systemService, systemServiceOrNull, \*Manager
 * Intent: [Intentx.java] ([Test][IntentxTest.java]) | [Intentx.kt] ([Test][IntentxTest.kt])
     * createRecordingIntent, createLaunchDialingIntent, createCallPhoneIntent, createLaunchSendSmsIntent,
     * createLaunchWebBrowserIntent, createScanFileBroadcastIntent, createInstallAppIntent, createUninstallAppIntent,
@@ -110,22 +109,25 @@ Dependencies:
 
 ### graphics
 * Drawable: [Drawablex.java] ([Test][DrawablexTest.java]) | [Drawablex.kt] ([Test][DrawablexTest.kt])
-    * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, toDrawableByColor, toDrawableByColorFromDrawableRes
-* Bitmap: [Bitmapx.java] | [Bitmapx.kt]
+    * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, changeColor, changeResDrawableColor
+* Bitmap: [Bitmapx.java] ([Test][BitmapxTest.java]) | [Bitmapx.kt] ([Test][BitmapxTest.kt])
     * centerCrop, centerCropTo, circular, circularTo, tint, createByColor, toByteArray,
-    * writeToFile, readBitmap, toDrawableByColor, use, calculateSamplingSize, calculateSamplingSizeForRegion
-* Image: [Imagex.java] | [Imagex.kt]
+    * writeToFile, readBitmap, toDrawable, use, calculateSamplingSize, calculateSamplingSizeForRegion
+* Image: [Imagex.java] ([Test][ImagexTest.java]) | [Imagex.kt] ([Test][ImagexTest.kt])
     * getMimeType, getMimeSubType
 * Color: [Colorx.java] ([Test][ColorxTest.java]) | [Colorx.kt] ([Test][ColorxTest.kt])
     * WHITE/BLACK/RED..., getAlpha, setAlpha, addAlpha, getHSVHue, setHSVHue, getHSVSaturation,
     * setHSVSaturation, addHSVSaturation, getHSVValue, setHSVValue, addHSVValue, isLight,
     * createMatrixColorFilter, argbEvaluate
-* Matrix: [Matrixx.java] | [Matrixx.kt]
+* Matrix: [Matrixx.java] ([Test][MatrixxTest.java]) | [Matrixx.kt] ([Test][MatrixxTest.kt])
     * getValue, getScale
-* OpenGl: [OpenGlx.java] | [OpenGlx.kt]
+* OpenGl: [OpenGlx.java] ([Test][OpenGlxTest.java]) | [OpenGlx.kt] [Matrixx.kt] ([Test][OpenGlxTest.kt])
     * getVersion, getMaxTextureSize,
-* Paint: [Paintx.java] | [Paintx.kt]
+* Paint: [Paintx.java] ([Test][PaintxTest.java]) | [Paintx.kt] ([Test][PaintxTest.kt])
     * getTextWidth, getTextHeight, getTextWidthByBounds, getTextHeightByBounds, getTextLeading
+* Resize: [Resizex.java] ([Test][ResizexTest.java])
+    * srcMappingStartRect, srcMappingCenterRect, srcMappingEndRect, srcMatrixRect,
+    * scaleTargetSize, calculator
 
 ### hardware
 * Hardware: [Hardwarex.java] ([Test][HardwarexTest.java]) | [Hardwarex.kt] ([Test][HardwarexTest.kt])
@@ -133,11 +135,11 @@ Dependencies:
     * getAndroidId, getSubscriberId, getSimSerialNumber, getSerial, getIMEI, getIMSI, getMacAddress
 
 ### net
-* NetworkState: [NetworkState.java] | [NetworkState.kt]
+* NetworkState: [NetworkState.java] ([Test][NetworkStateTest.java])
     * isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated, isBluetoothActivated,
     * getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName, getSubtypeName,
     * getExtraInfo, getNetworkInfo, getConnectivity
-* Network: [Networkx.java] | [Networkx.kt]
+* Network: [Networkx.java] ([Test][NetworkxTest.java]) | [Networkx.kt] ([Test][NetworkxTest.kt])
     * getState, isActivated, isWifiActivated, isNoMeteredWifiActivated, isMobileActivated,
     * isBluetoothActivated, getType, isVPNActivated, isMetered, isRoaming, isFailover, getTypeName,
     * getSubtypeName, getExtraInfo, getNetworkInfo, getConnectivity, getWifiState,
@@ -171,11 +173,10 @@ Dependencies:
     * get, getInt, getLong, getBoolean, set, addChangeCallbacks, callChangeCallbacks
 
 ### provider
-* Settings: [Settingsx.java] | [Settingsx.kt]
+* Settings: [Settingsx.java] ([Test][SettingsxTest.java])  | [Settingsx.kt] ([Test][SettingsxTest.kt])
     * isScreenBrightnessModeAutomatic, setScreenBrightnessModeAutomatic, getScreenBrightness,
-    * setScreenBrightness, getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem,
-    * getScreenOffTimeout, setScreenOffTimeout, isAirplaneModeOn, setAirplaneModeOn, isBluetoothOn,
-    * setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
+    * setScreenBrightness, getScreenOffTimeout, setScreenOffTimeout, isAirplaneModeOn, setAirplaneModeOn,
+    * isBluetoothOn, setBluetoothOn, getMediaVolume, setMediaVolume, getRingVolume, setRingVolume
 
 ### util
 * Dimen: [Dimenx.java] ([Test][DimenxTest.java]) | [Dimenx.kt] ([Test][DimenxTest.kt])
@@ -184,25 +185,27 @@ Dependencies:
     * isEmpty, isNotEmpty, toJsonArray, toJson, toStringList, toStringArray, toIntArray,
     * toBeanList, toBean, optString, optInt, optLong, optBoolean, optDouble, optJSONObject, optJSONArray,
     * getString, getInt, getLong, getBoolean, getDouble, getJSONObject, getJSONArray, format
-* Text: [Textx.java] | [Textx.kt]
-    * textToBitmap, toHtmlColorFlag, toHtmlRedFlag, keywordMadeColorByHtml, keywordMadeRedByHtml,
-    * keywordMadeColorBySpannable, keywordMadeRedBySpannable
+* Text: [Textx.java] ([Test][TextxTest.java]) | [Textx.kt] ([Test][TextxTest.kt])
+    * textToBitmap, changeColorByHtml, changeColorToRedByHtml, changeKeywordColorByHtml, changeKeywordColorToRedByHtml,
+    * changeColorBySpannable, changeColorToRedBySpannable, changeKeywordColorBySpannable, changeKeywordColorToRedBySpannable
 * WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java]) | [WeakAsyncTask.kt] ([Test][WeakAsyncTaskTest.kt])
 
 ### view
-* InputMethod: [InputMethodx.java] | [InputMethodx.kt]
+* InputMethod: [InputMethodx.java] ([Test][InputMethodxTest.java]) | [InputMethodx.kt] ([Test][InputMethodxTest.kt])
     * showSoftInput, delayShowSoftInput, hideSoftInput, moveCursorToEnd, moveCursorToStart, moveCursorTo
-* Display: [Displayx.java] | [Displayx.kt]
+* Display: [Displayx.java] ([Test][DisplayxTest.java]) | [Displayx.kt] ([Test][DisplayxTest.kt])
     * getScreenSize, getScreenWidth, getScreenHeight, getMetrics, getDensity, getDisplayRotation
     * getDensityDpi, isOrientationPortrait, isOrientationLandscape, isOrientationUndefined, getRotation
     * hasNavigationBar, getStatusBarHeight, getNavigationBarHeight, getNavigationBarWidth
-* ViewAnim: [ViewAnimx.java] | [ViewAnimx.kt]
+* ViewAnim: [ViewAnimx.java] ([Test][ViewAnimxTest.java]) | [ViewAnimx.kt] ([Test][ViewAnimxTest.kt])
     * animAlpha, animTranslate, shake, shock, startAnimFromRes, invisibleByAnimAlpha,
     * goneByAnimAlpha, visibleByAnimAlpha,
-* View: [Viewx.java] | [Viewx.kt]
+* View: [Viewx.java] ([Test][ViewxTest.java]) | [Viewx.kt] ([Test][ViewxTest.kt])
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
-    * toBitmapByMaxHeight, inflateLayout, appContext
+    * toBitmapByMaxHeight, inflateLayout
+* Window: [Windowx.java] ([Test][WindowxTest.java]) | [Windowx.kt] ([Test][WindowxTest.kt])
+    * getBrightness, setBrightness, isBrightnessFlowSystem
 
 ### widget
 * Toast: [Toastx.java] ([Test][ToastxTest.java]) | [Toastx.kt] ([Test][ToastxTest.kt])
@@ -359,6 +362,11 @@ Please view the [CHANGELOG.md] file
 [Paintx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Paintx.kt
 [PaintxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/PaintxTest.kt
 
+[Resizex.java]: androidx/src/main/java/me/panpf/androidx/graphics/Resizex.java
+[ResizexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/ResizexTest.java
+[Resizex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Resizex.kt
+[ResizexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/ResizexTest.kt
+
 [Hardwarex.java]: androidx/src/main/java/me/panpf/androidx/hardware/Hardwarex.java
 [HardwarexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/hardware/HardwarexTest.java
 [Hardwarex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/hardware/Hardwarex.kt
@@ -428,9 +436,9 @@ Please view the [CHANGELOG.md] file
 [TextxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/TextxTest.kt
 
 [InputMethodx.java]: androidx/src/main/java/me/panpf/androidx/view/inputmethod/InputMethodx.java
-[InputMethodxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/inputmethod/InputMethodxTest.java
+[InputMethodxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/InputMethodxTest.java
 [InputMethodx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/view/inputmethod/InputMethodx.kt
-[InputMethodxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/inputmethod/InputMethodxTest.kt
+[InputMethodxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/view/InputMethodxTest.kt
 
 [Displayx.java]: androidx/src/main/java/me/panpf/androidx/view/Displayx.java
 [DisplayxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/view/DisplayxTest.java

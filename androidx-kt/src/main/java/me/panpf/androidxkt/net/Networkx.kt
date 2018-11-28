@@ -20,7 +20,6 @@ package me.panpf.androidxkt.net
 
 import android.Manifest
 import android.content.Context
-import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.support.annotation.RequiresPermission
 import me.panpf.androidx.net.NetworkState
@@ -117,12 +116,6 @@ inline fun Context.getNetworkExtraInfo(): String = Networkx.getExtraInfo(this)
 inline fun Context.getNetworkInfo(): NetworkInfo? = Networkx.getNetworkInfo(this)
 
 /**
- * Get network connection
- */
-@RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-inline fun Context.getNetworkConnectivity(): ConnectivityManager? = Networkx.getConnectivity(this)
-
-/**
  * Get the status of Wi-Fi
  *
  * @return The value is one of WIFI_STATE_ENABLED, WIFI_STATE_ENABLING, WIFI_STATE_DISABLED, WIFI_STATE_DISABLING, WIFI_STATE_UNKNOWN in WifiManager.
@@ -134,28 +127,28 @@ inline fun Context.getWifiState(): Int = Networkx.getWifiState(this)
  * Return true if Wi-Fi is turned on
  */
 @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-inline fun Context.isWifiEnabled(): Boolean = Networkx.isWifiEnabled(this)
+inline fun Context.isWifiNetworkEnabled(): Boolean = Networkx.isWifiEnabled(this)
 
 /**
  * Turn Wi-Fi on or off
  */
 @RequiresPermission(anyOf = [(Manifest.permission.ACCESS_WIFI_STATE), (Manifest.permission.CHANGE_WIFI_STATE)])
-inline fun Context.setWifiEnabled(enable: Boolean): Boolean = Networkx.setWifiEnabled(this, enable)
+inline fun Context.setWifiNetworkEnabled(enable: Boolean): Boolean = Networkx.setWifiEnabled(this, enable)
 
 /**
  * Return true if mobile network is turned on
  */
 @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-inline fun Context.isMobileEnabled(): Boolean = Networkx.isMobileEnabled(this)
+inline fun Context.isMobileNetworkEnabled(): Boolean = Networkx.isMobileEnabled(this)
 
 /**
  * Turn mobile network on or off
  */
 @RequiresPermission(Manifest.permission.CHANGE_NETWORK_STATE)
-inline fun Context.setMobileEnabled(enabled: Boolean): Boolean = Networkx.setMobileEnabled(this, enabled)
+inline fun Context.setMobileNetworkEnabled(enabled: Boolean): Boolean = Networkx.setMobileEnabled(this, enabled)
 
 /**
  * Gateway
  */
 @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-inline fun Context.getGateway(): String = Networkx.getGateway(this)
+inline fun Context.getNetworkGateway(): String = Networkx.getGateway(this)
