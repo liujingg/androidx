@@ -152,4 +152,16 @@
     <string name="string_intent_uri_required">stringIntentUriRequired</string>
     <string name="string_intent_uri_optional">stringIntentUriOptional</string>
     <string name="string_intent_uri_or_default">stringIntentUriOrDefault</string>
+
+    <string name="byte_uri_intent_or_default">byteUriIntentOrDefault</string>
+    <string name="short_uri_intent_or_default">shortUriIntentOrDefault</string>
+    <string name="int_uri_intent_or_default">intUriIntentOrDefault</string>
+    <string name="long_uri_intent_or_default">longUriIntentOrDefault</string>
+    <string name="float_uri_intent_or_default">floatUriIntentOrDefault</string>
+    <string name="double_uri_intent_or_default">doubleUriIntentOrDefault</string>
+    <string name="boolean_uri_intent_or_default">booleanUriIntentOrDefault</string>
+
+    <string name="string_uri_intent_required">stringUriIntentRequired</string>
+    <string name="string_uri_intent_optional">stringUriIntentOptional</string>
+    <string name="string_uri_intent_or_default">stringUriIntentOrDefault</string>
 </resources>

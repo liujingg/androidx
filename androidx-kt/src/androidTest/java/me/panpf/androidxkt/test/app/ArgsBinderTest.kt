@@ -328,12 +328,12 @@ class ArgsBinderTest {
             }
         }
 
-        private val stringRequired by bindStringArg(me.panpf.androidxkt.test.R.string.string_required)
-        private val stringOptional by bindStringArgOrNull(me.panpf.androidxkt.test.R.string.string_optional)
-        private val stringArrayRequired by bindStringArrayArg(me.panpf.androidxkt.test.R.string.string_array_required)
-        private val stringArrayOptional by bindStringArrayArgOrNull(me.panpf.androidxkt.test.R.string.string_array_optional)
-        private val stringArrayListRequired by bindStringArrayListArg(me.panpf.androidxkt.test.R.string.string_array_list_required)
-        private val stringArrayListOptional by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.string_array_list_optional)
+        private val stringRequired by bindStringArg(R.string.string_required)
+        private val stringOptional by bindStringArgOrNull(R.string.string_optional)
+        private val stringArrayRequired by bindStringArrayArg(R.string.string_array_required)
+        private val stringArrayOptional by bindStringArrayArgOrNull(R.string.string_array_optional)
+        private val stringArrayListRequired by bindStringArrayListArg(R.string.string_array_list_required)
+        private val stringArrayListOptional by bindStringArrayListArgOrNull(R.string.string_array_list_optional)
 
         private val byteRequired by bindByteArgOr(R.string.byte_required)
         private val byteArrayRequired by bindByteArrayArg(R.string.byte_array_required)
@@ -374,7 +374,6 @@ class ArgsBinderTest {
         private val charSequenceArrayRequired by bindCharSequenceArrayArg(R.string.char_sequence_array_required)
         private val charSequenceArrayOptional by bindCharSequenceArrayArgOrNull(R.string.char_sequence_array_optional)
 
-
         private val parcelableRequired by bindParcelableArg<TestParcelable>(R.string.parcelable_required)
         private val parcelableOptional by bindParcelableArgOrNull<TestParcelable>(R.string.parcelable_optional)
         private val parcelableArrayRequired by bindParcelableArrayArg<Parcelable>(R.string.parcelable_array_required)
@@ -384,9 +383,9 @@ class ArgsBinderTest {
 
         private val serializableRequired by bindSerializableArg<TestSerializable>(R.string.serializable_required)
         private val serializableOptional by bindSerializableArgOrNull<TestSerializable>(R.string.serializable_optional)
-
         private val bundleRequired by bindBundleArg(R.string.bundle_required)
         private val bundleOptional by bindBundleArgOrNull(R.string.bundle_optional)
+
 
         private val byteArrayOrDefault by bindByteArrayArgOr(R.string.byte_array_or_default, byteArrayOf())
 
@@ -430,6 +429,27 @@ class ArgsBinderTest {
 
         private val bundleOrDefault by bindBundleArgOr(R.string.bundle_or_default, Bundle())
 
+        private val stringOptionalErrKey by bindStringArgOrNull(R.string.not_exist_key)
+        private val stringArrayOptionalErrKey by bindStringArrayArgOrNull(R.string.not_exist_key)
+        private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.not_exist_key)
+        private val booleanArrayOptionalErrKey by bindBooleanArrayArgOrNull(R.string.not_exist_key)
+        private val charArrayOptionalErrKEy by bindCharArrayArgOrNull(R.string.not_exist_key)
+        private val charSequenceOptionalErrKet by bindCharSequenceArgOrNull(R.string.not_exist_key)
+        private val charSequenceArrayOptionalErrKey by bindCharSequenceArrayArgOrNull(R.string.not_exist_key)
+        private val parcelableOptionalErrKey by bindParcelableArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val parcelableArrayOptionalErrKey by bindParcelableArrayArgOrNull<Parcelable>(R.string.not_exist_key)
+        private val parcelableArrayListOptionalErrKey by bindParcelableArrayListArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val serializableOptionalErrKey by bindSerializableArgOrNull<TestSerializable>(R.string.not_exist_key)
+        private val bundleOptionalErrKey by bindBundleArgOrNull(R.string.not_exist_key)
+        private val charSequenceArrayListOptionalErrKey by bindCharSequenceArrayListArgOrNull(R.string.not_exist_key)
+        private val byteArrayOptionalErrKey by bindByteArrayArgOrNull(R.string.not_exist_key)
+        private val shortArrayOptionalErrKey by bindShortArrayArgOrNull(R.string.not_exist_key)
+        private val intArrayOptionalErrKey by bindIntArrayArgOrNull(R.string.not_exist_key)
+        private val intArrayListOptionalErrKey by bindIntArrayListArgOrNull(R.string.not_exist_key)
+        private val longArrayOptionalErrKey by bindLongArrayArgOrNull(R.string.not_exist_key)
+        private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull(R.string.not_exist_key)
+        private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull(R.string.not_exist_key)
+
         fun assert() {
             Assert.assertTrue(stringRequired == "stringRequired")
             Assert.assertTrue(stringOptional == "stringOptional")
@@ -446,6 +466,7 @@ class ArgsBinderTest {
             Assert.assertTrue(booleanArrayRequired[0] && !booleanArrayRequired[1])
             Assert.assertTrue(booleanArrayOptional?.get(0) != true
                     && booleanArrayOptional?.get(1) ?: false)
+            Assert.assertNull(booleanArrayOptionalErrKey)
 
             Assert.assertTrue(byteRequired == 2.toByte())
             Assert.assertTrue(byteArrayRequired[0] == 2.toByte()
@@ -559,6 +580,26 @@ class ArgsBinderTest {
 
             Assert.assertTrue(bundleOrDefault.getString("bundle") == "bundleOrDefault")
 
+            Assert.assertNull(stringOptionalErrKey)
+            Assert.assertNull(stringArrayOptionalErrKey)
+            Assert.assertNull(stringArrayListOptionalErrKey)
+            Assert.assertNull(booleanArrayOptionalErrKey)
+            Assert.assertNull(byteArrayOptionalErrKey)
+            Assert.assertNull(shortArrayOptionalErrKey)
+            Assert.assertNull(intArrayOptionalErrKey)
+            Assert.assertNull(intArrayListOptionalErrKey)
+            Assert.assertNull(floatArrayOptionalErrKey)
+            Assert.assertNull(longArrayOptionalErrKey)
+            Assert.assertNull(doubleArrayOptionalErrKey)
+            Assert.assertNull(charArrayOptionalErrKEy)
+            Assert.assertNull(charSequenceOptionalErrKet)
+            Assert.assertNull(charSequenceArrayOptionalErrKey)
+            Assert.assertNull(charSequenceArrayListOptionalErrKey)
+            Assert.assertNull(parcelableOptionalErrKey)
+            Assert.assertNull(parcelableArrayOptionalErrKey)
+            Assert.assertNull(parcelableArrayListOptionalErrKey)
+            Assert.assertNull(serializableOptionalErrKey)
+            Assert.assertNull(bundleOptionalErrKey)
         }
 
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -584,7 +625,6 @@ class ArgsBinderTest {
         private val stringArrayOptional by bindStringArrayArgOrNull(me.panpf.androidxkt.test.R.string.string_array_optional)
         private val stringArrayListRequired by bindStringArrayListArg(me.panpf.androidxkt.test.R.string.string_array_list_required)
         private val stringArrayListOptional by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.string_array_list_optional)
-
 
         private val byteRequired by bindByteArgOr(R.string.byte_required)
         private val byteArrayRequired by bindByteArrayArg(R.string.byte_array_required)
@@ -705,7 +745,59 @@ class ArgsBinderTest {
         private val sizeFOrDefault by bindSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
         private val sizeFOrDefaultErrKey by bindSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
 
+        private val stringOptionalErrKey by bindStringArgOrNull(R.string.not_exist_key)
+        private val stringArrayOptionalErrKey by bindStringArrayArgOrNull(R.string.not_exist_key)
+        private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.not_exist_key)
+        private val booleanArrayOptionalErrKey by bindBooleanArrayArgOrNull(R.string.not_exist_key)
+        private val charArrayOptionalErrKEy by bindCharArrayArgOrNull(R.string.not_exist_key)
+        private val charSequenceOptionalErrKet by bindCharSequenceArgOrNull(R.string.not_exist_key)
+        private val charSequenceArrayOptionalErrKey by bindCharSequenceArrayArgOrNull(R.string.not_exist_key)
+        private val parcelableOptionalErrKey by bindParcelableArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val parcelableArrayOptionalErrKey by bindParcelableArrayArgOrNull<Parcelable>(R.string.not_exist_key)
+        private val parcelableArrayListOptionalErrKey by bindParcelableArrayListArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val serializableOptionalErrKey by bindSerializableArgOrNull<TestSerializable>(R.string.not_exist_key)
+        private val bundleOptionalErrKey by bindBundleArgOrNull(R.string.not_exist_key)
+        private val charSequenceArrayListOptionalErrKey by bindCharSequenceArrayListArgOrNull(R.string.not_exist_key)
+        private val byteArrayOptionalErrKey by bindByteArrayArgOrNull(R.string.not_exist_key)
+        private val shortArrayOptionalErrKey by bindShortArrayArgOrNull(R.string.not_exist_key)
+        private val intArrayOptionalErrKey by bindIntArrayArgOrNull(R.string.not_exist_key)
+        private val intArrayListOptionalErrKey by bindIntArrayListArgOrNull(R.string.not_exist_key)
+        private val longArrayOptionalErrKey by bindLongArrayArgOrNull(R.string.not_exist_key)
+        private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull(R.string.not_exist_key)
+        private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull(R.string.not_exist_key)
+        private val sparseParcelableArrayOptionalErrKey by bindSparseParcelableArrayArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val binderOptionalErrKey by bindBinderArgOrNull(R.string.not_exist_key)
+        private val sizeOptionalErrKey by bindSizeArgOrNull(R.string.not_exist_key)
+        private val sizeFOptionalErrKey by bindSizeFArgOrNull(R.string.not_exist_key)
+
+
         fun assert() {
+
+            Assert.assertNull(stringOptionalErrKey)
+            Assert.assertNull(stringArrayOptionalErrKey)
+            Assert.assertNull(stringArrayListOptionalErrKey)
+            Assert.assertNull(booleanArrayOptionalErrKey)
+            Assert.assertNull(byteArrayOptionalErrKey)
+            Assert.assertNull(shortArrayOptionalErrKey)
+            Assert.assertNull(intArrayOptionalErrKey)
+            Assert.assertNull(intArrayListOptionalErrKey)
+            Assert.assertNull(floatArrayOptionalErrKey)
+            Assert.assertNull(longArrayOptionalErrKey)
+            Assert.assertNull(doubleArrayOptionalErrKey)
+            Assert.assertNull(charArrayOptionalErrKEy)
+            Assert.assertNull(charSequenceOptionalErrKet)
+            Assert.assertNull(charSequenceArrayOptionalErrKey)
+            Assert.assertNull(charSequenceArrayListOptionalErrKey)
+            Assert.assertNull(parcelableOptionalErrKey)
+            Assert.assertNull(parcelableArrayOptionalErrKey)
+            Assert.assertNull(parcelableArrayListOptionalErrKey)
+            Assert.assertNull(serializableOptionalErrKey)
+            Assert.assertNull(bundleOptionalErrKey)
+            Assert.assertNull(sparseParcelableArrayOptionalErrKey)
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertNull(sizeFOptionalErrKey)
+
             Assert.assertTrue(stringRequired == "stringRequired")
             Assert.assertTrue(stringOptional == "stringOptional")
             Assert.assertTrue(stringArrayRequired[0] == "stringRequired"
@@ -898,6 +990,10 @@ class ArgsBinderTest {
                 putCharArray(context.getString(R.string.char_array_required), charArrayOf('a', 'b'))
                 putCharArray(context.getString(R.string.char_array_optional), charArrayOf('b', 'a'))
 
+                putCharSequence(context.getString(R.string.char_sequence_required), "stringRequired")
+                putCharSequence(context.getString(R.string.char_sequence_optional), "stringOptional")
+                putCharSequenceArray(context.getString(R.string.char_sequence_array_required), arrayOf("stringRequired", "stringOptional"))
+                putCharSequenceArray(context.getString(R.string.char_sequence_array_optional), arrayOf("stringOptional", "stringRequired"))
 
                 putParcelable(context.getString(R.string.parcelable_required), TestParcelable("parcelableRequired"))
                 putParcelable(context.getString(R.string.parcelable_optional), TestParcelable("parcelableOptional"))
@@ -981,7 +1077,6 @@ class ArgsBinderTest {
         private val stringArrayListRequired by bindStringArrayListArg(me.panpf.androidxkt.test.R.string.string_array_list_required)
         private val stringArrayListOptional by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.string_array_list_optional)
 
-
         private val byteRequired by bindByteArgOr(R.string.byte_required)
         private val byteArrayRequired by bindByteArrayArg(R.string.byte_array_required)
         private val byteArrayOptional by bindByteArrayArgOrNull(R.string.byte_array_optional)
@@ -1101,7 +1196,59 @@ class ArgsBinderTest {
         private val sizeFOrDefault by bindSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
         private val sizeFOrDefaultErrKey by bindSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
 
+        private val stringOptionalErrKey by bindStringArgOrNull(R.string.not_exist_key)
+        private val stringArrayOptionalErrKey by bindStringArrayArgOrNull(R.string.not_exist_key)
+        private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.not_exist_key)
+        private val booleanArrayOptionalErrKey by bindBooleanArrayArgOrNull(R.string.not_exist_key)
+        private val charArrayOptionalErrKEy by bindCharArrayArgOrNull(R.string.not_exist_key)
+        private val charSequenceOptionalErrKet by bindCharSequenceArgOrNull(R.string.not_exist_key)
+        private val charSequenceArrayOptionalErrKey by bindCharSequenceArrayArgOrNull(R.string.not_exist_key)
+        private val parcelableOptionalErrKey by bindParcelableArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val parcelableArrayOptionalErrKey by bindParcelableArrayArgOrNull<Parcelable>(R.string.not_exist_key)
+        private val parcelableArrayListOptionalErrKey by bindParcelableArrayListArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val serializableOptionalErrKey by bindSerializableArgOrNull<TestSerializable>(R.string.not_exist_key)
+        private val bundleOptionalErrKey by bindBundleArgOrNull(R.string.not_exist_key)
+        private val charSequenceArrayListOptionalErrKey by bindCharSequenceArrayListArgOrNull(R.string.not_exist_key)
+        private val byteArrayOptionalErrKey by bindByteArrayArgOrNull(R.string.not_exist_key)
+        private val shortArrayOptionalErrKey by bindShortArrayArgOrNull(R.string.not_exist_key)
+        private val intArrayOptionalErrKey by bindIntArrayArgOrNull(R.string.not_exist_key)
+        private val intArrayListOptionalErrKey by bindIntArrayListArgOrNull(R.string.not_exist_key)
+        private val longArrayOptionalErrKey by bindLongArrayArgOrNull(R.string.not_exist_key)
+        private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull(R.string.not_exist_key)
+        private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull(R.string.not_exist_key)
+        private val sparseParcelableArrayOptionalErrKey by bindSparseParcelableArrayArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val binderOptionalErrKey by bindBinderArgOrNull(R.string.not_exist_key)
+        private val sizeOptionalErrKey by bindSizeArgOrNull(R.string.not_exist_key)
+        private val sizeFOptionalErrKey by bindSizeFArgOrNull(R.string.not_exist_key)
+
+
         fun assert() {
+
+            Assert.assertNull(stringOptionalErrKey)
+            Assert.assertNull(stringArrayOptionalErrKey)
+            Assert.assertNull(stringArrayListOptionalErrKey)
+            Assert.assertNull(booleanArrayOptionalErrKey)
+            Assert.assertNull(byteArrayOptionalErrKey)
+            Assert.assertNull(shortArrayOptionalErrKey)
+            Assert.assertNull(intArrayOptionalErrKey)
+            Assert.assertNull(intArrayListOptionalErrKey)
+            Assert.assertNull(floatArrayOptionalErrKey)
+            Assert.assertNull(longArrayOptionalErrKey)
+            Assert.assertNull(doubleArrayOptionalErrKey)
+            Assert.assertNull(charArrayOptionalErrKEy)
+            Assert.assertNull(charSequenceOptionalErrKet)
+            Assert.assertNull(charSequenceArrayOptionalErrKey)
+            Assert.assertNull(charSequenceArrayListOptionalErrKey)
+            Assert.assertNull(parcelableOptionalErrKey)
+            Assert.assertNull(parcelableArrayOptionalErrKey)
+            Assert.assertNull(parcelableArrayListOptionalErrKey)
+            Assert.assertNull(serializableOptionalErrKey)
+            Assert.assertNull(bundleOptionalErrKey)
+            Assert.assertNull(sparseParcelableArrayOptionalErrKey)
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertNull(sizeFOptionalErrKey)
+
             Assert.assertTrue(stringRequired == "stringRequired")
             Assert.assertTrue(stringOptional == "stringOptional")
             Assert.assertTrue(stringArrayRequired[0] == "stringRequired"
@@ -1294,6 +1441,10 @@ class ArgsBinderTest {
                 putCharArray(context.getString(R.string.char_array_required), charArrayOf('a', 'b'))
                 putCharArray(context.getString(R.string.char_array_optional), charArrayOf('b', 'a'))
 
+                putCharSequence(context.getString(R.string.char_sequence_required), "stringRequired")
+                putCharSequence(context.getString(R.string.char_sequence_optional), "stringOptional")
+                putCharSequenceArray(context.getString(R.string.char_sequence_array_required), arrayOf("stringRequired", "stringOptional"))
+                putCharSequenceArray(context.getString(R.string.char_sequence_array_optional), arrayOf("stringOptional", "stringRequired"))
 
                 putParcelable(context.getString(R.string.parcelable_required), TestParcelable("parcelableRequired"))
                 putParcelable(context.getString(R.string.parcelable_optional), TestParcelable("parcelableOptional"))
@@ -1475,6 +1626,27 @@ class ArgsBinderTest {
         private val extrasOptional by bindExtrasArgOrNull()
         private val extrasOrDefault by bindExtrasArgOr(Bundle())
 
+        private val stringOptionalErrKey by bindStringArgOrNull(R.string.not_exist_key)
+        private val stringArrayOptionalErrKey by bindStringArrayArgOrNull(R.string.not_exist_key)
+        private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.not_exist_key)
+        private val booleanArrayOptionalErrKey by bindBooleanArrayArgOrNull(R.string.not_exist_key)
+        private val charArrayOptionalErrKEy by bindCharArrayArgOrNull(R.string.not_exist_key)
+        private val charSequenceOptionalErrKet by bindCharSequenceArgOrNull(R.string.not_exist_key)
+        private val charSequenceArrayOptionalErrKey by bindCharSequenceArrayArgOrNull(R.string.not_exist_key)
+        private val parcelableOptionalErrKey by bindParcelableArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val parcelableArrayOptionalErrKey by bindParcelableArrayArgOrNull<Parcelable>(R.string.not_exist_key)
+        private val parcelableArrayListOptionalErrKey by bindParcelableArrayListArgOrNull<TestParcelable>(R.string.not_exist_key)
+        private val serializableOptionalErrKey by bindSerializableArgOrNull<TestSerializable>(R.string.not_exist_key)
+        private val bundleOptionalErrKey by bindBundleArgOrNull(R.string.not_exist_key)
+        private val charSequenceArrayListOptionalErrKey by bindCharSequenceArrayListArgOrNull(R.string.not_exist_key)
+        private val byteArrayOptionalErrKey by bindByteArrayArgOrNull(R.string.not_exist_key)
+        private val shortArrayOptionalErrKey by bindShortArrayArgOrNull(R.string.not_exist_key)
+        private val intArrayOptionalErrKey by bindIntArrayArgOrNull(R.string.not_exist_key)
+        private val intArrayListOptionalErrKey by bindIntArrayListArgOrNull(R.string.not_exist_key)
+        private val longArrayOptionalErrKey by bindLongArrayArgOrNull(R.string.not_exist_key)
+        private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull(R.string.not_exist_key)
+        private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull(R.string.not_exist_key)
+
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
@@ -1490,6 +1662,27 @@ class ArgsBinderTest {
         }
 
         fun assert() {
+
+            Assert.assertNull(stringOptionalErrKey)
+            Assert.assertNull(stringArrayOptionalErrKey)
+            Assert.assertNull(stringArrayListOptionalErrKey)
+            Assert.assertNull(booleanArrayOptionalErrKey)
+            Assert.assertNull(byteArrayOptionalErrKey)
+            Assert.assertNull(shortArrayOptionalErrKey)
+            Assert.assertNull(intArrayOptionalErrKey)
+            Assert.assertNull(intArrayListOptionalErrKey)
+            Assert.assertNull(floatArrayOptionalErrKey)
+            Assert.assertNull(longArrayOptionalErrKey)
+            Assert.assertNull(doubleArrayOptionalErrKey)
+            Assert.assertNull(charArrayOptionalErrKEy)
+            Assert.assertNull(charSequenceOptionalErrKet)
+            Assert.assertNull(charSequenceArrayOptionalErrKey)
+            Assert.assertNull(charSequenceArrayListOptionalErrKey)
+            Assert.assertNull(parcelableOptionalErrKey)
+            Assert.assertNull(parcelableArrayOptionalErrKey)
+            Assert.assertNull(parcelableArrayListOptionalErrKey)
+            Assert.assertNull(serializableOptionalErrKey)
+            Assert.assertNull(bundleOptionalErrKey)
 
             Assert.assertTrue(byteArrayOrDefault[0] == 2.toByte() && byteArrayOrDefault[1] == (-2).toByte())
 
@@ -1855,7 +2048,58 @@ class ArgsBinderTest {
         private val sizeFOrDefault by bindSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
         private val sizeFOrDefaultErrKey by bindSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
 
+        private val stringOptionalErrKey by bindStringArgOrNull("KeyNotExist")
+        private val stringArrayOptionalErrKey by bindStringArrayArgOrNull("KeyNotExist")
+        private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull("KeyNotExist")
+        private val booleanArrayOptionalErrKey by bindBooleanArrayArgOrNull("KeyNotExist")
+        private val charArrayOptionalErrKEy by bindCharArrayArgOrNull("KeyNotExist")
+        private val charSequenceOptionalErrKet by bindCharSequenceArgOrNull("KeyNotExist")
+        private val charSequenceArrayOptionalErrKey by bindCharSequenceArrayArgOrNull("KeyNotExist")
+        private val parcelableOptionalErrKey by bindParcelableArgOrNull<TestParcelable>("KeyNotExist")
+        private val parcelableArrayOptionalErrKey by bindParcelableArrayArgOrNull<Parcelable>("KeyNotExist")
+        private val parcelableArrayListOptionalErrKey by bindParcelableArrayListArgOrNull<TestParcelable>("KeyNotExist")
+        private val serializableOptionalErrKey by bindSerializableArgOrNull<TestSerializable>("KeyNotExist")
+        private val bundleOptionalErrKey by bindBundleArgOrNull("KeyNotExist")
+        private val charSequenceArrayListOptionalErrKey by bindCharSequenceArrayListArgOrNull("KeyNotExist")
+        private val byteArrayOptionalErrKey by bindByteArrayArgOrNull("KeyNotExist")
+        private val shortArrayOptionalErrKey by bindShortArrayArgOrNull("KeyNotExist")
+        private val intArrayOptionalErrKey by bindIntArrayArgOrNull("KeyNotExist")
+        private val intArrayListOptionalErrKey by bindIntArrayListArgOrNull("KeyNotExist")
+        private val longArrayOptionalErrKey by bindLongArrayArgOrNull("KeyNotExist")
+        private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull("KeyNotExist")
+        private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull("KeyNotExist")
+        private val sparseParcelableArrayOptionalErrKey by bindSparseParcelableArrayArgOrNull<TestParcelable>("KeyNotExist")
+        private val binderOptionalErrKey by bindBinderArgOrNull("KeyNotExist")
+        private val sizeOptionalErrKey by bindSizeArgOrNull("KeyNotExist")
+        private val sizeFOptionalErrKey by bindSizeFArgOrNull("KeyNotExist")
+
         fun assert() {
+
+            Assert.assertNull(stringOptionalErrKey)
+            Assert.assertNull(stringArrayOptionalErrKey)
+            Assert.assertNull(stringArrayListOptionalErrKey)
+            Assert.assertNull(booleanArrayOptionalErrKey)
+            Assert.assertNull(byteArrayOptionalErrKey)
+            Assert.assertNull(shortArrayOptionalErrKey)
+            Assert.assertNull(intArrayOptionalErrKey)
+            Assert.assertNull(intArrayListOptionalErrKey)
+            Assert.assertNull(floatArrayOptionalErrKey)
+            Assert.assertNull(longArrayOptionalErrKey)
+            Assert.assertNull(doubleArrayOptionalErrKey)
+            Assert.assertNull(charArrayOptionalErrKEy)
+            Assert.assertNull(charSequenceOptionalErrKet)
+            Assert.assertNull(charSequenceArrayOptionalErrKey)
+            Assert.assertNull(charSequenceArrayListOptionalErrKey)
+            Assert.assertNull(parcelableOptionalErrKey)
+            Assert.assertNull(parcelableArrayOptionalErrKey)
+            Assert.assertNull(parcelableArrayListOptionalErrKey)
+            Assert.assertNull(serializableOptionalErrKey)
+            Assert.assertNull(bundleOptionalErrKey)
+            Assert.assertNull(sparseParcelableArrayOptionalErrKey)
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertNull(sizeFOptionalErrKey)
+
             Assert.assertTrue(booleanRequired)
             Assert.assertTrue(booleanArrayRequired[0] && !booleanArrayRequired[1])
             Assert.assertTrue(booleanArrayOptional?.get(0) != true
@@ -2254,7 +2498,58 @@ class ArgsBinderTest {
         private val sizeFOrDefault by bindSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
         private val sizeFOrDefaultErrKey by bindSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
 
+        private val stringOptionalErrKey by bindStringArgOrNull("KeyNotExist")
+        private val stringArrayOptionalErrKey by bindStringArrayArgOrNull("KeyNotExist")
+        private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull("KeyNotExist")
+        private val booleanArrayOptionalErrKey by bindBooleanArrayArgOrNull("KeyNotExist")
+        private val charArrayOptionalErrKEy by bindCharArrayArgOrNull("KeyNotExist")
+        private val charSequenceOptionalErrKet by bindCharSequenceArgOrNull("KeyNotExist")
+        private val charSequenceArrayOptionalErrKey by bindCharSequenceArrayArgOrNull("KeyNotExist")
+        private val parcelableOptionalErrKey by bindParcelableArgOrNull<TestParcelable>("KeyNotExist")
+        private val parcelableArrayOptionalErrKey by bindParcelableArrayArgOrNull<Parcelable>("KeyNotExist")
+        private val parcelableArrayListOptionalErrKey by bindParcelableArrayListArgOrNull<TestParcelable>("KeyNotExist")
+        private val serializableOptionalErrKey by bindSerializableArgOrNull<TestSerializable>("KeyNotExist")
+        private val bundleOptionalErrKey by bindBundleArgOrNull("KeyNotExist")
+        private val charSequenceArrayListOptionalErrKey by bindCharSequenceArrayListArgOrNull("KeyNotExist")
+        private val byteArrayOptionalErrKey by bindByteArrayArgOrNull("KeyNotExist")
+        private val shortArrayOptionalErrKey by bindShortArrayArgOrNull("KeyNotExist")
+        private val intArrayOptionalErrKey by bindIntArrayArgOrNull("KeyNotExist")
+        private val intArrayListOptionalErrKey by bindIntArrayListArgOrNull("KeyNotExist")
+        private val longArrayOptionalErrKey by bindLongArrayArgOrNull("KeyNotExist")
+        private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull("KeyNotExist")
+        private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull("KeyNotExist")
+        private val sparseParcelableArrayOptionalErrKey by bindSparseParcelableArrayArgOrNull<TestParcelable>("KeyNotExist")
+        private val binderOptionalErrKey by bindBinderArgOrNull("KeyNotExist")
+        private val sizeOptionalErrKey by bindSizeArgOrNull("KeyNotExist")
+        private val sizeFOptionalErrKey by bindSizeFArgOrNull("KeyNotExist")
+
         fun assert() {
+
+            Assert.assertNull(stringOptionalErrKey)
+            Assert.assertNull(stringArrayOptionalErrKey)
+            Assert.assertNull(stringArrayListOptionalErrKey)
+            Assert.assertNull(booleanArrayOptionalErrKey)
+            Assert.assertNull(byteArrayOptionalErrKey)
+            Assert.assertNull(shortArrayOptionalErrKey)
+            Assert.assertNull(intArrayOptionalErrKey)
+            Assert.assertNull(intArrayListOptionalErrKey)
+            Assert.assertNull(floatArrayOptionalErrKey)
+            Assert.assertNull(longArrayOptionalErrKey)
+            Assert.assertNull(doubleArrayOptionalErrKey)
+            Assert.assertNull(charArrayOptionalErrKEy)
+            Assert.assertNull(charSequenceOptionalErrKet)
+            Assert.assertNull(charSequenceArrayOptionalErrKey)
+            Assert.assertNull(charSequenceArrayListOptionalErrKey)
+            Assert.assertNull(parcelableOptionalErrKey)
+            Assert.assertNull(parcelableArrayOptionalErrKey)
+            Assert.assertNull(parcelableArrayListOptionalErrKey)
+            Assert.assertNull(serializableOptionalErrKey)
+            Assert.assertNull(bundleOptionalErrKey)
+            Assert.assertNull(sparseParcelableArrayOptionalErrKey)
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertNull(sizeFOptionalErrKey)
+
             Assert.assertTrue(booleanRequired)
             Assert.assertTrue(booleanArrayRequired[0] && !booleanArrayRequired[1])
             Assert.assertTrue(booleanArrayOptional?.get(0) != true
@@ -2570,6 +2865,8 @@ class ArgsBinderTest {
 
         private val extrasOrDefaultErrKey by bindExtrasArgOr(Bundle().apply { putString("extrasOrDefaultErrKey", "error") })
 
+        private val extrasOptionalErrKey by bindExtrasArgOrNull()
+
         companion object {
             fun createIntent(context: Context) = Intent(context, TestNoExtrasActivity::class.java)
         }
@@ -2580,6 +2877,9 @@ class ArgsBinderTest {
         }
 
         fun assert() {
+
+            Assert.assertNull(extrasOptionalErrKey)
+
             Assert.assertTrue(byteArrayOrDefaultErrKey[0] == 120.toByte())
 
             Assert.assertTrue(shortArrayOrDefaultErrKey[0] == 130.toShort())
@@ -2666,6 +2966,15 @@ class ArgsBinderTest {
         private val stringUriOrDefault by bindStringUriArgOr("stringUriOrDefault", "")
         private val stringUriOrDefaultErrKey by bindStringUriArgOr("stringUriOrDefaultErrKey", "stringUriOrDefaultErrKey")
 
+        private val byteUriOptionalErrKey by bindByteUriArgOrNull("keyNotExist")
+        private val shortUriOptionalErrKey by bindShortUriArgOrNull("keyNotExist")
+        private val intUriOptionalErrKey by bindIntUriArgOrNull("keyNotExist")
+        private val longUriOptionalErrKey by bindLongUriArgOrNull("keyNotExist")
+        private val floatUriOptionalErrKey by bindFloatUriArgOrNull("keyNotExist")
+        private val doubleUriOptionalErrKey by bindDoubleUriArgOrNull("keyNotExist")
+        private val booleanUriOptionalErrKey by bindBooleanUriArgOrNull("keyNotExist")
+        private val stringUriOptionalErrKey by bindStringUriArgOrNull("keyNotExist")
+
         companion object {
             private val params = StringBuilder()
                     .append("byteUriRequired=").append(1.toByte())
@@ -2705,6 +3014,16 @@ class ArgsBinderTest {
         }
 
         fun assert() {
+
+            Assert.assertNull(byteUriOptionalErrKey)
+            Assert.assertNull(shortUriOptionalErrKey)
+            Assert.assertNull(intUriOptionalErrKey)
+            Assert.assertNull(longUriOptionalErrKey)
+            Assert.assertNull(floatUriOptionalErrKey)
+            Assert.assertNull(doubleUriOptionalErrKey)
+            Assert.assertNull(booleanUriOptionalErrKey)
+            Assert.assertNull(stringUriOptionalErrKey)
+
             Assert.assertTrue(byteUriRequired == 1.toByte())
             Assert.assertTrue(byteUriOptional?.run { this == (-1).toByte() } ?: false)
             Assert.assertTrue(byteUriOrDefault == 2.toByte())
@@ -2789,6 +3108,15 @@ class ArgsBinderTest {
         private val stringUriOrDefault by bindStringUriArgOr(R.string.string_uri_or_default, "")
         private val stringUriOrDefaultErrKey by bindStringUriArgOr(R.string.not_exist_key, "stringUriOrDefaultErrKey")
 
+        private val byteUriOptionalErrKey by bindByteUriArgOrNull(R.string.not_exist_key)
+        private val shortUriOptionalErrKey by bindShortUriArgOrNull(R.string.not_exist_key)
+        private val intUriOptionalErrKey by bindIntUriArgOrNull(R.string.not_exist_key)
+        private val longUriOptionalErrKey by bindLongUriArgOrNull(R.string.not_exist_key)
+        private val floatUriOptionalErrKey by bindFloatUriArgOrNull(R.string.not_exist_key)
+        private val doubleUriOptionalErrKey by bindDoubleUriArgOrNull(R.string.not_exist_key)
+        private val booleanUriOptionalErrKey by bindBooleanUriArgOrNull(R.string.not_exist_key)
+        private val stringUriOptionalErrKey by bindStringUriArgOrNull(R.string.not_exist_key)
+
         companion object {
             private val params = StringBuilder()
                     .append("byteUriRequired=").append(1.toByte())
@@ -2828,6 +3156,16 @@ class ArgsBinderTest {
         }
 
         fun assert() {
+
+            Assert.assertNull(byteUriOptionalErrKey)
+            Assert.assertNull(shortUriOptionalErrKey)
+            Assert.assertNull(intUriOptionalErrKey)
+            Assert.assertNull(longUriOptionalErrKey)
+            Assert.assertNull(floatUriOptionalErrKey)
+            Assert.assertNull(doubleUriOptionalErrKey)
+            Assert.assertNull(booleanUriOptionalErrKey)
+            Assert.assertNull(stringUriOptionalErrKey)
+
             Assert.assertTrue(byteUriRequired == 1.toByte())
             Assert.assertTrue(byteUriOptional?.run { this == (-1).toByte() } ?: false)
             Assert.assertTrue(byteUriOrDefault == 2.toByte())
@@ -2885,6 +3223,24 @@ class ArgsBinderTest {
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr("stringIntentUriOrDefault", "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr("stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey")
 
+
+        //Activity Uri Intent
+        private val byteUriIntentOrDefault by bindByteUriIntentArgOr("byteUriIntentOrDefault", 0.toByte())
+        private val shortUriIntentOrDefault by bindShortUriIntentArgOr("shortUriIntentOrDefault", 0.toShort())
+        private val intUriIntentOrDefault by bindIntUriIntentArgOr("intUriIntentOrDefault", 0)
+        private val longUriIntentOrDefault by bindLongUriIntentArgOr("longUriIntentOrDefault", 0L)
+        private val floatUriIntentOrDefault by bindFloatUriIntentArgOr("floatUriIntentOrDefault", 0f)
+        private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr("doubleUriIntentOrDefault", 0.toDouble())
+        private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr("booleanUriIntentOrDefault", false)
+
+        private val stringUriIntentRequired by bindStringUriIntentArg("stringUriIntentRequired")
+        private val stringUriIntentOptional by bindStringUriIntentArgOrNull("stringUriIntentOptional")
+        private val stringUriIntentOrDefault by bindStringIntentUriArgOr("stringUriIntentOrDefault", "default")
+        private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr("stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey")
+
+        private val stringUriIntentOptionalErrKey by bindStringUriIntentArgOrNull("keyNotExist")
+        private val stringIntentUriOptionalErrKey by bindStringIntentUriArgOrNull("keyNotExist")
+
         companion object {
             private val params = StringBuilder()
                     .append("byteIntentUriOrDefault=").append(1.toByte())
@@ -2894,10 +3250,21 @@ class ArgsBinderTest {
                     .append("&floatIntentUriOrDefault=").append(5.toFloat())
                     .append("&doubleIntentUriOrDefault=").append(6.toDouble())
                     .append("&booleanIntentUriOrDefault=").append(true)
-
                     .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
                     .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
                     .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+
+                    //Activity Uri Intent
+                    .append("&byteUriIntentOrDefault=").append(11.toByte())
+                    .append("&shortUriIntentOrDefault=").append(12.toShort())
+                    .append("&intUriIntentOrDefault=").append(13)
+                    .append("&longUriIntentOrDefault=").append(14L)
+                    .append("&floatUriIntentOrDefault=").append(15.toFloat())
+                    .append("&doubleUriIntentOrDefault=").append(16.toDouble())
+                    .append("&booleanUriIntentOrDefault=").append(true)
+                    .append("&stringUriIntentRequired=").append("stringUriIntentRequired")
+                    .append("&stringUriIntentOptional=").append("stringUriIntentOptional")
+                    .append("&stringUriIntentOrDefault=").append("stringUriIntentOrDefault")
 
             private val uri = Uri.parse("https://github.com/panpf/androidx/uri?$params")
 
@@ -2913,12 +3280,28 @@ class ArgsBinderTest {
             Assert.assertTrue(floatIntentUriOrDefault == 5.toFloat())
             Assert.assertTrue(doubleIntentUriOrDefault == 6.toDouble())
             Assert.assertTrue(booleanIntentUriOrDefault)
-
             Assert.assertTrue(stringIntentUriRequired == "stringIntentUriRequired")
             Assert.assertTrue(stringIntentUriOptional?.run { this == "stringIntentUriOptional" }
                     ?: false)
             Assert.assertTrue(stringIntentUriOrDefault == "stringIntentUriOrDefault")
             Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+
+            //Activity Uri Intent
+            Assert.assertTrue(byteUriIntentOrDefault == 11.toByte())
+            Assert.assertTrue(shortUriIntentOrDefault == 12.toShort())
+            Assert.assertTrue(intUriIntentOrDefault == 13)
+            Assert.assertTrue(longUriIntentOrDefault == 14L)
+            Assert.assertTrue(floatUriIntentOrDefault == 15.toFloat())
+            Assert.assertTrue(doubleUriIntentOrDefault == 16.toDouble())
+            Assert.assertTrue(booleanUriIntentOrDefault)
+            Assert.assertTrue(stringUriIntentRequired == "stringUriIntentRequired")
+            Assert.assertTrue(stringUriIntentOptional?.run { this == "stringUriIntentOptional" }
+                    ?: false)
+            Assert.assertTrue(stringUriIntentOrDefault == "stringUriIntentOrDefault")
+            Assert.assertTrue(stringUriIntentOrDefaultErrKey == "stringUriIntentOrDefaultErrKey")
+
+            Assert.assertNull(stringUriIntentOptionalErrKey)
+            Assert.assertNull(stringIntentUriOptionalErrKey)
         }
 
     }
@@ -2938,6 +3321,23 @@ class ArgsBinderTest {
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr("stringIntentUriOrDefault", "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr("stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey")
 
+        //Activity Uri Intent
+        private val byteUriIntentOrDefault by bindByteUriIntentArgOr("byteUriIntentOrDefault", 0.toByte())
+        private val shortUriIntentOrDefault by bindShortUriIntentArgOr("shortUriIntentOrDefault", 0.toShort())
+        private val intUriIntentOrDefault by bindIntUriIntentArgOr("intUriIntentOrDefault", 0)
+        private val longUriIntentOrDefault by bindLongUriIntentArgOr("longUriIntentOrDefault", 0L)
+        private val floatUriIntentOrDefault by bindFloatUriIntentArgOr("floatUriIntentOrDefault", 0f)
+        private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr("doubleUriIntentOrDefault", 0.toDouble())
+        private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr("booleanUriIntentOrDefault", false)
+
+        private val stringUriIntentRequired by bindStringUriIntentArg("stringUriIntentRequired")
+        private val stringUriIntentOptional by bindStringUriIntentArgOrNull("stringUriIntentOptional")
+        private val stringUriIntentOrDefault by bindStringIntentUriArgOr("stringUriIntentOrDefault", "default")
+        private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr("stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey")
+
+        private val stringUriIntentOptionalErrKey by bindStringUriIntentArgOrNull("keyNotExist")
+        private val stringIntentUriOptionalErrKey by bindStringIntentUriArgOrNull("keyNotExist")
+
         companion object {
 
             fun createIntentWithExtras(context: Context) = Intent(context, TestOnlyIntentNoUriActivity::class.java).apply {
@@ -2952,10 +3352,21 @@ class ArgsBinderTest {
                 putExtra("floatIntentUriOrDefault", -5f)
                 putExtra("doubleIntentUriOrDefault", (-6).toDouble())
                 putExtra("booleanIntentUriOrDefault", true)
-
                 putExtra("stringIntentUriRequired", "stringIntentRequired")
                 putExtra("stringIntentUriOptional", "stringIntentOptional")
                 putExtra("stringIntentUriOrDefault", "stringIntentOrDefault")
+
+                //Activity Uri Intent
+                putExtra("byteUriIntentOrDefault", (-11).toByte())
+                putExtra("shortUriIntentOrDefault", (-12).toShort())
+                putExtra("intUriIntentOrDefault", -13)
+                putExtra("longUriIntentOrDefault", -14L)
+                putExtra("floatUriIntentOrDefault", -15f)
+                putExtra("doubleUriIntentOrDefault", (-16).toDouble())
+                putExtra("booleanUriIntentOrDefault", true)
+                putExtra("stringUriIntentRequired", "stringUriIntentRequired")
+                putExtra("stringUriIntentOptional", "stringUriIntentOptional")
+                putExtra("stringUriIntentOrDefault", "stringUriIntentOrDefault")
             }
 
         }
@@ -2968,12 +3379,28 @@ class ArgsBinderTest {
             Assert.assertTrue(floatIntentUriOrDefault == (-5).toFloat())
             Assert.assertTrue(doubleIntentUriOrDefault == (-6).toDouble())
             Assert.assertTrue(booleanIntentUriOrDefault)
-
             Assert.assertTrue(stringIntentUriRequired == "stringIntentRequired")
             Assert.assertTrue(stringIntentUriOptional?.run { this == "stringIntentOptional" }
                     ?: false)
             Assert.assertTrue(stringIntentUriOrDefault == "stringIntentOrDefault")
             Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+
+            //Activity Uri Intent
+            Assert.assertTrue(byteUriIntentOrDefault == (-11).toByte())
+            Assert.assertTrue(shortUriIntentOrDefault == (-12).toShort())
+            Assert.assertTrue(intUriIntentOrDefault == -13)
+            Assert.assertTrue(longUriIntentOrDefault == -14L)
+            Assert.assertTrue(floatUriIntentOrDefault == (-15).toFloat())
+            Assert.assertTrue(doubleUriIntentOrDefault == (-16).toDouble())
+            Assert.assertTrue(booleanUriIntentOrDefault)
+            Assert.assertTrue(stringUriIntentRequired == "stringUriIntentRequired")
+            Assert.assertTrue(stringUriIntentOptional?.run { this == "stringUriIntentOptional" }
+                    ?: false)
+            Assert.assertTrue(stringUriIntentOrDefault == "stringUriIntentOrDefault")
+            Assert.assertTrue(stringUriIntentOrDefaultErrKey == "stringUriIntentOrDefaultErrKey")
+
+            Assert.assertNull(stringUriIntentOptionalErrKey)
+            Assert.assertNull(stringIntentUriOptionalErrKey)
         }
 
     }
@@ -2993,6 +3420,23 @@ class ArgsBinderTest {
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr("stringIntentUriOrDefault", "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr("stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey")
 
+        //Activity Uri Intent
+        private val byteUriIntentOrDefault by bindByteUriIntentArgOr("byteUriIntentOrDefault", 0.toByte())
+        private val shortUriIntentOrDefault by bindShortUriIntentArgOr("shortUriIntentOrDefault", 0.toShort())
+        private val intUriIntentOrDefault by bindIntUriIntentArgOr("intUriIntentOrDefault", 0)
+        private val longUriIntentOrDefault by bindLongUriIntentArgOr("longUriIntentOrDefault", 0L)
+        private val floatUriIntentOrDefault by bindFloatUriIntentArgOr("floatUriIntentOrDefault", 0f)
+        private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr("doubleUriIntentOrDefault", 0.toDouble())
+        private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr("booleanUriIntentOrDefault", false)
+
+        private val stringUriIntentRequired by bindStringUriIntentArg("stringUriIntentRequired")
+        private val stringUriIntentOptional by bindStringUriIntentArgOrNull("stringUriIntentOptional")
+        private val stringUriIntentOrDefault by bindStringIntentUriArgOr("stringUriIntentOrDefault", "default")
+        private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr("stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey")
+
+        private val stringUriIntentOptionalErrKey by bindStringUriIntentArgOrNull("keyNotExist")
+        private val stringIntentUriOptionalErrKey by bindStringIntentUriArgOrNull("keyNotExist")
+
         companion object {
 
             private val params = StringBuilder()
@@ -3007,6 +3451,18 @@ class ArgsBinderTest {
                     .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
                     .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
                     .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+
+                    //Activity Uri Intent
+                    .append("&byteUriIntentOrDefault=").append(11.toByte())
+                    .append("&shortUriIntentOrDefault=").append(12.toShort())
+                    .append("&intUriIntentOrDefault=").append(13)
+                    .append("&longUriIntentOrDefault=").append(14L)
+                    .append("&floatUriIntentOrDefault=").append(15.toFloat())
+                    .append("&doubleUriIntentOrDefault=").append(16.toDouble())
+                    .append("&booleanUriIntentOrDefault=").append(true)
+                    .append("&stringUriIntentRequired=").append("stringUriIntentRequired")
+                    .append("&stringUriIntentOptional=").append("stringUriIntentOptional")
+                    .append("&stringUriIntentOrDefault=").append("stringUriIntentOrDefault")
 
             private val uri = Uri.parse("https://github.com/panpf/androidx/uri/intent?$params")
 
@@ -3026,6 +3482,18 @@ class ArgsBinderTest {
                 putExtra("stringIntentUriRequired", "stringIntentRequired")
                 putExtra("stringIntentUriOptional", "stringIntentOptional")
                 putExtra("stringIntentUriOrDefault", "stringIntentOrDefault")
+
+                //Activity Uri Intent
+                putExtra("byteUriIntentOrDefault", (-11).toByte())
+                putExtra("shortUriIntentOrDefault", (-12).toShort())
+                putExtra("intUriIntentOrDefault", -13)
+                putExtra("longUriIntentOrDefault", -14L)
+                putExtra("floatUriIntentOrDefault", -15f)
+                putExtra("doubleUriIntentOrDefault", (-16).toDouble())
+                putExtra("booleanUriIntentOrDefault", true)
+                putExtra("stringUriIntentRequired", "stringUriIntentRequired")
+                putExtra("stringUriIntentOptional", "stringUriIntentOptional")
+                putExtra("stringUriIntentOrDefault", "stringUriIntentOrDefault")
             }
 
         }
@@ -3044,6 +3512,23 @@ class ArgsBinderTest {
                     ?: false)
             Assert.assertTrue(stringIntentUriOrDefault == "stringIntentOrDefault")
             Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+
+            //Activity Uri Intent
+            Assert.assertTrue(byteUriIntentOrDefault == 11.toByte())
+            Assert.assertTrue(shortUriIntentOrDefault == 12.toShort())
+            Assert.assertTrue(intUriIntentOrDefault == 13)
+            Assert.assertTrue(longUriIntentOrDefault == 14L)
+            Assert.assertTrue(floatUriIntentOrDefault == 15.toFloat())
+            Assert.assertTrue(doubleUriIntentOrDefault == 16.toDouble())
+            Assert.assertTrue(booleanUriIntentOrDefault)
+            Assert.assertTrue(stringUriIntentRequired == "stringUriIntentRequired")
+            Assert.assertTrue(stringUriIntentOptional?.run { this == "stringUriIntentOptional" }
+                    ?: false)
+            Assert.assertTrue(stringUriIntentOrDefault == "stringUriIntentOrDefault")
+            Assert.assertTrue(stringUriIntentOrDefaultErrKey == "stringUriIntentOrDefaultErrKey")
+
+            Assert.assertNull(stringUriIntentOptionalErrKey)
+            Assert.assertNull(stringIntentUriOptionalErrKey)
         }
 
     }
@@ -3059,9 +3544,24 @@ class ArgsBinderTest {
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr("booleanIntentUriOrDefault", false)
 
         //private val stringIntentUriRequired by bindStringIntentUriArg("stringIntentUriRequired")
-//        private val stringIntentUriOptional by bindStringIntentUriArgOrNull("stringIntentUriOptional")
+        private val stringIntentUriOptional by bindStringIntentUriArgOrNull("stringIntentUriOptional")
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr("stringIntentUriOrDefault", "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr("stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey")
+
+        //Activity Uri Intent
+        private val byteUriIntentOrDefault by bindByteUriIntentArgOr("byteUriIntentOrDefault", 0.toByte())
+        private val shortUriIntentOrDefault by bindShortUriIntentArgOr("shortUriIntentOrDefault", 0.toShort())
+        private val intUriIntentOrDefault by bindIntUriIntentArgOr("intUriIntentOrDefault", 0)
+        private val longUriIntentOrDefault by bindLongUriIntentArgOr("longUriIntentOrDefault", 0L)
+        private val floatUriIntentOrDefault by bindFloatUriIntentArgOr("floatUriIntentOrDefault", 0f)
+        private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr("doubleUriIntentOrDefault", 0.toDouble())
+        private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr("booleanUriIntentOrDefault", false)
+
+        //        private val stringUriIntentRequired by bindStringUriIntentArg("stringUriIntentRequired")
+        private val stringUriIntentOptional by bindStringUriIntentArgOrNull("stringUriIntentOptional")
+        private val stringUriIntentOrDefault by bindStringIntentUriArgOr("stringUriIntentOrDefault", "default")
+        private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr("stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey")
+
 
         companion object {
 
@@ -3080,9 +3580,22 @@ class ArgsBinderTest {
             Assert.assertTrue(doubleIntentUriOrDefault == 0.toDouble())
             Assert.assertTrue(!booleanIntentUriOrDefault)
 
-//            Assert.assertTrue(stringIntentUriOptional == null)
+            Assert.assertNull(stringIntentUriOptional)
             Assert.assertTrue(stringIntentUriOrDefault == "default")
             Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+
+            //Activity Uri Intent
+            Assert.assertTrue(byteUriIntentOrDefault == 0.toByte())
+            Assert.assertTrue(shortUriIntentOrDefault == 0.toShort())
+            Assert.assertTrue(intUriIntentOrDefault == 0)
+            Assert.assertTrue(longUriIntentOrDefault == 0L)
+            Assert.assertTrue(floatUriIntentOrDefault == 0f)
+            Assert.assertTrue(doubleUriIntentOrDefault == 0.toDouble())
+            Assert.assertTrue(!booleanUriIntentOrDefault)
+
+            Assert.assertNull(stringUriIntentOptional)
+            Assert.assertTrue(stringUriIntentOrDefault == "default")
+            Assert.assertTrue(stringUriIntentOrDefaultErrKey == "stringUriIntentOrDefaultErrKey")
         }
 
     }
@@ -3102,6 +3615,23 @@ class ArgsBinderTest {
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
 
+        //Activity Uri Intent
+        private val byteUriIntentOrDefault by bindByteUriIntentArgOr(R.string.byte_uri_intent_or_default, 0.toByte())
+        private val shortUriIntentOrDefault by bindShortUriIntentArgOr(R.string.short_uri_intent_or_default, 0.toShort())
+        private val intUriIntentOrDefault by bindIntUriIntentArgOr(R.string.int_uri_intent_or_default, 0)
+        private val longUriIntentOrDefault by bindLongUriIntentArgOr(R.string.long_uri_intent_or_default, 0L)
+        private val floatUriIntentOrDefault by bindFloatUriIntentArgOr(R.string.float_uri_intent_or_default, 0f)
+        private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr(R.string.double_uri_intent_or_default, 0.toDouble())
+        private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr(R.string.boolean_uri_intent_or_default, false)
+
+        private val stringUriIntentRequired by bindStringUriIntentArg(R.string.string_uri_intent_required)
+        private val stringUriIntentOptional by bindStringUriIntentArgOrNull(R.string.string_uri_intent_optional)
+        private val stringUriIntentOrDefault by bindStringUriIntentArgOr(R.string.string_uri_intent_or_default, "default")
+        private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr(R.string.not_exist_key, "stringUriIntentOrDefaultErrKey")
+
+        private val stringUriIntentOptionalErrKey by bindStringUriIntentArgOrNull(R.string.not_exist_key)
+        private val stringIntentUriOptionalErrKey by bindStringIntentUriArgOrNull(R.string.not_exist_key)
+
         companion object {
             private val params = StringBuilder()
                     .append("byteIntentUriOrDefault=").append(1.toByte())
@@ -3111,10 +3641,21 @@ class ArgsBinderTest {
                     .append("&floatIntentUriOrDefault=").append(5.toFloat())
                     .append("&doubleIntentUriOrDefault=").append(6.toDouble())
                     .append("&booleanIntentUriOrDefault=").append(true)
-
                     .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
                     .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
                     .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+
+                    //Activity Uri Intent
+                    .append("&byteUriIntentOrDefault=").append(11.toByte())
+                    .append("&shortUriIntentOrDefault=").append(12.toShort())
+                    .append("&intUriIntentOrDefault=").append(13)
+                    .append("&longUriIntentOrDefault=").append(14L)
+                    .append("&floatUriIntentOrDefault=").append(15.toFloat())
+                    .append("&doubleUriIntentOrDefault=").append(16.toDouble())
+                    .append("&booleanUriIntentOrDefault=").append(true)
+                    .append("&stringUriIntentRequired=").append("stringUriIntentRequired")
+                    .append("&stringUriIntentOptional=").append("stringUriIntentOptional")
+                    .append("&stringUriIntentOrDefault=").append("stringUriIntentOrDefault")
 
             private val uri = Uri.parse("https://github.com/panpf/androidx/res/uri?$params")
 
@@ -3136,6 +3677,24 @@ class ArgsBinderTest {
                     ?: false)
             Assert.assertTrue(stringIntentUriOrDefault == "stringIntentUriOrDefault")
             Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+
+            //Activity Uri Intent
+            Assert.assertTrue(byteUriIntentOrDefault == 11.toByte())
+            Assert.assertTrue(shortUriIntentOrDefault == 12.toShort())
+            Assert.assertTrue(intUriIntentOrDefault == 13)
+            Assert.assertTrue(longUriIntentOrDefault == 14L)
+            Assert.assertTrue(floatUriIntentOrDefault == 15.toFloat())
+            Assert.assertTrue(doubleUriIntentOrDefault == 16.toDouble())
+            Assert.assertTrue(booleanUriIntentOrDefault)
+            Assert.assertTrue(stringUriIntentRequired == "stringUriIntentRequired")
+            Assert.assertTrue(stringUriIntentOptional?.run { this == "stringUriIntentOptional" }
+                    ?: false)
+            Assert.assertTrue(stringUriIntentOrDefault == "stringUriIntentOrDefault")
+            Assert.assertTrue(stringUriIntentOrDefaultErrKey == "stringUriIntentOrDefaultErrKey")
+
+            Assert.assertNull(stringUriIntentOptionalErrKey)
+            Assert.assertNull(stringIntentUriOptionalErrKey)
+
         }
 
     }
@@ -3155,6 +3714,23 @@ class ArgsBinderTest {
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
 
+        //Activity Uri Intent
+        private val byteUriIntentOrDefault by bindByteUriIntentArgOr(R.string.byte_uri_intent_or_default, 0.toByte())
+        private val shortUriIntentOrDefault by bindShortUriIntentArgOr(R.string.short_uri_intent_or_default, 0.toShort())
+        private val intUriIntentOrDefault by bindIntUriIntentArgOr(R.string.int_uri_intent_or_default, 0)
+        private val longUriIntentOrDefault by bindLongUriIntentArgOr(R.string.long_uri_intent_or_default, 0L)
+        private val floatUriIntentOrDefault by bindFloatUriIntentArgOr(R.string.float_uri_intent_or_default, 0f)
+        private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr(R.string.double_uri_intent_or_default, 0.toDouble())
+        private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr(R.string.boolean_uri_intent_or_default, false)
+
+        private val stringUriIntentRequired by bindStringUriIntentArg(R.string.string_uri_intent_required)
+        private val stringUriIntentOptional by bindStringUriIntentArgOrNull(R.string.string_uri_intent_optional)
+        private val stringUriIntentOrDefault by bindStringUriIntentArgOr(R.string.string_uri_intent_or_default, "default")
+        private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr(R.string.not_exist_key, "stringUriIntentOrDefaultErrKey")
+
+        private val stringUriIntentOptionalErrKey by bindStringUriIntentArgOrNull(R.string.not_exist_key)
+        private val stringIntentUriOptionalErrKey by bindStringIntentUriArgOrNull(R.string.not_exist_key)
+
         companion object {
 
             fun createIntentWithExtras(context: Context) = Intent(context, ResTestOnlyIntentNoUriActivity::class.java).apply {
@@ -3169,10 +3745,20 @@ class ArgsBinderTest {
                 putExtra(context.getString(R.string.float_intent_uri_or_default), -5f)
                 putExtra(context.getString(R.string.double_intent_uri_or_default), (-6).toDouble())
                 putExtra(context.getString(R.string.boolean_intent_uri_or_default), true)
-
                 putExtra(context.getString(R.string.string_intent_uri_required), "stringIntentRequired")
                 putExtra(context.getString(R.string.string_intent_uri_optional), "stringIntentOptional")
                 putExtra(context.getString(R.string.string_intent_uri_or_default), "stringIntentOrDefault")
+
+                putExtra(context.getString(R.string.byte_uri_intent_or_default), (-11).toByte())
+                putExtra(context.getString(R.string.short_uri_intent_or_default), (-12).toShort())
+                putExtra(context.getString(R.string.int_uri_intent_or_default), -13)
+                putExtra(context.getString(R.string.long_uri_intent_or_default), -14L)
+                putExtra(context.getString(R.string.float_uri_intent_or_default), -15f)
+                putExtra(context.getString(R.string.double_uri_intent_or_default), (-16).toDouble())
+                putExtra(context.getString(R.string.boolean_uri_intent_or_default), true)
+                putExtra(context.getString(R.string.string_uri_intent_required), "stringUriIntentRequired")
+                putExtra(context.getString(R.string.string_uri_intent_optional), "stringUriIntentOptional")
+                putExtra(context.getString(R.string.string_uri_intent_or_default), "stringUriIntentOrDefault")
             }
 
         }
@@ -3185,12 +3771,28 @@ class ArgsBinderTest {
             Assert.assertTrue(floatIntentUriOrDefault == (-5).toFloat())
             Assert.assertTrue(doubleIntentUriOrDefault == (-6).toDouble())
             Assert.assertTrue(booleanIntentUriOrDefault)
-
             Assert.assertTrue(stringIntentUriRequired == "stringIntentRequired")
             Assert.assertTrue(stringIntentUriOptional?.run { this == "stringIntentOptional" }
                     ?: false)
             Assert.assertTrue(stringIntentUriOrDefault == "stringIntentOrDefault")
             Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+
+            //Activity Uri Intent
+            Assert.assertTrue(byteUriIntentOrDefault == (-11).toByte())
+            Assert.assertTrue(shortUriIntentOrDefault == (-12).toShort())
+            Assert.assertTrue(intUriIntentOrDefault == -13)
+            Assert.assertTrue(longUriIntentOrDefault == -14L)
+            Assert.assertTrue(floatUriIntentOrDefault == (-15).toFloat())
+            Assert.assertTrue(doubleUriIntentOrDefault == (-16).toDouble())
+            Assert.assertTrue(booleanUriIntentOrDefault)
+            Assert.assertTrue(stringUriIntentRequired == "stringUriIntentRequired")
+            Assert.assertTrue(stringUriIntentOptional?.run { this == "stringUriIntentOptional" }
+                    ?: false)
+            Assert.assertTrue(stringUriIntentOrDefault == "stringUriIntentOrDefault")
+            Assert.assertTrue(stringUriIntentOrDefaultErrKey == "stringUriIntentOrDefaultErrKey")
+
+            Assert.assertNull(stringUriIntentOptionalErrKey)
+            Assert.assertNull(stringIntentUriOptionalErrKey)
         }
 
     }
@@ -3210,6 +3812,23 @@ class ArgsBinderTest {
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
 
+        //Activity Uri Intent
+        private val byteUriIntentOrDefault by bindByteUriIntentArgOr(R.string.byte_uri_intent_or_default, 0.toByte())
+        private val shortUriIntentOrDefault by bindShortUriIntentArgOr(R.string.short_uri_intent_or_default, 0.toShort())
+        private val intUriIntentOrDefault by bindIntUriIntentArgOr(R.string.int_uri_intent_or_default, 0)
+        private val longUriIntentOrDefault by bindLongUriIntentArgOr(R.string.long_uri_intent_or_default, 0L)
+        private val floatUriIntentOrDefault by bindFloatUriIntentArgOr(R.string.float_uri_intent_or_default, 0f)
+        private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr(R.string.double_uri_intent_or_default, 0.toDouble())
+        private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr(R.string.boolean_uri_intent_or_default, false)
+
+        private val stringUriIntentRequired by bindStringUriIntentArg(R.string.string_uri_intent_required)
+        private val stringUriIntentOptional by bindStringUriIntentArgOrNull(R.string.string_uri_intent_optional)
+        private val stringUriIntentOrDefault by bindStringUriIntentArgOr(R.string.string_uri_intent_or_default, "default")
+        private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr(R.string.not_exist_key, "stringUriIntentOrDefaultErrKey")
+
+        private val stringUriIntentOptionalErrKey by bindStringUriIntentArgOrNull(R.string.not_exist_key)
+        private val stringIntentUriOptionalErrKey by bindStringIntentUriArgOrNull(R.string.not_exist_key)
+
         companion object {
 
             private val params = StringBuilder()
@@ -3220,10 +3839,21 @@ class ArgsBinderTest {
                     .append("&floatIntentUriOrDefault=").append(5.toFloat())
                     .append("&doubleIntentUriOrDefault=").append(6.toDouble())
                     .append("&booleanIntentUriOrDefault=").append(true)
-
                     .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
                     .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
                     .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+
+                    //Activity Uri Intent
+                    .append("&byteUriIntentOrDefault=").append(11.toByte())
+                    .append("&shortUriIntentOrDefault=").append(12.toShort())
+                    .append("&intUriIntentOrDefault=").append(13)
+                    .append("&longUriIntentOrDefault=").append(14L)
+                    .append("&floatUriIntentOrDefault=").append(15.toFloat())
+                    .append("&doubleUriIntentOrDefault=").append(16.toDouble())
+                    .append("&booleanUriIntentOrDefault=").append(true)
+                    .append("&stringUriIntentRequired=").append("stringUriIntentRequired")
+                    .append("&stringUriIntentOptional=").append("stringUriIntentOptional")
+                    .append("&stringUriIntentOrDefault=").append("stringUriIntentOrDefault")
 
             private val uri = Uri.parse("https://github.com/panpf/androidx/res/uri/intent?$params")
 
@@ -3239,10 +3869,20 @@ class ArgsBinderTest {
                 putExtra(context.getString(R.string.float_intent_uri_or_default), -5f)
                 putExtra(context.getString(R.string.double_intent_uri_or_default), (-6).toDouble())
                 putExtra(context.getString(R.string.boolean_intent_uri_or_default), true)
-
                 putExtra(context.getString(R.string.string_intent_uri_required), "stringIntentRequired")
                 putExtra(context.getString(R.string.string_intent_uri_optional), "stringIntentOptional")
                 putExtra(context.getString(R.string.string_intent_uri_or_default), "stringIntentOrDefault")
+
+                putExtra(context.getString(R.string.byte_uri_intent_or_default), (-11).toByte())
+                putExtra(context.getString(R.string.short_uri_intent_or_default), (-12).toShort())
+                putExtra(context.getString(R.string.int_uri_intent_or_default), -13)
+                putExtra(context.getString(R.string.long_uri_intent_or_default), -14L)
+                putExtra(context.getString(R.string.float_uri_intent_or_default), -15f)
+                putExtra(context.getString(R.string.double_uri_intent_or_default), (-16).toDouble())
+                putExtra(context.getString(R.string.boolean_uri_intent_or_default), true)
+                putExtra(context.getString(R.string.string_uri_intent_required), "stringUriIntentRequired")
+                putExtra(context.getString(R.string.string_uri_intent_optional), "stringUriIntentOptional")
+                putExtra(context.getString(R.string.string_uri_intent_or_default), "stringUriIntentOrDefault")
             }
 
         }
@@ -3261,6 +3901,23 @@ class ArgsBinderTest {
                     ?: false)
             Assert.assertTrue(stringIntentUriOrDefault == "stringIntentOrDefault")
             Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+
+            //Activity Uri Intent
+            Assert.assertTrue(byteUriIntentOrDefault == 11.toByte())
+            Assert.assertTrue(shortUriIntentOrDefault == 12.toShort())
+            Assert.assertTrue(intUriIntentOrDefault == 13)
+            Assert.assertTrue(longUriIntentOrDefault == 14L)
+            Assert.assertTrue(floatUriIntentOrDefault == 15.toFloat())
+            Assert.assertTrue(doubleUriIntentOrDefault == 16.toDouble())
+            Assert.assertTrue(booleanUriIntentOrDefault)
+            Assert.assertTrue(stringUriIntentRequired == "stringUriIntentRequired")
+            Assert.assertTrue(stringUriIntentOptional?.run { this == "stringUriIntentOptional" }
+                    ?: false)
+            Assert.assertTrue(stringUriIntentOrDefault == "stringUriIntentOrDefault")
+            Assert.assertTrue(stringUriIntentOrDefaultErrKey == "stringUriIntentOrDefaultErrKey")
+
+            Assert.assertNull(stringUriIntentOptionalErrKey)
+            Assert.assertNull(stringIntentUriOptionalErrKey)
         }
 
     }
@@ -3275,10 +3932,24 @@ class ArgsBinderTest {
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr(R.string.double_intent_uri_or_default, 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr(R.string.boolean_intent_uri_or_default, false)
 
-        //        private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
-//        private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
+        //                private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
+        private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
+
+        //Activity Uri Intent
+        private val byteUriIntentOrDefault by bindByteUriIntentArgOr(R.string.byte_uri_intent_or_default, 0.toByte())
+        private val shortUriIntentOrDefault by bindShortUriIntentArgOr(R.string.short_uri_intent_or_default, 0.toShort())
+        private val intUriIntentOrDefault by bindIntUriIntentArgOr(R.string.int_uri_intent_or_default, 0)
+        private val longUriIntentOrDefault by bindLongUriIntentArgOr(R.string.long_uri_intent_or_default, 0L)
+        private val floatUriIntentOrDefault by bindFloatUriIntentArgOr(R.string.float_uri_intent_or_default, 0f)
+        private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr(R.string.double_uri_intent_or_default, 0.toDouble())
+        private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr(R.string.boolean_uri_intent_or_default, false)
+
+        //        private val stringUriIntentRequired by bindStringIntentUriArg(R.string.string_uri_intent_required)
+        private val stringUriIntentOptional by bindStringUriIntentArgOrNull(R.string.string_uri_intent_optional)
+        private val stringUriIntentOrDefault by bindStringUriIntentArgOr(R.string.string_uri_intent_or_default, "default")
+        private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr(R.string.not_exist_key, "stringUriIntentOrDefaultErrKey")
 
         companion object {
 
@@ -3296,14 +3967,24 @@ class ArgsBinderTest {
             Assert.assertTrue(floatIntentUriOrDefault == 0f)
             Assert.assertTrue(doubleIntentUriOrDefault == 0.toDouble())
             Assert.assertTrue(!booleanIntentUriOrDefault)
-
-//            Assert.assertTrue(stringIntentUriOptional == null)
+            Assert.assertNull(stringIntentUriOptional)
             Assert.assertTrue(stringIntentUriOrDefault == "default")
             Assert.assertTrue(stringIntentUriOrDefaultErrKey == "stringIntentUriOrDefaultErrKey")
+
+            //Activity Uri Intent
+            Assert.assertTrue(byteUriIntentOrDefault == 0.toByte())
+            Assert.assertTrue(shortUriIntentOrDefault == 0.toShort())
+            Assert.assertTrue(intUriIntentOrDefault == 0)
+            Assert.assertTrue(longUriIntentOrDefault == 0L)
+            Assert.assertTrue(floatUriIntentOrDefault == 0f)
+            Assert.assertTrue(doubleUriIntentOrDefault == 0.toDouble())
+            Assert.assertTrue(!booleanUriIntentOrDefault)
+
+            Assert.assertNull(stringUriIntentOptional)
+            Assert.assertTrue(stringUriIntentOrDefault == "default")
+            Assert.assertTrue(stringUriIntentOrDefaultErrKey == "stringUriIntentOrDefaultErrKey")
         }
-
     }
-
 
     @Parcelize
     data class TestParcelable(val tag: String) : Parcelable
