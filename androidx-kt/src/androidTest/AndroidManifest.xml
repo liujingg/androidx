@@ -105,6 +105,79 @@
         </activity>
         <activity android:name=".app.ArgsBinderTest$ResTestNoIntentUriActivity"/>
 
+        <activity android:name=".app.ArgsxTest$TestActivity"/>
+        <activity android:name=".app.ArgsxTest$ResTestActivity" />
+        <activity android:name=".app.ArgsxTest$NoExtraActivity" />
+        <activity android:name=".app.ArgsxTest$TestOnlyUriNoIntentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/uri"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".app.ArgsxTest$TestOnlyIntentNoUriActivity" />
+        <activity android:name=".app.ArgsxTest$TestBothIntentUriActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/uri/intent"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".app.ArgsxTest$TestNoIntentUriActivity" />
+        <activity android:name=".app.ArgsxTest$ResTestOnlyUriNoIntentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/res/uri"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".app.ArgsxTest$ResTestOnlyIntentNoUriActivity" />
+        <activity android:name=".app.ArgsxTest$ResTestBothIntentUriActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/res/uri/intent"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".app.ArgsxTest$ResTestNoIntentUriActivity" />
+        <activity android:name=".app.ArgsxTest$TestUriActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".app.ArgsxTest$TestUriActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".app.ArgsxTest$ResTestUriActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <data
+                    android:host="github.com"
+                    android:path="/panpf/androidx/res"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+
         <service android:name=".TestService" />
         <receiver android:name=".TestReceiver" />
         <provider
