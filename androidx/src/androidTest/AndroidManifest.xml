@@ -13,6 +13,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY"/>
 
     <permission android:name="me.panpf.androidx.tes.share" />
 
@@ -27,6 +29,7 @@
         <activity android:name=".content.PackageInfoxTest$TestActivity" />
         <activity android:name=".content.LifecycleBroadcastReceiverTest$TestFragmentActivity" />
         <activity android:name=".provider.SettingsxTest$RequestPermissionTestActivity" />
+        <activity android:name=".provider.SettingsxTest$RequestNotificationPolicyTestActivity" />
         <activity android:name=".util.DimenxTest$TestActivity" />
         <activity android:name=".util.WeakAsyncTaskTest$TestActivity" />
         <activity android:name=".view.DisplayxTest$TestActivity" />

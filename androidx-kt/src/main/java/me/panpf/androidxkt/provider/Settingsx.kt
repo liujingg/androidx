@@ -43,6 +43,8 @@ import me.panpf.androidx.provider.Settingsx
  */
 inline fun Context.canWrite(): Boolean = Settingsx.canWrite(this)
 
+inline fun Context.isNotificationPolicyAccessGranted(): Boolean = Settingsx.isNotificationPolicyAccessGranted(this)
+
 
 /**
  * Return true if screen brightness auto mode is on

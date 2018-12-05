@@ -63,8 +63,12 @@ class NetworkxTest {
         if (networkInfo != null && networkInfo.isConnected && networkInfo.type == ConnectivityManager.TYPE_WIFI) {
             Assert.assertTrue(context.isWifiNetworkActivated())
             if (context.isWifiNetworkEnabled() && context.setWifiNetworkEnabled(false)) {
-                Assert.assertFalse(context.isNetworkActivated())
-                context.setWifiNetworkEnabled(true)
+                Thread.sleep(1000)
+                try {
+                    Assert.assertFalse(context.isNetworkActivated())
+                } finally {
+                    context.setWifiNetworkEnabled(true)
+                }
             }
         } else {
             Assert.assertFalse(context.isWifiNetworkActivated())
@@ -160,7 +164,7 @@ class NetworkxTest {
     fun testGetTypeName() {
         val context = InstrumentationRegistry.getContext()
         if (context.isWifiNetworkActivated()) {
-            Assert.assertEquals("WI-FI", context.getNetworkTypeName())
+            Assert.assertEquals("WIFI", context.getNetworkTypeName())
         } else if (context.isMobileNetworkActivated()) {
             Assert.assertEquals("Mobile", context.getNetworkTypeName())
         } else if (context.isBluetoothNetworkActivated()) {
@@ -175,10 +179,11 @@ class NetworkxTest {
     @Test
     fun testGetSubTypeName() {
         val context = InstrumentationRegistry.getContext()
+        val subtypeName = context.getNetworkSubtypeName()
         if (context.isNetworkActivated()) {
-            Assert.assertNotNull(context.getNetworkSubtypeName())
+            Assert.assertNotNull(subtypeName)
         } else {
-            Assert.assertEquals("unknown", context.getNetworkSubtypeName())
+            Assert.assertTrue(subtypeName, "unknown" == subtypeName || "" == subtypeName)
         }
     }
 

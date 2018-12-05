@@ -36,6 +36,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import me.panpf.androidx.Androidx;
 import me.panpf.androidx.graphics.Bitmapx;
 import me.panpf.androidx.graphics.Colorx;
 import me.panpf.androidx.os.storage.Storagex;
@@ -175,7 +176,7 @@ public class BitmapxTest {
         try {
             Assert.assertEquals(100, bitmap.getWidth());
             Assert.assertEquals(200, bitmap.getHeight());
-            Assert.assertEquals(Bitmap.Config.ARGB_4444, bitmap.getConfig());
+            Assert.assertEquals(Androidx.isAtLeastK() ? Bitmap.Config.ARGB_8888 : Bitmap.Config.ARGB_4444, bitmap.getConfig());
             Assert.assertEquals(Colorx.FUCHSIA, bitmap.getPixel(0, 0));
         } finally {
             bitmap.recycle();

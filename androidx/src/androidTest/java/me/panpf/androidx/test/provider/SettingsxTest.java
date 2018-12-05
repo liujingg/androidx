@@ -52,6 +52,15 @@ public class SettingsxTest {
         return this.requestPermissionActivityRule;
     }
 
+    @NonNull
+    private final ActivityTestRule<RequestNotificationPolicyTestActivity> requestNotificationPolicyActivityRule = new ActivityTestRule<>(RequestNotificationPolicyTestActivity.class);
+
+    @Rule
+    @NonNull
+    public final ActivityTestRule getRequestNotificationPolicyActivityRule() {
+        return this.requestNotificationPolicyActivityRule;
+    }
+
     @Test
     public void testScreenBrightnessMode() {
         // todo 测试 23 以下的权限问题
@@ -136,6 +145,8 @@ public class SettingsxTest {
 
     @Test
     public void testAirplaneModeOn() {
+        if (Androidx.isAtLeast17()) return;
+
         Context context = InstrumentationRegistry.getContext();
         if (!Settingsx.canWrite(context)) {
             RequestPermissionTestActivity activity = requestPermissionActivityRule.getActivity();
@@ -212,16 +223,16 @@ public class SettingsxTest {
     @Test
     public void testRingVolume() {
         Context context = InstrumentationRegistry.getContext();
-        if (!Settingsx.canWrite(context)) {
-            RequestPermissionTestActivity activity = requestPermissionActivityRule.getActivity();
+        if (!Settingsx.isNotificationPolicyAccessGranted(context)) {
+            RequestNotificationPolicyTestActivity activity = requestNotificationPolicyActivityRule.getActivity();
             try {
                 activity.countDownLatch.await();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
-            if (!Settingsx.canWrite(context)) {
-                Assert.fail("No write settings permission");
+            if (!Settingsx.isNotificationPolicyAccessGranted(context)) {
+                Assert.fail("No NotificationPolicy access permission");
             }
         }
 
@@ -250,6 +261,54 @@ public class SettingsxTest {
                 startActivityForResult(intent, 101);
 
                 Toastx.showLong(this, "请允许修改系统设置并关闭此页面");
+                Androidx.getMainHandler().postDelayed(new FinishTask(new WeakReference<Activity>(this)), 10 * 1000);
+            } else {
+                finish();
+            }
+        }
+
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            finish();
+        }
+
+        @Override
+        protected void onDestroy() {
+            super.onDestroy();
+            countDownLatch.countDown();
+        }
+
+        private static class FinishTask implements Runnable {
+            private WeakReference<Activity> activityWeakReference;
+
+            FinishTask(WeakReference<Activity> activityWeakReference) {
+                this.activityWeakReference = activityWeakReference;
+            }
+
+            @Override
+            public void run() {
+                Activity activity = activityWeakReference.get();
+                if (activity != null) {
+                    activity.finish();
+                }
+            }
+        }
+    }
+
+    public static class RequestNotificationPolicyTestActivity extends Activity {
+
+        private CountDownLatch countDownLatch = new CountDownLatch(1);
+
+        @Override
+        protected void onCreate(@Nullable Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            if (!Settingsx.isNotificationPolicyAccessGranted(this)) {
+                Intent intent = new Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS);
+                startActivityForResult(intent, 1);
+
+                Toastx.showLong(this, "请允许修改请勿打扰状态并关闭此页面");
                 Androidx.getMainHandler().postDelayed(new FinishTask(new WeakReference<Activity>(this)), 10 * 1000);
             } else {
                 finish();

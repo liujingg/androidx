@@ -67,7 +67,7 @@ public class NetworkStateTest {
         Context context = InstrumentationRegistry.getContext();
         NetworkState networkState = NetworkState.get(context);
         NetworkInfo networkInfo = Contextx.connectivityManager(context).getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI && Contextx.connectivityManager(context).isActiveNetworkMetered()) {
+        if (networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI && !Contextx.connectivityManager(context).isActiveNetworkMetered()) {
             Assert.assertTrue(networkState.isNoMeteredWifiActivated());
         } else {
             Assert.assertFalse(networkState.isNoMeteredWifiActivated());
@@ -155,7 +155,7 @@ public class NetworkStateTest {
         Context context = InstrumentationRegistry.getContext();
         NetworkState networkState = NetworkState.get(context);
         if (networkState.isWifiActivated()) {
-            Assert.assertEquals("WI-FI", networkState.getTypeName());
+            Assert.assertEquals("WIFI", networkState.getTypeName());
         } else if (networkState.isMobileActivated()) {
             Assert.assertEquals("Mobile", networkState.getTypeName());
         } else if (networkState.isBluetoothActivated()) {

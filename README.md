@@ -10,8 +10,12 @@ Extensions to the Android standard library and support libraries and some basic 
 ### :warning: `Warning`
 `Currently in the development stage, some APIs have not been tested yet, please use them carefully`
 
-#### Child module
+### Child module
 * [androidx-kt-arch]: Kotlin extension to Android Architecture related libraries
+
+### Passed Test Device
+* Google Nexus 4;API 25/7.1.2;LineageOS/14.1-20180427-NIGHTLY-make
+* Lenovo K860;API 17/4.2.1
 
 ## Getting Started
 

@@ -17,6 +17,7 @@
 package me.panpf.androidxkt.test.util
 
 import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidx.Androidx
 import me.panpf.androidx.util.Jsonx
 import me.panpf.androidxkt.util.*
 import me.panpf.javaxkt.util.base64DecodeToString
@@ -324,15 +325,21 @@ class JsonxTest {
         val sourceArray = "[{\"age\":20,\"name\":\"David\"},{\"age\":21,\"name\":\"Kevin\"},{\"age\":22,\"name\":\"Ruth\"}]"
         val sourceObject = "{\"age\":20,\"name\":\"David\"}"
 
+        // 从 Android N 开始 JSONObject 内部实现由 HashMap 改为 LinkedHashMap，因此 json 字符串转为 JSONObject 后再转成字符串后由于顺序发生了变化导致内容不一样
         val sourceArrayFormatResultBase64 = "WwogICAgewogICAgICAgICJuYW1lIjoiRGF2aWQiLAogICAgICAgICJhZ2UiOjIwCiAgICB9LAog\nICAgewogICAgICAgICJuYW1lIjoiS2V2aW4iLAogICAgICAgICJhZ2UiOjIxCiAgICB9LAogICAg\newogICAgICAgICJuYW1lIjoiUnV0aCIsCiAgICAgICAgImFnZSI6MjIKICAgIH0KXQ==\n"
+        val sourceArrayFormatResultBase64AtLastN = "WwogICAgewogICAgICAgICJhZ2UiOjIwLAogICAgICAgICJuYW1lIjoiRGF2aWQiCiAgICB9LAog\nICAgewogICAgICAgICJhZ2UiOjIxLAogICAgICAgICJuYW1lIjoiS2V2aW4iCiAgICB9LAogICAg\newogICAgICAgICJhZ2UiOjIyLAogICAgICAgICJuYW1lIjoiUnV0aCIKICAgIH0KXQ==\n"
 
-        assertEquals(sourceArrayFormatResultBase64.base64DecodeToString(), sourceArray.formatJson())
-        assertEquals(sourceArrayFormatResultBase64.base64DecodeToString(), JSONArray(sourceArray).formatJson())
+        assertEquals((if (Androidx.isAtLeastN()) sourceArrayFormatResultBase64AtLastN else sourceArrayFormatResultBase64).base64DecodeToString(), sourceArray.formatJson())
+        assertEquals((if (Androidx.isAtLeastN()) sourceArrayFormatResultBase64AtLastN else sourceArrayFormatResultBase64).base64DecodeToString(), JSONArray(sourceArray).formatJson())
         assertEquals("[]", (null as JSONArray?).formatJson())
         assertEquals("[]", JSONArray().formatJson())
 
-        assertEquals("ewogICAgIm5hbWUiOiJEYXZpZCIsCiAgICAiYWdlIjoyMAp9\n".base64DecodeToString(), sourceObject.formatJson())
-        assertEquals("ewogICAgIm5hbWUiOiJEYXZpZCIsCiAgICAiYWdlIjoyMAp9\n".base64DecodeToString(), JSONObject(sourceObject).formatJson())
+        // 从 Android N 开始 JSONObject 内部实现由 HashMap 改为 LinkedHashMap，因此 json 字符串转为 JSONObject 后再转成字符串后由于顺序发生了变化导致内容不一样
+        val sourceObjectFromResultBase64 = "ewogICAgIm5hbWUiOiJEYXZpZCIsCiAgICAiYWdlIjoyMAp9\n"
+        val sourceObjectFromResultBase64AtLastN = "ewogICAgImFnZSI6MjAsCiAgICAibmFtZSI6IkRhdmlkIgp9\n"
+
+        assertEquals((if (Androidx.isAtLeastN()) sourceObjectFromResultBase64AtLastN else sourceObjectFromResultBase64).base64DecodeToString(), sourceObject.formatJson())
+        assertEquals((if (Androidx.isAtLeastN()) sourceObjectFromResultBase64AtLastN else sourceObjectFromResultBase64).base64DecodeToString(), JSONObject(sourceObject).formatJson())
         assertEquals("{}", (null as JSONObject?).formatJson())
         assertEquals("{}", (null as String?).formatJson())
         assertEquals("{}", "{}".formatJson())

@@ -54,7 +54,13 @@ class InputMethodxTest {
         val originEditText = activity.originFragmentEditTxt
 
         // show
-        if (activity.isOrientationPortrait()) Assert.assertFalse(activity.isSoftInputShowing())
+        if (activity.isOrientationPortrait()) {
+            if (activity.isSoftInputShowing()) {
+                runInUI { activity.hideSoftInput() }
+                Thread.sleep(500)
+                Assert.assertFalse(activity.isSoftInputShowing())
+            }
+        }
         Assert.assertEquals(0, Selection.getSelectionEnd(originEditText.text).toLong())
         runInUI { originEditText.showSoftInput() }
         Thread.sleep(500)
@@ -69,7 +75,13 @@ class InputMethodxTest {
         val supportEditText = activity.originFragmentEditTxt
 
         // show
-        if (activity.isOrientationPortrait()) Assert.assertFalse(activity.isSoftInputShowing())
+        if (activity.isOrientationPortrait()) {
+            if (activity.isSoftInputShowing()) {
+                runInUI { activity.hideSoftInput() }
+                Thread.sleep(500)
+                Assert.assertFalse(activity.isSoftInputShowing())
+            }
+        }
         Assert.assertEquals(0, Selection.getSelectionEnd(supportEditText.text).toLong())
         runInUI { supportEditText.delayShowSoftInput() }
         Thread.sleep(500)
@@ -100,7 +112,13 @@ class InputMethodxTest {
         val supportEditText = activity.supportFragmentEditTxt
 
         // show
-        if (activity.isOrientationPortrait()) Assert.assertFalse(activity.isSoftInputShowing())
+        if (activity.isOrientationPortrait()) {
+            if (activity.isSoftInputShowing()) {
+                runInUI { activity.hideSoftInput() }
+                Thread.sleep(500)
+                Assert.assertFalse(activity.isSoftInputShowing())
+            }
+        }
         runInUI { originEditText.showSoftInput() }
         Thread.sleep(500)
 
@@ -194,7 +212,7 @@ class InputMethodxTest {
 
     class EditOriginFragment : android.app.Fragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-            val editText = EditText(context)
+            val editText = EditText(activity)
             editText.setText("0123456789")
             return editText
         }
@@ -202,7 +220,7 @@ class InputMethodxTest {
 
     class EditSupportFragment : android.support.v4.app.Fragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-            val editText = EditText(context)
+            val editText = EditText(activity)
             editText.setText("0123456789")
             return editText
         }
