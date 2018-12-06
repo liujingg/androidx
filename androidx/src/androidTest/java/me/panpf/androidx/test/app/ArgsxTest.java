@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Binder;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcel;
@@ -552,45 +553,47 @@ public class ArgsxTest {
         SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefault", sparseArrayDefault);
         SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefaultErrKey", sparseArrayDefault);
 
-        IBinder binderRequired = Argsx.readBinderArg(activity, "binderRequired");
-        IBinder binderOptional = Argsx.readBinderArgOrNull(activity, "binderOptional");
-        IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, "binderOptionalErrKey");
-        IBinder binderOrDefault = Argsx.readBinderArgOr(activity, "binderOrDefault", new TestBinder(""));
-        IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, "binderOrDefaultErrKey", new TestBinder("binderOrDefaultErrKey"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            IBinder binderRequired = Argsx.readBinderArg(activity, "binderRequired");
+            IBinder binderOptional = Argsx.readBinderArgOrNull(activity, "binderOptional");
+            IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, "binderOptionalErrKey");
+            IBinder binderOrDefault = Argsx.readBinderArgOr(activity, "binderOrDefault", new TestBinder(""));
+            IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, "binderOrDefaultErrKey", new TestBinder("binderOrDefaultErrKey"));
 
-        Size sizeRequired = Argsx.readSizeArg(activity, "sizeRequired");
-        Size sizeOptional = Argsx.readSizeArgOrNull(activity, "sizeOptional");
-        Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, "sizeOptionalErrKey");
-        Size sizeOrDefault = Argsx.readSizeArgOr(activity, "sizeOrDefault", new Size(0, 0));
-        Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, "sizeOrDefaultErrKey", new Size(4, 4));
+            Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
+            Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
+            Assert.assertNull(binderOptionalErrKey);
+            Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
+            Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
+        }
 
-        SizeF sizeFRequired = Argsx.readSizeFArg(activity, "sizeFRequired");
-        SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, "sizeFOptional");
-        SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, "sizeFOptionalErrKey");
-        SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, "sizeFOrDefault", new SizeF(0f, 0f));
-        SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, "sizeFOrDefaultErrKey", new SizeF(4f, 4f));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Size sizeRequired = Argsx.readSizeArg(activity, "sizeRequired");
+            Size sizeOptional = Argsx.readSizeArgOrNull(activity, "sizeOptional");
+            Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, "sizeOptionalErrKey");
+            Size sizeOrDefault = Argsx.readSizeArgOr(activity, "sizeOrDefault", new Size(0, 0));
+            Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, "sizeOrDefaultErrKey", new Size(4, 4));
+
+            SizeF sizeFRequired = Argsx.readSizeFArg(activity, "sizeFRequired");
+            SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, "sizeFOptional");
+            SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, "sizeFOptionalErrKey");
+            SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, "sizeFOrDefault", new SizeF(0f, 0f));
+            SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, "sizeFOrDefaultErrKey", new SizeF(4f, 4f));
+
+            Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
+            Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
+            Assert.assertNull(sizeFOptionalErrKey);
+            Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
+            Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
+
+            Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
+            Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
+            Assert.assertNull(sizeOptionalErrKey);
+            Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
+            Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
+        }
 
         //test start
-
-        Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
-        Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
-        Assert.assertNull(sizeFOptionalErrKey);
-        Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
-        Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
-
-        Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
-        Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
-        Assert.assertNull(sizeOptionalErrKey);
-        Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
-        Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
-
-
-        Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
-        Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
-        Assert.assertNull(binderOptionalErrKey);
-        Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
-        Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
-
         Assert.assertTrue(sparseParcelableArrayRequired.get(-1).equals(new TestParcelable("-1")) && sparseParcelableArrayRequired.get(1).equals(new TestParcelable("1")));
         Assert.assertTrue(sparseParcelableArrayOptional.get(-2).equals(new TestParcelable("-2")) && sparseParcelableArrayOptional.get(2).equals(new TestParcelable("2")));
         Assert.assertNull(sparseParcelableArrayOptionalErrKey);
@@ -859,45 +862,49 @@ public class ArgsxTest {
         SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefault", sparseArrayDefault);
         SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefaultErrKey", sparseArrayDefault);
 
-        IBinder binderRequired = Argsx.readBinderArg(activity, "binderRequired");
-        IBinder binderOptional = Argsx.readBinderArgOrNull(activity, "binderOptional");
-        IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, "binderOptionalErrKey");
-        IBinder binderOrDefault = Argsx.readBinderArgOr(activity, "binderOrDefault", new TestBinder(""));
-        IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, "binderOrDefaultErrKey", new TestBinder("binderOrDefaultErrKey"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            IBinder binderRequired = Argsx.readBinderArg(activity, "binderRequired");
+            IBinder binderOptional = Argsx.readBinderArgOrNull(activity, "binderOptional");
+            IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, "binderOptionalErrKey");
+            IBinder binderOrDefault = Argsx.readBinderArgOr(activity, "binderOrDefault", new TestBinder(""));
+            IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, "binderOrDefaultErrKey", new TestBinder("binderOrDefaultErrKey"));
 
-        Size sizeRequired = Argsx.readSizeArg(activity, "sizeRequired");
-        Size sizeOptional = Argsx.readSizeArgOrNull(activity, "sizeOptional");
-        Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, "sizeOptionalErrKey");
-        Size sizeOrDefault = Argsx.readSizeArgOr(activity, "sizeOrDefault", new Size(0, 0));
-        Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, "sizeOrDefaultErrKey", new Size(4, 4));
+            Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
+            Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
+            Assert.assertNull(binderOptionalErrKey);
+            Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
+            Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
+        }
 
-        SizeF sizeFRequired = Argsx.readSizeFArg(activity, "sizeFRequired");
-        SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, "sizeFOptional");
-        SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, "sizeFOptionalErrKey");
-        SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, "sizeFOrDefault", new SizeF(0f, 0f));
-        SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, "sizeFOrDefaultErrKey", new SizeF(4f, 4f));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            Size sizeRequired = Argsx.readSizeArg(activity, "sizeRequired");
+            Size sizeOptional = Argsx.readSizeArgOrNull(activity, "sizeOptional");
+            Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, "sizeOptionalErrKey");
+            Size sizeOrDefault = Argsx.readSizeArgOr(activity, "sizeOrDefault", new Size(0, 0));
+            Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, "sizeOrDefaultErrKey", new Size(4, 4));
+
+            SizeF sizeFRequired = Argsx.readSizeFArg(activity, "sizeFRequired");
+            SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, "sizeFOptional");
+            SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, "sizeFOptionalErrKey");
+            SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, "sizeFOrDefault", new SizeF(0f, 0f));
+            SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, "sizeFOrDefaultErrKey", new SizeF(4f, 4f));
+
+
+            Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
+            Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
+            Assert.assertNull(sizeFOptionalErrKey);
+            Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
+            Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
+
+            Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
+            Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
+            Assert.assertNull(sizeOptionalErrKey);
+            Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
+            Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
+        }
+
 
         //test start
-
-        Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
-        Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
-        Assert.assertNull(sizeFOptionalErrKey);
-        Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
-        Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
-
-        Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
-        Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
-        Assert.assertNull(sizeOptionalErrKey);
-        Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
-        Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
-
-
-        Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
-        Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
-        Assert.assertNull(binderOptionalErrKey);
-        Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
-        Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
-
         Assert.assertTrue(sparseParcelableArrayRequired.get(-1).equals(new TestParcelable("-1")) && sparseParcelableArrayRequired.get(1).equals(new TestParcelable("1")));
         Assert.assertTrue(sparseParcelableArrayOptional.get(-2).equals(new TestParcelable("-2")) && sparseParcelableArrayOptional.get(2).equals(new TestParcelable("2")));
         Assert.assertNull(sparseParcelableArrayOptionalErrKey);
@@ -1439,44 +1446,48 @@ public class ArgsxTest {
         SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, R.string.sparse_parcelable_array_or_default, sparseArrayDefault);
         SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, R.string.not_exist_key, sparseArrayDefault);
 
-        IBinder binderRequired = Argsx.readBinderArg(activity, R.string.binder_required);
-        IBinder binderOptional = Argsx.readBinderArgOrNull(activity, R.string.binder_optional);
-        IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, R.string.not_exist_key);
-        IBinder binderOrDefault = Argsx.readBinderArgOr(activity, R.string.binder_or_default, new TestBinder(""));
-        IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, R.string.not_exist_key, new TestBinder("binderOrDefaultErrKey"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            IBinder binderRequired = Argsx.readBinderArg(activity, R.string.binder_required);
+            IBinder binderOptional = Argsx.readBinderArgOrNull(activity, R.string.binder_optional);
+            IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, R.string.not_exist_key);
+            IBinder binderOrDefault = Argsx.readBinderArgOr(activity, R.string.binder_or_default, new TestBinder(""));
+            IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, R.string.not_exist_key, new TestBinder("binderOrDefaultErrKey"));
 
-        Size sizeRequired = Argsx.readSizeArg(activity, R.string.size_required);
-        Size sizeOptional = Argsx.readSizeArgOrNull(activity, R.string.size_optional);
-        Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, R.string.not_exist_key);
-        Size sizeOrDefault = Argsx.readSizeArgOr(activity, R.string.size_or_default, new Size(0, 0));
-        Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, R.string.not_exist_key, new Size(4, 4));
+            Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
+            Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
+            Assert.assertNull(binderOptionalErrKey);
+            Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
+            Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
+        }
 
-        SizeF sizeFRequired = Argsx.readSizeFArg(activity, R.string.sizeF_required);
-        SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, R.string.sizeF_optional);
-        SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, R.string.not_exist_key);
-        SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, R.string.sizeF_or_default, new SizeF(0f, 0f));
-        SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, R.string.not_exist_key, new SizeF(4f, 4f));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Size sizeRequired = Argsx.readSizeArg(activity, R.string.size_required);
+            Size sizeOptional = Argsx.readSizeArgOrNull(activity, R.string.size_optional);
+            Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, R.string.not_exist_key);
+            Size sizeOrDefault = Argsx.readSizeArgOr(activity, R.string.size_or_default, new Size(0, 0));
+            Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, R.string.not_exist_key, new Size(4, 4));
+
+            SizeF sizeFRequired = Argsx.readSizeFArg(activity, R.string.sizeF_required);
+            SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, R.string.sizeF_optional);
+            SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, R.string.not_exist_key);
+            SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, R.string.sizeF_or_default, new SizeF(0f, 0f));
+            SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, R.string.not_exist_key, new SizeF(4f, 4f));
+
+            Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
+            Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
+            Assert.assertNull(sizeFOptionalErrKey);
+            Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
+            Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
+
+            Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
+            Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
+            Assert.assertNull(sizeOptionalErrKey);
+            Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
+            Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
+        }
+
 
         //test start
-
-        Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
-        Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
-        Assert.assertNull(sizeFOptionalErrKey);
-        Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
-        Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
-
-        Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
-        Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
-        Assert.assertNull(sizeOptionalErrKey);
-        Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
-        Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
-
-
-        Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
-        Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
-        Assert.assertNull(binderOptionalErrKey);
-        Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
-        Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
 
         Assert.assertTrue(sparseParcelableArrayRequired.get(-1).equals(new TestParcelable("-1")) && sparseParcelableArrayRequired.get(1).equals(new TestParcelable("1")));
         Assert.assertTrue(sparseParcelableArrayOptional.get(-2).equals(new TestParcelable("-2")) && sparseParcelableArrayOptional.get(2).equals(new TestParcelable("2")));
@@ -1745,44 +1756,47 @@ public class ArgsxTest {
         SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, R.string.sparse_parcelable_array_or_default, sparseArrayDefault);
         SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, R.string.not_exist_key, sparseArrayDefault);
 
-        IBinder binderRequired = Argsx.readBinderArg(activity, R.string.binder_required);
-        IBinder binderOptional = Argsx.readBinderArgOrNull(activity, R.string.binder_optional);
-        IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, R.string.not_exist_key);
-        IBinder binderOrDefault = Argsx.readBinderArgOr(activity, R.string.binder_or_default, new TestBinder(""));
-        IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, R.string.not_exist_key, new TestBinder("binderOrDefaultErrKey"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            IBinder binderRequired = Argsx.readBinderArg(activity, R.string.binder_required);
+            IBinder binderOptional = Argsx.readBinderArgOrNull(activity, R.string.binder_optional);
+            IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, R.string.not_exist_key);
+            IBinder binderOrDefault = Argsx.readBinderArgOr(activity, R.string.binder_or_default, new TestBinder(""));
+            IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, R.string.not_exist_key, new TestBinder("binderOrDefaultErrKey"));
 
-        Size sizeRequired = Argsx.readSizeArg(activity, R.string.size_required);
-        Size sizeOptional = Argsx.readSizeArgOrNull(activity, R.string.size_optional);
-        Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, R.string.not_exist_key);
-        Size sizeOrDefault = Argsx.readSizeArgOr(activity, R.string.size_or_default, new Size(0, 0));
-        Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, R.string.not_exist_key, new Size(4, 4));
+            Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
+            Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
+            Assert.assertNull(binderOptionalErrKey);
+            Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
+            Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
+        }
 
-        SizeF sizeFRequired = Argsx.readSizeFArg(activity, R.string.sizeF_required);
-        SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, R.string.sizeF_optional);
-        SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, R.string.not_exist_key);
-        SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, R.string.sizeF_or_default, new SizeF(0f, 0f));
-        SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, R.string.not_exist_key, new SizeF(4f, 4f));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Size sizeRequired = Argsx.readSizeArg(activity, R.string.size_required);
+            Size sizeOptional = Argsx.readSizeArgOrNull(activity, R.string.size_optional);
+            Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, R.string.not_exist_key);
+            Size sizeOrDefault = Argsx.readSizeArgOr(activity, R.string.size_or_default, new Size(0, 0));
+            Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, R.string.not_exist_key, new Size(4, 4));
+
+            SizeF sizeFRequired = Argsx.readSizeFArg(activity, R.string.sizeF_required);
+            SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, R.string.sizeF_optional);
+            SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, R.string.not_exist_key);
+            SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, R.string.sizeF_or_default, new SizeF(0f, 0f));
+            SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, R.string.not_exist_key, new SizeF(4f, 4f));
+
+            Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
+            Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
+            Assert.assertNull(sizeFOptionalErrKey);
+            Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
+            Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
+
+            Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
+            Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
+            Assert.assertNull(sizeOptionalErrKey);
+            Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
+            Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
+        }
 
         //test start
-
-        Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
-        Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
-        Assert.assertNull(sizeFOptionalErrKey);
-        Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
-        Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
-
-        Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
-        Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
-        Assert.assertNull(sizeOptionalErrKey);
-        Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
-        Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
-
-
-        Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
-        Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
-        Assert.assertNull(binderOptionalErrKey);
-        Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
-        Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
 
         Assert.assertTrue(sparseParcelableArrayRequired.get(-1).equals(new TestParcelable("-1")) && sparseParcelableArrayRequired.get(1).equals(new TestParcelable("1")));
         Assert.assertTrue(sparseParcelableArrayOptional.get(-2).equals(new TestParcelable("-2")) && sparseParcelableArrayOptional.get(2).equals(new TestParcelable("2")));
@@ -2722,17 +2736,21 @@ public class ArgsxTest {
             sparseParcelableArrayOrDefault.put(3, new TestParcelable("3"));
             args.putSparseParcelableArray("sparseParcelableArrayOrDefault", sparseParcelableArrayOrDefault);
 
-            args.putBinder("binderRequired", new TestBinder("binderRequired"));
-            args.putBinder("binderOptional", new TestBinder("binderOptional"));
-            args.putBinder("binderOrDefault", new TestBinder("binderOrDefault"));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                args.putBinder("binderRequired", new TestBinder("binderRequired"));
+                args.putBinder("binderOptional", new TestBinder("binderOptional"));
+                args.putBinder("binderOrDefault", new TestBinder("binderOrDefault"));
+            }
 
-            args.putSize("sizeRequired", new Size(1, 1));
-            args.putSize("sizeOptional", new Size(2, 2));
-            args.putSize("sizeOrDefault", new Size(3, 3));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                args.putSize("sizeRequired", new Size(1, 1));
+                args.putSize("sizeOptional", new Size(2, 2));
+                args.putSize("sizeOrDefault", new Size(3, 3));
 
-            args.putSizeF("sizeFRequired", new SizeF(1f, 1f));
-            args.putSizeF("sizeFOptional", new SizeF(2f, 2f));
-            args.putSizeF("sizeFOrDefault", new SizeF(3f, 3f));
+                args.putSizeF("sizeFRequired", new SizeF(1f, 1f));
+                args.putSizeF("sizeFOptional", new SizeF(2f, 2f));
+                args.putSizeF("sizeFOrDefault", new SizeF(3f, 3f));
+            }
 
             starter.putExtras(args);
 
@@ -2907,17 +2925,21 @@ public class ArgsxTest {
             sparseParcelableArrayOrDefault.put(3, new TestParcelable("3"));
             args.putSparseParcelableArray(context.getString(R.string.sparse_parcelable_array_or_default), sparseParcelableArrayOrDefault);
 
-            args.putBinder(context.getString(R.string.binder_required), new TestBinder("binderRequired"));
-            args.putBinder(context.getString(R.string.binder_optional), new TestBinder("binderOptional"));
-            args.putBinder(context.getString(R.string.binder_or_default), new TestBinder("binderOrDefault"));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                args.putBinder(context.getString(R.string.binder_required), new TestBinder("binderRequired"));
+                args.putBinder(context.getString(R.string.binder_optional), new TestBinder("binderOptional"));
+                args.putBinder(context.getString(R.string.binder_or_default), new TestBinder("binderOrDefault"));
+            }
 
-            args.putSize(context.getString(R.string.size_required), new Size(1, 1));
-            args.putSize(context.getString(R.string.size_optional), new Size(2, 2));
-            args.putSize(context.getString(R.string.size_or_default), new Size(3, 3));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                args.putSize(context.getString(R.string.size_required), new Size(1, 1));
+                args.putSize(context.getString(R.string.size_optional), new Size(2, 2));
+                args.putSize(context.getString(R.string.size_or_default), new Size(3, 3));
 
-            args.putSizeF(context.getString(R.string.sizeF_required), new SizeF(1f, 1f));
-            args.putSizeF(context.getString(R.string.sizeF_optional), new SizeF(2f, 2f));
-            args.putSizeF(context.getString(R.string.sizeF_or_default), new SizeF(3f, 3f));
+                args.putSizeF(context.getString(R.string.sizeF_required), new SizeF(1f, 1f));
+                args.putSizeF(context.getString(R.string.sizeF_optional), new SizeF(2f, 2f));
+                args.putSizeF(context.getString(R.string.sizeF_or_default), new SizeF(3f, 3f));
+            }
 
             starter.putExtras(args);
 

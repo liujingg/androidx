@@ -38,6 +38,10 @@
         <activity android:name=".widget.ToastxTest$TestActivity" />
         <activity android:name=".widget.ToastxTest$TestFragmentActivity" />
         <activity android:name=".app.ArgsBinderTest$TestNoExtrasActivity" />
+        <activity android:name=".app.ArgsBinderTest18$ResTestActivity18"/>
+        <activity android:name=".app.ArgsBinderTest18$TestActivity18"/>
+        <activity android:name=".app.ArgsBinderTest21$TestActivity21"/>
+        <activity android:name=".app.ArgsBinderTest21$ResTestActivity21"/>
 
         <activity android:name=".app.ArgsBinderTest$TestUriActivity">
 

@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Binder
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.test.InstrumentationRegistry
@@ -488,7 +489,7 @@ class ArgsxTest {
         val parcelableArrayOrDefault = activity.readParcelableArrayArgOr("parcelableArrayOrDefault", arrayOf())
         val parcelableArrayOrDefaultErrKey = activity.readParcelableArrayArgOr("parcelableArrayOrDefaultErrKey", arrayOf(TestParcelable("error"), TestParcelable("erk")))
         val parcelableArrayListRequired = activity.readParcelableArrayListArg<Parcelable>("parcelableArrayListRequired")
-        val parcelableArrayListOrDefault = activity.readParcelableArrayListArgOr("parcelableArrayListOrDefault",arrayListOf<Parcelable>(TestParcelable("list"), TestParcelable("default")))
+        val parcelableArrayListOrDefault = activity.readParcelableArrayListArgOr("parcelableArrayListOrDefault", arrayListOf<Parcelable>(TestParcelable("list"), TestParcelable("default")))
         val parcelableArrayListOrDefaultErrKey = activity.readParcelableArrayListArgOr("parcelableArrayListOrDefaultErrKey", arrayListOf<Parcelable>(TestParcelable("parcelableArrayListOrDefaultErrKey"), TestParcelable("errKey")))
         val parcelableArrayListOptional = activity.readParcelableArrayListArgOrNull<Parcelable>("parcelableArrayListOptional")
         val parcelableArrayListOptionalErrKey = activity.readParcelableArrayListArgOrNull<Parcelable>("parcelableArrayListOptionalErrKey")
@@ -516,45 +517,48 @@ class ArgsxTest {
         val sparseParcelableArrayOrDefault = activity.readSparseParcelableArrayArgOr("sparseParcelableArrayOrDefault", sparseArrayDefault)
         val sparseParcelableArrayOrDefaultErrKey = activity.readSparseParcelableArrayArgOr("sparseParcelableArrayOrDefaultErrKey", sparseArrayDefault)
 
-        val binderRequired = activity.readBinderArg("binderRequired")
-        val binderOptional = activity.readBinderArgOrNull("binderOptional")
-        val binderOptionalErrKey = activity.readBinderArgOrNull("binderOptionalErrKey")
-        val binderOrDefault = activity.readBinderArgOr("binderOrDefault", TestBinder(""))
-        val binderOrDefaultErrKey = activity.readBinderArgOr("binderOrDefaultErrKey", TestBinder("binderOrDefaultErrKey"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            val binderRequired = activity.readBinderArg("binderRequired")
+            val binderOptional = activity.readBinderArgOrNull("binderOptional")
+            val binderOptionalErrKey = activity.readBinderArgOrNull("binderOptionalErrKey")
+            val binderOrDefault = activity.readBinderArgOr("binderOrDefault", TestBinder(""))
+            val binderOrDefaultErrKey = activity.readBinderArgOr("binderOrDefaultErrKey", TestBinder("binderOrDefaultErrKey"))
 
-        val sizeRequired = activity.readSizeArg("sizeRequired")
-        val sizeOptional = activity.readSizeArgOrNull("sizeOptional")
-        val sizeOptionalErrKey = activity.readSizeArgOrNull("sizeOptionalErrKey")
-        val sizeOrDefault = activity.readSizeArgOr("sizeOrDefault", Size(0, 0))
-        val sizeOrDefaultErrKey = activity.readSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
+            Assert.assertEquals(binderRequired, TestBinder("binderRequired"))
+            Assert.assertEquals(binderOptional, TestBinder("binderOptional"))
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertEquals(binderOrDefault, TestBinder("binderOrDefault"))
+            Assert.assertEquals(binderOrDefaultErrKey, TestBinder("binderOrDefaultErrKey"))
+        }
 
-        val sizeFRequired = activity.readSizeFArg("sizeFRequired")
-        val sizeFOptional = activity.readSizeFArgOrNull("sizeFOptional")
-        val sizeFOptionalErrKey = activity.readSizeFArgOrNull("sizeFOptionalErrKey")
-        val sizeFOrDefault = activity.readSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
-        val sizeFOrDefaultErrKey = activity.readSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val sizeRequired = activity.readSizeArg("sizeRequired")
+            val sizeOptional = activity.readSizeArgOrNull("sizeOptional")
+            val sizeOptionalErrKey = activity.readSizeArgOrNull("sizeOptionalErrKey")
+            val sizeOrDefault = activity.readSizeArgOr("sizeOrDefault", Size(0, 0))
+            val sizeOrDefaultErrKey = activity.readSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
+
+            val sizeFRequired = activity.readSizeFArg("sizeFRequired")
+            val sizeFOptional = activity.readSizeFArgOrNull("sizeFOptional")
+            val sizeFOptionalErrKey = activity.readSizeFArgOrNull("sizeFOptionalErrKey")
+            val sizeFOrDefault = activity.readSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
+            val sizeFOrDefaultErrKey = activity.readSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
+
+            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
+            Assert.assertTrue(sizeFOptional!!.width == 2f && sizeFOptional.height == 2f)
+            Assert.assertNull(sizeFOptionalErrKey)
+            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
+            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
+
+            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
+            Assert.assertTrue(sizeOptional!!.width == 2 && sizeOptional.height == 2)
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
+            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
+        }
+
 
         //test start
-
-        Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
-        Assert.assertTrue(sizeFOptional!!.width == 2f && sizeFOptional.height == 2f)
-        Assert.assertNull(sizeFOptionalErrKey)
-        Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
-        Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
-
-        Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
-        Assert.assertTrue(sizeOptional!!.width == 2 && sizeOptional.height == 2)
-        Assert.assertNull(sizeOptionalErrKey)
-        Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
-        Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
-
-
-        Assert.assertEquals(binderRequired, TestBinder("binderRequired"))
-        Assert.assertEquals(binderOptional, TestBinder("binderOptional"))
-        Assert.assertNull(binderOptionalErrKey)
-        Assert.assertEquals(binderOrDefault, TestBinder("binderOrDefault"))
-        Assert.assertEquals(binderOrDefaultErrKey, TestBinder("binderOrDefaultErrKey"))
-
         Assert.assertTrue(sparseParcelableArrayRequired.get(-1) == TestParcelable("-1") && sparseParcelableArrayRequired.get(1) == TestParcelable("1"))
         Assert.assertTrue(sparseParcelableArrayOptional!!.get(-2) == TestParcelable("-2") && sparseParcelableArrayOptional.get(2) == TestParcelable("2"))
         Assert.assertNull(sparseParcelableArrayOptionalErrKey)
@@ -821,45 +825,49 @@ class ArgsxTest {
         val sparseParcelableArrayOrDefault = activity.readSparseParcelableArrayArgOr("sparseParcelableArrayOrDefault", sparseArrayDefault)
         val sparseParcelableArrayOrDefaultErrKey = activity.readSparseParcelableArrayArgOr("sparseParcelableArrayOrDefaultErrKey", sparseArrayDefault)
 
-        val binderRequired = activity.readBinderArg("binderRequired")
-        val binderOptional = activity.readBinderArgOrNull("binderOptional")
-        val binderOptionalErrKey = activity.readBinderArgOrNull("binderOptionalErrKey")
-        val binderOrDefault = activity.readBinderArgOr("binderOrDefault", TestBinder(""))
-        val binderOrDefaultErrKey = activity.readBinderArgOr("binderOrDefaultErrKey", TestBinder("binderOrDefaultErrKey"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            val binderRequired = activity.readBinderArg("binderRequired")
+            val binderOptional = activity.readBinderArgOrNull("binderOptional")
+            val binderOptionalErrKey = activity.readBinderArgOrNull("binderOptionalErrKey")
+            val binderOrDefault = activity.readBinderArgOr("binderOrDefault", TestBinder(""))
+            val binderOrDefaultErrKey = activity.readBinderArgOr("binderOrDefaultErrKey", TestBinder("binderOrDefaultErrKey"))
 
-        val sizeRequired = activity.readSizeArg("sizeRequired")
-        val sizeOptional = activity.readSizeArgOrNull("sizeOptional")
-        val sizeOptionalErrKey = activity.readSizeArgOrNull("sizeOptionalErrKey")
-        val sizeOrDefault = activity.readSizeArgOr("sizeOrDefault", Size(0, 0))
-        val sizeOrDefaultErrKey = activity.readSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
 
-        val sizeFRequired = activity.readSizeFArg("sizeFRequired")
-        val sizeFOptional = activity.readSizeFArgOrNull("sizeFOptional")
-        val sizeFOptionalErrKey = activity.readSizeFArgOrNull("sizeFOptionalErrKey")
-        val sizeFOrDefault = activity.readSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
-        val sizeFOrDefaultErrKey = activity.readSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
+            Assert.assertEquals(binderRequired, TestBinder("binderRequired"))
+            Assert.assertEquals(binderOptional, TestBinder("binderOptional"))
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertEquals(binderOrDefault, TestBinder("binderOrDefault"))
+            Assert.assertEquals(binderOrDefaultErrKey, TestBinder("binderOrDefaultErrKey"))
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val sizeRequired = activity.readSizeArg("sizeRequired")
+            val sizeOptional = activity.readSizeArgOrNull("sizeOptional")
+            val sizeOptionalErrKey = activity.readSizeArgOrNull("sizeOptionalErrKey")
+            val sizeOrDefault = activity.readSizeArgOr("sizeOrDefault", Size(0, 0))
+            val sizeOrDefaultErrKey = activity.readSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
+
+            val sizeFRequired = activity.readSizeFArg("sizeFRequired")
+            val sizeFOptional = activity.readSizeFArgOrNull("sizeFOptional")
+            val sizeFOptionalErrKey = activity.readSizeFArgOrNull("sizeFOptionalErrKey")
+            val sizeFOrDefault = activity.readSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
+            val sizeFOrDefaultErrKey = activity.readSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
+
+            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
+            Assert.assertTrue(sizeFOptional!!.width == 2f && sizeFOptional.height == 2f)
+            Assert.assertNull(sizeFOptionalErrKey)
+            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
+            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
+
+            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
+            Assert.assertTrue(sizeOptional!!.width == 2 && sizeOptional.height == 2)
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
+            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
+        }
+
 
         //test start
-
-        Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
-        Assert.assertTrue(sizeFOptional!!.width == 2f && sizeFOptional.height == 2f)
-        Assert.assertNull(sizeFOptionalErrKey)
-        Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
-        Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
-
-        Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
-        Assert.assertTrue(sizeOptional!!.width == 2 && sizeOptional.height == 2)
-        Assert.assertNull(sizeOptionalErrKey)
-        Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
-        Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
-
-
-        Assert.assertEquals(binderRequired, TestBinder("binderRequired"))
-        Assert.assertEquals(binderOptional, TestBinder("binderOptional"))
-        Assert.assertNull(binderOptionalErrKey)
-        Assert.assertEquals(binderOrDefault, TestBinder("binderOrDefault"))
-        Assert.assertEquals(binderOrDefaultErrKey, TestBinder("binderOrDefaultErrKey"))
-
         Assert.assertTrue(sparseParcelableArrayRequired.get(-1) == TestParcelable("-1") && sparseParcelableArrayRequired.get(1) == TestParcelable("1"))
         Assert.assertTrue(sparseParcelableArrayOptional!!.get(-2) == TestParcelable("-2") && sparseParcelableArrayOptional.get(2) == TestParcelable("2"))
         Assert.assertNull(sparseParcelableArrayOptionalErrKey)
@@ -1400,44 +1408,48 @@ class ArgsxTest {
         val sparseParcelableArrayOrDefault = activity.readSparseParcelableArrayArgOr(R.string.sparse_parcelable_array_or_default, sparseArrayDefault)
         val sparseParcelableArrayOrDefaultErrKey = activity.readSparseParcelableArrayArgOr(R.string.not_exist_key, sparseArrayDefault)
 
-        val binderRequired = activity.readBinderArg(R.string.binder_required)
-        val binderOptional = activity.readBinderArgOrNull(R.string.binder_optional)
-        val binderOptionalErrKey = activity.readBinderArgOrNull(R.string.not_exist_key)
-        val binderOrDefault = activity.readBinderArgOr(R.string.binder_or_default, TestBinder(""))
-        val binderOrDefaultErrKey = activity.readBinderArgOr(R.string.not_exist_key, TestBinder("binderOrDefaultErrKey"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            val binderRequired = activity.readBinderArg(R.string.binder_required)
+            val binderOptional = activity.readBinderArgOrNull(R.string.binder_optional)
+            val binderOptionalErrKey = activity.readBinderArgOrNull(R.string.not_exist_key)
+            val binderOrDefault = activity.readBinderArgOr(R.string.binder_or_default, TestBinder(""))
+            val binderOrDefaultErrKey = activity.readBinderArgOr(R.string.not_exist_key, TestBinder("binderOrDefaultErrKey"))
 
-        val sizeRequired = activity.readSizeArg(R.string.size_required)
-        val sizeOptional = activity.readSizeArgOrNull(R.string.size_optional)
-        val sizeOptionalErrKey = activity.readSizeArgOrNull(R.string.not_exist_key)
-        val sizeOrDefault = activity.readSizeArgOr(R.string.size_or_default, Size(0, 0))
-        val sizeOrDefaultErrKey = activity.readSizeArgOr(R.string.not_exist_key, Size(4, 4))
+            Assert.assertEquals(binderRequired, TestBinder("binderRequired"))
+            Assert.assertEquals(binderOptional, TestBinder("binderOptional"))
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertEquals(binderOrDefault, TestBinder("binderOrDefault"))
+            Assert.assertEquals(binderOrDefaultErrKey, TestBinder("binderOrDefaultErrKey"))
+        }
 
-        val sizeFRequired = activity.readSizeFArg(R.string.sizeF_required)
-        val sizeFOptional = activity.readSizeFArgOrNull(R.string.sizeF_optional)
-        val sizeFOptionalErrKey = activity.readSizeFArgOrNull(R.string.not_exist_key)
-        val sizeFOrDefault = activity.readSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
-        val sizeFOrDefaultErrKey = activity.readSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val sizeRequired = activity.readSizeArg(R.string.size_required)
+            val sizeOptional = activity.readSizeArgOrNull(R.string.size_optional)
+            val sizeOptionalErrKey = activity.readSizeArgOrNull(R.string.not_exist_key)
+            val sizeOrDefault = activity.readSizeArgOr(R.string.size_or_default, Size(0, 0))
+            val sizeOrDefaultErrKey = activity.readSizeArgOr(R.string.not_exist_key, Size(4, 4))
+
+            val sizeFRequired = activity.readSizeFArg(R.string.sizeF_required)
+            val sizeFOptional = activity.readSizeFArgOrNull(R.string.sizeF_optional)
+            val sizeFOptionalErrKey = activity.readSizeFArgOrNull(R.string.not_exist_key)
+            val sizeFOrDefault = activity.readSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
+            val sizeFOrDefaultErrKey = activity.readSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
+
+            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
+            Assert.assertTrue(sizeFOptional!!.width == 2f && sizeFOptional.height == 2f)
+            Assert.assertNull(sizeFOptionalErrKey)
+            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
+            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
+
+            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
+            Assert.assertTrue(sizeOptional!!.width == 2 && sizeOptional.height == 2)
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
+            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
+        }
+
 
         //test start
-
-        Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
-        Assert.assertTrue(sizeFOptional!!.width == 2f && sizeFOptional.height == 2f)
-        Assert.assertNull(sizeFOptionalErrKey)
-        Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
-        Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
-
-        Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
-        Assert.assertTrue(sizeOptional!!.width == 2 && sizeOptional.height == 2)
-        Assert.assertNull(sizeOptionalErrKey)
-        Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
-        Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
-
-
-        Assert.assertEquals(binderRequired, TestBinder("binderRequired"))
-        Assert.assertEquals(binderOptional, TestBinder("binderOptional"))
-        Assert.assertNull(binderOptionalErrKey)
-        Assert.assertEquals(binderOrDefault, TestBinder("binderOrDefault"))
-        Assert.assertEquals(binderOrDefaultErrKey, TestBinder("binderOrDefaultErrKey"))
 
         Assert.assertTrue(sparseParcelableArrayRequired.get(-1) == TestParcelable("-1") && sparseParcelableArrayRequired.get(1) == TestParcelable("1"))
         Assert.assertTrue(sparseParcelableArrayOptional!!.get(-2) == TestParcelable("-2") && sparseParcelableArrayOptional.get(2) == TestParcelable("2"))
@@ -1705,45 +1717,48 @@ class ArgsxTest {
         val sparseParcelableArrayOrDefault = activity.readSparseParcelableArrayArgOr(R.string.sparse_parcelable_array_or_default, sparseArrayDefault)
         val sparseParcelableArrayOrDefaultErrKey = activity.readSparseParcelableArrayArgOr(R.string.not_exist_key, sparseArrayDefault)
 
-        val binderRequired = activity.readBinderArg(R.string.binder_required)
-        val binderOptional = activity.readBinderArgOrNull(R.string.binder_optional)
-        val binderOptionalErrKey = activity.readBinderArgOrNull(R.string.not_exist_key)
-        val binderOrDefault = activity.readBinderArgOr(R.string.binder_or_default, TestBinder(""))
-        val binderOrDefaultErrKey = activity.readBinderArgOr(R.string.not_exist_key, TestBinder("binderOrDefaultErrKey"))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            val binderRequired = activity.readBinderArg(R.string.binder_required)
+            val binderOptional = activity.readBinderArgOrNull(R.string.binder_optional)
+            val binderOptionalErrKey = activity.readBinderArgOrNull(R.string.not_exist_key)
+            val binderOrDefault = activity.readBinderArgOr(R.string.binder_or_default, TestBinder(""))
+            val binderOrDefaultErrKey = activity.readBinderArgOr(R.string.not_exist_key, TestBinder("binderOrDefaultErrKey"))
 
-        val sizeRequired = activity.readSizeArg(R.string.size_required)
-        val sizeOptional = activity.readSizeArgOrNull(R.string.size_optional)
-        val sizeOptionalErrKey = activity.readSizeArgOrNull(R.string.not_exist_key)
-        val sizeOrDefault = activity.readSizeArgOr(R.string.size_or_default, Size(0, 0))
-        val sizeOrDefaultErrKey = activity.readSizeArgOr(R.string.not_exist_key, Size(4, 4))
+            Assert.assertEquals(binderRequired, TestBinder("binderRequired"))
+            Assert.assertEquals(binderOptional, TestBinder("binderOptional"))
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertEquals(binderOrDefault, TestBinder("binderOrDefault"))
+            Assert.assertEquals(binderOrDefaultErrKey, TestBinder("binderOrDefaultErrKey"))
+        }
 
-        val sizeFRequired = activity.readSizeFArg(R.string.sizeF_required)
-        val sizeFOptional = activity.readSizeFArgOrNull(R.string.sizeF_optional)
-        val sizeFOptionalErrKey = activity.readSizeFArgOrNull(R.string.not_exist_key)
-        val sizeFOrDefault = activity.readSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
-        val sizeFOrDefaultErrKey = activity.readSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val sizeRequired = activity.readSizeArg(R.string.size_required)
+            val sizeOptional = activity.readSizeArgOrNull(R.string.size_optional)
+            val sizeOptionalErrKey = activity.readSizeArgOrNull(R.string.not_exist_key)
+            val sizeOrDefault = activity.readSizeArgOr(R.string.size_or_default, Size(0, 0))
+            val sizeOrDefaultErrKey = activity.readSizeArgOr(R.string.not_exist_key, Size(4, 4))
+
+            val sizeFRequired = activity.readSizeFArg(R.string.sizeF_required)
+            val sizeFOptional = activity.readSizeFArgOrNull(R.string.sizeF_optional)
+            val sizeFOptionalErrKey = activity.readSizeFArgOrNull(R.string.not_exist_key)
+            val sizeFOrDefault = activity.readSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
+            val sizeFOrDefaultErrKey = activity.readSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
+
+            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
+            Assert.assertTrue(sizeFOptional!!.width == 2f && sizeFOptional.height == 2f)
+            Assert.assertNull(sizeFOptionalErrKey)
+            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
+            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
+
+            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
+            Assert.assertTrue(sizeOptional!!.width == 2 && sizeOptional.height == 2)
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
+            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
+        }
+
 
         //test start
-
-        Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
-        Assert.assertTrue(sizeFOptional!!.width == 2f && sizeFOptional.height == 2f)
-        Assert.assertNull(sizeFOptionalErrKey)
-        Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
-        Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
-
-        Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
-        Assert.assertTrue(sizeOptional!!.width == 2 && sizeOptional.height == 2)
-        Assert.assertNull(sizeOptionalErrKey)
-        Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
-        Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
-
-
-        Assert.assertEquals(binderRequired, TestBinder("binderRequired"))
-        Assert.assertEquals(binderOptional, TestBinder("binderOptional"))
-        Assert.assertNull(binderOptionalErrKey)
-        Assert.assertEquals(binderOrDefault, TestBinder("binderOrDefault"))
-        Assert.assertEquals(binderOrDefaultErrKey, TestBinder("binderOrDefaultErrKey"))
-
         Assert.assertTrue(sparseParcelableArrayRequired.get(-1) == TestParcelable("-1") && sparseParcelableArrayRequired.get(1) == TestParcelable("1"))
         Assert.assertTrue(sparseParcelableArrayOptional!!.get(-2) == TestParcelable("-2") && sparseParcelableArrayOptional.get(2) == TestParcelable("2"))
         Assert.assertNull(sparseParcelableArrayOptionalErrKey)
@@ -2694,17 +2709,21 @@ class ArgsxTest {
                 sparseParcelableArrayOrDefault.put(3, TestParcelable("3"))
                 args.putSparseParcelableArray("sparseParcelableArrayOrDefault", sparseParcelableArrayOrDefault)
 
-                args.putBinder("binderRequired", TestBinder("binderRequired"))
-                args.putBinder("binderOptional", TestBinder("binderOptional"))
-                args.putBinder("binderOrDefault", TestBinder("binderOrDefault"))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    args.putBinder("binderRequired", TestBinder("binderRequired"))
+                    args.putBinder("binderOptional", TestBinder("binderOptional"))
+                    args.putBinder("binderOrDefault", TestBinder("binderOrDefault"))
+                }
 
-                args.putSize("sizeRequired", Size(1, 1))
-                args.putSize("sizeOptional", Size(2, 2))
-                args.putSize("sizeOrDefault", Size(3, 3))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    args.putSize("sizeRequired", Size(1, 1))
+                    args.putSize("sizeOptional", Size(2, 2))
+                    args.putSize("sizeOrDefault", Size(3, 3))
 
-                args.putSizeF("sizeFRequired", SizeF(1f, 1f))
-                args.putSizeF("sizeFOptional", SizeF(2f, 2f))
-                args.putSizeF("sizeFOrDefault", SizeF(3f, 3f))
+                    args.putSizeF("sizeFRequired", SizeF(1f, 1f))
+                    args.putSizeF("sizeFOptional", SizeF(2f, 2f))
+                    args.putSizeF("sizeFOrDefault", SizeF(3f, 3f))
+                }
 
                 starter.putExtras(args)
 
@@ -2874,17 +2893,21 @@ class ArgsxTest {
                 sparseParcelableArrayOrDefault.put(3, TestParcelable("3"))
                 args.putSparseParcelableArray(context.getString(R.string.sparse_parcelable_array_or_default), sparseParcelableArrayOrDefault)
 
-                args.putBinder(context.getString(R.string.binder_required), TestBinder("binderRequired"))
-                args.putBinder(context.getString(R.string.binder_optional), TestBinder("binderOptional"))
-                args.putBinder(context.getString(R.string.binder_or_default), TestBinder("binderOrDefault"))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    args.putBinder(context.getString(R.string.binder_required), TestBinder("binderRequired"))
+                    args.putBinder(context.getString(R.string.binder_optional), TestBinder("binderOptional"))
+                    args.putBinder(context.getString(R.string.binder_or_default), TestBinder("binderOrDefault"))
+                }
 
-                args.putSize(context.getString(R.string.size_required), Size(1, 1))
-                args.putSize(context.getString(R.string.size_optional), Size(2, 2))
-                args.putSize(context.getString(R.string.size_or_default), Size(3, 3))
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                    args.putSize(context.getString(R.string.size_required), Size(1, 1))
+                    args.putSize(context.getString(R.string.size_optional), Size(2, 2))
+                    args.putSize(context.getString(R.string.size_or_default), Size(3, 3))
 
-                args.putSizeF(context.getString(R.string.sizeF_required), SizeF(1f, 1f))
-                args.putSizeF(context.getString(R.string.sizeF_optional), SizeF(2f, 2f))
-                args.putSizeF(context.getString(R.string.sizeF_or_default), SizeF(3f, 3f))
+                    args.putSizeF(context.getString(R.string.sizeF_required), SizeF(1f, 1f))
+                    args.putSizeF(context.getString(R.string.sizeF_optional), SizeF(2f, 2f))
+                    args.putSizeF(context.getString(R.string.sizeF_or_default), SizeF(3f, 3f))
+                }
 
                 starter.putExtras(args)
 

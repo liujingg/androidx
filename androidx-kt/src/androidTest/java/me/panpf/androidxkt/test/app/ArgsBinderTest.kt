@@ -4,9 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Binder
+import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.test.InstrumentationRegistry
+import android.support.test.filters.SdkSuppress
 import android.support.test.rule.ActivityTestRule
 import android.support.test.runner.AndroidJUnit4
 import android.support.v4.app.Fragment
@@ -614,6 +616,7 @@ class ArgsBinderTest {
             val fragment = ResTestFragment()
             fragment.arguments = ResTestFragment.createArguments(this)
             fragmentManager.beginTransaction().add(android.R.id.content, fragment).commit()
+
         }
     }
 
@@ -730,21 +733,6 @@ class ArgsBinderTest {
                     put(4, TestParcelable("4"))
                 })
 
-        private val binderRequired by bindBinderArg(R.string.binder_required)
-        private val binderOptional by bindBinderArgOrNull(R.string.binder_optional)
-        private val binderOrDefault by bindBinderArgOr(R.string.binder_or_default, TestBinder())
-        private val binderOrDefaultErrKey by bindBinderArgOr(R.string.not_exist_key, TestBinder("error"))
-
-        private val sizeRequired by bindSizeArg(R.string.size_required)
-        private val sizeOptional by bindSizeArgOrNull(R.string.size_optional)
-        private val sizeOrDefault by bindSizeArgOr(R.string.size_or_default, Size(0, 0))
-        private val sizeOrDefaultErrKey by bindSizeArgOr(R.string.not_exist_key, Size(4, 4))
-
-        private val sizeFRequired by bindSizeFArg(R.string.sizeF_required)
-        private val sizeFOptional by bindSizeFArgOrNull(R.string.sizeF_optional)
-        private val sizeFOrDefault by bindSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
-        private val sizeFOrDefaultErrKey by bindSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
-
         private val stringOptionalErrKey by bindStringArgOrNull(R.string.not_exist_key)
         private val stringArrayOptionalErrKey by bindStringArrayArgOrNull(R.string.not_exist_key)
         private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.not_exist_key)
@@ -766,10 +754,6 @@ class ArgsBinderTest {
         private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull(R.string.not_exist_key)
         private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull(R.string.not_exist_key)
         private val sparseParcelableArrayOptionalErrKey by bindSparseParcelableArrayArgOrNull<TestParcelable>(R.string.not_exist_key)
-        private val binderOptionalErrKey by bindBinderArgOrNull(R.string.not_exist_key)
-        private val sizeOptionalErrKey by bindSizeArgOrNull(R.string.not_exist_key)
-        private val sizeFOptionalErrKey by bindSizeFArgOrNull(R.string.not_exist_key)
-
 
         fun assert() {
 
@@ -794,9 +778,6 @@ class ArgsBinderTest {
             Assert.assertNull(serializableOptionalErrKey)
             Assert.assertNull(bundleOptionalErrKey)
             Assert.assertNull(sparseParcelableArrayOptionalErrKey)
-            Assert.assertNull(binderOptionalErrKey)
-            Assert.assertNull(sizeOptionalErrKey)
-            Assert.assertNull(sizeFOptionalErrKey)
 
             Assert.assertTrue(stringRequired == "stringRequired")
             Assert.assertTrue(stringOptional == "stringOptional")
@@ -930,21 +911,6 @@ class ArgsBinderTest {
             Assert.assertTrue(sparseParcelableArrayOptional?.get(-2) == TestParcelable("-2") && sparseParcelableArrayOptional?.get(2) == TestParcelable("2"))
             Assert.assertTrue(sparseParcelableArrayOrDefault[-3] == TestParcelable("-3") && sparseParcelableArrayOrDefault[3] == TestParcelable("3"))
             Assert.assertTrue(sparseParcelableArrayOrDefaultErrKey[-4] == TestParcelable("-4") && sparseParcelableArrayOrDefaultErrKey[4] == TestParcelable("4"))
-
-            Assert.assertTrue(binderRequired == TestBinder("binderRequired"))
-            Assert.assertTrue(binderOptional == TestBinder("binderOptional"))
-            Assert.assertTrue(binderOrDefault == TestBinder("binderOrDefault"))
-            Assert.assertTrue(binderOrDefaultErrKey == TestBinder("error"))
-
-            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
-            Assert.assertTrue(sizeOptional?.width == 2 && sizeOptional?.height == 2)
-            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
-            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
-
-            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
-            Assert.assertTrue(sizeFOptional?.width == 2f && sizeFOptional?.height == 2f)
-            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
-            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
         }
 
         companion object {
@@ -1051,19 +1017,6 @@ class ArgsBinderTest {
                             put(-3, TestParcelable("-3"))
                             put(3, TestParcelable("3"))
                         })
-
-                putBinder(context.getString(R.string.binder_required), TestBinder("binderRequired"))
-                putBinder(context.getString(R.string.binder_optional), TestBinder("binderOptional"))
-                putBinder(context.getString(R.string.binder_or_default), TestBinder("binderOrDefault"))
-
-                putSize(context.getString(R.string.size_required), Size(1, 1))
-                putSize(context.getString(R.string.size_optional), Size(2, 2))
-                putSize(context.getString(R.string.size_or_default), Size(3, 3))
-
-                putSizeF(context.getString(R.string.sizeF_required), SizeF(1f, 1f))
-                putSizeF(context.getString(R.string.sizeF_optional), SizeF(2f, 2f))
-                putSizeF(context.getString(R.string.sizeF_or_default), SizeF(3f, 3f))
-
             }
         }
     }
@@ -1181,21 +1134,6 @@ class ArgsBinderTest {
                     put(4, TestParcelable("4"))
                 })
 
-        private val binderRequired by bindBinderArg(R.string.binder_required)
-        private val binderOptional by bindBinderArgOrNull(R.string.binder_optional)
-        private val binderOrDefault by bindBinderArgOr(R.string.binder_or_default, TestBinder())
-        private val binderOrDefaultErrKey by bindBinderArgOr(R.string.not_exist_key, TestBinder("error"))
-
-        private val sizeRequired by bindSizeArg(R.string.size_required)
-        private val sizeOptional by bindSizeArgOrNull(R.string.size_optional)
-        private val sizeOrDefault by bindSizeArgOr(R.string.size_or_default, Size(0, 0))
-        private val sizeOrDefaultErrKey by bindSizeArgOr(R.string.not_exist_key, Size(4, 4))
-
-        private val sizeFRequired by bindSizeFArg(R.string.sizeF_required)
-        private val sizeFOptional by bindSizeFArgOrNull(R.string.sizeF_optional)
-        private val sizeFOrDefault by bindSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
-        private val sizeFOrDefaultErrKey by bindSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
-
         private val stringOptionalErrKey by bindStringArgOrNull(R.string.not_exist_key)
         private val stringArrayOptionalErrKey by bindStringArrayArgOrNull(R.string.not_exist_key)
         private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.not_exist_key)
@@ -1217,9 +1155,6 @@ class ArgsBinderTest {
         private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull(R.string.not_exist_key)
         private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull(R.string.not_exist_key)
         private val sparseParcelableArrayOptionalErrKey by bindSparseParcelableArrayArgOrNull<TestParcelable>(R.string.not_exist_key)
-        private val binderOptionalErrKey by bindBinderArgOrNull(R.string.not_exist_key)
-        private val sizeOptionalErrKey by bindSizeArgOrNull(R.string.not_exist_key)
-        private val sizeFOptionalErrKey by bindSizeFArgOrNull(R.string.not_exist_key)
 
 
         fun assert() {
@@ -1245,9 +1180,6 @@ class ArgsBinderTest {
             Assert.assertNull(serializableOptionalErrKey)
             Assert.assertNull(bundleOptionalErrKey)
             Assert.assertNull(sparseParcelableArrayOptionalErrKey)
-            Assert.assertNull(binderOptionalErrKey)
-            Assert.assertNull(sizeOptionalErrKey)
-            Assert.assertNull(sizeFOptionalErrKey)
 
             Assert.assertTrue(stringRequired == "stringRequired")
             Assert.assertTrue(stringOptional == "stringOptional")
@@ -1382,20 +1314,6 @@ class ArgsBinderTest {
             Assert.assertTrue(sparseParcelableArrayOrDefault[-3] == TestParcelable("-3") && sparseParcelableArrayOrDefault[3] == TestParcelable("3"))
             Assert.assertTrue(sparseParcelableArrayOrDefaultErrKey[-4] == TestParcelable("-4") && sparseParcelableArrayOrDefaultErrKey[4] == TestParcelable("4"))
 
-            Assert.assertTrue(binderRequired == TestBinder("binderRequired"))
-            Assert.assertTrue(binderOptional == TestBinder("binderOptional"))
-            Assert.assertTrue(binderOrDefault == TestBinder("binderOrDefault"))
-            Assert.assertTrue(binderOrDefaultErrKey == TestBinder("error"))
-
-            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
-            Assert.assertTrue(sizeOptional?.width == 2 && sizeOptional?.height == 2)
-            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
-            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
-
-            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
-            Assert.assertTrue(sizeFOptional?.width == 2f && sizeFOptional?.height == 2f)
-            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
-            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
         }
 
         companion object {
@@ -1502,18 +1420,6 @@ class ArgsBinderTest {
                             put(-3, TestParcelable("-3"))
                             put(3, TestParcelable("3"))
                         })
-
-                putBinder(context.getString(R.string.binder_required), TestBinder("binderRequired"))
-                putBinder(context.getString(R.string.binder_optional), TestBinder("binderOptional"))
-                putBinder(context.getString(R.string.binder_or_default), TestBinder("binderOrDefault"))
-
-                putSize(context.getString(R.string.size_required), Size(1, 1))
-                putSize(context.getString(R.string.size_optional), Size(2, 2))
-                putSize(context.getString(R.string.size_or_default), Size(3, 3))
-
-                putSizeF(context.getString(R.string.sizeF_required), SizeF(1f, 1f))
-                putSizeF(context.getString(R.string.sizeF_optional), SizeF(2f, 2f))
-                putSizeF(context.getString(R.string.sizeF_or_default), SizeF(3f, 3f))
 
             }
         }
@@ -1658,7 +1564,7 @@ class ArgsBinderTest {
 
             val fragment = TestFragment()
             fragment.arguments = TestFragment.createArguments(this)
-            fragmentManager.beginTransaction().add(android.R.id.content, fragment).commit()
+            fragmentManager.beginTransaction().add(android.R.id.content,fragment).commit()
         }
 
         fun assert() {
@@ -2033,21 +1939,6 @@ class ArgsBinderTest {
                     put(4, TestParcelable("4"))
                 })
 
-        private val binderRequired by bindBinderArg("binderRequired")
-        private val binderOptional by bindBinderArgOrNull("binderOptional")
-        private val binderOrDefault by bindBinderArgOr("binderOrDefault", TestBinder())
-        private val binderOrDefaultErrKey by bindBinderArgOr("binderOrDefaultErrKey", TestBinder("error"))
-
-        private val sizeRequired by bindSizeArg("sizeRequired")
-        private val sizeOptional by bindSizeArgOrNull("sizeOptional")
-        private val sizeOrDefault by bindSizeArgOr("sizeOrDefault", Size(0, 0))
-        private val sizeOrDefaultErrKey by bindSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
-
-        private val sizeFRequired by bindSizeFArg("sizeFRequired")
-        private val sizeFOptional by bindSizeFArgOrNull("sizeFOptional")
-        private val sizeFOrDefault by bindSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
-        private val sizeFOrDefaultErrKey by bindSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
-
         private val stringOptionalErrKey by bindStringArgOrNull("KeyNotExist")
         private val stringArrayOptionalErrKey by bindStringArrayArgOrNull("KeyNotExist")
         private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull("KeyNotExist")
@@ -2069,9 +1960,6 @@ class ArgsBinderTest {
         private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull("KeyNotExist")
         private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull("KeyNotExist")
         private val sparseParcelableArrayOptionalErrKey by bindSparseParcelableArrayArgOrNull<TestParcelable>("KeyNotExist")
-        private val binderOptionalErrKey by bindBinderArgOrNull("KeyNotExist")
-        private val sizeOptionalErrKey by bindSizeArgOrNull("KeyNotExist")
-        private val sizeFOptionalErrKey by bindSizeFArgOrNull("KeyNotExist")
 
         fun assert() {
 
@@ -2096,9 +1984,6 @@ class ArgsBinderTest {
             Assert.assertNull(serializableOptionalErrKey)
             Assert.assertNull(bundleOptionalErrKey)
             Assert.assertNull(sparseParcelableArrayOptionalErrKey)
-            Assert.assertNull(binderOptionalErrKey)
-            Assert.assertNull(sizeOptionalErrKey)
-            Assert.assertNull(sizeFOptionalErrKey)
 
             Assert.assertTrue(booleanRequired)
             Assert.assertTrue(booleanArrayRequired[0] && !booleanArrayRequired[1])
@@ -2232,22 +2117,6 @@ class ArgsBinderTest {
             Assert.assertTrue(sparseParcelableArrayOptional?.get(-2) == TestParcelable("-2") && sparseParcelableArrayOptional?.get(2) == TestParcelable("2"))
             Assert.assertTrue(sparseParcelableArrayOrDefault[-3] == TestParcelable("-3") && sparseParcelableArrayOrDefault[3] == TestParcelable("3"))
             Assert.assertTrue(sparseParcelableArrayOrDefaultErrKey[-4] == TestParcelable("-4") && sparseParcelableArrayOrDefaultErrKey[4] == TestParcelable("4"))
-
-            Assert.assertTrue(binderRequired == TestBinder("binderRequired"))
-            Assert.assertTrue(binderOptional == TestBinder("binderOptional"))
-            Assert.assertTrue(binderOrDefault == TestBinder("binderOrDefault"))
-            Assert.assertTrue(binderOrDefaultErrKey == TestBinder("error"))
-
-            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
-            Assert.assertTrue(sizeOptional?.width == 2 && sizeOptional?.height == 2)
-            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
-            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
-
-            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
-            Assert.assertTrue(sizeFOptional?.width == 2f && sizeFOptional?.height == 2f)
-            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
-            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
-
         }
 
         companion object {
@@ -2354,19 +2223,6 @@ class ArgsBinderTest {
                             put(-3, TestParcelable("-3"))
                             put(3, TestParcelable("3"))
                         })
-
-                putBinder("binderRequired", TestBinder("binderRequired"))
-                putBinder("binderOptional", TestBinder("binderOptional"))
-                putBinder("binderOrDefault", TestBinder("binderOrDefault"))
-
-                putSize("sizeRequired", Size(1, 1))
-                putSize("sizeOptional", Size(2, 2))
-                putSize("sizeOrDefault", Size(3, 3))
-
-                putSizeF("sizeFRequired", SizeF(1f, 1f))
-                putSizeF("sizeFOptional", SizeF(2f, 2f))
-                putSizeF("sizeFOrDefault", SizeF(3f, 3f))
-
             }
         }
     }
@@ -2483,21 +2339,6 @@ class ArgsBinderTest {
                     put(4, TestParcelable("4"))
                 })
 
-        private val binderRequired by bindBinderArg("binderRequired")
-        private val binderOptional by bindBinderArgOrNull("binderOptional")
-        private val binderOrDefault by bindBinderArgOr("binderOrDefault", TestBinder())
-        private val binderOrDefaultErrKey by bindBinderArgOr("binderOrDefaultErrKey", TestBinder("error"))
-
-        private val sizeRequired by bindSizeArg("sizeRequired")
-        private val sizeOptional by bindSizeArgOrNull("sizeOptional")
-        private val sizeOrDefault by bindSizeArgOr("sizeOrDefault", Size(0, 0))
-        private val sizeOrDefaultErrKey by bindSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
-
-        private val sizeFRequired by bindSizeFArg("sizeFRequired")
-        private val sizeFOptional by bindSizeFArgOrNull("sizeFOptional")
-        private val sizeFOrDefault by bindSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
-        private val sizeFOrDefaultErrKey by bindSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
-
         private val stringOptionalErrKey by bindStringArgOrNull("KeyNotExist")
         private val stringArrayOptionalErrKey by bindStringArrayArgOrNull("KeyNotExist")
         private val stringArrayListOptionalErrKey by bindStringArrayListArgOrNull("KeyNotExist")
@@ -2519,9 +2360,6 @@ class ArgsBinderTest {
         private val floatArrayOptionalErrKey by bindFloatArrayArgOrNull("KeyNotExist")
         private val doubleArrayOptionalErrKey by bindDoubleArrayArgOrNull("KeyNotExist")
         private val sparseParcelableArrayOptionalErrKey by bindSparseParcelableArrayArgOrNull<TestParcelable>("KeyNotExist")
-        private val binderOptionalErrKey by bindBinderArgOrNull("KeyNotExist")
-        private val sizeOptionalErrKey by bindSizeArgOrNull("KeyNotExist")
-        private val sizeFOptionalErrKey by bindSizeFArgOrNull("KeyNotExist")
 
         fun assert() {
 
@@ -2546,9 +2384,6 @@ class ArgsBinderTest {
             Assert.assertNull(serializableOptionalErrKey)
             Assert.assertNull(bundleOptionalErrKey)
             Assert.assertNull(sparseParcelableArrayOptionalErrKey)
-            Assert.assertNull(binderOptionalErrKey)
-            Assert.assertNull(sizeOptionalErrKey)
-            Assert.assertNull(sizeFOptionalErrKey)
 
             Assert.assertTrue(booleanRequired)
             Assert.assertTrue(booleanArrayRequired[0] && !booleanArrayRequired[1])
@@ -2683,21 +2518,6 @@ class ArgsBinderTest {
             Assert.assertTrue(sparseParcelableArrayOrDefault[-3] == TestParcelable("-3") && sparseParcelableArrayOrDefault[3] == TestParcelable("3"))
             Assert.assertTrue(sparseParcelableArrayOrDefaultErrKey[-4] == TestParcelable("-4") && sparseParcelableArrayOrDefaultErrKey[4] == TestParcelable("4"))
 
-            Assert.assertTrue(binderRequired == TestBinder("binderRequired"))
-            Assert.assertTrue(binderOptional == TestBinder("binderOptional"))
-            Assert.assertTrue(binderOrDefault == TestBinder("binderOrDefault"))
-            Assert.assertTrue(binderOrDefaultErrKey == TestBinder("error"))
-
-            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
-            Assert.assertTrue(sizeOptional?.width == 2 && sizeOptional?.height == 2)
-            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
-            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
-
-            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
-            Assert.assertTrue(sizeFOptional?.width == 2f && sizeFOptional?.height == 2f)
-            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
-            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
-
         }
 
         companion object {
@@ -2804,18 +2624,6 @@ class ArgsBinderTest {
                             put(-3, TestParcelable("-3"))
                             put(3, TestParcelable("3"))
                         })
-
-                putBinder("binderRequired", TestBinder("binderRequired"))
-                putBinder("binderOptional", TestBinder("binderOptional"))
-                putBinder("binderOrDefault", TestBinder("binderOrDefault"))
-
-                putSize("sizeRequired", Size(1, 1))
-                putSize("sizeOptional", Size(2, 2))
-                putSize("sizeOrDefault", Size(3, 3))
-
-                putSizeF("sizeFRequired", SizeF(1f, 1f))
-                putSizeF("sizeFOptional", SizeF(2f, 2f))
-                putSizeF("sizeFOrDefault", SizeF(3f, 3f))
 
             }
         }
@@ -3992,4 +3800,445 @@ class ArgsBinderTest {
     data class TestSerializable(val tag: String) : java.io.Serializable
 
     data class TestBinder(val tag: String = "") : Binder()
+}
+
+@RunWith(AndroidJUnit4::class)
+@SdkSuppress(minSdkVersion = Build.VERSION_CODES.JELLY_BEAN_MR2)
+class ArgsBinderTest18 {
+
+    @get:Rule
+    val testRule18: ActivityTestRule<TestActivity18> = object : ActivityTestRule<TestActivity18>(TestActivity18::class.java) {
+        override fun getActivityIntent(): Intent {
+            return TestActivity18.createIntent(InstrumentationRegistry.getContext())
+        }
+    }
+
+    @get:Rule
+    val resTestRule18: ActivityTestRule<ResTestActivity18> = object : ActivityTestRule<ResTestActivity18>(ResTestActivity18::class.java) {
+        override fun getActivityIntent(): Intent {
+            return ResTestActivity18.createIntent(InstrumentationRegistry.getContext())
+        }
+    }
+
+    @Test
+    fun testBindSupportFragment18() {
+        val fragment = testRule18.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame) as TestSupportFragment18
+        fragment.assert()
+    }
+
+    @Test
+    fun testBindFragment18() {
+        val fragment = testRule18.activity.fragmentManager.findFragmentById(android.R.id.content) as TestFragment18
+        fragment.assert()
+    }
+
+
+    @Test
+    fun testBindResSupportFragment18() {
+        val fragment = resTestRule18.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame) as ResTestSupportFragment18
+        fragment.assert()
+    }
+
+    @Test
+    fun testBindResFragment18() {
+        val fragment = resTestRule18.activity.fragmentManager.findFragmentById(android.R.id.content) as ResTestFragment18
+        fragment.assert()
+    }
+
+
+    class TestActivity18 : FragmentActivity() {
+        companion object {
+            fun createIntent(context: Context): Intent {
+                return Intent(context, TestActivity18::class.java)
+            }
+        }
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.at_test)
+
+            val supportFragment18 = TestSupportFragment18()
+            supportFragment18.arguments = TestSupportFragment18.createArguments(this)
+            supportFragmentManager.beginTransaction().replace(R.id.testAt_frame, supportFragment18).commit()
+
+            val fragment18 = TestFragment18()
+            fragment18.arguments = ResTestFragment18.createArguments(this)
+            fragmentManager.beginTransaction().add(android.R.id.content, fragment18, "fragment18").commit()
+        }
+    }
+
+    class ResTestActivity18 : FragmentActivity() {
+        companion object {
+            fun createIntent(context: Context): Intent {
+                return Intent(context, ResTestActivity18::class.java)
+            }
+        }
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.at_test)
+
+            val supportFragment18 = ResTestSupportFragment18()
+            supportFragment18.arguments = ResTestSupportFragment18.createArguments(this)
+            supportFragmentManager.beginTransaction().replace(R.id.testAt_frame, supportFragment18).commit()
+
+            val fragment18 = ResTestFragment18()
+            fragment18.arguments = ResTestFragment18.createArguments(this)
+            fragmentManager.beginTransaction().add(android.R.id.content, fragment18, "fragment18").commit()
+        }
+    }
+
+    class TestFragment18 : android.app.Fragment() {
+        private val binderRequired by bindBinderArg("binderRequired")
+        private val binderOptional by bindBinderArgOrNull("binderOptional")
+        private val binderOrDefault by bindBinderArgOr("binderOrDefault", TestBinder())
+        private val binderOrDefaultErrKey by bindBinderArgOr("binderOrDefaultErrKey", TestBinder("error"))
+        private val binderOptionalErrKey by bindBinderArgOrNull("KeyNotExist")
+
+        fun assert() {
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertTrue(binderRequired == TestBinder("binderRequired"))
+            Assert.assertTrue(binderOptional == TestBinder("binderOptional"))
+            Assert.assertTrue(binderOrDefault == TestBinder("binderOrDefault"))
+            Assert.assertTrue(binderOrDefaultErrKey == TestBinder("error"))
+        }
+
+        companion object {
+            fun createArguments(activity: Context): Bundle = Bundle().apply {
+                putBinder("binderRequired", TestBinder("binderRequired"))
+                putBinder("binderOptional", TestBinder("binderOptional"))
+                putBinder("binderOrDefault", TestBinder("binderOrDefault"))
+            }
+        }
+    }
+
+    class TestSupportFragment18 : Fragment() {
+        private val binderRequired by bindBinderArg("binderRequired")
+        private val binderOptional by bindBinderArgOrNull("binderOptional")
+        private val binderOrDefault by bindBinderArgOr("binderOrDefault", TestBinder())
+        private val binderOrDefaultErrKey by bindBinderArgOr("binderOrDefaultErrKey", TestBinder("error"))
+        private val binderOptionalErrKey by bindBinderArgOrNull("KeyNotExist")
+
+        fun assert() {
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertTrue(binderRequired == TestBinder("binderRequired"))
+            Assert.assertTrue(binderOptional == TestBinder("binderOptional"))
+            Assert.assertTrue(binderOrDefault == TestBinder("binderOrDefault"))
+            Assert.assertTrue(binderOrDefaultErrKey == TestBinder("error"))
+        }
+
+        companion object {
+            fun createArguments(activity: Context): Bundle = Bundle().apply {
+                putBinder("binderRequired", TestBinder("binderRequired"))
+                putBinder("binderOptional", TestBinder("binderOptional"))
+                putBinder("binderOrDefault", TestBinder("binderOrDefault"))
+            }
+        }
+    }
+
+    class ResTestFragment18 : android.app.Fragment() {
+
+        private val binderRequired by bindBinderArg(R.string.binder_required)
+        private val binderOptional by bindBinderArgOrNull(R.string.binder_optional)
+        private val binderOrDefault by bindBinderArgOr(R.string.binder_or_default, TestBinder())
+        private val binderOrDefaultErrKey by bindBinderArgOr(R.string.not_exist_key, TestBinder("error"))
+        private val binderOptionalErrKey by bindBinderArgOrNull(R.string.not_exist_key)
+
+        fun assert() {
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertTrue(binderRequired == TestBinder("binderRequired"))
+            Assert.assertTrue(binderOptional == TestBinder("binderOptional"))
+            Assert.assertTrue(binderOrDefault == TestBinder("binderOrDefault"))
+            Assert.assertTrue(binderOrDefaultErrKey == TestBinder("error"))
+
+
+        }
+
+        companion object {
+            fun createArguments(context: Context): Bundle = Bundle().apply {
+                putBinder(context.getString(R.string.binder_required), TestBinder("binderRequired"))
+                putBinder(context.getString(R.string.binder_optional), TestBinder("binderOptional"))
+                putBinder(context.getString(R.string.binder_or_default), TestBinder("binderOrDefault"))
+            }
+        }
+    }
+
+    class ResTestSupportFragment18 : Fragment() {
+
+        private val binderRequired by bindBinderArg(R.string.binder_required)
+        private val binderOptional by bindBinderArgOrNull(R.string.binder_optional)
+        private val binderOrDefault by bindBinderArgOr(R.string.binder_or_default, TestBinder())
+        private val binderOrDefaultErrKey by bindBinderArgOr(R.string.not_exist_key, TestBinder("error"))
+        private val binderOptionalErrKey by bindBinderArgOrNull(R.string.not_exist_key)
+
+        fun assert() {
+            Assert.assertNull(binderOptionalErrKey)
+            Assert.assertTrue(binderRequired == TestBinder("binderRequired"))
+            Assert.assertTrue(binderOptional == TestBinder("binderOptional"))
+            Assert.assertTrue(binderOrDefault == TestBinder("binderOrDefault"))
+            Assert.assertTrue(binderOrDefaultErrKey == TestBinder("error"))
+        }
+
+        companion object {
+            fun createArguments(context: Context): Bundle = Bundle().apply {
+                putBinder(context.getString(R.string.binder_required), TestBinder("binderRequired"))
+                putBinder(context.getString(R.string.binder_optional), TestBinder("binderOptional"))
+                putBinder(context.getString(R.string.binder_or_default), TestBinder("binderOrDefault"))
+            }
+        }
+    }
+
+
+    data class TestBinder(val tag: String = "") : Binder()
+}
+
+@RunWith(AndroidJUnit4::class)
+@SdkSuppress(minSdkVersion = Build.VERSION_CODES.LOLLIPOP)
+class ArgsBinderTest21 {
+
+    @get:Rule
+    val testRule21: ActivityTestRule<TestActivity21> = object : ActivityTestRule<TestActivity21>(TestActivity21::class.java) {
+        override fun getActivityIntent(): Intent {
+            return TestActivity21.createIntent(InstrumentationRegistry.getContext())
+        }
+    }
+
+    @get:Rule
+    val resTestRule21: ActivityTestRule<ResTestActivity21> = object : ActivityTestRule<ResTestActivity21>(ResTestActivity21::class.java) {
+        override fun getActivityIntent(): Intent {
+            return ResTestActivity21.createIntent(InstrumentationRegistry.getContext())
+        }
+    }
+
+    @Test
+    fun testBindSupportFragment21() {
+        val fragment = testRule21.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame) as TestSupportFragment21
+        fragment.assert()
+    }
+
+    @Test
+    fun testBindFragment21() {
+        val fragment = testRule21.activity.fragmentManager.findFragmentById(android.R.id.content) as TestFragment21
+        fragment.assert()
+    }
+
+
+    @Test
+    fun testBindResSupportFragment21() {
+        val fragment = resTestRule21.activity.supportFragmentManager.findFragmentById(R.id.testAt_frame) as ResTestSupportFragment21
+        fragment.assert()
+    }
+
+    @Test
+    fun testBindResFragment21() {
+        val fragment = resTestRule21.activity.fragmentManager.findFragmentById(android.R.id.content) as ResTestFragment21
+        fragment.assert()
+    }
+
+    class TestActivity21 : FragmentActivity() {
+        companion object {
+            fun createIntent(context: Context): Intent {
+                return Intent(context, TestActivity21::class.java)
+            }
+        }
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.at_test)
+
+            val supportFragment21 = TestSupportFragment21()
+            supportFragment21.arguments = TestSupportFragment21.createArguments(this)
+            supportFragmentManager.beginTransaction().replace(R.id.testAt_frame, supportFragment21).commit()
+
+            val fragment21 = TestFragment21()
+            fragment21.arguments = ResTestFragment21.createArguments(this)
+            fragmentManager.beginTransaction().add(android.R.id.content, fragment21, "fragment21").commit()
+        }
+    }
+
+    class ResTestActivity21 : FragmentActivity() {
+        companion object {
+            fun createIntent(context: Context): Intent {
+                return Intent(context, ResTestActivity21::class.java)
+            }
+        }
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+            setContentView(R.layout.at_test)
+
+            val supportFragment21 = ResTestSupportFragment21()
+            supportFragment21.arguments = ResTestSupportFragment21.createArguments(this)
+            supportFragmentManager.beginTransaction().replace(R.id.testAt_frame, supportFragment21).commit()
+
+            val fragment21 = ResTestFragment21()
+            fragment21.arguments = ResTestFragment21.createArguments(this)
+            fragmentManager.beginTransaction().add(android.R.id.content, fragment21, "fragment21").commit()
+        }
+    }
+
+    class TestFragment21 : android.app.Fragment() {
+        private val sizeRequired by bindSizeArg("sizeRequired")
+        private val sizeOptional by bindSizeArgOrNull("sizeOptional")
+        private val sizeOrDefault by bindSizeArgOr("sizeOrDefault", Size(0, 0))
+        private val sizeOrDefaultErrKey by bindSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
+
+        private val sizeFRequired by bindSizeFArg("sizeFRequired")
+        private val sizeFOptional by bindSizeFArgOrNull("sizeFOptional")
+        private val sizeFOrDefault by bindSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
+        private val sizeFOrDefaultErrKey by bindSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
+
+        private val sizeOptionalErrKey by bindSizeArgOrNull("KeyNotExist")
+        private val sizeFOptionalErrKey by bindSizeFArgOrNull("KeyNotExist")
+        fun assert() {
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertNull(sizeFOptionalErrKey)
+            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
+            Assert.assertTrue(sizeOptional?.width == 2 && sizeOptional?.height == 2)
+            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
+            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
+            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
+            Assert.assertTrue(sizeFOptional?.width == 2f && sizeFOptional?.height == 2f)
+            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
+            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
+        }
+
+        companion object {
+            fun createArguments(activity: Context): Bundle = Bundle().apply {
+                putSize("sizeRequired", Size(1, 1))
+                putSize("sizeOptional", Size(2, 2))
+                putSize("sizeOrDefault", Size(3, 3))
+
+                putSizeF("sizeFRequired", SizeF(1f, 1f))
+                putSizeF("sizeFOptional", SizeF(2f, 2f))
+                putSizeF("sizeFOrDefault", SizeF(3f, 3f))
+
+            }
+        }
+    }
+
+    class TestSupportFragment21 : Fragment() {
+
+        private val sizeRequired by bindSizeArg("sizeRequired")
+        private val sizeOptional by bindSizeArgOrNull("sizeOptional")
+        private val sizeOrDefault by bindSizeArgOr("sizeOrDefault", Size(0, 0))
+        private val sizeOrDefaultErrKey by bindSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
+
+        private val sizeFRequired by bindSizeFArg("sizeFRequired")
+        private val sizeFOptional by bindSizeFArgOrNull("sizeFOptional")
+        private val sizeFOrDefault by bindSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
+        private val sizeFOrDefaultErrKey by bindSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
+
+        private val sizeOptionalErrKey by bindSizeArgOrNull("KeyNotExist")
+        private val sizeFOptionalErrKey by bindSizeFArgOrNull("KeyNotExist")
+        fun assert() {
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertNull(sizeFOptionalErrKey)
+            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
+            Assert.assertTrue(sizeOptional?.width == 2 && sizeOptional?.height == 2)
+            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
+            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
+            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
+            Assert.assertTrue(sizeFOptional?.width == 2f && sizeFOptional?.height == 2f)
+            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
+            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
+        }
+
+        companion object {
+            fun createArguments(activity: Context): Bundle = Bundle().apply {
+                putSize("sizeRequired", Size(1, 1))
+                putSize("sizeOptional", Size(2, 2))
+                putSize("sizeOrDefault", Size(3, 3))
+
+                putSizeF("sizeFRequired", SizeF(1f, 1f))
+                putSizeF("sizeFOptional", SizeF(2f, 2f))
+                putSizeF("sizeFOrDefault", SizeF(3f, 3f))
+
+            }
+        }
+    }
+
+    class ResTestFragment21 : android.app.Fragment() {
+
+        private val sizeRequired by bindSizeArg(R.string.size_required)
+        private val sizeOptional by bindSizeArgOrNull(R.string.size_optional)
+        private val sizeOrDefault by bindSizeArgOr(R.string.size_or_default, Size(0, 0))
+        private val sizeOrDefaultErrKey by bindSizeArgOr(R.string.not_exist_key, Size(4, 4))
+
+        private val sizeFRequired by bindSizeFArg(R.string.sizeF_required)
+        private val sizeFOptional by bindSizeFArgOrNull(R.string.sizeF_optional)
+        private val sizeFOrDefault by bindSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
+        private val sizeFOrDefaultErrKey by bindSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
+
+        private val sizeOptionalErrKey by bindSizeArgOrNull(R.string.not_exist_key)
+        private val sizeFOptionalErrKey by bindSizeFArgOrNull(R.string.not_exist_key)
+
+        fun assert() {
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertNull(sizeFOptionalErrKey)
+            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
+            Assert.assertTrue(sizeOptional?.width == 2 && sizeOptional?.height == 2)
+            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
+            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
+            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
+            Assert.assertTrue(sizeFOptional?.width == 2f && sizeFOptional?.height == 2f)
+            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
+            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
+        }
+
+        companion object {
+            fun createArguments(context: Context): Bundle = Bundle().apply {
+                putSize(context.getString(R.string.size_required), Size(1, 1))
+                putSize(context.getString(R.string.size_optional), Size(2, 2))
+                putSize(context.getString(R.string.size_or_default), Size(3, 3))
+
+                putSizeF(context.getString(R.string.sizeF_required), SizeF(1f, 1f))
+                putSizeF(context.getString(R.string.sizeF_optional), SizeF(2f, 2f))
+                putSizeF(context.getString(R.string.sizeF_or_default), SizeF(3f, 3f))
+
+            }
+        }
+    }
+
+    class ResTestSupportFragment21 : Fragment() {
+
+        private val sizeRequired by bindSizeArg(R.string.size_required)
+        private val sizeOptional by bindSizeArgOrNull(R.string.size_optional)
+        private val sizeOrDefault by bindSizeArgOr(R.string.size_or_default, Size(0, 0))
+        private val sizeOrDefaultErrKey by bindSizeArgOr(R.string.not_exist_key, Size(4, 4))
+
+        private val sizeFRequired by bindSizeFArg(R.string.sizeF_required)
+        private val sizeFOptional by bindSizeFArgOrNull(R.string.sizeF_optional)
+        private val sizeFOrDefault by bindSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
+        private val sizeFOrDefaultErrKey by bindSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
+
+        private val sizeOptionalErrKey by bindSizeArgOrNull(R.string.not_exist_key)
+        private val sizeFOptionalErrKey by bindSizeFArgOrNull(R.string.not_exist_key)
+
+        fun assert() {
+            Assert.assertNull(sizeOptionalErrKey)
+            Assert.assertNull(sizeFOptionalErrKey)
+            Assert.assertTrue(sizeRequired.width == 1 && sizeRequired.height == 1)
+            Assert.assertTrue(sizeOptional?.width == 2 && sizeOptional?.height == 2)
+            Assert.assertTrue(sizeOrDefault.width == 3 && sizeOrDefault.height == 3)
+            Assert.assertTrue(sizeOrDefaultErrKey.width == 4 && sizeOrDefaultErrKey.height == 4)
+            Assert.assertTrue(sizeFRequired.width == 1f && sizeFRequired.height == 1f)
+            Assert.assertTrue(sizeFOptional?.width == 2f && sizeFOptional?.height == 2f)
+            Assert.assertTrue(sizeFOrDefault.width == 3f && sizeFOrDefault.height == 3f)
+            Assert.assertTrue(sizeFOrDefaultErrKey.width == 4f && sizeFOrDefaultErrKey.height == 4f)
+        }
+
+        companion object {
+            fun createArguments(context: Context): Bundle = Bundle().apply {
+                putSize(context.getString(R.string.size_required), Size(1, 1))
+                putSize(context.getString(R.string.size_optional), Size(2, 2))
+                putSize(context.getString(R.string.size_or_default), Size(3, 3))
+
+                putSizeF(context.getString(R.string.sizeF_required), SizeF(1f, 1f))
+                putSizeF(context.getString(R.string.sizeF_optional), SizeF(2f, 2f))
+                putSizeF(context.getString(R.string.sizeF_or_default), SizeF(3f, 3f))
+
+            }
+        }
+    }
 }
