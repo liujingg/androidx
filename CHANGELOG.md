@@ -43,6 +43,7 @@
 * :fire: Bitmapx remove toDrawableByColor
 * :sparkles: Bitmapx adds toDrawable
 * :white_check_mark: Prefect Resizex testing
+* :white_check_mark: Prefect Argsx and ArgsBinder testing
 
 Upgrade
 * :arrow_up: Upgrade Javax 0.9.0

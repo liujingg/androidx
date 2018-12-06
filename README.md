@@ -61,10 +61,10 @@ Dependencies:
 * Activity: [Activityx.java] ([Test][ActivityxTest.java]) | [Activityx.kt] ([Test][ActivityxTest.kt])
     * isDestroyedCompat, convertToTranslucentCompat, convertFromTranslucentCompat, getImplWithParent
     * appContext, canStart, start, safeStart
-* Args: [Argsx.java] | [Argsx.kt]
+* Args: [Argsx.java] ([Test][ArgsxTest.java]) | [Argsx.kt] ([Test][ArgsxTest.kt])
     * read\*Arg, read\*ArgOr, read\*UriArg, read\*UriArgOr, read\*IntentUriArg, read\*IntentUriArgOr,
     * read\*UriIntentArg, read\*UriIntentArgOr
-* ArgsBinder: [ArgsBinder.kt]
+* ArgsBinder: [ArgsBinder.kt] ([Test][ArgsBinderTest.kt])
     * bind\*Arg, bind\*ArgOr, bind\*UriArg, bind\*UriArgOr, bind\*IntentUriArg, bind\*IntentUriArgOr,
     * bind\*UriIntentArg, bind\*UriIntentArgOr
 * Dialog: [Dialogx.java] ([Test][DialogxTest.java]) | [Dialogx.kt] ([Test][DialogxTest.kt])
