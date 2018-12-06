@@ -19,9 +19,13 @@ package me.panpf.androidxkt.test.app
 import android.Manifest
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
+import me.panpf.androidx.Androidx
 import me.panpf.androidx.Androidx.isAtLeastM
+import me.panpf.androidx.hardware.Hardwarex
 import me.panpf.androidxkt.app.filterDeniedPermissions
 import me.panpf.androidxkt.app.isGrantPermissions
+import me.panpf.androidxkt.hardware.getDeviceId
+import me.panpf.androidxkt.hardware.getMacAddress
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,7 +43,12 @@ class PermissionxTest {
     fun testSingleNoPermission() {
         val context = InstrumentationRegistry.getContext()
         if (isAtLeastM()) {
-            Assert.assertFalse(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE))
+            val result = Hardwarex.getDeviceId(context)
+            if ("PermissionDenied" == result) {
+                Assert.assertFalse(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE))
+            } else {
+                Assert.assertTrue(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE))
+            }
         } else {
             Assert.assertTrue(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE))
         }
@@ -54,12 +63,16 @@ class PermissionxTest {
     @Test
     fun testMultiNoPermission() {
         val context = InstrumentationRegistry.getContext()
-        if (isAtLeastM()) {
-            Assert.assertFalse(context.isGrantPermissions(
-                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA))
+        if (Androidx.isAtLeastM()) {
+            val deviceIdResult = context.getDeviceId()
+            val macAddressResult = context.getMacAddress()
+            if ("PermissionDenied" == deviceIdResult || "PermissionDenied" == macAddressResult) {
+                Assert.assertFalse(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_WIFI_STATE))
+            } else {
+                Assert.assertTrue(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_WIFI_STATE))
+            }
         } else {
-            Assert.assertTrue(context.isGrantPermissions(
-                    Manifest.permission.READ_PHONE_STATE, Manifest.permission.CAMERA))
+            Assert.assertTrue(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_WIFI_STATE))
         }
     }
 }

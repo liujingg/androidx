@@ -59,14 +59,18 @@ public class NetworkxTest {
     }
 
     @Test
-    public void testIsWifiActivated() {
+    public void testIsWifiActivated() throws InterruptedException {
         Context context = InstrumentationRegistry.getContext();
         NetworkInfo networkInfo = Contextx.connectivityManager(context).getActiveNetworkInfo();
         if (networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
             Assert.assertTrue(Networkx.isWifiActivated(context));
             if (Networkx.isWifiEnabled(context) && Networkx.setWifiEnabled(context, false)) {
-                Assert.assertFalse(Networkx.isActivated(context));
-                Networkx.setWifiEnabled(context, true);
+                Thread.sleep(1000);
+                try {
+                    Assert.assertFalse(Networkx.isActivated(context));
+                } finally {
+                    Networkx.setWifiEnabled(context, true);
+                }
             }
         } else {
             Assert.assertFalse(Networkx.isWifiActivated(context));
@@ -162,7 +166,7 @@ public class NetworkxTest {
     public void testGetTypeName() {
         Context context = InstrumentationRegistry.getContext();
         if (Networkx.isWifiActivated(context)) {
-            Assert.assertEquals("WI-FI", Networkx.getTypeName(context));
+            Assert.assertEquals("WIFI", Networkx.getTypeName(context));
         } else if (Networkx.isMobileActivated(context)) {
             Assert.assertEquals("Mobile", Networkx.getTypeName(context));
         } else if (Networkx.isBluetoothActivated(context)) {
@@ -177,10 +181,11 @@ public class NetworkxTest {
     @Test
     public void testGetSubTypeName() {
         Context context = InstrumentationRegistry.getContext();
+        String subtypeName = Networkx.getSubtypeName(context);
         if (Networkx.isActivated(context)) {
-            Assert.assertNotNull(Networkx.getSubtypeName(context));
+            Assert.assertNotNull(subtypeName);
         } else {
-            Assert.assertEquals("unknown", Networkx.getSubtypeName(context));
+            Assert.assertTrue(subtypeName, "unknown".equals(subtypeName) || "".equals(subtypeName));
         }
     }
 

@@ -58,6 +58,14 @@ public class Settingsx {
         }
     }
 
+    public static boolean isNotificationPolicyAccessGranted(@NonNull Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Contextx.notificationManager(context).isNotificationPolicyAccessGranted();
+        } else {
+            return true;
+        }
+    }
+
 
     /**
      * Return true if screen brightness auto mode is on

@@ -30,6 +30,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import me.panpf.androidx.Androidx;
 import me.panpf.androidx.util.Jsonx;
 import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.collections.Collectionx;
@@ -342,15 +343,21 @@ public class JsonxTest {
         String sourceArray = "[{\"age\":20,\"name\":\"David\"},{\"age\":21,\"name\":\"Kevin\"},{\"age\":22,\"name\":\"Ruth\"}]";
         String sourceObject = "{\"age\":20,\"name\":\"David\"}";
 
+        // 从 Android N 开始 JSONObject 内部实现由 HashMap 改为 LinkedHashMap，因此 json 字符串转为 JSONObject 后再转成字符串后由于顺序发生了变化导致内容不一样
         String sourceArrayFormatResultBase64 = "WwogICAgewogICAgICAgICJuYW1lIjoiRGF2aWQiLAogICAgICAgICJhZ2UiOjIwCiAgICB9LAog\nICAgewogICAgICAgICJuYW1lIjoiS2V2aW4iLAogICAgICAgICJhZ2UiOjIxCiAgICB9LAogICAg\newogICAgICAgICJuYW1lIjoiUnV0aCIsCiAgICAgICAgImFnZSI6MjIKICAgIH0KXQ==\n";
+        String sourceArrayFormatResultBase64AtLastN = "WwogICAgewogICAgICAgICJhZ2UiOjIwLAogICAgICAgICJuYW1lIjoiRGF2aWQiCiAgICB9LAog\nICAgewogICAgICAgICJhZ2UiOjIxLAogICAgICAgICJuYW1lIjoiS2V2aW4iCiAgICB9LAogICAg\newogICAgICAgICJhZ2UiOjIyLAogICAgICAgICJuYW1lIjoiUnV0aCIKICAgIH0KXQ==\n";
 
-        assertEquals(Base64x.decodeToString(sourceArrayFormatResultBase64), Jsonx.format(sourceArray));
-        assertEquals(Base64x.decodeToString(sourceArrayFormatResultBase64), Jsonx.format(new JSONArray(sourceArray)));
+        assertEquals(Base64x.decodeToString(Androidx.isAtLeastN() ? sourceArrayFormatResultBase64AtLastN : sourceArrayFormatResultBase64), Jsonx.format(sourceArray));
+        assertEquals(Base64x.decodeToString(Androidx.isAtLeastN() ? sourceArrayFormatResultBase64AtLastN : sourceArrayFormatResultBase64), Jsonx.format(new JSONArray(sourceArray)));
         assertEquals("[]", Jsonx.format((JSONArray) null));
         assertEquals("[]", Jsonx.format(new JSONArray()));
 
-        assertEquals(Base64x.decodeToString("ewogICAgIm5hbWUiOiJEYXZpZCIsCiAgICAiYWdlIjoyMAp9\n"), Jsonx.format(sourceObject));
-        assertEquals(Base64x.decodeToString("ewogICAgIm5hbWUiOiJEYXZpZCIsCiAgICAiYWdlIjoyMAp9\n"), Jsonx.format(new JSONObject(sourceObject)));
+        // 从 Android N 开始 JSONObject 内部实现由 HashMap 改为 LinkedHashMap，因此 json 字符串转为 JSONObject 后再转成字符串后由于顺序发生了变化导致内容不一样
+        String sourceObjectFromResultBase64 = "ewogICAgIm5hbWUiOiJEYXZpZCIsCiAgICAiYWdlIjoyMAp9\n";
+        String sourceObjectFromResultBase64AtLastN = "ewogICAgImFnZSI6MjAsCiAgICAibmFtZSI6IkRhdmlkIgp9\n";
+
+        assertEquals(Base64x.decodeToString(Androidx.isAtLeastN() ? sourceObjectFromResultBase64AtLastN : sourceObjectFromResultBase64), Jsonx.format(sourceObject));
+        assertEquals(Base64x.decodeToString(Androidx.isAtLeastN() ? sourceObjectFromResultBase64AtLastN : sourceObjectFromResultBase64), Jsonx.format(new JSONObject(sourceObject)));
         assertEquals("{}", Jsonx.format((JSONObject) null));
         assertEquals("{}", Jsonx.format((String) null));
         assertEquals("{}", Jsonx.format("{}"));

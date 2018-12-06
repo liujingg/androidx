@@ -37,12 +37,11 @@ import java.util.concurrent.CountDownLatch
 @RunWith(AndroidJUnit4::class)
 class SettingsxTest {
 
-    private val requestPermissionActivityRule = ActivityTestRule(RequestPermissionTestActivity::class.java)
+    @get:Rule
+    val requestPermissionActivityRule = ActivityTestRule(RequestPermissionTestActivity::class.java)
 
-    @Rule
-    fun getRequestPermissionActivityRule(): ActivityTestRule<*> {
-        return this.requestPermissionActivityRule
-    }
+    @get:Rule
+    val requestNotificationPolicyActivityRule = ActivityTestRule(RequestNotificationPolicyTestActivity::class.java)
 
     @Test
     fun testScreenBrightnessMode() {
@@ -127,6 +126,8 @@ class SettingsxTest {
 
     @Test
     fun testAirplaneModeOn() {
+        if (Androidx.isAtLeast17()) return
+
         val context = InstrumentationRegistry.getContext()
         if (!context.canWrite()) {
             val activity = requestPermissionActivityRule.activity
@@ -182,16 +183,16 @@ class SettingsxTest {
     @Test
     fun testRingVolume() {
         val context = InstrumentationRegistry.getContext()
-        if (!context.canWrite()) {
-            val activity = requestPermissionActivityRule.activity
+        if (!context.isNotificationPolicyAccessGranted()) {
+            val activity = requestNotificationPolicyActivityRule.activity
             try {
                 activity.countDownLatch.await()
             } catch (e: InterruptedException) {
                 e.printStackTrace()
             }
 
-            if (!context.canWrite()) {
-                Assert.fail("No write settings permission")
+            if (!context.isNotificationPolicyAccessGranted()) {
+                Assert.fail("No NotificationPolicy access permission")
             }
         }
 
@@ -219,6 +220,43 @@ class SettingsxTest {
                 startActivityForResult(intent, 101)
 
                 Toastx.showLong(this, "请允许修改系统设置并关闭此页面")
+                Androidx.getMainHandler().postDelayed(FinishTask(WeakReference(this)), (10 * 1000).toLong())
+            } else {
+                finish()
+            }
+        }
+
+        override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+            super.onActivityResult(requestCode, resultCode, data)
+            finish()
+        }
+
+        override fun onDestroy() {
+            super.onDestroy()
+            countDownLatch.countDown()
+        }
+
+        private class FinishTask internal constructor(private val activityWeakReference: WeakReference<Activity>) : Runnable {
+
+            override fun run() {
+                val activity = activityWeakReference.get()
+                activity?.finish()
+            }
+        }
+    }
+
+    class RequestNotificationPolicyTestActivity : Activity() {
+
+        val countDownLatch = CountDownLatch(1)
+
+        override fun onCreate(savedInstanceState: Bundle?) {
+            super.onCreate(savedInstanceState)
+
+            if (!isNotificationPolicyAccessGranted()) {
+                val intent = Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS)
+                startActivityForResult(intent, 1)
+
+                Toastx.showLong(this, "请允许修改请勿打扰状态并关闭此页面")
                 Androidx.getMainHandler().postDelayed(FinishTask(WeakReference(this)), (10 * 1000).toLong())
             } else {
                 finish()
