@@ -119,7 +119,7 @@ public class AndroidxText {
     @Test
     public void testIsAtLeast() {
         SparseArray<List<Predicate<String>>> array = new SparseArray<>();
-        array.append(Build.VERSION_CODES.JELLY_BEAN, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.JELLY_BEAN, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastJ();
@@ -135,7 +135,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast4_1();
             }
         }));
-        array.append(Build.VERSION_CODES.JELLY_BEAN_MR1, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.JELLY_BEAN_MR1, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastJMR1();
@@ -151,7 +151,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast4_2();
             }
         }));
-        array.append(Build.VERSION_CODES.JELLY_BEAN_MR2, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.JELLY_BEAN_MR2, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastJMR2();
@@ -167,7 +167,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast4_3();
             }
         }));
-        array.append(Build.VERSION_CODES.KITKAT, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.KITKAT, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastK();
@@ -183,7 +183,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast4_4();
             }
         }));
-        array.append(Build.VERSION_CODES.KITKAT_WATCH, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.KITKAT_WATCH, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastKW();
@@ -199,7 +199,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast4_4_W();
             }
         }));
-        array.append(Build.VERSION_CODES.LOLLIPOP, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.LOLLIPOP, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastL();
@@ -215,7 +215,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast5_0();
             }
         }));
-        array.append(Build.VERSION_CODES.LOLLIPOP_MR1, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.LOLLIPOP_MR1, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastLMR1();
@@ -231,7 +231,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast5_1();
             }
         }));
-        array.append(Build.VERSION_CODES.M, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.M, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastM();
@@ -247,7 +247,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast6_0();
             }
         }));
-        array.append(Build.VERSION_CODES.N, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.N, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastN();
@@ -263,7 +263,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast7_0();
             }
         }));
-        array.append(Build.VERSION_CODES.N_MR1, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.N_MR1, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastNMR1();
@@ -279,7 +279,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast7_1();
             }
         }));
-        array.append(Build.VERSION_CODES.O, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.O, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastO();
@@ -295,7 +295,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast8_0();
             }
         }));
-        array.append(Build.VERSION_CODES.O_MR1, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.O_MR1, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastOMR1();
@@ -311,7 +311,7 @@ public class AndroidxText {
                 return Androidx.isAtLeast8_1();
             }
         }));
-        array.append(Build.VERSION_CODES.P, Collectionx.listOf(new Predicate<String>() {
+        array.append(Build.VERSION_CODES.P, Collectionx.mutableListOf(new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String s) {
                 return Androidx.isAtLeastP();

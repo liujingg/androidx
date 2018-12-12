@@ -67,7 +67,7 @@ public class JsonxTest {
 
     @Test
     public void testToJsonArray() {
-        assertEquals("[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\"]", Jsonx.toJsonArray(Collectionx.listOf("0", "1", "2", "3", "4", "5")).toString());
+        assertEquals("[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\"]", Jsonx.toJsonArray(Collectionx.mutableListOf("0", "1", "2", "3", "4", "5")).toString());
         assertEquals("[]", Jsonx.toJsonArray((List<String>) null).toString());
         assertEquals("[0,1,2,3,4,5]", Jsonx.toJsonArray(Arrayx.intArrayOf(0, 1, 2, 3, 4, 5)).toString());
         assertEquals("[]", Jsonx.toJsonArray((int[]) null).toString());
@@ -75,25 +75,25 @@ public class JsonxTest {
 
     @Test
     public void testToJson() {
-        assertEquals("[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\"]", Jsonx.toJson(Collectionx.listOf("0", "1", "2", "3", "4", "5")));
+        assertEquals("[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\"]", Jsonx.toJson(Collectionx.mutableListOf("0", "1", "2", "3", "4", "5")));
         assertEquals("[0,1,2,3,4,5]", Jsonx.toJson(Arrayx.intArrayOf(0, 1, 2, 3, 4, 5)));
     }
 
     @Test
     public void testToListOrArray() throws JSONException {
-        assertEquals(Collectionx.listOf("0", "1", "2", "3", "4", "5"), Jsonx.toStringList(Jsonx.toJsonArray(Collectionx.listOf("0", "1", "2", "3", "4", "5"))));
-        assertEquals(Collectionx.listOf("0", "1", "2", "3", "4", "5"), Jsonx.toStringList("[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\"]"));
+        assertEquals(Collectionx.mutableListOf("0", "1", "2", "3", "4", "5"), Jsonx.toStringList(Jsonx.toJsonArray(Collectionx.mutableListOf("0", "1", "2", "3", "4", "5"))));
+        assertEquals(Collectionx.mutableListOf("0", "1", "2", "3", "4", "5"), Jsonx.toStringList("[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\"]"));
         assertEquals(new ArrayList<>(0), Jsonx.toStringList((JSONArray) null));
         assertEquals(new ArrayList<>(0), Jsonx.toStringList(new JSONArray()));
         assertEquals(new ArrayList<>(0), Jsonx.toStringList((String) null));
 
-        assertArrayEquals(Arrayx.arrayOf("0", "1", "2", "3", "4", "5"), Jsonx.toStringArray(Jsonx.toJsonArray(Collectionx.listOf("0", "1", "2", "3", "4", "5"))));
+        assertArrayEquals(Arrayx.arrayOf("0", "1", "2", "3", "4", "5"), Jsonx.toStringArray(Jsonx.toJsonArray(Collectionx.mutableListOf("0", "1", "2", "3", "4", "5"))));
         assertArrayEquals(Arrayx.arrayOf("0", "1", "2", "3", "4", "5"), Jsonx.toStringArray("[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\"]"));
         assertArrayEquals(new String[0], Jsonx.toStringArray((JSONArray) null));
         assertArrayEquals(new String[0], Jsonx.toStringArray(new JSONArray()));
         assertArrayEquals(new String[0], Jsonx.toStringArray((String) null));
 
-        assertArrayEquals(Arrayx.intArrayOf(0, 1, 2, 3, 4, 5), Jsonx.toIntArray(Jsonx.toJsonArray(Collectionx.listOf("0", "1", "2", "3", "4", "5"))));
+        assertArrayEquals(Arrayx.intArrayOf(0, 1, 2, 3, 4, 5), Jsonx.toIntArray(Jsonx.toJsonArray(Collectionx.mutableListOf("0", "1", "2", "3", "4", "5"))));
         assertArrayEquals(Arrayx.intArrayOf(0, 1, 2, 3, 4, 5), Jsonx.toIntArray("[\"0\",\"1\",\"2\",\"3\",\"4\",\"5\"]"));
         assertArrayEquals(new int[0], Jsonx.toIntArray((JSONArray) null));
         assertArrayEquals(new int[0], Jsonx.toIntArray(new JSONArray()));
@@ -111,8 +111,8 @@ public class JsonxTest {
         };
 
         String source = "[{\"age\":20,\"name\":\"David\"},{\"age\":21,\"name\":\"Kevin\"},{\"age\":22,\"name\":\"Ruth\"}]";
-        assertEquals(Collectionx.listOf(new Bean(20, "David"), new Bean(21, "Kevin"), new Bean(22, "Ruth")), Jsonx.toBeanList(new JSONArray(source), parser));
-        assertEquals(Collectionx.listOf(new Bean(20, "David"), new Bean(21, "Kevin"), new Bean(22, "Ruth")), Jsonx.toBeanList(source, parser));
+        assertEquals(Collectionx.mutableListOf(new Bean(20, "David"), new Bean(21, "Kevin"), new Bean(22, "Ruth")), Jsonx.toBeanList(new JSONArray(source), parser));
+        assertEquals(Collectionx.mutableListOf(new Bean(20, "David"), new Bean(21, "Kevin"), new Bean(22, "Ruth")), Jsonx.toBeanList(source, parser));
 
         String source2 = "{\"age\":20,\"name\":\"David\"}";
         assertEquals(new Bean(20, "David"), Jsonx.toBean(new JSONObject(source2), parser));

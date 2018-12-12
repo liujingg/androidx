@@ -76,7 +76,7 @@ public class Hardwarex {
                 return Build.SUPPORTED_ABIS;
             } else {
                 //noinspection deprecation
-                return Collectionx.filter(Collectionx.listOf(Build.CPU_ABI, Build.CPU_ABI2), new Predicate<String>() {
+                return Collectionx.filter(Collectionx.mutableListOf(Build.CPU_ABI, Build.CPU_ABI2), new Predicate<String>() {
                     @Override
                     public boolean accept(@NonNull String s) {
                         return Stringx.isNotEmpty(s) && !"unknown".equals(s);

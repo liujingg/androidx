@@ -37,7 +37,7 @@ public class ColorxTest {
 
     @Test
     public void testColors() {
-        List<Integer> colorList = Collectionx.listOf(Colorx.WHITE, Colorx.WHITE_TRANSLUCENT, Colorx.BLACK, Colorx.BLACK_TRANSLUCENT,
+        List<Integer> colorList = Collectionx.mutableListOf(Colorx.WHITE, Colorx.WHITE_TRANSLUCENT, Colorx.BLACK, Colorx.BLACK_TRANSLUCENT,
                 Colorx.TRANSPARENT, Colorx.RED, Colorx.RED_TRANSLUCENT, Colorx.RED_DARK, Colorx.RED_DARK_TRANSLUCENT, Colorx.GREEN,
                 Colorx.GREEN_TRANSLUCENT, Colorx.GREEN_DARK, Colorx.GREEN_DARK_TRANSLUCENT, Colorx.GREEN_LIGHT, Colorx.GREEN_LIGHT_TRANSLUCENT,
                 Colorx.BLUE, Colorx.BLUE_TRANSLUCENT, Colorx.BLUE_DARK, Colorx.BLUE_DARK_TRANSLUCENT, Colorx.BLUE_LIGHT, Colorx.BLUE_LIGHT_TRANSLUCENT,

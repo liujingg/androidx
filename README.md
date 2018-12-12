@@ -29,7 +29,7 @@ Please replace `$lastVersion` with the latest version: [![Download][version_java
 
 Dependencies:
 * [com.android.support:support-fragment][support_fragment]: [28.0.0][support_fragment_versions]
-* [me.panpf:javax][javax]: [0.9.0][javax_versions]
+* [me.panpf:javax][javax]: [1.0.0-alpha1][javax_versions]
 
 ### Kotlin Expansion:
 
@@ -44,7 +44,7 @@ Please replace `$lastVersion` with the latest version: [![Download][version_kotl
 Dependencies:
 * [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.2.71][kotlin_versions]
 * [com.android.support:support-fragment][support_fragment]: [28.0.0][support_fragment_versions]
-* [me.panpf:javax-kt][javax]: [0.9.0][javax_versions]
+* [me.panpf:javax-kt][javax]: [1.0.0-alpha1][javax_versions]
 
 `androidx-kt is a androidx extension on the Kotlin platform that allows you to use androidx more comfortably on Kotlin`
 

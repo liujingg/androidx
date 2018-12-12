@@ -65,13 +65,13 @@ class PreferencexTest {
 
             Assert.assertEquals(-1, context.getIntPreference("intKey1", -1).toLong())
             Assert.assertEquals(-1, context.getIntPreference("intKey2", -1).toLong())
-            context.putIntsPreference(Mapx.builder("intKey1", 1).put("intKey2", 2).build())
+            context.putIntsPreference(Mapx.builder("intKey1", 1).put("intKey2", 2).buildHashMap())
             Assert.assertEquals(1, context.getIntPreference("intKey1", -1).toLong())
             Assert.assertEquals(2, context.getIntPreference("intKey2", -1).toLong())
 
             Assert.assertEquals(-1, context.getIntPreferenceFrom(name, "intKey1", -1).toLong())
             Assert.assertEquals(-1, context.getIntPreferenceFrom(name, "intKey2", -1).toLong())
-            context.putIntsPreferenceTo(name, Mapx.builder("intKey1", 1).put("intKey2", 2).build())
+            context.putIntsPreferenceTo(name, Mapx.builder("intKey1", 1).put("intKey2", 2).buildHashMap())
             Assert.assertEquals(1, context.getIntPreferenceFrom(name, "intKey1", -1).toLong())
             Assert.assertEquals(2, context.getIntPreferenceFrom(name, "intKey2", -1).toLong())
 
@@ -86,13 +86,13 @@ class PreferencexTest {
 
             Assert.assertEquals(-1L, context.getLongPreference("longKey1", -1L))
             Assert.assertEquals(-1L, context.getLongPreference("longKey2", -1L))
-            context.putLongsPreference(Mapx.builder("longKey1", 1L).put("longKey2", 2L).build())
+            context.putLongsPreference(Mapx.builder("longKey1", 1L).put("longKey2", 2L).buildHashMap())
             Assert.assertEquals(1L, context.getLongPreference("longKey1", -1L))
             Assert.assertEquals(2L, context.getLongPreference("longKey2", -1L))
 
             Assert.assertEquals(-1L, context.getLongPreferenceFrom(name, "longKey1", -1L))
             Assert.assertEquals(-1L, context.getLongPreferenceFrom(name, "longKey2", -1L))
-            context.putLongsPreferenceTo(name, Mapx.builder("longKey1", 1L).put("longKey2", 2L).build())
+            context.putLongsPreferenceTo(name, Mapx.builder("longKey1", 1L).put("longKey2", 2L).buildHashMap())
             Assert.assertEquals(1L, context.getLongPreferenceFrom(name, "longKey1", -1L))
             Assert.assertEquals(2L, context.getLongPreferenceFrom(name, "longKey2", -1L))
 
@@ -107,13 +107,13 @@ class PreferencexTest {
 
             Assert.assertTrue(context.getBooleanPreference("booleanKey1", true))
             Assert.assertTrue(context.getBooleanPreference("booleanKey2", true))
-            context.putBooleansPreference(Mapx.builder("booleanKey1", false).put("booleanKey2", true).build())
+            context.putBooleansPreference(Mapx.builder("booleanKey1", false).put("booleanKey2", true).buildHashMap())
             Assert.assertFalse(context.getBooleanPreference("booleanKey1", true))
             Assert.assertTrue(context.getBooleanPreference("booleanKey2", true))
 
             Assert.assertTrue(context.getBooleanPreferenceFrom(name, "booleanKey1", true))
             Assert.assertTrue(context.getBooleanPreferenceFrom(name, "booleanKey2", true))
-            context.putBooleansPreferenceTo(name, Mapx.builder("booleanKey1", false).put("booleanKey2", true).build())
+            context.putBooleansPreferenceTo(name, Mapx.builder("booleanKey1", false).put("booleanKey2", true).buildHashMap())
             Assert.assertFalse(context.getBooleanPreferenceFrom(name, "booleanKey1", true))
             Assert.assertTrue(context.getBooleanPreferenceFrom(name, "booleanKey2", true))
 
@@ -128,13 +128,13 @@ class PreferencexTest {
 
             Assert.assertEquals(-1f, context.getFloatPreference("floatKey1", -1f), 0f)
             Assert.assertEquals(-1f, context.getFloatPreference("floatKey2", -1f), 0f)
-            context.putFloatsPreference(Mapx.builder("floatKey1", 1f).put("floatKey2", 2f).build())
+            context.putFloatsPreference(Mapx.builder("floatKey1", 1f).put("floatKey2", 2f).buildHashMap())
             Assert.assertEquals(1f, context.getFloatPreference("floatKey1", -1f), 0f)
             Assert.assertEquals(2f, context.getFloatPreference("floatKey2", -1f), 0f)
 
             Assert.assertEquals(-1f, context.getFloatPreferenceFrom(name, "floatKey1", -1f), 0f)
             Assert.assertEquals(-1f, context.getFloatPreferenceFrom(name, "floatKey2", -1f), 0f)
-            context.putFloatsPreferenceTo(name, Mapx.builder("floatKey1", 1f).put("floatKey2", 2f).build())
+            context.putFloatsPreferenceTo(name, Mapx.builder("floatKey1", 1f).put("floatKey2", 2f).buildHashMap())
             Assert.assertEquals(1f, context.getFloatPreferenceFrom(name, "floatKey1", -1f), 0f)
             Assert.assertEquals(2f, context.getFloatPreferenceFrom(name, "floatKey2", -1f), 0f)
 
@@ -151,13 +151,13 @@ class PreferencexTest {
 
             Assert.assertEquals("-1f", context.getStringPreference("stringKey1", "-1f"))
             Assert.assertEquals("-1f", context.getStringPreference("stringKey2", "-1f"))
-            context.putStringsPreference(Mapx.builder("stringKey1", "1f").put("stringKey2", "2f").build())
+            context.putStringsPreference(Mapx.builder("stringKey1", "1f").put("stringKey2", "2f").buildHashMap())
             Assert.assertEquals("1f", context.getStringPreference("stringKey1", "-1f"))
             Assert.assertEquals("2f", context.getStringPreference("stringKey2", "-1f"))
 
             Assert.assertEquals("-1f", context.getStringPreferenceFrom(name, "stringKey1", "-1f"))
             Assert.assertEquals("-1f", context.getStringPreferenceFrom(name, "stringKey2", "-1f"))
-            context.putStringsPreferenceTo(name, Mapx.builder("stringKey1", "1f").put("stringKey2", "2f").build())
+            context.putStringsPreferenceTo(name, Mapx.builder("stringKey1", "1f").put("stringKey2", "2f").buildHashMap())
             Assert.assertEquals("1f", context.getStringPreferenceFrom(name, "stringKey1", "-1f"))
             Assert.assertEquals("2f", context.getStringPreferenceFrom(name, "stringKey2", "-1f"))
 
@@ -175,13 +175,13 @@ class PreferencexTest {
 
             Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetsKey1", listOf("-1", "-2").toSet()).sorted().joinToString())
             Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetsKey2", listOf("-1", "-2").toSet()).sorted().joinToString())
-            context.putStringSetsPreference(Mapx.builder("stringSetsKey1", listOf("1", "2").toSet()).put("stringSetsKey2", listOf("3", "4").toSet()).build())
+            context.putStringSetsPreference(Mapx.builder("stringSetsKey1", listOf("1", "2").toSet()).put("stringSetsKey2", listOf("3", "4").toSet()).buildHashMap())
             Assert.assertEquals(listOf("1", "2").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetsKey1", listOf("-1", "-2").toSet()).sorted().joinToString())
             Assert.assertEquals(listOf("4", "3").sorted().toSet().joinToString(), context.getStringSetPreference("stringSetsKey2", listOf("-1", "-2").toSet()).sorted().joinToString())
 
             Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetsKey1", listOf("-1", "-2").toSet()).sorted().joinToString())
             Assert.assertEquals(listOf("-1", "-2").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetsKey2", listOf("-1", "-2").toSet()).sorted().joinToString())
-            context.putStringSetsPreferenceTo(name, Mapx.builder("stringSetsKey1", listOf("1", "2").toSet()).put("stringSetsKey2", listOf("3", "4").toSet()).build())
+            context.putStringSetsPreferenceTo(name, Mapx.builder("stringSetsKey1", listOf("1", "2").toSet()).put("stringSetsKey2", listOf("3", "4").toSet()).buildHashMap())
             Assert.assertEquals(listOf("1", "2").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetsKey1", listOf("-1", "-2").toSet()).sorted().joinToString())
             Assert.assertEquals(listOf("4", "3").sorted().toSet().joinToString(), context.getStringSetPreferenceFrom(name, "stringSetsKey2", listOf("-1", "-2").toSet()).sorted().joinToString())
         } finally {

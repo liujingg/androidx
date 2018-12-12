@@ -73,13 +73,13 @@ public class PreferencexTest {
 
             Assert.assertEquals(-1, Preferencex.getInt(context, "intKey1", -1));
             Assert.assertEquals(-1, Preferencex.getInt(context, "intKey2", -1));
-            Preferencex.putInts(context, Mapx.builder("intKey1", 1).put("intKey2", 2).build());
+            Preferencex.putInts(context, Mapx.builder("intKey1", 1).put("intKey2", 2).buildHashMap());
             Assert.assertEquals(1, Preferencex.getInt(context, "intKey1", -1));
             Assert.assertEquals(2, Preferencex.getInt(context, "intKey2", -1));
 
             Assert.assertEquals(-1, Preferencex.getIntFrom(context, name, "intKey1", -1));
             Assert.assertEquals(-1, Preferencex.getIntFrom(context, name, "intKey2", -1));
-            Preferencex.putIntsTo(context, name, Mapx.builder("intKey1", 1).put("intKey2", 2).build());
+            Preferencex.putIntsTo(context, name, Mapx.builder("intKey1", 1).put("intKey2", 2).buildHashMap());
             Assert.assertEquals(1, Preferencex.getIntFrom(context, name, "intKey1", -1));
             Assert.assertEquals(2, Preferencex.getIntFrom(context, name, "intKey2", -1));
 
@@ -94,13 +94,13 @@ public class PreferencexTest {
 
             Assert.assertEquals(-1L, Preferencex.getLong(context, "longKey1", -1L));
             Assert.assertEquals(-1L, Preferencex.getLong(context, "longKey2", -1L));
-            Preferencex.putLongs(context, Mapx.builder("longKey1", 1L).put("longKey2", 2L).build());
+            Preferencex.putLongs(context, Mapx.builder("longKey1", 1L).put("longKey2", 2L).buildHashMap());
             Assert.assertEquals(1L, Preferencex.getLong(context, "longKey1", -1L));
             Assert.assertEquals(2L, Preferencex.getLong(context, "longKey2", -1L));
 
             Assert.assertEquals(-1L, Preferencex.getLongFrom(context, name, "longKey1", -1L));
             Assert.assertEquals(-1L, Preferencex.getLongFrom(context, name, "longKey2", -1L));
-            Preferencex.putLongsTo(context, name, Mapx.builder("longKey1", 1L).put("longKey2", 2L).build());
+            Preferencex.putLongsTo(context, name, Mapx.builder("longKey1", 1L).put("longKey2", 2L).buildHashMap());
             Assert.assertEquals(1L, Preferencex.getLongFrom(context, name, "longKey1", -1L));
             Assert.assertEquals(2L, Preferencex.getLongFrom(context, name, "longKey2", -1L));
 
@@ -115,13 +115,13 @@ public class PreferencexTest {
 
             Assert.assertTrue(Preferencex.getBoolean(context, "booleanKey1", true));
             Assert.assertTrue(Preferencex.getBoolean(context, "booleanKey2", true));
-            Preferencex.putBooleans(context, Mapx.builder("booleanKey1", false).put("booleanKey2", true).build());
+            Preferencex.putBooleans(context, Mapx.builder("booleanKey1", false).put("booleanKey2", true).buildHashMap());
             Assert.assertFalse(Preferencex.getBoolean(context, "booleanKey1", true));
             Assert.assertTrue(Preferencex.getBoolean(context, "booleanKey2", true));
 
             Assert.assertTrue(Preferencex.getBooleanFrom(context, name, "booleanKey1", true));
             Assert.assertTrue(Preferencex.getBooleanFrom(context, name, "booleanKey2", true));
-            Preferencex.putBooleansTo(context, name, Mapx.builder("booleanKey1", false).put("booleanKey2", true).build());
+            Preferencex.putBooleansTo(context, name, Mapx.builder("booleanKey1", false).put("booleanKey2", true).buildHashMap());
             Assert.assertFalse(Preferencex.getBooleanFrom(context, name, "booleanKey1", true));
             Assert.assertTrue(Preferencex.getBooleanFrom(context, name, "booleanKey2", true));
 
@@ -136,13 +136,13 @@ public class PreferencexTest {
 
             Assert.assertEquals(-1f, Preferencex.getFloat(context, "floatKey1", -1f), 0f);
             Assert.assertEquals(-1f, Preferencex.getFloat(context, "floatKey2", -1f), 0f);
-            Preferencex.putFloats(context, Mapx.builder("floatKey1", 1f).put("floatKey2", 2f).build());
+            Preferencex.putFloats(context, Mapx.builder("floatKey1", 1f).put("floatKey2", 2f).buildHashMap());
             Assert.assertEquals(1f, Preferencex.getFloat(context, "floatKey1", -1f), 0f);
             Assert.assertEquals(2f, Preferencex.getFloat(context, "floatKey2", -1f), 0f);
 
             Assert.assertEquals(-1f, Preferencex.getFloatFrom(context, name, "floatKey1", -1f), 0f);
             Assert.assertEquals(-1f, Preferencex.getFloatFrom(context, name, "floatKey2", -1f), 0f);
-            Preferencex.putFloatsTo(context, name, Mapx.builder("floatKey1", 1f).put("floatKey2", 2f).build());
+            Preferencex.putFloatsTo(context, name, Mapx.builder("floatKey1", 1f).put("floatKey2", 2f).buildHashMap());
             Assert.assertEquals(1f, Preferencex.getFloatFrom(context, name, "floatKey1", -1f), 0f);
             Assert.assertEquals(2f, Preferencex.getFloatFrom(context, name, "floatKey2", -1f), 0f);
 
@@ -159,39 +159,39 @@ public class PreferencexTest {
 
             Assert.assertEquals("-1f", Preferencex.getString(context, "stringKey1", "-1f"));
             Assert.assertEquals("-1f", Preferencex.getString(context, "stringKey2", "-1f"));
-            Preferencex.putStrings(context, Mapx.builder("stringKey1", "1f").put("stringKey2", "2f").build());
+            Preferencex.putStrings(context, Mapx.builder("stringKey1", "1f").put("stringKey2", "2f").buildHashMap());
             Assert.assertEquals("1f", Preferencex.getString(context, "stringKey1", "-1f"));
             Assert.assertEquals("2f", Preferencex.getString(context, "stringKey2", "-1f"));
 
             Assert.assertEquals("-1f", Preferencex.getStringFrom(context, name, "stringKey1", "-1f"));
             Assert.assertEquals("-1f", Preferencex.getStringFrom(context, name, "stringKey2", "-1f"));
-            Preferencex.putStringsTo(context, name, Mapx.builder("stringKey1", "1f").put("stringKey2", "2f").build());
+            Preferencex.putStringsTo(context, name, Mapx.builder("stringKey1", "1f").put("stringKey2", "2f").buildHashMap());
             Assert.assertEquals("1f", Preferencex.getStringFrom(context, name, "stringKey1", "-1f"));
             Assert.assertEquals("2f", Preferencex.getStringFrom(context, name, "stringKey2", "-1f"));
 
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
             Assert.assertNull(Preferencex.getStringSetOrNull(context, "stringSetKey"));
-            Preferencex.putStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.listOf("1", "2")));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Preferencex.putStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.mutableListOf("1", "2")));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetKey", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetKey", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
             Assert.assertNull(Preferencex.getStringSetOrNullFrom(context, name, "stringSetKey"));
-            Preferencex.putStringSetTo(context, name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("1", "2")));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetKey", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Preferencex.putStringSetTo(context, name, "stringSetKey", Collectionx.toSet(Collectionx.mutableListOf("1", "2")));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetKey", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
 
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
-            Preferencex.putStringSets(context, Mapx.builder("stringSetsKey1", Collectionx.toSet(Collectionx.listOf("1", "2"))).put("stringSetsKey2", Collectionx.toSet(Collectionx.listOf("3", "4"))).build());
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("4", "3")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey1", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey2", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
+            Preferencex.putStringSets(context, Mapx.builder("stringSetsKey1", Collectionx.toSet(Collectionx.mutableListOf("1", "2"))).put("stringSetsKey2", Collectionx.toSet(Collectionx.mutableListOf("3", "4"))).buildHashMap());
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey1", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("4", "3")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSet(context, "stringSetsKey2", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
 
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
-            Preferencex.putStringSetsTo(context, name, Mapx.builder("stringSetsKey1", Collectionx.toSet(Collectionx.listOf("1", "2"))).put("stringSetsKey2", Collectionx.toSet(Collectionx.listOf("3", "4"))).build());
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey1", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
-            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.listOf("4", "3")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey2", Collectionx.toSet(Collectionx.listOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey1", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("-1", "-2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey2", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
+            Preferencex.putStringSetsTo(context, name, Mapx.builder("stringSetsKey1", Collectionx.toSet(Collectionx.mutableListOf("1", "2"))).put("stringSetsKey2", Collectionx.toSet(Collectionx.mutableListOf("3", "4"))).buildHashMap());
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("1", "2")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey1", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
+            Assert.assertEquals(Collectionx.joinToString(Collectionx.toSet(Collectionx.sorted(Collectionx.mutableListOf("4", "3")))), Collectionx.joinToString(Collectionx.sorted(Preferencex.getStringSetFrom(context, name, "stringSetsKey2", Collectionx.toSet(Collectionx.mutableListOf("-1", "-2"))))));
         } finally {
             Preferencex.clear(context);
             Preferencex.clearFrom(context, name);

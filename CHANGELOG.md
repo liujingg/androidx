@@ -46,7 +46,7 @@
 * :white_check_mark: Prefect Argsx and ArgsBinder testing
 
 Upgrade
-* :arrow_up: Upgrade Javax 0.9.0
+* :arrow_up: Upgrade Javax 1.0.0-alpha1
 
 ## v0.6.0
 
