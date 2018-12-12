@@ -7,9 +7,6 @@
 
 Extensions to the Android standard library and support libraries and some basic tools
 
-### :warning: `Warning`
-`Currently in the development stage, some APIs have not been tested yet, please use them carefully`
-
 ### Child module
 * [androidx-kt-arch]: Kotlin extension to Android Architecture related libraries
 
@@ -49,8 +46,6 @@ Dependencies:
 `androidx-kt is a androidx extension on the Kotlin platform that allows you to use androidx more comfortably on Kotlin`
 
 ## Index
-
-:warning: Representatives with the `(Test)` tag have passed the test and can be used with confidence.
 
 ### android
 * Android: [Androidx.java] ([Test][AndroidxTest.java]) | [Androidx.kt] ([Test][AndroidxTest.kt])

@@ -1,37 +1,49 @@
-## v...
+## v1.0.0-alpha1
 
-* :sparkles: Add PackageInfox
-* :sparkles: Intentx adds getShareFileUri adds
-* :white_check_mark: Perfect Intentx testing
-* :sparkles: Adds LifecycleBroadcastReceiver
-* :white_check_mark: Perfect Dialogx testing
-* :sparkles: Adds BundleBuilder
+Fix the following bug:
+* :bug: Fix a bug where Networkx isMetered actually called the isVPNActivated method
+
+Delete or rename the following methods:
 * :fire: Fragmentx instance rename to instantiate, instanceOrigin rename to instantiateOrigin
-* :white_check_mark: Perfect Fragmentx testing
-* :fire: Serevicex tryStart rename to startIfNoRunning, tryStop rename to stopIfRunning
-* :white_check_mark: Perfect Servicex testing
-* :white_check_mark: Perfect Assetx testing
+* :fire: Servicex tryStart rename to startIfNoRunning, tryStop rename to stopIfRunning
 * :fire: Remove Assetx
 * :fire: Remove Contentx
 * :fire: Refactoring Preferencex
-* :white_check_mark: Prefect Preferencex testing
 * :fire: Refactoring Packagex
+* :fire: Dimenx unit2px rename to applyDimension
+* :fire: Settingsx getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem move to Windowx
+* :fire: Activityx appContext, Fragmentx requireContext and requireAppContext, Viewx appContext move to Contextx
+* :fire: Networkx remove getConnectivity method
+* :fire: Networkx.kt isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getGateway method rename to isWifiNetworkEnabled, setWifiNetworkEnabled, isMobileNetworkEnabled, setMobileNetworkEnabled, getNetworkGateway
+* :fire: The default return value for some methods of NetworkState is changed from 'Unknown' to 'unknown'
+* :fire: Drawablex toDrawableByColor rename to changeColor, toDrawableByColorFromDrawableRes rename to changeResDrawableColor
+* :fire: Bitmapx remove toDrawableByColor
+
+Add the following methods or tool classes:
+* :sparkles: Adds BundleBuilder
+* :sparkles: Bitmapx adds toDrawable
+* :sparkles: Add PackageInfox
+* :sparkles: Intentx adds getShareFileUri adds
+* :sparkles: Adds LifecycleBroadcastReceiver
+
+Complete the following tool classes of tests:
+* :white_check_mark: Perfect Intentx testing
+* :white_check_mark: Perfect Dialogx testing
+* :white_check_mark: Perfect Fragmentx testing
+* :white_check_mark: Perfect Servicex testing
+* :white_check_mark: Perfect Assetx testing
+* :white_check_mark: Prefect Preferencex testing
 * :white_check_mark: Prefect Packagex testing
 * :white_check_mark: Prefect Dimenx testing
-* :fire: Dimenx unit2px rename to applyDimension
 * :white_check_mark: Prefect Jsonx testing
 * :white_check_mark: Prefect Textx testing
-* :fire: Settingsx getWindowBrightness, setWindowBrightness, isWindowBrightnessFlowSystem move to Windowx
 * :white_check_mark: Prefect Settingsx testing
-* :fire: Activityx appContext, Fragmentx requireContext and requireAppContext, Viewx appContext move to Contextx
 * :white_check_mark: Prefect Viewx testing
 * :white_check_mark: Prefect Displayx testing
 * :white_check_mark: Prefect ViewAnimx testing
 * :white_check_mark: Prefect InputMethodx testing
-* :fire: Networkx remove getConnectivity method
-* :bug: Fix a bug where Networkx isMetered actually called the isVPNActivated method
-* :fire: Networkx.kt isWifiEnabled, setWifiEnabled, isMobileEnabled, setMobileEnabled, getGateway method rename to isWifiNetworkEnabled, setWifiNetworkEnabled, isMobileNetworkEnabled, setMobileNetworkEnabled, getNetworkGateway
-* :fire: The default return value for some methods of NetworkState is changed from 'Unknown' to 'unknown'
+* :white_check_mark: Prefect Resizex testing
+* :white_check_mark: Prefect Argsx and ArgsBinder testing
 * :white_check_mark: Prefect Networkx testing
 * :white_check_mark: Prefect NetworkState testing
 * :white_check_mark: Prefect Matrixx testing
@@ -39,14 +51,9 @@
 * :white_check_mark: Prefect Paintx testing
 * :white_check_mark: Prefect Colorx testing
 * :white_check_mark: Prefect Imagex testing
-* :fire: Drawablex toDrawableByColor rename to changeColor, toDrawableByColorFromDrawableRes rename to changeResDrawableColor
-* :fire: Bitmapx remove toDrawableByColor
-* :sparkles: Bitmapx adds toDrawable
-* :white_check_mark: Prefect Resizex testing
-* :white_check_mark: Prefect Argsx and ArgsBinder testing
-* :arrow_up: Upgrade to Jetpack
 
-Upgrade
+Upgrade the following dependencies:
+* :arrow_up: Upgrade to Jetpack
 * :arrow_up: Upgrade Javax 1.0.0-alpha1
 
 ## v0.6.0
