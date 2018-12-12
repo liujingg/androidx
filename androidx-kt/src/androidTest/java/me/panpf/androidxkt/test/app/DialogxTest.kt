@@ -5,9 +5,8 @@ package me.panpf.androidxkt.test.app
 import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.FragmentActivity
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.app.setClickButtonClosable
 import me.panpf.androidxkt.app.showProgressDialog
 import me.panpf.androidxkt.waitRunInUI
@@ -67,13 +66,13 @@ class DialogxTest {
         }
     }
 
-    class TestFragmentActivity : FragmentActivity() {
+    class TestFragmentActivity : androidx.fragment.app.FragmentActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
             supportFragmentManager.beginTransaction()
-                    .replace(android.R.id.content, android.support.v4.app.Fragment())
+                    .replace(android.R.id.content, androidx.fragment.app.Fragment())
                     .commit()
         }
     }

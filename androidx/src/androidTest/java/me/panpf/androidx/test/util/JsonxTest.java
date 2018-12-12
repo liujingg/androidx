@@ -16,10 +16,6 @@
 
 package me.panpf.androidx.test.util;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.test.runner.AndroidJUnit4;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,6 +26,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.util.Jsonx;
 import me.panpf.javax.collections.Arrayx;

@@ -19,8 +19,6 @@ package me.panpf.androidx.test.content;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 import android.util.Pair;
 
 import org.jetbrains.annotations.NotNull;
@@ -32,6 +30,8 @@ import java.io.File;
 import java.util.List;
 import java.util.Map;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.pm.AppPackage;
 import me.panpf.androidx.content.pm.Packagex;
 import me.panpf.androidx.test.BuildConfig;

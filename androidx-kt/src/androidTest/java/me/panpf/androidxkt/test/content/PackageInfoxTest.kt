@@ -2,8 +2,8 @@ package me.panpf.androidxkt.test.content
 
 import android.app.Activity
 import android.content.pm.PackageManager
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.content.pm.*
 import me.panpf.androidxkt.test.TestProvider
 import me.panpf.androidxkt.test.TestReceiver

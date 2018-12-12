@@ -17,8 +17,8 @@
 package me.panpf.androidxkt.test.os.storage
 
 import android.os.Environment
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.os.storage.*
 import org.junit.Assert.*
 import org.junit.Test

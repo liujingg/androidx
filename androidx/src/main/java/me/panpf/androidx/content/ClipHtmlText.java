@@ -19,8 +19,9 @@ package me.panpf.androidx.content;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 public class ClipHtmlText extends ClipContent {
 

@@ -1,12 +1,12 @@
 package me.panpf.androidxkt.arch.test
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
+import androidx.fragment.app.FragmentActivity
 import me.panpf.androidxkt.arch.bindViewModel
 
-class TestActivity : FragmentActivity() {
+class TestActivity : androidx.fragment.app.FragmentActivity() {
 
     val viewModel: TestViewModel  by bindViewModel(TestViewModel::class)
 

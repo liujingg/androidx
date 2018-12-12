@@ -17,7 +17,7 @@
 package me.panpf.androidxkt.test.graphics
 
 import android.graphics.Matrix
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.graphics.getScale
 import me.panpf.androidxkt.graphics.getValue
 import org.junit.Assert

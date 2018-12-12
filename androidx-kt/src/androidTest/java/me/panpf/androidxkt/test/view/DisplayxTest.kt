@@ -20,12 +20,11 @@ package me.panpf.androidxkt.test.view
 
 import android.content.res.Configuration
 import android.os.Bundle
-import android.support.test.InstrumentationRegistry
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.FragmentActivity
 import android.view.Surface
 import android.view.View
+import androidx.test.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.content.Contextx
 import me.panpf.androidxkt.test.R
 import me.panpf.androidxkt.view.*
@@ -179,12 +178,12 @@ class DisplayxTest {
         }
     }
 
-    class TestActivity : FragmentActivity() {
+    class TestActivity : androidx.fragment.app.FragmentActivity() {
 
         val originFragment: android.app.Fragment
             get() = fragmentManager.findFragmentById(R.id.multiFrameAt_frame1)
 
-        val supportFragment: android.support.v4.app.Fragment
+        val supportFragment: androidx.fragment.app.Fragment
             get() = Premisex.requireNotNull(supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2))
 
         val view: View
@@ -199,7 +198,7 @@ class DisplayxTest {
                     .commit()
 
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.multiFrameAt_frame2, android.support.v4.app.Fragment())
+                    .replace(R.id.multiFrameAt_frame2, androidx.fragment.app.Fragment())
                     .commit()
         }
     }

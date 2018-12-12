@@ -21,7 +21,6 @@ import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
-import android.support.test.runner.AndroidJUnit4;
 import android.util.Size;
 import android.util.SizeF;
 import android.util.SparseArray;
@@ -33,6 +32,7 @@ import org.junit.runner.RunWith;
 import java.io.Serializable;
 import java.util.Arrays;
 
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.os.BundleBuilder;
 import me.panpf.javax.collections.Arrayx;

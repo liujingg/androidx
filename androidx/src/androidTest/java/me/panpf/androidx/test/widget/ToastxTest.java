@@ -18,18 +18,19 @@ package me.panpf.androidx.test.widget;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.test.R;
 import me.panpf.androidx.view.Viewx;
 import me.panpf.androidx.widget.Toastx;
@@ -72,7 +73,7 @@ public class ToastxTest {
 
     @Test
     public final void testSupportFragmentToast() {
-        android.support.v4.app.Fragment fragment = fragmentActivityRule.getActivity().getFragment();
+        Fragment fragment = fragmentActivityRule.getActivity().getFragment();
 
         Toastx.showLong(fragment, "今天是2018年10月18号");
         Toastx.showLong(fragment, "今天是%d年%d月%d号", 2018, 10, 18);
@@ -139,11 +140,11 @@ public class ToastxTest {
 
         protected void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            this.getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new android.support.v4.app.Fragment()).commit();
+            this.getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new Fragment()).commit();
         }
 
         @NonNull
-        public android.support.v4.app.Fragment getFragment() {
+        public Fragment getFragment() {
             return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(android.R.id.content));
         }
 

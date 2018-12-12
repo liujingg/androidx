@@ -18,10 +18,6 @@ package me.panpf.androidx.test;
 
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 import android.util.SparseArray;
 
 import org.junit.Assert;
@@ -31,12 +27,16 @@ import org.junit.runner.RunWith;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.androidx.util.ResultRunnable;
 import me.panpf.javax.collections.Collectionx;
-import me.panpf.javax.util.Predicate;
 import me.panpf.javax.ranges.Rangex;
+import me.panpf.javax.util.Predicate;
 
 @RunWith(AndroidJUnit4.class)
 public class AndroidxText {

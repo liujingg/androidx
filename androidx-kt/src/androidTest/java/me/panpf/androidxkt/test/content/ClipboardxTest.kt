@@ -22,9 +22,8 @@ import android.content.ClipboardManager
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.FragmentActivity
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.content.ClipHtmlText
 import me.panpf.androidx.content.ClipIntent
 import me.panpf.androidx.content.ClipPlainText
@@ -91,7 +90,7 @@ class ClipboardxTest {
         val result = context.getClipIntent()
         Assert.assertEquals(result?.getComponent().toString(), intent.component.toString())
 
-        val intent2 = Intent(context, FragmentActivity::class.java)
+        val intent2 = Intent(context, androidx.fragment.app.FragmentActivity::class.java)
         context.copyIntent(arrayOf(intent, intent2))
 
         val results = context.getClipIntents()

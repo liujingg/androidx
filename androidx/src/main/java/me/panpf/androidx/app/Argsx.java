@@ -23,10 +23,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.annotation.StringRes;
 import android.util.Size;
 import android.util.SizeF;
 import android.util.SparseArray;
@@ -34,6 +30,11 @@ import android.util.SparseArray;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Comparisonx;
 import me.panpf.javax.util.LazyValue;
@@ -1491,14 +1492,14 @@ public class Argsx {
     /* ************************************* SupportFragment Args ***************************************** */
 
 
-    public static byte readByteArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, byte defaultValue) {
+    public static byte readByteArgOr(@NonNull Fragment fragment, @NonNull String argName, byte defaultValue) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getByte(argName, defaultValue) : defaultValue;
     }
 
 
     @NonNull
-    public static byte[] readByteArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static byte[] readByteArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         byte[] bytes = arguments != null ? arguments.getByteArray(argName) : null;
         if (bytes != null) return bytes;
@@ -1506,27 +1507,27 @@ public class Argsx {
     }
 
     @NonNull
-    public static byte[] readByteArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull byte[] defaultValue) {
+    public static byte[] readByteArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull byte[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         byte[] bytes = arguments != null ? arguments.getByteArray(argName) : null;
         return bytes != null ? bytes : defaultValue;
     }
 
     @Nullable
-    public static byte[] readByteArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static byte[] readByteArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getByteArray(argName) : null;
     }
 
 
-    public static short readShortArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, short defaultValue) {
+    public static short readShortArgOr(@NonNull Fragment fragment, @NonNull String argName, short defaultValue) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getShort(argName, defaultValue) : defaultValue;
     }
 
 
     @NonNull
-    public static short[] readShortArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static short[] readShortArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         short[] shorts = arguments != null ? arguments.getShortArray(argName) : null;
         if (shorts != null) return shorts;
@@ -1534,27 +1535,27 @@ public class Argsx {
     }
 
     @NonNull
-    public static short[] readShortArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull short[] defaultValue) {
+    public static short[] readShortArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull short[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         short[] shorts = arguments != null ? arguments.getShortArray(argName) : null;
         return shorts != null ? shorts : defaultValue;
     }
 
     @Nullable
-    public static short[] readShortArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static short[] readShortArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getShortArray(argName) : null;
     }
 
 
-    public static int readIntArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, int defaultValue) {
+    public static int readIntArgOr(@NonNull Fragment fragment, @NonNull String argName, int defaultValue) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getInt(argName, defaultValue) : defaultValue;
     }
 
 
     @NonNull
-    public static int[] readIntArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static int[] readIntArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         int[] ints = arguments != null ? arguments.getIntArray(argName) : null;
         if (ints != null) return ints;
@@ -1562,21 +1563,21 @@ public class Argsx {
     }
 
     @NonNull
-    public static int[] readIntArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull int[] defaultValue) {
+    public static int[] readIntArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull int[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         int[] ints = arguments != null ? arguments.getIntArray(argName) : null;
         return ints != null ? ints : defaultValue;
     }
 
     @Nullable
-    public static int[] readIntArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static int[] readIntArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getIntArray(argName) : null;
     }
 
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static ArrayList<Integer> readIntArrayListArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         ArrayList<Integer> ints = arguments != null ? arguments.getIntegerArrayList(argName) : null;
         if (ints != null) return ints;
@@ -1584,27 +1585,27 @@ public class Argsx {
     }
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull ArrayList<Integer> defaultValue) {
+    public static ArrayList<Integer> readIntArrayListArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull ArrayList<Integer> defaultValue) {
         Bundle arguments = fragment.getArguments();
         ArrayList<Integer> integers = arguments != null ? arguments.getIntegerArrayList(argName) : null;
         return integers != null ? integers : defaultValue;
     }
 
     @Nullable
-    public static ArrayList<Integer> readIntArrayListArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static ArrayList<Integer> readIntArrayListArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getIntegerArrayList(argName) : null;
     }
 
 
-    public static long readLongArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, long defaultValue) {
+    public static long readLongArgOr(@NonNull Fragment fragment, @NonNull String argName, long defaultValue) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getLong(argName, defaultValue) : defaultValue;
     }
 
 
     @NonNull
-    public static long[] readLongArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static long[] readLongArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         long[] longs = arguments != null ? arguments.getLongArray(argName) : null;
         if (longs != null) return longs;
@@ -1612,27 +1613,27 @@ public class Argsx {
     }
 
     @NonNull
-    public static long[] readLongArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull long[] defaultValue) {
+    public static long[] readLongArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull long[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         long[] longs = arguments != null ? arguments.getLongArray(argName) : null;
         return longs != null ? longs : defaultValue;
     }
 
     @Nullable
-    public static long[] readLongArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static long[] readLongArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getLongArray(argName) : null;
     }
 
 
-    public static float readFloatArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, float defaultValue) {
+    public static float readFloatArgOr(@NonNull Fragment fragment, @NonNull String argName, float defaultValue) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getFloat(argName, defaultValue) : defaultValue;
     }
 
 
     @NonNull
-    public static float[] readFloatArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static float[] readFloatArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         float[] floats = arguments != null ? arguments.getFloatArray(argName) : null;
         if (floats != null) return floats;
@@ -1640,27 +1641,27 @@ public class Argsx {
     }
 
     @NonNull
-    public static float[] readFloatArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull float[] defaultValue) {
+    public static float[] readFloatArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull float[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         float[] floats = arguments != null ? arguments.getFloatArray(argName) : null;
         return floats != null ? floats : defaultValue;
     }
 
     @Nullable
-    public static float[] readFloatArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static float[] readFloatArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getFloatArray(argName) : null;
     }
 
 
-    public static double readDoubleArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, double defaultValue) {
+    public static double readDoubleArgOr(@NonNull Fragment fragment, @NonNull String argName, double defaultValue) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getDouble(argName, defaultValue) : defaultValue;
     }
 
 
     @NonNull
-    public static double[] readDoubleArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static double[] readDoubleArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         double[] doubles = arguments != null ? arguments.getDoubleArray(argName) : null;
         if (doubles != null) return doubles;
@@ -1668,27 +1669,27 @@ public class Argsx {
     }
 
     @NonNull
-    public static double[] readDoubleArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull double[] defaultValue) {
+    public static double[] readDoubleArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull double[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         double[] doubles = arguments != null ? arguments.getDoubleArray(argName) : null;
         return doubles != null ? doubles : defaultValue;
     }
 
     @Nullable
-    public static double[] readDoubleArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static double[] readDoubleArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getDoubleArray(argName) : null;
     }
 
 
-    public static boolean readBooleanArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, boolean defaultValue) {
+    public static boolean readBooleanArgOr(@NonNull Fragment fragment, @NonNull String argName, boolean defaultValue) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getBoolean(argName, defaultValue) : defaultValue;
     }
 
 
     @NonNull
-    public static boolean[] readBooleanArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static boolean[] readBooleanArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         boolean[] booleans = arguments != null ? arguments.getBooleanArray(argName) : null;
         if (booleans != null) return booleans;
@@ -1696,27 +1697,27 @@ public class Argsx {
     }
 
     @NonNull
-    public static boolean[] readBooleanArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull boolean[] defaultValue) {
+    public static boolean[] readBooleanArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull boolean[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         boolean[] booleans = arguments != null ? arguments.getBooleanArray(argName) : null;
         return booleans != null ? booleans : defaultValue;
     }
 
     @Nullable
-    public static boolean[] readBooleanArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static boolean[] readBooleanArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getBooleanArray(argName) : null;
     }
 
 
-    public static char readCharArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, char defaultValue) {
+    public static char readCharArgOr(@NonNull Fragment fragment, @NonNull String argName, char defaultValue) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getChar(argName, defaultValue) : defaultValue;
     }
 
 
     @NonNull
-    public static char[] readCharArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static char[] readCharArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         char[] chars = arguments != null ? arguments.getCharArray(argName) : null;
         if (chars != null) return chars;
@@ -1724,21 +1725,21 @@ public class Argsx {
     }
 
     @NonNull
-    public static char[] readCharArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull char[] defaultValue) {
+    public static char[] readCharArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull char[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         char[] chars = arguments != null ? arguments.getCharArray(argName) : null;
         return chars != null ? chars : defaultValue;
     }
 
     @Nullable
-    public static char[] readCharArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static char[] readCharArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getCharArray(argName) : null;
     }
 
 
     @NonNull
-    public static CharSequence readCharSequenceArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static CharSequence readCharSequenceArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         CharSequence charSequence = arguments != null ? arguments.getCharSequence(argName) : null;
         if (charSequence != null) return charSequence;
@@ -1746,21 +1747,21 @@ public class Argsx {
     }
 
     @NonNull
-    public static CharSequence readCharSequenceArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull CharSequence defaultValue) {
+    public static CharSequence readCharSequenceArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull CharSequence defaultValue) {
         Bundle arguments = fragment.getArguments();
         CharSequence charSequence = arguments != null ? arguments.getCharSequence(argName, defaultValue) : null;
         return charSequence != null ? charSequence : defaultValue;
     }
 
     @Nullable
-    public static CharSequence readCharSequenceArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static CharSequence readCharSequenceArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getCharSequence(argName) : null;
     }
 
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static CharSequence[] readCharSequenceArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         CharSequence[] charSequences = arguments != null ? arguments.getCharSequenceArray(argName) : null;
         if (charSequences != null) return charSequences;
@@ -1768,21 +1769,21 @@ public class Argsx {
     }
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull CharSequence[] defaultValue) {
+    public static CharSequence[] readCharSequenceArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull CharSequence[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         CharSequence[] charSequences = arguments != null ? arguments.getCharSequenceArray(argName) : null;
         return charSequences != null ? charSequences : defaultValue;
     }
 
     @Nullable
-    public static CharSequence[] readCharSequenceArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static CharSequence[] readCharSequenceArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getCharSequenceArray(argName) : null;
     }
 
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         ArrayList<CharSequence> charSequences = arguments != null ? arguments.getCharSequenceArrayList(argName) : null;
         if (charSequences != null) return charSequences;
@@ -1790,21 +1791,21 @@ public class Argsx {
     }
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull ArrayList<CharSequence> defaultValue) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull ArrayList<CharSequence> defaultValue) {
         Bundle arguments = fragment.getArguments();
         ArrayList<CharSequence> charSequences = arguments != null ? arguments.getCharSequenceArrayList(argName) : null;
         return charSequences != null ? charSequences : defaultValue;
     }
 
     @Nullable
-    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getCharSequenceArrayList(argName) : null;
     }
 
 
     @NonNull
-    public static String readStringArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static String readStringArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         String string = arguments != null ? arguments.getString(argName) : null;
         if (string != null) return string;
@@ -1812,21 +1813,21 @@ public class Argsx {
     }
 
     @NonNull
-    public static String readStringArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull String defaultValue) {
+    public static String readStringArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull String defaultValue) {
         Bundle arguments = fragment.getArguments();
         String string = arguments != null ? arguments.getString(argName, defaultValue) : null;
         return string != null ? string : defaultValue;
     }
 
     @Nullable
-    public static String readStringArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static String readStringArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getString(argName) : null;
     }
 
 
     @NonNull
-    public static String[] readStringArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static String[] readStringArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         String[] strings = arguments != null ? arguments.getStringArray(argName) : null;
         if (strings != null) return strings;
@@ -1834,21 +1835,21 @@ public class Argsx {
     }
 
     @NonNull
-    public static String[] readStringArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull String[] defaultValue) {
+    public static String[] readStringArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull String[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         String[] strings = arguments != null ? arguments.getStringArray(argName) : null;
         return strings != null ? strings : defaultValue;
     }
 
     @Nullable
-    public static String[] readStringArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static String[] readStringArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getStringArray(argName) : null;
     }
 
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static ArrayList<String> readStringArrayListArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         ArrayList<String> strings = arguments != null ? arguments.getStringArrayList(argName) : null;
         if (strings != null) return strings;
@@ -1856,21 +1857,21 @@ public class Argsx {
     }
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull ArrayList<String> defaultValue) {
+    public static ArrayList<String> readStringArrayListArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull ArrayList<String> defaultValue) {
         Bundle arguments = fragment.getArguments();
         ArrayList<String> strings = arguments != null ? arguments.getStringArrayList(argName) : null;
         return strings != null ? strings : defaultValue;
     }
 
     @Nullable
-    public static ArrayList<String> readStringArrayListArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static ArrayList<String> readStringArrayListArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getStringArrayList(argName) : null;
     }
 
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> V readParcelableArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1881,7 +1882,7 @@ public class Argsx {
     }
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull V defaultValue) {
+    public static <V extends Parcelable> V readParcelableArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull V defaultValue) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1891,7 +1892,7 @@ public class Argsx {
     }
 
     @Nullable
-    public static <V extends Parcelable> V readParcelableArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> V readParcelableArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1901,7 +1902,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1912,7 +1913,7 @@ public class Argsx {
     }
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull V[] defaultValue) {
+    public static <V extends Parcelable> V[] readParcelableArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull V[] defaultValue) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1922,7 +1923,7 @@ public class Argsx {
     }
 
     @Nullable
-    public static <V extends Parcelable> V[] readParcelableArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> V[] readParcelableArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1932,7 +1933,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1943,7 +1944,7 @@ public class Argsx {
     }
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull ArrayList<V> defaultValue) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull ArrayList<V> defaultValue) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1953,7 +1954,7 @@ public class Argsx {
     }
 
     @Nullable
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1963,7 +1964,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1974,7 +1975,7 @@ public class Argsx {
     }
 
     @NonNull
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull SparseArray<V> defaultValue) {
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull SparseArray<V> defaultValue) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1984,7 +1985,7 @@ public class Argsx {
     }
 
     @Nullable
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -1994,7 +1995,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Serializable> V readSerializableArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         //noinspection unchecked
         V serializable = arguments != null ? (V) arguments.getSerializable(argName) : null;
@@ -2003,7 +2004,7 @@ public class Argsx {
     }
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull V defaultValue) {
+    public static <V extends Serializable> V readSerializableArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull V defaultValue) {
         Bundle arguments = fragment.getArguments();
         //noinspection unchecked
         V serializable = arguments != null ? (V) arguments.getSerializable(argName) : null;
@@ -2011,7 +2012,7 @@ public class Argsx {
     }
 
     @Nullable
-    public static <V extends Serializable> V readSerializableArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Serializable> V readSerializableArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         //noinspection unchecked
         return arguments != null ? (V) arguments.getSerializable(argName) : null;
@@ -2019,7 +2020,7 @@ public class Argsx {
 
 
     @NonNull
-    public static Bundle readBundleArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static Bundle readBundleArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         Bundle bundle = arguments != null ? arguments.getBundle(argName) : null;
         if (bundle != null) return bundle;
@@ -2027,14 +2028,14 @@ public class Argsx {
     }
 
     @NonNull
-    public static Bundle readBundleArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull Bundle defaultValue) {
+    public static Bundle readBundleArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull Bundle defaultValue) {
         Bundle arguments = fragment.getArguments();
         Bundle bundle = arguments != null ? arguments.getBundle(argName) : null;
         return bundle != null ? bundle : defaultValue;
     }
 
     @Nullable
-    public static Bundle readBundleArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static Bundle readBundleArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getBundle(argName) : null;
     }
@@ -2042,7 +2043,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static IBinder readBinderArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         IBinder iBinder = arguments != null ? arguments.getBinder(argName) : null;
         if (iBinder != null) return iBinder;
@@ -2051,7 +2052,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull IBinder defaultValue) {
+    public static IBinder readBinderArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull IBinder defaultValue) {
         Bundle arguments = fragment.getArguments();
         IBinder iBinder = arguments != null ? arguments.getBinder(argName) : null;
         return iBinder != null ? iBinder : defaultValue;
@@ -2059,7 +2060,7 @@ public class Argsx {
 
     @Nullable
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static IBinder readBinderArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getBinder(argName) : null;
     }
@@ -2067,7 +2068,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static Size readSizeArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         Size size = arguments != null ? arguments.getSize(argName) : null;
         if (size != null) return size;
@@ -2076,7 +2077,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull Size defaultValue) {
+    public static Size readSizeArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull Size defaultValue) {
         Bundle arguments = fragment.getArguments();
         Size size = arguments != null ? arguments.getSize(argName) : null;
         return size != null ? size : defaultValue;
@@ -2084,7 +2085,7 @@ public class Argsx {
 
     @Nullable
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static Size readSizeArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getSize(argName) : null;
     }
@@ -2092,7 +2093,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArg(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static SizeF readSizeFArg(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         SizeF sizeF = arguments != null ? arguments.getSizeF(argName) : null;
         if (sizeF != null) return sizeF;
@@ -2101,7 +2102,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArgOr(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName, @NonNull SizeF defaultValue) {
+    public static SizeF readSizeFArgOr(@NonNull Fragment fragment, @NonNull String argName, @NonNull SizeF defaultValue) {
         Bundle arguments = fragment.getArguments();
         SizeF sizeF = arguments != null ? arguments.getSizeF(argName) : null;
         return sizeF != null ? sizeF : defaultValue;
@@ -2109,7 +2110,7 @@ public class Argsx {
 
     @Nullable
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @NonNull String argName) {
+    public static SizeF readSizeFArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         return arguments != null ? arguments.getSizeF(argName) : null;
     }
@@ -2118,435 +2119,435 @@ public class Argsx {
     /* ************************************* SupportFragment Args ***************************************** */
 
 
-    public static byte readByteArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, byte defaultValue) {
+    public static byte readByteArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, byte defaultValue) {
         return Argsx.readByteArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
 
     @NonNull
-    public static byte[] readByteArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static byte[] readByteArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readByteArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static byte[] readByteArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull byte[] defaultValue) {
+    public static byte[] readByteArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull byte[] defaultValue) {
         return Argsx.readByteArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static byte[] readByteArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static byte[] readByteArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readByteArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
-    public static short readShortArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, short defaultValue) {
+    public static short readShortArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, short defaultValue) {
         return Argsx.readShortArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
 
     @NonNull
-    public static short[] readShortArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static short[] readShortArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readShortArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static short[] readShortArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull short[] defaultValue) {
+    public static short[] readShortArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull short[] defaultValue) {
         return Argsx.readShortArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static short[] readShortArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static short[] readShortArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readShortArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
-    public static int readIntArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, int defaultValue) {
+    public static int readIntArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, int defaultValue) {
         return Argsx.readIntArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
 
     @NonNull
-    public static int[] readIntArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static int[] readIntArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readIntArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static int[] readIntArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull int[] defaultValue) {
+    public static int[] readIntArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull int[] defaultValue) {
         return Argsx.readIntArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static int[] readIntArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static int[] readIntArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readIntArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static ArrayList<Integer> readIntArrayListArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readIntArrayListArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<Integer> defaultValue) {
+    public static ArrayList<Integer> readIntArrayListArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<Integer> defaultValue) {
         return Argsx.readIntArrayListArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static ArrayList<Integer> readIntArrayListArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static ArrayList<Integer> readIntArrayListArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readIntArrayListArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
-    public static long readLongArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, long defaultValue) {
+    public static long readLongArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, long defaultValue) {
         return Argsx.readLongArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
 
     @NonNull
-    public static long[] readLongArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static long[] readLongArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readLongArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static long[] readLongArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull long[] defaultValue) {
+    public static long[] readLongArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull long[] defaultValue) {
         return Argsx.readLongArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static long[] readLongArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static long[] readLongArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readLongArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
-    public static float readFloatArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, float defaultValue) {
+    public static float readFloatArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, float defaultValue) {
         return Argsx.readFloatArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
 
     @NonNull
-    public static float[] readFloatArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static float[] readFloatArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readFloatArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static float[] readFloatArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull float[] defaultValue) {
+    public static float[] readFloatArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull float[] defaultValue) {
         return Argsx.readFloatArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static float[] readFloatArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static float[] readFloatArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readFloatArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
-    public static double readDoubleArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, double defaultValue) {
+    public static double readDoubleArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, double defaultValue) {
         return Argsx.readDoubleArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
 
     @NonNull
-    public static double[] readDoubleArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static double[] readDoubleArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readDoubleArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static double[] readDoubleArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull double[] defaultValue) {
+    public static double[] readDoubleArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull double[] defaultValue) {
         return Argsx.readDoubleArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static double[] readDoubleArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static double[] readDoubleArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readDoubleArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
-    public static boolean readBooleanArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, boolean defaultValue) {
+    public static boolean readBooleanArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, boolean defaultValue) {
         return Argsx.readBooleanArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
 
     @NonNull
-    public static boolean[] readBooleanArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static boolean[] readBooleanArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readBooleanArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static boolean[] readBooleanArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull boolean[] defaultValue) {
+    public static boolean[] readBooleanArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull boolean[] defaultValue) {
         return Argsx.readBooleanArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static boolean[] readBooleanArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static boolean[] readBooleanArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readBooleanArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
-    public static char readCharArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, char defaultValue) {
+    public static char readCharArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, char defaultValue) {
         return Argsx.readCharArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
 
     @NonNull
-    public static char[] readCharArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static char[] readCharArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readCharArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static char[] readCharArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull char[] defaultValue) {
+    public static char[] readCharArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull char[] defaultValue) {
         return Argsx.readCharArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static char[] readCharArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static char[] readCharArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readCharArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static CharSequence readCharSequenceArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static CharSequence readCharSequenceArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readCharSequenceArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static CharSequence readCharSequenceArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull CharSequence defaultValue) {
+    public static CharSequence readCharSequenceArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull CharSequence defaultValue) {
         return Argsx.readCharSequenceArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static CharSequence readCharSequenceArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static CharSequence readCharSequenceArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readCharSequenceArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static CharSequence[] readCharSequenceArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readCharSequenceArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull CharSequence[] defaultValue) {
+    public static CharSequence[] readCharSequenceArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull CharSequence[] defaultValue) {
         return Argsx.readCharSequenceArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static CharSequence[] readCharSequenceArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static CharSequence[] readCharSequenceArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readCharSequenceArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readCharSequenceArrayListArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<CharSequence> defaultValue) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<CharSequence> defaultValue) {
         return Argsx.readCharSequenceArrayListArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readCharSequenceArrayListArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static String readStringArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static String readStringArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readStringArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static String readStringArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull String defaultValue) {
+    public static String readStringArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull String defaultValue) {
         return Argsx.readStringArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static String readStringArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static String readStringArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readStringArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static String[] readStringArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static String[] readStringArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readStringArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static String[] readStringArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull String[] defaultValue) {
+    public static String[] readStringArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull String[] defaultValue) {
         return Argsx.readStringArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static String[] readStringArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static String[] readStringArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readStringArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static ArrayList<String> readStringArrayListArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readStringArrayListArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<String> defaultValue) {
+    public static ArrayList<String> readStringArrayListArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<String> defaultValue) {
         return Argsx.readStringArrayListArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static ArrayList<String> readStringArrayListArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static ArrayList<String> readStringArrayListArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readStringArrayListArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Parcelable> V readParcelableArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readParcelableArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull V defaultValue) {
+    public static <V extends Parcelable> V readParcelableArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull V defaultValue) {
         return Argsx.readParcelableArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static <V extends Parcelable> V readParcelableArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Parcelable> V readParcelableArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readParcelableArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readParcelableArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull V[] defaultValue) {
+    public static <V extends Parcelable> V[] readParcelableArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull V[] defaultValue) {
         return Argsx.readParcelableArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static <V extends Parcelable> V[] readParcelableArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Parcelable> V[] readParcelableArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readParcelableArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readParcelableArrayListArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<V> defaultValue) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<V> defaultValue) {
         return Argsx.readParcelableArrayListArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readParcelableArrayListArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readSparseParcelableArrayArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull SparseArray<V> defaultValue) {
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull SparseArray<V> defaultValue) {
         return Argsx.readSparseParcelableArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readSparseParcelableArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Serializable> V readSerializableArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readSerializableArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull V defaultValue) {
+    public static <V extends Serializable> V readSerializableArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull V defaultValue) {
         return Argsx.readSerializableArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static <V extends Serializable> V readSerializableArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static <V extends Serializable> V readSerializableArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readSerializableArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
-    public static Bundle readBundleArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static Bundle readBundleArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readBundleArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
-    public static Bundle readBundleArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull Bundle defaultValue) {
+    public static Bundle readBundleArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull Bundle defaultValue) {
         return Argsx.readBundleArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
-    public static Bundle readBundleArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static Bundle readBundleArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readBundleArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static IBinder readBinderArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readBinderArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull IBinder defaultValue) {
+    public static IBinder readBinderArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull IBinder defaultValue) {
         return Argsx.readBinderArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static IBinder readBinderArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readBinderArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static Size readSizeArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readSizeArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull Size defaultValue) {
+    public static Size readSizeArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull Size defaultValue) {
         return Argsx.readSizeArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static Size readSizeArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readSizeArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArg(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static SizeF readSizeFArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readSizeFArg(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArgOr(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId, @NonNull SizeF defaultValue) {
+    public static SizeF readSizeFArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull SizeF defaultValue) {
         return Argsx.readSizeFArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
     }
 
     @Nullable
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArgOrNull(@NonNull android.support.v4.app.Fragment fragment, @StringRes int argNameResId) {
+    public static SizeF readSizeFArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
         return Argsx.readSizeFArgOrNull(fragment, fragment.getResources().getString(argNameResId));
     }
 

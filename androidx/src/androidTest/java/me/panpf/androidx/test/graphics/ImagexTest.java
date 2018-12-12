@@ -18,8 +18,6 @@ package me.panpf.androidx.test.graphics;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -31,6 +29,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.graphics.Imagex;
 import me.panpf.androidx.os.storage.Storagex;
 import me.panpf.androidx.test.R;

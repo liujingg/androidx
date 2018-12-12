@@ -19,13 +19,13 @@ package me.panpf.androidx.test.graphics;
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.graphics.Paintx;
 import me.panpf.androidx.util.Dimenx;
 

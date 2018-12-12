@@ -1,6 +1,6 @@
 package me.panpf.androidx.util;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public interface NullableResultRunnable<T> {
     @Nullable

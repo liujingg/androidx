@@ -21,7 +21,7 @@ package me.panpf.androidxkt.hardware
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.annotation.RequiresPermission
+import androidx.annotation.RequiresPermission
 import me.panpf.androidx.hardware.Hardwarex
 
 /*

@@ -25,13 +25,13 @@ import android.content.pm.PermissionInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
 
-import me.panpf.javax.lang.Stringx;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import me.panpf.javax.collections.Arrayx;
+import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Pair;
 import me.panpf.javax.util.Predicate;
 

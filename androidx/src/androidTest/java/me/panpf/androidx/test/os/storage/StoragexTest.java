@@ -18,9 +18,6 @@ package me.panpf.androidx.test.os.storage;
 
 import android.content.Context;
 import android.os.Environment;
-import android.support.annotation.NonNull;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +25,9 @@ import org.junit.runner.RunWith;
 import java.io.File;
 import java.io.IOException;
 
+import androidx.annotation.NonNull;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.os.storage.StorageVolumeCompat;
 import me.panpf.androidx.os.storage.Storagex;
 import me.panpf.javax.collections.Arrayx;

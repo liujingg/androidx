@@ -23,10 +23,10 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.annotation.IntRange;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresPermission;
 
+import androidx.annotation.IntRange;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import me.panpf.androidx.content.Contextx;
 
 /**
@@ -164,7 +164,7 @@ public class Settingsx {
     /**
      * Return true if Bluetooth is available
      */
-    public static boolean haveBluetooth(){
+    public static boolean haveBluetooth() {
         return BluetoothAdapter.getDefaultAdapter() != null;
     }
 

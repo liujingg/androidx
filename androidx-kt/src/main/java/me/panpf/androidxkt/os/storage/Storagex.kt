@@ -20,7 +20,7 @@ package me.panpf.androidxkt.os.storage
 
 import android.content.Context
 import android.os.Environment
-import android.support.annotation.WorkerThread
+import androidx.annotation.WorkerThread
 import me.panpf.androidx.os.storage.StorageVolumeCompat
 import me.panpf.androidx.os.storage.Storagex
 import java.io.File

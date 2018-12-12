@@ -19,9 +19,9 @@
 package me.panpf.androidxkt.graphics
 
 import android.graphics.ColorMatrixColorFilter
-import android.support.annotation.ColorInt
-import android.support.annotation.FloatRange
-import android.support.annotation.IntRange
+import androidx.annotation.ColorInt
+import androidx.annotation.FloatRange
+import androidx.annotation.IntRange
 import me.panpf.androidx.graphics.Colorx
 
 /**

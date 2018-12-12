@@ -16,8 +16,8 @@
 
 package me.panpf.androidxkt.test.graphics
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.graphics.getOpenGlVersion
 import org.junit.Assert
 import org.junit.Test

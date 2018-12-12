@@ -16,7 +16,7 @@
 
 package me.panpf.androidxkt.test.util
 
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.Androidx
 import me.panpf.androidx.util.Jsonx
 import me.panpf.androidxkt.util.*

@@ -19,15 +19,14 @@
 package me.panpf.androidxkt.test.app
 
 import android.app.Activity
-import android.arch.lifecycle.ViewModelStoreOwner
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.support.test.InstrumentationRegistry
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.FragmentActivity
 import android.view.View
+import androidx.lifecycle.ViewModelStoreOwner
+import androidx.test.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.app.*
 import me.panpf.androidxkt.content.appContext
 import me.panpf.androidxkt.waitRunInUIResult
@@ -416,7 +415,7 @@ class ActivityxTest {
         }
     }
 
-    class TestFragmentActivity : FragmentActivity(){
+    class TestFragmentActivity : androidx.fragment.app.FragmentActivity() {
         var finished: Boolean = false
         var finishedActivity: Boolean = false
         var finishedActivityFromChild: Boolean = false
@@ -424,7 +423,7 @@ class ActivityxTest {
 
         public override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            supportFragmentManager.beginTransaction().replace(android.R.id.content, android.support.v4.app.Fragment()).commit()
+            supportFragmentManager.beginTransaction().replace(android.R.id.content, androidx.fragment.app.Fragment()).commit()
         }
 
         override fun finish() {
@@ -447,7 +446,7 @@ class ActivityxTest {
             destoryed = true
         }
 
-        fun getFragment(): android.support.v4.app.Fragment {
+        fun getFragment(): androidx.fragment.app.Fragment {
             return supportFragmentManager.findFragmentById(android.R.id.content).requireNotNull()
         }
 

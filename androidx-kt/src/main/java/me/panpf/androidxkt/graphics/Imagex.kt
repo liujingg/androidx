@@ -20,8 +20,8 @@ package me.panpf.androidxkt.graphics
 
 import android.content.res.Resources
 import android.graphics.Rect
-import android.support.annotation.DrawableRes
 import android.util.TypedValue
+import androidx.annotation.DrawableRes
 import me.panpf.androidx.graphics.Imagex
 import java.io.File
 import java.io.FileDescriptor

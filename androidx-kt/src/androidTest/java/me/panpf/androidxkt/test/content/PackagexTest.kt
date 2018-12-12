@@ -17,8 +17,8 @@
 package me.panpf.androidxkt.test.content
 
 import android.content.pm.PackageManager
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.content.pm.*
 import me.panpf.androidxkt.test.BuildConfig
 import me.panpf.javax.collections.Collectionx

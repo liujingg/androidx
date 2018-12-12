@@ -19,16 +19,12 @@
 package me.panpf.androidxkt.test.app
 
 import android.os.Bundle
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
-import android.support.v4.app.FragmentPagerAdapter
-import android.support.v4.view.ViewPager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.Androidx
 import me.panpf.androidx.app.Argsx
 import me.panpf.androidx.os.BundleBuilder
@@ -101,17 +97,17 @@ class FragmentxTest {
         Assert.assertEquals(android.app.Fragment::class.java.name, originFragment::class.java.name)
         Assert.assertEquals("testInstantiate", Argsx.readStringArg(originFragment, "key"))
 
-        val supportFragment = android.support.v4.app.Fragment::class.java.instantiate(Bundle().apply {
+        val supportFragment = androidx.fragment.app.Fragment::class.java.instantiate(Bundle().apply {
             putString("key", "testInstantiate")
         })
-        Assert.assertEquals(android.support.v4.app.Fragment::class.java.name, supportFragment::class.java.name)
+        Assert.assertEquals(androidx.fragment.app.Fragment::class.java.name, supportFragment::class.java.name)
         Assert.assertEquals("testInstantiate", Argsx.readStringArg(supportFragment, "key"))
 
         val originFragment2 = android.app.Fragment::class.java.instantiateOrigin()
         Assert.assertEquals(android.app.Fragment::class.java.name, originFragment2::class.java.name)
 
-        val supportFragment2 = android.support.v4.app.Fragment::class.java.instantiate()
-        Assert.assertEquals(android.support.v4.app.Fragment::class.java.name, supportFragment2::class.java.name)
+        val supportFragment2 = androidx.fragment.app.Fragment::class.java.instantiate()
+        Assert.assertEquals(androidx.fragment.app.Fragment::class.java.name, supportFragment2::class.java.name)
     }
 
     @Test
@@ -152,7 +148,7 @@ class FragmentxTest {
         Assert.assertTrue(fragmentFromChildFragment.tag, fragmentFromChildFragment.tag.orEmpty().startsWith("android:switcher") && fragmentFromChildFragment.tag.orEmpty().endsWith(":3"))
     }
 
-    class TestActivity : FragmentActivity(), ImplTestInterface {
+    class TestActivity : androidx.fragment.app.FragmentActivity(), ImplTestInterface {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -169,7 +165,7 @@ class FragmentxTest {
         fun getOriginFragment(): android.app.Fragment =
                 fragmentManager.findFragmentById(R.id.multiFrameAt_frame1).requireNotNull()
 
-        fun getSupportFragment(): android.support.v4.app.Fragment =
+        fun getSupportFragment(): androidx.fragment.app.Fragment =
                 supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2).requireNotNull()
 
         fun convertChildFragment() {
@@ -204,7 +200,7 @@ class FragmentxTest {
 
     class TestImplOriginFragment2 : android.app.Fragment()
 
-    class TestImplSupportFragment : android.support.v4.app.Fragment(), ImplTestInterface {
+    class TestImplSupportFragment : androidx.fragment.app.Fragment(), ImplTestInterface {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             return inflater.inflate(R.layout.at_test, container, false)
         }
@@ -216,20 +212,20 @@ class FragmentxTest {
                     .commit()
         }
 
-        fun getChildFragment(): android.support.v4.app.Fragment =
+        fun getChildFragment(): androidx.fragment.app.Fragment =
                 childFragmentManager.findFragmentById(R.id.testAt_frame).requireNotNull()
     }
 
-    class TestImplSupportFragment2 : android.support.v4.app.Fragment()
+    class TestImplSupportFragment2 : androidx.fragment.app.Fragment()
 
-    class TestFindUserVisibleChildActivity : FragmentActivity() {
+    class TestFindUserVisibleChildActivity : androidx.fragment.app.FragmentActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.at_view_pager)
 
-            val viewPager = findViewById<ViewPager>(R.id.viewPagerAt_viewPager)
-            viewPager.adapter = object : FragmentPagerAdapter(supportFragmentManager) {
-                override fun getItem(p0: Int): Fragment {
+            val viewPager = findViewById<androidx.viewpager.widget.ViewPager>(R.id.viewPagerAt_viewPager)
+            viewPager.adapter = object : androidx.fragment.app.FragmentPagerAdapter(supportFragmentManager) {
+                override fun getItem(p0: Int): androidx.fragment.app.Fragment {
                     return if (p0 == 2) {
                         TestFindUserVisibleChildFragment::class.java.instantiate(BundleBuilder().putString("position", p0.toString()).build())
                     } else {
@@ -243,7 +239,7 @@ class FragmentxTest {
         }
     }
 
-    class TestFindUserVisibleChildFragment : android.support.v4.app.Fragment() {
+    class TestFindUserVisibleChildFragment : androidx.fragment.app.Fragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             return inflater.inflate(R.layout.at_view_pager, container, false)
         }
@@ -251,9 +247,9 @@ class FragmentxTest {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-            val viewPager = view.findViewById<ViewPager>(R.id.viewPagerAt_viewPager)
-            viewPager.adapter = object : FragmentPagerAdapter(childFragmentManager) {
-                override fun getItem(p0: Int): android.support.v4.app.Fragment =
+            val viewPager = view.findViewById<androidx.viewpager.widget.ViewPager>(R.id.viewPagerAt_viewPager)
+            viewPager.adapter = object : androidx.fragment.app.FragmentPagerAdapter(childFragmentManager) {
+                override fun getItem(p0: Int): androidx.fragment.app.Fragment =
                         TestFindUserVisibleChildFragment2::class.java.instantiate(BundleBuilder().putString("position", p0.toString()).build())
 
                 override fun getCount(): Int = 5
@@ -262,7 +258,7 @@ class FragmentxTest {
         }
     }
 
-    class TestFindUserVisibleChildFragment2 : android.support.v4.app.Fragment() {
+    class TestFindUserVisibleChildFragment2 : androidx.fragment.app.Fragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             return TextView(context)
         }

@@ -19,7 +19,8 @@ package me.panpf.androidx.graphics;
 import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 public class Paintx {
 

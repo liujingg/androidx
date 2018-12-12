@@ -28,7 +28,7 @@ implementation "me.panpf:androidx:$lastVersion"
 Please replace `$lastVersion` with the latest version: [![Download][version_java_icon]][version_java_link]
 
 Dependencies:
-* [com.android.support:support-fragment][support_fragment]: [28.0.0][support_fragment_versions]
+* androidx.fragment:fragment: 1.1.0-alpha02
 * [me.panpf:javax][javax]: [1.0.0-alpha1][javax_versions]
 
 ### Kotlin Expansion:
@@ -43,7 +43,7 @@ Please replace `$lastVersion` with the latest version: [![Download][version_kotl
 
 Dependencies:
 * [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.2.71][kotlin_versions]
-* [com.android.support:support-fragment][support_fragment]: [28.0.0][support_fragment_versions]
+* androidx.fragment:fragment: 1.1.0-alpha02
 * [me.panpf:javax-kt][javax]: [1.0.0-alpha1][javax_versions]
 
 `androidx-kt is a androidx extension on the Kotlin platform that allows you to use androidx more comfortably on Kotlin`
@@ -249,8 +249,6 @@ Please view the [CHANGELOG.md] file
 [version_kotlin_link]: https://bintray.com/panpf/maven/androidx-kt/_latestVersion
 [javax]: https://github.com/panpf/javax
 [javax_versions]: https://github.com/panpf/javax/blob/master/CHANGELOG.md
-[support_fragment]: https://developer.android.com/topic/libraries/support-library/packages#v4-fragment
-[support_fragment_versions]: https://developer.android.com/topic/libraries/support-library/revisions
 [kotlin_stdlib]: https://kotlinlang.org/
 [kotlin_versions]: https://blog.jetbrains.com/kotlin/
 [androidx-kt-arch]: androidx-kt-arch

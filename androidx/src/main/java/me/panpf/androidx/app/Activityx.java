@@ -18,23 +18,24 @@ package me.panpf.androidx.app;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
-import android.arch.lifecycle.Lifecycle;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ResolveInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.Lifecycle;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.javax.lang.Classx;
 
@@ -182,7 +183,7 @@ public class Activityx {
     /**
      * Start the activity of the specified intent
      */
-    public static void start(@NonNull android.support.v4.app.Fragment fragment, @NonNull Intent intent) {
+    public static void start(@NonNull Fragment fragment, @NonNull Intent intent) {
         fragment.startActivity(intent);
     }
 
@@ -220,7 +221,7 @@ public class Activityx {
     /**
      * Start the activity of the specified Class
      */
-    public static void start(@NonNull android.support.v4.app.Fragment fragment,
+    public static void start(@NonNull Fragment fragment,
                              @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
         Intent intent = new Intent(Contextx.requireContext(fragment), clazz);
         if (args != null) intent.putExtras(args);
@@ -230,7 +231,7 @@ public class Activityx {
     /**
      * Start the activity of the specified Class
      */
-    public static void start(@NonNull android.support.v4.app.Fragment fragment,
+    public static void start(@NonNull Fragment fragment,
                              @NonNull Class<? extends Activity> clazz) {
         start(fragment, clazz, null);
     }
@@ -293,7 +294,7 @@ public class Activityx {
     /**
      * Safely launch an Activity, catch ActivityNotFoundException and return false
      */
-    public static boolean safeStart(@NonNull android.support.v4.app.Fragment fragment, @NonNull Intent intent) {
+    public static boolean safeStart(@NonNull Fragment fragment, @NonNull Intent intent) {
         try {
             fragment.startActivity(intent);
             return true;
@@ -343,7 +344,7 @@ public class Activityx {
     /**
      * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
      */
-    public static boolean safeStart(@NonNull android.support.v4.app.Fragment fragment,
+    public static boolean safeStart(@NonNull Fragment fragment,
                                     @NonNull Class<? extends Activity> clazz, @Nullable Bundle args) {
         Intent intent = new Intent(Contextx.requireContext(fragment), clazz);
         if (args != null) intent.putExtras(args);
@@ -353,7 +354,7 @@ public class Activityx {
     /**
      * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
      */
-    public static boolean safeStart(@NonNull android.support.v4.app.Fragment fragment,
+    public static boolean safeStart(@NonNull Fragment fragment,
                                     @NonNull Class<? extends Activity> clazz) {
         return safeStart(fragment, clazz, null);
     }

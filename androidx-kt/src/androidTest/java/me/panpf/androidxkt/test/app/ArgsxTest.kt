@@ -7,14 +7,12 @@ import android.os.Binder
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.test.InstrumentationRegistry
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.util.Size
 import android.util.SizeF
 import android.util.SparseArray
+import androidx.test.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import kotlinx.android.parcel.Parcelize
 import me.panpf.androidxkt.app.*
 import me.panpf.androidxkt.test.R
@@ -2569,7 +2567,7 @@ class ArgsxTest {
     // class for test used
     ///////////////////////////////////////////////////////////////////////////
 
-    class TestActivity : FragmentActivity() {
+    class TestActivity : androidx.fragment.app.FragmentActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -2732,7 +2730,7 @@ class ArgsxTest {
         }
     }
 
-    class TestSupportFragment : Fragment() {
+    class TestSupportFragment : androidx.fragment.app.Fragment() {
         companion object {
             fun newInstance(args: Bundle?): TestSupportFragment {
                 val fragment = TestSupportFragment()
@@ -2753,7 +2751,7 @@ class ArgsxTest {
     }
 
     //res
-    class ResTestActivity : FragmentActivity() {
+    class ResTestActivity : androidx.fragment.app.FragmentActivity() {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
@@ -2916,7 +2914,7 @@ class ArgsxTest {
         }
     }
 
-    class ResTestSupportFragment : Fragment() {
+    class ResTestSupportFragment : androidx.fragment.app.Fragment() {
         companion object {
             fun newInstance(args: Bundle?): ResTestSupportFragment {
                 val fragment = ResTestSupportFragment()
@@ -2937,7 +2935,7 @@ class ArgsxTest {
     }
 
     //no extras
-    class NoExtraActivity : FragmentActivity() {
+    class NoExtraActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntent(context: Context): Intent {
                 return Intent(context, NoExtraActivity::class.java)
@@ -2946,7 +2944,7 @@ class ArgsxTest {
     }
 
     //uri || intent
-    class TestOnlyUriNoIntentActivity : FragmentActivity() {
+    class TestOnlyUriNoIntentActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntentWithUri(): Intent {
                 val params = StringBuilder()
@@ -2981,7 +2979,7 @@ class ArgsxTest {
         }
     }
 
-    class TestOnlyIntentNoUriActivity : FragmentActivity() {
+    class TestOnlyIntentNoUriActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntentWithExtras(context: Context): Intent {
                 val starter = Intent(context, TestOnlyIntentNoUriActivity::class.java)
@@ -3014,7 +3012,7 @@ class ArgsxTest {
         }
     }
 
-    class TestBothIntentUriActivity : FragmentActivity() {
+    class TestBothIntentUriActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
 
             fun createIntentWithUriAndExtras(context: Context): Intent {
@@ -3076,7 +3074,7 @@ class ArgsxTest {
         }
     }
 
-    class TestNoIntentUriActivity : FragmentActivity() {
+    class TestNoIntentUriActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntentWithNothing(context: Context): Intent {
                 val starter = Intent(context, TestNoIntentUriActivity::class.java)
@@ -3088,7 +3086,7 @@ class ArgsxTest {
     }
 
     //res
-    class ResTestOnlyUriNoIntentActivity : FragmentActivity() {
+    class ResTestOnlyUriNoIntentActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntentWithUri(): Intent {
                 val params = StringBuilder()
@@ -3123,7 +3121,7 @@ class ArgsxTest {
         }
     }
 
-    class ResTestOnlyIntentNoUriActivity : FragmentActivity() {
+    class ResTestOnlyIntentNoUriActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntentWithExtras(context: Context): Intent {
                 val starter = Intent(context, ResTestOnlyIntentNoUriActivity::class.java)
@@ -3156,7 +3154,7 @@ class ArgsxTest {
         }
     }
 
-    class ResTestBothIntentUriActivity : FragmentActivity() {
+    class ResTestBothIntentUriActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
 
             fun createIntentWithUriAndExtras(context: Context): Intent {
@@ -3218,7 +3216,7 @@ class ArgsxTest {
         }
     }
 
-    class ResTestNoIntentUriActivity : FragmentActivity() {
+    class ResTestNoIntentUriActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntentWithNothing(context: Context): Intent {
                 val starter = Intent(context, ResTestNoIntentUriActivity::class.java)
@@ -3230,7 +3228,7 @@ class ArgsxTest {
     }
 
     //activity uri
-    class TestUriActivity : FragmentActivity() {
+    class TestUriActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
 
             fun createIntent(): Intent {
@@ -3273,7 +3271,7 @@ class ArgsxTest {
         }
     }
 
-    class ResTestUriActivity : FragmentActivity() {
+    class ResTestUriActivity : androidx.fragment.app.FragmentActivity() {
         companion object {
 
             fun createIntent(): Intent {

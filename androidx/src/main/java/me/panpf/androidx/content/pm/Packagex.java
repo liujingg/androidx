@@ -23,8 +23,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.util.Pair;
 
 import org.jetbrains.annotations.NotNull;
@@ -33,6 +31,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.collection.ArrayMap;
 import me.panpf.androidx.graphics.drawable.Drawablex;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Premisex;
@@ -216,7 +217,7 @@ public class Packagex {
      * @param excludeSelf      If true, exclude yourself
      */
     @NonNull
-    public static android.support.v4.util.ArrayMap<String, Integer> listPackageNameAndVersionCodeMap(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    public static ArrayMap<String, Integer> listPackageNameAndVersionCodeMap(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -225,10 +226,10 @@ public class Packagex {
             // ApplicationPackageManager crashes internally on dazen X7 4.4.4 and Coolpad Y803-8 5.1 models
         }
         if (packageInfoList == null || packageInfoList.isEmpty()) {
-            return new android.support.v4.util.ArrayMap<>(0);
+            return new ArrayMap<>(0);
         }
 
-        android.support.v4.util.ArrayMap<String, Integer> appsSet = new android.support.v4.util.ArrayMap<>();
+        ArrayMap<String, Integer> appsSet = new ArrayMap<>();
         for (PackageInfo packageInfo : packageInfoList) {
             if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
                 continue;

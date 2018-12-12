@@ -18,7 +18,8 @@ package me.panpf.androidx.os;
 
 import android.os.Build;
 import android.os.StatFs;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 /*
  * StatFs related extension methods or properties

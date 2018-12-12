@@ -23,14 +23,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.FragmentActivity;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.ClipContent;
 import me.panpf.androidx.content.ClipHtmlText;
 import me.panpf.androidx.content.ClipIntent;

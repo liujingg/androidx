@@ -18,11 +18,10 @@ package me.panpf.androidxkt.test.widget
 
 import android.app.Activity
 import android.os.Bundle
-import android.support.test.InstrumentationRegistry
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.FragmentActivity
 import android.view.View
+import androidx.test.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.test.R
 import me.panpf.androidxkt.view.inflateLayout
 import me.panpf.androidxkt.widget.showLongToast
@@ -124,9 +123,9 @@ class ToastxTest {
         }
     }
 
-    class TestFragmentActivity : FragmentActivity() {
+    class TestFragmentActivity : androidx.fragment.app.FragmentActivity() {
 
-        val fragment: android.support.v4.app.Fragment
+        val fragment: androidx.fragment.app.Fragment
             get() = Premisex.requireNotNull(supportFragmentManager.findFragmentById(android.R.id.content))
 
         val view: View
@@ -134,7 +133,7 @@ class ToastxTest {
 
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
-            this.supportFragmentManager.beginTransaction().replace(android.R.id.content, android.support.v4.app.Fragment()).commit()
+            this.supportFragmentManager.beginTransaction().replace(android.R.id.content, androidx.fragment.app.Fragment()).commit()
         }
     }
 }

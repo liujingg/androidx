@@ -23,10 +23,10 @@ import android.net.ConnectivityManager;
 import android.net.DhcpInfo;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresPermission;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.SystemPropertiesx;
 import me.panpf.javax.lang.Classx;

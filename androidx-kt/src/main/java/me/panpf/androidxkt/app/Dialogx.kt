@@ -41,12 +41,12 @@ inline fun Activity.showProgressDialog(messageId: Int): ProgressDialog = Dialogx
 /**
  * Display a progress dialog
  */
-inline fun android.support.v4.app.Fragment.showProgressDialog(message: String): ProgressDialog? = Dialogx.showProgressDialog(this, message)
+inline fun androidx.fragment.app.Fragment.showProgressDialog(message: String): ProgressDialog? = Dialogx.showProgressDialog(this, message)
 
 /**
  * Display a progress dialog
  */
-inline fun android.support.v4.app.Fragment.showProgressDialog(messageId: Int): ProgressDialog? = Dialogx.showProgressDialog(this, messageId)
+inline fun androidx.fragment.app.Fragment.showProgressDialog(messageId: Int): ProgressDialog? = Dialogx.showProgressDialog(this, messageId)
 
 /**
  * Display a progress dialog

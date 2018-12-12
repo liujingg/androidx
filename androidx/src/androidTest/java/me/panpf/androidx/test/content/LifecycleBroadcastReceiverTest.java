@@ -20,12 +20,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 
 import org.junit.Assert;
 import org.junit.Rule;
@@ -35,10 +29,16 @@ import org.junit.runner.RunWith;
 import java.util.LinkedList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.LifecycleBroadcastReceiver;
 import me.panpf.androidx.test.BuildConfig;
-import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.collections.Collectionx;
+import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Premisex;
 
 @RunWith(AndroidJUnit4.class)

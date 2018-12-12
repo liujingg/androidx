@@ -17,17 +17,10 @@
 package me.panpf.androidx.test.app;
 
 import android.app.Activity;
-import android.arch.lifecycle.ViewModelStoreOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import org.junit.Assert;
@@ -35,6 +28,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelStoreOwner;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Activityx;
 import me.panpf.androidx.content.Contextx;
@@ -457,7 +458,7 @@ public class ActivityxTest {
         @Override
         public void onCreate(@Nullable Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
-            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new android.support.v4.app.Fragment()).commit();
+            getSupportFragmentManager().beginTransaction().replace(android.R.id.content, new Fragment()).commit();
         }
 
         @Override
@@ -485,7 +486,7 @@ public class ActivityxTest {
         }
 
         @NonNull
-        public android.support.v4.app.Fragment getFragment() {
+        public Fragment getFragment() {
             return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(android.R.id.content));
         }
 

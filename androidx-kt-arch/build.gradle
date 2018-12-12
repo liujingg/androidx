@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply from: '../build_kotlin.gradle'
 apply from: '../build_test.gradle'
-//apply plugin: 'jacoco'
 
 android {
     compileSdkVersion COMPILE_SDK_VERSION.toInteger()
@@ -14,9 +13,6 @@ android {
     }
 
     buildTypes {
-//        debug {
-//            testCoverageEnabled true
-//        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -25,9 +21,9 @@ android {
 }
 
 dependencies {
-    api "com.android.support:support-fragment:${SUPPORT_VERSION}"
-    api "android.arch.lifecycle:viewmodel:${LIFECYCLE_VERSION}"
-    api "android.arch.lifecycle:extensions:${LIFECYCLE_VERSION}"
+    api "androidx.fragment:fragment:$ANDROIDX_FRAGMENT"
+    api "androidx.lifecycle:lifecycle-viewmodel:$ANDROIDX_LIFECYCLE"
+    api "androidx.lifecycle:lifecycle-extensions:$ANDROIDX_LIFECYCLE"
 }
 
 apply from: 'build_upload.gradle'

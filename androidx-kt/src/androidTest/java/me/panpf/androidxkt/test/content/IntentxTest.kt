@@ -22,9 +22,9 @@ import android.os.Build
 import android.os.Parcelable
 import android.provider.MediaStore
 import android.provider.Settings
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.content.FileProvider
+import androidx.core.content.FileProvider
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.content.*
 import me.panpf.androidxkt.content.pm.findSelfProviderInfoByName
 import me.panpf.androidxkt.content.pm.getPackageApkFile

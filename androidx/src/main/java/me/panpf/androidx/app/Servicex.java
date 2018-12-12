@@ -21,10 +21,10 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 
 import java.util.ArrayList;
 
+import androidx.annotation.NonNull;
 import me.panpf.androidx.content.Contextx;
 
 public class Servicex {

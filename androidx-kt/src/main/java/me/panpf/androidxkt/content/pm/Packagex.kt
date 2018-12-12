@@ -23,7 +23,6 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.support.v4.util.ArrayMap
 import android.util.Pair
 import me.panpf.androidx.content.pm.AppPackage
 import me.panpf.androidx.content.pm.Packagex
@@ -113,7 +112,7 @@ inline fun Context.listPackageNameAndVersionCode(excludeSystemApp: Boolean, excl
  * @param excludeSystemApp If true, exclude yourself exclude system apps
  * @param excludeSelf      If true, exclude yourself
  */
-inline fun Context.listPackageNameAndVersionCodeMap(excludeSystemApp: Boolean, excludeSelf: Boolean): ArrayMap<String, Int> = Packagex.listPackageNameAndVersionCodeMap(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackageNameAndVersionCodeMap(excludeSystemApp: Boolean, excludeSelf: Boolean): androidx.collection.ArrayMap<String, Int> = Packagex.listPackageNameAndVersionCodeMap(this, excludeSystemApp, excludeSelf)
 
 /**
  * List the packageName of all installed apps

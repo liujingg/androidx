@@ -19,8 +19,8 @@ package me.panpf.androidxkt.test.graphics
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.graphics.drawable.changeColor
 import me.panpf.androidxkt.graphics.drawable.changeResDrawableColor
 import me.panpf.androidxkt.graphics.drawable.toBitmapWithBoundsSize

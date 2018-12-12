@@ -18,12 +18,6 @@ package me.panpf.androidx.test.util;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.FragmentActivity;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -32,6 +26,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.test.R;
 import me.panpf.androidx.util.Dimenx;
 import me.panpf.javax.util.Premisex;
@@ -87,7 +88,7 @@ public class DimenxTest {
         Assert.assertEquals(((float) 10) * context.getResources().getDisplayMetrics().scaledDensity, Dimenx.applyDimension(originFragment, TypedValue.COMPLEX_UNIT_SP, 10), 0f);
 
 
-        android.support.v4.app.Fragment supportFragment = activityTestRule.getActivity().getSupportFragment();
+        Fragment supportFragment = activityTestRule.getActivity().getSupportFragment();
 
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(supportFragment, 10f));
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(supportFragment, 10));
@@ -135,7 +136,7 @@ public class DimenxTest {
                     .commit();
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.multiFrameAt_frame2, new android.support.v4.app.Fragment())
+                    .replace(R.id.multiFrameAt_frame2, new Fragment())
                     .commit();
         }
 
@@ -145,7 +146,7 @@ public class DimenxTest {
         }
 
         @NonNull
-        public android.support.v4.app.Fragment getSupportFragment() {
+        public Fragment getSupportFragment() {
             return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(R.id.multiFrameAt_frame2));
         }
 

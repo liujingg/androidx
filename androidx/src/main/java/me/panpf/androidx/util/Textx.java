@@ -20,12 +20,12 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import me.panpf.androidx.graphics.Paintx;
 
 public class Textx {

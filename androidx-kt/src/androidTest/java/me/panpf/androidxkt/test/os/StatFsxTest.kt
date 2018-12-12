@@ -18,7 +18,7 @@ package me.panpf.androidxkt.test.os
 
 import android.os.Environment
 import android.os.StatFs
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.os.availableBytesCompat
 import me.panpf.androidxkt.os.freeBytesCompat
 import me.panpf.androidxkt.os.totalBytesCompat

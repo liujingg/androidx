@@ -7,15 +7,13 @@ import android.os.Binder
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.test.InstrumentationRegistry
-import android.support.test.filters.SdkSuppress
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.util.Size
 import android.util.SizeF
 import android.util.SparseArray
+import androidx.test.InstrumentationRegistry
+import androidx.test.filters.SdkSuppress
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import kotlinx.android.parcel.Parcelize
 import me.panpf.androidxkt.app.*
 import me.panpf.androidxkt.test.R
@@ -233,7 +231,7 @@ class ArgsBinderTest {
         fragment.assert()
     }
 
-    class ResTestActivity : FragmentActivity() {
+    class ResTestActivity : androidx.fragment.app.FragmentActivity() {
 
         companion object {
             fun createIntent(context: Context): Intent {
@@ -620,7 +618,7 @@ class ArgsBinderTest {
         }
     }
 
-    class ResTestSupportFragment : Fragment() {
+    class ResTestSupportFragment : androidx.fragment.app.Fragment() {
 
         private val stringRequired by bindStringArg(me.panpf.androidxkt.test.R.string.string_required)
         private val stringOptional by bindStringArgOrNull(me.panpf.androidxkt.test.R.string.string_optional)
@@ -1425,7 +1423,7 @@ class ArgsBinderTest {
         }
     }
 
-    class TestActivity : FragmentActivity() {
+    class TestActivity : androidx.fragment.app.FragmentActivity() {
 
         val byteRequired by bindByteArgOr("byteRequired")
         val byteArrayRequired by bindByteArrayArg("byteArrayRequired")
@@ -1564,7 +1562,7 @@ class ArgsBinderTest {
 
             val fragment = TestFragment()
             fragment.arguments = TestFragment.createArguments(this)
-            fragmentManager.beginTransaction().add(android.R.id.content,fragment).commit()
+            fragmentManager.beginTransaction().add(android.R.id.content, fragment).commit()
         }
 
         fun assert() {
@@ -1827,7 +1825,7 @@ class ArgsBinderTest {
         }
     }
 
-    class TestSupportFragment : Fragment() {
+    class TestSupportFragment : androidx.fragment.app.Fragment() {
 
         private val byteRequired by bindByteArgOr("byteRequired")
         private val byteArrayRequired by bindByteArrayArg("byteArrayRequired")
@@ -2629,7 +2627,7 @@ class ArgsBinderTest {
         }
     }
 
-    class TestNoExtrasActivity : FragmentActivity() {
+    class TestNoExtrasActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteArrayOrDefaultErrKey by bindByteArrayArgOr("byteArrayOrDefaultErrorKey", byteArrayOf(120.toByte()))
 
@@ -2732,7 +2730,7 @@ class ArgsBinderTest {
         }
     }
 
-    class TestUriActivity : FragmentActivity() {
+    class TestUriActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteUriRequired by bindByteUriArg("byteUriRequired")
         private val byteUriOptional by bindByteUriArgOrNull("byteUriOptional")
@@ -2874,7 +2872,7 @@ class ArgsBinderTest {
         }
     }
 
-    class ResTestUriActivity : FragmentActivity() {
+    class ResTestUriActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteUriRequired by bindByteUriArg(R.string.byte_uri_required)
         private val byteUriOptional by bindByteUriArgOrNull(R.string.byte_uri_optional)
@@ -3016,7 +3014,7 @@ class ArgsBinderTest {
         }
     }
 
-    class TestOnlyUriNoIntentActivity : FragmentActivity() {
+    class TestOnlyUriNoIntentActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault", 0.toByte())
         private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault", 0.toShort())
@@ -3114,7 +3112,7 @@ class ArgsBinderTest {
 
     }
 
-    class TestOnlyIntentNoUriActivity : FragmentActivity() {
+    class TestOnlyIntentNoUriActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault", 0.toByte())
         private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault", 0.toShort())
@@ -3213,7 +3211,7 @@ class ArgsBinderTest {
 
     }
 
-    class TestBothIntentUriActivity : FragmentActivity() {
+    class TestBothIntentUriActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault", 0.toByte())
         private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault", 0.toShort())
@@ -3341,7 +3339,7 @@ class ArgsBinderTest {
 
     }
 
-    class TestNoIntentUriActivity : FragmentActivity() {
+    class TestNoIntentUriActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteIntentUriOrDefault by bindByteIntentUriArgOr("byteIntentUriOrDefault", 0.toByte())
         private val shortIntentUriOrDefault by bindShortIntentUriArgOr("shortIntentUriOrDefault", 0.toShort())
@@ -3408,7 +3406,7 @@ class ArgsBinderTest {
 
     }
 
-    class ResTestOnlyUriNoIntentActivity : FragmentActivity() {
+    class ResTestOnlyUriNoIntentActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteIntentUriOrDefault by bindByteIntentUriArgOr(R.string.byte_intent_uri_or_default, 0.toByte())
         private val shortIntentUriOrDefault by bindShortIntentUriArgOr(R.string.short_intent_uri_or_default, 0.toShort())
@@ -3507,7 +3505,7 @@ class ArgsBinderTest {
 
     }
 
-    class ResTestOnlyIntentNoUriActivity : FragmentActivity() {
+    class ResTestOnlyIntentNoUriActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteIntentUriOrDefault by bindByteIntentUriArgOr(R.string.byte_intent_uri_or_default, 0.toByte())
         private val shortIntentUriOrDefault by bindShortIntentUriArgOr(R.string.short_intent_uri_or_default, 0.toShort())
@@ -3605,7 +3603,7 @@ class ArgsBinderTest {
 
     }
 
-    class ResTestBothIntentUriActivity : FragmentActivity() {
+    class ResTestBothIntentUriActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteIntentUriOrDefault by bindByteIntentUriArgOr(R.string.byte_intent_uri_or_default, 0.toByte())
         private val shortIntentUriOrDefault by bindShortIntentUriArgOr(R.string.short_intent_uri_or_default, 0.toShort())
@@ -3730,7 +3728,7 @@ class ArgsBinderTest {
 
     }
 
-    class ResTestNoIntentUriActivity : FragmentActivity() {
+    class ResTestNoIntentUriActivity : androidx.fragment.app.FragmentActivity() {
 
         private val byteIntentUriOrDefault by bindByteIntentUriArgOr(R.string.byte_intent_uri_or_default, 0.toByte())
         private val shortIntentUriOrDefault by bindShortIntentUriArgOr(R.string.short_intent_uri_or_default, 0.toShort())
@@ -3846,7 +3844,7 @@ class ArgsBinderTest18 {
     }
 
 
-    class TestActivity18 : FragmentActivity() {
+    class TestActivity18 : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntent(context: Context): Intent {
                 return Intent(context, TestActivity18::class.java)
@@ -3867,7 +3865,7 @@ class ArgsBinderTest18 {
         }
     }
 
-    class ResTestActivity18 : FragmentActivity() {
+    class ResTestActivity18 : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntent(context: Context): Intent {
                 return Intent(context, ResTestActivity18::class.java)
@@ -3912,7 +3910,7 @@ class ArgsBinderTest18 {
         }
     }
 
-    class TestSupportFragment18 : Fragment() {
+    class TestSupportFragment18 : androidx.fragment.app.Fragment() {
         private val binderRequired by bindBinderArg("binderRequired")
         private val binderOptional by bindBinderArgOrNull("binderOptional")
         private val binderOrDefault by bindBinderArgOr("binderOrDefault", TestBinder())
@@ -3963,7 +3961,7 @@ class ArgsBinderTest18 {
         }
     }
 
-    class ResTestSupportFragment18 : Fragment() {
+    class ResTestSupportFragment18 : androidx.fragment.app.Fragment() {
 
         private val binderRequired by bindBinderArg(R.string.binder_required)
         private val binderOptional by bindBinderArgOrNull(R.string.binder_optional)
@@ -4035,7 +4033,7 @@ class ArgsBinderTest21 {
         fragment.assert()
     }
 
-    class TestActivity21 : FragmentActivity() {
+    class TestActivity21 : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntent(context: Context): Intent {
                 return Intent(context, TestActivity21::class.java)
@@ -4056,7 +4054,7 @@ class ArgsBinderTest21 {
         }
     }
 
-    class ResTestActivity21 : FragmentActivity() {
+    class ResTestActivity21 : androidx.fragment.app.FragmentActivity() {
         companion object {
             fun createIntent(context: Context): Intent {
                 return Intent(context, ResTestActivity21::class.java)
@@ -4117,7 +4115,7 @@ class ArgsBinderTest21 {
         }
     }
 
-    class TestSupportFragment21 : Fragment() {
+    class TestSupportFragment21 : androidx.fragment.app.Fragment() {
 
         private val sizeRequired by bindSizeArg("sizeRequired")
         private val sizeOptional by bindSizeArgOrNull("sizeOptional")
@@ -4200,7 +4198,7 @@ class ArgsBinderTest21 {
         }
     }
 
-    class ResTestSupportFragment21 : Fragment() {
+    class ResTestSupportFragment21 : androidx.fragment.app.Fragment() {
 
         private val sizeRequired by bindSizeArg(R.string.size_required)
         private val sizeOptional by bindSizeArgOrNull(R.string.size_optional)

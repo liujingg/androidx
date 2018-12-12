@@ -21,7 +21,7 @@ package me.panpf.androidxkt.net
 import android.Manifest
 import android.content.Context
 import android.net.NetworkInfo
-import android.support.annotation.RequiresPermission
+import androidx.annotation.RequiresPermission
 import me.panpf.androidx.net.NetworkState
 import me.panpf.androidx.net.Networkx
 

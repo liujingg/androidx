@@ -17,8 +17,8 @@
 package me.panpf.androidxkt.test.graphics
 
 import android.graphics.Rect
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.graphics.getImageMimeSubType
 import me.panpf.androidxkt.graphics.getImageMimeType
 import me.panpf.androidxkt.os.storage.getAppExternalCacheDirs
@@ -72,8 +72,8 @@ class ImagexTest {
             Assert.assertEquals(context.resources.getImageMimeType(R.drawable.ic_opera), "image/png")
             Assert.assertEquals(context.resources.getImageMimeType(R.drawable.rect), "image/jpeg")
 
-            Assert.assertEquals(operaFile.inputStream().use { context.resources.getImageMimeType(null, it, Rect())}, "image/png")
-            Assert.assertEquals(rectFile.inputStream().use { context.resources.getImageMimeType(null, it, Rect())}, "image/jpeg")
+            Assert.assertEquals(operaFile.inputStream().use { context.resources.getImageMimeType(null, it, Rect()) }, "image/png")
+            Assert.assertEquals(rectFile.inputStream().use { context.resources.getImageMimeType(null, it, Rect()) }, "image/jpeg")
         } finally {
             operaFile.deleteRecursively()
             rectFile.deleteRecursively()
@@ -120,8 +120,8 @@ class ImagexTest {
             Assert.assertEquals(context.resources.getImageMimeSubType(R.drawable.ic_opera), "png")
             Assert.assertEquals(context.resources.getImageMimeSubType(R.drawable.rect), "jpeg")
 
-            Assert.assertEquals(operaFile.inputStream().use { context.resources.getImageMimeSubType(null, it, Rect())}, "png")
-            Assert.assertEquals(rectFile.inputStream().use { context.resources.getImageMimeSubType(null, it, Rect())}, "jpeg")
+            Assert.assertEquals(operaFile.inputStream().use { context.resources.getImageMimeSubType(null, it, Rect()) }, "png")
+            Assert.assertEquals(rectFile.inputStream().use { context.resources.getImageMimeSubType(null, it, Rect()) }, "jpeg")
         } finally {
             operaFile.deleteRecursively()
             rectFile.deleteRecursively()

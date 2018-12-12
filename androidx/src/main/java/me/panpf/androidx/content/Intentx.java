@@ -26,13 +26,13 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresPermission;
-import android.support.v4.content.FileProvider;
 
 import java.io.File;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.core.content.FileProvider;
 import me.panpf.androidx.content.pm.PackageInfox;
 
 /**
@@ -59,14 +59,14 @@ public class Intentx {
     }
 
     /**
-     * Get the shared file uri. Read the authority of provider 'android.support.v4.content.FileProvider' from AndroidManifest to generate file uri
+     * Get the shared file uri. Read the authority of provider 'androidx.core.content.FileProvider' from AndroidManifest to generate file uri
      */
     @NonNull
     public static Uri getShareFileUri(@NonNull Context context, @NonNull File file) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             ProviderInfo fileProviderInfo = PackageInfox.findSelfProviderInfoByName(context, FileProvider.class.getName());
             if (fileProviderInfo == null) {
-                throw new IllegalStateException("Please configure the provider 'android.support.v4.content.FileProvider' in the AndroidManifest.xml file");
+                throw new IllegalStateException("Please configure the provider 'androidx.core.content.FileProvider' in the AndroidManifest.xml file");
             }
             return FileProvider.getUriForFile(context, fileProviderInfo.authority, file);
         } else {

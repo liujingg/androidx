@@ -18,7 +18,8 @@ package me.panpf.androidx.content;
 
 import android.content.ClipData;
 import android.content.ClipDescription;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 public class ClipPlainText extends ClipContent {
 

@@ -74,9 +74,6 @@ import android.os.Vibrator;
 import android.os.health.SystemHealthManager;
 import android.os.storage.StorageManager;
 import android.print.PrintManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.telecom.TelecomManager;
 import android.telephony.CarrierConfigManager;
 import android.telephony.SubscriptionManager;
@@ -90,6 +87,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.textclassifier.TextClassificationManager;
 import android.view.textservice.TextServicesManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.fragment.app.Fragment;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.os.storage.StorageManagerCompat;
 import me.panpf.androidx.util.NullableResultRunnable;
@@ -118,7 +119,7 @@ public class Contextx {
      * Get Context, Throw an exception if Fragment is dead
      */
     @NonNull
-    public static Context requireContext(@NonNull android.support.v4.app.Fragment fragment) {
+    public static Context requireContext(@NonNull Fragment fragment) {
         return fragment.requireContext();
     }
 
@@ -140,7 +141,7 @@ public class Contextx {
      * Get Application Context, Throw an exception if Fragment is dead
      */
     @NonNull
-    public static Context requireAppContext(@NonNull android.support.v4.app.Fragment fragment) {
+    public static Context requireAppContext(@NonNull Fragment fragment) {
         return requireContext(fragment).getApplicationContext();
     }
 

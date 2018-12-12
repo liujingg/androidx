@@ -18,7 +18,8 @@ package me.panpf.androidx.content.pm;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
+
+import androidx.annotation.NonNull;
 
 public class AppPackage implements Parcelable {
     public static final Creator<AppPackage> CREATOR = new Creator<AppPackage>() {

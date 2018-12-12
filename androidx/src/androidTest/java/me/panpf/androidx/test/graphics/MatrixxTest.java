@@ -17,12 +17,12 @@
 package me.panpf.androidx.test.graphics;
 
 import android.graphics.Matrix;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.graphics.Matrixx;
 
 @RunWith(AndroidJUnit4.class)

@@ -16,8 +16,8 @@
 
 package me.panpf.androidxkt.test
 
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.Androidx
 import me.panpf.androidx.util.NullableResultRunnable
 import me.panpf.androidx.util.ResultRunnable

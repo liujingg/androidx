@@ -1,11 +1,11 @@
 package me.panpf.androidxkt.arch.test
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.support.v4.app.Fragment
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
 import me.panpf.androidxkt.arch.bindViewModel
 
-class TestFragment : Fragment(){
+class TestFragment : androidx.fragment.app.Fragment(){
 
     val viewModel: TestViewModel  by bindViewModel(TestViewModel::class)
 

@@ -17,13 +17,6 @@
 package me.panpf.androidx.test.app;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +28,14 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+import androidx.viewpager.widget.ViewPager;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Argsx;
 import me.panpf.androidx.app.Fragmentx;
@@ -67,7 +68,7 @@ public class FragmentxTest {
     @Test
     public void testDestroyed() throws InterruptedException {
         android.app.Fragment originFragment = activityTestRule.getActivity().getOriginFragment();
-        android.support.v4.app.Fragment supportFragment = activityTestRule.getActivity().getSupportFragment();
+        Fragment supportFragment = activityTestRule.getActivity().getSupportFragment();
 
         Assert.assertFalse(Fragmentx.isDestroyedCompat(originFragment));
         Assert.assertFalse(Fragmentx.isDestroyedCompat(supportFragment));
@@ -127,15 +128,15 @@ public class FragmentxTest {
         Assert.assertEquals(android.app.Fragment.class.getName(), originFragment.getClass().getName());
         Assert.assertEquals("testInstantiate", Argsx.readStringArg(originFragment, "key"));
 
-        android.support.v4.app.Fragment supportFragment = Fragmentx.instantiate(android.support.v4.app.Fragment.class, new BundleBuilder().putString("key", "testInstantiate").build());
-        Assert.assertEquals(android.support.v4.app.Fragment.class.getName(), supportFragment.getClass().getName());
+        Fragment supportFragment = Fragmentx.instantiate(Fragment.class, new BundleBuilder().putString("key", "testInstantiate").build());
+        Assert.assertEquals(Fragment.class.getName(), supportFragment.getClass().getName());
         Assert.assertEquals("testInstantiate", Argsx.readStringArg(supportFragment, "key"));
 
         android.app.Fragment originFragment2 = Fragmentx.instantiateOrigin(android.app.Fragment.class);
         Assert.assertEquals(android.app.Fragment.class.getName(), originFragment2.getClass().getName());
 
-        android.support.v4.app.Fragment supportFragment2 = Fragmentx.instantiate(android.support.v4.app.Fragment.class);
-        Assert.assertEquals(android.support.v4.app.Fragment.class.getName(), supportFragment2.getClass().getName());
+        Fragment supportFragment2 = Fragmentx.instantiate(Fragment.class);
+        Assert.assertEquals(Fragment.class.getName(), supportFragment2.getClass().getName());
     }
 
     @Test
@@ -145,14 +146,14 @@ public class FragmentxTest {
         activityTestRule.finishActivity();
         // 此测试要求手机处于屏幕解锁状态
 
-        android.support.v4.app.Fragment fragmentFromActivity = Premisex.requireNotNull(Fragmentx.findUserVisibleChildFragment(activity));
+        Fragment fragmentFromActivity = Premisex.requireNotNull(Fragmentx.findUserVisibleChildFragment(activity));
         Assert.assertEquals(TestFindUserVisibleChildFragment.class.getName(), fragmentFromActivity.getClass().getName());
 
-        android.support.v4.app.Fragment fragmentFromList = Premisex.requireNotNull(Fragmentx.findUserVisibleChildFragment(activity.getSupportFragmentManager().getFragments()));
+        Fragment fragmentFromList = Premisex.requireNotNull(Fragmentx.findUserVisibleChildFragment(activity.getSupportFragmentManager().getFragments()));
         Assert.assertEquals(TestFindUserVisibleChildFragment.class.getName(), fragmentFromList.getClass().getName());
 
         TestFindUserVisibleChildFragment fragmentFromActivity2 = (TestFindUserVisibleChildFragment) fragmentFromActivity;
-        android.support.v4.app.Fragment fragmentFromChildFragment = Premisex.requireNotNull(Fragmentx.findUserVisibleChildFragment(fragmentFromActivity2));
+        Fragment fragmentFromChildFragment = Premisex.requireNotNull(Fragmentx.findUserVisibleChildFragment(fragmentFromActivity2));
         Assert.assertTrue(fragmentFromChildFragment.getTag(), Stringx.orEmpty(fragmentFromChildFragment.getTag()).startsWith("android:switcher") && Stringx.orEmpty(fragmentFromChildFragment.getTag()).endsWith(":3"));
     }
 
@@ -163,16 +164,16 @@ public class FragmentxTest {
         activityTestRule.finishActivity();
         // 此测试要求手机处于屏幕解锁状态
 
-        android.support.v4.app.Fragment fragmentFromActivity = Premisex.requireNotNull(Fragmentx.findFragmentByViewPagerCurrentItem(activity, 2));
+        Fragment fragmentFromActivity = Premisex.requireNotNull(Fragmentx.findFragmentByViewPagerCurrentItem(activity, 2));
         Assert.assertEquals(TestFindUserVisibleChildFragment.class.getName(), fragmentFromActivity.getClass().getName());
         Assert.assertTrue(fragmentFromActivity.getTag(), Stringx.orEmpty(fragmentFromActivity.getTag()).startsWith("android:switcher") && Stringx.orEmpty(fragmentFromActivity.getTag()).endsWith(":2"));
 
-        android.support.v4.app.Fragment fragmentFromList = Premisex.requireNotNull(Fragmentx.findFragmentByViewPagerCurrentItem(activity.getSupportFragmentManager().getFragments(), 2));
+        Fragment fragmentFromList = Premisex.requireNotNull(Fragmentx.findFragmentByViewPagerCurrentItem(activity.getSupportFragmentManager().getFragments(), 2));
         Assert.assertEquals(TestFindUserVisibleChildFragment.class.getName(), fragmentFromList.getClass().getName());
         Assert.assertTrue(fragmentFromList.getTag(), Stringx.orEmpty(fragmentFromList.getTag()).startsWith("android:switcher") && Stringx.orEmpty(fragmentFromList.getTag()).endsWith(":2"));
 
         TestFindUserVisibleChildFragment fragmentFromActivity2 = (TestFindUserVisibleChildFragment) fragmentFromActivity;
-        android.support.v4.app.Fragment fragmentFromChildFragment = Premisex.requireNotNull(Fragmentx.findFragmentByViewPagerCurrentItem(fragmentFromActivity2, 3));
+        Fragment fragmentFromChildFragment = Premisex.requireNotNull(Fragmentx.findFragmentByViewPagerCurrentItem(fragmentFromActivity2, 3));
         Assert.assertTrue(fragmentFromChildFragment.getTag(), Stringx.orEmpty(fragmentFromChildFragment.getTag()).startsWith("android:switcher") && Stringx.orEmpty(fragmentFromChildFragment.getTag()).endsWith(":3"));
     }
 
@@ -201,7 +202,7 @@ public class FragmentxTest {
         }
 
         @NonNull
-        public android.support.v4.app.Fragment getSupportFragment() {
+        public Fragment getSupportFragment() {
             return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(R.id.multiFrameAt_frame2));
         }
 
@@ -239,7 +240,7 @@ public class FragmentxTest {
     public static final class TestImplOriginFragment2 extends android.app.Fragment {
     }
 
-    public static final class TestImplSupportFragment extends android.support.v4.app.Fragment implements FragmentxTest.ImplTestInterface {
+    public static final class TestImplSupportFragment extends Fragment implements FragmentxTest.ImplTestInterface {
 
         @Nullable
         public View onCreateView(@NotNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -254,12 +255,12 @@ public class FragmentxTest {
         }
 
         @NotNull
-        public final android.support.v4.app.Fragment getChildFragment() {
+        public final Fragment getChildFragment() {
             return Premisex.requireNotNull(this.getChildFragmentManager().findFragmentById(R.id.testAt_frame));
         }
     }
 
-    public static final class TestImplSupportFragment2 extends android.support.v4.app.Fragment {
+    public static final class TestImplSupportFragment2 extends Fragment {
 
     }
 
@@ -273,7 +274,7 @@ public class FragmentxTest {
             ViewPager viewPager = findViewById(R.id.viewPagerAt_viewPager);
             viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
                 @Override
-                public android.support.v4.app.Fragment getItem(int p0) {
+                public Fragment getItem(int p0) {
                     if (p0 == 2) {
                         return Fragmentx.instantiate(TestFindUserVisibleChildFragment.class, new BundleBuilder().putString("position", String.valueOf(p0)).build());
                     } else {
@@ -290,7 +291,7 @@ public class FragmentxTest {
         }
     }
 
-    public static class TestFindUserVisibleChildFragment extends android.support.v4.app.Fragment {
+    public static class TestFindUserVisibleChildFragment extends Fragment {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return inflater.inflate(R.layout.at_view_pager, container, false);
@@ -303,7 +304,7 @@ public class FragmentxTest {
             ViewPager viewPager = view.findViewById(R.id.viewPagerAt_viewPager);
             viewPager.setAdapter(new FragmentPagerAdapter(getChildFragmentManager()) {
                 @Override
-                public android.support.v4.app.Fragment getItem(int p0) {
+                public Fragment getItem(int p0) {
                     return Fragmentx.instantiate(TestFindUserVisibleChildFragment2.class, new BundleBuilder().putString("position", String.valueOf(p0)).build());
                 }
 
@@ -316,7 +317,7 @@ public class FragmentxTest {
         }
     }
 
-    public static class TestFindUserVisibleChildFragment2 extends android.support.v4.app.Fragment {
+    public static class TestFindUserVisibleChildFragment2 extends Fragment {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             return new TextView(getContext());

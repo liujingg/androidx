@@ -19,8 +19,8 @@ package me.panpf.androidxkt.test.app
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.os.BundleBuilder
 import me.panpf.androidxkt.app.*
 import me.panpf.androidxkt.test.TestService

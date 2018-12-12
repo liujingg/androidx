@@ -21,12 +21,13 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
-import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewConfiguration;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.SystemPropertiesx;
 import me.panpf.javax.util.LazyValue;
@@ -122,7 +123,7 @@ public class Displayx {
     /**
      * Get the screen rotation angle, 0, 90, 180, 270
      */
-    public static int getRotation(@NonNull android.support.v4.app.Fragment fragment) {
+    public static int getRotation(@NonNull Fragment fragment) {
         return getRotation(fragment.requireContext());
     }
 
@@ -157,7 +158,7 @@ public class Displayx {
     /**
      * Return true if the current screen orientation is portrait
      */
-    public static boolean isOrientationPortrait(@NonNull android.support.v4.app.Fragment fragment) {
+    public static boolean isOrientationPortrait(@NonNull Fragment fragment) {
         return isOrientationPortrait(fragment.requireContext());
     }
 
@@ -192,7 +193,7 @@ public class Displayx {
     /**
      * Return true if the current screen orientation is landscape
      */
-    public static boolean isOrientationLandscape(@NonNull android.support.v4.app.Fragment fragment) {
+    public static boolean isOrientationLandscape(@NonNull Fragment fragment) {
         return isOrientationLandscape(fragment.requireContext());
     }
 
@@ -227,7 +228,7 @@ public class Displayx {
     /**
      * Return true if the current screen orientation is undefined
      */
-    public static boolean isOrientationUndefined(@NonNull android.support.v4.app.Fragment fragment) {
+    public static boolean isOrientationUndefined(@NonNull Fragment fragment) {
         return isOrientationUndefined(fragment.requireContext());
     }
 

@@ -24,8 +24,8 @@ android {
 }
 
 dependencies {
-    api "com.android.support:support-fragment:${SUPPORT_VERSION}"
-    api "me.panpf:javax:${JAVAX}"
+    api "androidx.fragment:fragment:$ANDROIDX_FRAGMENT"
+    api "me.panpf:javax:$JAVAX"
 }
 
 apply from: 'build_upload.gradle'

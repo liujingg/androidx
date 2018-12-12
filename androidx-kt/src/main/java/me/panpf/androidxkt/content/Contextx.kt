@@ -61,7 +61,6 @@ import android.os.*
 import android.os.health.SystemHealthManager
 import android.os.storage.StorageManager
 import android.print.PrintManager
-import android.support.annotation.RequiresApi
 import android.telecom.TelecomManager
 import android.telephony.CarrierConfigManager
 import android.telephony.SubscriptionManager
@@ -74,6 +73,7 @@ import android.view.accessibility.CaptioningManager
 import android.view.inputmethod.InputMethodManager
 import android.view.textclassifier.TextClassificationManager
 import android.view.textservice.TextServicesManager
+import androidx.annotation.RequiresApi
 import me.panpf.androidx.content.Contextx
 import me.panpf.androidx.os.storage.StorageManagerCompat
 
@@ -92,13 +92,13 @@ inline fun android.app.Fragment.requireContext(): Context = Contextx.requireCont
 ///**
 // * Get Context, Throw an exception if Fragment is dead
 // */
-//inline fun android.support.v4.app.Fragment.requireContext(): Context = Contextx.requireContext(this)
+//inline fun androidx.fragment.app.Fragment.requireContext(): Context = Contextx.requireContext(this)
 
 
 /**
  * Get Application Context, Throw an exception if Fragment is dead
  */
-inline fun android.support.v4.app.Fragment.requireAppContext(): Context = Contextx.requireAppContext(this)
+inline fun androidx.fragment.app.Fragment.requireAppContext(): Context = Contextx.requireAppContext(this)
 
 /**
  * Get Application Context, Throw an exception if Fragment is dead

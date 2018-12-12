@@ -4,16 +4,16 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.FragmentActivity;
 
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Dialogx;
 
@@ -47,7 +47,7 @@ public class DialogxTest {
             public void run() {
                 TestActivity activity = mActivityTestRule.getActivity();
                 Fragment fragment = activity.getFragmentManager().findFragmentById(android.R.id.content);
-                android.support.v4.app.Fragment supportFragment = mFragmentActivityTestRule.getActivity()
+                androidx.fragment.app.Fragment supportFragment = mFragmentActivityTestRule.getActivity()
                         .getSupportFragmentManager()
                         .findFragmentById(android.R.id.content);
 
@@ -87,7 +87,7 @@ public class DialogxTest {
             super.onCreate(savedInstanceState);
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(android.R.id.content, new android.support.v4.app.Fragment())
+                    .replace(android.R.id.content, new androidx.fragment.app.Fragment())
                     .commit();
         }
 

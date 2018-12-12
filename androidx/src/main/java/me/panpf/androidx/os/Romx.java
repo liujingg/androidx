@@ -16,11 +16,10 @@
 
 package me.panpf.androidx.os;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import me.panpf.javax.lang.Stringx;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import me.panpf.javax.collections.Arrayx;
+import me.panpf.javax.lang.Stringx;
 
 public class Romx {
 

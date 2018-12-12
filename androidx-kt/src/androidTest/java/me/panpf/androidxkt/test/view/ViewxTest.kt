@@ -19,11 +19,11 @@ package me.panpf.androidxkt.test.view
 import android.app.Activity
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.util.ResultRunnable
 import me.panpf.androidxkt.runInUI
 import me.panpf.androidxkt.test.R

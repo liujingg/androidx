@@ -20,8 +20,8 @@ package me.panpf.androidxkt.test.net
 
 import android.net.ConnectivityManager
 import android.net.wifi.WifiManager
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.content.connectivityManager
 import me.panpf.androidxkt.net.*
 import me.panpf.javax.ranges.Rangex

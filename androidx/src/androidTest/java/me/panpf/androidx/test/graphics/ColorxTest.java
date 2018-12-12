@@ -17,7 +17,6 @@
 package me.panpf.androidx.test.graphics;
 
 import android.graphics.Color;
-import android.support.test.runner.AndroidJUnit4;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,6 +25,7 @@ import org.junit.runner.RunWith;
 import java.util.List;
 import java.util.Set;
 
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.graphics.Colorx;
 import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.lang.Mathx;

@@ -46,28 +46,28 @@ inline fun Context.applyDimension(@Dimenx.DimenUnit unit: Int, value: Float): Fl
 inline fun Context.applyDimension(@Dimenx.DimenUnit unit: Int, value: Int): Float = Dimenx.applyDimension(this, unit, value)
 
 
-/* ************************************* android.support.v4.app.Fragment ***************************************** */
+/* ************************************* androidx.fragment.app.Fragment ***************************************** */
 
 
-inline fun android.support.v4.app.Fragment.dp2px(dpValue: Float): Int = Dimenx.dp2px(this, dpValue)
+inline fun androidx.fragment.app.Fragment.dp2px(dpValue: Float): Int = Dimenx.dp2px(this, dpValue)
 
-inline fun android.support.v4.app.Fragment.dp2px(dpValue: Int): Int = Dimenx.dp2px(this, dpValue)
-
-
-inline fun android.support.v4.app.Fragment.px2dp(px: Int): Float = Dimenx.px2dp(this, px)
+inline fun androidx.fragment.app.Fragment.dp2px(dpValue: Int): Int = Dimenx.dp2px(this, dpValue)
 
 
-inline fun android.support.v4.app.Fragment.sp2px(dpValue: Float): Int = Dimenx.sp2px(this, dpValue)
-
-inline fun android.support.v4.app.Fragment.sp2px(dpValue: Int): Int = Dimenx.sp2px(this, dpValue)
+inline fun androidx.fragment.app.Fragment.px2dp(px: Int): Float = Dimenx.px2dp(this, px)
 
 
-inline fun android.support.v4.app.Fragment.px2sp(px: Int): Float = Dimenx.px2sp(this, px)
+inline fun androidx.fragment.app.Fragment.sp2px(dpValue: Float): Int = Dimenx.sp2px(this, dpValue)
+
+inline fun androidx.fragment.app.Fragment.sp2px(dpValue: Int): Int = Dimenx.sp2px(this, dpValue)
 
 
-inline fun android.support.v4.app.Fragment.applyDimension(@Dimenx.DimenUnit unit: Int, value: Float): Float = Dimenx.applyDimension(this, unit, value)
+inline fun androidx.fragment.app.Fragment.px2sp(px: Int): Float = Dimenx.px2sp(this, px)
 
-inline fun android.support.v4.app.Fragment.applyDimension(@Dimenx.DimenUnit unit: Int, value: Int): Float = Dimenx.applyDimension(this, unit, value)
+
+inline fun androidx.fragment.app.Fragment.applyDimension(@Dimenx.DimenUnit unit: Int, value: Float): Float = Dimenx.applyDimension(this, unit, value)
+
+inline fun androidx.fragment.app.Fragment.applyDimension(@Dimenx.DimenUnit unit: Int, value: Int): Float = Dimenx.applyDimension(this, unit, value)
 
 
 /* ************************************* android.app.Fragment ***************************************** */

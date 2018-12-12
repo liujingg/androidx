@@ -22,7 +22,6 @@ import android.opengl.EGL14;
 import android.opengl.GLES10;
 import android.opengl.GLES20;
 import android.os.Build;
-import android.support.annotation.NonNull;
 
 import javax.microedition.khronos.egl.EGL10;
 import javax.microedition.khronos.egl.EGLConfig;
@@ -30,6 +29,7 @@ import javax.microedition.khronos.egl.EGLContext;
 import javax.microedition.khronos.egl.EGLDisplay;
 import javax.microedition.khronos.egl.EGLSurface;
 
+import androidx.annotation.NonNull;
 import me.panpf.androidx.content.Contextx;
 
 public class OpenGlx {

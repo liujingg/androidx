@@ -17,11 +17,6 @@
 package me.panpf.androidx.test.view;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.FragmentActivity;
 import android.text.Selection;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +28,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.test.R;
 import me.panpf.androidx.view.Displayx;
@@ -88,7 +89,7 @@ public class InputMethodxTest {
         final EditText supportEditText = activity.getOriginFragmentEditTxt();
 
         // show
-        if (Displayx.isOrientationPortrait(activity)){
+        if (Displayx.isOrientationPortrait(activity)) {
             if (InputMethodx.isSoftInputShowing(activity)) {
                 Androidx.runInUI(new Runnable() {
                     @Override
@@ -145,7 +146,7 @@ public class InputMethodxTest {
         final EditText supportEditText = activity.getSupportFragmentEditTxt();
 
         // show
-        if (Displayx.isOrientationPortrait(activity)){
+        if (Displayx.isOrientationPortrait(activity)) {
             if (InputMethodx.isSoftInputShowing(activity)) {
                 Androidx.runInUI(new Runnable() {
                     @Override
@@ -307,7 +308,7 @@ public class InputMethodxTest {
         }
 
         @NonNull
-        public android.support.v4.app.Fragment getSupportFragment() {
+        public Fragment getSupportFragment() {
             return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(R.id.multiFrameAt_frame2));
         }
 
@@ -332,7 +333,7 @@ public class InputMethodxTest {
         }
     }
 
-    public static class EditSupportFragment extends android.support.v4.app.Fragment {
+    public static class EditSupportFragment extends Fragment {
         @NonNull
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

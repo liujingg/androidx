@@ -21,8 +21,8 @@ package me.panpf.androidxkt.graphics.drawable
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.support.annotation.ColorInt
-import android.support.annotation.DrawableRes
+import androidx.annotation.ColorInt
+import androidx.annotation.DrawableRes
 import me.panpf.androidx.graphics.drawable.Drawablex
 
 /*

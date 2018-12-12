@@ -19,8 +19,8 @@
 package me.panpf.androidxkt.widget
 
 import android.content.Context
-import android.support.annotation.StringRes
 import android.view.View
+import androidx.annotation.StringRes
 import me.panpf.androidx.widget.Toastx
 
 /*
@@ -48,24 +48,24 @@ inline fun Context.showShortToast(@StringRes messageResId: Int) = Toastx.showSho
 inline fun Context.showShortToast(@StringRes messageResId: Int, vararg params: Any) = Toastx.showShort(this, messageResId, *params)
 
 
-/* ************************************* android.support.v4.app.Fragment ***************************************** */
+/* ************************************* androidx.fragment.app.Fragment ***************************************** */
 
 
-inline fun android.support.v4.app.Fragment.showLongToast(message: String) = Toastx.showLong(this, message)
+inline fun androidx.fragment.app.Fragment.showLongToast(message: String) = Toastx.showLong(this, message)
 
-inline fun android.support.v4.app.Fragment.showLongToast(message: String, vararg params: Any) = Toastx.showLong(this, message, *params)
+inline fun androidx.fragment.app.Fragment.showLongToast(message: String, vararg params: Any) = Toastx.showLong(this, message, *params)
 
-inline fun android.support.v4.app.Fragment.showLongToast(@StringRes messageResId: Int) = Toastx.showLong(this, messageResId)
+inline fun androidx.fragment.app.Fragment.showLongToast(@StringRes messageResId: Int) = Toastx.showLong(this, messageResId)
 
-inline fun android.support.v4.app.Fragment.showLongToast(@StringRes messageResId: Int, vararg params: Any) = Toastx.showLong(this, messageResId, *params)
+inline fun androidx.fragment.app.Fragment.showLongToast(@StringRes messageResId: Int, vararg params: Any) = Toastx.showLong(this, messageResId, *params)
 
-inline fun android.support.v4.app.Fragment.showShortToast(message: String) = Toastx.showShort(this, message)
+inline fun androidx.fragment.app.Fragment.showShortToast(message: String) = Toastx.showShort(this, message)
 
-inline fun android.support.v4.app.Fragment.showShortToast(message: String, vararg params: Any) = Toastx.showShort(this, message, *params)
+inline fun androidx.fragment.app.Fragment.showShortToast(message: String, vararg params: Any) = Toastx.showShort(this, message, *params)
 
-inline fun android.support.v4.app.Fragment.showShortToast(@StringRes messageResId: Int) = Toastx.showShort(this, messageResId)
+inline fun androidx.fragment.app.Fragment.showShortToast(@StringRes messageResId: Int) = Toastx.showShort(this, messageResId)
 
-inline fun android.support.v4.app.Fragment.showShortToast(@StringRes messageResId: Int, vararg params: Any) = Toastx.showShort(this, messageResId, *params)
+inline fun androidx.fragment.app.Fragment.showShortToast(@StringRes messageResId: Int, vararg params: Any) = Toastx.showShort(this, messageResId, *params)
 
 
 /* ************************************* android.app.Fragment ***************************************** */

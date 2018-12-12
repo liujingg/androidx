@@ -21,12 +21,6 @@ import android.app.Application;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.rule.ActivityTestRule;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
 
 import org.junit.Assert;
@@ -34,6 +28,13 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.test.R;
 import me.panpf.javax.util.Premisex;
@@ -290,7 +291,7 @@ public class ContextxTest {
                     .commit();
 
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.multiFrameAt_frame2, new android.support.v4.app.Fragment())
+                    .replace(R.id.multiFrameAt_frame2, new Fragment())
                     .commit();
         }
 
@@ -300,7 +301,7 @@ public class ContextxTest {
         }
 
         @NonNull
-        public android.support.v4.app.Fragment getSupportFragment() {
+        public Fragment getSupportFragment() {
             return Premisex.requireNotNull(getSupportFragmentManager().findFragmentById(R.id.multiFrameAt_frame2));
         }
 

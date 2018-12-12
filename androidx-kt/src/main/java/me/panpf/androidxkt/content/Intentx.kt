@@ -23,7 +23,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.net.Uri
-import android.support.annotation.RequiresPermission
+import androidx.annotation.RequiresPermission
 import me.panpf.androidx.content.Intentx
 import java.io.File
 
@@ -36,7 +36,7 @@ import java.io.File
 inline fun Context.getShareFileUri(file: File, authority: String): Uri = Intentx.getShareFileUri(this, file, authority)
 
 /**
- * Get the shared file uri. Read the authority of provider 'android.support.v4.content.FileProvider' from AndroidManifest to generate file uri
+ * Get the shared file uri. Read the authority of provider 'androidx.fragment.app.Fragment' from AndroidManifest to generate file uri
  */
 inline fun Context.getShareFileUri(file: File): Uri = Intentx.getShareFileUri(this, file)
 

@@ -60,7 +60,7 @@ inline fun Activity.hideSoftInput() = InputMethodx.hideSoftInput(this)
 /**
  * Hide soft keyboard
  */
-inline fun android.support.v4.app.Fragment.hideSoftInput() = InputMethodx.hideSoftInput(this)
+inline fun androidx.fragment.app.Fragment.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
 /**
  * Hide soft keyboard

@@ -16,10 +16,11 @@
 
 package me.panpf.androidx.view;
 
-import android.support.annotation.FloatRange;
-import android.support.annotation.NonNull;
 import android.view.Window;
 import android.view.WindowManager;
+
+import androidx.annotation.FloatRange;
+import androidx.annotation.NonNull;
 
 public class Windowx {
 

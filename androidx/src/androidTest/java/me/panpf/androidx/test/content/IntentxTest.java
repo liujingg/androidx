@@ -25,9 +25,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.MediaStore;
 import android.provider.Settings;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.content.FileProvider;
 
 import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
@@ -39,17 +36,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import androidx.core.content.FileProvider;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.Intentx;
 import me.panpf.androidx.content.pm.PackageInfox;
 import me.panpf.androidx.content.pm.Packagex;
 import me.panpf.androidx.os.storage.Storagex;
 import me.panpf.androidx.test.BuildConfig;
+import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.io.Filex;
 import me.panpf.javax.io.Streamx;
 import me.panpf.javax.io.UnableCreateDirException;
 import me.panpf.javax.io.UnableCreateFileException;
 import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Premisex;
 

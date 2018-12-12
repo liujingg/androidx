@@ -44,6 +44,7 @@
 * :sparkles: Bitmapx adds toDrawable
 * :white_check_mark: Prefect Resizex testing
 * :white_check_mark: Prefect Argsx and ArgsBinder testing
+* :arrow_up: Upgrade to Jetpack
 
 Upgrade
 * :arrow_up: Upgrade Javax 1.0.0-alpha1

@@ -17,8 +17,8 @@
 package me.panpf.androidxkt.test.graphics
 
 import android.graphics.Paint
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.graphics.*
 import me.panpf.androidxkt.util.dp2px
 import org.junit.Assert

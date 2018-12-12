@@ -20,8 +20,8 @@ import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ContentResolver;
 import android.net.Uri;
-import android.support.annotation.NonNull;
 
+import androidx.annotation.NonNull;
 import me.panpf.javax.collections.Arrayx;
 
 public class ClipUri extends ClipContent {

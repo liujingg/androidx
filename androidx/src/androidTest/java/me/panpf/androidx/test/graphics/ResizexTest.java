@@ -18,13 +18,13 @@ package me.panpf.androidx.test.graphics;
 
 import android.graphics.Point;
 import android.graphics.Rect;
-import android.support.test.runner.AndroidJUnit4;
 import android.widget.ImageView;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.graphics.Resizex;
 
 @RunWith(AndroidJUnit4.class)

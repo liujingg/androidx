@@ -20,15 +20,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.util.Size;
 import android.util.SizeF;
 import android.util.SparseArray;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 public class BundleBuilder {
 
@@ -231,7 +232,8 @@ public class BundleBuilder {
     /**
      * Inserts an ArrayList<Integer> value into the mapping of this Bundle, replacing
      * any existing value for the given key.  Either key or value may be null.
-     *  @param key   a String, or null
+     *
+     * @param key   a String, or null
      * @param value an ArrayList<Integer> object, or null
      */
     public BundleBuilder putIntegerArrayList(@Nullable String key, @Nullable ArrayList<Integer> value) {

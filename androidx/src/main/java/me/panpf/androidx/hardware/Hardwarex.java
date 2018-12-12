@@ -23,8 +23,6 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresPermission;
 import android.telephony.TelephonyManager;
 
 import java.net.NetworkInterface;
@@ -33,9 +31,11 @@ import java.util.Enumeration;
 import java.util.LinkedList;
 import java.util.List;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 import me.panpf.androidx.content.Contextx;
-import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.collections.Collectionx;
+import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Transformer;
 

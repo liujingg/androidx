@@ -20,8 +20,8 @@ package me.panpf.androidxkt.provider
 
 import android.Manifest
 import android.content.Context
-import android.support.annotation.IntRange
-import android.support.annotation.RequiresPermission
+import androidx.annotation.IntRange
+import androidx.annotation.RequiresPermission
 import me.panpf.androidx.provider.Settingsx
 
 

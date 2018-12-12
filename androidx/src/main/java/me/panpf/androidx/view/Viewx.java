@@ -20,14 +20,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
+import androidx.annotation.LayoutRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import me.panpf.androidx.widget.Toastx;
 
 public class Viewx {
@@ -230,18 +230,18 @@ public class Viewx {
     /**
      * Inflate a new view hierarchy from the specified xml resource. Throws {@link android.view.InflateException} if there is an error.
      *
-     * @param resource ID for an XML layout resource to load (e.g.,
-     *        <code>R.layout.main_page</code>)
-     * @param root Optional view to be the parent of the generated hierarchy (if
-     *        <em>attachToRoot</em> is true), or else simply an object that
-     *        provides a set of LayoutParams values for root of the returned
-     *        hierarchy (if <em>attachToRoot</em> is false.)
+     * @param resource     ID for an XML layout resource to load (e.g.,
+     *                     <code>R.layout.main_page</code>)
+     * @param root         Optional view to be the parent of the generated hierarchy (if
+     *                     <em>attachToRoot</em> is true), or else simply an object that
+     *                     provides a set of LayoutParams values for root of the returned
+     *                     hierarchy (if <em>attachToRoot</em> is false.)
      * @param attachToRoot Whether the inflated hierarchy should be attached to
-     *        the root parameter? If false, root is only used to create the
-     *        correct subclass of LayoutParams for the root view in the XML.
+     *                     the root parameter? If false, root is only used to create the
+     *                     correct subclass of LayoutParams for the root view in the XML.
      * @return The root View of the inflated hierarchy. If root was supplied and
-     *         attachToRoot is true, this is root; otherwise it is the root of
-     *         the inflated XML file.
+     * attachToRoot is true, this is root; otherwise it is the root of
+     * the inflated XML file.
      */
     @NonNull
     public static View inflateLayout(@NonNull Context context, @LayoutRes int resource, @Nullable ViewGroup root, boolean attachToRoot) {
@@ -252,14 +252,14 @@ public class Viewx {
      * Inflate a new view hierarchy from the specified xml resource. Throws {@link android.view.InflateException} if there is an error.
      *
      * @param resource ID for an XML layout resource to load (e.g.,
-     *        <code>R.layout.main_page</code>)
-     * @param root Optional view to be the parent of the generated hierarchy (if
-     *        <em>attachToRoot</em> is true), or else simply an object that
-     *        provides a set of LayoutParams values for root of the returned
-     *        hierarchy (if <em>attachToRoot</em> is false.)
+     *                 <code>R.layout.main_page</code>)
+     * @param root     Optional view to be the parent of the generated hierarchy (if
+     *                 <em>attachToRoot</em> is true), or else simply an object that
+     *                 provides a set of LayoutParams values for root of the returned
+     *                 hierarchy (if <em>attachToRoot</em> is false.)
      * @return The root View of the inflated hierarchy. If root was supplied and
-     *         attachToRoot is true, this is root; otherwise it is the root of
-     *         the inflated XML file.
+     * attachToRoot is true, this is root; otherwise it is the root of
+     * the inflated XML file.
      */
     @NonNull
     public static View inflateLayout(@NonNull Context context, @LayoutRes int resource, @Nullable ViewGroup root) {
@@ -270,8 +270,8 @@ public class Viewx {
      * Inflate a new view hierarchy from the specified xml resource. Throws {@link android.view.InflateException} if there is an error.
      *
      * @return The root View of the inflated hierarchy. If root was supplied and
-     *         attachToRoot is true, this is root; otherwise it is the root of
-     *         the inflated XML file.
+     * attachToRoot is true, this is root; otherwise it is the root of
+     * the inflated XML file.
      */
     @NonNull
     public static View inflateLayout(@NonNull Context context, @LayoutRes int resource) {

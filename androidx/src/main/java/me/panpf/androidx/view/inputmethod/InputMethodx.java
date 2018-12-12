@@ -18,12 +18,13 @@ package me.panpf.androidx.view.inputmethod;
 
 import android.app.Activity;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
 import android.text.Selection;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.view.Displayx;
 
@@ -108,7 +109,7 @@ public class InputMethodx {
     /**
      * Hide soft keyboard
      */
-    public static void hideSoftInput(@NonNull android.support.v4.app.Fragment fragment) {
+    public static void hideSoftInput(@NonNull Fragment fragment) {
         Activity activity = fragment.getActivity();
         if (activity != null) hideSoftInput(activity);
     }

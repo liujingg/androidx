@@ -19,9 +19,9 @@ Please replace `$lastVersion` with the latest version: [![Download][version_icon
 
 Dependencies:
 * org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.71
-* com.android.support:support-fragment: 28.0.0
-* android.arch.lifecycle:viewmodel: 1.1.1
-* android.arch.lifecycle:extensions: 1.1.1
+* androidx.fragment:fragment: 1.1.0-alpha02
+* androidx.lifecycle:lifecycle-viewmodel: 2.0.0
+* androidx.lifecycle:lifecycle-extensions: 2.0.0
 
 ## Usage Guide
 

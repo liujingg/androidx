@@ -17,12 +17,11 @@
 package me.panpf.androidxkt.test.util
 
 import android.os.Bundle
-import android.support.test.InstrumentationRegistry
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.FragmentActivity
 import android.util.TypedValue
 import android.view.View
+import androidx.test.InstrumentationRegistry
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.test.R
 import me.panpf.androidxkt.util.*
 import me.panpf.javax.util.Premisex
@@ -112,13 +111,13 @@ class DimenxTest {
         Assert.assertEquals(10.toFloat() * context.resources.displayMetrics.scaledDensity, view.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10), 0f)
     }
 
-    class TestActivity : FragmentActivity() {
+    class TestActivity : androidx.fragment.app.FragmentActivity() {
 
         val originFragment: android.app.Fragment
             get() = fragmentManager.findFragmentById(R.id.multiFrameAt_frame1)
 
-        val supportFragment: android.support.v4.app.Fragment
-            get() = Premisex.requireNotNull<android.support.v4.app.Fragment>(supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2))
+        val supportFragment: androidx.fragment.app.Fragment
+            get() = Premisex.requireNotNull<androidx.fragment.app.Fragment>(supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2))
 
         val view: View
             get() = findViewById(android.R.id.content)
@@ -132,7 +131,7 @@ class DimenxTest {
                     .commit()
 
             supportFragmentManager.beginTransaction()
-                    .replace(R.id.multiFrameAt_frame2, android.support.v4.app.Fragment())
+                    .replace(R.id.multiFrameAt_frame2, androidx.fragment.app.Fragment())
                     .commit()
         }
     }

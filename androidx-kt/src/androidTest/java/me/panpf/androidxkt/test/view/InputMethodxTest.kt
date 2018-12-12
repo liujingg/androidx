@@ -19,14 +19,13 @@
 package me.panpf.androidxkt.test.view
 
 import android.os.Bundle
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.FragmentActivity
 import android.text.Selection
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidxkt.runInUI
 import me.panpf.androidxkt.test.R
 import me.panpf.androidxkt.view.inputmethod.*
@@ -179,7 +178,7 @@ class InputMethodxTest {
         Assert.assertEquals((originEditText.length() / 2).toLong(), Selection.getSelectionEnd(originEditText.text).toLong())
     }
 
-    class TestActivity : FragmentActivity() {
+    class TestActivity : androidx.fragment.app.FragmentActivity() {
 
         val originFragment: android.app.Fragment
             get() = fragmentManager.findFragmentById(R.id.multiFrameAt_frame1)
@@ -187,7 +186,7 @@ class InputMethodxTest {
         val originFragmentEditTxt: EditText
             get() = originFragment.view as EditText
 
-        val supportFragment: android.support.v4.app.Fragment
+        val supportFragment: androidx.fragment.app.Fragment
             get() = supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2).requireNotNull()
 
         val supportFragmentEditTxt: EditText
@@ -218,7 +217,7 @@ class InputMethodxTest {
         }
     }
 
-    class EditSupportFragment : android.support.v4.app.Fragment() {
+    class EditSupportFragment : androidx.fragment.app.Fragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
             val editText = EditText(activity)
             editText.setText("0123456789")

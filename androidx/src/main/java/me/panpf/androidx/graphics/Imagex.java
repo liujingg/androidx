@@ -19,13 +19,14 @@ package me.panpf.androidx.graphics;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
 import android.util.TypedValue;
 
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.InputStream;
+
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 
 public class Imagex {
 

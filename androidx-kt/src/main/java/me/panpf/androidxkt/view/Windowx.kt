@@ -18,8 +18,8 @@
 
 package me.panpf.androidxkt.view
 
-import android.support.annotation.FloatRange
 import android.view.Window
+import androidx.annotation.FloatRange
 import me.panpf.androidx.view.Windowx
 
 /**

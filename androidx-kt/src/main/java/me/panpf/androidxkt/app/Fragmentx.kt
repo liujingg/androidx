@@ -18,9 +18,7 @@
 
 package me.panpf.androidxkt.app
 
-import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.FragmentActivity
 import me.panpf.androidx.app.Fragmentx
 
 /**
@@ -31,13 +29,13 @@ inline fun android.app.Fragment.isDestroyedCompat(): Boolean = Fragmentx.isDestr
 /**
  * Return true if the fragment has been destroyed
  */
-inline fun android.support.v4.app.Fragment.isDestroyedCompat(): Boolean = Fragmentx.isDestroyedCompat(this)
+inline fun androidx.fragment.app.Fragment.isDestroyedCompat(): Boolean = Fragmentx.isDestroyedCompat(this)
 
 
 /**
  * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
  */
-inline fun <T> android.support.v4.app.Fragment.getImplWithParent(clazz: Class<T>): T? = Fragmentx.getImplWithParent(this, clazz)
+inline fun <T> androidx.fragment.app.Fragment.getImplWithParent(clazz: Class<T>): T? = Fragmentx.getImplWithParent(this, clazz)
 
 /**
  * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
@@ -48,12 +46,12 @@ inline fun <T> android.app.Fragment.getImplWithParent(clazz: Class<T>): T? = Fra
 /**
  * Instantiate a Fragment and set arguments
  */
-inline fun Class<out android.support.v4.app.Fragment>.instantiate(arguments: Bundle): android.support.v4.app.Fragment = Fragmentx.instantiate(this, arguments)
+inline fun Class<out androidx.fragment.app.Fragment>.instantiate(arguments: Bundle): androidx.fragment.app.Fragment = Fragmentx.instantiate(this, arguments)
 
 /**
  * Instantiate a Fragment and set arguments
  */
-inline fun Class<out android.support.v4.app.Fragment>.instantiate(): android.support.v4.app.Fragment = Fragmentx.instantiate(this)
+inline fun Class<out androidx.fragment.app.Fragment>.instantiate(): androidx.fragment.app.Fragment = Fragmentx.instantiate(this)
 
 /**
  * Instantiate a Fragment and set arguments
@@ -69,33 +67,33 @@ inline fun Class<out android.app.Fragment>.instantiateOrigin(): android.app.Frag
 /**
  * Find the visible fragments visible to the current user from the fragment list
  */
-inline fun List<android.support.v4.app.Fragment>?.findUserVisibleChildFragment(): android.support.v4.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
+inline fun List<androidx.fragment.app.Fragment>?.findUserVisibleChildFragment(): androidx.fragment.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
 
 /**
  * Find the visible fragments visible to the current user from the FragmentActivity
  */
-inline fun FragmentActivity?.findUserVisibleChildFragment(): android.support.v4.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
+inline fun androidx.fragment.app.FragmentActivity?.findUserVisibleChildFragment(): androidx.fragment.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
 
 /**
  * Find the visible fragments visible to the current user from the fragment
  */
-inline fun android.support.v4.app.Fragment?.findUserVisibleChildFragment(): android.support.v4.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
+inline fun androidx.fragment.app.Fragment?.findUserVisibleChildFragment(): androidx.fragment.app.Fragment? = Fragmentx.findUserVisibleChildFragment(this)
 
 
 /**
  * Find the target fragment from the specified fragment list based on the current Item of ViewPager
  */
-inline fun List<android.support.v4.app.Fragment>?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): android.support.v4.app.Fragment? =
+inline fun List<androidx.fragment.app.Fragment>?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): androidx.fragment.app.Fragment? =
         Fragmentx.findFragmentByViewPagerCurrentItem(this, viewPagerCurrentItem)
 
 /**
  * Find the target fragment from the specified fragment list based on the current Item of ViewPager
  */
-inline fun FragmentActivity?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): android.support.v4.app.Fragment? =
+inline fun androidx.fragment.app.FragmentActivity?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): androidx.fragment.app.Fragment? =
         Fragmentx.findFragmentByViewPagerCurrentItem(this, viewPagerCurrentItem)
 
 /**
  * Find the target fragment from the specified fragment list based on the current Item of ViewPager
  */
-inline fun android.support.v4.app.Fragment?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): android.support.v4.app.Fragment? =
+inline fun androidx.fragment.app.Fragment?.findFragmentByViewPagerCurrentItem(viewPagerCurrentItem: Int): androidx.fragment.app.Fragment? =
         Fragmentx.findFragmentByViewPagerCurrentItem(this, viewPagerCurrentItem)

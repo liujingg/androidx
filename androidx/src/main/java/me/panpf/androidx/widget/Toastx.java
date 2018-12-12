@@ -17,11 +17,11 @@
 package me.panpf.androidx.widget;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.StringRes;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 import me.panpf.androidx.Androidx;
 
 public class Toastx {
@@ -113,10 +113,10 @@ public class Toastx {
     }
 
 
-    /* ************************************ android.support.v4.app.Fragment **************************************** */
+    /* ************************************ androidx.fragment.app.Fragment **************************************** */
 
 
-    public static void showLong(@NonNull android.support.v4.app.Fragment fragment, @NonNull final String message) {
+    public static void showLong(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String message) {
         final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
         if (appContext == null) return;
         Androidx.runInUI(new Runnable() {
@@ -127,7 +127,7 @@ public class Toastx {
         });
     }
 
-    public static void showLong(@NonNull android.support.v4.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
+    public static void showLong(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
         final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
         if (appContext == null) return;
         Androidx.runInUI(new Runnable() {
@@ -138,7 +138,7 @@ public class Toastx {
         });
     }
 
-    public static void showLong(@NonNull android.support.v4.app.Fragment fragment, @StringRes final int messageResId) {
+    public static void showLong(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId) {
         final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
         if (appContext == null) return;
         Androidx.runInUI(new Runnable() {
@@ -149,7 +149,7 @@ public class Toastx {
         });
     }
 
-    public static void showLong(@NonNull android.support.v4.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
+    public static void showLong(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
         final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
         if (appContext == null) return;
         Androidx.runInUI(new Runnable() {
@@ -160,7 +160,7 @@ public class Toastx {
         });
     }
 
-    public static void showShort(@NonNull android.support.v4.app.Fragment fragment, @NonNull final String message) {
+    public static void showShort(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String message) {
         final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
         if (appContext == null) return;
         Androidx.runInUI(new Runnable() {
@@ -171,7 +171,7 @@ public class Toastx {
         });
     }
 
-    public static void showShort(@NonNull android.support.v4.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
+    public static void showShort(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
         final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
         if (appContext == null) return;
         Androidx.runInUI(new Runnable() {
@@ -182,7 +182,7 @@ public class Toastx {
         });
     }
 
-    public static void showShort(@NonNull android.support.v4.app.Fragment fragment, @StringRes final int messageResId) {
+    public static void showShort(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId) {
         final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
         if (appContext == null) return;
         Androidx.runInUI(new Runnable() {
@@ -193,7 +193,7 @@ public class Toastx {
         });
     }
 
-    public static void showShort(@NonNull android.support.v4.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
+    public static void showShort(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
         final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
         if (appContext == null) return;
         Androidx.runInUI(new Runnable() {

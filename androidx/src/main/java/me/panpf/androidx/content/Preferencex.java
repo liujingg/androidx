@@ -19,14 +19,14 @@ package me.panpf.androidx.content;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.util.Predicate;
 

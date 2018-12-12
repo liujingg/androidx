@@ -19,8 +19,8 @@ package me.panpf.androidxkt.test.graphics
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
+import androidx.test.InstrumentationRegistry
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.graphics.Bitmapx
 import me.panpf.androidx.graphics.Colorx
 import me.panpf.androidxkt.graphics.*

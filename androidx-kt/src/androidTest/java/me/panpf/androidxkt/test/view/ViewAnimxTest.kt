@@ -17,13 +17,12 @@
 package me.panpf.androidxkt.test.view
 
 import android.os.Bundle
-import android.support.test.rule.ActivityTestRule
-import android.support.test.runner.AndroidJUnit4
-import android.support.v4.app.FragmentActivity
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.widget.ImageView
+import androidx.test.rule.ActivityTestRule
+import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.view.ViewAnimx
 import me.panpf.androidxkt.runInUI
 import me.panpf.androidxkt.test.R
@@ -400,7 +399,7 @@ class ViewAnimxTest {
         Thread.sleep(ViewAnimx.DEFAULT_ANIMATION_DURATION)
     }
 
-    class TestActivity : FragmentActivity() {
+    class TestActivity : androidx.fragment.app.FragmentActivity() {
 
         val view: View
             get() = (findViewById<View>(android.R.id.content) as ViewGroup).getChildAt(0)

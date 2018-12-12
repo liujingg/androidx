@@ -16,14 +16,15 @@
 
 package me.panpf.androidx.view;
 
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.CycleInterpolator;
 import android.view.animation.TranslateAnimation;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 /**
  * View animation tool method

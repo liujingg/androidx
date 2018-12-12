@@ -2,27 +2,27 @@
 
 package me.panpf.androidxkt.arch
 
-import android.arch.lifecycle.ViewModel
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
-import android.support.v4.app.FragmentActivity
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
+import androidx.fragment.app.FragmentActivity
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
-public fun <V : ViewModel> android.support.v4.app.Fragment.bindViewModel(clazz: KClass<V>): ReadOnlyProperty<android.support.v4.app.Fragment, V> {
+public fun <V : ViewModel> androidx.fragment.app.Fragment.bindViewModel(clazz: KClass<V>): ReadOnlyProperty<androidx.fragment.app.Fragment, V> {
     return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this).get(clazz.java) }
 }
 
-public fun <V : ViewModel> android.support.v4.app.Fragment.bindViewModel(clazz: KClass<V>, factory: ViewModelProvider.Factory): ReadOnlyProperty<android.support.v4.app.Fragment, V> {
+public fun <V : ViewModel> androidx.fragment.app.Fragment.bindViewModel(clazz: KClass<V>, factory: ViewModelProvider.Factory): ReadOnlyProperty<androidx.fragment.app.Fragment, V> {
     return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this, factory).get(clazz.java) }
 }
 
-public fun <V : ViewModel> FragmentActivity.bindViewModel(clazz: KClass<V>): ReadOnlyProperty<FragmentActivity, V> {
+public fun <V : ViewModel> androidx.fragment.app.FragmentActivity.bindViewModel(clazz: KClass<V>): ReadOnlyProperty<androidx.fragment.app.FragmentActivity, V> {
     return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this).get(clazz.java) }
 }
 
-public fun <V : ViewModel> FragmentActivity.bindViewModel(clazz: KClass<V>, factory: ViewModelProvider.Factory): ReadOnlyProperty<FragmentActivity, V> {
+public fun <V : ViewModel> androidx.fragment.app.FragmentActivity.bindViewModel(clazz: KClass<V>, factory: ViewModelProvider.Factory): ReadOnlyProperty<androidx.fragment.app.FragmentActivity, V> {
     return ViewModelLazy { _, _: KProperty<*> -> ViewModelProviders.of(this, factory).get(clazz.java) }
 }
 

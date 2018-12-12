@@ -23,8 +23,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Rect
 import android.graphics.drawable.BitmapDrawable
-import android.support.annotation.ColorInt
 import android.util.TypedValue
+import androidx.annotation.ColorInt
 import me.panpf.androidx.graphics.Bitmapx
 import java.io.File
 import java.io.FileDescriptor
