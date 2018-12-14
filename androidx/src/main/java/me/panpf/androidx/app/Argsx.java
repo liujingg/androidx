@@ -17,7 +17,6 @@
 package me.panpf.androidx.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -42,13 +41,6 @@ import me.panpf.javax.util.Premisex;
 
 public class Argsx {
 
-    private static final LazyValue<String> ACTION_NOT_VIEW = new LazyValue<String>() {
-        @NonNull
-        @Override
-        public String get() {
-            return "Intent action not VIEW";
-        }
-    };
     private static final LazyValue<String> DATA_IS_NULL = new LazyValue<String>() {
         @NonNull
         @Override
@@ -512,7 +504,6 @@ public class Argsx {
 
 
     public static byte readByteUriArg(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Byte.parseByte(value);
@@ -520,7 +511,6 @@ public class Argsx {
     }
 
     public static byte readByteUriArgOr(@NonNull Activity activity, @NonNull String argName, byte defaultValue) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
@@ -534,7 +524,6 @@ public class Argsx {
 
     @Nullable
     public static Byte readByteUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
@@ -548,7 +537,6 @@ public class Argsx {
 
 
     public static short readShortUriArg(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Short.parseShort(value);
@@ -556,7 +544,6 @@ public class Argsx {
     }
 
     public static short readShortUriArgOr(@NonNull Activity activity, @NonNull String argName, short defaultValue) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
@@ -570,7 +557,6 @@ public class Argsx {
 
     @Nullable
     public static Short readShortUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
@@ -584,7 +570,6 @@ public class Argsx {
 
 
     public static int readIntUriArg(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Integer.parseInt(value);
@@ -592,7 +577,6 @@ public class Argsx {
     }
 
     public static int readIntUriArgOr(@NonNull Activity activity, @NonNull String argName, int defaultValue) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
@@ -606,7 +590,6 @@ public class Argsx {
 
     @Nullable
     public static Integer readIntUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
@@ -620,7 +603,6 @@ public class Argsx {
 
 
     public static long readLongUriArg(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Long.parseLong(value);
@@ -628,7 +610,6 @@ public class Argsx {
     }
 
     public static long readLongUriArgOr(@NonNull Activity activity, @NonNull String argName, long defaultValue) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
@@ -642,7 +623,6 @@ public class Argsx {
 
     @Nullable
     public static Long readLongUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
@@ -656,7 +636,6 @@ public class Argsx {
 
 
     public static float readFloatUriArg(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Float.parseFloat(value);
@@ -664,7 +643,6 @@ public class Argsx {
     }
 
     public static float readFloatUriArgOr(@NonNull Activity activity, @NonNull String argName, float defaultValue) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
@@ -678,7 +656,6 @@ public class Argsx {
 
     @Nullable
     public static Float readFloatUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
@@ -692,7 +669,6 @@ public class Argsx {
 
 
     public static double readDoubleUriArg(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Double.parseDouble(value);
@@ -700,7 +676,6 @@ public class Argsx {
     }
 
     public static double readDoubleUriArgOr(@NonNull Activity activity, @NonNull String argName, double defaultValue) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
@@ -714,7 +689,6 @@ public class Argsx {
 
     @Nullable
     public static Double readDoubleUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
@@ -728,7 +702,6 @@ public class Argsx {
 
 
     public static boolean readBooleanUriArg(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return Boolean.parseBoolean(value);
@@ -736,7 +709,6 @@ public class Argsx {
     }
 
     public static boolean readBooleanUriArgOr(@NonNull Activity activity, @NonNull String argName, boolean defaultValue) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
@@ -750,7 +722,6 @@ public class Argsx {
 
     @Nullable
     public static Boolean readBooleanUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;
@@ -765,7 +736,6 @@ public class Argsx {
 
     @NonNull
     public static String readStringUriArg(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if (!"".equals(value)) return value;
@@ -774,7 +744,6 @@ public class Argsx {
 
     @NonNull
     public static String readStringUriArgOr(@NonNull Activity activity, @NonNull String argName, @NonNull String defaultValue) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return defaultValue;
@@ -788,7 +757,6 @@ public class Argsx {
 
     @Nullable
     public static String readStringUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        Premisex.require(Intent.ACTION_VIEW.equals(activity.getIntent().getAction()), ACTION_NOT_VIEW);
         Uri uri = Premisex.requireNotNull(activity.getIntent().getData(), DATA_IS_NULL);
         String value = Stringx.orEmpty(uri.getQueryParameter(argName)).trim();
         if ("".equals(value.trim())) return null;

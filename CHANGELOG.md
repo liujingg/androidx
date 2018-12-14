@@ -1,4 +1,7 @@
-## v...
+## v1.0.0-alpha2
+
+Behavior change:
+* :fire: The Argsx.read\*Uri\* family of methods no longer checks if the Intent action is ACTION_VIEW
 
 Upgrade the following dependencies:
 * :arrow_up: Upgrade Javax 1.0.0-alpha2
