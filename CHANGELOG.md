@@ -1,3 +1,9 @@
+## v...
+
+Upgrade the following dependencies:
+* :arrow_up: Upgrade Javax 1.0.0-alpha2
+
+
 ## v1.0.0-alpha1
 
 Fix the following bug:
