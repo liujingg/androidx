@@ -108,8 +108,8 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static Fragment instantiate(@NonNull Class<? extends Fragment> clas, @Nullable Bundle arguments) {
-        Fragment fragment;
+    public static <T extends Fragment> T instantiate(@NonNull Class<? extends T> clas, @Nullable Bundle arguments) {
+        T fragment;
         //noinspection TryWithIdenticalCatches
         try {
             fragment = clas.newInstance();
@@ -127,15 +127,15 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static Fragment instantiate(@NonNull Class<? extends Fragment> clas) {
+    public static <T extends Fragment> T instantiate(@NonNull Class<? extends T> clas) {
         return instantiate(clas, null);
     }
 
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static android.app.Fragment instantiateOrigin(@NonNull Class<? extends android.app.Fragment> clas, @Nullable Bundle arguments) {
-        android.app.Fragment fragment;
+    public static <T extends android.app.Fragment> T instantiateOrigin(@NonNull Class<? extends T> clas, @Nullable Bundle arguments) {
+        T fragment;
         //noinspection TryWithIdenticalCatches
         try {
             fragment = clas.newInstance();
@@ -153,7 +153,7 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static android.app.Fragment instantiateOrigin(@NonNull Class<? extends android.app.Fragment> clas) {
+    public static <T extends android.app.Fragment> T instantiateOrigin(@NonNull Class<? extends T> clas) {
         return instantiateOrigin(clas, null);
     }
 
