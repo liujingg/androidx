@@ -1,4 +1,4 @@
-## ...
+## v1.0.0-alpha3
 
 Behavior change:
 * :sparkles: The Fragmentx.instantiate method now returns the generic type specified by Class
