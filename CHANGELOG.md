@@ -2,6 +2,7 @@
 
 Behavior change:
 * :sparkles: The Fragmentx.instantiate method now returns the generic type specified by Class
+* :zap: Argsx supports attempting to parse its String type data when reading data of the underlying type
 
 
 ## v1.0.0-alpha2
