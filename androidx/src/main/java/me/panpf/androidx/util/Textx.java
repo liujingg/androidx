@@ -101,6 +101,7 @@ public class Textx {
     /**
      * Modify the display color of a string using Html
      */
+    @NonNull
     public static String changeColorByHtml(@NonNull String string, @NonNull String color) {
         return "<font color=\"" + color + "\">" + string + "</font>";
     }
@@ -108,6 +109,7 @@ public class Textx {
     /**
      * Modify the display red color of a string using Html
      */
+    @NonNull
     public static String changeColorToRedByHtml(@NonNull String string) {
         return changeColorByHtml(string, "red");
     }
@@ -116,6 +118,7 @@ public class Textx {
     /**
      * Use Html to modify the display color of all specified keywords in a string
      */
+    @NonNull
     public static String changeKeywordColorByHtml(@NonNull String sourceString, @NonNull String keyword, @NonNull String color) {
         return sourceString.replaceAll(keyword, "<font color=\"" + color + "\">" + keyword + "</font>");
     }
@@ -123,6 +126,7 @@ public class Textx {
     /**
      * Use Html to modify the display color of all specified keywords in a string
      */
+    @NonNull
     public static String changeKeywordColorToRedByHtml(@NonNull String sourceString, @NonNull String keyword) {
         return changeKeywordColorByHtml(sourceString, keyword, "red");
     }
@@ -131,6 +135,7 @@ public class Textx {
     /**
      * Use Spannable to modify the display color of a string
      */
+    @NonNull
     public static SpannableStringBuilder changeColorBySpannable(@NonNull String sourceString, int color) {
         SpannableStringBuilder builder = new SpannableStringBuilder(sourceString);
         builder.setSpan(new ForegroundColorSpan(color), 0, sourceString.length(), Spannable.SPAN_EXCLUSIVE_INCLUSIVE);
@@ -140,6 +145,7 @@ public class Textx {
     /**
      * Use Spannable to modify the display color of a string
      */
+    @NonNull
     public static SpannableStringBuilder changeColorToRedBySpannable(@NonNull String sourceString) {
         return changeColorBySpannable(sourceString, Color.RED);
     }
@@ -148,6 +154,7 @@ public class Textx {
     /**
      * Use Spannable to modify the display color of all specified keywords in a string
      */
+    @NonNull
     public static SpannableStringBuilder changeKeywordColorBySpannable(@NonNull String sourceString, @NonNull String keyword, int color) {
         SpannableStringBuilder builder = new SpannableStringBuilder(sourceString);
         int fromIndex = 0;
@@ -167,6 +174,7 @@ public class Textx {
     /**
      * Use Spannable to modify the display color of all specified keywords in a string
      */
+    @NonNull
     public static SpannableStringBuilder changeKeywordColorToRedBySpannable(@NonNull String sourceString, @NonNull String keyword) {
         return changeKeywordColorBySpannable(sourceString, keyword, Color.RED);
     }
