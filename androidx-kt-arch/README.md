@@ -18,7 +18,7 @@ implementation "me.panpf:androidx-kt-arch:$lastVersion"
 Please replace `$lastVersion` with the latest version: [![Download][version_icon]][version_link]
 
 Dependencies:
-* org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.2.71
+* org.jetbrains.kotlin:kotlin-stdlib-jdk7: 1.3.21
 * androidx.fragment:fragment: 1.1.0-alpha02
 * androidx.lifecycle:lifecycle-viewmodel: 2.0.0
 * androidx.lifecycle:lifecycle-extensions: 2.0.0

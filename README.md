@@ -39,7 +39,7 @@ implementation "me.panpf:androidx-kt:$lastVersion"
 Please replace `$lastVersion` with the latest version: [![Download][version_kotlin_icon]][version_kotlin_link]
 
 Dependencies:
-* [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.2.71][kotlin_versions]
+* [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.3.21][kotlin_versions]
 * androidx.fragment:fragment: 1.1.0-alpha02
 * [me.panpf:javax-kt][javax]: [1.0.0-alpha2][javax_versions]
 
