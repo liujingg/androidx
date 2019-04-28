@@ -180,10 +180,6 @@ Dependencies:
 ### util
 * Dimen: [Dimenx.java] ([Test][DimenxTest.java]) | [Dimenx.kt] ([Test][DimenxTest.kt])
     * dp2px, px2dp, sp2px, px2sp, applyDimension
-* Json: [Jsonx.java] ([Test][JsonxTest.java]) | [Jsonx.kt] ([Test][JsonxTest.kt])
-    * isEmpty, isNotEmpty, toJsonArray, toJson, toStringList, toStringArray, toIntArray,
-    * toBeanList, toBean, optString, optInt, optLong, optBoolean, optDouble, optJSONObject, optJSONArray,
-    * getString, getInt, getLong, getBoolean, getDouble, getJSONObject, getJSONArray, format
 * Text: [Textx.java] ([Test][TextxTest.java]) | [Textx.kt] ([Test][TextxTest.kt])
     * textToBitmap, changeColorByHtml, changeColorToRedByHtml, changeKeywordColorByHtml, changeKeywordColorToRedByHtml,
     * changeColorBySpannable, changeColorToRedBySpannable, changeKeywordColorBySpannable, changeKeywordColorToRedBySpannable
@@ -421,11 +417,6 @@ Please view the [CHANGELOG.md] file
 [DimenxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/DimenxTest.java
 [Dimenx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/util/Dimenx.kt
 [DimenxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/DimenxTest.kt
-
-[Jsonx.java]: androidx/src/main/java/me/panpf/androidx/util/Jsonx.java
-[JsonxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/JsonxTest.java
-[Jsonx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/util/Jsonx.kt
-[JsonxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/JsonxTest.kt
 
 [Textx.java]: androidx/src/main/java/me/panpf/androidx/util/Textx.java
 [TextxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/TextxTest.java
