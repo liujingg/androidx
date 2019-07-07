@@ -13,6 +13,7 @@ Rename
 New
 * :sparkles: Displayx adds getActionBarSize() method
 * :sparkles: Bitmapx adds crop, cropTo method
+* :sparkles: Packagex adds requestInstall, requestUninstall method
 
 Behavior change:
 * :fire: Intentx createInstallAppIntent method add RequiresPermission(REQUEST_INSTALL_PACKAGES) annotated

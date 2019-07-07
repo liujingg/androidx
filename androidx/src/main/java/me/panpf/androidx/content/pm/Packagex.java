@@ -51,6 +51,38 @@ public class Packagex {
 
 
     /**
+     * Request to install apk
+     *
+     * @return false: Request failed
+     */
+    @RequiresPermission(value = Manifest.permission.REQUEST_INSTALL_PACKAGES, conditional = true)
+    public static boolean requestInstall(@NonNull Context context, @NonNull Uri apkFileUri) {
+        return Activityx.safeStart(context, Intentx.createInstallAppIntent(apkFileUri));
+    }
+
+    /**
+     * Request to install apk
+     *
+     * @return false: Request failed
+     */
+    @RequiresPermission(value = Manifest.permission.REQUEST_INSTALL_PACKAGES, conditional = true)
+    public static boolean requestInstall(@NonNull Context context, @NonNull File apkFile) {
+        return Activityx.safeStart(context, Intentx.createInstallAppIntent(context, apkFile));
+    }
+
+
+    /**
+     * Request to uninstall app
+     *
+     * @return false: Request failed
+     */
+    @RequiresPermission(value = Manifest.permission.REQUEST_DELETE_PACKAGES, conditional = true)
+    public static boolean requestUninstall(@NonNull Context context, @NonNull String packageName) {
+        return Activityx.safeStart(context, Intentx.createUninstallAppIntent(packageName));
+    }
+
+
+    /**
      * Return true if the app with the specified packageName is installed
      */
     public static boolean isInstalled(@NonNull Context context, @NonNull String packageName) {

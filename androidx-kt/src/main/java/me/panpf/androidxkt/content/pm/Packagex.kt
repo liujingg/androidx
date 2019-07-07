@@ -18,12 +18,15 @@
 
 package me.panpf.androidxkt.content.pm
 
+import android.Manifest
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.net.Uri
 import android.util.Pair
+import androidx.annotation.RequiresPermission
 import me.panpf.androidx.content.pm.AppPackage
 import me.panpf.androidx.content.pm.Packagex
 import java.io.File
@@ -32,6 +35,29 @@ import java.io.File
 /*
  * APP Package related extension methods or properties
  */
+
+
+/**
+ * Request to install apk
+ * @return false: Request failed
+ */
+@RequiresPermission(value = Manifest.permission.REQUEST_INSTALL_PACKAGES, conditional = true)
+inline fun Context.requestInstallPackage(apkFileUri: Uri): Boolean = Packagex.requestInstall(this, apkFileUri)
+
+/**
+ * Request to install apk
+ * @return false: Request failed
+ */
+@RequiresPermission(value = Manifest.permission.REQUEST_INSTALL_PACKAGES, conditional = true)
+inline fun Context.requestInstallPackage(apkFile: File): Boolean = Packagex.requestInstall(this, apkFile)
+
+
+/**
+ * Request to uninstall app
+ * @return false: Request failed
+ */
+@RequiresPermission(value = Manifest.permission.REQUEST_DELETE_PACKAGES, conditional = true)
+inline fun Context.requestUninstallPackage(packageName: String): Boolean = Packagex.requestUninstall(this, packageName)
 
 
 /**

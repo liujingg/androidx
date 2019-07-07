@@ -78,8 +78,8 @@ Dependencies:
     * findPermissionInfo, findPermissionInfoByName, findRequestedPermission, findRequestedPermissionByName
     * findMetaDataWithName, findMetaDataByName, findMetaDataWithValue, findMetaDataByValue
 * Package: [Packagex.java] ([Test][PackagexTest.java]) | [Packagex.kt] ([Test][PackagexTest.kt])
-    * isInstalled, getVersionCode, getVersionCodeOr, getVersionName, getVersionNameOr, getVersionNameOrNull,
-    * get, getOrNull, isSystemApp, isSystemAppOr, listPackageVersionCodePair,
+    * requestInstall,  requestUninstallisInstalled, getVersionCode, getVersionCodeOr, getVersionName, getVersionNameOr,
+    * getVersionNameOrNull, get, getOrNull, isSystemApp, isSystemAppOr, listPackageVersionCodePair,
     * listPackageVersionCodeMap, listPackageName, list, getOne, count, getPackageApkFile,
     * getPackageApkFileOrNull, getAppSignatureBytes, getAppSignatureBytesOrNull,
     * getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
