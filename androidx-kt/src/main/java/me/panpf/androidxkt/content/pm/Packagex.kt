@@ -28,6 +28,7 @@ import android.net.Uri
 import android.util.Pair
 import androidx.annotation.RequiresPermission
 import me.panpf.androidx.content.pm.AppPackage
+import me.panpf.androidx.content.pm.PackageType
 import me.panpf.androidx.content.pm.Packagex
 import java.io.File
 
@@ -126,62 +127,55 @@ inline fun Context.isSystemAppOr(packageName: String, defaultValue: Boolean): Bo
 /**
  * List the packageName and versionCode of all installed APPs
  *
- * @param excludeSystemApp If true, exclude yourself exclude system apps
- * @param excludeSelf      If true, exclude yourself
+ * @param packageType Accepted package type, see {@link AppType}
  */
-inline fun Context.listPackageVersionCodePair(excludeSystemApp: Boolean, excludeSelf: Boolean): List<Pair<String, Int>> = Packagex.listVersionCodePair(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackageVersionCodePair(@PackageType packageType: Int): List<Pair<String, Int>> = Packagex.listVersionCodePair(this, packageType)
 
 
 /**
  * Get the packageName and versionCode of all installed apps Map
  *
- * @param excludeSystemApp If true, exclude yourself exclude system apps
- * @param excludeSelf      If true, exclude yourself
+ * @param packageType Accepted package type, see {@link AppType}
  */
-inline fun Context.listPackageVersionCodeMap(excludeSystemApp: Boolean, excludeSelf: Boolean): androidx.collection.ArrayMap<String, Int> = Packagex.listVersionCodeMap(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackageVersionCodeMap(@PackageType packageType: Int): androidx.collection.ArrayMap<String, Int> = Packagex.listVersionCodeMap(this, packageType)
 
 /**
  * List the packageName of all installed apps
  *
- * @param excludeSystemApp If true, exclude yourself exclude system apps
- * @param excludeSelf      If true, exclude yourself
+ * @param packageType Accepted package type, see {@link AppType}
  */
-inline fun Context.listPackageName(excludeSystemApp: Boolean, excludeSelf: Boolean): List<String> = Packagex.listPackageName(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackageName(@PackageType packageType: Int): List<String> = Packagex.listPackageName(this, packageType)
 
 /**
  * List information for all installed apps
  *
- * @param excludeSystemApp If true, exclude yourself exclude system apps
- * @param excludeSelf      If true, exclude yourself
+ * @param packageType Accepted package type, see {@link AppType}
  * @param size             How many apps to get. -1: all
  */
-inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean, size: Int): List<AppPackage> = Packagex.list(this, excludeSystemApp, excludeSelf, size)
+inline fun Context.listPackage(@PackageType packageType: Int, size: Int): List<AppPackage> = Packagex.list(this, packageType, size)
 
 /**
  * List information for all installed apps
  *
- * @param excludeSystemApp If true, exclude yourself exclude system apps
- * @param excludeSelf      If true, exclude yourself
+ * @param packageType Accepted package type, see {@link AppType}
  */
-inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean): List<AppPackage> = Packagex.list(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackage(@PackageType packageType: Int): List<AppPackage> = Packagex.list(this, packageType)
 
 
 /**
  * Get information about an app
  *
- * @param excludeSystemApp If true, exclude yourself exclude system apps
- * @param excludeSelf      If true, exclude yourself
+ * @param packageType Accepted package type, see {@link AppType}
  */
-inline fun Context.getOnePackage(excludeSystemApp: Boolean, excludeSelf: Boolean): AppPackage? = Packagex.getOne(this, excludeSystemApp, excludeSelf)
+inline fun Context.getOnePackage(@PackageType packageType: Int): AppPackage? = Packagex.getOne(this, packageType)
 
 
 /**
  * Get the number of installed apps
  *
- * @param excludeSystemApp If true, exclude yourself exclude system apps
- * @param excludeSelf      If true, exclude yourself
+ * @param packageType Accepted package type, see {@link AppType}
  */
-inline fun Context.countPackage(excludeSystemApp: Boolean, excludeSelf: Boolean): Int = Packagex.count(this, excludeSystemApp, excludeSelf)
+inline fun Context.countPackage(@PackageType packageType: Int): Int = Packagex.count(this, packageType)
 
 
 /**

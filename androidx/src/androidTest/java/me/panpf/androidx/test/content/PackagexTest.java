@@ -32,15 +32,16 @@ import org.junit.runner.RunWith;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import me.panpf.androidx.BuildConfig;
 import me.panpf.androidx.content.pm.AppPackage;
+import me.panpf.androidx.content.pm.PackageType;
 import me.panpf.androidx.content.pm.Packagex;
+import me.panpf.androidx.test.BuildConfig;
 import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Premisex;
-import me.panpf.javax.util.Transformer;
 
 @RunWith(AndroidJUnit4.class)
 public class PackagexTest {
@@ -57,7 +58,7 @@ public class PackagexTest {
     public void testGetVersionCode() throws PackageManager.NameNotFoundException {
         Context context = InstrumentationRegistry.getContext();
 
-        AppPackage appPackage = Premisex.requireNotNull(Packagex.getOne(context, false, true));
+        AppPackage appPackage = Premisex.requireNotNull(Packagex.getOne(context, PackageType.ALL_AND_EXCLUDE_SELF));
 
         Assert.assertTrue("versionCode: " + appPackage.versionCode, appPackage.versionCode > 0);
         Assert.assertEquals(appPackage.versionCode, Packagex.getVersionCode(context, appPackage.packageName));
@@ -68,7 +69,7 @@ public class PackagexTest {
     public void testGetVersionName() throws PackageManager.NameNotFoundException {
         Context context = InstrumentationRegistry.getContext();
 
-        AppPackage appPackage = Premisex.requireNotNull(Packagex.getOne(context, false, true));
+        AppPackage appPackage = Premisex.requireNotNull(Packagex.getOne(context, PackageType.ALL_AND_EXCLUDE_SELF));
 
         Assert.assertTrue("versionName: " + appPackage.versionName, Stringx.isSafe(appPackage.versionName));
         Assert.assertEquals(appPackage.versionName, Packagex.getVersionName(context, appPackage.packageName));
@@ -92,7 +93,7 @@ public class PackagexTest {
         Assert.assertFalse(selfAppPackage.systemApp);
         Assert.assertTrue(selfAppPackage.enabled);
 
-        AppPackage systemAppPackage = Premisex.requireNotNull(Packagex.get(context, Premisex.requireNotNull(Collectionx.find(Packagex.list(context, false, true), new Predicate<AppPackage>() {
+        AppPackage systemAppPackage = Premisex.requireNotNull(Packagex.get(context, Premisex.requireNotNull(Collectionx.find(Packagex.list(context, PackageType.ALL_AND_EXCLUDE_SELF), new Predicate<AppPackage>() {
             @Override
             public boolean accept(@NotNull AppPackage appPackage) {
                 return appPackage.systemApp;
@@ -107,7 +108,7 @@ public class PackagexTest {
     public void testIsSystemApp() throws PackageManager.NameNotFoundException {
         Context context = InstrumentationRegistry.getContext();
 
-        String systemAppPackageName = Premisex.requireNotNull(Collectionx.find(Packagex.list(context, false, true), new Predicate<AppPackage>() {
+        String systemAppPackageName = Premisex.requireNotNull(Collectionx.find(Packagex.list(context, PackageType.ALL_AND_EXCLUDE_SELF), new Predicate<AppPackage>() {
             @Override
             public boolean accept(@NotNull AppPackage appPackage) {
                 return appPackage.systemApp;
@@ -122,213 +123,427 @@ public class PackagexTest {
     }
 
     @Test
-    public void testListPackageNameAndVersion() {
+    public void testListVersionCodePair() throws PackageManager.NameNotFoundException {
         final Context context = InstrumentationRegistry.getContext();
-
-        me.panpf.javax.util.Pair<List<android.util.Pair<String, Integer>>, List<android.util.Pair<String, Integer>>> listPairPair = Collectionx.partition(Packagex.listVersionCodePair(context, false, false), new Predicate<android.util.Pair<String, Integer>>() {
-            @Override
-            public boolean accept(@NotNull android.util.Pair<String, Integer> stringIntegerPair) {
-                return Packagex.isSystemAppOr(context, stringIntegerPair.first, false);
-            }
-        });
-        Assert.assertTrue(!listPairPair.first.isEmpty());
-        Assert.assertTrue(!listPairPair.second.isEmpty());
-
-        me.panpf.javax.util.Pair<List<android.util.Pair<String, Integer>>, List<android.util.Pair<String, Integer>>> listPairPairWithoutSystem = Collectionx.partition(Packagex.listVersionCodePair(context, true, false), new Predicate<android.util.Pair<String, Integer>>() {
-            @Override
-            public boolean accept(@NotNull android.util.Pair<String, Integer> stringIntegerPair) {
-                return Packagex.isSystemAppOr(context, stringIntegerPair.first, false);
-            }
-        });
-        Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty());
-        Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty());
-
-        Assert.assertNotNull(Collectionx.find(Packagex.listVersionCodePair(context, false, false), new Predicate<Pair<String, Integer>>() {
+        final String selfPackageName = context.getPackageName();
+        final Predicate<Pair<String, Integer>> selfPredicate = new Predicate<Pair<String, Integer>>() {
             @Override
             public boolean accept(@NotNull Pair<String, Integer> stringIntegerPair) {
-                return stringIntegerPair.first.equals(context.getPackageName());
+                return stringIntegerPair.first.equals(selfPackageName);
             }
-        }));
-
-        Assert.assertNull(Collectionx.find(Packagex.listVersionCodePair(context, false, true), new Predicate<Pair<String, Integer>>() {
+        };
+        final Predicate<Pair<String, Integer>> systemAppPredicate = new Predicate<Pair<String, Integer>>() {
             @Override
             public boolean accept(@NotNull Pair<String, Integer> stringIntegerPair) {
-                return stringIntegerPair.first.equals(context.getPackageName());
+                return Packagex.isSystemAppOr(context, stringIntegerPair.first, false);
             }
-        }));
+        };
+        final Predicate<Pair<String, Integer>> userAppPredicate = new Predicate<Pair<String, Integer>>() {
+            @Override
+            public boolean accept(@NotNull Pair<String, Integer> stringIntegerPair) {
+                return !Packagex.isSystemAppOr(context, stringIntegerPair.first, false);
+            }
+        };
+
+        /*
+         * ALL
+         */
+        List<Pair<String, Integer>> allApps = Packagex.listVersionCodePair(context, PackageType.ALL);
+        int systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate);
+        Assert.assertTrue(systemAppsInAllSize > 0);
+        int userAppsInAllSize = Collectionx.count(allApps, userAppPredicate);
+        Assert.assertTrue(userAppsInAllSize > 0);
+        Assert.assertNotNull(Collectionx.find(allApps, selfPredicate));
+
+        /*
+         * ALL_AND_EXCLUDE_SELF
+         */
+        List<Pair<String, Integer>> allAndExcludeSelfApps = Packagex.listVersionCodePair(context, PackageType.ALL_AND_EXCLUDE_SELF);
+        Assert.assertEquals(allApps.size(), allAndExcludeSelfApps.size() + 1);
+        Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate));
+
+
+        /*
+         * USER
+         */
+        List<Pair<String, Integer>> userApps = Packagex.listVersionCodePair(context, PackageType.USER);
+        Assert.assertTrue(Collectionx.all(userApps, userAppPredicate));
+        Assert.assertEquals(userAppsInAllSize, userApps.size());
+        if (!Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(userApps, selfPredicate));
+        } else {
+            Assert.assertNull(Collectionx.find(userApps, selfPredicate));
+        }
+
+        /*
+         * USER_AND_EXCLUDE_SELF
+         */
+        List<Pair<String, Integer>> userAndExcludeSelfApps = Packagex.listVersionCodePair(context, PackageType.USER_AND_EXCLUDE_SELF);
+        Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate));
+        if (!Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertEquals(userApps.size(), userAndExcludeSelfApps.size() + 1);
+        } else {
+            Assert.assertEquals(userApps.size(), userAndExcludeSelfApps.size());
+        }
+        Assert.assertNull(Collectionx.find(userAndExcludeSelfApps, selfPredicate));
+
+
+        /*
+         * SYSTEM
+         */
+        List<Pair<String, Integer>> systemApps = Packagex.listVersionCodePair(context, PackageType.SYSTEM);
+        Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate));
+        Assert.assertEquals(systemAppsInAllSize, systemApps.size());
+        Assert.assertEquals(allApps.size(), userApps.size() + systemApps.size());
+        if (Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(systemApps, selfPredicate));
+        } else {
+            Assert.assertNull(Collectionx.find(systemApps, selfPredicate));
+        }
+
+        /*
+         * SYSTEM_AND_EXCLUDE_SELF
+         */
+        List<Pair<String, Integer>> systemAndExcludeSelfApps = Packagex.listVersionCodePair(context, PackageType.SYSTEM_AND_EXCLUDE_SELF);
+        Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate));
+        if (Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertEquals(systemApps.size(), systemAndExcludeSelfApps.size() + 1);
+        } else {
+            Assert.assertEquals(systemApps.size(), systemAndExcludeSelfApps.size());
+        }
+        Assert.assertNull(Collectionx.find(systemAndExcludeSelfApps, selfPredicate));
+        Assert.assertEquals(allAndExcludeSelfApps.size(), userAndExcludeSelfApps.size() + systemAndExcludeSelfApps.size());
     }
 
     @Test
-    public void testListPackageNameAndVersionMap() {
+    public void testListVersionCodeMap() throws PackageManager.NameNotFoundException {
         final Context context = InstrumentationRegistry.getContext();
+        final String selfPackageName = context.getPackageName();
+        final Predicate<Map.Entry<String, Integer>> selfPredicate = new Predicate<Map.Entry<String, Integer>>() {
+            @Override
+            public boolean accept(@NotNull Map.Entry<String, Integer> stringIntegerPair) {
+                return stringIntegerPair.getKey().equals(selfPackageName);
+            }
+        };
+        final Predicate<Map.Entry<String, Integer>> systemAppPredicate = new Predicate<Map.Entry<String, Integer>>() {
+            @Override
+            public boolean accept(@NotNull Map.Entry<String, Integer> stringIntegerPair) {
+                return Packagex.isSystemAppOr(context, stringIntegerPair.getKey(), false);
+            }
+        };
+        final Predicate<Map.Entry<String, Integer>> userAppPredicate = new Predicate<Map.Entry<String, Integer>>() {
+            @Override
+            public boolean accept(@NotNull Map.Entry<String, Integer> stringIntegerPair) {
+                return !Packagex.isSystemAppOr(context, stringIntegerPair.getKey(), false);
+            }
+        };
 
-        me.panpf.javax.util.Pair<List<android.util.Pair<String, Integer>>, List<android.util.Pair<String, Integer>>> listPairPair = Collectionx.partition(Collectionx.map(Packagex.listVersionCodeMap(context, false, false).entrySet(), new Transformer<Map.Entry<String, Integer>, Pair<String, Integer>>() {
-            @NotNull
-            @Override
-            public Pair<String, Integer> transform(@NotNull Map.Entry<String, Integer> stringIntegerEntry) {
-                return new Pair<>(stringIntegerEntry.getKey(), stringIntegerEntry.getValue());
-            }
-        }), new Predicate<android.util.Pair<String, Integer>>() {
-            @Override
-            public boolean accept(@NotNull android.util.Pair<String, Integer> stringIntegerPair) {
-                return Packagex.isSystemAppOr(context, stringIntegerPair.first, false);
-            }
-        });
-        Assert.assertTrue(!listPairPair.first.isEmpty());
-        Assert.assertTrue(!listPairPair.second.isEmpty());
+        /*
+         * ALL
+         */
+        Set<Map.Entry<String, Integer>> allApps = Packagex.listVersionCodeMap(context, PackageType.ALL).entrySet();
+        int systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate);
+        Assert.assertTrue(systemAppsInAllSize > 0);
+        int userAppsInAllSize = Collectionx.count(allApps, userAppPredicate);
+        Assert.assertTrue(userAppsInAllSize > 0);
+        Assert.assertNotNull(Collectionx.find(allApps, selfPredicate));
 
-        me.panpf.javax.util.Pair<List<android.util.Pair<String, Integer>>, List<android.util.Pair<String, Integer>>> listPairPairWithoutSystem = Collectionx.partition(Collectionx.map(Packagex.listVersionCodeMap(context, true, false).entrySet(), new Transformer<Map.Entry<String, Integer>, Pair<String, Integer>>() {
-            @NotNull
-            @Override
-            public Pair<String, Integer> transform(@NotNull Map.Entry<String, Integer> stringIntegerEntry) {
-                return new Pair<>(stringIntegerEntry.getKey(), stringIntegerEntry.getValue());
-            }
-        }), new Predicate<android.util.Pair<String, Integer>>() {
-            @Override
-            public boolean accept(@NotNull android.util.Pair<String, Integer> stringIntegerPair) {
-                return Packagex.isSystemAppOr(context, stringIntegerPair.first, false);
-            }
-        });
-        Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty());
-        Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty());
+        /*
+         * ALL_AND_EXCLUDE_SELF
+         */
+        Set<Map.Entry<String, Integer>> allAndExcludeSelfApps = Packagex.listVersionCodeMap(context, PackageType.ALL_AND_EXCLUDE_SELF).entrySet();
+        Assert.assertEquals(allApps.size(), allAndExcludeSelfApps.size() + 1);
+        Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate));
 
-        Assert.assertNotNull(Collectionx.find(Collectionx.map(Packagex.listVersionCodeMap(context, false, false).entrySet(), new Transformer<Map.Entry<String, Integer>, Pair<String, Integer>>() {
-            @NotNull
-            @Override
-            public Pair<String, Integer> transform(@NotNull Map.Entry<String, Integer> stringIntegerEntry) {
-                return new Pair<>(stringIntegerEntry.getKey(), stringIntegerEntry.getValue());
-            }
-        }), new Predicate<Pair<String, Integer>>() {
-            @Override
-            public boolean accept(@NotNull Pair<String, Integer> stringIntegerPair) {
-                return stringIntegerPair.first.equals(context.getPackageName());
-            }
-        }));
 
-        Assert.assertNull(Collectionx.find(Collectionx.map(Packagex.listVersionCodeMap(context, false, true).entrySet(), new Transformer<Map.Entry<String, Integer>, Pair<String, Integer>>() {
-            @NotNull
-            @Override
-            public Pair<String, Integer> transform(@NotNull Map.Entry<String, Integer> stringIntegerEntry) {
-                return new Pair<>(stringIntegerEntry.getKey(), stringIntegerEntry.getValue());
-            }
-        }), new Predicate<Pair<String, Integer>>() {
-            @Override
-            public boolean accept(@NotNull Pair<String, Integer> stringIntegerPair) {
-                return stringIntegerPair.first.equals(context.getPackageName());
-            }
-        }));
+        /*
+         * USER
+         */
+        Set<Map.Entry<String, Integer>> userApps = Packagex.listVersionCodeMap(context, PackageType.USER).entrySet();
+        Assert.assertTrue(Collectionx.all(userApps, userAppPredicate));
+        Assert.assertEquals(userAppsInAllSize, userApps.size());
+        if (!Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(userApps, selfPredicate));
+        } else {
+            Assert.assertNull(Collectionx.find(userApps, selfPredicate));
+        }
+
+        /*
+         * USER_AND_EXCLUDE_SELF
+         */
+        Set<Map.Entry<String, Integer>> userAndExcludeSelfApps = Packagex.listVersionCodeMap(context, PackageType.USER_AND_EXCLUDE_SELF).entrySet();
+        Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate));
+        if (!Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertEquals(userApps.size(), userAndExcludeSelfApps.size() + 1);
+        } else {
+            Assert.assertEquals(userApps.size(), userAndExcludeSelfApps.size());
+        }
+        Assert.assertNull(Collectionx.find(userAndExcludeSelfApps, selfPredicate));
+
+
+        /*
+         * SYSTEM
+         */
+        Set<Map.Entry<String, Integer>> systemApps = Packagex.listVersionCodeMap(context, PackageType.SYSTEM).entrySet();
+        Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate));
+        Assert.assertEquals(systemAppsInAllSize, systemApps.size());
+        Assert.assertEquals(allApps.size(), userApps.size() + systemApps.size());
+        if (Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(systemApps, selfPredicate));
+        } else {
+            Assert.assertNull(Collectionx.find(systemApps, selfPredicate));
+        }
+
+        /*
+         * SYSTEM_AND_EXCLUDE_SELF
+         */
+        Set<Map.Entry<String, Integer>> systemAndExcludeSelfApps = Packagex.listVersionCodeMap(context, PackageType.SYSTEM_AND_EXCLUDE_SELF).entrySet();
+        Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate));
+        if (Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertEquals(systemApps.size(), systemAndExcludeSelfApps.size() + 1);
+        } else {
+            Assert.assertEquals(systemApps.size(), systemAndExcludeSelfApps.size());
+        }
+        Assert.assertNull(Collectionx.find(systemAndExcludeSelfApps, selfPredicate));
+        Assert.assertEquals(allAndExcludeSelfApps.size(), userAndExcludeSelfApps.size() + systemAndExcludeSelfApps.size());
     }
 
     @Test
-    public void testListPackageName() {
+    public void testListPackageName() throws PackageManager.NameNotFoundException {
         final Context context = InstrumentationRegistry.getContext();
-
-        me.panpf.javax.util.Pair<List<String>, List<String>> listPairPair = Collectionx.partition(Packagex.listPackageName(context, false, false), new Predicate<String>() {
+        final String selfPackageName = context.getPackageName();
+        final Predicate<String> selfPredicate = new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String packageName) {
-                return Packagex.isSystemAppOr(context, packageName, false);
+            public boolean accept(@NotNull String string) {
+                return string.equals(selfPackageName);
             }
-        });
-        Assert.assertTrue(!listPairPair.first.isEmpty());
-        Assert.assertTrue(!listPairPair.second.isEmpty());
-
-        me.panpf.javax.util.Pair<List<String>, List<String>> listPairPairWithoutSystem = Collectionx.partition(Packagex.listPackageName(context, true, false), new Predicate<String>() {
+        };
+        final Predicate<String> systemAppPredicate = new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String packageName) {
-                return Packagex.isSystemAppOr(context, packageName, false);
+            public boolean accept(@NotNull String string) {
+                return Packagex.isSystemAppOr(context, string, false);
             }
-        });
-        Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty());
-        Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty());
-
-        Assert.assertNotNull(Collectionx.find(Packagex.listPackageName(context, false, false), new Predicate<String>() {
+        };
+        final Predicate<String> userAppPredicate = new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String packageName) {
-                return packageName.equals(context.getPackageName());
+            public boolean accept(@NotNull String string) {
+                return !Packagex.isSystemAppOr(context, string, false);
             }
-        }));
+        };
 
-        Assert.assertNull(Collectionx.find(Packagex.listPackageName(context, false, true), new Predicate<String>() {
-            @Override
-            public boolean accept(@NotNull String packageName) {
-                return packageName.equals(context.getPackageName());
-            }
-        }));
+        /*
+         * ALL
+         */
+        List<String> allApps = Packagex.listPackageName(context, PackageType.ALL);
+        int systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate);
+        Assert.assertTrue(systemAppsInAllSize > 0);
+        int userAppsInAllSize = Collectionx.count(allApps, userAppPredicate);
+        Assert.assertTrue(userAppsInAllSize > 0);
+        Assert.assertNotNull(Collectionx.find(allApps, selfPredicate));
+
+        /*
+         * ALL_AND_EXCLUDE_SELF
+         */
+        List<String> allAndExcludeSelfApps = Packagex.listPackageName(context, PackageType.ALL_AND_EXCLUDE_SELF);
+        Assert.assertEquals(allApps.size(), allAndExcludeSelfApps.size() + 1);
+        Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate));
+
+
+        /*
+         * USER
+         */
+        List<String> userApps = Packagex.listPackageName(context, PackageType.USER);
+        Assert.assertTrue(Collectionx.all(userApps, userAppPredicate));
+        Assert.assertEquals(userAppsInAllSize, userApps.size());
+        if (!Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(userApps, selfPredicate));
+        } else {
+            Assert.assertNull(Collectionx.find(userApps, selfPredicate));
+        }
+
+        /*
+         * USER_AND_EXCLUDE_SELF
+         */
+        List<String> userAndExcludeSelfApps = Packagex.listPackageName(context, PackageType.USER_AND_EXCLUDE_SELF);
+        Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate));
+        if (!Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertEquals(userApps.size(), userAndExcludeSelfApps.size() + 1);
+        } else {
+            Assert.assertEquals(userApps.size(), userAndExcludeSelfApps.size());
+        }
+        Assert.assertNull(Collectionx.find(userAndExcludeSelfApps, selfPredicate));
+
+
+        /*
+         * SYSTEM
+         */
+        List<String> systemApps = Packagex.listPackageName(context, PackageType.SYSTEM);
+        Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate));
+        Assert.assertEquals(systemAppsInAllSize, systemApps.size());
+        Assert.assertEquals(allApps.size(), userApps.size() + systemApps.size());
+        if (Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(systemApps, selfPredicate));
+        } else {
+            Assert.assertNull(Collectionx.find(systemApps, selfPredicate));
+        }
+
+        /*
+         * SYSTEM_AND_EXCLUDE_SELF
+         */
+        List<String> systemAndExcludeSelfApps = Packagex.listPackageName(context, PackageType.SYSTEM_AND_EXCLUDE_SELF);
+        Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate));
+        if (Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertEquals(systemApps.size(), systemAndExcludeSelfApps.size() + 1);
+        } else {
+            Assert.assertEquals(systemApps.size(), systemAndExcludeSelfApps.size());
+        }
+        Assert.assertNull(Collectionx.find(systemAndExcludeSelfApps, selfPredicate));
+        Assert.assertEquals(allAndExcludeSelfApps.size(), userAndExcludeSelfApps.size() + systemAndExcludeSelfApps.size());
     }
 
     @Test
-    public void testListPackage() {
+    public void testList() throws PackageManager.NameNotFoundException {
         final Context context = InstrumentationRegistry.getContext();
-
-        me.panpf.javax.util.Pair<List<AppPackage>, List<AppPackage>> listPairPair = Collectionx.partition(Packagex.list(context, false, false), new Predicate<AppPackage>() {
+        final String selfPackageName = context.getPackageName();
+        final Predicate<AppPackage> selfPredicate = new Predicate<AppPackage>() {
+            @Override
+            public boolean accept(@NotNull AppPackage appPackage) {
+                return appPackage.packageName.equals(selfPackageName);
+            }
+        };
+        final Predicate<AppPackage> systemAppPredicate = new Predicate<AppPackage>() {
             @Override
             public boolean accept(@NotNull AppPackage appPackage) {
                 return Packagex.isSystemAppOr(context, appPackage.packageName, false);
             }
-        });
-        Assert.assertTrue(!listPairPair.first.isEmpty());
-        Assert.assertTrue(!listPairPair.second.isEmpty());
-
-        me.panpf.javax.util.Pair<List<AppPackage>, List<AppPackage>> listPairPairWithoutSystem = Collectionx.partition(Packagex.list(context, true, false), new Predicate<AppPackage>() {
+        };
+        final Predicate<AppPackage> userAppPredicate = new Predicate<AppPackage>() {
             @Override
             public boolean accept(@NotNull AppPackage appPackage) {
-                return Packagex.isSystemAppOr(context, appPackage.packageName, false);
+                return !Packagex.isSystemAppOr(context, appPackage.packageName, false);
             }
-        });
-        Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty());
-        Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty());
+        };
 
-        Assert.assertNotNull(Collectionx.find(Packagex.list(context, false, false), new Predicate<AppPackage>() {
-            @Override
-            public boolean accept(@NotNull AppPackage appPackage) {
-                return appPackage.packageName.equals(context.getPackageName());
-            }
-        }));
+        /*
+         * ALL
+         */
+        List<AppPackage> allApps = Packagex.list(context, PackageType.ALL);
+        int systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate);
+        Assert.assertTrue(systemAppsInAllSize > 0);
+        int userAppsInAllSize = Collectionx.count(allApps, userAppPredicate);
+        Assert.assertTrue(userAppsInAllSize > 0);
+        Assert.assertNotNull(Collectionx.find(allApps, selfPredicate));
 
-        Assert.assertNull(Collectionx.find(Packagex.list(context, false, true), new Predicate<AppPackage>() {
-            @Override
-            public boolean accept(@NotNull AppPackage appPackage) {
-                return appPackage.packageName.equals(context.getPackageName());
-            }
-        }));
+        /*
+         * ALL_AND_EXCLUDE_SELF
+         */
+        List<AppPackage> allAndExcludeSelfApps = Packagex.list(context, PackageType.ALL_AND_EXCLUDE_SELF);
+        Assert.assertEquals(allApps.size(), allAndExcludeSelfApps.size() + 1);
+        Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate));
 
-        Assert.assertEquals(3, Packagex.list(context, false, false, 3).size());
+
+        /*
+         * USER
+         */
+        List<AppPackage> userApps = Packagex.list(context, PackageType.USER);
+        Assert.assertTrue(Collectionx.all(userApps, userAppPredicate));
+        Assert.assertEquals(userAppsInAllSize, userApps.size());
+        if (!Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(userApps, selfPredicate));
+        } else {
+            Assert.assertNull(Collectionx.find(userApps, selfPredicate));
+        }
+
+        /*
+         * USER_AND_EXCLUDE_SELF
+         */
+        List<AppPackage> userAndExcludeSelfApps = Packagex.list(context, PackageType.USER_AND_EXCLUDE_SELF);
+        Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate));
+        if (!Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertEquals(userApps.size(), userAndExcludeSelfApps.size() + 1);
+        } else {
+            Assert.assertEquals(userApps.size(), userAndExcludeSelfApps.size());
+        }
+        Assert.assertNull(Collectionx.find(userAndExcludeSelfApps, selfPredicate));
+
+
+        /*
+         * SYSTEM
+         */
+        List<AppPackage> systemApps = Packagex.list(context, PackageType.SYSTEM);
+        Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate));
+        Assert.assertEquals(systemAppsInAllSize, systemApps.size());
+        Assert.assertEquals(allApps.size(), userApps.size() + systemApps.size());
+        if (Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(systemApps, selfPredicate));
+        } else {
+            Assert.assertNull(Collectionx.find(systemApps, selfPredicate));
+        }
+
+        /*
+         * SYSTEM_AND_EXCLUDE_SELF
+         */
+        List<AppPackage> systemAndExcludeSelfApps = Packagex.list(context, PackageType.SYSTEM_AND_EXCLUDE_SELF);
+        Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate));
+        if (Packagex.isSystemApp(context, selfPackageName)) {
+            Assert.assertEquals(systemApps.size(), systemAndExcludeSelfApps.size() + 1);
+        } else {
+            Assert.assertEquals(systemApps.size(), systemAndExcludeSelfApps.size());
+        }
+        Assert.assertNull(Collectionx.find(systemAndExcludeSelfApps, selfPredicate));
+        Assert.assertEquals(allAndExcludeSelfApps.size(), userAndExcludeSelfApps.size() + systemAndExcludeSelfApps.size());
     }
 
     @Test
-    public void testGetOnePackage() {
+    public void testGetOne() {
         final Context context = InstrumentationRegistry.getContext();
 
-        AppPackage allAppPackage = Packagex.getOne(context, false, false);
+        AppPackage allAppPackage = Packagex.getOne(context, PackageType.ALL);
         Assert.assertNotNull(allAppPackage);
 
-        AppPackage notSelfAppPackage = Packagex.getOne(context, false, true);
-        Assert.assertNotNull(notSelfAppPackage);
-        Assert.assertNotEquals(context.getPackageName(), notSelfAppPackage.packageName);
+        AppPackage allAndExcludeSelfAppPackage = Packagex.getOne(context, PackageType.ALL_AND_EXCLUDE_SELF);
+        Assert.assertNotNull(allAndExcludeSelfAppPackage);
+        Assert.assertNotEquals(context.getPackageName(), allAndExcludeSelfAppPackage.packageName);
 
-        AppPackage notSystemAppPackage = Packagex.getOne(context, true, false);
-        Assert.assertNotNull(notSystemAppPackage);
-        Assert.assertFalse(Packagex.isSystemAppOr(context, notSystemAppPackage.packageName, false));
+        AppPackage userAppPackage = Packagex.getOne(context, PackageType.USER);
+        Assert.assertNotNull(userAppPackage);
+        Assert.assertFalse(Packagex.isSystemAppOr(context, userAppPackage.packageName, false));
+        Assert.assertFalse(Packagex.isSystemAppOr(context, userAppPackage.packageName, false));
 
-        AppPackage notSystemNotSelfAppPackage = Packagex.getOne(context, true, true);
-        Assert.assertNotNull(notSystemNotSelfAppPackage);
-        Assert.assertFalse(Packagex.isSystemAppOr(context, notSystemNotSelfAppPackage.packageName, false));
-        Assert.assertNotEquals(context.getPackageName(), notSystemNotSelfAppPackage.packageName);
+        AppPackage userAndExcludeSelfAppPackage = Packagex.getOne(context, PackageType.USER_AND_EXCLUDE_SELF);
+        Assert.assertNotNull(userAndExcludeSelfAppPackage);
+        Assert.assertFalse(Packagex.isSystemAppOr(context, userAndExcludeSelfAppPackage.packageName, false));
+        Assert.assertNotEquals(context.getPackageName(), userAndExcludeSelfAppPackage.packageName);
+
+        AppPackage systemAppPackage = Packagex.getOne(context, PackageType.SYSTEM);
+        Assert.assertNotNull(systemAppPackage);
+        Assert.assertTrue(Packagex.isSystemAppOr(context, systemAppPackage.packageName, false));
+
+        AppPackage systemAndExcludeSelfAppPackage = Packagex.getOne(context, PackageType.SYSTEM_AND_EXCLUDE_SELF);
+        Assert.assertNotNull(systemAndExcludeSelfAppPackage);
+        Assert.assertTrue(Packagex.isSystemAppOr(context, systemAndExcludeSelfAppPackage.packageName, false));
+        Assert.assertNotEquals(context.getPackageName(), systemAndExcludeSelfAppPackage.packageName);
     }
 
     @Test
     public void testCount() {
         final Context context = InstrumentationRegistry.getContext();
 
-        int allCount = Packagex.count(context, false, false);
-        int notSelfCount = Packagex.count(context, false, true);
+        int allCount = Packagex.count(context, PackageType.ALL);
+        int allAndExcludeSelfCount = Packagex.count(context, PackageType.ALL_AND_EXCLUDE_SELF);
 
-        int notSystemCount = Packagex.count(context, true, false);
-        int notSystemNotSelfCount = Packagex.count(context, true, true);
+        int userCount = Packagex.count(context, PackageType.USER);
+        int userAndExcludeSelfCount = Packagex.count(context, PackageType.USER_AND_EXCLUDE_SELF);
+
+        int systemCount = Packagex.count(context, PackageType.SYSTEM);
+        int systemAndExcludeSelfCount = Packagex.count(context, PackageType.SYSTEM_AND_EXCLUDE_SELF);
 
         Assert.assertTrue(allCount > 0);
-        Assert.assertEquals(allCount - 1, notSelfCount);
-        Assert.assertEquals(notSystemCount - 1, notSystemNotSelfCount);
+        Assert.assertEquals(allCount - 1, allAndExcludeSelfCount);
+        Assert.assertEquals(userCount - 1, userAndExcludeSelfCount);
+        Assert.assertEquals(systemCount, systemAndExcludeSelfCount);
+        Assert.assertEquals(allCount, systemCount + userCount);
+        Assert.assertEquals(allAndExcludeSelfCount, systemAndExcludeSelfCount + userAndExcludeSelfCount);
     }
 
     @Test

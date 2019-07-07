@@ -17,11 +17,15 @@
 package me.panpf.androidxkt.test.content
 
 import android.content.pm.PackageManager
+import android.util.Pair
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
+import me.panpf.androidx.content.pm.AppPackage
+import me.panpf.androidx.content.pm.PackageType
 import me.panpf.androidxkt.content.pm.*
 import me.panpf.androidxkt.test.BuildConfig
 import me.panpf.javax.collections.Collectionx
+import me.panpf.javax.util.Predicate
 import me.panpf.javaxkt.lang.isSafe
 import me.panpf.javaxkt.util.requireNotNull
 import org.junit.Assert
@@ -44,7 +48,7 @@ class PackagexTest {
     fun testGetVersionCode() {
         val context = InstrumentationRegistry.getContext()
 
-        val appPackage = context.getOnePackage(false, true).requireNotNull()
+        val appPackage = context.getOnePackage(PackageType.ALL_AND_EXCLUDE_SELF).requireNotNull()
 
         Assert.assertTrue("versionCode: " + appPackage.versionCode, appPackage.versionCode > 0)
         Assert.assertEquals(appPackage.versionCode.toLong(), context.getPackageVersionCode(appPackage.packageName).toLong())
@@ -56,7 +60,7 @@ class PackagexTest {
     fun testGetVersionName() {
         val context = InstrumentationRegistry.getContext()
 
-        val appPackage = context.getOnePackage(false, true).requireNotNull()
+        val appPackage = context.getOnePackage(PackageType.ALL_AND_EXCLUDE_SELF).requireNotNull()
 
         Assert.assertTrue("versionName: " + appPackage.versionName, appPackage.versionName.isSafe())
         Assert.assertEquals(appPackage.versionName, context.getPackageVersionName(appPackage.packageName))
@@ -81,7 +85,7 @@ class PackagexTest {
         Assert.assertFalse(selfAppPackage.systemApp)
         Assert.assertTrue(selfAppPackage.enabled)
 
-        val systemAppPackage = context.getPackage(context.listPackage(false, true).find { appPackage -> appPackage.systemApp }.requireNotNull().packageName).requireNotNull()
+        val systemAppPackage = context.getPackage(context.listPackage(PackageType.ALL_AND_EXCLUDE_SELF).find { appPackage -> appPackage.systemApp }.requireNotNull().packageName).requireNotNull()
         Assert.assertTrue(systemAppPackage.systemApp)
 
         Assert.assertNull(context.getPackageOrNull(context.packageName + "_nonono"))
@@ -92,7 +96,7 @@ class PackagexTest {
     fun testIsSystemApp() {
         val context = InstrumentationRegistry.getContext()
 
-        val systemAppPackageName = context.listPackage(false, true).find { appPackage -> appPackage.systemApp }.requireNotNull().packageName
+        val systemAppPackageName = context.listPackage(PackageType.ALL_AND_EXCLUDE_SELF).find { appPackage -> appPackage.systemApp }.requireNotNull().packageName
 
         Assert.assertTrue(context.packageManager.getApplicationInfo(systemAppPackageName, 0).isSystemApp())
         Assert.assertFalse(context.packageManager.getApplicationInfo(context.packageName, 0).isSystemApp())
@@ -102,105 +106,367 @@ class PackagexTest {
     }
 
     @Test
-    fun testListPackageNameAndVersion() {
+    fun testListPackageVersionCodePair() {
         val context = InstrumentationRegistry.getContext()
+        val selfPackageName = context.packageName
+        val selfPredicate = Predicate<Pair<String, Int>> { stringIntegerPair -> stringIntegerPair.first == selfPackageName }
+        val systemAppPredicate = Predicate<Pair<String, Int>> { stringIntegerPair -> context.isSystemAppOr(stringIntegerPair.first, false) }
+        val userAppPredicate = Predicate<Pair<String, Int>> { stringIntegerPair -> !context.isSystemAppOr(stringIntegerPair.first, false) }
 
-        val listPairPair = Collectionx.partition(context.listPackageVersionCodePair(false, false)) { stringIntegerPair -> context.isSystemAppOr(stringIntegerPair.first, false) }
-        Assert.assertTrue(!listPairPair.first.isEmpty())
-        Assert.assertTrue(!listPairPair.second.isEmpty())
+        /*
+         * ALL
+         */
+        val allApps = context.listPackageVersionCodePair(PackageType.ALL)
+        val systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate)
+        Assert.assertTrue(systemAppsInAllSize > 0)
+        val userAppsInAllSize = Collectionx.count(allApps, userAppPredicate)
+        Assert.assertTrue(userAppsInAllSize > 0)
+        Assert.assertNotNull(Collectionx.find(allApps, selfPredicate))
 
-        val listPairPairWithoutSystem = Collectionx.partition(context.listPackageVersionCodePair(true, false)) { stringIntegerPair -> context.isSystemAppOr(stringIntegerPair.first, false) }
-        Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty())
-        Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty())
+        /*
+         * ALL_AND_EXCLUDE_SELF
+         */
+        val allAndExcludeSelfApps = context.listPackageVersionCodePair(PackageType.ALL_AND_EXCLUDE_SELF)
+        Assert.assertEquals(allApps.size.toLong(), (allAndExcludeSelfApps.size + 1).toLong())
+        Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate))
 
-        Assert.assertNotNull(Collectionx.find(context.listPackageVersionCodePair(false, false)) { stringIntegerPair -> stringIntegerPair.first == context.packageName })
 
-        Assert.assertNull(Collectionx.find(context.listPackageVersionCodePair(false, true)) { stringIntegerPair -> stringIntegerPair.first == context.packageName })
+        /*
+         * USER
+         */
+        val userApps = context.listPackageVersionCodePair(PackageType.USER)
+        Assert.assertTrue(Collectionx.all(userApps, userAppPredicate))
+        Assert.assertEquals(userAppsInAllSize.toLong(), userApps.size.toLong())
+        if (!context.isSystemApp(selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(userApps, selfPredicate))
+        } else {
+            Assert.assertNull(Collectionx.find(userApps, selfPredicate))
+        }
+
+        /*
+         * USER_AND_EXCLUDE_SELF
+         */
+        val userAndExcludeSelfApps = context.listPackageVersionCodePair(PackageType.USER_AND_EXCLUDE_SELF)
+        Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate))
+        if (!context.isSystemApp(selfPackageName)) {
+            Assert.assertEquals(userApps.size.toLong(), (userAndExcludeSelfApps.size + 1).toLong())
+        } else {
+            Assert.assertEquals(userApps.size.toLong(), userAndExcludeSelfApps.size.toLong())
+        }
+        Assert.assertNull(Collectionx.find(userAndExcludeSelfApps, selfPredicate))
+
+
+        /*
+         * SYSTEM
+         */
+        val systemApps = context.listPackageVersionCodePair(PackageType.SYSTEM)
+        Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate))
+        Assert.assertEquals(systemAppsInAllSize.toLong(), systemApps.size.toLong())
+        Assert.assertEquals(allApps.size.toLong(), (userApps.size + systemApps.size).toLong())
+        if (context.isSystemApp(selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(systemApps, selfPredicate))
+        } else {
+            Assert.assertNull(Collectionx.find(systemApps, selfPredicate))
+        }
+
+        /*
+         * SYSTEM_AND_EXCLUDE_SELF
+         */
+        val systemAndExcludeSelfApps = context.listPackageVersionCodePair(PackageType.SYSTEM_AND_EXCLUDE_SELF)
+        Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate))
+        if (context.isSystemApp(selfPackageName)) {
+            Assert.assertEquals(systemApps.size.toLong(), (systemAndExcludeSelfApps.size + 1).toLong())
+        } else {
+            Assert.assertEquals(systemApps.size.toLong(), systemAndExcludeSelfApps.size.toLong())
+        }
+        Assert.assertNull(Collectionx.find(systemAndExcludeSelfApps, selfPredicate))
+        Assert.assertEquals(allAndExcludeSelfApps.size.toLong(), (userAndExcludeSelfApps.size + systemAndExcludeSelfApps.size).toLong())
     }
 
     @Test
-    fun testListPackageNameAndVersionMap() {
+    fun testListPackageVersionCodeMap() {
         val context = InstrumentationRegistry.getContext()
+        val selfPackageName = context.packageName
+        val selfPredicate = Predicate<MutableMap.MutableEntry<String, Int>> { stringIntegerPair -> stringIntegerPair.key == selfPackageName }
+        val systemAppPredicate = Predicate<MutableMap.MutableEntry<String, Int>> { stringIntegerPair -> context.isSystemAppOr(stringIntegerPair.key, false) }
+        val userAppPredicate = Predicate<MutableMap.MutableEntry<String, Int>> { stringIntegerPair -> !context.isSystemAppOr(stringIntegerPair.key, false) }
 
-        val listPairPair = context.listPackageVersionCodeMap(false, false).toList().partition { context.isSystemAppOr(it.first, false) }
-        Assert.assertTrue(!listPairPair.first.isEmpty())
-        Assert.assertTrue(!listPairPair.second.isEmpty())
+        /*
+         * ALL
+         */
+        val allApps = context.listPackageVersionCodeMap(PackageType.ALL).entries
+        val systemAppsInAllSize = Collectionx.count<MutableMap.MutableEntry<String, Int>>(allApps, systemAppPredicate)
+        Assert.assertTrue(systemAppsInAllSize > 0)
+        val userAppsInAllSize = Collectionx.count<MutableMap.MutableEntry<String, Int>>(allApps, userAppPredicate)
+        Assert.assertTrue(userAppsInAllSize > 0)
+        Assert.assertNotNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(allApps, selfPredicate))
 
-        val listPairPairWithoutSystem = context.listPackageVersionCodeMap(true, false).toList().partition { context.isSystemAppOr(it.first, false) }
-        Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty())
-        Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty())
+        /*
+         * ALL_AND_EXCLUDE_SELF
+         */
+        val allAndExcludeSelfApps = context.listPackageVersionCodeMap(PackageType.ALL_AND_EXCLUDE_SELF).entries
+        Assert.assertEquals(allApps.size.toLong(), (allAndExcludeSelfApps.size + 1).toLong())
+        Assert.assertNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(allAndExcludeSelfApps, selfPredicate))
 
-        Assert.assertNotNull(context.listPackageVersionCodeMap(false, false).toList().find { it.first == context.packageName })
-        Assert.assertNull(context.listPackageVersionCodeMap(false, true).toList().find { it.first == context.packageName })
+
+        /*
+         * USER
+         */
+        val userApps = context.listPackageVersionCodeMap(PackageType.USER).entries
+        Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(userApps, userAppPredicate))
+        Assert.assertEquals(userAppsInAllSize.toLong(), userApps.size.toLong())
+        if (!context.isSystemApp(selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(userApps, selfPredicate))
+        } else {
+            Assert.assertNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(userApps, selfPredicate))
+        }
+
+        /*
+         * USER_AND_EXCLUDE_SELF
+         */
+        val userAndExcludeSelfApps = context.listPackageVersionCodeMap(PackageType.USER_AND_EXCLUDE_SELF).entries
+        Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(userAndExcludeSelfApps, userAppPredicate))
+        if (!context.isSystemApp(selfPackageName)) {
+            Assert.assertEquals(userApps.size.toLong(), (userAndExcludeSelfApps.size + 1).toLong())
+        } else {
+            Assert.assertEquals(userApps.size.toLong(), userAndExcludeSelfApps.size.toLong())
+        }
+        Assert.assertNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(userAndExcludeSelfApps, selfPredicate))
+
+
+        /*
+         * SYSTEM
+         */
+        val systemApps = context.listPackageVersionCodeMap(PackageType.SYSTEM).entries
+        Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(systemApps, systemAppPredicate))
+        Assert.assertEquals(systemAppsInAllSize.toLong(), systemApps.size.toLong())
+        Assert.assertEquals(allApps.size.toLong(), (userApps.size + systemApps.size).toLong())
+        if (context.isSystemApp(selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(systemApps, selfPredicate))
+        } else {
+            Assert.assertNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(systemApps, selfPredicate))
+        }
+
+        /*
+         * SYSTEM_AND_EXCLUDE_SELF
+         */
+        val systemAndExcludeSelfApps = context.listPackageVersionCodeMap(PackageType.SYSTEM_AND_EXCLUDE_SELF).entries
+        Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(systemAndExcludeSelfApps, systemAppPredicate))
+        if (context.isSystemApp(selfPackageName)) {
+            Assert.assertEquals(systemApps.size.toLong(), (systemAndExcludeSelfApps.size + 1).toLong())
+        } else {
+            Assert.assertEquals(systemApps.size.toLong(), systemAndExcludeSelfApps.size.toLong())
+        }
+        Assert.assertNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(systemAndExcludeSelfApps, selfPredicate))
+        Assert.assertEquals(allAndExcludeSelfApps.size.toLong(), (userAndExcludeSelfApps.size + systemAndExcludeSelfApps.size).toLong())
     }
 
     @Test
     fun testListPackageName() {
         val context = InstrumentationRegistry.getContext()
+        val selfPackageName = context.packageName
+        val selfPredicate = Predicate<String> { string -> string == selfPackageName }
+        val systemAppPredicate = Predicate<String> { string -> context.isSystemAppOr(string, false) }
+        val userAppPredicate = Predicate<String> { string -> !context.isSystemAppOr(string, false) }
 
-        val listPairPair = context.listPackageName(false, false).partition { packageName -> context.isSystemAppOr(packageName, false) }
-        Assert.assertTrue(!listPairPair.first.isEmpty())
-        Assert.assertTrue(!listPairPair.second.isEmpty())
+        /*
+         * ALL
+         */
+        val allApps = context.listPackageName(PackageType.ALL)
+        val systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate)
+        Assert.assertTrue(systemAppsInAllSize > 0)
+        val userAppsInAllSize = Collectionx.count(allApps, userAppPredicate)
+        Assert.assertTrue(userAppsInAllSize > 0)
+        Assert.assertNotNull(Collectionx.find(allApps, selfPredicate))
 
-        val listPairPairWithoutSystem = context.listPackageName(true, false).partition { packageName -> context.isSystemAppOr(packageName, false) }
-        Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty())
-        Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty())
+        /*
+         * ALL_AND_EXCLUDE_SELF
+         */
+        val allAndExcludeSelfApps = context.listPackageName(PackageType.ALL_AND_EXCLUDE_SELF)
+        Assert.assertEquals(allApps.size.toLong(), (allAndExcludeSelfApps.size + 1).toLong())
+        Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate))
 
-        Assert.assertNotNull(context.listPackageName(false, false).find { packageName -> packageName == context.packageName })
 
-        Assert.assertNull(context.listPackageName(false, true).find { packageName -> packageName == context.packageName })
+        /*
+         * USER
+         */
+        val userApps = context.listPackageName(PackageType.USER)
+        Assert.assertTrue(Collectionx.all(userApps, userAppPredicate))
+        Assert.assertEquals(userAppsInAllSize.toLong(), userApps.size.toLong())
+        if (!context.isSystemApp(selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(userApps, selfPredicate))
+        } else {
+            Assert.assertNull(Collectionx.find(userApps, selfPredicate))
+        }
+
+        /*
+         * USER_AND_EXCLUDE_SELF
+         */
+        val userAndExcludeSelfApps = context.listPackageName(PackageType.USER_AND_EXCLUDE_SELF)
+        Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate))
+        if (!context.isSystemApp(selfPackageName)) {
+            Assert.assertEquals(userApps.size.toLong(), (userAndExcludeSelfApps.size + 1).toLong())
+        } else {
+            Assert.assertEquals(userApps.size.toLong(), userAndExcludeSelfApps.size.toLong())
+        }
+        Assert.assertNull(Collectionx.find(userAndExcludeSelfApps, selfPredicate))
+
+
+        /*
+         * SYSTEM
+         */
+        val systemApps = context.listPackageName(PackageType.SYSTEM)
+        Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate))
+        Assert.assertEquals(systemAppsInAllSize.toLong(), systemApps.size.toLong())
+        Assert.assertEquals(allApps.size.toLong(), (userApps.size + systemApps.size).toLong())
+        if (context.isSystemApp(selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(systemApps, selfPredicate))
+        } else {
+            Assert.assertNull(Collectionx.find(systemApps, selfPredicate))
+        }
+
+        /*
+         * SYSTEM_AND_EXCLUDE_SELF
+         */
+        val systemAndExcludeSelfApps = context.listPackageName(PackageType.SYSTEM_AND_EXCLUDE_SELF)
+        Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate))
+        if (context.isSystemApp(selfPackageName)) {
+            Assert.assertEquals(systemApps.size.toLong(), (systemAndExcludeSelfApps.size + 1).toLong())
+        } else {
+            Assert.assertEquals(systemApps.size.toLong(), systemAndExcludeSelfApps.size.toLong())
+        }
+        Assert.assertNull(Collectionx.find(systemAndExcludeSelfApps, selfPredicate))
+        Assert.assertEquals(allAndExcludeSelfApps.size.toLong(), (userAndExcludeSelfApps.size + systemAndExcludeSelfApps.size).toLong())
     }
 
     @Test
     fun testListPackage() {
         val context = InstrumentationRegistry.getContext()
+        val selfPackageName = context.packageName
+        val selfPredicate = Predicate<AppPackage> { appPackage -> appPackage.packageName == selfPackageName }
+        val systemAppPredicate = Predicate<AppPackage> { appPackage -> context.isSystemAppOr(appPackage.packageName, false) }
+        val userAppPredicate = Predicate<AppPackage> { appPackage -> !context.isSystemAppOr(appPackage.packageName, false) }
 
-        val listPairPair = context.listPackage(false, false).partition { appPackage -> context.isSystemAppOr(appPackage.packageName, false) }
-        Assert.assertTrue(!listPairPair.first.isEmpty())
-        Assert.assertTrue(!listPairPair.second.isEmpty())
+        /*
+         * ALL
+         */
+        val allApps = context.listPackage(PackageType.ALL)
+        val systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate)
+        Assert.assertTrue(systemAppsInAllSize > 0)
+        val userAppsInAllSize = Collectionx.count(allApps, userAppPredicate)
+        Assert.assertTrue(userAppsInAllSize > 0)
+        Assert.assertNotNull(Collectionx.find(allApps, selfPredicate))
 
-        val listPairPairWithoutSystem = context.listPackage(true, false).partition { appPackage -> context.isSystemAppOr(appPackage.packageName, false) }
-        Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty())
-        Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty())
+        /*
+         * ALL_AND_EXCLUDE_SELF
+         */
+        val allAndExcludeSelfApps = context.listPackage(PackageType.ALL_AND_EXCLUDE_SELF)
+        Assert.assertEquals(allApps.size.toLong(), (allAndExcludeSelfApps.size + 1).toLong())
+        Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate))
 
-        Assert.assertNotNull(context.listPackage(false, false).find { appPackage -> appPackage.packageName == context.packageName })
 
-        Assert.assertNull(context.listPackage(false, true).find { appPackage -> appPackage.packageName == context.packageName })
+        /*
+         * USER
+         */
+        val userApps = context.listPackage(PackageType.USER)
+        Assert.assertTrue(Collectionx.all(userApps, userAppPredicate))
+        Assert.assertEquals(userAppsInAllSize.toLong(), userApps.size.toLong())
+        if (!context.isSystemApp(selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(userApps, selfPredicate))
+        } else {
+            Assert.assertNull(Collectionx.find(userApps, selfPredicate))
+        }
 
-        Assert.assertEquals(3, context.listPackage(false, false, 3).size.toLong())
+        /*
+         * USER_AND_EXCLUDE_SELF
+         */
+        val userAndExcludeSelfApps = context.listPackage(PackageType.USER_AND_EXCLUDE_SELF)
+        Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate))
+        if (!context.isSystemApp(selfPackageName)) {
+            Assert.assertEquals(userApps.size.toLong(), (userAndExcludeSelfApps.size + 1).toLong())
+        } else {
+            Assert.assertEquals(userApps.size.toLong(), userAndExcludeSelfApps.size.toLong())
+        }
+        Assert.assertNull(Collectionx.find(userAndExcludeSelfApps, selfPredicate))
+
+
+        /*
+         * SYSTEM
+         */
+        val systemApps = context.listPackage(PackageType.SYSTEM)
+        Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate))
+        Assert.assertEquals(systemAppsInAllSize.toLong(), systemApps.size.toLong())
+        Assert.assertEquals(allApps.size.toLong(), (userApps.size + systemApps.size).toLong())
+        if (context.isSystemApp(selfPackageName)) {
+            Assert.assertNotNull(Collectionx.find(systemApps, selfPredicate))
+        } else {
+            Assert.assertNull(Collectionx.find(systemApps, selfPredicate))
+        }
+
+        /*
+         * SYSTEM_AND_EXCLUDE_SELF
+         */
+        val systemAndExcludeSelfApps = context.listPackage(PackageType.SYSTEM_AND_EXCLUDE_SELF)
+        Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate))
+        if (context.isSystemApp(selfPackageName)) {
+            Assert.assertEquals(systemApps.size.toLong(), (systemAndExcludeSelfApps.size + 1).toLong())
+        } else {
+            Assert.assertEquals(systemApps.size.toLong(), systemAndExcludeSelfApps.size.toLong())
+        }
+        Assert.assertNull(Collectionx.find(systemAndExcludeSelfApps, selfPredicate))
+        Assert.assertEquals(allAndExcludeSelfApps.size.toLong(), (userAndExcludeSelfApps.size + systemAndExcludeSelfApps.size).toLong())
     }
 
     @Test
     fun testGetOnePackage() {
         val context = InstrumentationRegistry.getContext()
 
-        val allAppPackage = context.getOnePackage(false, false)
+        val allAppPackage = context.getOnePackage(PackageType.ALL)
         Assert.assertNotNull(allAppPackage)
 
-        val notSelfAppPackage = context.getOnePackage(false, true).requireNotNull()
-        Assert.assertNotEquals(context.packageName, notSelfAppPackage.packageName)
+        val allAndExcludeSelfAppPackage = context.getOnePackage(PackageType.ALL_AND_EXCLUDE_SELF)
+        Assert.assertNotNull(allAndExcludeSelfAppPackage)
+        Assert.assertNotEquals(context.packageName, allAndExcludeSelfAppPackage!!.packageName)
 
-        val notSystemAppPackage = context.getOnePackage(true, false).requireNotNull()
-        Assert.assertFalse(context.isSystemAppOr(notSystemAppPackage.packageName, false))
+        val userAppPackage = context.getOnePackage(PackageType.USER)
+        Assert.assertNotNull(userAppPackage)
+        Assert.assertFalse(context.isSystemAppOr(userAppPackage!!.packageName, false))
+        Assert.assertFalse(context.isSystemAppOr(userAppPackage.packageName, false))
 
-        val notSystemNotSelfAppPackage = context.getOnePackage(true, true).requireNotNull()
-        Assert.assertFalse(context.isSystemAppOr(notSystemNotSelfAppPackage.packageName, false))
-        Assert.assertNotEquals(context.packageName, notSystemNotSelfAppPackage.packageName)
+        val userAndExcludeSelfAppPackage = context.getOnePackage(PackageType.USER_AND_EXCLUDE_SELF)
+        Assert.assertNotNull(userAndExcludeSelfAppPackage)
+        Assert.assertFalse(context.isSystemAppOr(userAndExcludeSelfAppPackage!!.packageName, false))
+        Assert.assertNotEquals(context.packageName, userAndExcludeSelfAppPackage.packageName)
+
+        val systemAppPackage = context.getOnePackage(PackageType.SYSTEM)
+        Assert.assertNotNull(systemAppPackage)
+        Assert.assertTrue(context.isSystemAppOr(systemAppPackage!!.packageName, false))
+
+        val systemAndExcludeSelfAppPackage = context.getOnePackage(PackageType.SYSTEM_AND_EXCLUDE_SELF)
+        Assert.assertNotNull(systemAndExcludeSelfAppPackage)
+        Assert.assertTrue(context.isSystemAppOr(systemAndExcludeSelfAppPackage!!.packageName, false))
+        Assert.assertNotEquals(context.packageName, systemAndExcludeSelfAppPackage.packageName)
     }
 
     @Test
     fun testCount() {
         val context = InstrumentationRegistry.getContext()
 
-        val allCount = context.countPackage(false, false)
-        val notSelfCount = context.countPackage(false, true)
+        val allCount = context.countPackage(PackageType.ALL)
+        val allAndExcludeSelfCount = context.countPackage(PackageType.ALL_AND_EXCLUDE_SELF)
 
-        val notSystemCount = context.countPackage(true, false)
-        val notSystemNotSelfCount = context.countPackage(true, true)
+        val userCount = context.countPackage(PackageType.USER)
+        val userAndExcludeSelfCount = context.countPackage(PackageType.USER_AND_EXCLUDE_SELF)
+
+        val systemCount = context.countPackage(PackageType.SYSTEM)
+        val systemAndExcludeSelfCount = context.countPackage(PackageType.SYSTEM_AND_EXCLUDE_SELF)
 
         Assert.assertTrue(allCount > 0)
-        Assert.assertEquals((allCount - 1).toLong(), notSelfCount.toLong())
-        Assert.assertEquals((notSystemCount - 1).toLong(), notSystemNotSelfCount.toLong())
+        Assert.assertEquals((allCount - 1).toLong(), allAndExcludeSelfCount.toLong())
+        Assert.assertEquals((userCount - 1).toLong(), userAndExcludeSelfCount.toLong())
+        Assert.assertEquals(systemCount.toLong(), systemAndExcludeSelfCount.toLong())
+        Assert.assertEquals(allCount.toLong(), (systemCount + userCount).toLong())
+        Assert.assertEquals(allAndExcludeSelfCount.toLong(), (systemAndExcludeSelfCount + userAndExcludeSelfCount).toLong())
     }
 
     @Test

@@ -217,11 +217,10 @@ public class Packagex {
     /**
      * List the packageName and versionCode of all installed APPs
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
-     * @param excludeSelf      If true, exclude yourself
+     * @param packageType Accepted package type, see {@link PackageType}
      */
     @NonNull
-    public static List<Pair<String, Integer>> listVersionCodePair(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    public static List<Pair<String, Integer>> listVersionCodePair(@NonNull Context context, @PackageType int packageType) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -235,11 +234,15 @@ public class Packagex {
 
         List<Pair<String, Integer>> appsSet = new ArrayList<>(packageInfoList.size());
         for (PackageInfo packageInfo : packageInfoList) {
-            if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
+            if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+                    && context.getPackageName().equals(packageInfo.packageName)) {
                 continue;
             }
 
-            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
+            boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
+            if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+                continue;
+            } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                 continue;
             }
 
@@ -251,11 +254,10 @@ public class Packagex {
     /**
      * Get the packageName and versionCode of all installed apps Map
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
-     * @param excludeSelf      If true, exclude yourself
-     */
+     * @param packageType Accepted package type, see {@link PackageType}
+     */// TODO: 2019-07-08 改名为 getPackageVersionCodeMap
     @NonNull
-    public static ArrayMap<String, Integer> listVersionCodeMap(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    public static ArrayMap<String, Integer> listVersionCodeMap(@NonNull Context context, @PackageType int packageType) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -269,11 +271,15 @@ public class Packagex {
 
         ArrayMap<String, Integer> appsSet = new ArrayMap<>();
         for (PackageInfo packageInfo : packageInfoList) {
-            if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
+            if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+                    && context.getPackageName().equals(packageInfo.packageName)) {
                 continue;
             }
 
-            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
+            boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
+            if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+                continue;
+            } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                 continue;
             }
 
@@ -285,11 +291,10 @@ public class Packagex {
     /**
      * List the packageName of all installed apps
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
-     * @param excludeSelf      If true, exclude yourself
+     * @param packageType Accepted package type, see {@link PackageType}
      */
     @NonNull
-    public static List<String> listPackageName(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    public static List<String> listPackageName(@NonNull Context context, @PackageType int packageType) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -300,11 +305,15 @@ public class Packagex {
         if (packageInfoList != null && !packageInfoList.isEmpty()) {
             List<String> appsSet = new ArrayList<>();
             for (PackageInfo packageInfo : packageInfoList) {
-                if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
+                if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+                        && context.getPackageName().equals(packageInfo.packageName)) {
                     continue;
                 }
 
-                if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
+                boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
+                if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+                    continue;
+                } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                     continue;
                 }
 
@@ -319,12 +328,11 @@ public class Packagex {
     /**
      * List information for all installed apps
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
-     * @param excludeSelf      If true, exclude yourself
-     * @param size             How many apps to get. -1: all
+     * @param packageType Accepted package type, see {@link PackageType}
+     * @param size        How many apps to get. -1: all
      */
     @NonNull
-    public static List<AppPackage> list(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf, int size) {
+    public static List<AppPackage> list(@NonNull Context context, @PackageType int packageType, int size) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> packageInfoList = null;
         try {
@@ -340,11 +348,15 @@ public class Packagex {
         ArrayList<AppPackage> packageArrayList = new ArrayList<>(size > 0 ? size : packageInfoList.size());
         int index = 0;
         for (PackageInfo packageInfo : packageInfoList) {
-            if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
+            if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+                    && context.getPackageName().equals(packageInfo.packageName)) {
                 continue;
             }
 
-            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
+            boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
+            if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+                continue;
+            } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                 continue;
             }
 
@@ -361,24 +373,22 @@ public class Packagex {
     /**
      * List information for all installed apps
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
-     * @param excludeSelf      If true, exclude yourself
+     * @param packageType Accepted package type, see {@link PackageType}
      */
     @NonNull
-    public static List<AppPackage> list(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
-        return list(context, excludeSystemApp, excludeSelf, -1);
+    public static List<AppPackage> list(@NonNull Context context, @PackageType int packageType) {
+        return list(context, packageType, -1);
     }
 
 
     /**
      * Get information about an app
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
-     * @param excludeSelf      If true, exclude yourself
+     * @param packageType Accepted package type, see {@link PackageType}
      */
     @Nullable
-    public static AppPackage getOne(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
-        List<AppPackage> appPackageList = list(context, excludeSystemApp, excludeSelf, 1);
+    public static AppPackage getOne(@NonNull Context context, @PackageType int packageType) {
+        List<AppPackage> appPackageList = list(context, packageType, 1);
         return appPackageList.size() >= 1 ? appPackageList.get(0) : null;
     }
 
@@ -386,10 +396,9 @@ public class Packagex {
     /**
      * Get the number of installed apps
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
-     * @param excludeSelf      If true, exclude yourself
+     * @param packageType Accepted package type, see {@link PackageType}
      */
-    public static int count(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    public static int count(@NonNull Context context, @PackageType int packageType) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> packageInfoList = null;
         try {
@@ -404,11 +413,15 @@ public class Packagex {
 
         int count = 0;
         for (PackageInfo packageInfo : packageInfoList) {
-            if (excludeSelf && context.getPackageName().equals(packageInfo.packageName)) {
+            if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+                    && context.getPackageName().equals(packageInfo.packageName)) {
                 continue;
             }
 
-            if (excludeSystemApp && isSystemApp(packageInfo.applicationInfo)) {
+            boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
+            if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+                continue;
+            } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                 continue;
             }
 

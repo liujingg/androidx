@@ -18,6 +18,9 @@ New
 Behavior change:
 * :fire: Intentx createInstallAppIntent method add RequiresPermission(REQUEST_INSTALL_PACKAGES) annotated
 
+Update
+* :fire: The excludeSystemApp and excludeSelf parameters of the Package* list*, getOne, count methods are combined into one packageType
+
 ## v1.0.0-alpha3
 
 Behavior change:
