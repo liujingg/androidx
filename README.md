@@ -80,7 +80,7 @@ Dependencies:
 * Package: [Packagex.java] ([Test][PackagexTest.java]) | [Packagex.kt] ([Test][PackagexTest.kt])
     * requestInstall,  requestUninstallisInstalled, getVersionCode, getVersionCodeOr, getVersionName, getVersionNameOr,
     * getVersionNameOrNull, get, getOrNull, isSystemApp, isSystemAppOr, listPackageVersionCodePair,
-    * listPackageVersionCodeMap, listPackageName, list, getOne, count, getPackageApkFile,
+    * getPackageVersionCodeMap, listPackageName, list, getOne, count, getPackageApkFile,
     * getPackageApkFileOrNull, getAppSignatureBytes, getAppSignatureBytesOrNull,
     * getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
 * Clipboard: [Clipboardx.java] ([Test][ClipboardxTest.java]) | [Clipboardx.kt] ([Test][ClipboardxTest.kt])

@@ -255,9 +255,9 @@ public class Packagex {
      * Get the packageName and versionCode of all installed apps Map
      *
      * @param packageType Accepted package type, see {@link PackageType}
-     */// TODO: 2019-07-08 改名为 getPackageVersionCodeMap
+     */
     @NonNull
-    public static ArrayMap<String, Integer> listVersionCodeMap(@NonNull Context context, @PackageType int packageType) {
+    public static ArrayMap<String, Integer> getVersionCodeMap(@NonNull Context context, @PackageType int packageType) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);

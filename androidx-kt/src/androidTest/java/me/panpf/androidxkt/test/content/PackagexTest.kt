@@ -184,7 +184,7 @@ class PackagexTest {
     }
 
     @Test
-    fun testListPackageVersionCodeMap() {
+    fun testGetPackageVersionCodeMap() {
         val context = InstrumentationRegistry.getContext()
         val selfPackageName = context.packageName
         val selfPredicate = Predicate<MutableMap.MutableEntry<String, Int>> { stringIntegerPair -> stringIntegerPair.key == selfPackageName }
@@ -194,7 +194,7 @@ class PackagexTest {
         /*
          * ALL
          */
-        val allApps = context.listPackageVersionCodeMap(PackageType.ALL).entries
+        val allApps = context.getPackageVersionCodeMap(PackageType.ALL).entries
         val systemAppsInAllSize = Collectionx.count<MutableMap.MutableEntry<String, Int>>(allApps, systemAppPredicate)
         Assert.assertTrue(systemAppsInAllSize > 0)
         val userAppsInAllSize = Collectionx.count<MutableMap.MutableEntry<String, Int>>(allApps, userAppPredicate)
@@ -204,7 +204,7 @@ class PackagexTest {
         /*
          * ALL_AND_EXCLUDE_SELF
          */
-        val allAndExcludeSelfApps = context.listPackageVersionCodeMap(PackageType.ALL_AND_EXCLUDE_SELF).entries
+        val allAndExcludeSelfApps = context.getPackageVersionCodeMap(PackageType.ALL_AND_EXCLUDE_SELF).entries
         Assert.assertEquals(allApps.size.toLong(), (allAndExcludeSelfApps.size + 1).toLong())
         Assert.assertNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(allAndExcludeSelfApps, selfPredicate))
 
@@ -212,7 +212,7 @@ class PackagexTest {
         /*
          * USER
          */
-        val userApps = context.listPackageVersionCodeMap(PackageType.USER).entries
+        val userApps = context.getPackageVersionCodeMap(PackageType.USER).entries
         Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(userApps, userAppPredicate))
         Assert.assertEquals(userAppsInAllSize.toLong(), userApps.size.toLong())
         if (!context.isSystemApp(selfPackageName)) {
@@ -224,7 +224,7 @@ class PackagexTest {
         /*
          * USER_AND_EXCLUDE_SELF
          */
-        val userAndExcludeSelfApps = context.listPackageVersionCodeMap(PackageType.USER_AND_EXCLUDE_SELF).entries
+        val userAndExcludeSelfApps = context.getPackageVersionCodeMap(PackageType.USER_AND_EXCLUDE_SELF).entries
         Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(userAndExcludeSelfApps, userAppPredicate))
         if (!context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(userApps.size.toLong(), (userAndExcludeSelfApps.size + 1).toLong())
@@ -237,7 +237,7 @@ class PackagexTest {
         /*
          * SYSTEM
          */
-        val systemApps = context.listPackageVersionCodeMap(PackageType.SYSTEM).entries
+        val systemApps = context.getPackageVersionCodeMap(PackageType.SYSTEM).entries
         Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(systemApps, systemAppPredicate))
         Assert.assertEquals(systemAppsInAllSize.toLong(), systemApps.size.toLong())
         Assert.assertEquals(allApps.size.toLong(), (userApps.size + systemApps.size).toLong())
@@ -250,7 +250,7 @@ class PackagexTest {
         /*
          * SYSTEM_AND_EXCLUDE_SELF
          */
-        val systemAndExcludeSelfApps = context.listPackageVersionCodeMap(PackageType.SYSTEM_AND_EXCLUDE_SELF).entries
+        val systemAndExcludeSelfApps = context.getPackageVersionCodeMap(PackageType.SYSTEM_AND_EXCLUDE_SELF).entries
         Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(systemAndExcludeSelfApps, systemAppPredicate))
         if (context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(systemApps.size.toLong(), (systemAndExcludeSelfApps.size + 1).toLong())

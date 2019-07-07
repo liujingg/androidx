@@ -137,7 +137,7 @@ inline fun Context.listPackageVersionCodePair(@PackageType packageType: Int): Li
  *
  * @param packageType Accepted package type, see {@link AppType}
  */
-inline fun Context.listPackageVersionCodeMap(@PackageType packageType: Int): androidx.collection.ArrayMap<String, Int> = Packagex.listVersionCodeMap(this, packageType)
+inline fun Context.getPackageVersionCodeMap(@PackageType packageType: Int): androidx.collection.ArrayMap<String, Int> = Packagex.getVersionCodeMap(this, packageType)
 
 /**
  * List the packageName of all installed apps

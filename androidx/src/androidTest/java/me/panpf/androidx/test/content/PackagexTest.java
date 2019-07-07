@@ -216,7 +216,7 @@ public class PackagexTest {
     }
 
     @Test
-    public void testListVersionCodeMap() throws PackageManager.NameNotFoundException {
+    public void testGetVersionCodeMap() throws PackageManager.NameNotFoundException {
         final Context context = InstrumentationRegistry.getContext();
         final String selfPackageName = context.getPackageName();
         final Predicate<Map.Entry<String, Integer>> selfPredicate = new Predicate<Map.Entry<String, Integer>>() {
@@ -241,7 +241,7 @@ public class PackagexTest {
         /*
          * ALL
          */
-        Set<Map.Entry<String, Integer>> allApps = Packagex.listVersionCodeMap(context, PackageType.ALL).entrySet();
+        Set<Map.Entry<String, Integer>> allApps = Packagex.getVersionCodeMap(context, PackageType.ALL).entrySet();
         int systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate);
         Assert.assertTrue(systemAppsInAllSize > 0);
         int userAppsInAllSize = Collectionx.count(allApps, userAppPredicate);
@@ -251,7 +251,7 @@ public class PackagexTest {
         /*
          * ALL_AND_EXCLUDE_SELF
          */
-        Set<Map.Entry<String, Integer>> allAndExcludeSelfApps = Packagex.listVersionCodeMap(context, PackageType.ALL_AND_EXCLUDE_SELF).entrySet();
+        Set<Map.Entry<String, Integer>> allAndExcludeSelfApps = Packagex.getVersionCodeMap(context, PackageType.ALL_AND_EXCLUDE_SELF).entrySet();
         Assert.assertEquals(allApps.size(), allAndExcludeSelfApps.size() + 1);
         Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate));
 
@@ -259,7 +259,7 @@ public class PackagexTest {
         /*
          * USER
          */
-        Set<Map.Entry<String, Integer>> userApps = Packagex.listVersionCodeMap(context, PackageType.USER).entrySet();
+        Set<Map.Entry<String, Integer>> userApps = Packagex.getVersionCodeMap(context, PackageType.USER).entrySet();
         Assert.assertTrue(Collectionx.all(userApps, userAppPredicate));
         Assert.assertEquals(userAppsInAllSize, userApps.size());
         if (!Packagex.isSystemApp(context, selfPackageName)) {
@@ -271,7 +271,7 @@ public class PackagexTest {
         /*
          * USER_AND_EXCLUDE_SELF
          */
-        Set<Map.Entry<String, Integer>> userAndExcludeSelfApps = Packagex.listVersionCodeMap(context, PackageType.USER_AND_EXCLUDE_SELF).entrySet();
+        Set<Map.Entry<String, Integer>> userAndExcludeSelfApps = Packagex.getVersionCodeMap(context, PackageType.USER_AND_EXCLUDE_SELF).entrySet();
         Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate));
         if (!Packagex.isSystemApp(context, selfPackageName)) {
             Assert.assertEquals(userApps.size(), userAndExcludeSelfApps.size() + 1);
@@ -284,7 +284,7 @@ public class PackagexTest {
         /*
          * SYSTEM
          */
-        Set<Map.Entry<String, Integer>> systemApps = Packagex.listVersionCodeMap(context, PackageType.SYSTEM).entrySet();
+        Set<Map.Entry<String, Integer>> systemApps = Packagex.getVersionCodeMap(context, PackageType.SYSTEM).entrySet();
         Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate));
         Assert.assertEquals(systemAppsInAllSize, systemApps.size());
         Assert.assertEquals(allApps.size(), userApps.size() + systemApps.size());
@@ -297,7 +297,7 @@ public class PackagexTest {
         /*
          * SYSTEM_AND_EXCLUDE_SELF
          */
-        Set<Map.Entry<String, Integer>> systemAndExcludeSelfApps = Packagex.listVersionCodeMap(context, PackageType.SYSTEM_AND_EXCLUDE_SELF).entrySet();
+        Set<Map.Entry<String, Integer>> systemAndExcludeSelfApps = Packagex.getVersionCodeMap(context, PackageType.SYSTEM_AND_EXCLUDE_SELF).entrySet();
         Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate));
         if (Packagex.isSystemApp(context, selfPackageName)) {
             Assert.assertEquals(systemApps.size(), systemAndExcludeSelfApps.size() + 1);
