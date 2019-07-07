@@ -13,6 +13,9 @@ Rename
 New
 * :sparkles: Displayx adds getActionBarSize() method
 
+Behavior change:
+* :fire: Intentx createInstallAppIntent method add RequiresPermission(REQUEST_INSTALL_PACKAGES) annotated
+
 ## v1.0.0-alpha3
 
 Behavior change:

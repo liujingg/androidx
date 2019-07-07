@@ -27,12 +27,13 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
 
-import java.io.File;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.core.content.FileProvider;
+
+import java.io.File;
+
 import me.panpf.androidx.content.pm.PackageInfox;
 
 /**
@@ -150,6 +151,7 @@ public class Intentx {
      * @param apkFileUri APK file uri
      */
     @NonNull
+    @RequiresPermission(value = Manifest.permission.REQUEST_INSTALL_PACKAGES, conditional = true)
     public static Intent createInstallAppIntent(@NonNull Uri apkFileUri) {
         return new Intent(Intent.ACTION_VIEW).addCategory(Intent.CATEGORY_DEFAULT)
                 .setDataAndType(apkFileUri, "application/vnd.android.package-archive")
@@ -160,6 +162,7 @@ public class Intentx {
      * Create an Intent that opens the specified app install page
      */
     @NonNull
+    @RequiresPermission(Manifest.permission.REQUEST_INSTALL_PACKAGES)
     public static Intent createInstallAppIntent(@NonNull Context context, @NonNull File apkFile) {
         return createInstallAppIntent(getShareFileUri(context, apkFile));
     }
@@ -170,6 +173,7 @@ public class Intentx {
      * @param packageName App package name
      */
     @NonNull
+    @RequiresPermission(Manifest.permission.REQUEST_DELETE_PACKAGES)
     public static Intent createUninstallAppIntent(@NonNull String packageName) {
         return new Intent(Intent.ACTION_DELETE, Uri.fromParts("package", packageName, null));
     }

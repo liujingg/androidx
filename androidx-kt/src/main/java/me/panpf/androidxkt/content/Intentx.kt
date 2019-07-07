@@ -87,11 +87,13 @@ inline fun Context.createScanFileBroadcastIntent(file: File): Intent = Intentx.c
  *
  * @receiver APK file uri
  */
+@RequiresPermission(Manifest.permission.REQUEST_INSTALL_PACKAGES)
 inline fun Uri.createInstallAppIntent(): Intent = Intentx.createInstallAppIntent(this)
 
 /**
  * Create an Intent that opens the specified app install page
  */
+@RequiresPermission(Manifest.permission.REQUEST_INSTALL_PACKAGES)
 inline fun Context.createInstallAppIntent(apkFile: File): Intent = Intentx.createInstallAppIntent(this, apkFile)
 
 /**
@@ -99,6 +101,7 @@ inline fun Context.createInstallAppIntent(apkFile: File): Intent = Intentx.creat
  *
  * @receiver App package name
  */
+@RequiresPermission(Manifest.permission.REQUEST_DELETE_PACKAGES)
 inline fun String.createUninstallAppIntent(): Intent = Intentx.createUninstallAppIntent(this)
 
 /**
