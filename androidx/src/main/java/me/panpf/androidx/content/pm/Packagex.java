@@ -16,6 +16,7 @@
 
 package me.panpf.androidx.content.pm;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -23,7 +24,13 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.util.Pair;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresPermission;
+import androidx.collection.ArrayMap;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -31,9 +38,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.collection.ArrayMap;
+import me.panpf.androidx.app.Activityx;
+import me.panpf.androidx.content.Intentx;
 import me.panpf.androidx.graphics.drawable.Drawablex;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Premisex;
@@ -125,7 +131,7 @@ public class Packagex {
      * Get information about the app with the specified packageName
      */
     @NonNull
-    public static AppPackage getPackage(@NonNull Context context, @NonNull String packageName) throws NameNotFoundException {
+    public static AppPackage get(@NonNull Context context, @NonNull String packageName) throws NameNotFoundException {
         return packageInfoToAppPackage(context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_META_DATA), context.getPackageManager());
     }
 
@@ -133,7 +139,7 @@ public class Packagex {
      * Get information about the app with the specified packageName, return to null if not installed
      */
     @Nullable
-    public static AppPackage getPackageOrNull(@NonNull Context context, @NonNull String packageName) {
+    public static AppPackage getOrNull(@NonNull Context context, @NonNull String packageName) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo;
         try {
@@ -179,11 +185,11 @@ public class Packagex {
     /**
      * List the packageName and versionCode of all installed APPs
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
      * @param excludeSelf      If true, exclude yourself
      */
     @NonNull
-    public static List<Pair<String, Integer>> listPackageNameAndVersionCode(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    public static List<Pair<String, Integer>> listVersionCodePair(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -213,11 +219,11 @@ public class Packagex {
     /**
      * Get the packageName and versionCode of all installed apps Map
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
      * @param excludeSelf      If true, exclude yourself
      */
     @NonNull
-    public static ArrayMap<String, Integer> listPackageNameAndVersionCodeMap(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+    public static ArrayMap<String, Integer> listVersionCodeMap(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -247,7 +253,7 @@ public class Packagex {
     /**
      * List the packageName of all installed apps
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
      * @param excludeSelf      If true, exclude yourself
      */
     @NonNull
@@ -281,12 +287,12 @@ public class Packagex {
     /**
      * List information for all installed apps
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
      * @param excludeSelf      If true, exclude yourself
      * @param size             How many apps to get. -1: all
      */
     @NonNull
-    public static List<AppPackage> listPackage(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf, int size) {
+    public static List<AppPackage> list(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf, int size) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> packageInfoList = null;
         try {
@@ -323,24 +329,24 @@ public class Packagex {
     /**
      * List information for all installed apps
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
      * @param excludeSelf      If true, exclude yourself
      */
     @NonNull
-    public static List<AppPackage> listPackage(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
-        return listPackage(context, excludeSystemApp, excludeSelf, -1);
+    public static List<AppPackage> list(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+        return list(context, excludeSystemApp, excludeSelf, -1);
     }
 
 
     /**
      * Get information about an app
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
      * @param excludeSelf      If true, exclude yourself
      */
     @Nullable
-    public static AppPackage getOnePackage(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
-        List<AppPackage> appPackageList = listPackage(context, excludeSystemApp, excludeSelf, 1);
+    public static AppPackage getOne(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {
+        List<AppPackage> appPackageList = list(context, excludeSystemApp, excludeSelf, 1);
         return appPackageList.size() >= 1 ? appPackageList.get(0) : null;
     }
 
@@ -348,7 +354,7 @@ public class Packagex {
     /**
      * Get the number of installed apps
      *
-     * @param excludeSystemApp If true, exclude yourself exclude system apps
+     * @param excludeSystemApp If true, exclude yourself exclude system apps todo 改为 acceptAppType     0：不过滤，1：只要用户安装的应用；-1：只要系统应用
      * @param excludeSelf      If true, exclude yourself
      */
     public static int count(@NonNull Context context, boolean excludeSystemApp, boolean excludeSelf) {

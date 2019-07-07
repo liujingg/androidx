@@ -79,8 +79,8 @@ Dependencies:
     * findMetaDataWithName, findMetaDataByName, findMetaDataWithValue, findMetaDataByValue
 * Package: [Packagex.java] ([Test][PackagexTest.java]) | [Packagex.kt] ([Test][PackagexTest.kt])
     * isInstalled, getVersionCode, getVersionCodeOr, getVersionName, getVersionNameOr, getVersionNameOrNull,
-    * getPackage, getPackageOrNull, isSystemApp, isSystemAppOr, listPackageNameAndVersionCode,
-    * listPackageNameAndVersionCodeMap, listPackageName, listPackage, getOnePackage, count, getPackageApkFile,
+    * get, getOrNull, isSystemApp, isSystemAppOr, listPackageVersionCodePair,
+    * listPackageVersionCodeMap, listPackageName, list, getOne, count, getPackageApkFile,
     * getPackageApkFileOrNull, getAppSignatureBytes, getAppSignatureBytesOrNull,
     * getAppIconDrawable, getAppIconBitmap, getApkIconDrawable, getApkIconBitmap
 * Clipboard: [Clipboardx.java] ([Test][ClipboardxTest.java]) | [Clipboardx.kt] ([Test][ClipboardxTest.kt])

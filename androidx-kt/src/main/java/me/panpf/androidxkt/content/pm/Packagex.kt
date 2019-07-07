@@ -72,12 +72,12 @@ inline fun Context.getPackageVersionNameOrNull(packageName: String): String? = P
 /**
  * Get information about the app with the specified packageName
  */
-inline fun Context.getPackage(packageName: String): AppPackage = Packagex.getPackage(this, packageName)
+inline fun Context.getPackage(packageName: String): AppPackage = Packagex.get(this, packageName)
 
 /**
  * Get information about the app with the specified packageName, return to null if not installed
  */
-inline fun Context.getPackageOrNull(packageName: String): AppPackage? = Packagex.getPackageOrNull(this, packageName)
+inline fun Context.getPackageOrNull(packageName: String): AppPackage? = Packagex.getOrNull(this, packageName)
 
 
 /**
@@ -103,7 +103,7 @@ inline fun Context.isSystemAppOr(packageName: String, defaultValue: Boolean): Bo
  * @param excludeSystemApp If true, exclude yourself exclude system apps
  * @param excludeSelf      If true, exclude yourself
  */
-inline fun Context.listPackageNameAndVersionCode(excludeSystemApp: Boolean, excludeSelf: Boolean): List<Pair<String, Int>> = Packagex.listPackageNameAndVersionCode(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackageVersionCodePair(excludeSystemApp: Boolean, excludeSelf: Boolean): List<Pair<String, Int>> = Packagex.listVersionCodePair(this, excludeSystemApp, excludeSelf)
 
 
 /**
@@ -112,7 +112,7 @@ inline fun Context.listPackageNameAndVersionCode(excludeSystemApp: Boolean, excl
  * @param excludeSystemApp If true, exclude yourself exclude system apps
  * @param excludeSelf      If true, exclude yourself
  */
-inline fun Context.listPackageNameAndVersionCodeMap(excludeSystemApp: Boolean, excludeSelf: Boolean): androidx.collection.ArrayMap<String, Int> = Packagex.listPackageNameAndVersionCodeMap(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackageVersionCodeMap(excludeSystemApp: Boolean, excludeSelf: Boolean): androidx.collection.ArrayMap<String, Int> = Packagex.listVersionCodeMap(this, excludeSystemApp, excludeSelf)
 
 /**
  * List the packageName of all installed apps
@@ -129,7 +129,7 @@ inline fun Context.listPackageName(excludeSystemApp: Boolean, excludeSelf: Boole
  * @param excludeSelf      If true, exclude yourself
  * @param size             How many apps to get. -1: all
  */
-inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean, size: Int): List<AppPackage> = Packagex.listPackage(this, excludeSystemApp, excludeSelf, size)
+inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean, size: Int): List<AppPackage> = Packagex.list(this, excludeSystemApp, excludeSelf, size)
 
 /**
  * List information for all installed apps
@@ -137,7 +137,7 @@ inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean, 
  * @param excludeSystemApp If true, exclude yourself exclude system apps
  * @param excludeSelf      If true, exclude yourself
  */
-inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean): List<AppPackage> = Packagex.listPackage(this, excludeSystemApp, excludeSelf)
+inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean): List<AppPackage> = Packagex.list(this, excludeSystemApp, excludeSelf)
 
 
 /**
@@ -146,7 +146,7 @@ inline fun Context.listPackage(excludeSystemApp: Boolean, excludeSelf: Boolean):
  * @param excludeSystemApp If true, exclude yourself exclude system apps
  * @param excludeSelf      If true, exclude yourself
  */
-inline fun Context.getOnePackage(excludeSystemApp: Boolean, excludeSelf: Boolean): AppPackage? = Packagex.getOnePackage(this, excludeSystemApp, excludeSelf)
+inline fun Context.getOnePackage(excludeSystemApp: Boolean, excludeSelf: Boolean): AppPackage? = Packagex.getOne(this, excludeSystemApp, excludeSelf)
 
 
 /**

@@ -105,33 +105,33 @@ class PackagexTest {
     fun testListPackageNameAndVersion() {
         val context = InstrumentationRegistry.getContext()
 
-        val listPairPair = Collectionx.partition(context.listPackageNameAndVersionCode(false, false)) { stringIntegerPair -> context.isSystemAppOr(stringIntegerPair.first, false) }
+        val listPairPair = Collectionx.partition(context.listPackageVersionCodePair(false, false)) { stringIntegerPair -> context.isSystemAppOr(stringIntegerPair.first, false) }
         Assert.assertTrue(!listPairPair.first.isEmpty())
         Assert.assertTrue(!listPairPair.second.isEmpty())
 
-        val listPairPairWithoutSystem = Collectionx.partition(context.listPackageNameAndVersionCode(true, false)) { stringIntegerPair -> context.isSystemAppOr(stringIntegerPair.first, false) }
+        val listPairPairWithoutSystem = Collectionx.partition(context.listPackageVersionCodePair(true, false)) { stringIntegerPair -> context.isSystemAppOr(stringIntegerPair.first, false) }
         Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty())
         Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty())
 
-        Assert.assertNotNull(Collectionx.find(context.listPackageNameAndVersionCode(false, false)) { stringIntegerPair -> stringIntegerPair.first == context.packageName })
+        Assert.assertNotNull(Collectionx.find(context.listPackageVersionCodePair(false, false)) { stringIntegerPair -> stringIntegerPair.first == context.packageName })
 
-        Assert.assertNull(Collectionx.find(context.listPackageNameAndVersionCode(false, true)) { stringIntegerPair -> stringIntegerPair.first == context.packageName })
+        Assert.assertNull(Collectionx.find(context.listPackageVersionCodePair(false, true)) { stringIntegerPair -> stringIntegerPair.first == context.packageName })
     }
 
     @Test
     fun testListPackageNameAndVersionMap() {
         val context = InstrumentationRegistry.getContext()
 
-        val listPairPair = context.listPackageNameAndVersionCodeMap(false, false).toList().partition { context.isSystemAppOr(it.first, false) }
+        val listPairPair = context.listPackageVersionCodeMap(false, false).toList().partition { context.isSystemAppOr(it.first, false) }
         Assert.assertTrue(!listPairPair.first.isEmpty())
         Assert.assertTrue(!listPairPair.second.isEmpty())
 
-        val listPairPairWithoutSystem = context.listPackageNameAndVersionCodeMap(true, false).toList().partition { context.isSystemAppOr(it.first, false) }
+        val listPairPairWithoutSystem = context.listPackageVersionCodeMap(true, false).toList().partition { context.isSystemAppOr(it.first, false) }
         Assert.assertTrue(listPairPairWithoutSystem.first.isEmpty())
         Assert.assertTrue(!listPairPairWithoutSystem.second.isEmpty())
 
-        Assert.assertNotNull(context.listPackageNameAndVersionCodeMap(false, false).toList().find { it.first == context.packageName })
-        Assert.assertNull(context.listPackageNameAndVersionCodeMap(false, true).toList().find { it.first == context.packageName })
+        Assert.assertNotNull(context.listPackageVersionCodeMap(false, false).toList().find { it.first == context.packageName })
+        Assert.assertNull(context.listPackageVersionCodeMap(false, true).toList().find { it.first == context.packageName })
     }
 
     @Test
