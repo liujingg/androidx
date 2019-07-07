@@ -45,6 +45,11 @@ inline fun Context.getScreenWidth(): Int = Displayx.getScreenWidth(this)
  */
 inline fun Context.getScreenHeight(): Int = Displayx.getScreenHeight(this)
 
+/**
+ * Get actionBar size
+ */
+inline fun Context.getActionBarSize(): Int = Displayx.getActionBarSize(this)
+
 
 /**
  * Get DisplayMetrics

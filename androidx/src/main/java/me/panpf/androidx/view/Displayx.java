@@ -22,10 +22,10 @@ import android.content.res.Resources;
 import android.graphics.Point;
 import android.os.Build;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewConfiguration;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import me.panpf.androidx.content.Contextx;
@@ -77,6 +77,18 @@ public class Displayx {
         Point point = new Point();
         Contextx.windowManager(context).getDefaultDisplay().getSize(point);
         return point.y;
+    }
+
+    /**
+     * Get actionBar size
+     */
+    public static int getActionBarSize(@NonNull Context context) {
+        TypedValue tv = new TypedValue();
+        if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            return TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+        } else {
+            return 0;
+        }
     }
 
 

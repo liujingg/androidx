@@ -20,6 +20,7 @@ package me.panpf.androidxkt.test.view
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.TypedValue
 import android.view.Surface
 import android.view.View
 import androidx.test.InstrumentationRegistry
@@ -59,6 +60,19 @@ class DisplayxTest {
 
         Assert.assertEquals(point.x.toLong(), context.getScreenWidth().toLong())
         Assert.assertEquals(point.y.toLong(), context.getScreenHeight().toLong())
+    }
+
+    @Test
+    fun testGetActionBarSize() {
+        val context = InstrumentationRegistry.getContext()
+        val tv = TypedValue()
+        val actonBarSize: Int = if (context.theme.resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            TypedValue.complexToDimensionPixelSize(tv.data, context.resources.displayMetrics)
+        } else {
+            0
+        }
+
+        Assert.assertEquals(actonBarSize.toLong(), context.getActionBarSize().toLong())
     }
 
     @Test

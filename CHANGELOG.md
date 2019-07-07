@@ -9,6 +9,9 @@ Removed
 Rename
 * :fire: Activityx start(*, Class<? extends Activity>) method rename to startByClass(*, Class<? extends Activity>)
 
+New
+* :sparkles: Displayx adds getActionBarSize() method
+
 ## v1.0.0-alpha3
 
 Behavior change:

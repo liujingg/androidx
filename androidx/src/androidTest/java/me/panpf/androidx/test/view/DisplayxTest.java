@@ -20,21 +20,23 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.TypedValue;
 import android.view.Surface;
 import android.view.View;
-
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.test.InstrumentationRegistry;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
+
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.test.R;
 import me.panpf.androidx.view.Displayx;
@@ -67,6 +69,20 @@ public class DisplayxTest {
 
         Assert.assertEquals(point.x, Displayx.getScreenWidth(context));
         Assert.assertEquals(point.y, Displayx.getScreenHeight(context));
+    }
+
+    @Test
+    public void testGetActionBarSize() {
+        Context context = InstrumentationRegistry.getContext();
+        TypedValue tv = new TypedValue();
+        int actonBarSize;
+        if (context.getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actonBarSize = TypedValue.complexToDimensionPixelSize(tv.data, context.getResources().getDisplayMetrics());
+        } else {
+            actonBarSize = 0;
+        }
+
+        Assert.assertEquals(actonBarSize, Displayx.getActionBarSize(context));
     }
 
     @Test
