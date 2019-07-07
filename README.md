@@ -110,7 +110,7 @@ Dependencies:
 * Drawable: [Drawablex.java] ([Test][DrawablexTest.java]) | [Drawablex.kt] ([Test][DrawablexTest.kt])
     * toBitmapWithIntrinsicSize, toBitmapWithBoundsSize, changeColor, changeResDrawableColor
 * Bitmap: [Bitmapx.java] ([Test][BitmapxTest.java]) | [Bitmapx.kt] ([Test][BitmapxTest.kt])
-    * centerCrop, centerCropTo, circular, circularTo, tint, createByColor, toByteArray,
+    * crop, cropTo, centerCrop, centerCropTo, circular, circularTo, tint, createByColor, toByteArray,
     * writeToFile, readBitmap, toDrawable, use, calculateSamplingSize, calculateSamplingSizeForRegion
 * Image: [Imagex.java] ([Test][ImagexTest.java]) | [Imagex.kt] ([Test][ImagexTest.kt])
     * getMimeType, getMimeSubType

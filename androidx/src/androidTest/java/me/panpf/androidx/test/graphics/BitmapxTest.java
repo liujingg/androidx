@@ -24,6 +24,9 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -34,8 +37,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.graphics.Bitmapx;
 import me.panpf.androidx.graphics.Colorx;
@@ -277,6 +278,29 @@ public class BitmapxTest {
 
         Bitmap circular5Bitmap = Bitmapx.circularTo(rectBitmap, Bitmap.createBitmap(rectBitmap.getHeight() / 2, rectBitmap.getHeight() / 2, Bitmap.Config.RGB_565));
         circular5Bitmap.recycle();
+
+        rectBitmap.recycle();
+    }
+
+    @Test
+    public void testCrop() {
+        Context context = InstrumentationRegistry.getContext();
+
+        Bitmap rectBitmap = Premisex.requireNotNull(Bitmapx.readBitmap(context.getResources(), me.panpf.androidx.test.R.drawable.rect));
+        Rect srcRect = new Rect(0, 0, rectBitmap.getWidth() / 2, rectBitmap.getHeight() / 2);
+
+        Bitmap centerCrop1Bitmap = Bitmapx.crop(rectBitmap, srcRect);
+        centerCrop1Bitmap.recycle();
+
+        Bitmap smallDstBitmap = Bitmapx.cropTo(rectBitmap, srcRect, Bitmap.createBitmap(srcRect.width() / 2, srcRect.height() / 2, Bitmap.Config.ARGB_8888));
+        smallDstBitmap.recycle();
+
+        try {
+            Bitmapx.cropTo(rectBitmap, srcRect, Bitmap.createBitmap(srcRect.width() / 2, srcRect.height() / 2 + 10, Bitmap.Config.ARGB_8888));
+            Assert.fail("No Exception");
+        } catch (Exception ignored) {
+
+        }
 
         rectBitmap.recycle();
     }

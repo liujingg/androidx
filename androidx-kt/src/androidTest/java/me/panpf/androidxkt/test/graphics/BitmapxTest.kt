@@ -19,6 +19,7 @@ package me.panpf.androidxkt.test.graphics
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
+import android.graphics.Rect
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.graphics.Bitmapx
@@ -225,7 +226,7 @@ class BitmapxTest {
     fun testCircular() {
         val context = InstrumentationRegistry.getContext()
 
-        val rectBitmap = context.resources.readBitmap(me.panpf.androidxkt.test.R.drawable.rect).requireNotNull()
+        val rectBitmap = context.resources.readBitmap(R.drawable.rect).requireNotNull()
 
         val circular1Bitmap = rectBitmap.circular()
         circular1Bitmap.recycle()
@@ -246,10 +247,33 @@ class BitmapxTest {
     }
 
     @Test
+    fun testCrop() {
+        val context = InstrumentationRegistry.getContext()
+
+        val rectBitmap = context.resources.readBitmap(R.drawable.rect).requireNotNull()
+        val srcRect = Rect(0, 0, rectBitmap.width / 2, rectBitmap.height / 2)
+
+        val centerCrop1Bitmap = rectBitmap.crop(srcRect)
+        centerCrop1Bitmap.recycle()
+
+        val smallDstBitmap = rectBitmap.cropTo(srcRect, Bitmap.createBitmap(srcRect.width() / 2, srcRect.height() / 2, Bitmap.Config.ARGB_8888))
+        smallDstBitmap.recycle()
+
+        try {
+            rectBitmap.cropTo(srcRect, Bitmap.createBitmap(srcRect.width() / 2, srcRect.height() / 2 + 10, Bitmap.Config.ARGB_8888))
+            Assert.fail("No Exception")
+        } catch (ignored: Exception) {
+
+        }
+
+        rectBitmap.recycle()
+    }
+
+    @Test
     fun testCenterCrop() {
         val context = InstrumentationRegistry.getContext()
 
-        val rectBitmap = context.resources.readBitmap(me.panpf.androidxkt.test.R.drawable.rect).requireNotNull()
+        val rectBitmap = context.resources.readBitmap(R.drawable.rect).requireNotNull()
 
         val centerCrop1Bitmap = rectBitmap.centerCrop(rectBitmap.height / 2, rectBitmap.height)
         centerCrop1Bitmap.recycle()
@@ -267,7 +291,7 @@ class BitmapxTest {
     fun testTint() {
         val context = InstrumentationRegistry.getContext()
 
-        val operaBitmap = context.resources.readBitmap(me.panpf.androidxkt.test.R.drawable.ic_opera).requireNotNull()
+        val operaBitmap = context.resources.readBitmap(R.drawable.ic_opera).requireNotNull()
 
         val centerCrop1Bitmap = operaBitmap.tint(Colorx.YELLOW)
         centerCrop1Bitmap.recycle()

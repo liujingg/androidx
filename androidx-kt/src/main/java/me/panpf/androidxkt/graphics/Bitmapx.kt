@@ -136,53 +136,69 @@ inline fun Bitmap.toDrawable(resources: Resources): BitmapDrawable = Bitmapx.toD
 inline fun Bitmap.toDrawable(): BitmapDrawable = Bitmapx.toDrawable(this)
 
 
-/* ************************************** process ******************************************  */
+/* ************************************** circular ******************************************  */
 
 
 /**
- * Change to circular Bitmap
+ * Change to circular bitmap
  */
 inline fun Bitmap.circularTo(dstBitmap: Bitmap): Bitmap = Bitmapx.circularTo(this, dstBitmap)
 
 /**
- * Change to circular Bitmap
+ * Change to circular bitmap
  */
 inline fun Bitmap.circular(newSize: Int, config: Bitmap.Config): Bitmap = Bitmapx.circular(this, newSize, config)
 
 /**
- * Change to circular Bitmap
+ * Change to circular bitmap
  */
 inline fun Bitmap.circular(newSize: Int): Bitmap = Bitmapx.circular(this, newSize)
 
 /**
- * Change to circular Bitmap
+ * Change to circular bitmap
  */
 inline fun Bitmap.circular(config: Bitmap.Config): Bitmap = Bitmapx.circular(this, config)
 
 /**
- * Change to circular Bitmap
+ * Change to circular bitmap
  */
 inline fun Bitmap.circular(): Bitmap = Bitmapx.circular(this)
 
 
+/* ************************************** crop ******************************************  */
+
+
 /**
- * Zoom in and then center cropped Bitmap
+ * Crop bitmap by the srcRect
+ */
+inline fun Bitmap.crop(srcRect: Rect): Bitmap = Bitmapx.crop(this, srcRect)
+
+/**
+ * Crop bitmap by the srcRect, and return dstBitmap
+ */
+inline fun Bitmap.cropTo(srcRect: Rect, dstBitmap: Bitmap): Bitmap = Bitmapx.cropTo(this, srcRect, dstBitmap)
+
+/**
+ * Zoom in and then center cropped bitmap
  */
 inline fun Bitmap.centerCropTo(dstBitmap: Bitmap): Bitmap = Bitmapx.centerCropTo(this, dstBitmap)
 
 /**
- * Zoom in and then center cropped Bitmap
+ * Zoom in and then center cropped bitmap
  */
 inline fun Bitmap.centerCrop(newWidth: Int, newHeight: Int, config: Bitmap.Config): Bitmap = Bitmapx.centerCrop(this, newWidth, newHeight, config)
 
 /**
- * Zoom in and then center cropped Bitmap
+ * Zoom in and then center cropped bitmap
  */
 inline fun Bitmap.centerCrop(newWidth: Int, newHeight: Int): Bitmap = Bitmapx.centerCrop(this, newWidth, newHeight)
 
 
+/* ************************************** tint ******************************************  */
+
+
 /**
- * Change Bitmap color
+ * Change bitmap color
  */
 inline fun Bitmap.tint(@ColorInt color: Int): Bitmap = Bitmapx.tint(this, color)
 

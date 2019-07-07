@@ -29,6 +29,11 @@ import android.graphics.drawable.BitmapDrawable;
 import android.util.TypedValue;
 import android.widget.ImageView;
 
+import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -37,12 +42,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import androidx.annotation.ColorInt;
-import androidx.annotation.DrawableRes;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import me.panpf.javax.io.Filex;
 import me.panpf.javax.io.Streamx;
+import me.panpf.javax.lang.Mathx;
 
 public class Bitmapx {
 
@@ -198,7 +200,6 @@ public class Bitmapx {
         try {
             bitmap.compress(format, quality, bos);
         } finally {
-            //noinspection ResultOfMethodCallIgnored
             Streamx.closeQuietly(bos);
         }
     }
@@ -240,11 +241,11 @@ public class Bitmapx {
     }
 
 
-    /* ************************************** process ******************************************  */
+    /* ************************************** circular ******************************************  */
 
 
     /**
-     * Change to circular Bitmap
+     * Change to circular bitmap
      */
     @NonNull
     public static Bitmap circularTo(@NonNull Bitmap srcBitmap, @NonNull Bitmap dstBitmap) {
@@ -267,7 +268,7 @@ public class Bitmapx {
     }
 
     /**
-     * Change to circular Bitmap
+     * Change to circular bitmap
      */
     @NonNull
     public static Bitmap circular(@NonNull Bitmap srcBitmap, int newSize, @NonNull Bitmap.Config config) {
@@ -275,7 +276,7 @@ public class Bitmapx {
     }
 
     /**
-     * Change to circular Bitmap
+     * Change to circular bitmap
      */
     @NonNull
     public static Bitmap circular(@NonNull Bitmap srcBitmap, int newSize) {
@@ -283,7 +284,7 @@ public class Bitmapx {
     }
 
     /**
-     * Change to circular Bitmap
+     * Change to circular bitmap
      */
     @NonNull
     public static Bitmap circular(@NonNull Bitmap srcBitmap, @NonNull Bitmap.Config config) {
@@ -292,7 +293,7 @@ public class Bitmapx {
     }
 
     /**
-     * Change to circular Bitmap
+     * Change to circular bitmap
      */
     @NonNull
     public static Bitmap circular(@NonNull Bitmap srcBitmap) {
@@ -300,8 +301,34 @@ public class Bitmapx {
     }
 
 
+    /* ************************************** crop ******************************************  */
+
+
     /**
-     * Zoom in and then center cropped Bitmap
+     * Crop bitmap by the srcRect
+     */
+    @NonNull
+    public static Bitmap crop(@NonNull Bitmap srcBitmap, @NonNull Rect srcRect) {
+        return Bitmap.createBitmap(srcBitmap, srcRect.left, srcRect.top, srcRect.width(), srcRect.height());
+    }
+
+    /**
+     * Crop bitmap by the srcRect, and return dstBitmap
+     */
+    @NonNull
+    public static Bitmap cropTo(@NonNull Bitmap srcBitmap, @NonNull Rect srcRect, @NonNull Bitmap dstBitmap) {
+        if (Mathx.scale((float) srcRect.width() / srcRect.height(), 1) != Mathx.scale((float) dstBitmap.getWidth() / dstBitmap.getHeight(), 1)) {
+            throw new IllegalArgumentException(String.format("srcRect is inconsistent with dstBitmap's aspect ratio. srcRect=%s, dstBitmap=%dx%d",
+                    srcRect.toShortString(), dstBitmap.getWidth(), dstBitmap.getHeight()));
+        }
+        Paint paint = new Paint();
+        Canvas canvas = new Canvas(dstBitmap);
+        canvas.drawBitmap(srcBitmap, srcRect, new Rect(0, 0, dstBitmap.getWidth(), dstBitmap.getHeight()), paint);
+        return dstBitmap;
+    }
+
+    /**
+     * Zoom in and then center cropped bitmap
      */
     @NonNull
     public static Bitmap centerCropTo(@NonNull Bitmap srcBitmap, @NonNull Bitmap dstBitmap) {
@@ -316,7 +343,7 @@ public class Bitmapx {
     }
 
     /**
-     * Zoom in and then center cropped Bitmap
+     * Zoom in and then center cropped bitmap
      */
     @NonNull
     public static Bitmap centerCrop(@NonNull Bitmap srcBitmap, int newWidth, int newHeight, @NonNull Bitmap.Config config) {
@@ -324,7 +351,7 @@ public class Bitmapx {
     }
 
     /**
-     * Zoom in and then center cropped Bitmap
+     * Zoom in and then center cropped bitmap
      */
     @NonNull
     public static Bitmap centerCrop(@NonNull Bitmap srcBitmap, int newWidth, int newHeight) {
@@ -332,8 +359,11 @@ public class Bitmapx {
     }
 
 
+    /* ************************************** tint ******************************************  */
+
+
     /**
-     * Change Bitmap color
+     * Change bitmap color
      */
     @NonNull
     public static Bitmap tint(@NonNull Bitmap srcBitmap, @ColorInt int color) {
