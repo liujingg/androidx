@@ -6,6 +6,9 @@ Upgrade
 Removed
 * :fire: Remove the Jsonx related code, which is now a standalone project: https://github.com/panpf/jsonx
 
+Rename
+* :fire: Activityx start(*, Class<? extends Activity>) method rename to startByClass(*, Class<? extends Activity>)
+
 ## v1.0.0-alpha3
 
 Behavior change:

@@ -23,11 +23,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,6 +31,12 @@ import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Activityx;
 import me.panpf.androidx.content.Contextx;
@@ -215,21 +216,21 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(activity, TestActivity.class, null);
+            Activityx.startByClass(activity, TestActivity.class, null);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity, TestActivity.class);
+            Activityx.startByClass(activity, TestActivity.class);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(Contextx.appContext(activity), NoRegisterTestActivity.class);
+            Activityx.startByClass(Contextx.appContext(activity), NoRegisterTestActivity.class);
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -255,21 +256,21 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(activity.getFragment(), TestActivity.class, null);
+            Activityx.startByClass(activity.getFragment(), TestActivity.class, null);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getFragment(), TestActivity.class);
+            Activityx.startByClass(activity.getFragment(), TestActivity.class);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getFragment(), NoRegisterTestActivity.class);
+            Activityx.startByClass(activity.getFragment(), NoRegisterTestActivity.class);
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -295,21 +296,21 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(activity.getFragment(), TestActivity.class, null);
+            Activityx.startByClass(activity.getFragment(), TestActivity.class, null);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getFragment(), TestActivity.class);
+            Activityx.startByClass(activity.getFragment(), TestActivity.class);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getFragment(), NoRegisterTestActivity.class);
+            Activityx.startByClass(activity.getFragment(), NoRegisterTestActivity.class);
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -335,21 +336,21 @@ public class ActivityxTest {
         }
 
         try {
-            Activityx.start(activity.getView(), TestActivity.class, null);
+            Activityx.startByClass(activity.getView(), TestActivity.class, null);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getView(), TestActivity.class);
+            Activityx.startByClass(activity.getView(), TestActivity.class);
         } catch (Exception e) {
             e.printStackTrace();
             Assert.fail(Throwablex.stackTraceToString(e));
         }
 
         try {
-            Activityx.start(activity.getView(), NoRegisterTestActivity.class);
+            Activityx.startByClass(activity.getView(), NoRegisterTestActivity.class);
             Assert.fail();
         } catch (Exception e) {
             e.printStackTrace();
@@ -362,9 +363,9 @@ public class ActivityxTest {
 
         Assert.assertTrue(Activityx.safeStart(activity, new Intent(activity, TestActivity.class)));
         Assert.assertFalse(Activityx.safeStart(Contextx.appContext(activity), new Intent(activity, ActivityxTest.class)));
-        Assert.assertTrue(Activityx.safeStart(activity, TestActivity.class, null));
-        Assert.assertTrue(Activityx.safeStart(activity, TestActivity.class));
-        Assert.assertFalse(Activityx.safeStart(Contextx.appContext(activity), NoRegisterTestActivity.class));
+        Assert.assertTrue(Activityx.safeStartByClass(activity, TestActivity.class, null));
+        Assert.assertTrue(Activityx.safeStartByClass(activity, TestActivity.class));
+        Assert.assertFalse(Activityx.safeStartByClass(Contextx.appContext(activity), NoRegisterTestActivity.class));
     }
 
     @Test
@@ -373,9 +374,9 @@ public class ActivityxTest {
 
         Assert.assertTrue(Activityx.safeStart(activity.getFragment(), new Intent(activity, TestActivity.class)));
         Assert.assertFalse(Activityx.safeStart(activity.getFragment(), new Intent(activity, ActivityxTest.class)));
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), TestActivity.class, null));
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), TestActivity.class));
-        Assert.assertFalse(Activityx.safeStart(activity.getFragment(), NoRegisterTestActivity.class));
+        Assert.assertTrue(Activityx.safeStartByClass(activity.getFragment(), TestActivity.class, null));
+        Assert.assertTrue(Activityx.safeStartByClass(activity.getFragment(), TestActivity.class));
+        Assert.assertFalse(Activityx.safeStartByClass(activity.getFragment(), NoRegisterTestActivity.class));
     }
 
     @Test
@@ -384,9 +385,9 @@ public class ActivityxTest {
 
         Assert.assertTrue(Activityx.safeStart(activity.getFragment(), new Intent(activity, TestActivity.class)));
         Assert.assertFalse(Activityx.safeStart(activity.getFragment(), new Intent(activity, ActivityxTest.class)));
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), TestActivity.class, null));
-        Assert.assertTrue(Activityx.safeStart(activity.getFragment(), TestActivity.class));
-        Assert.assertFalse(Activityx.safeStart(activity.getFragment(), NoRegisterTestActivity.class));
+        Assert.assertTrue(Activityx.safeStartByClass(activity.getFragment(), TestActivity.class, null));
+        Assert.assertTrue(Activityx.safeStartByClass(activity.getFragment(), TestActivity.class));
+        Assert.assertFalse(Activityx.safeStartByClass(activity.getFragment(), NoRegisterTestActivity.class));
     }
 
     @Test
@@ -395,9 +396,9 @@ public class ActivityxTest {
 
         Assert.assertTrue(Activityx.safeStart(activity.getView(), new Intent(activity, TestActivity.class)));
         Assert.assertFalse(Activityx.safeStart(activity.getView(), new Intent(activity, ActivityxTest.class)));
-        Assert.assertTrue(Activityx.safeStart(activity.getView(), TestActivity.class, null));
-        Assert.assertTrue(Activityx.safeStart(activity.getView(), TestActivity.class));
-        Assert.assertFalse(Activityx.safeStart(activity.getView(), NoRegisterTestActivity.class));
+        Assert.assertTrue(Activityx.safeStartByClass(activity.getView(), TestActivity.class, null));
+        Assert.assertTrue(Activityx.safeStartByClass(activity.getView(), TestActivity.class));
+        Assert.assertFalse(Activityx.safeStartByClass(activity.getView(), NoRegisterTestActivity.class));
     }
 
     public interface ImplTestInterface {

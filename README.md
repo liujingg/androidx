@@ -55,7 +55,7 @@ Dependencies:
 ### app
 * Activity: [Activityx.java] ([Test][ActivityxTest.java]) | [Activityx.kt] ([Test][ActivityxTest.kt])
     * isDestroyedCompat, convertToTranslucentCompat, convertFromTranslucentCompat, getImplWithParent
-    * appContext, canStart, start, safeStart
+    * appContext, canStart, start, startByClass, safeStart, safeStartByClass
 * Args: [Argsx.java] ([Test][ArgsxTest.java]) | [Argsx.kt] ([Test][ArgsxTest.kt])
     * read\*Arg, read\*ArgOr, read\*UriArg, read\*UriArgOr, read\*IntentUriArg, read\*IntentUriArgOr,
     * read\*UriIntentArg, read\*UriIntentArgOr

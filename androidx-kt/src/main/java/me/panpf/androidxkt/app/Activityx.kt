@@ -93,42 +93,43 @@ inline fun View.startActivity(intent: Intent) = Activityx.start(this, intent)
 /**
  * Start the activity of the specified Class
  */
-inline fun Context.startActivity(clazz: Class<out Activity>, args: Bundle?) = Activityx.start(this, clazz, args)
+// TODO: 2019-05-26 改名为 startByClass
+inline fun Context.startActivityByClass(clazz: Class<out Activity>, args: Bundle?) = Activityx.startByClass(this, clazz, args)
 
 /**
  * Start the activity of the specified Class
  */
-inline fun Context.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+inline fun Context.startActivityByClass(clazz: Class<out Activity>) = Activityx.startByClass(this, clazz)
 
 /**
  * Start the activity of the specified Class
  */
-inline fun androidx.fragment.app.Fragment.startActivity(clazz: Class<out Activity>, args: Bundle?) = Activityx.start(this, clazz, args)
+inline fun androidx.fragment.app.Fragment.startActivityByClass(clazz: Class<out Activity>, args: Bundle?) = Activityx.startByClass(this, clazz, args)
 
 /**
  * Start the activity of the specified Class
  */
-inline fun androidx.fragment.app.Fragment.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+inline fun androidx.fragment.app.Fragment.startActivityByClass(clazz: Class<out Activity>) = Activityx.startByClass(this, clazz)
 
 /**
  * Start the activity of the specified Class
  */
-inline fun android.app.Fragment.startActivity(clazz: Class<out Activity>, args: Bundle?) = Activityx.start(this, clazz, args)
+inline fun android.app.Fragment.startActivityByClass(clazz: Class<out Activity>, args: Bundle?) = Activityx.startByClass(this, clazz, args)
 
 /**
  * Start the activity of the specified Class
  */
-inline fun android.app.Fragment.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+inline fun android.app.Fragment.startActivityByClass(clazz: Class<out Activity>) = Activityx.startByClass(this, clazz)
 
 /**
  * Start the activity of the specified Class
  */
-inline fun View.startActivity(clazz: Class<out Activity>, args: Bundle?) = Activityx.start(this, clazz, args)
+inline fun View.startActivityByClass(clazz: Class<out Activity>, args: Bundle?) = Activityx.startByClass(this, clazz, args)
 
 /**
  * Start the activity of the specified Class
  */
-inline fun View.startActivity(clazz: Class<out Activity>) = Activityx.start(this, clazz)
+inline fun View.startActivityByClass(clazz: Class<out Activity>) = Activityx.startByClass(this, clazz)
 
 
 /* ************************************* safeStart ***************************************** */
@@ -158,39 +159,39 @@ inline fun View.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun Context.safeStartActivity(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStart(this, clazz, args)
+inline fun Context.safeStartActivityByClass(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStartByClass(this, clazz, args)
 
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun Context.safeStartActivity(clazz: Class<out Activity>): Boolean = Activityx.safeStart(this, clazz)
+inline fun Context.safeStartActivityByClass(clazz: Class<out Activity>): Boolean = Activityx.safeStartByClass(this, clazz)
 
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun androidx.fragment.app.Fragment.safeStartActivity(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStart(this, clazz, args)
+inline fun androidx.fragment.app.Fragment.safeStartActivityByClass(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStartByClass(this, clazz, args)
 
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun androidx.fragment.app.Fragment.safeStartActivity(clazz: Class<out Activity>): Boolean = Activityx.safeStart(this, clazz)
+inline fun androidx.fragment.app.Fragment.safeStartActivityByClass(clazz: Class<out Activity>): Boolean = Activityx.safeStartByClass(this, clazz)
 
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun android.app.Fragment.safeStartActivity(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStart(this, clazz, args)
+inline fun android.app.Fragment.safeStartActivityByClass(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStartByClass(this, clazz, args)
 
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun android.app.Fragment.safeStartActivity(clazz: Class<out Activity>): Boolean = Activityx.safeStart(this, clazz)
+inline fun android.app.Fragment.safeStartActivityByClass(clazz: Class<out Activity>): Boolean = Activityx.safeStartByClass(this, clazz)
 
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun View.safeStartActivity(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStart(this, clazz, args)
+inline fun View.safeStartActivityByClass(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStartByClass(this, clazz, args)
 
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun View.safeStartActivity(clazz: Class<out Activity>): Boolean = Activityx.safeStart(this, clazz)
+inline fun View.safeStartActivityByClass(clazz: Class<out Activity>): Boolean = Activityx.safeStartByClass(this, clazz)

@@ -186,21 +186,21 @@ class ActivityxTest {
         }
 
         try {
-            activity.startActivity(TestActivity::class.java, null)
+            activity.startActivityByClass(TestActivity::class.java, null)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.startActivity(TestActivity::class.java)
+            activity.startActivityByClass(TestActivity::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.appContext().startActivity(NoRegisterTestActivity::class.java)
+            activity.appContext().startActivityByClass(NoRegisterTestActivity::class.java)
             Assert.fail()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -226,21 +226,21 @@ class ActivityxTest {
         }
 
         try {
-            activity.getFragment().startActivity(TestActivity::class.java, null)
+            activity.getFragment().startActivityByClass(TestActivity::class.java, null)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getFragment().startActivity(TestActivity::class.java)
+            activity.getFragment().startActivityByClass(TestActivity::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getFragment().startActivity(NoRegisterTestActivity::class.java)
+            activity.getFragment().startActivityByClass(NoRegisterTestActivity::class.java)
             Assert.fail()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -267,21 +267,21 @@ class ActivityxTest {
         }
 
         try {
-            activity.getFragment().startActivity(TestActivity::class.java, null)
+            activity.getFragment().startActivityByClass(TestActivity::class.java, null)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getFragment().startActivity(TestActivity::class.java)
+            activity.getFragment().startActivityByClass(TestActivity::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getFragment().startActivity(NoRegisterTestActivity::class.java)
+            activity.getFragment().startActivityByClass(NoRegisterTestActivity::class.java)
             Assert.fail()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -308,21 +308,21 @@ class ActivityxTest {
         }
 
         try {
-            activity.getView().startActivity(TestActivity::class.java, null)
+            activity.getView().startActivityByClass(TestActivity::class.java, null)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getView().startActivity(TestActivity::class.java)
+            activity.getView().startActivityByClass(TestActivity::class.java)
         } catch (e: Exception) {
             e.printStackTrace()
             Assert.fail(Throwablex.stackTraceToString(e))
         }
 
         try {
-            activity.getView().startActivity(NoRegisterTestActivity::class.java)
+            activity.getView().startActivityByClass(NoRegisterTestActivity::class.java)
             Assert.fail()
         } catch (e: Exception) {
             e.printStackTrace()
@@ -335,9 +335,9 @@ class ActivityxTest {
 
         Assert.assertTrue(activity.safeStartActivity(Intent(activity, TestActivity::class.java)))
         Assert.assertFalse(activity.appContext().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
-        Assert.assertTrue(activity.safeStartActivity(TestActivity::class.java, null))
-        Assert.assertTrue(activity.safeStartActivity(TestActivity::class.java))
-        Assert.assertFalse(activity.appContext().safeStartActivity(NoRegisterTestActivity::class.java))
+        Assert.assertTrue(activity.safeStartActivityByClass(TestActivity::class.java, null))
+        Assert.assertTrue(activity.safeStartActivityByClass(TestActivity::class.java))
+        Assert.assertFalse(activity.appContext().safeStartActivityByClass(NoRegisterTestActivity::class.java))
     }
 
     @Test
@@ -346,9 +346,9 @@ class ActivityxTest {
 
         Assert.assertTrue(activity.getFragment().safeStartActivity(Intent(activity, TestActivity::class.java)))
         Assert.assertFalse(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
-        Assert.assertTrue(activity.getFragment().safeStartActivity(TestActivity::class.java, null))
-        Assert.assertTrue(activity.getFragment().safeStartActivity(TestActivity::class.java))
-        Assert.assertFalse(activity.getFragment().safeStartActivity(NoRegisterTestActivity::class.java))
+        Assert.assertTrue(activity.getFragment().safeStartActivityByClass(TestActivity::class.java, null))
+        Assert.assertTrue(activity.getFragment().safeStartActivityByClass(TestActivity::class.java))
+        Assert.assertFalse(activity.getFragment().safeStartActivityByClass(NoRegisterTestActivity::class.java))
     }
 
     @Test
@@ -357,9 +357,9 @@ class ActivityxTest {
 
         Assert.assertTrue(activity.getFragment().safeStartActivity(Intent(activity, TestActivity::class.java)))
         Assert.assertFalse(activity.getFragment().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
-        Assert.assertTrue(activity.getFragment().safeStartActivity(TestActivity::class.java, null))
-        Assert.assertTrue(activity.getFragment().safeStartActivity(TestActivity::class.java))
-        Assert.assertFalse(activity.getFragment().safeStartActivity(NoRegisterTestActivity::class.java))
+        Assert.assertTrue(activity.getFragment().safeStartActivityByClass(TestActivity::class.java, null))
+        Assert.assertTrue(activity.getFragment().safeStartActivityByClass(TestActivity::class.java))
+        Assert.assertFalse(activity.getFragment().safeStartActivityByClass(NoRegisterTestActivity::class.java))
     }
 
     @Test
@@ -368,9 +368,9 @@ class ActivityxTest {
 
         Assert.assertTrue(activity.getView().safeStartActivity(Intent(activity, TestActivity::class.java)))
         Assert.assertFalse(activity.getView().safeStartActivity(Intent(activity, ActivityxTest::class.java)))
-        Assert.assertTrue(activity.getView().safeStartActivity(TestActivity::class.java, null))
-        Assert.assertTrue(activity.getView().safeStartActivity(TestActivity::class.java))
-        Assert.assertFalse(activity.getView().safeStartActivity(NoRegisterTestActivity::class.java))
+        Assert.assertTrue(activity.getView().safeStartActivityByClass(TestActivity::class.java, null))
+        Assert.assertTrue(activity.getView().safeStartActivityByClass(TestActivity::class.java))
+        Assert.assertFalse(activity.getView().safeStartActivityByClass(NoRegisterTestActivity::class.java))
     }
 
     interface ImplTestInterface
