@@ -93,7 +93,6 @@ inline fun View.startActivity(intent: Intent) = Activityx.start(this, intent)
 /**
  * Start the activity of the specified Class
  */
-// TODO: 2019-05-26 改名为 startByClass
 inline fun Context.startActivityByClass(clazz: Class<out Activity>, args: Bundle?) = Activityx.startByClass(this, clazz, args)
 
 /**
