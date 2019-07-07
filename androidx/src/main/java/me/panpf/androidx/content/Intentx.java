@@ -162,7 +162,7 @@ public class Intentx {
      * Create an Intent that opens the specified app install page
      */
     @NonNull
-    @RequiresPermission(Manifest.permission.REQUEST_INSTALL_PACKAGES)
+    @RequiresPermission(value = Manifest.permission.REQUEST_INSTALL_PACKAGES, conditional = true)
     public static Intent createInstallAppIntent(@NonNull Context context, @NonNull File apkFile) {
         return createInstallAppIntent(getShareFileUri(context, apkFile));
     }
@@ -173,7 +173,7 @@ public class Intentx {
      * @param packageName App package name
      */
     @NonNull
-    @RequiresPermission(Manifest.permission.REQUEST_DELETE_PACKAGES)
+    @RequiresPermission(value = Manifest.permission.REQUEST_DELETE_PACKAGES, conditional = true)
     public static Intent createUninstallAppIntent(@NonNull String packageName) {
         return new Intent(Intent.ACTION_DELETE, Uri.fromParts("package", packageName, null));
     }
