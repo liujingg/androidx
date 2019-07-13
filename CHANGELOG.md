@@ -2,6 +2,8 @@
 
 Upgrade
 * :arrow_up: Kotlin upgrade to 1.3.21
+* :arrow_up: Javax upgrade to 1.0.0-alpha3
+* :arrow_up: Fragment upgrade to 1.2.0-alpha01
 
 Removed
 * :fire: Remove the Jsonx related code, which is now a standalone project: https://github.com/panpf/jsonx
@@ -18,6 +20,7 @@ New
 
 Behavior change:
 * :fire: Intentx createInstallAppIntent method add RequiresPermission(REQUEST_INSTALL_PACKAGES) annotated
+* :fire: Fragmentx de isDestroyedCompat method also returns true when the Lifecycle state is INITIALIZED
 
 Update
 * :fire: The excludeSystemApp and excludeSelf parameters of the Package* list*, getOne, count methods are combined into one packageType
