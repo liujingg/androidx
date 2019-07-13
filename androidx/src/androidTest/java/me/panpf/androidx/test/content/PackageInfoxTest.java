@@ -24,13 +24,14 @@ import android.content.pm.PermissionInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
 
-import org.jetbrains.annotations.NotNull;
+import androidx.annotation.NonNull;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.pm.PackageInfox;
 import me.panpf.androidx.test.TestProvider;
 import me.panpf.androidx.test.TestReceiver;
@@ -49,7 +50,7 @@ public class PackageInfoxTest {
 
         ActivityInfo activityInfo1 = PackageInfox.findActivityInfo(context, context.getPackageName(), new Predicate<ActivityInfo>() {
             @Override
-            public boolean accept(@NotNull ActivityInfo activityInfo) {
+            public boolean accept(@NonNull ActivityInfo activityInfo) {
                 return Stringx.equals(activityInfo.name, activityName);
             }
         });
@@ -58,7 +59,7 @@ public class PackageInfoxTest {
 
         ActivityInfo activityInfo2 = PackageInfox.findSelfActivityInfo(context, new Predicate<ActivityInfo>() {
             @Override
-            public boolean accept(@NotNull ActivityInfo activityInfo) {
+            public boolean accept(@NonNull ActivityInfo activityInfo) {
                 return Stringx.equals(activityInfo.name, activityName);
             }
         });
@@ -90,7 +91,7 @@ public class PackageInfoxTest {
 
         ServiceInfo serviceInfo1 = PackageInfox.findServiceInfo(context, context.getPackageName(), new Predicate<ServiceInfo>() {
             @Override
-            public boolean accept(@NotNull ServiceInfo serviceInfo) {
+            public boolean accept(@NonNull ServiceInfo serviceInfo) {
                 return Stringx.equals(serviceInfo.name, serviceName);
             }
         });
@@ -99,7 +100,7 @@ public class PackageInfoxTest {
 
         ServiceInfo serviceInfo2 = PackageInfox.findSelfServiceInfo(context, new Predicate<ServiceInfo>() {
             @Override
-            public boolean accept(@NotNull ServiceInfo serviceInfo) {
+            public boolean accept(@NonNull ServiceInfo serviceInfo) {
                 return Stringx.equals(serviceInfo.name, serviceName);
             }
         });
@@ -131,7 +132,7 @@ public class PackageInfoxTest {
 
         ActivityInfo receiverInfo1 = PackageInfox.findReceiverInfo(context, context.getPackageName(), new Predicate<ActivityInfo>() {
             @Override
-            public boolean accept(@NotNull ActivityInfo receiverInfo) {
+            public boolean accept(@NonNull ActivityInfo receiverInfo) {
                 return Stringx.equals(receiverInfo.name, receiverName);
             }
         });
@@ -140,7 +141,7 @@ public class PackageInfoxTest {
 
         ActivityInfo receiverInfo2 = PackageInfox.findSelfReceiverInfo(context, new Predicate<ActivityInfo>() {
             @Override
-            public boolean accept(@NotNull ActivityInfo receiverInfo) {
+            public boolean accept(@NonNull ActivityInfo receiverInfo) {
                 return Stringx.equals(receiverInfo.name, receiverName);
             }
         });
@@ -172,7 +173,7 @@ public class PackageInfoxTest {
 
         ProviderInfo providerInfo1 = PackageInfox.findProviderInfo(context, context.getPackageName(), new Predicate<ProviderInfo>() {
             @Override
-            public boolean accept(@NotNull ProviderInfo providerInfo) {
+            public boolean accept(@NonNull ProviderInfo providerInfo) {
                 return Stringx.equals(providerInfo.name, providerName);
             }
         });
@@ -181,7 +182,7 @@ public class PackageInfoxTest {
 
         ProviderInfo providerInfo2 = PackageInfox.findSelfProviderInfo(context, new Predicate<ProviderInfo>() {
             @Override
-            public boolean accept(@NotNull ProviderInfo providerInfo) {
+            public boolean accept(@NonNull ProviderInfo providerInfo) {
                 return Stringx.equals(providerInfo.name, providerName);
             }
         });
@@ -213,7 +214,7 @@ public class PackageInfoxTest {
 
         PermissionInfo permissionInfo1 = PackageInfox.findPermissionInfo(context, context.getPackageName(), new Predicate<PermissionInfo>() {
             @Override
-            public boolean accept(@NotNull PermissionInfo permissionInfo) {
+            public boolean accept(@NonNull PermissionInfo permissionInfo) {
                 return Stringx.equals(permissionInfo.name, permissionName);
             }
         });
@@ -222,7 +223,7 @@ public class PackageInfoxTest {
 
         PermissionInfo permissionInfo2 = PackageInfox.findSelfPermissionInfo(context, new Predicate<PermissionInfo>() {
             @Override
-            public boolean accept(@NotNull PermissionInfo permissionInfo) {
+            public boolean accept(@NonNull PermissionInfo permissionInfo) {
                 return Stringx.equals(permissionInfo.name, permissionName);
             }
         });
@@ -254,7 +255,7 @@ public class PackageInfoxTest {
 
         String requestedPermission1 = PackageInfox.findRequestedPermission(context, context.getPackageName(), new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String requestedPermission) {
+            public boolean accept(@NonNull String requestedPermission) {
                 return Stringx.equals(requestedPermission, requestedPermissionName);
             }
         });
@@ -263,7 +264,7 @@ public class PackageInfoxTest {
 
         String requestedPermission2 = PackageInfox.findSelfRequestedPermission(context, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String requestedPermission) {
+            public boolean accept(@NonNull String requestedPermission) {
                 return Stringx.equals(requestedPermission, requestedPermissionName);
             }
         });
@@ -296,7 +297,7 @@ public class PackageInfoxTest {
 
         Pair<String, String> metaData1 = PackageInfox.findMetaDataWithName(context, context.getPackageName(), new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Stringx.equals(s, metaDataName);
             }
         });
@@ -305,7 +306,7 @@ public class PackageInfoxTest {
 
         Pair<String, String> metaData2 = PackageInfox.findSelfMetaDataWithName(context, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Stringx.equals(s, metaDataName);
             }
         });
@@ -338,7 +339,7 @@ public class PackageInfoxTest {
 
         Pair<String, String> metaData1 = PackageInfox.findMetaDataWithValue(context, context.getPackageName(), new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Stringx.equals(s, metaDataValue);
             }
         });
@@ -347,7 +348,7 @@ public class PackageInfoxTest {
 
         Pair<String, String> metaData2 = PackageInfox.findSelfMetaDataWithValue(context, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Stringx.equals(s, metaDataValue);
             }
         });

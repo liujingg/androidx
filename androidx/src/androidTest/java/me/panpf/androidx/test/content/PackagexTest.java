@@ -21,10 +21,10 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
-import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -95,7 +95,7 @@ public class PackagexTest {
 
         AppPackage systemAppPackage = Premisex.requireNotNull(Packagex.get(context, Premisex.requireNotNull(Collectionx.find(Packagex.list(context, PackageType.ALL_AND_EXCLUDE_SELF), new Predicate<AppPackage>() {
             @Override
-            public boolean accept(@NotNull AppPackage appPackage) {
+            public boolean accept(@NonNull AppPackage appPackage) {
                 return appPackage.systemApp;
             }
         })).packageName));
@@ -110,7 +110,7 @@ public class PackagexTest {
 
         String systemAppPackageName = Premisex.requireNotNull(Collectionx.find(Packagex.list(context, PackageType.ALL_AND_EXCLUDE_SELF), new Predicate<AppPackage>() {
             @Override
-            public boolean accept(@NotNull AppPackage appPackage) {
+            public boolean accept(@NonNull AppPackage appPackage) {
                 return appPackage.systemApp;
             }
         })).packageName;
@@ -128,19 +128,19 @@ public class PackagexTest {
         final String selfPackageName = context.getPackageName();
         final Predicate<Pair<String, Integer>> selfPredicate = new Predicate<Pair<String, Integer>>() {
             @Override
-            public boolean accept(@NotNull Pair<String, Integer> stringIntegerPair) {
+            public boolean accept(@NonNull Pair<String, Integer> stringIntegerPair) {
                 return stringIntegerPair.first.equals(selfPackageName);
             }
         };
         final Predicate<Pair<String, Integer>> systemAppPredicate = new Predicate<Pair<String, Integer>>() {
             @Override
-            public boolean accept(@NotNull Pair<String, Integer> stringIntegerPair) {
+            public boolean accept(@NonNull Pair<String, Integer> stringIntegerPair) {
                 return Packagex.isSystemAppOr(context, stringIntegerPair.first, false);
             }
         };
         final Predicate<Pair<String, Integer>> userAppPredicate = new Predicate<Pair<String, Integer>>() {
             @Override
-            public boolean accept(@NotNull Pair<String, Integer> stringIntegerPair) {
+            public boolean accept(@NonNull Pair<String, Integer> stringIntegerPair) {
                 return !Packagex.isSystemAppOr(context, stringIntegerPair.first, false);
             }
         };
@@ -221,19 +221,19 @@ public class PackagexTest {
         final String selfPackageName = context.getPackageName();
         final Predicate<Map.Entry<String, Integer>> selfPredicate = new Predicate<Map.Entry<String, Integer>>() {
             @Override
-            public boolean accept(@NotNull Map.Entry<String, Integer> stringIntegerPair) {
+            public boolean accept(@NonNull Map.Entry<String, Integer> stringIntegerPair) {
                 return stringIntegerPair.getKey().equals(selfPackageName);
             }
         };
         final Predicate<Map.Entry<String, Integer>> systemAppPredicate = new Predicate<Map.Entry<String, Integer>>() {
             @Override
-            public boolean accept(@NotNull Map.Entry<String, Integer> stringIntegerPair) {
+            public boolean accept(@NonNull Map.Entry<String, Integer> stringIntegerPair) {
                 return Packagex.isSystemAppOr(context, stringIntegerPair.getKey(), false);
             }
         };
         final Predicate<Map.Entry<String, Integer>> userAppPredicate = new Predicate<Map.Entry<String, Integer>>() {
             @Override
-            public boolean accept(@NotNull Map.Entry<String, Integer> stringIntegerPair) {
+            public boolean accept(@NonNull Map.Entry<String, Integer> stringIntegerPair) {
                 return !Packagex.isSystemAppOr(context, stringIntegerPair.getKey(), false);
             }
         };
@@ -314,19 +314,19 @@ public class PackagexTest {
         final String selfPackageName = context.getPackageName();
         final Predicate<String> selfPredicate = new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String string) {
+            public boolean accept(@NonNull String string) {
                 return string.equals(selfPackageName);
             }
         };
         final Predicate<String> systemAppPredicate = new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String string) {
+            public boolean accept(@NonNull String string) {
                 return Packagex.isSystemAppOr(context, string, false);
             }
         };
         final Predicate<String> userAppPredicate = new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String string) {
+            public boolean accept(@NonNull String string) {
                 return !Packagex.isSystemAppOr(context, string, false);
             }
         };
@@ -407,19 +407,19 @@ public class PackagexTest {
         final String selfPackageName = context.getPackageName();
         final Predicate<AppPackage> selfPredicate = new Predicate<AppPackage>() {
             @Override
-            public boolean accept(@NotNull AppPackage appPackage) {
+            public boolean accept(@NonNull AppPackage appPackage) {
                 return appPackage.packageName.equals(selfPackageName);
             }
         };
         final Predicate<AppPackage> systemAppPredicate = new Predicate<AppPackage>() {
             @Override
-            public boolean accept(@NotNull AppPackage appPackage) {
+            public boolean accept(@NonNull AppPackage appPackage) {
                 return Packagex.isSystemAppOr(context, appPackage.packageName, false);
             }
         };
         final Predicate<AppPackage> userAppPredicate = new Predicate<AppPackage>() {
             @Override
-            public boolean accept(@NotNull AppPackage appPackage) {
+            public boolean accept(@NonNull AppPackage appPackage) {
                 return !Packagex.isSystemAppOr(context, appPackage.packageName, false);
             }
         };

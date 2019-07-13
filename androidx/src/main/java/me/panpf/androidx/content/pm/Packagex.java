@@ -32,8 +32,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import androidx.collection.ArrayMap;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -130,7 +128,7 @@ public class Packagex {
      * Get the versionName of the app for the specified packageName, return to defaultValue if not installed
      */
     @NonNull
-    public static String getVersionNameOr(@NonNull Context context, @NonNull String packageName, @NotNull String defaultValue) {
+    public static String getVersionNameOr(@NonNull Context context, @NonNull String packageName, @NonNull String defaultValue) {
         PackageManager packageManager = context.getPackageManager();
         PackageInfo packageInfo;
         try {

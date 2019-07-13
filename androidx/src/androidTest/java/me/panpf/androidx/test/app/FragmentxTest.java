@@ -22,12 +22,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.jetbrains.annotations.NotNull;
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,6 +30,12 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
 import androidx.viewpager.widget.ViewPager;
+
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Argsx;
 import me.panpf.androidx.app.Fragmentx;
@@ -231,7 +231,7 @@ public class FragmentxTest {
             }
         }
 
-        @NotNull
+        @NonNull
         public final android.app.Fragment getChildFragment() {
             return Premisex.requireNotNull(getChildFragmentManager().findFragmentById(R.id.testAt_frame));
         }
@@ -243,18 +243,18 @@ public class FragmentxTest {
     public static final class TestImplSupportFragment extends Fragment implements FragmentxTest.ImplTestInterface {
 
         @Nullable
-        public View onCreateView(@NotNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             return inflater.inflate(R.layout.at_test, container, false);
         }
 
-        public void onViewCreated(@NotNull View view, @Nullable Bundle savedInstanceState) {
+        public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
             this.getChildFragmentManager().beginTransaction()
                     .replace(R.id.testAt_frame, new TestImplSupportFragment2())
                     .commit();
         }
 
-        @NotNull
+        @NonNull
         public final Fragment getChildFragment() {
             return Premisex.requireNotNull(this.getChildFragmentManager().findFragmentById(R.id.testAt_frame));
         }

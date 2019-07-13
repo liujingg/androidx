@@ -20,13 +20,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import org.jetbrains.annotations.NotNull;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Map;
 import java.util.Set;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.util.Predicate;
 
@@ -745,7 +744,7 @@ public class Preferencex {
         final SharedPreferences preferences = getDefaultPreferences(context);
         return Arrayx.any(keys, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String key) {
+            public boolean accept(@NonNull String key) {
                 return preferences.contains(key);
             }
         });
@@ -762,7 +761,7 @@ public class Preferencex {
         final SharedPreferences preferences = getDefaultPreferences(context);
         return Arrayx.all(keys, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String key) {
+            public boolean accept(@NonNull String key) {
                 return preferences.contains(key);
             }
         });
@@ -792,7 +791,7 @@ public class Preferencex {
         final SharedPreferences preferences = getPreferences(context, name);
         return Arrayx.any(keys, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String key) {
+            public boolean accept(@NonNull String key) {
                 return preferences.contains(key);
             }
         });
@@ -810,7 +809,7 @@ public class Preferencex {
         final SharedPreferences preferences = getPreferences(context, name);
         return Arrayx.all(keys, new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String key) {
+            public boolean accept(@NonNull String key) {
                 return preferences.contains(key);
             }
         });

@@ -26,11 +26,11 @@ import android.os.Build;
 import android.provider.MediaStore;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.FileProvider;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.runner.AndroidJUnit4;
 
-import org.jetbrains.annotations.NotNull;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -203,7 +203,7 @@ public class IntentxTest {
         Assert.assertEquals(Intent.ACTION_VIEW, installAppIntent1.getAction());
         Assert.assertEquals(Intent.CATEGORY_DEFAULT, Collectionx.find(installAppIntent1.getCategories(), new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Stringx.equals(s, Intent.CATEGORY_DEFAULT);
             }
         }));
@@ -216,7 +216,7 @@ public class IntentxTest {
         Assert.assertEquals(Intent.ACTION_VIEW, installAppIntent2.getAction());
         Assert.assertNotNull(Collectionx.find(installAppIntent2.getCategories(), new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Stringx.equals(s, Intent.CATEGORY_DEFAULT);
             }
         }));
@@ -263,7 +263,7 @@ public class IntentxTest {
         Assert.assertEquals(Intent.ACTION_MAIN, launchAppIntent.getAction());
         Assert.assertNotNull(Collectionx.find(launchAppIntent.getCategories(), new Predicate<String>() {
             @Override
-            public boolean accept(@NotNull String s) {
+            public boolean accept(@NonNull String s) {
                 return Stringx.equals(s, Intent.CATEGORY_LAUNCHER);
             }
         }));
