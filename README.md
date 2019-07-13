@@ -54,7 +54,7 @@ Dependencies:
 
 ### app
 * Activity: [Activityx.java] ([Test][ActivityxTest.java]) | [Activityx.kt] ([Test][ActivityxTest.kt])
-    * isDestroyedCompat, convertToTranslucentCompat, convertFromTranslucentCompat, getImplWithParent
+    * isDestroyedCompat, convertToTranslucentCompat, convertFromTranslucentCompat, getImplFromParent
     * appContext, canStart, start, startByClass, safeStart, safeStartByClass
 * Args: [Argsx.java] ([Test][ArgsxTest.java]) | [Argsx.kt] ([Test][ArgsxTest.kt])
     * read\*Arg, read\*ArgOr, read\*UriArg, read\*UriArgOr, read\*IntentUriArg, read\*IntentUriArgOr,
@@ -65,7 +65,7 @@ Dependencies:
 * Dialog: [Dialogx.java] ([Test][DialogxTest.java]) | [Dialogx.kt] ([Test][DialogxTest.kt])
     * setClickButtonClosable, showProgressDialog
 * Fragment: [Fragmentx.java] ([Test][FragmentxTest.java]) | [Fragmentx.kt] ([Test][FragmentxTest.kt])
-    * isDestroyedCompat, getImplWithParent, instantiate, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
+    * isDestroyedCompat, getImplFromParent, instantiate, findUserVisibleChildFragment, findFragmentByViewPagerCurrentItem
 * Permission: [Permissionx.java] ([Test][PermissionxTest.java]) | [Permissionx.kt] ([Test][PermissionxTest.kt])
     * isGrantPermissions, filterDeniedPermissions
 * Service: [Servicex.java] ([Test][ServicexTest.java]) | [Servicex.kt] ([Test][ServicexTest.kt])

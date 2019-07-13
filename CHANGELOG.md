@@ -9,6 +9,7 @@ Removed
 Rename
 * :fire: Activityx start(*, Class<? extends Activity>) method rename to startByClass(*, Class<? extends Activity>)
 * :fire: Packagex getPackage rename to get, getPackageOrNull rename to getOrNull, listPackageNameAndVersionCode rename to listVersionCodePair, listPackageNameAndVersionCodeMap rename to getVersionCodeMap, listPackage rename to list, getOnePackage rename to getOne
+* :fire: Fragmentx and Activityx getImplWithParent method rename to getImplFromParent
 
 New
 * :sparkles: Displayx adds getActionBarSize() method

@@ -151,12 +151,12 @@ class ActivityxTest {
     @Test
     fun testGetImplWithParent() {
         val activity = activityTestRule.activity
-        Assert.assertEquals(activity.getImplWithParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestActivity::class.java)
-        Assert.assertNull(activity.getImplWithParent(ViewModelStoreOwner::class.java))
+        Assert.assertEquals(activity.getImplFromParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestActivity::class.java)
+        Assert.assertNull(activity.getImplFromParent(ViewModelStoreOwner::class.java))
 
         val activity2 = fragmentActivityTestRule.activity
-        Assert.assertNull(activity2.getImplWithParent(ImplTestInterface::class.java))
-        Assert.assertEquals(activity2.getImplWithParent(ViewModelStoreOwner::class.java).requireNotNull()::class.java, TestFragmentActivity::class.java)
+        Assert.assertNull(activity2.getImplFromParent(ImplTestInterface::class.java))
+        Assert.assertEquals(activity2.getImplFromParent(ViewModelStoreOwner::class.java).requireNotNull()::class.java, TestFragmentActivity::class.java)
     }
 
     @Test

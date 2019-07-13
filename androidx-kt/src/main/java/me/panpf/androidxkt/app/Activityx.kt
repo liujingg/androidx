@@ -72,7 +72,7 @@ inline fun Activity.convertFromTranslucentCompat(): Boolean = Activityx.convertF
 /**
  * If the own or parent activity implements the specified [clazz], it returns its implementation.
  */
-inline fun <T> Activity.getImplWithParent(clazz: Class<T>): T? = Activityx.getImplWithParent(this, clazz)
+inline fun <T> Activity.getImplFromParent(clazz: Class<T>): T? = Activityx.getImplFromParent(this, clazz)
 
 
 /* ************************************* start ***************************************** */

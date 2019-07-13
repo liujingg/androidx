@@ -52,7 +52,7 @@ public class Fragmentx {
      * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
      */
     @Nullable
-    public static <T> T getImplWithParent(@NonNull Fragment fragment, @NonNull Class<T> clazz) {
+    public static <T> T getImplFromParent(@NonNull Fragment fragment, @NonNull Class<T> clazz) {
         Fragment parent = fragment;
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {
@@ -78,7 +78,7 @@ public class Fragmentx {
      * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
      */
     @Nullable
-    public static <T> T getImplWithParent(@NonNull android.app.Fragment fragment, @NonNull Class<T> clazz) {
+    public static <T> T getImplFromParent(@NonNull android.app.Fragment fragment, @NonNull Class<T> clazz) {
         android.app.Fragment parent = fragment;
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {

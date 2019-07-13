@@ -85,13 +85,13 @@ public class FragmentxTest {
         TestImplOriginFragment originFragment = (TestImplOriginFragment) activityTestRule.getActivity().getOriginFragment();
         TestImplSupportFragment supportFragment = (TestImplSupportFragment) activityTestRule.getActivity().getSupportFragment();
 
-        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplWithParent(originFragment, ImplTestInterface.class)).getClass(), TestImplOriginFragment.class);
-        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplWithParent(supportFragment, ImplTestInterface.class)).getClass(), TestImplSupportFragment.class);
+        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(originFragment, ImplTestInterface.class)).getClass(), TestImplOriginFragment.class);
+        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(supportFragment, ImplTestInterface.class)).getClass(), TestImplSupportFragment.class);
 
         if (Androidx.isAtLeast17()) {
-            Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplWithParent(originFragment.getChildFragment(), ImplTestInterface.class)).getClass(), TestImplOriginFragment.class);
+            Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(originFragment.getChildFragment(), ImplTestInterface.class)).getClass(), TestImplOriginFragment.class);
         }
-        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplWithParent(supportFragment.getChildFragment(), ImplTestInterface.class)).getClass(), TestImplSupportFragment.class);
+        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(supportFragment.getChildFragment(), ImplTestInterface.class)).getClass(), TestImplSupportFragment.class);
 
         Androidx.waitRunInUI(new Runnable() {
             @Override
@@ -115,11 +115,11 @@ public class FragmentxTest {
             }
         });
 
-        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplWithParent(originFragment2, ImplTestInterface.class)).getClass(), TestActivity.class);
-        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplWithParent(supportFragment2, ImplTestInterface.class)).getClass(), TestActivity.class);
+        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(originFragment2, ImplTestInterface.class)).getClass(), TestActivity.class);
+        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(supportFragment2, ImplTestInterface.class)).getClass(), TestActivity.class);
 
-        Assert.assertNull(Fragmentx.getImplWithParent(new TestImplOriginFragment2(), ImplTestInterface.class));
-        Assert.assertNull(Fragmentx.getImplWithParent(new TestImplSupportFragment2(), ImplTestInterface.class));
+        Assert.assertNull(Fragmentx.getImplFromParent(new TestImplOriginFragment2(), ImplTestInterface.class));
+        Assert.assertNull(Fragmentx.getImplFromParent(new TestImplSupportFragment2(), ImplTestInterface.class));
     }
 
     @Test

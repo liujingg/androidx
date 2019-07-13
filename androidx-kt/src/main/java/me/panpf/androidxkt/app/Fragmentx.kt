@@ -35,12 +35,12 @@ inline fun androidx.fragment.app.Fragment.isDestroyedCompat(): Boolean = Fragmen
 /**
  * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
  */
-inline fun <T> androidx.fragment.app.Fragment.getImplWithParent(clazz: Class<T>): T? = Fragmentx.getImplWithParent(this, clazz)
+inline fun <T> androidx.fragment.app.Fragment.getImplFromParent(clazz: Class<T>): T? = Fragmentx.getImplFromParent(this, clazz)
 
 /**
  * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
  */
-inline fun <T> android.app.Fragment.getImplWithParent(clazz: Class<T>): T? = Fragmentx.getImplWithParent(this, clazz)
+inline fun <T> android.app.Fragment.getImplFromParent(clazz: Class<T>): T? = Fragmentx.getImplFromParent(this, clazz)
 
 
 /**
