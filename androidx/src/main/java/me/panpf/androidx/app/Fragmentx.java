@@ -20,13 +20,13 @@ import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Lifecycle;
+
+import java.util.List;
 
 public class Fragmentx {
 
@@ -57,7 +57,7 @@ public class Fragmentx {
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {
                 //noinspection unchecked
-                return (T) clazz;
+                return (T) parent;
             } else {
                 parent = parent.getParentFragment();
             }
@@ -66,7 +66,7 @@ public class Fragmentx {
         while (parentActivity != null) {
             if (clazz.isAssignableFrom(parentActivity.getClass())) {
                 //noinspection unchecked
-                return (T) clazz;
+                return (T) parentActivity;
             } else {
                 parentActivity = parentActivity.getParent();
             }
@@ -83,7 +83,7 @@ public class Fragmentx {
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {
                 //noinspection unchecked
-                return (T) clazz;
+                return (T) parent;
             } else {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                     parent = parent.getParentFragment();
@@ -96,7 +96,7 @@ public class Fragmentx {
         while (parentActivity != null) {
             if (clazz.isAssignableFrom(parentActivity.getClass())) {
                 //noinspection unchecked
-                return (T) clazz;
+                return (T) parentActivity;
             } else {
                 parentActivity = parentActivity.getParent();
             }
@@ -108,11 +108,10 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static <T extends Fragment> T instantiate(@NonNull Class<? extends T> clas, @Nullable Bundle arguments) {
+    public static <T extends Fragment> T instantiate(@NonNull Class<? extends T> clazz, @Nullable Bundle arguments) {
         T fragment;
-        //noinspection TryWithIdenticalCatches
         try {
-            fragment = clas.newInstance();
+            fragment = clazz.newInstance();
         } catch (InstantiationException e) {
             throw new IllegalArgumentException(e);
         } catch (IllegalAccessException e) {
@@ -127,18 +126,17 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static <T extends Fragment> T instantiate(@NonNull Class<? extends T> clas) {
-        return instantiate(clas, null);
+    public static <T extends Fragment> T instantiate(@NonNull Class<? extends T> clazz) {
+        return instantiate(clazz, null);
     }
 
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static <T extends android.app.Fragment> T instantiateOrigin(@NonNull Class<? extends T> clas, @Nullable Bundle arguments) {
+    public static <T extends android.app.Fragment> T instantiateOrigin(@NonNull Class<? extends T> clazz, @Nullable Bundle arguments) {
         T fragment;
-        //noinspection TryWithIdenticalCatches
         try {
-            fragment = clas.newInstance();
+            fragment = clazz.newInstance();
         } catch (InstantiationException e) {
             throw new IllegalArgumentException(e);
         } catch (IllegalAccessException e) {
@@ -153,8 +151,8 @@ public class Fragmentx {
     /**
      * Instantiate a Fragment and set arguments
      */
-    public static <T extends android.app.Fragment> T instantiateOrigin(@NonNull Class<? extends T> clas) {
-        return instantiateOrigin(clas, null);
+    public static <T extends android.app.Fragment> T instantiateOrigin(@NonNull Class<? extends T> clazz) {
+        return instantiateOrigin(clazz, null);
     }
 
 

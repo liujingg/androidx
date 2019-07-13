@@ -21,6 +21,9 @@ Behavior change:
 Update
 * :fire: The excludeSystemApp and excludeSelf parameters of the Package* list*, getOne, count methods are combined into one packageType
 
+Fixed bug
+* :bug: Fix Fragmentx and Activityx getImplWithParent method always returns a bug in the interface class
+
 ## v1.0.0-alpha3
 
 Behavior change:

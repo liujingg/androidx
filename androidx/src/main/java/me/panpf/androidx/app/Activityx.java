@@ -146,7 +146,7 @@ public class Activityx {
         while (parent != null) {
             if (clazz.isAssignableFrom(parent.getClass())) {
                 //noinspection unchecked
-                return (T) clazz;
+                return (T) parent;
             } else {
                 parent = parent.getParent();
             }

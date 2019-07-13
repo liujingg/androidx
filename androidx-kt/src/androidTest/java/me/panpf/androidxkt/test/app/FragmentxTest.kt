@@ -67,13 +67,13 @@ class FragmentxTest {
         val originFragment = activityTestRule.activity.getOriginFragment() as TestImplOriginFragment
         val supportFragment = activityTestRule.activity.getSupportFragment() as TestImplSupportFragment
 
-        Assert.assertNotNull(originFragment.getImplWithParent(ImplTestInterface::class.java))
-        Assert.assertNotNull(supportFragment.getImplWithParent(ImplTestInterface::class.java))
+        Assert.assertEquals(originFragment.getImplWithParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestImplOriginFragment::class.java)
+        Assert.assertEquals(supportFragment.getImplWithParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestImplSupportFragment::class.java)
 
         if (Androidx.isAtLeast17()) {
-            Assert.assertNotNull(originFragment.getChildFragment().getImplWithParent(ImplTestInterface::class.java))
+            Assert.assertEquals(originFragment.getChildFragment().getImplWithParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestImplOriginFragment::class.java)
         }
-        Assert.assertNotNull(supportFragment.getChildFragment().getImplWithParent(ImplTestInterface::class.java))
+        Assert.assertEquals(supportFragment.getChildFragment().getImplWithParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestImplSupportFragment::class.java)
 
         waitRunInUI {
             activityTestRule.activity.convertChildFragment()
@@ -82,8 +82,8 @@ class FragmentxTest {
         val originFragment2 = waitRunInUIResult { activityTestRule.activity.getOriginFragment() as TestImplOriginFragment2 }
         val supportFragment2 = waitRunInUIResult { activityTestRule.activity.getSupportFragment() as TestImplSupportFragment2 }
 
-        Assert.assertNotNull(originFragment2.getImplWithParent(ImplTestInterface::class.java))
-        Assert.assertNotNull(supportFragment2.getImplWithParent(ImplTestInterface::class.java))
+        Assert.assertEquals(originFragment2.getImplWithParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestActivity::class.java)
+        Assert.assertEquals(supportFragment2.getImplWithParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestActivity::class.java)
 
         Assert.assertNull(TestImplOriginFragment2().getImplWithParent(ImplTestInterface::class.java))
         Assert.assertNull(TestImplSupportFragment2().getImplWithParent(ImplTestInterface::class.java))
