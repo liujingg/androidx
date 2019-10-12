@@ -17,6 +17,7 @@ Update
 
 New
 * :sparkles: Servicex adds isAccessibilityServiceEnabled method
+* :sparkles: Fragmentx adds getApplication and requireApplication method
 
 ## v1.0.0-alpha4
 

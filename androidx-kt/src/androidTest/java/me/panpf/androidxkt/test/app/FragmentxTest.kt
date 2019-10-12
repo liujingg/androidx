@@ -23,6 +23,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.Androidx
@@ -46,6 +47,31 @@ class FragmentxTest {
 
     @get:Rule
     val findUserVisibleChildActivityRule = ActivityTestRule(TestFindUserVisibleChildActivity::class.java)
+
+    @Test
+    fun testGetApplication() {
+        val originFragment = activityTestRule.activity.getOriginFragment()
+        val supportFragment = activityTestRule.activity.getSupportFragment()
+
+        Assert.assertNotNull(originFragment.getApplication())
+        Assert.assertNotNull(supportFragment.getApplication())
+
+        Assert.assertNull(android.app.Fragment().getApplication())
+        Assert.assertNull(Fragment().getApplication())
+
+        try {
+            android.app.Fragment().requireApplication()
+            Assert.fail()
+        } catch (ignored: Exception) {
+        }
+
+        try {
+            Fragment().requireApplication()
+            Assert.fail()
+        } catch (ignored: Exception) {
+        }
+
+    }
 
     @Test
     fun testDestroyed() {

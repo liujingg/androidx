@@ -17,6 +17,8 @@
 package me.panpf.androidx.app;
 
 import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -28,9 +30,45 @@ import androidx.lifecycle.Lifecycle;
 
 import java.util.List;
 
+import me.panpf.javax.util.Premisex;
+
 public class Fragmentx {
 
     private Fragmentx() {
+    }
+
+    /**
+     * Get Application from Fragment
+     */
+    @Nullable
+    public static Application getApplication(@Nullable Fragment fragment) {
+        Context context = fragment != null ? fragment.getContext() : null;
+        return context != null ? (Application) context.getApplicationContext() : null;
+    }
+
+    /**
+     * Get Application from Fragment
+     */
+    @Nullable
+    public static Application getApplication(@Nullable android.app.Fragment fragment) {
+        Activity activity = fragment != null ? fragment.getActivity() : null;
+        return activity != null ? activity.getApplication() : null;
+    }
+
+    /**
+     * Get Application from Fragment, throws an exception if null
+     */
+    @NonNull
+    public static Application requireApplication(@NonNull Fragment fragment) {
+        return (Application) fragment.requireContext().getApplicationContext();
+    }
+
+    /**
+     * Get Application from Fragment, throws an exception if null
+     */
+    @NonNull
+    public static Application requireApplication(@NonNull android.app.Fragment fragment) {
+        return Premisex.requireNotNull(fragment.getActivity()).getApplication();
     }
 
     /**

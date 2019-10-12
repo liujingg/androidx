@@ -18,8 +18,31 @@
 
 package me.panpf.androidxkt.app
 
+import android.app.Application
 import android.os.Bundle
 import me.panpf.androidx.app.Fragmentx
+
+
+/**
+ * Get Application from Fragment
+ */
+inline fun androidx.fragment.app.Fragment?.getApplication(): Application? = Fragmentx.getApplication(this)
+
+/**
+ * Get Application from Fragment
+ */
+inline fun android.app.Fragment?.getApplication(): Application? = Fragmentx.getApplication(this)
+
+/**
+ * Get Application from Fragment, throws an exception if null
+ */
+inline fun androidx.fragment.app.Fragment.requireApplication(): Application = Fragmentx.requireApplication(this)
+
+/**
+ * Get Application from Fragment, throws an exception if null
+ */
+inline fun android.app.Fragment.requireApplication(): Application = Fragmentx.requireApplication(this)
+
 
 /**
  * Return true if the fragment has been destroyed

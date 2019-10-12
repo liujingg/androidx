@@ -66,6 +66,30 @@ public class FragmentxTest {
     }
 
     @Test
+    public void testGetApplication() {
+        android.app.Fragment originFragment = activityTestRule.getActivity().getOriginFragment();
+        Fragment supportFragment = activityTestRule.getActivity().getSupportFragment();
+
+        Assert.assertNotNull(Fragmentx.getApplication(originFragment));
+        Assert.assertNotNull(Fragmentx.getApplication(supportFragment));
+
+        Assert.assertNull(Fragmentx.getApplication(new android.app.Fragment()));
+        Assert.assertNull(Fragmentx.getApplication(new Fragment()));
+
+        try {
+            Fragmentx.requireApplication(new android.app.Fragment());
+            Assert.fail();
+        } catch (Exception ignored) {
+        }
+
+        try {
+            Fragmentx.requireApplication(new Fragment());
+            Assert.fail();
+        } catch (Exception ignored) {
+        }
+    }
+
+    @Test
     public void testDestroyed() throws InterruptedException {
         android.app.Fragment originFragment = activityTestRule.getActivity().getOriginFragment();
         Fragment supportFragment = activityTestRule.getActivity().getSupportFragment();
