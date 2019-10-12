@@ -8,6 +8,7 @@ Rename
 * :fire: Storagex.getFreeBytes(File, long) rename to getFreeBytesOr(File, long)
 * :fire: Storagex.getTotalBytes(File, long) rename to getTotalBytesOr(File, long)
 * :fire: Storagex.getAvailableBytes(File, long) rename to getAvailableBytesOr(File, long)
+* :fire: Remove Servicex.startIfNoRunning and stopIfRunning method
 
 ## v1.0.0-alpha4
 

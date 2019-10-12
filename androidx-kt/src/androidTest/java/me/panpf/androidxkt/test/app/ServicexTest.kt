@@ -22,7 +22,9 @@ import android.os.IBinder
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.os.BundleBuilder
-import me.panpf.androidxkt.app.*
+import me.panpf.androidxkt.app.isServiceRunning
+import me.panpf.androidxkt.app.startService
+import me.panpf.androidxkt.app.stopService
 import me.panpf.androidxkt.test.TestService
 import org.junit.Assert
 import org.junit.Test
@@ -68,12 +70,6 @@ class ServicexTest {
 
             Assert.assertFalse(context.isServiceRunning(TestService::class.java))
         }
-    }
-
-    @Test
-    @Throws(InterruptedException::class)
-    fun testStartExtras() {
-        val context = InstrumentationRegistry.getContext()
 
         try {
             Assert.assertFalse(context.isServiceRunning(TestService::class.java))
@@ -83,50 +79,6 @@ class ServicexTest {
 
             Assert.assertTrue(context.isServiceRunning(TestService::class.java))
             Assert.assertEquals("testStartExtras", TestService.SHARE_KEY)
-        } finally {
-            context.stopService(TestService::class.java)
-            Thread.sleep(100)
-
-            Assert.assertFalse(context.isServiceRunning(TestService::class.java))
-        }
-    }
-
-    @Test
-    @Throws(InterruptedException::class)
-    fun testStartIfNoRunning() {
-        val context = InstrumentationRegistry.getContext()
-
-        try {
-            Assert.assertFalse(context.isServiceRunning(TestService::class.java))
-
-            Assert.assertTrue(context.startServiceIfNoRunning(TestService::class.java))
-            Thread.sleep(100)
-
-            Assert.assertTrue(context.isServiceRunning(TestService::class.java))
-            Assert.assertFalse(context.startServiceIfNoRunning(TestService::class.java))
-        } finally {
-            context.stopService(TestService::class.java)
-            Thread.sleep(100)
-
-            Assert.assertFalse(context.isServiceRunning(TestService::class.java))
-        }
-    }
-
-    @Test
-    @Throws(InterruptedException::class)
-    fun testStartIfNoRunningExtras() {
-        val context = InstrumentationRegistry.getContext()
-
-        try {
-            Assert.assertFalse(context.isServiceRunning(TestService::class.java))
-
-            Assert.assertTrue(context.startServiceIfNoRunning(TestService::class.java, BundleBuilder().putString("SHARE_KEY", "testStartIfNoRunningExtras").build()))
-            Thread.sleep(100)
-
-            Assert.assertTrue(context.isServiceRunning(TestService::class.java))
-            Assert.assertEquals("testStartIfNoRunningExtras", TestService.SHARE_KEY)
-
-            Assert.assertFalse(context.startServiceIfNoRunning(TestService::class.java))
         } finally {
             context.stopService(TestService::class.java)
             Thread.sleep(100)
@@ -148,29 +100,6 @@ class ServicexTest {
             context.stopService(TestService::class.java)
             Thread.sleep(100)
             Assert.assertFalse(context.isServiceRunning(TestService::class.java))
-        } finally {
-            context.stopService(TestService::class.java)
-            Thread.sleep(100)
-
-            Assert.assertFalse(context.isServiceRunning(TestService::class.java))
-        }
-    }
-
-    @Test
-    @Throws(InterruptedException::class)
-    fun testStopIfRunning() {
-        val context = InstrumentationRegistry.getContext()
-
-        try {
-            context.startService(TestService::class.java)
-            Thread.sleep(100)
-
-            Assert.assertTrue(context.isServiceRunning(TestService::class.java))
-
-            Assert.assertTrue(context.stopServiceIfRunning(TestService::class.java))
-            Thread.sleep(100)
-
-            Assert.assertFalse(context.stopServiceIfRunning(TestService::class.java))
         } finally {
             context.stopService(TestService::class.java)
             Thread.sleep(100)

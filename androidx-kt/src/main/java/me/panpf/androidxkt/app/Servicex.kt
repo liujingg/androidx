@@ -31,29 +31,9 @@ inline fun Context.isServiceRunning(serviceClass: Class<out Service>): Boolean =
 /**
  * Start Service
  */
-inline fun Context.startService(serviceClass: Class<out Service>, extras: Bundle) = Servicex.start(this, serviceClass, extras)
-
-/**
- * Start Service
- */
-inline fun Context.startService(serviceClass: Class<out Service>) = Servicex.start(this, serviceClass)
-
-/**
- * Start the service if the specified Class is not running.
- */
-inline fun Context.startServiceIfNoRunning(serviceClass: Class<out Service>, extras: Bundle): Boolean = Servicex.startIfNoRunning(this, serviceClass, extras)
-
-/**
- * Start the service if the specified Class is not running.
- */
-inline fun Context.startServiceIfNoRunning(serviceClass: Class<out Service>): Boolean = Servicex.startIfNoRunning(this, serviceClass)
+inline fun Context.startService(serviceClass: Class<out Service>, extras: Bundle? = null) = Servicex.start(this, serviceClass, extras)
 
 /**
  * Stop Service
  */
 inline fun Context.stopService(serviceClass: Class<out Service>) = Servicex.stop(this, serviceClass)
-
-/**
- * Stop it if the Service for the specified Class is running
- */
-inline fun Context.stopServiceIfRunning(serviceClass: Class<out Service>): Boolean = Servicex.stopIfRunning(this, serviceClass)

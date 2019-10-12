@@ -21,13 +21,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.IBinder;
 
+import androidx.annotation.Nullable;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.annotation.Nullable;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.app.Servicex;
 import me.panpf.androidx.os.BundleBuilder;
 import me.panpf.androidx.test.TestService;
@@ -70,11 +71,6 @@ public final class ServicexTest {
 
             Assert.assertFalse(Servicex.isRunning(context, TestService.class));
         }
-    }
-
-    @Test
-    public void testStartExtras() throws InterruptedException {
-        Context context = InstrumentationRegistry.getContext();
 
         try {
             Assert.assertFalse(Servicex.isRunning(context, TestService.class));
@@ -84,48 +80,6 @@ public final class ServicexTest {
 
             Assert.assertTrue(Servicex.isRunning(context, TestService.class));
             Assert.assertEquals("testStartExtras", TestService.SHARE_KEY);
-        } finally {
-            Servicex.stop(context, TestService.class);
-            Thread.sleep(100);
-
-            Assert.assertFalse(Servicex.isRunning(context, TestService.class));
-        }
-    }
-
-    @Test
-    public void testStartIfNoRunning() throws InterruptedException {
-        Context context = InstrumentationRegistry.getContext();
-
-        try {
-            Assert.assertFalse(Servicex.isRunning(context, TestService.class));
-
-            Assert.assertTrue(Servicex.startIfNoRunning(context, TestService.class));
-            Thread.sleep(100);
-
-            Assert.assertTrue(Servicex.isRunning(context, TestService.class));
-            Assert.assertFalse(Servicex.startIfNoRunning(context, TestService.class));
-        } finally {
-            Servicex.stop(context, TestService.class);
-            Thread.sleep(100);
-
-            Assert.assertFalse(Servicex.isRunning(context, TestService.class));
-        }
-    }
-
-    @Test
-    public void testStartIfNoRunningExtras() throws InterruptedException {
-        Context context = InstrumentationRegistry.getContext();
-
-        try {
-            Assert.assertFalse(Servicex.isRunning(context, TestService.class));
-
-            Assert.assertTrue(Servicex.startIfNoRunning(context, TestService.class, new BundleBuilder().putString("SHARE_KEY", "testStartIfNoRunningExtras").build()));
-            Thread.sleep(100);
-
-            Assert.assertTrue(Servicex.isRunning(context, TestService.class));
-            Assert.assertEquals("testStartIfNoRunningExtras", TestService.SHARE_KEY);
-
-            Assert.assertFalse(Servicex.startIfNoRunning(context, TestService.class));
         } finally {
             Servicex.stop(context, TestService.class);
             Thread.sleep(100);
@@ -146,28 +100,6 @@ public final class ServicexTest {
             Servicex.stop(context, TestService.class);
             Thread.sleep(100);
             Assert.assertFalse(Servicex.isRunning(context, TestService.class));
-        } finally {
-            Servicex.stop(context, TestService.class);
-            Thread.sleep(100);
-
-            Assert.assertFalse(Servicex.isRunning(context, TestService.class));
-        }
-    }
-
-    @Test
-    public void testStopIfRunning() throws InterruptedException {
-        Context context = InstrumentationRegistry.getContext();
-
-        try {
-            Servicex.start(context, TestService.class);
-            Thread.sleep(100);
-
-            Assert.assertTrue(Servicex.isRunning(context, TestService.class));
-
-            Assert.assertTrue(Servicex.stopIfRunning(context, TestService.class));
-            Thread.sleep(100);
-
-            Assert.assertFalse(Servicex.stopIfRunning(context, TestService.class));
         } finally {
             Servicex.stop(context, TestService.class);
             Thread.sleep(100);

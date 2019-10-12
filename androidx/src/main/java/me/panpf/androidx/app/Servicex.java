@@ -72,38 +72,33 @@ public class Servicex {
     }
 
     /**
-     * Start the service if the specified Class is not running.
-     */
-    public static boolean startIfNoRunning(@NonNull Context context, @NonNull Class<? extends Service> serviceClass, @NonNull Bundle extras) {
-        if (isRunning(context, serviceClass)) return false;
-        Intent intent = new Intent(context, serviceClass);
-        intent.putExtras(extras);
-        context.startService(intent);
-        return true;
-    }
-
-    /**
-     * Start the service if the specified Class is not running.
-     */
-    public static boolean startIfNoRunning(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
-        if (isRunning(context, serviceClass)) return false;
-        context.startService(new Intent(context, serviceClass));
-        return true;
-    }
-
-    /**
      * Stop Service
      */
     public static void stop(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
         context.stopService(new Intent(context, serviceClass));
     }
 
-    /**
-     * Stop it if the Service for the specified Class is running
-     */
-    public static boolean stopIfRunning(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
-        if (!isRunning(context, serviceClass)) return false;
-        context.stopService(new Intent(context, serviceClass));
-        return true;
-    }
+    // todo add isAccessibilityServiceEnabled
+//    public static boolean isAccessibilityServiceEnabled(@NonNull Context context, @NonNull Class<? extends AccessibilityService> service, final @Nullable String packageName) {
+//        try {
+//            int enable = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.ACCESSIBILITY_ENABLED, 0);
+//            if (enable == 1) {
+//                String services = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES);
+//                if (!TextUtils.isEmpty(services)) {
+//                    TextUtils.SimpleStringSplitter split = new TextUtils.SimpleStringSplitter(':');
+//                    split.setString(services);
+//                    final String finalPackageName = packageName != null ? packageName : context.getPackageName();
+//                    final String serviceInfo = finalPackageName + "/" + service.getName();
+//                    while (split.hasNext()) {
+//                        if (split.next().equalsIgnoreCase(serviceInfo)) {
+//                            return true;
+//                        }
+//                    }
+//                }
+//            }
+//        } catch (Throwable e) {
+//            e.printStackTrace();
+//        }
+//        return false;
+//    }
 }
