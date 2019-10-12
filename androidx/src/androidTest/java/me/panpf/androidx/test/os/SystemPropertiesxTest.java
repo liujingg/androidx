@@ -18,11 +18,12 @@ package me.panpf.androidx.test.os;
 
 import android.os.Build;
 
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.hardware.Hardwarex;
 import me.panpf.androidx.os.SystemPropertiesx;
 
@@ -38,25 +39,25 @@ public class SystemPropertiesxTest {
 
     @Test
     public void testGetDef() {
-        Assert.assertEquals(SystemPropertiesx.get("ro.wifi.channels", "unknown"), "unknown");
-        Assert.assertEquals(SystemPropertiesx.get("custom", "customValue"), "customValue");
+        Assert.assertEquals(SystemPropertiesx.getOr("ro.wifi.channels", "unknown"), "unknown");
+        Assert.assertEquals(SystemPropertiesx.getOr("custom", "customValue"), "customValue");
     }
 
     @Test
     public void testGetInt() {
-        Assert.assertEquals(SystemPropertiesx.getInt("ro.build.version.sdk", -1), Build.VERSION.SDK_INT);
-        Assert.assertEquals(SystemPropertiesx.getInt("custom", -1), -1);
+        Assert.assertEquals(SystemPropertiesx.getIntOr("ro.build.version.sdk", -1), Build.VERSION.SDK_INT);
+        Assert.assertEquals(SystemPropertiesx.getIntOr("custom", -1), -1);
     }
 
     @Test
     public void testGetLong() {
-        Assert.assertEquals(SystemPropertiesx.getLong("ro.build.version.sdk", (long) -1), (long) Build.VERSION.SDK_INT);
-        Assert.assertEquals(SystemPropertiesx.getLong("custom", (long) -1), (long) -1);
+        Assert.assertEquals(SystemPropertiesx.getLongOr("ro.build.version.sdk", (long) -1), (long) Build.VERSION.SDK_INT);
+        Assert.assertEquals(SystemPropertiesx.getLongOr("custom", (long) -1), (long) -1);
     }
 
     @Test
     public void testGetBoolean() {
-        Assert.assertNotNull(String.valueOf(SystemPropertiesx.getBoolean("gsm.operator.isroaming", true)));
-        Assert.assertTrue(SystemPropertiesx.getBoolean("custom", true));
+        Assert.assertNotNull(String.valueOf(SystemPropertiesx.getBooleanOr("gsm.operator.isroaming", true)));
+        Assert.assertTrue(SystemPropertiesx.getBooleanOr("custom", true));
     }
 }

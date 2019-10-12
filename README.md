@@ -169,7 +169,7 @@ Dependencies:
     * getType, isType, isMiuiType, isEmuiType, isFlymeType, isColorType, isFuntouchOSType, isSmartisanOSType,
     * isH2OSType, getTypeName, getVersionName, getVersionCode, getVersionIncremental
 * SystemProperties: [SystemPropertiesx.java] ([Test][SystemPropertiesxTest.java])
-    * get, getInt, getLong, getBoolean, set, addChangeCallbacks, callChangeCallbacks
+    * get, getOr, getIntOr, getLongOr, getBooleanOr, set, addChangeCallbacks, callChangeCallbacks
 
 ### provider
 * Settings: [Settingsx.java] ([Test][SettingsxTest.java])  | [Settingsx.kt] ([Test][SettingsxTest.kt])

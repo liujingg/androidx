@@ -16,10 +16,11 @@
 
 package me.panpf.androidx.os;
 
-import java.lang.reflect.Method;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.lang.reflect.Method;
+
 import me.panpf.javax.lang.Classx;
 import me.panpf.javax.lang.Stringx;
 
@@ -41,7 +42,7 @@ public class SystemPropertiesx {
      * Get system properties based on the specified key
      */
     @NonNull
-    public static String get(@NonNull String key, @NonNull String defaultValue) {
+    public static String getOr(@NonNull String key, @NonNull String defaultValue) {
         if (GetStringDefMethodHolder.METHOD == null) return defaultValue;
         return Stringx.orEmpty((String) Classx.callStaticMethod(GetStringDefMethodHolder.METHOD, key, defaultValue));
     }
@@ -50,7 +51,7 @@ public class SystemPropertiesx {
     /**
      * Get the system property according to the specified key and convert it to int
      */
-    public static int getInt(@NonNull String key, int defaultValue) {
+    public static int getIntOr(@NonNull String key, int defaultValue) {
         if (GetIntMethodHolder.METHOD == null) return defaultValue;
         return (int) Classx.callStaticMethod(GetIntMethodHolder.METHOD, key, defaultValue);
     }
@@ -58,7 +59,7 @@ public class SystemPropertiesx {
     /**
      * Get the system property according to the specified key and convert it to long
      */
-    public static long getLong(@NonNull String key, long defaultValue) {
+    public static long getLongOr(@NonNull String key, long defaultValue) {
         if (GetLongMethodHolder.METHOD == null) return defaultValue;
         return (long) Classx.callStaticMethod(GetLongMethodHolder.METHOD, key, defaultValue);
     }
@@ -66,7 +67,7 @@ public class SystemPropertiesx {
     /**
      * Get the system property according to the specified key and convert it to boolean
      */
-    public static boolean getBoolean(@NonNull String key, boolean defaultValue) {
+    public static boolean getBooleanOr(@NonNull String key, boolean defaultValue) {
         if (GetBooleanMethodHolder.METHOD == null) return defaultValue;
         return (boolean) Classx.callStaticMethod(GetBooleanMethodHolder.METHOD, key, defaultValue);
     }

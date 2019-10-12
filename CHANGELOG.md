@@ -1,3 +1,11 @@
+## new
+
+Rename
+* :fire: SystemPropertiesx.get(String, String) rename to getOr(String, String) 
+* :fire: SystemPropertiesx.getInt(String, String) rename to getIntOr(String, String) 
+* :fire: SystemPropertiesx.getLong(String, String) rename to getLongOr(String, String) 
+* :fire: SystemPropertiesx.getBoolean(String, String) rename to getBooleanOr(String, String) 
+
 ## v1.0.0-alpha4
 
 Upgrade
