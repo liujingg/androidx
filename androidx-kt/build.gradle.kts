@@ -27,6 +27,10 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro")
         }
     }
+
+    androidExtensions {
+        isExperimental = true
+    }
 }
 
 dependencies {
