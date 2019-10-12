@@ -15,6 +15,9 @@ Remove
 Update
 * :fire: Servicex.isRunning(Context, Class) add String parameter 
 
+New
+* :sparkles: Servicex adds isAccessibilityServiceEnabled method
+
 ## v1.0.0-alpha4
 
 Upgrade

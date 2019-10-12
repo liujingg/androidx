@@ -18,6 +18,7 @@
 
 package me.panpf.androidxkt.app
 
+import android.accessibilityservice.AccessibilityService
 import android.app.Service
 import android.content.Context
 import android.os.Bundle
@@ -37,3 +38,9 @@ inline fun Context.startService(serviceClass: Class<out Service>, extras: Bundle
  * Stop Service
  */
 inline fun Context.stopService(serviceClass: Class<out Service>) = Servicex.stop(this, serviceClass)
+
+/**
+ * Return true if the specified AccessibilityService service has been enabled
+ */
+inline fun Context.isAccessibilityServiceEnabled(service: Class<out AccessibilityService>, packageName: String? = null): Boolean =
+        Servicex.isAccessibilityServiceEnabled(this, service, packageName)

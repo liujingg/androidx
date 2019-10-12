@@ -16,6 +16,7 @@
 
 package me.panpf.androidx.test.app;
 
+import android.accessibilityservice.AccessibilityService;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -111,6 +112,14 @@ public final class ServicexTest {
 
             Assert.assertFalse(Servicex.isRunning(context, TestService.class));
         }
+    }
+
+    @Test
+    public void testIsAccessibilityServiceEnabled() {
+        Context context = InstrumentationRegistry.getContext();
+
+        Assert.assertFalse(Servicex.isAccessibilityServiceEnabled(context, AccessibilityService.class));
+        Assert.assertFalse(Servicex.isAccessibilityServiceEnabled(context, AccessibilityService.class, context.getPackageName()));
     }
 
     public static class NoRegisterTestService extends Service {

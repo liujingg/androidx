@@ -16,12 +16,14 @@
 
 package me.panpf.androidxkt.test.app
 
+import android.accessibilityservice.AccessibilityService
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.os.BundleBuilder
+import me.panpf.androidxkt.app.isAccessibilityServiceEnabled
 import me.panpf.androidxkt.app.isServiceRunning
 import me.panpf.androidxkt.app.startService
 import me.panpf.androidxkt.app.stopService
@@ -112,6 +114,14 @@ class ServicexTest {
 
             Assert.assertFalse(context.isServiceRunning(TestService::class.java))
         }
+    }
+
+    @Test
+    fun testIsAccessibilityServiceEnabled() {
+        val context = InstrumentationRegistry.getContext()
+
+        Assert.assertFalse(context.isAccessibilityServiceEnabled(AccessibilityService::class.java))
+        Assert.assertFalse(context.isAccessibilityServiceEnabled(AccessibilityService::class.java, context.packageName))
     }
 
     class NoRegisterTestService : Service() {
