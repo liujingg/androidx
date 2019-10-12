@@ -37,11 +37,11 @@ class StoragexTest {
 
         val downloadDir = File(Environment.getExternalStorageDirectory(), "download")
         assertTrue(downloadDir.getFreeBytes() <= downloadDir.getTotalBytes())
-        assertTrue(downloadDir.getFreeBytes(0) <= downloadDir.getTotalBytes())
+        assertTrue(downloadDir.getFreeBytesOr(0) <= downloadDir.getTotalBytes())
         assertTrue(downloadDir.getTotalBytes() <= downloadDir.getTotalBytes())
-        assertTrue(downloadDir.getTotalBytes(0) <= downloadDir.getTotalBytes())
+        assertTrue(downloadDir.getTotalBytesOr(0) <= downloadDir.getTotalBytes())
         assertTrue(downloadDir.getAvailableBytes() <= downloadDir.getFreeBytes())
-        assertTrue(downloadDir.getAvailableBytes(0) <= downloadDir.getFreeBytes())
+        assertTrue(downloadDir.getAvailableBytesOr(0) <= downloadDir.getFreeBytes())
     }
 
     @Test

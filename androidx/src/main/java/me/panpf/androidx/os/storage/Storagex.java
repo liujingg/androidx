@@ -21,14 +21,15 @@ import android.os.Build;
 import android.os.Environment;
 import android.os.StatFs;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.WorkerThread;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.WorkerThread;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.StatFsx;
 import me.panpf.javax.collections.Arrayx;
@@ -52,6 +53,7 @@ public class Storagex {
     /**
      * Get the number of free bytes of the given path
      */
+    // todo 删除
     public static long getFreeBytes(@NonNull File path) {
         return StatFsx.getFreeBytesCompat(new StatFs(path.getPath()));
     }
@@ -59,7 +61,7 @@ public class Storagex {
     /**
      * Get the number of free bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
      */
-    public static long getFreeBytes(@NonNull File path, long defaultValue) {
+    public static long getFreeBytesOr(@NonNull File path, long defaultValue) {
         try {
             if (!path.exists() && !path.mkdirs()) {
                 return defaultValue;
@@ -74,6 +76,7 @@ public class Storagex {
     /**
      * Get the number of total bytes of the given path
      */
+    // todo 删除
     public static long getTotalBytes(@NonNull File path) {
         return StatFsx.getTotalBytesCompat(new StatFs(path.getPath()));
     }
@@ -81,7 +84,7 @@ public class Storagex {
     /**
      * Get the number of total bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
      */
-    public static long getTotalBytes(@NonNull File path, long defaultValue) {
+    public static long getTotalBytesOr(@NonNull File path, long defaultValue) {
         try {
             if (!path.exists() && !path.mkdirs()) {
                 return defaultValue;
@@ -96,6 +99,7 @@ public class Storagex {
     /**
      * Get the number of available bytes of the given path
      */
+    // todo 删除
     public static long getAvailableBytes(@NonNull File path) {
         return StatFsx.getAvailableBytesCompat(new StatFs(path.getPath()));
     }
@@ -103,7 +107,7 @@ public class Storagex {
     /**
      * Get the number of available bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
      */
-    public static long getAvailableBytes(@NonNull File path, long defaultValue) {
+    public static long getAvailableBytesOr(@NonNull File path, long defaultValue) {
         try {
             if (!path.exists() && !path.mkdirs()) {
                 return defaultValue;
@@ -1004,7 +1008,7 @@ public class Storagex {
             @Override
             public boolean accept(@NonNull File path1) {
                 Filex.mkdirsOrCheck(path1);
-                return path1.isDirectory() && getAvailableBytes(path1, 0) >= minBytes;
+                return path1.isDirectory() && getAvailableBytesOr(path1, 0) >= minBytes;
             }
         });
     }
@@ -1037,7 +1041,7 @@ public class Storagex {
                     newFile.delete();
                 }
 
-                if (Storagex.getAvailableBytes(dir, 0) >= minBytes) {
+                if (Storagex.getAvailableBytesOr(dir, 0) >= minBytes) {
                     return newFile;
                 }
             }

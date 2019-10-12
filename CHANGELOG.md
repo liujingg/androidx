@@ -5,6 +5,9 @@ Rename
 * :fire: SystemPropertiesx.getInt(String, String) rename to getIntOr(String, String) 
 * :fire: SystemPropertiesx.getLong(String, String) rename to getLongOr(String, String) 
 * :fire: SystemPropertiesx.getBoolean(String, String) rename to getBooleanOr(String, String) 
+* :fire: Storagex.getFreeBytes(File, long) rename to getFreeBytesOr(File, long)
+* :fire: Storagex.getTotalBytes(File, long) rename to getTotalBytesOr(File, long)
+* :fire: Storagex.getAvailableBytes(File, long) rename to getAvailableBytesOr(File, long)
 
 ## v1.0.0-alpha4
 

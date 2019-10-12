@@ -40,7 +40,7 @@ inline fun File.getFreeBytes(): Long = Storagex.getFreeBytes(this)
 /**
  * Get the number of free bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
  */
-inline fun File.getFreeBytes(defaultValue: Long): Long = Storagex.getFreeBytes(this, defaultValue)
+inline fun File.getFreeBytesOr(defaultValue: Long): Long = Storagex.getFreeBytesOr(this, defaultValue)
 
 /**
  * Get the number of total bytes of the given path
@@ -50,7 +50,7 @@ inline fun File.getTotalBytes(): Long = Storagex.getTotalBytes(this)
 /**
  * Get the number of total bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
  */
-inline fun File.getTotalBytes(defaultValue: Long): Long = Storagex.getTotalBytes(this, defaultValue)
+inline fun File.getTotalBytesOr(defaultValue: Long): Long = Storagex.getTotalBytesOr(this, defaultValue)
 
 /**
  * Get the number of available bytes of the given path
@@ -60,7 +60,7 @@ inline fun File.getAvailableBytes(): Long = Storagex.getAvailableBytes(this)
 /**
  * Get the number of available bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
  */
-inline fun File.getAvailableBytes(defaultValue: Long): Long = Storagex.getAvailableBytes(this, defaultValue)
+inline fun File.getAvailableBytesOr(defaultValue: Long): Long = Storagex.getAvailableBytesOr(this, defaultValue)
 
 /**
  * Get the number of free bytes for the primary shared/external storage media

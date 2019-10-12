@@ -50,11 +50,11 @@ public class StoragexTest {
 
         File downloadDir = new File(Environment.getExternalStorageDirectory(), "download");
         assertTrue(Storagex.getFreeBytes(downloadDir) <= Storagex.getTotalBytes(downloadDir));
-        assertTrue(Storagex.getFreeBytes(downloadDir, 0) <= Storagex.getTotalBytes(downloadDir));
+        assertTrue(Storagex.getFreeBytesOr(downloadDir, 0) <= Storagex.getTotalBytes(downloadDir));
         assertTrue(Storagex.getAvailableBytes(downloadDir) <= Storagex.getTotalBytes(downloadDir));
-        assertTrue(Storagex.getAvailableBytes(downloadDir, 0) <= Storagex.getTotalBytes(downloadDir));
+        assertTrue(Storagex.getAvailableBytesOr(downloadDir, 0) <= Storagex.getTotalBytes(downloadDir));
         assertTrue(Storagex.getAvailableBytes(downloadDir) <= Storagex.getFreeBytes(downloadDir));
-        assertTrue(Storagex.getAvailableBytes(downloadDir, 0) <= Storagex.getFreeBytes(downloadDir));
+        assertTrue(Storagex.getAvailableBytesOr(downloadDir, 0) <= Storagex.getFreeBytes(downloadDir));
     }
 
     @Test
