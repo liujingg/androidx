@@ -26,7 +26,7 @@ import me.panpf.androidx.app.Servicex
 /**
  * Return true if the service specifying Class is running
  */
-inline fun Context.isServiceRunning(serviceClass: Class<out Service>): Boolean = Servicex.isRunning(this, serviceClass)
+inline fun Context.isServiceRunning(serviceClass: Class<out Service>, packageName: String? = null): Boolean = Servicex.isRunning(this, serviceClass, packageName)
 
 /**
  * Start Service

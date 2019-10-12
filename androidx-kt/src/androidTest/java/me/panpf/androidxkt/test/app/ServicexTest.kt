@@ -64,6 +64,12 @@ class ServicexTest {
             Thread.sleep(100)
 
             Assert.assertTrue(context.isServiceRunning(TestService::class.java))
+            Assert.assertTrue(context.isServiceRunning(TestService::class.java, context.packageName))
+            Assert.assertFalse(context.isServiceRunning(NoRegisterTestService::class.java))
+            Assert.assertFalse(context.isServiceRunning(TestService::class.java, context.packageName + "_error"))
+
+            Assert.assertTrue(context.isServiceRunning(TestService::class.java))
+            Assert.assertTrue(context.isServiceRunning(TestService::class.java, context.packageName))
         } finally {
             context.stopService(TestService::class.java)
             Thread.sleep(100)

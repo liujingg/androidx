@@ -22,9 +22,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 
-import androidx.annotation.NonNull;
 import me.panpf.androidx.content.Contextx;
 
 public class Servicex {
@@ -35,15 +37,15 @@ public class Servicex {
     /**
      * Return true if the service specifying Class is running
      */
-    public static boolean isRunning(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
+    public static boolean isRunning(@NonNull Context context, @NonNull Class<? extends Service> serviceClass, final @Nullable String packageName) {
         try {
-            String serviceClassName = serviceClass.getName();
-
-            ArrayList<ActivityManager.RunningServiceInfo> runningService = (ArrayList<ActivityManager.RunningServiceInfo>)
+            ArrayList<ActivityManager.RunningServiceInfo> runningServiceInfos = (ArrayList<ActivityManager.RunningServiceInfo>)
                     Contextx.activityManager(context).getRunningServices(Integer.MAX_VALUE);
-            if (runningService != null) {
-                for (int i = 0, size = runningService.size(); i < size; i++) {
-                    if (runningService.get(i).service.getClassName().equals(serviceClassName)) {
+            if (runningServiceInfos != null) {
+                final String serviceClassName = serviceClass.getName();
+                for (ActivityManager.RunningServiceInfo serviceInfo : runningServiceInfos) {
+                    if (serviceInfo.service.getClassName().equals(serviceClassName)
+                            && (packageName == null || packageName.equals(serviceInfo.service.getPackageName()))) {
                         return true;
                     }
                 }
@@ -51,16 +53,24 @@ public class Servicex {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return false;
+    }
+
+    /**
+     * Return true if the service specifying Class is running
+     */
+    public static boolean isRunning(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
+        return isRunning(context, serviceClass, null);
     }
 
     /**
      * Start Service
      */
-    public static void start(@NonNull Context context, @NonNull Class<? extends Service> serviceClass, @NonNull Bundle extras) {
+    public static void start(@NonNull Context context, @NonNull Class<? extends Service> serviceClass, @Nullable Bundle extras) {
         Intent intent = new Intent(context, serviceClass);
-        intent.putExtras(extras);
+        if (extras != null) {
+            intent.putExtras(extras);
+        }
         context.startService(intent);
     }
 
@@ -68,7 +78,7 @@ public class Servicex {
      * Start Service
      */
     public static void start(@NonNull Context context, @NonNull Class<? extends Service> serviceClass) {
-        context.startService(new Intent(context, serviceClass));
+        start(context, serviceClass, null);
     }
 
     /**

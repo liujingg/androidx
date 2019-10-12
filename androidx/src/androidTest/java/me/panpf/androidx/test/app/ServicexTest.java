@@ -45,7 +45,12 @@ public final class ServicexTest {
             Thread.sleep(100);
 
             Assert.assertTrue(Servicex.isRunning(context, TestService.class));
+            Assert.assertTrue(Servicex.isRunning(context, TestService.class, context.getPackageName()));
             Assert.assertFalse(Servicex.isRunning(context, NoRegisterTestService.class));
+            Assert.assertFalse(Servicex.isRunning(context, TestService.class, context.getPackageName() + "_error"));
+
+            Assert.assertTrue(Servicex.isRunning(context, TestService.class));
+            Assert.assertTrue(Servicex.isRunning(context, TestService.class, context.getPackageName()));
         } finally {
             Servicex.stop(context, TestService.class);
             Thread.sleep(100);
