@@ -14,12 +14,15 @@ Remove
 * :fire: Remove Servicex.startIfNoRunning and stopIfRunning method
 
 Update
-* :fire: Servicex.isRunning(Context, Class) add String parameter 
+* :fire: Servicex.isRunning(Context, Class) add String parameter
 
 New
 * :sparkles: Servicex adds isAccessibilityServiceEnabled method
 * :sparkles: Fragmentx adds getApplication and requireApplication method
 * :sparkles: Views adds addPaddingTopByStatusBarHeight method
+
+Upgrade
+* :arrow_up: Upgrade javax 1.0.0-alpha04
 
 ## v1.0.0-alpha4
 

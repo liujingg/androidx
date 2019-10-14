@@ -3,8 +3,8 @@
 buildscript {
     repositories {
         google()
-        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/") }
         jcenter()
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/") }
     }
     dependencies {
         classpath("com.android.tools.build:gradle:${property("ANDROID_BUILD_GRADLE")}")
@@ -19,8 +19,8 @@ buildscript {
 allprojects {
     repositories {
         google()
-        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/") }
         jcenter()
+        maven { setUrl("https://mirrors.huaweicloud.com/repository/maven/") }
     }
 }
 

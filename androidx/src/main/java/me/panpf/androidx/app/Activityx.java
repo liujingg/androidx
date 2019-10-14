@@ -85,9 +85,9 @@ public class Activityx {
     public static boolean convertToTranslucentCompat(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             try {
-                ActivityOptions options = (ActivityOptions) Classx.callMethod(activity, "getActivityOptions");
-                Field mTranslucentCallbackField = Classx.getFieldWithParent(activity, "mTranslucentCallback");
-                Method method = Classx.getMethodWithParent(activity, "convertToTranslucent", mTranslucentCallbackField.getType(), ActivityOptions.class);
+                ActivityOptions options = Classx.callMethod(activity, "getActivityOptions");
+                Field mTranslucentCallbackField = Classx.getDeclaredFieldRecursive(activity.getClass(), "mTranslucentCallback");
+                Method method = Classx.getDeclaredMethodRecursive(activity.getClass(), "convertToTranslucent", mTranslucentCallbackField.getType(), ActivityOptions.class);
                 Classx.callMethod(activity, method, Classx.getFieldValue(activity, mTranslucentCallbackField), options);
                 return true;
             } catch (Throwable e) {
@@ -96,8 +96,8 @@ public class Activityx {
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             try {
-                Field mTranslucentCallbackField = Classx.getFieldWithParent(activity, "mTranslucentCallback");
-                Method method = Classx.getMethodWithParent(activity, "convertToTranslucent", mTranslucentCallbackField.getType());
+                Field mTranslucentCallbackField = Classx.getDeclaredFieldRecursive(activity.getClass(), "mTranslucentCallback");
+                Method method = Classx.getDeclaredMethodRecursive(activity.getClass(), "convertToTranslucent", mTranslucentCallbackField.getType());
                 Classx.callMethod(activity, method, Classx.getFieldValue(activity, mTranslucentCallbackField));
                 return true;
             } catch (Throwable e) {

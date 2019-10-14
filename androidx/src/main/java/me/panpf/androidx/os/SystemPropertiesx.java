@@ -111,7 +111,7 @@ public class SystemPropertiesx {
              */
             Method getMethod = null;
             try {
-                getMethod = Classx.getMethodWithParent("android.os.SystemProperties", "get", String.class);
+                getMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "get", String.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -127,7 +127,7 @@ public class SystemPropertiesx {
         static {
             Method getDefMethod = null;
             try {
-                getDefMethod = Classx.getMethodWithParent("android.os.SystemProperties", "get", String.class, String.class);
+                getDefMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "get", String.class, String.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -142,7 +142,7 @@ public class SystemPropertiesx {
         static {
             Method getIntMethod = null;
             try {
-                getIntMethod = Classx.getMethodWithParent("android.os.SystemProperties", "getInt", String.class, int.class);
+                getIntMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "getInt", String.class, int.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -157,7 +157,7 @@ public class SystemPropertiesx {
         static {
             Method getLongMethod = null;
             try {
-                getLongMethod = Classx.getMethodWithParent("android.os.SystemProperties", "getLong", String.class, long.class);
+                getLongMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "getLong", String.class, long.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -172,7 +172,7 @@ public class SystemPropertiesx {
         static {
             Method getBooleanMethod = null;
             try {
-                getBooleanMethod = Classx.getMethodWithParent("android.os.SystemProperties", "getBoolean", String.class, boolean.class);
+                getBooleanMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "getBoolean", String.class, boolean.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -188,7 +188,7 @@ public class SystemPropertiesx {
         static {
             Method getDefMethod = null;
             try {
-                getDefMethod = Classx.getMethodWithParent("android.os.SystemProperties", "set", String.class, String.class);
+                getDefMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "set", String.class, String.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -204,7 +204,7 @@ public class SystemPropertiesx {
         static {
             Method getDefMethod = null;
             try {
-                getDefMethod = Classx.getMethodWithParent("android.os.SystemProperties", "addChangeCallback", Runnable.class);
+                getDefMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "addChangeCallback", Runnable.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
@@ -220,7 +220,7 @@ public class SystemPropertiesx {
         static {
             Method getDefMethod = null;
             try {
-                getDefMethod = Classx.getMethodWithParent("android.os.SystemProperties", "callChangeCallbacks");
+                getDefMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "callChangeCallbacks");
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
