@@ -23,10 +23,11 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@IntDef({PackageType.ALL, PackageType.SYSTEM, PackageType.USER})
+@IntDef({AcceptPackageType.ALL, AcceptPackageType.ALL_AND_EXCLUDE_SELF, AcceptPackageType.SYSTEM,
+        AcceptPackageType.USER_AND_EXCLUDE_SELF, AcceptPackageType.USER, AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF})
 @Retention(RetentionPolicy.SOURCE)
 @Target({ElementType.FIELD, ElementType.LOCAL_VARIABLE, ElementType.PARAMETER})
-public @interface PackageType {
+public @interface AcceptPackageType {
     int ALL = 0;
     int ALL_AND_EXCLUDE_SELF = 1;
     int USER = 2;

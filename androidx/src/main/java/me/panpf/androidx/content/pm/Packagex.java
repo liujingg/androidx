@@ -215,10 +215,10 @@ public class Packagex {
     /**
      * List the packageName and versionCode of all installed APPs
      *
-     * @param packageType Accepted package type, see {@link PackageType}
+     * @param acceptPackageType Accepted package type, see {@link AcceptPackageType}
      */
     @NonNull
-    public static List<Pair<String, Integer>> listVersionCodePair(@NonNull Context context, @PackageType int packageType) {
+    public static List<Pair<String, Integer>> listVersionCodePair(@NonNull Context context, @AcceptPackageType int acceptPackageType) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -232,15 +232,15 @@ public class Packagex {
 
         List<Pair<String, Integer>> appsSet = new ArrayList<>(packageInfoList.size());
         for (PackageInfo packageInfo : packageInfoList) {
-            if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+            if ((acceptPackageType == AcceptPackageType.ALL_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
                     && context.getPackageName().equals(packageInfo.packageName)) {
                 continue;
             }
 
             boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
-            if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+            if ((acceptPackageType == AcceptPackageType.USER || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
                 continue;
-            } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
+            } else if ((acceptPackageType == AcceptPackageType.SYSTEM || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                 continue;
             }
 
@@ -252,10 +252,10 @@ public class Packagex {
     /**
      * Get the packageName and versionCode of all installed apps Map
      *
-     * @param packageType Accepted package type, see {@link PackageType}
+     * @param acceptPackageType Accepted package type, see {@link AcceptPackageType}
      */
     @NonNull
-    public static ArrayMap<String, Integer> getVersionCodeMap(@NonNull Context context, @PackageType int packageType) {
+    public static ArrayMap<String, Integer> getVersionCodeMap(@NonNull Context context, @AcceptPackageType int acceptPackageType) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -269,15 +269,15 @@ public class Packagex {
 
         ArrayMap<String, Integer> appsSet = new ArrayMap<>();
         for (PackageInfo packageInfo : packageInfoList) {
-            if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+            if ((acceptPackageType == AcceptPackageType.ALL_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
                     && context.getPackageName().equals(packageInfo.packageName)) {
                 continue;
             }
 
             boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
-            if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+            if ((acceptPackageType == AcceptPackageType.USER || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
                 continue;
-            } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
+            } else if ((acceptPackageType == AcceptPackageType.SYSTEM || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                 continue;
             }
 
@@ -289,10 +289,10 @@ public class Packagex {
     /**
      * List the packageName of all installed apps
      *
-     * @param packageType Accepted package type, see {@link PackageType}
+     * @param acceptPackageType Accepted package type, see {@link AcceptPackageType}
      */
     @NonNull
-    public static List<String> listPackageName(@NonNull Context context, @PackageType int packageType) {
+    public static List<String> listPackageName(@NonNull Context context, @AcceptPackageType int acceptPackageType) {
         List<PackageInfo> packageInfoList = null;
         try {
             packageInfoList = context.getPackageManager().getInstalledPackages(PackageManager.GET_META_DATA);
@@ -303,15 +303,15 @@ public class Packagex {
         if (packageInfoList != null && !packageInfoList.isEmpty()) {
             List<String> appsSet = new ArrayList<>();
             for (PackageInfo packageInfo : packageInfoList) {
-                if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+                if ((acceptPackageType == AcceptPackageType.ALL_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
                         && context.getPackageName().equals(packageInfo.packageName)) {
                     continue;
                 }
 
                 boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
-                if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+                if ((acceptPackageType == AcceptPackageType.USER || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
                     continue;
-                } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
+                } else if ((acceptPackageType == AcceptPackageType.SYSTEM || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                     continue;
                 }
 
@@ -326,11 +326,11 @@ public class Packagex {
     /**
      * List information for all installed apps
      *
-     * @param packageType Accepted package type, see {@link PackageType}
-     * @param size        How many apps to get. -1: all
+     * @param acceptPackageType Accepted package type, see {@link AcceptPackageType}
+     * @param size              How many apps to get. -1: all
      */
     @NonNull
-    public static List<AppPackage> list(@NonNull Context context, @PackageType int packageType, int size) {
+    public static List<AppPackage> list(@NonNull Context context, @AcceptPackageType int acceptPackageType, int size) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> packageInfoList = null;
         try {
@@ -346,15 +346,15 @@ public class Packagex {
         ArrayList<AppPackage> packageArrayList = new ArrayList<>(size > 0 ? size : packageInfoList.size());
         int index = 0;
         for (PackageInfo packageInfo : packageInfoList) {
-            if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+            if ((acceptPackageType == AcceptPackageType.ALL_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
                     && context.getPackageName().equals(packageInfo.packageName)) {
                 continue;
             }
 
             boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
-            if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+            if ((acceptPackageType == AcceptPackageType.USER || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
                 continue;
-            } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
+            } else if ((acceptPackageType == AcceptPackageType.SYSTEM || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                 continue;
             }
 
@@ -371,22 +371,22 @@ public class Packagex {
     /**
      * List information for all installed apps
      *
-     * @param packageType Accepted package type, see {@link PackageType}
+     * @param acceptPackageType Accepted package type, see {@link AcceptPackageType}
      */
     @NonNull
-    public static List<AppPackage> list(@NonNull Context context, @PackageType int packageType) {
-        return list(context, packageType, -1);
+    public static List<AppPackage> list(@NonNull Context context, @AcceptPackageType int acceptPackageType) {
+        return list(context, acceptPackageType, -1);
     }
 
 
     /**
      * Get information about an app
      *
-     * @param packageType Accepted package type, see {@link PackageType}
+     * @param acceptPackageType Accepted package type, see {@link AcceptPackageType}
      */
     @Nullable
-    public static AppPackage getOne(@NonNull Context context, @PackageType int packageType) {
-        List<AppPackage> appPackageList = list(context, packageType, 1);
+    public static AppPackage getOne(@NonNull Context context, @AcceptPackageType int acceptPackageType) {
+        List<AppPackage> appPackageList = list(context, acceptPackageType, 1);
         return appPackageList.size() >= 1 ? appPackageList.get(0) : null;
     }
 
@@ -394,9 +394,9 @@ public class Packagex {
     /**
      * Get the number of installed apps
      *
-     * @param packageType Accepted package type, see {@link PackageType}
+     * @param acceptPackageType Accepted package type, see {@link AcceptPackageType}
      */
-    public static int count(@NonNull Context context, @PackageType int packageType) {
+    public static int count(@NonNull Context context, @AcceptPackageType int acceptPackageType) {
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> packageInfoList = null;
         try {
@@ -411,15 +411,15 @@ public class Packagex {
 
         int count = 0;
         for (PackageInfo packageInfo : packageInfoList) {
-            if ((packageType == PackageType.ALL_AND_EXCLUDE_SELF || packageType == PackageType.USER_AND_EXCLUDE_SELF || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF)
+            if ((acceptPackageType == AcceptPackageType.ALL_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
                     && context.getPackageName().equals(packageInfo.packageName)) {
                 continue;
             }
 
             boolean isSystemApp = isSystemApp(packageInfo.applicationInfo);
-            if ((packageType == PackageType.USER || packageType == PackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
+            if ((acceptPackageType == AcceptPackageType.USER || acceptPackageType == AcceptPackageType.USER_AND_EXCLUDE_SELF) && isSystemApp) {
                 continue;
-            } else if ((packageType == PackageType.SYSTEM || packageType == PackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
+            } else if ((acceptPackageType == AcceptPackageType.SYSTEM || acceptPackageType == AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF) && !isSystemApp) {
                 continue;
             }
 

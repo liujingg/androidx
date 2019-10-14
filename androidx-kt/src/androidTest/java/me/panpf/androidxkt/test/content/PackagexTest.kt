@@ -21,7 +21,7 @@ import android.util.Pair
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.content.pm.AppPackage
-import me.panpf.androidx.content.pm.PackageType
+import me.panpf.androidx.content.pm.AcceptPackageType
 import me.panpf.androidxkt.content.pm.*
 import me.panpf.androidxkt.test.BuildConfig
 import me.panpf.javax.collections.Collectionx
@@ -48,7 +48,7 @@ class PackagexTest {
     fun testGetVersionCode() {
         val context = InstrumentationRegistry.getContext()
 
-        val appPackage = context.getOnePackage(PackageType.ALL_AND_EXCLUDE_SELF).requireNotNull()
+        val appPackage = context.getOnePackage(AcceptPackageType.ALL_AND_EXCLUDE_SELF).requireNotNull()
 
         Assert.assertTrue("versionCode: " + appPackage.versionCode, appPackage.versionCode > 0)
         Assert.assertEquals(appPackage.versionCode.toLong(), context.getPackageVersionCode(appPackage.packageName).toLong())
@@ -60,7 +60,7 @@ class PackagexTest {
     fun testGetVersionName() {
         val context = InstrumentationRegistry.getContext()
 
-        val appPackage = context.getOnePackage(PackageType.ALL_AND_EXCLUDE_SELF).requireNotNull()
+        val appPackage = context.getOnePackage(AcceptPackageType.ALL_AND_EXCLUDE_SELF).requireNotNull()
 
         Assert.assertTrue("versionName: " + appPackage.versionName, appPackage.versionName.isSafe())
         Assert.assertEquals(appPackage.versionName, context.getPackageVersionName(appPackage.packageName))
@@ -85,7 +85,7 @@ class PackagexTest {
         Assert.assertFalse(selfAppPackage.systemApp)
         Assert.assertTrue(selfAppPackage.enabled)
 
-        val systemAppPackage = context.getPackage(context.listPackage(PackageType.ALL_AND_EXCLUDE_SELF).find { appPackage -> appPackage.systemApp }.requireNotNull().packageName).requireNotNull()
+        val systemAppPackage = context.getPackage(context.listPackage(AcceptPackageType.ALL_AND_EXCLUDE_SELF).find { appPackage -> appPackage.systemApp }.requireNotNull().packageName).requireNotNull()
         Assert.assertTrue(systemAppPackage.systemApp)
 
         Assert.assertNull(context.getPackageOrNull(context.packageName + "_nonono"))
@@ -96,7 +96,7 @@ class PackagexTest {
     fun testIsSystemApp() {
         val context = InstrumentationRegistry.getContext()
 
-        val systemAppPackageName = context.listPackage(PackageType.ALL_AND_EXCLUDE_SELF).find { appPackage -> appPackage.systemApp }.requireNotNull().packageName
+        val systemAppPackageName = context.listPackage(AcceptPackageType.ALL_AND_EXCLUDE_SELF).find { appPackage -> appPackage.systemApp }.requireNotNull().packageName
 
         Assert.assertTrue(context.packageManager.getApplicationInfo(systemAppPackageName, 0).isSystemApp())
         Assert.assertFalse(context.packageManager.getApplicationInfo(context.packageName, 0).isSystemApp())
@@ -116,7 +116,7 @@ class PackagexTest {
         /*
          * ALL
          */
-        val allApps = context.listPackageVersionCodePair(PackageType.ALL)
+        val allApps = context.listPackageVersionCodePair(AcceptPackageType.ALL)
         val systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate)
         Assert.assertTrue(systemAppsInAllSize > 0)
         val userAppsInAllSize = Collectionx.count(allApps, userAppPredicate)
@@ -126,7 +126,7 @@ class PackagexTest {
         /*
          * ALL_AND_EXCLUDE_SELF
          */
-        val allAndExcludeSelfApps = context.listPackageVersionCodePair(PackageType.ALL_AND_EXCLUDE_SELF)
+        val allAndExcludeSelfApps = context.listPackageVersionCodePair(AcceptPackageType.ALL_AND_EXCLUDE_SELF)
         Assert.assertEquals(allApps.size.toLong(), (allAndExcludeSelfApps.size + 1).toLong())
         Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate))
 
@@ -134,7 +134,7 @@ class PackagexTest {
         /*
          * USER
          */
-        val userApps = context.listPackageVersionCodePair(PackageType.USER)
+        val userApps = context.listPackageVersionCodePair(AcceptPackageType.USER)
         Assert.assertTrue(Collectionx.all(userApps, userAppPredicate))
         Assert.assertEquals(userAppsInAllSize.toLong(), userApps.size.toLong())
         if (!context.isSystemApp(selfPackageName)) {
@@ -146,7 +146,7 @@ class PackagexTest {
         /*
          * USER_AND_EXCLUDE_SELF
          */
-        val userAndExcludeSelfApps = context.listPackageVersionCodePair(PackageType.USER_AND_EXCLUDE_SELF)
+        val userAndExcludeSelfApps = context.listPackageVersionCodePair(AcceptPackageType.USER_AND_EXCLUDE_SELF)
         Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate))
         if (!context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(userApps.size.toLong(), (userAndExcludeSelfApps.size + 1).toLong())
@@ -159,7 +159,7 @@ class PackagexTest {
         /*
          * SYSTEM
          */
-        val systemApps = context.listPackageVersionCodePair(PackageType.SYSTEM)
+        val systemApps = context.listPackageVersionCodePair(AcceptPackageType.SYSTEM)
         Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate))
         Assert.assertEquals(systemAppsInAllSize.toLong(), systemApps.size.toLong())
         Assert.assertEquals(allApps.size.toLong(), (userApps.size + systemApps.size).toLong())
@@ -172,7 +172,7 @@ class PackagexTest {
         /*
          * SYSTEM_AND_EXCLUDE_SELF
          */
-        val systemAndExcludeSelfApps = context.listPackageVersionCodePair(PackageType.SYSTEM_AND_EXCLUDE_SELF)
+        val systemAndExcludeSelfApps = context.listPackageVersionCodePair(AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
         Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate))
         if (context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(systemApps.size.toLong(), (systemAndExcludeSelfApps.size + 1).toLong())
@@ -194,7 +194,7 @@ class PackagexTest {
         /*
          * ALL
          */
-        val allApps = context.getPackageVersionCodeMap(PackageType.ALL).entries
+        val allApps = context.getPackageVersionCodeMap(AcceptPackageType.ALL).entries
         val systemAppsInAllSize = Collectionx.count<MutableMap.MutableEntry<String, Int>>(allApps, systemAppPredicate)
         Assert.assertTrue(systemAppsInAllSize > 0)
         val userAppsInAllSize = Collectionx.count<MutableMap.MutableEntry<String, Int>>(allApps, userAppPredicate)
@@ -204,7 +204,7 @@ class PackagexTest {
         /*
          * ALL_AND_EXCLUDE_SELF
          */
-        val allAndExcludeSelfApps = context.getPackageVersionCodeMap(PackageType.ALL_AND_EXCLUDE_SELF).entries
+        val allAndExcludeSelfApps = context.getPackageVersionCodeMap(AcceptPackageType.ALL_AND_EXCLUDE_SELF).entries
         Assert.assertEquals(allApps.size.toLong(), (allAndExcludeSelfApps.size + 1).toLong())
         Assert.assertNull(Collectionx.find<MutableMap.MutableEntry<String, Int>>(allAndExcludeSelfApps, selfPredicate))
 
@@ -212,7 +212,7 @@ class PackagexTest {
         /*
          * USER
          */
-        val userApps = context.getPackageVersionCodeMap(PackageType.USER).entries
+        val userApps = context.getPackageVersionCodeMap(AcceptPackageType.USER).entries
         Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(userApps, userAppPredicate))
         Assert.assertEquals(userAppsInAllSize.toLong(), userApps.size.toLong())
         if (!context.isSystemApp(selfPackageName)) {
@@ -224,7 +224,7 @@ class PackagexTest {
         /*
          * USER_AND_EXCLUDE_SELF
          */
-        val userAndExcludeSelfApps = context.getPackageVersionCodeMap(PackageType.USER_AND_EXCLUDE_SELF).entries
+        val userAndExcludeSelfApps = context.getPackageVersionCodeMap(AcceptPackageType.USER_AND_EXCLUDE_SELF).entries
         Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(userAndExcludeSelfApps, userAppPredicate))
         if (!context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(userApps.size.toLong(), (userAndExcludeSelfApps.size + 1).toLong())
@@ -237,7 +237,7 @@ class PackagexTest {
         /*
          * SYSTEM
          */
-        val systemApps = context.getPackageVersionCodeMap(PackageType.SYSTEM).entries
+        val systemApps = context.getPackageVersionCodeMap(AcceptPackageType.SYSTEM).entries
         Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(systemApps, systemAppPredicate))
         Assert.assertEquals(systemAppsInAllSize.toLong(), systemApps.size.toLong())
         Assert.assertEquals(allApps.size.toLong(), (userApps.size + systemApps.size).toLong())
@@ -250,7 +250,7 @@ class PackagexTest {
         /*
          * SYSTEM_AND_EXCLUDE_SELF
          */
-        val systemAndExcludeSelfApps = context.getPackageVersionCodeMap(PackageType.SYSTEM_AND_EXCLUDE_SELF).entries
+        val systemAndExcludeSelfApps = context.getPackageVersionCodeMap(AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF).entries
         Assert.assertTrue(Collectionx.all<MutableMap.MutableEntry<String, Int>>(systemAndExcludeSelfApps, systemAppPredicate))
         if (context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(systemApps.size.toLong(), (systemAndExcludeSelfApps.size + 1).toLong())
@@ -272,7 +272,7 @@ class PackagexTest {
         /*
          * ALL
          */
-        val allApps = context.listPackageName(PackageType.ALL)
+        val allApps = context.listPackageName(AcceptPackageType.ALL)
         val systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate)
         Assert.assertTrue(systemAppsInAllSize > 0)
         val userAppsInAllSize = Collectionx.count(allApps, userAppPredicate)
@@ -282,7 +282,7 @@ class PackagexTest {
         /*
          * ALL_AND_EXCLUDE_SELF
          */
-        val allAndExcludeSelfApps = context.listPackageName(PackageType.ALL_AND_EXCLUDE_SELF)
+        val allAndExcludeSelfApps = context.listPackageName(AcceptPackageType.ALL_AND_EXCLUDE_SELF)
         Assert.assertEquals(allApps.size.toLong(), (allAndExcludeSelfApps.size + 1).toLong())
         Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate))
 
@@ -290,7 +290,7 @@ class PackagexTest {
         /*
          * USER
          */
-        val userApps = context.listPackageName(PackageType.USER)
+        val userApps = context.listPackageName(AcceptPackageType.USER)
         Assert.assertTrue(Collectionx.all(userApps, userAppPredicate))
         Assert.assertEquals(userAppsInAllSize.toLong(), userApps.size.toLong())
         if (!context.isSystemApp(selfPackageName)) {
@@ -302,7 +302,7 @@ class PackagexTest {
         /*
          * USER_AND_EXCLUDE_SELF
          */
-        val userAndExcludeSelfApps = context.listPackageName(PackageType.USER_AND_EXCLUDE_SELF)
+        val userAndExcludeSelfApps = context.listPackageName(AcceptPackageType.USER_AND_EXCLUDE_SELF)
         Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate))
         if (!context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(userApps.size.toLong(), (userAndExcludeSelfApps.size + 1).toLong())
@@ -315,7 +315,7 @@ class PackagexTest {
         /*
          * SYSTEM
          */
-        val systemApps = context.listPackageName(PackageType.SYSTEM)
+        val systemApps = context.listPackageName(AcceptPackageType.SYSTEM)
         Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate))
         Assert.assertEquals(systemAppsInAllSize.toLong(), systemApps.size.toLong())
         Assert.assertEquals(allApps.size.toLong(), (userApps.size + systemApps.size).toLong())
@@ -328,7 +328,7 @@ class PackagexTest {
         /*
          * SYSTEM_AND_EXCLUDE_SELF
          */
-        val systemAndExcludeSelfApps = context.listPackageName(PackageType.SYSTEM_AND_EXCLUDE_SELF)
+        val systemAndExcludeSelfApps = context.listPackageName(AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
         Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate))
         if (context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(systemApps.size.toLong(), (systemAndExcludeSelfApps.size + 1).toLong())
@@ -350,7 +350,7 @@ class PackagexTest {
         /*
          * ALL
          */
-        val allApps = context.listPackage(PackageType.ALL)
+        val allApps = context.listPackage(AcceptPackageType.ALL)
         val systemAppsInAllSize = Collectionx.count(allApps, systemAppPredicate)
         Assert.assertTrue(systemAppsInAllSize > 0)
         val userAppsInAllSize = Collectionx.count(allApps, userAppPredicate)
@@ -360,7 +360,7 @@ class PackagexTest {
         /*
          * ALL_AND_EXCLUDE_SELF
          */
-        val allAndExcludeSelfApps = context.listPackage(PackageType.ALL_AND_EXCLUDE_SELF)
+        val allAndExcludeSelfApps = context.listPackage(AcceptPackageType.ALL_AND_EXCLUDE_SELF)
         Assert.assertEquals(allApps.size.toLong(), (allAndExcludeSelfApps.size + 1).toLong())
         Assert.assertNull(Collectionx.find(allAndExcludeSelfApps, selfPredicate))
 
@@ -368,7 +368,7 @@ class PackagexTest {
         /*
          * USER
          */
-        val userApps = context.listPackage(PackageType.USER)
+        val userApps = context.listPackage(AcceptPackageType.USER)
         Assert.assertTrue(Collectionx.all(userApps, userAppPredicate))
         Assert.assertEquals(userAppsInAllSize.toLong(), userApps.size.toLong())
         if (!context.isSystemApp(selfPackageName)) {
@@ -380,7 +380,7 @@ class PackagexTest {
         /*
          * USER_AND_EXCLUDE_SELF
          */
-        val userAndExcludeSelfApps = context.listPackage(PackageType.USER_AND_EXCLUDE_SELF)
+        val userAndExcludeSelfApps = context.listPackage(AcceptPackageType.USER_AND_EXCLUDE_SELF)
         Assert.assertTrue(Collectionx.all(userAndExcludeSelfApps, userAppPredicate))
         if (!context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(userApps.size.toLong(), (userAndExcludeSelfApps.size + 1).toLong())
@@ -393,7 +393,7 @@ class PackagexTest {
         /*
          * SYSTEM
          */
-        val systemApps = context.listPackage(PackageType.SYSTEM)
+        val systemApps = context.listPackage(AcceptPackageType.SYSTEM)
         Assert.assertTrue(Collectionx.all(systemApps, systemAppPredicate))
         Assert.assertEquals(systemAppsInAllSize.toLong(), systemApps.size.toLong())
         Assert.assertEquals(allApps.size.toLong(), (userApps.size + systemApps.size).toLong())
@@ -406,7 +406,7 @@ class PackagexTest {
         /*
          * SYSTEM_AND_EXCLUDE_SELF
          */
-        val systemAndExcludeSelfApps = context.listPackage(PackageType.SYSTEM_AND_EXCLUDE_SELF)
+        val systemAndExcludeSelfApps = context.listPackage(AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
         Assert.assertTrue(Collectionx.all(systemAndExcludeSelfApps, systemAppPredicate))
         if (context.isSystemApp(selfPackageName)) {
             Assert.assertEquals(systemApps.size.toLong(), (systemAndExcludeSelfApps.size + 1).toLong())
@@ -421,28 +421,28 @@ class PackagexTest {
     fun testGetOnePackage() {
         val context = InstrumentationRegistry.getContext()
 
-        val allAppPackage = context.getOnePackage(PackageType.ALL)
+        val allAppPackage = context.getOnePackage(AcceptPackageType.ALL)
         Assert.assertNotNull(allAppPackage)
 
-        val allAndExcludeSelfAppPackage = context.getOnePackage(PackageType.ALL_AND_EXCLUDE_SELF)
+        val allAndExcludeSelfAppPackage = context.getOnePackage(AcceptPackageType.ALL_AND_EXCLUDE_SELF)
         Assert.assertNotNull(allAndExcludeSelfAppPackage)
         Assert.assertNotEquals(context.packageName, allAndExcludeSelfAppPackage!!.packageName)
 
-        val userAppPackage = context.getOnePackage(PackageType.USER)
+        val userAppPackage = context.getOnePackage(AcceptPackageType.USER)
         Assert.assertNotNull(userAppPackage)
         Assert.assertFalse(context.isSystemAppOr(userAppPackage!!.packageName, false))
         Assert.assertFalse(context.isSystemAppOr(userAppPackage.packageName, false))
 
-        val userAndExcludeSelfAppPackage = context.getOnePackage(PackageType.USER_AND_EXCLUDE_SELF)
+        val userAndExcludeSelfAppPackage = context.getOnePackage(AcceptPackageType.USER_AND_EXCLUDE_SELF)
         Assert.assertNotNull(userAndExcludeSelfAppPackage)
         Assert.assertFalse(context.isSystemAppOr(userAndExcludeSelfAppPackage!!.packageName, false))
         Assert.assertNotEquals(context.packageName, userAndExcludeSelfAppPackage.packageName)
 
-        val systemAppPackage = context.getOnePackage(PackageType.SYSTEM)
+        val systemAppPackage = context.getOnePackage(AcceptPackageType.SYSTEM)
         Assert.assertNotNull(systemAppPackage)
         Assert.assertTrue(context.isSystemAppOr(systemAppPackage!!.packageName, false))
 
-        val systemAndExcludeSelfAppPackage = context.getOnePackage(PackageType.SYSTEM_AND_EXCLUDE_SELF)
+        val systemAndExcludeSelfAppPackage = context.getOnePackage(AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
         Assert.assertNotNull(systemAndExcludeSelfAppPackage)
         Assert.assertTrue(context.isSystemAppOr(systemAndExcludeSelfAppPackage!!.packageName, false))
         Assert.assertNotEquals(context.packageName, systemAndExcludeSelfAppPackage.packageName)
@@ -452,14 +452,14 @@ class PackagexTest {
     fun testCount() {
         val context = InstrumentationRegistry.getContext()
 
-        val allCount = context.countPackage(PackageType.ALL)
-        val allAndExcludeSelfCount = context.countPackage(PackageType.ALL_AND_EXCLUDE_SELF)
+        val allCount = context.countPackage(AcceptPackageType.ALL)
+        val allAndExcludeSelfCount = context.countPackage(AcceptPackageType.ALL_AND_EXCLUDE_SELF)
 
-        val userCount = context.countPackage(PackageType.USER)
-        val userAndExcludeSelfCount = context.countPackage(PackageType.USER_AND_EXCLUDE_SELF)
+        val userCount = context.countPackage(AcceptPackageType.USER)
+        val userAndExcludeSelfCount = context.countPackage(AcceptPackageType.USER_AND_EXCLUDE_SELF)
 
-        val systemCount = context.countPackage(PackageType.SYSTEM)
-        val systemAndExcludeSelfCount = context.countPackage(PackageType.SYSTEM_AND_EXCLUDE_SELF)
+        val systemCount = context.countPackage(AcceptPackageType.SYSTEM)
+        val systemAndExcludeSelfCount = context.countPackage(AcceptPackageType.SYSTEM_AND_EXCLUDE_SELF)
 
         Assert.assertTrue(allCount > 0)
         Assert.assertEquals((allCount - 1).toLong(), allAndExcludeSelfCount.toLong())

@@ -27,8 +27,8 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.util.Pair
 import androidx.annotation.RequiresPermission
+import me.panpf.androidx.content.pm.AcceptPackageType
 import me.panpf.androidx.content.pm.AppPackage
-import me.panpf.androidx.content.pm.PackageType
 import me.panpf.androidx.content.pm.Packagex
 import java.io.File
 
@@ -127,55 +127,55 @@ inline fun Context.isSystemAppOr(packageName: String, defaultValue: Boolean): Bo
 /**
  * List the packageName and versionCode of all installed APPs
  *
- * @param packageType Accepted package type, see {@link AppType}
+ * @param acceptPackageType Accepted package type, see {@link AppType}
  */
-inline fun Context.listPackageVersionCodePair(@PackageType packageType: Int): List<Pair<String, Int>> = Packagex.listVersionCodePair(this, packageType)
+inline fun Context.listPackageVersionCodePair(@AcceptPackageType acceptPackageType: Int): List<Pair<String, Int>> = Packagex.listVersionCodePair(this, acceptPackageType)
 
 
 /**
  * Get the packageName and versionCode of all installed apps Map
  *
- * @param packageType Accepted package type, see {@link AppType}
+ * @param acceptPackageType Accepted package type, see {@link AppType}
  */
-inline fun Context.getPackageVersionCodeMap(@PackageType packageType: Int): androidx.collection.ArrayMap<String, Int> = Packagex.getVersionCodeMap(this, packageType)
+inline fun Context.getPackageVersionCodeMap(@AcceptPackageType acceptPackageType: Int): androidx.collection.ArrayMap<String, Int> = Packagex.getVersionCodeMap(this, acceptPackageType)
 
 /**
  * List the packageName of all installed apps
  *
- * @param packageType Accepted package type, see {@link AppType}
+ * @param acceptPackageType Accepted package type, see {@link AppType}
  */
-inline fun Context.listPackageName(@PackageType packageType: Int): List<String> = Packagex.listPackageName(this, packageType)
+inline fun Context.listPackageName(@AcceptPackageType acceptPackageType: Int): List<String> = Packagex.listPackageName(this, acceptPackageType)
 
 /**
  * List information for all installed apps
  *
- * @param packageType Accepted package type, see {@link AppType}
+ * @param acceptPackageType Accepted package type, see {@link AppType}
  * @param size             How many apps to get. -1: all
  */
-inline fun Context.listPackage(@PackageType packageType: Int, size: Int): List<AppPackage> = Packagex.list(this, packageType, size)
+inline fun Context.listPackage(@AcceptPackageType acceptPackageType: Int, size: Int): List<AppPackage> = Packagex.list(this, acceptPackageType, size)
 
 /**
  * List information for all installed apps
  *
- * @param packageType Accepted package type, see {@link AppType}
+ * @param acceptPackageType Accepted package type, see {@link AppType}
  */
-inline fun Context.listPackage(@PackageType packageType: Int): List<AppPackage> = Packagex.list(this, packageType)
+inline fun Context.listPackage(@AcceptPackageType acceptPackageType: Int): List<AppPackage> = Packagex.list(this, acceptPackageType)
 
 
 /**
  * Get information about an app
  *
- * @param packageType Accepted package type, see {@link AppType}
+ * @param acceptPackageType Accepted package type, see {@link AppType}
  */
-inline fun Context.getOnePackage(@PackageType packageType: Int): AppPackage? = Packagex.getOne(this, packageType)
+inline fun Context.getOnePackage(@AcceptPackageType acceptPackageType: Int): AppPackage? = Packagex.getOne(this, acceptPackageType)
 
 
 /**
  * Get the number of installed apps
  *
- * @param packageType Accepted package type, see {@link AppType}
+ * @param acceptPackageType Accepted package type, see {@link AppType}
  */
-inline fun Context.countPackage(@PackageType packageType: Int): Int = Packagex.count(this, packageType)
+inline fun Context.countPackage(@AcceptPackageType acceptPackageType: Int): Int = Packagex.count(this, acceptPackageType)
 
 
 /**
