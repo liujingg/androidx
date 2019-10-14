@@ -49,7 +49,6 @@ public class Settingsx {
      *
      * @return true if the calling app can write to system settings, false otherwise
      */
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public static boolean canWrite(@NonNull Context context) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             return Settings.System.canWrite(context);

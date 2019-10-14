@@ -23,6 +23,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,11 +37,6 @@ import org.junit.runner.RunWith;
 import java.lang.ref.WeakReference;
 import java.util.concurrent.CountDownLatch;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.provider.Settingsx;
 import me.panpf.androidx.widget.Toastx;
@@ -63,7 +64,6 @@ public class SettingsxTest {
 
     @Test
     public void testScreenBrightnessMode() {
-        // todo 测试 23 以下的权限问题
         Context context = InstrumentationRegistry.getContext();
         if (!Settingsx.canWrite(context)) {
             RequestPermissionTestActivity activity = requestPermissionActivityRule.getActivity();

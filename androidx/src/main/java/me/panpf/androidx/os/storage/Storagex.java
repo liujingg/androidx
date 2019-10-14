@@ -35,7 +35,6 @@ import me.panpf.androidx.os.StatFsx;
 import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.io.Filex;
-import me.panpf.javax.io.UnableCreateDirException;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Transformer;
 
@@ -49,14 +48,6 @@ public class Storagex {
 
     /* ******************************************* Bytes *******************************************/
 
-
-    /**
-     * Get the number of free bytes of the given path
-     */
-    // todo 删除
-    public static long getFreeBytes(@NonNull File path) {
-        return StatFsx.getFreeBytesCompat(new StatFs(path.getPath()));
-    }
 
     /**
      * Get the number of free bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
@@ -74,14 +65,6 @@ public class Storagex {
     }
 
     /**
-     * Get the number of total bytes of the given path
-     */
-    // todo 删除
-    public static long getTotalBytes(@NonNull File path) {
-        return StatFsx.getTotalBytesCompat(new StatFs(path.getPath()));
-    }
-
-    /**
      * Get the number of total bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
      */
     public static long getTotalBytesOr(@NonNull File path, long defaultValue) {
@@ -94,14 +77,6 @@ public class Storagex {
             e.printStackTrace();
             return defaultValue;
         }
-    }
-
-    /**
-     * Get the number of available bytes of the given path
-     */
-    // todo 删除
-    public static long getAvailableBytes(@NonNull File path) {
-        return StatFsx.getAvailableBytesCompat(new StatFs(path.getPath()));
     }
 
     /**
@@ -123,21 +98,21 @@ public class Storagex {
      * Get the number of free bytes for the primary shared/external storage media
      */
     public static long getExternalStorageFreeBytes() {
-        return getFreeBytes(getExternalStorageDirectory());
+        return getFreeBytesOr(getExternalStorageDirectory(), -1);
     }
 
     /**
      * Get the number of total bytes for the primary shared/external storage media
      */
     public static long getExternalStorageTotalBytes() {
-        return getTotalBytes(getExternalStorageDirectory());
+        return getTotalBytesOr(getExternalStorageDirectory(), -1);
     }
 
     /**
      * Get the number of available bytes for the primary shared/external storage media
      */
     public static long getExternalStorageAvailableBytes() {
-        return getAvailableBytes(getExternalStorageDirectory());
+        return getAvailableBytesOr(getExternalStorageDirectory(), -1);
     }
 
 
@@ -1025,14 +1000,8 @@ public class Storagex {
     public static File getFileIn(@Nullable File[] dirs, @NonNull String fileName, long minBytes, boolean cleanOldFile) {
         if (dirs != null && dirs.length > 0) {
             for (File dir : dirs) {
-                if (dir == null || dir.exists() && dir.isFile()) {
+                if (dir == null || dir.isFile()) {
                     continue;
-                }
-
-                try {
-                    Filex.mkdirsOrThrow(dir);
-                } catch (UnableCreateDirException e) {
-                    e.printStackTrace();
                 }
 
                 File newFile = new File(dir, fileName);
@@ -1041,7 +1010,7 @@ public class Storagex {
                     newFile.delete();
                 }
 
-                if (Storagex.getAvailableBytesOr(dir, 0) >= minBytes) {
+                if (Storagex.getAvailableBytesOr(dir, -1) >= minBytes) {
                     return newFile;
                 }
             }

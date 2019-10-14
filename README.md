@@ -147,8 +147,7 @@ Dependencies:
 
 ### os
 * Storage: [Storagex.java] ([Test][StoragexTest.java]) | [Storagex.kt] ([Test][StoragexTest.kt])
-    * getFreeBytes, getFreeBytesOr, getTotalBytes, getTotalBytesOr, getAvailableBytes, getAvailableBytesOr, 
-    * getVolumeState, isVolumeMounted, isPrimaryVolume,
+    * getFreeBytesOr, getTotalBytesOr, getAvailableBytesOr, getVolumeState, isVolumeMounted, isPrimaryVolume,
     * isVolumeEmulated, isVolumeRemovable, getVolumePaths, getMountedVolumePaths, getVolumeFiles,
     * getMountedVolumeFiles, getVolumeList, getMountedVolumeList, getVolumes, getMountedVolumes, getVolume,
     * getExternalStorageState, isExternalStorageMounted, isPrimaryExternalStorage, isExternalStorageEmulated,

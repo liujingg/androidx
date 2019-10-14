@@ -12,6 +12,9 @@ Rename
 
 Remove
 * :fire: Remove Servicex.startIfNoRunning and stopIfRunning method
+* :fire: Remove Storagex.getFreeBytes(File) method
+* :fire: Remove Storagex.getTotalBytes(File) method
+* :fire: Remove Storagex.getAvailableBytes(File) method
 
 Update
 * :fire: Servicex.isRunning(Context, Class) add String parameter

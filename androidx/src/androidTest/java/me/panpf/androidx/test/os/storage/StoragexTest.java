@@ -19,18 +19,20 @@ package me.panpf.androidx.test.os.storage;
 import android.content.Context;
 import android.os.Environment;
 
+import androidx.annotation.NonNull;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.File;
 import java.io.IOException;
 
-import androidx.annotation.NonNull;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.os.storage.StorageVolumeCompat;
 import me.panpf.androidx.os.storage.Storagex;
 import me.panpf.javax.collections.Arrayx;
+import me.panpf.javax.io.Filex;
 import me.panpf.javax.util.Predicate;
 
 import static org.junit.Assert.assertEquals;
@@ -49,12 +51,22 @@ public class StoragexTest {
         assertTrue(Storagex.getExternalStorageAvailableBytes() <= Storagex.getExternalStorageFreeBytes());
 
         File downloadDir = new File(Environment.getExternalStorageDirectory(), "download");
-        assertTrue(Storagex.getFreeBytes(downloadDir) <= Storagex.getTotalBytes(downloadDir));
-        assertTrue(Storagex.getFreeBytesOr(downloadDir, 0) <= Storagex.getTotalBytes(downloadDir));
-        assertTrue(Storagex.getAvailableBytes(downloadDir) <= Storagex.getTotalBytes(downloadDir));
-        assertTrue(Storagex.getAvailableBytesOr(downloadDir, 0) <= Storagex.getTotalBytes(downloadDir));
-        assertTrue(Storagex.getAvailableBytes(downloadDir) <= Storagex.getFreeBytes(downloadDir));
-        assertTrue(Storagex.getAvailableBytesOr(downloadDir, 0) <= Storagex.getFreeBytes(downloadDir));
+        try {
+            assertTrue(Storagex.getFreeBytesOr(downloadDir, -1) <= Storagex.getTotalBytesOr(downloadDir, -1));
+            assertTrue(Storagex.getAvailableBytesOr(downloadDir, -1) <= Storagex.getTotalBytesOr(downloadDir, -1));
+            assertTrue(Storagex.getAvailableBytesOr(downloadDir, -1) <= Storagex.getFreeBytesOr(downloadDir, -1));
+        } finally {
+            Filex.deleteRecursively(downloadDir);
+        }
+
+        File errorDir = new File(Environment.getExternalStorageDirectory(), "fhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfas");
+        try {
+            assertEquals(-1, Storagex.getFreeBytesOr(errorDir, -1));
+            assertEquals(-1, Storagex.getAvailableBytesOr(errorDir, -1));
+            assertEquals(-1, Storagex.getTotalBytesOr(errorDir, -1));
+        } finally {
+            Filex.deleteRecursively(errorDir);
+        }
     }
 
     @Test

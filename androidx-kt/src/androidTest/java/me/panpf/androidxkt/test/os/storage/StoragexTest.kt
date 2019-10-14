@@ -19,6 +19,7 @@ package me.panpf.androidxkt.test.os.storage
 import android.os.Environment
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
+import me.panpf.androidx.os.storage.Storagex
 import me.panpf.androidxkt.os.storage.*
 import org.junit.Assert.*
 import org.junit.Test
@@ -31,17 +32,27 @@ class StoragexTest {
 
     @Test
     fun testBytes() {
-        assertTrue(getExternalStorageFreeBytes() <= getExternalStorageTotalBytes())
-        assertTrue(getExternalStorageAvailableBytes() <= getExternalStorageTotalBytes())
-        assertTrue(getExternalStorageAvailableBytes() <= getExternalStorageFreeBytes())
+        assertTrue(Storagex.getExternalStorageFreeBytes() <= Storagex.getExternalStorageTotalBytes())
+        assertTrue(Storagex.getExternalStorageAvailableBytes() <= Storagex.getExternalStorageTotalBytes())
+        assertTrue(Storagex.getExternalStorageAvailableBytes() <= Storagex.getExternalStorageFreeBytes())
 
         val downloadDir = File(Environment.getExternalStorageDirectory(), "download")
-        assertTrue(downloadDir.getFreeBytes() <= downloadDir.getTotalBytes())
-        assertTrue(downloadDir.getFreeBytesOr(0) <= downloadDir.getTotalBytes())
-        assertTrue(downloadDir.getTotalBytes() <= downloadDir.getTotalBytes())
-        assertTrue(downloadDir.getTotalBytesOr(0) <= downloadDir.getTotalBytes())
-        assertTrue(downloadDir.getAvailableBytes() <= downloadDir.getFreeBytes())
-        assertTrue(downloadDir.getAvailableBytesOr(0) <= downloadDir.getFreeBytes())
+        try {
+            assertTrue(downloadDir.getFreeBytesOr(-1) <= downloadDir.getTotalBytesOr(-1))
+            assertTrue(downloadDir.getAvailableBytesOr(-1) <= downloadDir.getTotalBytesOr(-1))
+            assertTrue(downloadDir.getAvailableBytesOr(-1) <= downloadDir.getFreeBytesOr(-1))
+        } finally {
+            downloadDir.deleteRecursively()
+        }
+
+        val errorDir = File(Environment.getExternalStorageDirectory(), "fhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfasfhkasjfwurklfsnmfsdfaopsjfpioawejfasjfiwhfsjfkasjfksjfkoasfwfas")
+        try {
+            assertEquals(-1, errorDir.getFreeBytesOr(-1))
+            assertEquals(-1, errorDir.getAvailableBytesOr(-1))
+            assertEquals(-1, errorDir.getTotalBytesOr(-1))
+        } finally {
+            errorDir.deleteRecursively()
+        }
     }
 
     @Test

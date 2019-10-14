@@ -33,19 +33,9 @@ import java.io.File
 
 
 /**
- * Get the number of free bytes of the given path
- */
-inline fun File.getFreeBytes(): Long = Storagex.getFreeBytes(this)
-
-/**
  * Get the number of free bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
  */
 inline fun File.getFreeBytesOr(defaultValue: Long): Long = Storagex.getFreeBytesOr(this, defaultValue)
-
-/**
- * Get the number of total bytes of the given path
- */
-inline fun File.getTotalBytes(): Long = Storagex.getTotalBytes(this)
 
 /**
  * Get the number of total bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
@@ -53,29 +43,9 @@ inline fun File.getTotalBytes(): Long = Storagex.getTotalBytes(this)
 inline fun File.getTotalBytesOr(defaultValue: Long): Long = Storagex.getTotalBytesOr(this, defaultValue)
 
 /**
- * Get the number of available bytes of the given path
- */
-inline fun File.getAvailableBytes(): Long = Storagex.getAvailableBytes(this)
-
-/**
  * Get the number of available bytes of the given path. The directory does not exist and the creation is unsuccessful. [defaultValue]
  */
 inline fun File.getAvailableBytesOr(defaultValue: Long): Long = Storagex.getAvailableBytesOr(this, defaultValue)
-
-/**
- * Get the number of free bytes for the primary shared/external storage media
- */
-inline fun getExternalStorageFreeBytes(): Long = Storagex.getExternalStorageFreeBytes()
-
-/**
- * Get the number of total bytes for the primary shared/external storage media
- */
-inline fun getExternalStorageTotalBytes(): Long = Storagex.getExternalStorageTotalBytes()
-
-/**
- * Get the number of available bytes for the primary shared/external storage media
- */
-inline fun getExternalStorageAvailableBytes(): Long = Storagex.getExternalStorageAvailableBytes()
 
 
 /* ******************************************* Volume *******************************************/
