@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -28,6 +29,7 @@ import android.view.ViewGroup;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import me.panpf.androidx.widget.Toastx;
 
 public class Viewx {
@@ -276,5 +278,17 @@ public class Viewx {
     @NonNull
     public static View inflateLayout(@NonNull Context context, @LayoutRes int resource) {
         return LayoutInflater.from(context).inflate(resource, null, false);
+    }
+
+    /**
+     * If the system version is greater than or equal to KITKAT, use the status bar height to increase the top padding of the given view.
+     */
+    public static void addPaddingTopByStatusBarHeight(@NonNull View view) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            int statusBarHeight = Displayx.getStatusBarHeight(view.getContext());
+            if (statusBarHeight > 0) {
+                view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + statusBarHeight, view.getPaddingRight(), view.getPaddingBottom());
+            }
+        }
     }
 }

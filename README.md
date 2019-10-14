@@ -200,7 +200,7 @@ Dependencies:
 * View: [Viewx.java] ([Test][ViewxTest.java]) | [Viewx.kt] ([Test][ViewxTest.kt])
     * setLongClickToastHint, setLayoutWidth, setLayoutHeight, setLayoutSize, setLayoutMarginTop,
     * addLayoutHeight, addLayoutWidth, addLayoutSize, addLayoutMarginTop, toBitmap, toBitmapByMaxWidth,
-    * toBitmapByMaxHeight, inflateLayout
+    * toBitmapByMaxHeight, inflateLayout, addPaddingTopByStatusBarHeight
 * Window: [Windowx.java] ([Test][WindowxTest.java]) | [Windowx.kt] ([Test][WindowxTest.kt])
     * getBrightness, setBrightness, isBrightnessFlowSystem
 

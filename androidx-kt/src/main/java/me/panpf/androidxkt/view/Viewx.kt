@@ -159,3 +159,9 @@ inline fun Context.inflateLayout(@LayoutRes resource: Int, root: ViewGroup): Vie
  *         the inflated XML file.
  */
 inline fun Context.inflateLayout(@LayoutRes resource: Int): View = Viewx.inflateLayout(this, resource)
+
+
+/**
+ * If the system version is greater than or equal to KITKAT, use the status bar height to increase the top padding of the given view.
+ */
+inline fun View.addPaddingTopByStatusBarHeight() = Viewx.addPaddingTopByStatusBarHeight(this)

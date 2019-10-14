@@ -24,6 +24,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
+import me.panpf.androidx.Androidx
 import me.panpf.androidx.util.ResultRunnable
 import me.panpf.androidxkt.runInUI
 import me.panpf.androidxkt.test.R
@@ -264,6 +265,19 @@ class ViewxTest {
         Assert.assertNull(childView3.parent)
         Assert.assertNull(childView3.layoutParams)
         Assert.assertEquals((contentViewChildCount + 1).toLong(), contentView.childCount.toLong())
+    }
+
+    @Test
+    fun testAddPaddingTopByStatusBarHeight() {
+        val activity = activityRule.activity
+        val contentView = activity.contentView
+        val oldTopPadding = contentView.paddingTop
+        Androidx.waitRunInUI { contentView.addPaddingTopByStatusBarHeight() }
+        if (Androidx.isAtLeastK()) {
+            Assert.assertEquals((oldTopPadding + activity.getStatusBarHeight()).toLong(), contentView.paddingTop.toLong())
+        } else {
+            Assert.assertEquals(oldTopPadding.toLong(), contentView.paddingTop.toLong())
+        }
     }
 
     class TestActivity : Activity() {

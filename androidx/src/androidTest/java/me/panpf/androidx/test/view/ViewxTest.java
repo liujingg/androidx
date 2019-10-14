@@ -23,18 +23,20 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.test.R;
 import me.panpf.androidx.util.ResultRunnable;
+import me.panpf.androidx.view.Displayx;
 import me.panpf.androidx.view.Viewx;
 
 @RunWith(AndroidJUnit4.class)
@@ -414,6 +416,24 @@ public class ViewxTest {
         Assert.assertNull(childView3.getParent());
         Assert.assertNull(childView3.getLayoutParams());
         Assert.assertEquals(contentViewChildCount + 1, contentView.getChildCount());
+    }
+
+    @Test
+    public void testAddPaddingTopByStatusBarHeight() {
+        final TestActivity activity = activityRule.getActivity();
+        final ViewGroup contentView = activity.getContentView();
+        final int oldTopPadding = contentView.getPaddingTop();
+        Androidx.waitRunInUI(new Runnable() {
+            @Override
+            public void run() {
+                Viewx.addPaddingTopByStatusBarHeight(contentView);
+            }
+        });
+        if (Androidx.isAtLeastK()) {
+            Assert.assertEquals(oldTopPadding + Displayx.getStatusBarHeight(activity), contentView.getPaddingTop());
+        } else {
+            Assert.assertEquals(oldTopPadding, contentView.getPaddingTop());
+        }
     }
 
     public static class TestActivity extends Activity {
