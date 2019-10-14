@@ -2,6 +2,6 @@
     package="me.panpf.androidxkt.arch.test">
 
     <application>
-        <activity android:name="me.panpf.androidxkt.arch.test.TestActivity" />
+        <activity android:name="me.panpf.androidxkt.arch.test.ViewModelBinderTest$TestActivity" />
     </application>
 </manifest>
