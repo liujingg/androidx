@@ -1,5 +1,9 @@
 ## new
 
+* fix: Fix Argsx.get \* UriArgOr \* series methods crash when encountering inteng.getData() returning null
+
+## v1.0.0-alpha5
+
 Rename
 * :fire: SystemPropertiesx.get(String, String) rename to getOr(String, String) 
 * :fire: SystemPropertiesx.getInt(String, String) rename to getIntOr(String, String) 
