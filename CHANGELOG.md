@@ -1,6 +1,8 @@
 ## new
 
 * fix: Fix Argsx.get \* UriArgOr \* series methods crash when encountering inteng.getData() returning null
+* fix: Fix NetworkState getTypeName (), getSubtypeName (), getExtraInfo () method may return null
+* new: New ApplicationSingletonLazy class for singleton implementation
 
 ## v1.0.0-alpha5
 
