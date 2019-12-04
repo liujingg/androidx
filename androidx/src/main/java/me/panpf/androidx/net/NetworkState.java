@@ -26,6 +26,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 import me.panpf.androidx.content.Contextx;
+import me.panpf.javax.lang.Stringx;
 
 /**
  * A tool class that determines the state of the network, which can satisfy whether there is a network and what type of network at one time.
@@ -131,7 +132,7 @@ public class NetworkState {
      */
     @NonNull
     public String getTypeName() {
-        return networkInfo != null ? networkInfo.getTypeName() : "unknown";
+        return Stringx.isNullOrEmptyOr(networkInfo != null ? networkInfo.getTypeName() : null, "unknown");
     }
 
     /**
@@ -139,7 +140,7 @@ public class NetworkState {
      */
     @NonNull
     public String getSubtypeName() {
-        return networkInfo != null ? networkInfo.getSubtypeName() : "unknown";
+        return Stringx.isNullOrEmptyOr(networkInfo != null ? networkInfo.getSubtypeName() : null, "unknown");
     }
 
     /**
@@ -147,7 +148,7 @@ public class NetworkState {
      */
     @NonNull
     public String getExtraInfo() {
-        return networkInfo != null ? networkInfo.getExtraInfo() : "unknown";
+        return Stringx.isNullOrEmptyOr(networkInfo != null ? networkInfo.getExtraInfo() : null, "unknown");
     }
 
     /**
