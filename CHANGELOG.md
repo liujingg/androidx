@@ -1,3 +1,7 @@
+## v1.0.0-alpha07
+
+* fix: Fix some strange bugs caused by Context.getSystemService method to force ApplicationContext to get all services
+
 ## v1.0.0-alpha06
 
 * fix: Fix Argsx.get \* UriArgOr \* series methods crash when encountering inteng.getData() returning null

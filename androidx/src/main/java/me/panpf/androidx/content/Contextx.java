@@ -91,6 +91,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
+
+import java.lang.ref.WeakReference;
+
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.os.storage.StorageManagerCompat;
 import me.panpf.androidx.util.NullableResultRunnable;
@@ -167,7 +170,13 @@ public class Contextx {
     @NonNull
     public static <T> T systemService(@NonNull Context context, @NonNull String serviceName) {
         //noinspection unchecked
-        return Premisex.requireNotNull((T) context.getApplicationContext().getSystemService(serviceName), serviceName);
+        return Premisex.requireNotNull((T) context.getSystemService(serviceName), serviceName);
+    }
+
+    @Nullable
+    public static <T> T systemServiceOrNull(@NonNull Context context, @NonNull String serviceName) {
+        //noinspection unchecked
+        return (T) context.getSystemService(serviceName);
     }
 
     /**
@@ -177,24 +186,20 @@ public class Contextx {
     public static <T> T systemServiceInUI(@NonNull final Context context, @NonNull final String serviceName) {
         if (Androidx.isMainThread()) {
             //noinspection unchecked
-            return Premisex.requireNotNull((T) context.getApplicationContext().getSystemService(serviceName), serviceName);
+            return Premisex.requireNotNull((T) context.getSystemService(serviceName), serviceName);
         } else {
-            final Context appContext = context.getApplicationContext();
+            final WeakReference<Context> contextWeakReference = new WeakReference<>(context);
             return Androidx.waitRunInUIResult(new ResultRunnable<T>() {
                 @NonNull
                 @Override
                 public T run() {
+                    Context nowContext = contextWeakReference.get();
+                    if (nowContext == null) throw new IllegalStateException("Context has death");
                     //noinspection unchecked
-                    return Premisex.requireNotNull((T) appContext.getApplicationContext().getSystemService(serviceName), serviceName);
+                    return Premisex.requireNotNull((T) nowContext.getSystemService(serviceName), serviceName);
                 }
             });
         }
-    }
-
-    @Nullable
-    public static <T> T systemServiceOrNull(@NonNull Context context, @NonNull String serviceName) {
-        //noinspection unchecked
-        return (T) context.getApplicationContext().getSystemService(serviceName);
     }
 
     /**
@@ -204,15 +209,16 @@ public class Contextx {
     public static <T> T systemServiceOrNullInUI(@NonNull final Context context, @NonNull final String serviceName) {
         if (Androidx.isMainThread()) {
             //noinspection unchecked
-            return (T) context.getApplicationContext().getSystemService(serviceName);
+            return (T) context.getSystemService(serviceName);
         } else {
-            final Context appContext = context.getApplicationContext();
+            final WeakReference<Context> contextWeakReference = new WeakReference<>(context);
             return Androidx.waitRunInUINullableResult(new NullableResultRunnable<T>() {
                 @Nullable
                 @Override
                 public T run() {
+                    Context nowContext = contextWeakReference.get();
                     //noinspection unchecked
-                    return (T) appContext.getApplicationContext().getSystemService(serviceName);
+                    return nowContext != null ? (T) nowContext.getSystemService(serviceName) : null;
                 }
             });
         }
@@ -220,7 +226,7 @@ public class Contextx {
 
     @NonNull
     public static PackageManager packageManager(@NonNull Context context) {
-        return Premisex.requireNotNull(context.getApplicationContext().getPackageManager(), "PackageManager");
+        return Premisex.requireNotNull(context.getPackageManager(), "PackageManager");
     }
 
     @NonNull
