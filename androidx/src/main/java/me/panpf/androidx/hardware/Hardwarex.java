@@ -25,15 +25,16 @@ import android.os.Build;
 import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
+
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.LinkedList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.RequiresPermission;
 import me.panpf.androidx.content.Contextx;
+import me.panpf.javax.collections.Arrayx;
 import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Predicate;
@@ -207,15 +208,12 @@ public class Hardwarex {
                     });
                     byte[] address = networkInterface != null ? networkInterface.getHardwareAddress() : null;
                     if (address != null) {
-                        List<Byte> byteList = new LinkedList<>();
-                        for (byte by : address) {
-                            byteList.add(by);
-                        }
-                        macAddress = Collectionx.joinToString(byteList, ":", null, null, -1, null, new Transformer<Byte, CharSequence>() {
+                        macAddress = Arrayx.joinToString(address, ":", null, null, -1, null, new Transformer<Byte, CharSequence>() {
                             @NonNull
                             @Override
                             public CharSequence transform(@NonNull Byte by) {
-                                return Integer.toHexString(by & 0xFF);
+                                String item = Integer.toHexString(by & 0xFF);
+                                return item.length() > 1 ? item : ("0" + item);
                             }
                         });
                     }

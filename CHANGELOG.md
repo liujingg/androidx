@@ -1,3 +1,7 @@
+## new
+
+* fix: Fix Hardware.getMacAddress() method return mac address segment length abnormal bug
+
 ## v1.0.0-alpha07
 
 * fix: Fix some strange bugs caused by Context.getSystemService method to force ApplicationContext to get all services
