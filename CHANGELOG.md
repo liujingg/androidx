@@ -1,4 +1,4 @@
-## new
+## v1.0.0-alpha08
 
 * fix: Fix Hardware.getMacAddress() method return mac address segment length abnormal bug
 * new: Added SingletonLazy for delayed production of singleton objects
