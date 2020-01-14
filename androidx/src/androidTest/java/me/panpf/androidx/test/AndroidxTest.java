@@ -39,7 +39,7 @@ import me.panpf.javax.ranges.Rangex;
 import me.panpf.javax.util.Predicate;
 
 @RunWith(AndroidJUnit4.class)
-public class AndroidxText {
+public class AndroidxTest {
 
     @Test
     public void testGetMainHandler() {

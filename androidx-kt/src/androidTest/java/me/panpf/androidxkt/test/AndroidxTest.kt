@@ -28,7 +28,7 @@ import org.junit.runner.RunWith
 import java.util.concurrent.CountDownLatch
 
 @RunWith(AndroidJUnit4::class)
-class AndroidxText {
+class AndroidxTest {
 
     @Test
     fun testRunInUI() {

@@ -184,7 +184,8 @@ Dependencies:
 * Text: [Textx.java] ([Test][TextxTest.java]) | [Textx.kt] ([Test][TextxTest.kt])
     * textToBitmap, changeColorByHtml, changeColorToRedByHtml, changeKeywordColorByHtml, changeKeywordColorToRedByHtml,
     * changeColorBySpannable, changeColorToRedBySpannable, changeKeywordColorBySpannable, changeKeywordColorToRedBySpannable
-* WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java]) | [WeakAsyncTask.kt] ([Test][WeakAsyncTaskTest.kt])
+* WeakAsyncTask: [WeakAsyncTask.java] ([Test][WeakAsyncTaskTest.java])
+* SingletonLazy: [SingletonLazy.java] ([Test][SingletonLazyTest.java])
 
 ### view
 * InputMethod: [InputMethodx.java] ([Test][InputMethodxTest.java]) | [InputMethodx.kt] ([Test][InputMethodxTest.kt])
@@ -244,7 +245,6 @@ Please view the [CHANGELOG.md] file
 [kotlin_stdlib]: https://kotlinlang.org/
 [kotlin_versions]: https://blog.jetbrains.com/kotlin/
 [androidx-kt-arch]: androidx-kt-arch
-[androidx-kt-args]: androidx-kt-args
 
 [CHANGELOG.md]: CHANGELOG.md
 
@@ -263,8 +263,6 @@ Please view the [CHANGELOG.md] file
 [Argsx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Argsx.kt
 [ArgsxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ArgsxTest.kt
 
-[ArgsBinder.java]: androidx/src/main/java/me/panpf/androidx/app/ArgsBinder.java
-[ArgsBinderTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/app/ArgsBinderTest.java
 [ArgsBinder.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/ArgsBinder.kt
 [ArgsBinderTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ArgsBinderTest.kt
 
@@ -288,15 +286,15 @@ Please view the [CHANGELOG.md] file
 [Servicex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/app/Servicex.kt
 [ServicexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/app/ServicexTest.kt
 
-[PackageInfox.java]: androidx/src/main/java/me/panpf/androidx/content/pm//PackageInfox.java
+[PackageInfox.java]: androidx/src/main/java/me/panpf/androidx/content/pm/PackageInfox.java
 [PackageInfoxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/PackageInfoxTest.java
 [PackageInfox.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/pm/PackageInfox.kt
 [PackageInfoxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/PackageInfoxTest.kt
 
 [Packagex.java]: androidx/src/main/java/me/panpf/androidx/content/pm/Packagex.java
-[PackagexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/pm/PackagexTest.java
+[PackagexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/PackagexTest.java
 [Packagex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/content/pm/Packagex.kt
-[PackagexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/pm/PackagexTest.kt
+[PackagexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/PackagexTest.kt
 
 [Contextx.java]: androidx/src/main/java/me/panpf/androidx/content/Contextx.java
 [ContextxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/content/ContextxTest.java
@@ -322,9 +320,9 @@ Please view the [CHANGELOG.md] file
 [PreferencexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/content/PreferencexTest.kt
 
 [Drawablex.java]: androidx/src/main/java/me/panpf/androidx/graphics/drawable/Drawablex.java
-[DrawablexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/drawable/DrawablexTest.java
+[DrawablexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/DrawablexTest.java
 [Drawablex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/drawable/Drawablex.kt
-[DrawablexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/drawable/DrawablexTest.kt
+[DrawablexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/DrawablexTest.kt
 
 [Bitmapx.java]: androidx/src/main/java/me/panpf/androidx/graphics/Bitmapx.java
 [BitmapxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/BitmapxTest.java
@@ -358,8 +356,6 @@ Please view the [CHANGELOG.md] file
 
 [Resizex.java]: androidx/src/main/java/me/panpf/androidx/graphics/Resizex.java
 [ResizexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/graphics/ResizexTest.java
-[Resizex.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/graphics/Resizex.kt
-[ResizexTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/graphics/ResizexTest.kt
 
 [Hardwarex.java]: androidx/src/main/java/me/panpf/androidx/hardware/Hardwarex.java
 [HardwarexTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/hardware/HardwarexTest.java
@@ -368,8 +364,6 @@ Please view the [CHANGELOG.md] file
 
 [NetworkState.java]: androidx/src/main/java/me/panpf/androidx/net/NetworkState.java
 [NetworkStateTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/net/NetworkStateTest.java
-[NetworkState.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/net/NetworkState.kt
-[NetworkStateTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/net/NetworkStateTest.kt
 
 [Networkx.java]: androidx/src/main/java/me/panpf/androidx/net/Networkx.java
 [NetworkxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/net/NetworkxTest.java
@@ -383,13 +377,9 @@ Please view the [CHANGELOG.md] file
 
 [StorageManagerCompat.java]: androidx/src/main/java/me/panpf/androidx/os/storage/StorageManagerCompat.java
 [StorageManagerCompatTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/storage/StorageManagerCompatTest.java
-[StorageManagerCompat.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/storage/StorageManagerCompat.kt
-[StorageManagerCompatTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/storage/StorageManagerCompatTest.kt
 
 [StorageVolumeCompat.java]: androidx/src/main/java/me/panpf/androidx/os/storage/StorageVolumeCompat.java
 [StorageVolumeCompatTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/storage/StorageVolumeCompatTest.java
-[StorageVolumeCompat.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/storage/StorageVolumeCompat.kt
-[StorageVolumeCompatTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/storage/StorageVolumeCompatTest.kt
 
 [StatFsx.java]: androidx/src/main/java/me/panpf/androidx/os/StatFsx.java
 [StatFsxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/StatFsxTest.java
@@ -398,16 +388,12 @@ Please view the [CHANGELOG.md] file
 
 [SystemPropertiesx.java]: androidx/src/main/java/me/panpf/androidx/os/SystemPropertiesx.java
 [SystemPropertiesxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/SystemPropertiesxTest.java
-[SystemPropertiesx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/SystemPropertiesx.kt
-[SystemPropertiesxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/SystemPropertiesxTest.kt
 
 [BundleBuilder.java]: androidx/src/main/java/me/panpf/androidx/os/BundleBuilder.java
 [BundleBuilderTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/BundleBuilderTest.java
 
 [Romx.java]: androidx/src/main/java/me/panpf/androidx/os/Romx.java
 [RomxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/os/RomxTest.java
-[Romx.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/os/Romx.kt
-[RomxTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/os/RomxTest.kt
 
 [Settingsx.java]: androidx/src/main/java/me/panpf/androidx/provider/Settingsx.java
 [SettingsxTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/provider/SettingsxTest.java
@@ -456,5 +442,6 @@ Please view the [CHANGELOG.md] file
 
 [WeakAsyncTask.java]: androidx/src/main/java/me/panpf/androidx/util/WeakAsyncTask.java
 [WeakAsyncTaskTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/WeakAsyncTaskTest.java
-[WeakAsyncTask.kt]: androidx-kt/src/main/java/me/panpf/androidxkt/util/WeakAsyncTask.kt
-[WeakAsyncTaskTest.kt]: androidx-kt/src/androidTest/java/me/panpf/androidxkt/test/util/WeakAsyncTaskTest.kt
+
+[SingletonLazy.java]: androidx/src/main/java/me/panpf/androidx/util/SingletonLazy.java
+[SingletonLazyTest.java]: androidx/src/androidTest/java/me/panpf/androidx/test/util/SingletonLazyTest.java
