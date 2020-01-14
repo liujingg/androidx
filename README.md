@@ -40,7 +40,7 @@ Please replace `$lastVersion` with the latest version: [![Download][version_kotl
 
 Dependencies:
 * [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.3.21][kotlin_versions]
-* androidx.fragment:fragment: 1.2.0-alpha01
+* androidx.fragment:fragment: 1.1.0
 * [me.panpf:javax-kt][javax]: [1.0.0-alpha04][javax_versions]
 
 `androidx-kt is a androidx extension on the Kotlin platform that allows you to use androidx more comfortably on Kotlin`

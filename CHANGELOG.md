@@ -2,6 +2,7 @@
 
 * fix: Fix Hardware.getMacAddress() method return mac address segment length abnormal bug
 * new: Added SingletonLazy for delayed production of singleton objects
+* downgrade: Fragment downgrade to 1.1.0
 
 ## v1.0.0-alpha07
 
