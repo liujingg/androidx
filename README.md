@@ -7,9 +7,6 @@
 
 Extensions to the Android standard library and support libraries and some basic tools
 
-### Child module
-* [androidx-kt-arch]: Kotlin extension to Android Architecture related libraries
-
 ### Passed Test Device
 * Google Nexus 4;API 25/7.1.2;LineageOS/14.1-20180427-NIGHTLY-make
 * Lenovo K860;API 17/4.2.1
@@ -244,7 +241,6 @@ Please view the [CHANGELOG.md] file
 [javax_versions]: https://github.com/panpf/javax/blob/master/CHANGELOG.md
 [kotlin_stdlib]: https://kotlinlang.org/
 [kotlin_versions]: https://blog.jetbrains.com/kotlin/
-[androidx-kt-arch]: androidx-kt-arch
 
 [CHANGELOG.md]: CHANGELOG.md
 

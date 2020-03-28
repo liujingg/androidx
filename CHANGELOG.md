@@ -1,3 +1,6 @@
+## v...
+* remove: Removed androidx-kt-arch module
+
 ## v1.0.0-alpha08
 
 * fix: Fix Hardware.getMacAddress() method return mac address segment length abnormal bug

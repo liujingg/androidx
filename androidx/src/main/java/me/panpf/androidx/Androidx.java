@@ -22,12 +22,13 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 
-import java.io.File;
-import java.util.concurrent.CountDownLatch;
-
 import androidx.annotation.AnyThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.io.File;
+import java.util.concurrent.CountDownLatch;
+
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.androidx.util.ResultRunnable;
@@ -35,6 +36,8 @@ import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Predicate;
 import me.panpf.javax.util.Premisex;
+
+// todo 不依赖 javax
 
 public class Androidx {
 
