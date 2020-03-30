@@ -34,8 +34,6 @@ import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.androidx.util.ResultRunnable;
 
-// todo 不依赖 javax
-
 public class Androidx {
 
     private Androidx() {
