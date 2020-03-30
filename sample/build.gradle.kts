@@ -28,8 +28,7 @@ android {
 dependencies {
     api("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${property("KOTLIN_VERSION")}")
     api("androidx.fragment:fragment:${property("ANDROIDX_FRAGMENT")}")
-    api("me.panpf:javax-kt:${property("JAVAX")}")
-    api(project(":androidx"))
+    api(project(":androidx-kt"))
 
     testImplementation("junit:junit:${property("JUNIT")}")
     androidTestImplementation("androidx.test:runner:${property("TEST_RUNNER")}")

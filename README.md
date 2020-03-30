@@ -22,7 +22,7 @@ implementation "me.panpf:androidx:$lastVersion"
 Please replace `$lastVersion` with the latest version: [![Download][version_java_icon]][version_java_link]
 
 Dependencies:
-* androidx.fragment:fragment: 1.2.0-alpha01
+* [androidx.fragment:fragment][fragment_home]: [1.2.0][fragment_versions]
 
 ### Kotlin Expansion:
 
@@ -36,7 +36,7 @@ Please replace `$lastVersion` with the latest version: [![Download][version_kotl
 
 Dependencies:
 * [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.3.21][kotlin_versions]
-* androidx.fragment:fragment: 1.1.0
+* [androidx.fragment:fragment][fragment_home]: [1.2.0][fragment_versions]
 
 `androidx-kt is a androidx extension on the Kotlin platform that allows you to use androidx more comfortably on Kotlin`
 
@@ -237,6 +237,8 @@ Please view the [CHANGELOG.md] file
 [version_kotlin_link]: https://bintray.com/panpf/maven/androidx-kt/_latestVersion
 [kotlin_stdlib]: https://kotlinlang.org/
 [kotlin_versions]: https://blog.jetbrains.com/kotlin/
+[fragment_home]: https://developer.android.google.cn/guide/components/fragments
+[fragment_versions]: https://developer.android.google.cn/jetpack/androidx/releases/fragment
 
 [CHANGELOG.md]: CHANGELOG.md
 

@@ -2,6 +2,7 @@
 * remove: Removed androidx-kt-arch module
 * remove: Remove dependency on javax
 * remove: Remove Settingx.getMediaVolume(), setMediaVolume(), getRingVolume(), setRingVolume() method
+* arrow_up: Fragment upgrade to 1.2.0
 
 ## v1.0.0-alpha08
 
