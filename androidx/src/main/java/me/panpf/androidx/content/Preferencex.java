@@ -26,9 +26,6 @@ import androidx.annotation.Nullable;
 import java.util.Map;
 import java.util.Set;
 
-import me.panpf.javax.collections.Arrayx;
-import me.panpf.javax.util.Predicate;
-
 @SuppressWarnings({"JavaDoc"})
 public class Preferencex {
 
@@ -742,12 +739,12 @@ public class Preferencex {
      */
     public static boolean containsAny(@NonNull Context context, @NonNull String... keys) {
         final SharedPreferences preferences = getDefaultPreferences(context);
-        return Arrayx.any(keys, new Predicate<String>() {
-            @Override
-            public boolean accept(@NonNull String key) {
-                return preferences.contains(key);
+        for (String key : keys) {
+            if (preferences.contains(key)) {
+                return true;
             }
-        });
+        }
+        return false;
     }
 
     /**
@@ -759,12 +756,12 @@ public class Preferencex {
      */
     public static boolean containsAll(@NonNull Context context, @NonNull String... keys) {
         final SharedPreferences preferences = getDefaultPreferences(context);
-        return Arrayx.all(keys, new Predicate<String>() {
-            @Override
-            public boolean accept(@NonNull String key) {
-                return preferences.contains(key);
+        for (String key : keys) {
+            if (!preferences.contains(key)) {
+                return false;
             }
-        });
+        }
+        return true;
     }
 
     /**
@@ -789,12 +786,12 @@ public class Preferencex {
      */
     public static boolean containsAnyFrom(@NonNull Context context, @NonNull String name, @NonNull String... keys) {
         final SharedPreferences preferences = getPreferences(context, name);
-        return Arrayx.any(keys, new Predicate<String>() {
-            @Override
-            public boolean accept(@NonNull String key) {
-                return preferences.contains(key);
+        for (String key : keys) {
+            if (preferences.contains(key)) {
+                return true;
             }
-        });
+        }
+        return false;
     }
 
     /**
@@ -807,12 +804,12 @@ public class Preferencex {
      */
     public static boolean containsAllFrom(@NonNull Context context, @NonNull String name, @NonNull String... keys) {
         final SharedPreferences preferences = getPreferences(context, name);
-        return Arrayx.all(keys, new Predicate<String>() {
-            @Override
-            public boolean accept(@NonNull String key) {
-                return preferences.contains(key);
+        for (String key : keys) {
+            if (!preferences.contains(key)) {
+                return false;
             }
-        });
+        }
+        return true;
     }
 
 

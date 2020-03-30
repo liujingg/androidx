@@ -194,65 +194,57 @@ public class Settingsx {
         return false;
     }
 
+    /**
+     * Get the music max volume
+     */
+    // todo 删除 volume 系列方法
+    public static int getMediaMaxVolume(@NonNull Context context) {
+        return Contextx.audioManager(context).getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+    }
 
     /**
-     * Get the media volume, the value range is 0-15
+     * Get the media volume
      */
-    @IntRange(from = 0, to = 15)
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
     public static int getMediaVolume(@NonNull Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return Contextx.audioManager(context).getStreamVolume(AudioManager.STREAM_MUSIC);
-        } else {
-            try {
-                return Settings.System.getInt(context.getContentResolver(), "volume_music");
-            } catch (Settings.SettingNotFoundException e) {
-                throw new IllegalStateException(e);
-            }
-        }
+        return Contextx.audioManager(context).getStreamVolume(AudioManager.STREAM_MUSIC);
     }
 
     /**
-     * Set the media volume, the value range is 0-15
+     * Set the media volume
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setMediaVolume(@NonNull Context context, @IntRange(from = 0, to = 15) int mediaVolume) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            Contextx.audioManager(context).setStreamVolume(AudioManager.STREAM_MUSIC, mediaVolume, 0);
-            return true;
-        } else {
-            return Settings.System.putInt(context.getContentResolver(), "volume_music", mediaVolume);
-        }
+    public static boolean setMediaVolume(@NonNull Context context, int mediaVolume) {
+        Contextx.audioManager(context).setStreamVolume(AudioManager.STREAM_MUSIC, mediaVolume, 0);
+        return true;
     }
 
 
     /**
-     * Get the ringer volume, the range is 0-7
+     * Get the ringer max volume
      */
-    @IntRange(from = 0, to = 7)
+    public static int getRingMaxVolume(@NonNull Context context) {
+        return Contextx.audioManager(context).getStreamMaxVolume(AudioManager.STREAM_RING);
+    }
+
+    /**
+     * Get the ringer volume
+     */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
     public static int getRingVolume(@NonNull Context context) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            return Contextx.audioManager(context).getStreamVolume(AudioManager.STREAM_RING);
-        } else {
-            try {
-                return Settings.System.getInt(context.getContentResolver(), "volume_ring");
-            } catch (Settings.SettingNotFoundException e) {
-                throw new IllegalStateException(e);
-            }
-        }
+        return Contextx.audioManager(context).getStreamVolume(AudioManager.STREAM_RING);
     }
 
     /**
-     * Set the ringer volume, the range is 0-7
+     * Set the ringer volume
      */
     @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setRingVolume(@NonNull Context context, @IntRange(from = 0, to = 7) int ringVolume) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+    public static boolean setRingVolume(@NonNull Context context, int ringVolume) {
             Contextx.audioManager(context).setStreamVolume(AudioManager.STREAM_RING, ringVolume, 0);
             return true;
-        } else {
-            return Settings.System.putInt(context.getContentResolver(), "volume_ring", ringVolume);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//        } else {
+//            return Settings.System.putInt(context.getContentResolver(), "volume_ring", ringVolume);
+//        }
     }
 }

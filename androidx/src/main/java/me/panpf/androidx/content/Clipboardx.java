@@ -24,13 +24,12 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
-import me.panpf.javax.ranges.Rangex;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class Clipboardx {
 
@@ -52,7 +51,7 @@ public class Clipboardx {
         if (texts.length <= 0) return;
         ClipData data = ClipData.newPlainText(label, texts[0]);
         if (texts.length > 1) {
-            for (int index : Rangex.until(1, texts.length)) {
+            for (int index = 1, size = texts.length; index < size; index++) {
                 data.addItem(new ClipData.Item(texts[index]));
             }
         }
@@ -90,7 +89,7 @@ public class Clipboardx {
         ClipHtmlText htmlContent = htmlContents[0];
         ClipData data = ClipData.newHtmlText(label, htmlContent.text, htmlContent.htmlText);
         if (htmlContents.length > 1) {
-            for (int index : Rangex.until(1, htmlContents.length)) {
+            for (int index = 1, size = htmlContents.length; index < size; index++) {
                 htmlContent = htmlContents[index];
                 data.addItem(new ClipData.Item(htmlContent.text, htmlContent.htmlText));
             }
@@ -132,7 +131,7 @@ public class Clipboardx {
         if (intents.length <= 0) return;
         ClipData data = ClipData.newIntent(label, intents[0]);
         if (intents.length > 1) {
-            for (int index : Rangex.until(1, intents.length)) {
+            for (int index = 1, size = intents.length; index < size; index++) {
                 data.addItem(new ClipData.Item(intents[index]));
             }
         }
@@ -168,7 +167,7 @@ public class Clipboardx {
         if (uris.length <= 0) return;
         ClipData data = ClipData.newUri(context.getContentResolver(), label, uris[0]);
         if (uris.length > 1) {
-            for (int index : Rangex.until(1, uris.length)) {
+            for (int index = 1, size = uris.length; index < size; index++) {
                 data.addItem(new ClipData.Item(uris[index]));
             }
         }
@@ -204,7 +203,7 @@ public class Clipboardx {
         if (uris.length <= 0) return;
         ClipData data = ClipData.newRawUri(label, uris[0]);
         if (uris.length > 1) {
-            for (int index : Rangex.until(1, uris.length)) {
+            for (int index = 1, size = uris.length; index < size; index++) {
                 data.addItem(new ClipData.Item(uris[index]));
             }
         }
@@ -240,7 +239,7 @@ public class Clipboardx {
         if (uris.length <= 0) return;
         ClipData data = new ClipData(label, new String[]{mimeType}, new ClipData.Item(uris[0]));
         if (uris.length > 1) {
-            for (int index : Rangex.until(1, uris.length)) {
+            for (int index = 1, size = uris.length; index < size; index++) {
                 data.addItem(new ClipData.Item(uris[index]));
             }
         }
@@ -275,12 +274,12 @@ public class Clipboardx {
         if (contents.length <= 0) return;
 
         String[] mimeTypes = new String[contents.length];
-        for (int index : Rangex.until(0, contents.length)) {
+        for (int index = 0, size = contents.length; index < size; index++) {
             mimeTypes[index] = contents[index].mimeType;
         }
 
         ClipData data = new ClipData(label, mimeTypes, contents[0].toItem());
-        for (int index : Rangex.until(1, contents.length)) {
+        for (int index = 1, size = contents.length; index < size; index++) {
             data.addItem(contents[index].toItem());
         }
 
@@ -322,7 +321,7 @@ public class Clipboardx {
 
         ClipDescription clipDescription = data.getDescription();
         List<ClipContent> objectList = new LinkedList<>();
-        for (int index : Rangex.until(0, data.getItemCount())) {
+        for (int index = 0, size = data.getItemCount(); index < size; index++) {
             ClipData.Item item = data.getItemAt(index);
             // Usually multiple items have only one mimeType
             String mimeType = clipDescription.getMimeType(Math.min(index, clipDescription.getMimeTypeCount() - 1));
@@ -369,7 +368,7 @@ public class Clipboardx {
 
         ClipDescription clipDescription = data.getDescription();
         List<CharSequence> textList = new LinkedList<>();
-        for (int index : Rangex.until(0, data.getItemCount())) {
+        for (int index = 0, size = data.getItemCount(); index < size; index++) {
             // Usually multiple items have only one mimeType
             String mimeType = clipDescription.getMimeType(Math.min(index, clipDescription.getMimeTypeCount() - 1));
             if (ClipDescription.MIMETYPE_TEXT_PLAIN.equals(mimeType)) {
@@ -411,7 +410,7 @@ public class Clipboardx {
 
         ClipDescription clipDescription = data.getDescription();
         List<ClipHtmlText> htmlTestList = new LinkedList<>();
-        for (int index : Rangex.until(0, data.getItemCount())) {
+        for (int index = 0, size = data.getItemCount(); index < size; index++) {
             // Usually multiple items have only one mimeType
             String mimeType = clipDescription.getMimeType(Math.min(index, clipDescription.getMimeTypeCount() - 1));
             if (ClipDescription.MIMETYPE_TEXT_HTML.equals(mimeType)) {
@@ -450,7 +449,7 @@ public class Clipboardx {
 
         ClipDescription clipDescription = data.getDescription();
         List<Intent> intentList = new LinkedList<>();
-        for (int index : Rangex.until(0, data.getItemCount())) {
+        for (int index = 0, size = data.getItemCount(); index < size; index++) {
             // Usually multiple items have only one mimeType
             String mimeType = clipDescription.getMimeType(Math.min(index, clipDescription.getMimeTypeCount() - 1));
             if (ClipDescription.MIMETYPE_TEXT_INTENT.equals(mimeType)) {
@@ -491,7 +490,7 @@ public class Clipboardx {
 
         ClipDescription clipDescription = data.getDescription();
         List<ClipUri> uriList = new LinkedList<>();
-        for (int index : Rangex.until(0, data.getItemCount())) {
+        for (int index = 0, size = data.getItemCount(); index < size; index++) {
             // Usually multiple items have only one mimeType
             String mimeType = clipDescription.getMimeType(Math.min(index, clipDescription.getMimeTypeCount() - 1));
             if (!ClipDescription.MIMETYPE_TEXT_PLAIN.equals(mimeType) && !ClipDescription.MIMETYPE_TEXT_HTML.equals(mimeType) && !ClipDescription.MIMETYPE_TEXT_INTENT.equals(mimeType)) {

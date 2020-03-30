@@ -21,9 +21,9 @@ import android.content.pm.PackageManager;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
-import me.panpf.javax.collections.Arrayx;
-import me.panpf.javax.collections.Collectionx;
-import me.panpf.javax.util.Predicate;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Permission related tool methods
@@ -49,11 +49,15 @@ public class Permissionx {
      * Filter all denied permissions
      */
     public static String[] filterDeniedPermissions(@NonNull final Context context, @NonNull String... permissions) {
-        return Collectionx.filter(Arrayx.toList(permissions), new Predicate<String>() {
-            @Override
-            public boolean accept(@NonNull String permission) {
-                return ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_DENIED;
+        List<String> deniedPermissionList = new LinkedList<>();
+        //noinspection ConstantConditions
+        if (permissions != null && permissions.length > 0) {
+            for (String permission : permissions) {
+                if (ActivityCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_DENIED) {
+                    deniedPermissionList.add(permission);
+                }
             }
-        }).toArray(new String[0]);
+        }
+        return deniedPermissionList.toArray(new String[0]);
     }
 }

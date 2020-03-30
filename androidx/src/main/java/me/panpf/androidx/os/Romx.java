@@ -18,8 +18,6 @@ package me.panpf.androidx.os;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import me.panpf.javax.collections.Arrayx;
-import me.panpf.javax.lang.Stringx;
 
 public class Romx {
 
@@ -98,10 +96,10 @@ public class Romx {
     @Nullable
     private static String[] checkMIUI() {
         String versionName = SystemPropertiesx.get("ro.miui.ui.version.name");
-        if (Stringx.isSafe(versionName)) {
+        if (!versionName.isEmpty()) {
             String versionCode = SystemPropertiesx.get("ro.miui.ui.version.code");
             String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, versionCode, versionIncremental);
+            return new String[]{versionName, versionCode, versionIncremental};
         } else {
             return null;
         }
@@ -109,7 +107,7 @@ public class Romx {
 
     @Nullable
     private static String[] checkFlyme() {
-        if ("flyme".equalsIgnoreCase(SystemPropertiesx.get("ro.build.user")) || Stringx.isSafe(SystemPropertiesx.get("ro.flyme.published"))) {
+        if ("flyme".equalsIgnoreCase(SystemPropertiesx.get("ro.build.user")) || !SystemPropertiesx.get("ro.flyme.published").isEmpty()) {
             String displayId = SystemPropertiesx.get("ro.build.display.id");
             String versionName;
             if (displayId.startsWith("Flyme OS ")) {
@@ -120,7 +118,7 @@ public class Romx {
                 versionName = displayId;
             }
             String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, "", versionIncremental);
+            return new String[]{versionName, "", versionIncremental};
         } else {
             return null;
         }
@@ -129,9 +127,9 @@ public class Romx {
     @Nullable
     private static String[] checkColorOS() {
         String versionName = SystemPropertiesx.get("ro.build.version.opporom");
-        if (Stringx.isSafe(versionName)) {
+        if (!versionName.isEmpty()) {
             String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, "", versionIncremental);
+            return new String[]{versionName, "", versionIncremental};
         } else {
             return null;
         }
@@ -143,8 +141,8 @@ public class Romx {
         versionName = versionName.startsWith("EmotionUI_") ? versionName.substring("EmotionUI_".length()) : versionName;
         String versionCode = SystemPropertiesx.get("ro.oppo.version"); // oppo rom 的 build_prop 文件中定义了 ro.oppo.version 属性，但是值始终是空的
         String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-        if (Stringx.isSafe(versionName)) {
-            return Arrayx.arrayOf(versionName, versionCode, versionIncremental);
+        if (!versionName.isEmpty()) {
+            return new String[]{versionName, versionCode, versionIncremental};
         } else {
             return null;
         }
@@ -156,7 +154,7 @@ public class Romx {
             String versionName = SystemPropertiesx.get("ro.vivo.os.version");
             String versionCode = SystemPropertiesx.get("ro.vivo.product.version");
             String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, versionCode, versionIncremental);
+            return new String[]{versionName, versionCode, versionIncremental};
         } else {
             return null;
         }
@@ -165,10 +163,11 @@ public class Romx {
     @Nullable
     private static String[] checkSmartisanOS() {
         String versionName = SystemPropertiesx.get("ro.smartisan.version");
-        if (Stringx.isSafe(versionName)) {
-            versionName = Arrayx.firstOrNull(versionName.split("-"));
+        if (!versionName.isEmpty()) {
+            String[] versionItems = versionName.split("-");
+            versionName = versionItems.length > 0 ? versionItems[0] : null;
             String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, "", versionIncremental);
+            return new String[]{versionName, "", versionIncremental};
         } else {
             return null;
         }
@@ -182,7 +181,7 @@ public class Romx {
                 versionName = versionName.substring("H2OS V".length());
             }
             String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, "", versionIncremental);
+            return new String[]{versionName, "", versionIncremental};
         } else {
             return null;
         }
@@ -193,7 +192,7 @@ public class Romx {
         if ("lineage".equalsIgnoreCase(SystemPropertiesx.get("ro.build.user"))) {
             String versionName = SystemPropertiesx.get("ro.cm.build.version");
             String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, "", versionIncremental);
+            return new String[]{versionName, "", versionIncremental};
         } else {
             return null;
         }
@@ -205,7 +204,7 @@ public class Romx {
             String versionName = SystemPropertiesx.get("ro.build.version.release");
             String versionCode = SystemPropertiesx.get("ro.build.version.sdk");
             String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, versionCode, versionIncremental);
+            return new String[]{versionName, versionCode, versionIncremental};
         } else {
             return null;
         }
@@ -216,7 +215,7 @@ public class Romx {
         if ("dpi".equalsIgnoreCase(SystemPropertiesx.get("ro.build.user"))) {
             String versionName = SystemPropertiesx.get("ro.build.display.id");
             String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, "", versionIncremental);
+            return new String[]{versionName, "", versionIncremental};
         } else {
             return null;
         }

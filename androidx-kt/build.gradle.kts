@@ -36,13 +36,13 @@ android {
 dependencies {
     api("org.jetbrains.kotlin:kotlin-stdlib-jdk7:${property("KOTLIN_VERSION")}")
     api("androidx.fragment:fragment:${property("ANDROIDX_FRAGMENT")}")
-    api("me.panpf:javax-kt:${property("JAVAX")}")
     api(project(":androidx"))
 
     testImplementation("junit:junit:${property("JUNIT")}")
     androidTestImplementation("androidx.test:runner:${property("TEST_RUNNER")}")
     androidTestImplementation("androidx.test:rules:${property("TEST_RULES")}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${property("TEST_ESPRESSO")}")
+    androidTestImplementation("me.panpf:javax-kt:${property("JAVAX")}")
 }
 
 Properties().apply { project.file("local.properties").takeIf { it.exists() }?.inputStream()?.use { load(it) } }.takeIf { !it.isEmpty }?.let { localProperties ->

@@ -22,7 +22,8 @@ import android.content.ContentResolver;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
-import me.panpf.javax.collections.Arrayx;
+
+import java.util.Arrays;
 
 public class ClipUri extends ClipContent {
 
@@ -59,7 +60,7 @@ public class ClipUri extends ClipContent {
             if (realType != null) {
                 if (mimeTypes == null) {
                     mimeTypes = new String[]{realType};
-                } else if (!Arrayx.toList(mimeTypes).contains(realType)) {
+                } else if (!Arrays.asList(mimeTypes).contains(realType)) {
                     String[] tmp = new String[mimeTypes.length + 1];
                     tmp[0] = realType;
                     System.arraycopy(mimeTypes, 0, tmp, 1, mimeTypes.length);

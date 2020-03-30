@@ -25,25 +25,29 @@ import android.content.pm.PermissionInfo;
 import android.content.pm.ProviderInfo;
 import android.content.pm.ServiceInfo;
 import android.os.Bundle;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
-import me.panpf.javax.collections.Arrayx;
-import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.util.Pair;
-import me.panpf.javax.util.Predicate;
 
 public class PackageInfox {
 
     private PackageInfox() {
     }
 
-
     @Nullable
-    public static ActivityInfo findActivityInfo(@NonNull Context context, @NonNull String packageName, @NonNull Predicate<ActivityInfo> predicate) throws PackageManager.NameNotFoundException {
+    public static ActivityInfo findActivityInfo(@NonNull Context context, @NonNull String packageName,
+                                                @NonNull Predicate<ActivityInfo> predicate) throws PackageManager.NameNotFoundException {
         PackageInfo info = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_ACTIVITIES);
-        return Arrayx.find(info.activities, predicate);
+        ActivityInfo[] activityInfos = info.activities;
+        if (activityInfos != null) {
+            for (ActivityInfo activityInfo : activityInfos) {
+                if (predicate.accept(activityInfo)) {
+                    return activityInfo;
+                }
+            }
+        }
+        return null;
     }
 
     @Nullable
@@ -56,11 +60,14 @@ public class PackageInfox {
     }
 
     @Nullable
-    public static ActivityInfo findActivityInfoByName(@NonNull Context context, @NonNull String packageName, @NonNull final String activityName) throws PackageManager.NameNotFoundException {
+    public static ActivityInfo findActivityInfoByName(@NonNull Context context, @NonNull String packageName,
+                                                      @NonNull final String activityName) throws PackageManager.NameNotFoundException {
         return findActivityInfo(context, packageName, new Predicate<ActivityInfo>() {
             @Override
             public boolean accept(@NonNull ActivityInfo activityInfo) {
-                return Stringx.equals(activityInfo.name, activityName);
+                final String activityInfoName = activityInfo.name;
+                //noinspection EqualsReplaceableByObjectsCall,ConstantConditions
+                return activityInfoName != null ? activityInfoName.equals(activityName) : activityName == null;
             }
         });
     }
@@ -76,9 +83,18 @@ public class PackageInfox {
 
 
     @Nullable
-    public static ServiceInfo findServiceInfo(@NonNull Context context, @NonNull String packageName, @NonNull Predicate<ServiceInfo> predicate) throws PackageManager.NameNotFoundException {
+    public static ServiceInfo findServiceInfo(@NonNull Context context, @NonNull String packageName,
+                                              @NonNull Predicate<ServiceInfo> predicate) throws PackageManager.NameNotFoundException {
         PackageInfo info = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_SERVICES);
-        return Arrayx.find(info.services, predicate);
+        ServiceInfo[] serviceInfos = info.services;
+        if (serviceInfos != null) {
+            for (ServiceInfo serviceInfo : serviceInfos) {
+                if (predicate.accept(serviceInfo)) {
+                    return serviceInfo;
+                }
+            }
+        }
+        return null;
     }
 
     @Nullable
@@ -91,11 +107,14 @@ public class PackageInfox {
     }
 
     @Nullable
-    public static ServiceInfo findServiceInfoByName(@NonNull Context context, @NonNull String packageName, @NonNull final String serviceName) throws PackageManager.NameNotFoundException {
+    public static ServiceInfo findServiceInfoByName(@NonNull Context context, @NonNull String packageName,
+                                                    @NonNull final String serviceName) throws PackageManager.NameNotFoundException {
         return findServiceInfo(context, packageName, new Predicate<ServiceInfo>() {
             @Override
             public boolean accept(@NonNull ServiceInfo serviceInfo) {
-                return Stringx.equals(serviceInfo.name, serviceName);
+                final String serviceInfoName = serviceInfo.name;
+                //noinspection EqualsReplaceableByObjectsCall,ConstantConditions
+                return serviceInfoName != null ? serviceInfoName.equals(serviceName) : serviceName == null;
             }
         });
     }
@@ -111,9 +130,18 @@ public class PackageInfox {
 
 
     @Nullable
-    public static ActivityInfo findReceiverInfo(@NonNull Context context, @NonNull String packageName, @NonNull Predicate<ActivityInfo> predicate) throws PackageManager.NameNotFoundException {
+    public static ActivityInfo findReceiverInfo(@NonNull Context context, @NonNull String packageName,
+                                                @NonNull Predicate<ActivityInfo> predicate) throws PackageManager.NameNotFoundException {
         PackageInfo info = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_RECEIVERS);
-        return Arrayx.find(info.receivers, predicate);
+        ActivityInfo[] activityInfos = info.receivers;
+        if (activityInfos != null) {
+            for (ActivityInfo activityInfo : activityInfos) {
+                if (predicate.accept(activityInfo)) {
+                    return activityInfo;
+                }
+            }
+        }
+        return null;
     }
 
     @Nullable
@@ -126,11 +154,14 @@ public class PackageInfox {
     }
 
     @Nullable
-    public static ActivityInfo findReceiverInfoByName(@NonNull Context context, @NonNull String packageName, @NonNull final String receiverName) throws PackageManager.NameNotFoundException {
+    public static ActivityInfo findReceiverInfoByName(@NonNull Context context, @NonNull String packageName,
+                                                      @NonNull final String receiverName) throws PackageManager.NameNotFoundException {
         return findReceiverInfo(context, packageName, new Predicate<ActivityInfo>() {
             @Override
             public boolean accept(@NonNull ActivityInfo activityInfo) {
-                return Stringx.equals(activityInfo.name, receiverName);
+                final String activityInfoName = activityInfo.name;
+                //noinspection EqualsReplaceableByObjectsCall,ConstantConditions
+                return activityInfoName != null ? activityInfoName.equals(receiverName) : receiverName == null;
             }
         });
     }
@@ -146,9 +177,18 @@ public class PackageInfox {
 
 
     @Nullable
-    public static ProviderInfo findProviderInfo(@NonNull Context context, @NonNull String packageName, @NonNull Predicate<ProviderInfo> predicate) throws PackageManager.NameNotFoundException {
+    public static ProviderInfo findProviderInfo(@NonNull Context context, @NonNull String packageName,
+                                                @NonNull Predicate<ProviderInfo> predicate) throws PackageManager.NameNotFoundException {
         PackageInfo info = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_PROVIDERS);
-        return Arrayx.find(info.providers, predicate);
+        ProviderInfo[] providerInfos = info.providers;
+        if (providerInfos != null) {
+            for (ProviderInfo providerInfo : providerInfos) {
+                if (predicate.accept(providerInfo)) {
+                    return providerInfo;
+                }
+            }
+        }
+        return null;
     }
 
     @Nullable
@@ -161,11 +201,14 @@ public class PackageInfox {
     }
 
     @Nullable
-    public static ProviderInfo findProviderInfoByName(@NonNull Context context, @NonNull String packageName, @NonNull final String providerName) throws PackageManager.NameNotFoundException {
+    public static ProviderInfo findProviderInfoByName(@NonNull Context context, @NonNull String packageName,
+                                                      @NonNull final String providerName) throws PackageManager.NameNotFoundException {
         return findProviderInfo(context, packageName, new Predicate<ProviderInfo>() {
             @Override
             public boolean accept(@NonNull ProviderInfo providerInfo) {
-                return Stringx.equals(providerInfo.name, providerName);
+                final String providerInfoName = providerInfo.name;
+                //noinspection EqualsReplaceableByObjectsCall,ConstantConditions
+                return providerInfoName != null ? providerInfoName.equals(providerName) : providerName == null;
             }
         });
     }
@@ -181,9 +224,18 @@ public class PackageInfox {
 
 
     @Nullable
-    public static PermissionInfo findPermissionInfo(@NonNull Context context, @NonNull String packageName, @NonNull Predicate<PermissionInfo> predicate) throws PackageManager.NameNotFoundException {
+    public static PermissionInfo findPermissionInfo(@NonNull Context context, @NonNull String packageName,
+                                                    @NonNull Predicate<PermissionInfo> predicate) throws PackageManager.NameNotFoundException {
         PackageInfo info = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
-        return Arrayx.find(info.permissions, predicate);
+        PermissionInfo[] permissionInfos = info.permissions;
+        if (permissionInfos != null) {
+            for (PermissionInfo permissionInfo : permissionInfos) {
+                if (predicate.accept(permissionInfo)) {
+                    return permissionInfo;
+                }
+            }
+        }
+        return null;
     }
 
     @Nullable
@@ -196,11 +248,14 @@ public class PackageInfox {
     }
 
     @Nullable
-    public static PermissionInfo findPermissionInfoByName(@NonNull Context context, @NonNull String packageName, @NonNull final String permissionName) throws PackageManager.NameNotFoundException {
+    public static PermissionInfo findPermissionInfoByName(@NonNull Context context, @NonNull String packageName,
+                                                          @NonNull final String permissionName) throws PackageManager.NameNotFoundException {
         return findPermissionInfo(context, packageName, new Predicate<PermissionInfo>() {
             @Override
             public boolean accept(@NonNull PermissionInfo permissionInfo) {
-                return Stringx.equals(permissionInfo.name, permissionName);
+                final String permissionInfoName = permissionInfo.name;
+                //noinspection EqualsReplaceableByObjectsCall,ConstantConditions
+                return permissionInfoName != null ? permissionInfoName.equals(permissionName) : permissionName == null;
             }
         });
     }
@@ -216,9 +271,18 @@ public class PackageInfox {
 
 
     @Nullable
-    public static String findRequestedPermission(@NonNull Context context, @NonNull String packageName, @NonNull Predicate<String> predicate) throws PackageManager.NameNotFoundException {
+    public static String findRequestedPermission(@NonNull Context context, @NonNull String packageName,
+                                                 @NonNull Predicate<String> predicate) throws PackageManager.NameNotFoundException {
         PackageInfo info = context.getPackageManager().getPackageInfo(packageName, PackageManager.GET_PERMISSIONS);
-        return Arrayx.find(info.requestedPermissions, predicate);
+        String[] requestedPermissions = info.requestedPermissions;
+        if (requestedPermissions != null) {
+            for (String requestedPermission : requestedPermissions) {
+                if (predicate.accept(requestedPermission)) {
+                    return requestedPermission;
+                }
+            }
+        }
+        return null;
     }
 
     @Nullable
@@ -231,11 +295,13 @@ public class PackageInfox {
     }
 
     @Nullable
-    public static String findRequestedPermissionByName(@NonNull Context context, @NonNull String packageName, @NonNull final String permissionName) throws PackageManager.NameNotFoundException {
+    public static String findRequestedPermissionByName(@NonNull Context context, @NonNull String packageName,
+                                                       @NonNull final String permissionName) throws PackageManager.NameNotFoundException {
         return findRequestedPermission(context, packageName, new Predicate<String>() {
             @Override
             public boolean accept(@NonNull String requestedPermission) {
-                return Stringx.equals(requestedPermission, permissionName);
+                //noinspection EqualsReplaceableByObjectsCall,ConstantConditions
+                return requestedPermission != null ? requestedPermission.equals(permissionName) : permissionName == null;
             }
         });
     }
@@ -251,7 +317,8 @@ public class PackageInfox {
 
 
     @Nullable
-    public static Pair<String, String> findMetaDataWithName(@NonNull Context context, @NonNull String packageName, @NonNull Predicate<String> predicate) throws PackageManager.NameNotFoundException {
+    public static Pair<String, String> findMetaDataWithName(@NonNull Context context, @NonNull String packageName,
+                                                            @NonNull Predicate<String> predicate) throws PackageManager.NameNotFoundException {
         ApplicationInfo info = context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
         Bundle metaData = info.metaData;
         if (metaData != null) {
@@ -276,19 +343,21 @@ public class PackageInfox {
     }
 
     @Nullable
-    public static Pair<String, String> findMetaDataByName(@NonNull Context context, @NonNull String packageName, @NonNull final String metaDataName) throws PackageManager.NameNotFoundException {
+    public static Pair<String, String> findMetaDataByName(@NonNull Context context, @NonNull String packageName,
+                                                          @NonNull final String expectedMetaDataName) throws PackageManager.NameNotFoundException {
         return findMetaDataWithName(context, packageName, new Predicate<String>() {
             @Override
-            public boolean accept(@NonNull String s) {
-                return Stringx.equals(s, metaDataName);
+            public boolean accept(@NonNull String metaDataName) {
+                //noinspection EqualsReplaceableByObjectsCall,ConstantConditions
+                return metaDataName != null ? metaDataName.equals(expectedMetaDataName) : expectedMetaDataName == null;
             }
         });
     }
 
     @Nullable
-    public static Pair<String, String> findSelfMetaDataByName(@NonNull Context context, @NonNull String metaDataName) {
+    public static Pair<String, String> findSelfMetaDataByName(@NonNull Context context, @NonNull String expectedMetaDataName) {
         try {
-            return findMetaDataByName(context, context.getPackageName(), metaDataName);
+            return findMetaDataByName(context, context.getPackageName(), expectedMetaDataName);
         } catch (PackageManager.NameNotFoundException e) {
             throw new IllegalStateException("Not found self ApplicationInfo", e);
         }
@@ -296,7 +365,8 @@ public class PackageInfox {
 
 
     @Nullable
-    public static Pair<String, String> findMetaDataWithValue(@NonNull Context context, @NonNull String packageName, @NonNull Predicate<String> predicate) throws PackageManager.NameNotFoundException {
+    public static Pair<String, String> findMetaDataWithValue(@NonNull Context context, @NonNull String packageName,
+                                                             @NonNull Predicate<String> predicate) throws PackageManager.NameNotFoundException {
         ApplicationInfo info = context.getPackageManager().getApplicationInfo(packageName, PackageManager.GET_META_DATA);
         Bundle metaData = info.metaData;
         if (metaData != null) {
@@ -321,21 +391,27 @@ public class PackageInfox {
     }
 
     @Nullable
-    public static Pair<String, String> findMetaDataByValue(@NonNull Context context, @NonNull String packageName, @NonNull final String metaDataValue) throws PackageManager.NameNotFoundException {
+    public static Pair<String, String> findMetaDataByValue(@NonNull Context context, @NonNull String packageName,
+                                                           @NonNull final String expectedMetaDataValue) throws PackageManager.NameNotFoundException {
         return findMetaDataWithValue(context, packageName, new Predicate<String>() {
             @Override
-            public boolean accept(@NonNull String s) {
-                return Stringx.equals(s, metaDataValue);
+            public boolean accept(@NonNull String metaDataValue) {
+                //noinspection EqualsReplaceableByObjectsCall,ConstantConditions
+                return metaDataValue != null ? metaDataValue.equals(expectedMetaDataValue) : expectedMetaDataValue == null;
             }
         });
     }
 
     @Nullable
-    public static Pair<String, String> findSelfMetaDataByValue(@NonNull Context context, @NonNull final String metaDataValue) {
+    public static Pair<String, String> findSelfMetaDataByValue(@NonNull Context context, @NonNull final String expectedMetaDataValue) {
         try {
-            return findMetaDataByValue(context, context.getPackageName(), metaDataValue);
+            return findMetaDataByValue(context, context.getPackageName(), expectedMetaDataValue);
         } catch (PackageManager.NameNotFoundException e) {
             throw new IllegalStateException("Not found self ApplicationInfo", e);
         }
+    }
+
+    public interface Predicate<T> {
+        boolean accept(@NonNull T t);
     }
 }

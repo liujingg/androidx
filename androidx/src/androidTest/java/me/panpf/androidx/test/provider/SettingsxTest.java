@@ -46,15 +46,14 @@ public class SettingsxTest {
 
     @NonNull
     private final ActivityTestRule<RequestPermissionTestActivity> requestPermissionActivityRule = new ActivityTestRule<>(RequestPermissionTestActivity.class);
+    @NonNull
+    private final ActivityTestRule<RequestNotificationPolicyTestActivity> requestNotificationPolicyActivityRule = new ActivityTestRule<>(RequestNotificationPolicyTestActivity.class);
 
     @Rule
     @NonNull
     public final ActivityTestRule getRequestPermissionActivityRule() {
         return this.requestPermissionActivityRule;
     }
-
-    @NonNull
-    private final ActivityTestRule<RequestNotificationPolicyTestActivity> requestNotificationPolicyActivityRule = new ActivityTestRule<>(RequestNotificationPolicyTestActivity.class);
 
     @Rule
     @NonNull
@@ -211,7 +210,11 @@ public class SettingsxTest {
 
         int mediaVolume = Settingsx.getMediaVolume(context);
         try {
-            int newMediaVolumeValue = 15 - mediaVolume;
+            int maxVolume = Settingsx.getMediaMaxVolume(context);
+            int newMediaVolumeValue = (int) (maxVolume * 0.3);
+            if (newMediaVolumeValue == mediaVolume) {
+                newMediaVolumeValue = (int) (maxVolume * 0.1);
+            }
             Assert.assertTrue(Settingsx.setMediaVolume(context, newMediaVolumeValue));
             int newMediaVolumeValueFromSettings = Settingsx.getMediaVolume(context);
             Assert.assertEquals(newMediaVolumeValue, newMediaVolumeValueFromSettings);
@@ -236,14 +239,18 @@ public class SettingsxTest {
             }
         }
 
-        int mediaVolume = Settingsx.getRingVolume(context);
+        int ringVolume = Settingsx.getRingVolume(context);
         try {
-            int newRingVolumeValue = 7 - mediaVolume;
+            int maxVolume = Settingsx.getMediaMaxVolume(context);
+            int newRingVolumeValue = (int) (maxVolume * 0.3);
+            if (newRingVolumeValue == ringVolume) {
+                newRingVolumeValue = (int) (maxVolume * 0.1);
+            }
             Assert.assertTrue(Settingsx.setRingVolume(context, newRingVolumeValue));
             int newRingVolumeValueFromSettings = Settingsx.getRingVolume(context);
             Assert.assertEquals(newRingVolumeValue, newRingVolumeValueFromSettings);
         } finally {
-            Settingsx.setRingVolume(context, mediaVolume);
+            Settingsx.setRingVolume(context, ringVolume);
         }
     }
 

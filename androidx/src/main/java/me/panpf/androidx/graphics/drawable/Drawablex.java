@@ -26,9 +26,8 @@ import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import me.panpf.androidx.graphics.Colorx;
-import me.panpf.javax.util.LazyValue;
-import me.panpf.javax.util.Premisex;
 
 public class Drawablex {
 
@@ -46,13 +45,9 @@ public class Drawablex {
     public static Bitmap toBitmapWithIntrinsicSize(@NonNull Drawable drawable, @Nullable Bitmap.Config config, @Nullable Bitmap reuseBitmap) {
         final int intrinsicWidth = drawable.getIntrinsicWidth();
         final int intrinsicHeight = drawable.getIntrinsicHeight();
-        Premisex.require(intrinsicWidth > 0 && intrinsicHeight > 0, new LazyValue<String>() {
-            @NonNull
-            @Override
-            public String get() {
-                return "Both drawable intrinsicWidth and intrinsicHeight must be greater than 0";
-            }
-        });
+        if (intrinsicWidth <= 0 || intrinsicHeight <= 0) {
+            throw new IllegalArgumentException("Both drawable intrinsicWidth and intrinsicHeight must be greater than 0");
+        }
 
         Rect originBounds = new Rect(drawable.getBounds());
 

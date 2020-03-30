@@ -27,15 +27,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.File;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.androidx.util.ResultRunnable;
-import me.panpf.javax.collections.Collectionx;
-import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.util.Predicate;
-import me.panpf.javax.util.Premisex;
 
 // todo 不依赖 javax
 
@@ -109,7 +106,12 @@ public class Androidx {
                 e.printStackTrace();
             }
             //noinspection unchecked
-            return Premisex.requireNotNull((T) results[0], "result");
+            T result = (T) results[0];
+            if (result != null) {
+                return result;
+            } else {
+                throw new IllegalArgumentException("return result cannot be null");
+            }
         }
     }
 
@@ -162,24 +164,26 @@ public class Androidx {
     @Nullable
     public static String getInProcessName(@NonNull Context context) {
         final int myPid = android.os.Process.myPid();
-        ActivityManager.RunningAppProcessInfo info = Collectionx.find(Contextx.activityManager(context).getRunningAppProcesses(), new Predicate<ActivityManager.RunningAppProcessInfo>() {
-            @Override
-            public boolean accept(@NonNull ActivityManager.RunningAppProcessInfo runningAppProcessInfo) {
-                return runningAppProcessInfo.pid == myPid;
+        List<ActivityManager.RunningAppProcessInfo> processInfoList = Contextx.activityManager(context).getRunningAppProcesses();
+        if (processInfoList != null) {
+            for (ActivityManager.RunningAppProcessInfo runningAppProcessInfo : processInfoList) {
+                if (runningAppProcessInfo.pid == myPid) {
+                    return runningAppProcessInfo.processName;
+                }
             }
-        });
-        return info != null ? info.processName : null;
+        }
+        return null;
     }
 
     /**
      * Get the suffix of the current process name, for example, the process name is 'com.my.app:push', then the suffix is ​​':push'
      */
     @Nullable
-    public static String getInProcessNameSuffix(@NonNull Context $receiver) {
-        String processName = getInProcessName($receiver);
+    public static String getInProcessNameSuffix(@NonNull Context context) {
+        String processName = getInProcessName(context);
         if (processName == null) return null;
-        String packageName = $receiver.getPackageName();
-        int lastIndex = Stringx.lastIndexOf(processName, packageName, 0, false);
+        String packageName = context.getPackageName();
+        int lastIndex = processName.lastIndexOf(packageName, 0);
         return lastIndex != -1 ? processName.substring(lastIndex + packageName.length()) : null;
     }
 

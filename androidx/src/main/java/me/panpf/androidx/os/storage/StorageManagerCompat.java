@@ -23,19 +23,17 @@ import android.os.Environment;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import me.panpf.androidx.content.Contextx;
-import me.panpf.javax.collections.Arrayx;
-import me.panpf.javax.collections.Collectionx;
-import me.panpf.javax.lang.Classx;
-import me.panpf.javax.util.Transformer;
+
+import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 public class StorageManagerCompat {
 
@@ -47,33 +45,40 @@ public class StorageManagerCompat {
     }
 
     public StorageManagerCompat(@NonNull Context context) {
-        this(Contextx.storageManager(context));
+        //noinspection ConstantConditions
+        this((StorageManager) context.getSystemService(Context.STORAGE_SERVICE));
     }
 
     @NonNull
     public List<StorageVolumeCompat> getVolumeList() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            return Collectionx.map(manager.getStorageVolumes(), new Transformer<StorageVolume, StorageVolumeCompat>() {
-                @NonNull
-                @Override
-                public StorageVolumeCompat transform(@NonNull StorageVolume storageVolume) {
-                    return new StorageVolumeCompat(storageVolume);
-                }
-            });
+            List<StorageVolume> storageVolumes = manager.getStorageVolumes();
+            ArrayList<StorageVolumeCompat> volumeCompats = new ArrayList<>(storageVolumes.size());
+            for (StorageVolume storageVolume : storageVolumes) {
+                volumeCompats.add(new StorageVolumeCompat(storageVolume));
+            }
+            return volumeCompats;
         } else {
             StorageVolume[] storageVolumes = null;
             try {
-                storageVolumes = (StorageVolume[]) Classx.callMethod(manager, "getVolumeList");
+                @SuppressLint("DiscouragedPrivateApi")
+                Method method = manager.getClass().getDeclaredMethod("getVolumeList");
+                method.setAccessible(true);
+                try {
+                    storageVolumes = (StorageVolume[]) method.invoke(manager);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    throw new IllegalStateException(e);
+                }
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
-            return storageVolumes != null ? Arrayx.map(storageVolumes, new Transformer<StorageVolume, StorageVolumeCompat>() {
-                @NonNull
-                @Override
-                public StorageVolumeCompat transform(@NonNull StorageVolume storageVolume) {
-                    return new StorageVolumeCompat(storageVolume);
+            ArrayList<StorageVolumeCompat> volumeCompats = new ArrayList<>(storageVolumes != null ? storageVolumes.length : 0);
+            if (storageVolumes != null) {
+                for (StorageVolume storageVolume : storageVolumes) {
+                    volumeCompats.add(new StorageVolumeCompat(storageVolume));
                 }
-            }) : new ArrayList<StorageVolumeCompat>(0);
+            }
+            return volumeCompats;
         }
     }
 
@@ -109,7 +114,14 @@ public class StorageManagerCompat {
     public String getVolumeState(@NonNull String mountPoint) {
         Object result = null;
         try {
-            result = Classx.callMethod(manager, "getVolumeState", mountPoint);
+            @SuppressLint("DiscouragedPrivateApi")
+            Method method = manager.getClass().getDeclaredMethod("getVolumeState", String.class);
+            method.setAccessible(true);
+            try {
+                result = method.invoke(manager, mountPoint);
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
         }
@@ -128,7 +140,14 @@ public class StorageManagerCompat {
             storageVolume = manager.getStorageVolume(file);
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             try {
-                storageVolume = (StorageVolume) Classx.callMethod(manager, "getStorageVolume", file);
+                @SuppressLint("DiscouragedPrivateApi")
+                Method method = manager.getClass().getDeclaredMethod("getStorageVolume", File.class);
+                method.setAccessible(true);
+                try {
+                    storageVolume = (StorageVolume) method.invoke(manager, file);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    throw new IllegalStateException(e);
+                }
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
@@ -152,7 +171,9 @@ public class StorageManagerCompat {
         // 在 4.1 版本内置 SD卡路径是 /mnt/sdcard 扩展 SD 卡路径是 /mnt/sdcard/external_sd，
         // 由于 volumes 始终 /mnt/sdcard 在第一位，如果 file 是 /mnt/sdcard/external_sd/download 将始终匹配到 /mnt/sdcard
         // 因此这里将 volumes 翻转一下就可解决这个问题
-        for (StorageVolumeCompat volume : Collectionx.reversed(volumes)) {
+        ArrayList<StorageVolumeCompat> newVolumes = new ArrayList<>(volumes);
+        Collections.reverse(newVolumes);
+        for (StorageVolumeCompat volume : newVolumes) {
             File volumeFile = volume.getPathFile();
             File canonicalVolumeFile;
             try {

@@ -26,12 +26,13 @@ import android.util.TypedValue;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewConfiguration;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import me.panpf.androidx.app.Fragmentx;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.SystemPropertiesx;
-import me.panpf.javax.util.LazyValue;
-import me.panpf.javax.util.Premisex;
 
 public class Displayx {
 
@@ -143,13 +144,7 @@ public class Displayx {
      * Get the screen rotation angle, 0, 90, 180, 270
      */
     public static int getRotation(@NonNull final android.app.Fragment fragment) {
-        return getRotation(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
-            @NonNull
-            @Override
-            public String get() {
-                return "Fragment " + fragment + " not attached to a context.";
-            }
-        }));
+        return getRotation(Fragmentx.requireActivity(fragment));
     }
 
     /**
@@ -178,13 +173,7 @@ public class Displayx {
      * Return true if the current screen orientation is portrait
      */
     public static boolean isOrientationPortrait(@NonNull final android.app.Fragment fragment) {
-        return isOrientationPortrait(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
-            @NonNull
-            @Override
-            public String get() {
-                return "Fragment " + fragment + " not attached to a context.";
-            }
-        }));
+        return isOrientationPortrait(Fragmentx.requireActivity(fragment));
     }
 
     /**
@@ -213,13 +202,7 @@ public class Displayx {
      * Return true if the current screen orientation is landscape
      */
     public static boolean isOrientationLandscape(@NonNull final android.app.Fragment fragment) {
-        return isOrientationLandscape(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
-            @NonNull
-            @Override
-            public String get() {
-                return "Fragment " + fragment + " not attached to a context.";
-            }
-        }));
+        return isOrientationLandscape(Fragmentx.requireActivity(fragment));
     }
 
     /**
@@ -248,13 +231,7 @@ public class Displayx {
      * Return true if the current screen orientation is undefined
      */
     public static boolean isOrientationUndefined(@NonNull final android.app.Fragment fragment) {
-        return isOrientationUndefined(Premisex.checkNotNull(fragment.getActivity(), new LazyValue<String>() {
-            @NonNull
-            @Override
-            public String get() {
-                return "Fragment " + fragment + " not attached to a context.";
-            }
-        }));
+        return isOrientationUndefined(Fragmentx.requireActivity(fragment));
     }
 
     /**

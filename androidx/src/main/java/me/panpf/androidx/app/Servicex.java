@@ -31,7 +31,6 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 
 import me.panpf.androidx.content.Contextx;
-import me.panpf.javax.lang.Stringx;
 
 public class Servicex {
 
@@ -101,7 +100,7 @@ public class Servicex {
             if (!TextUtils.isEmpty(services)) {
                 TextUtils.SimpleStringSplitter split = new TextUtils.SimpleStringSplitter(':');
                 split.setString(services);
-                final String targetServiceInfo = Stringx.orEmpty(packageName) + "/" + service.getName();
+                final String targetServiceInfo = (packageName != null ? packageName : "") + "/" + service.getName();
                 while (split.hasNext()) {
                     final String serviceInfo = split.next();
                     if (packageName != null && serviceInfo.equalsIgnoreCase(targetServiceInfo)) {

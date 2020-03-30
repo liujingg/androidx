@@ -35,10 +35,10 @@ import androidx.lifecycle.Lifecycle;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.List;
 
 import me.panpf.androidx.content.Contextx;
-import me.panpf.javax.lang.Classx;
 
 public class Activityx {
 
@@ -85,10 +85,10 @@ public class Activityx {
     public static boolean convertToTranslucentCompat(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             try {
-                ActivityOptions options = Classx.callMethod(activity, "getActivityOptions");
-                Field mTranslucentCallbackField = Classx.getDeclaredFieldRecursive(activity.getClass(), "mTranslucentCallback");
-                Method method = Classx.getDeclaredMethodRecursive(activity.getClass(), "convertToTranslucent", mTranslucentCallbackField.getType(), ActivityOptions.class);
-                Classx.callMethod(activity, method, Classx.getFieldValue(activity, mTranslucentCallbackField), options);
+                ActivityOptions options = callMethod(activity, "getActivityOptions");
+                Field mTranslucentCallbackField = getDeclaredFieldRecursive(activity.getClass(), "mTranslucentCallback");
+                Method method = getDeclaredMethodRecursive(activity.getClass(), "convertToTranslucent", mTranslucentCallbackField.getType(), ActivityOptions.class);
+                callMethod(activity, method, getFieldValue(activity, mTranslucentCallbackField), options);
                 return true;
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -96,9 +96,9 @@ public class Activityx {
             }
         } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             try {
-                Field mTranslucentCallbackField = Classx.getDeclaredFieldRecursive(activity.getClass(), "mTranslucentCallback");
-                Method method = Classx.getDeclaredMethodRecursive(activity.getClass(), "convertToTranslucent", mTranslucentCallbackField.getType());
-                Classx.callMethod(activity, method, Classx.getFieldValue(activity, mTranslucentCallbackField));
+                Field mTranslucentCallbackField = getDeclaredFieldRecursive(activity.getClass(), "mTranslucentCallback");
+                Method method = getDeclaredMethodRecursive(activity.getClass(), "convertToTranslucent", mTranslucentCallbackField.getType());
+                callMethod(activity, method, getFieldValue(activity, mTranslucentCallbackField));
                 return true;
             } catch (Throwable e) {
                 e.printStackTrace();
@@ -125,7 +125,7 @@ public class Activityx {
     public static boolean convertFromTranslucentCompat(@NonNull Activity activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             try {
-                Classx.callMethod(activity, "convertFromTranslucent");
+                callMethod(activity, "convertFromTranslucent");
                 return true;
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
@@ -392,5 +392,99 @@ public class Activityx {
      */
     public static boolean safeStartByClass(@NonNull View view, @NonNull Class<? extends Activity> clazz) {
         return safeStartByClass(view, clazz, null);
+    }
+
+    /**
+     * Get the declared field with the specified name from the specified class
+     */
+    @NonNull
+    private static Field getDeclaredFieldRecursive(@NonNull Class<?> clazz, @NonNull String fieldName) throws NoSuchFieldException {
+        Field field = null;
+
+        Class currentClazz = clazz;
+        while (field == null && currentClazz != null) {
+            try {
+                field = currentClazz.getDeclaredField(fieldName);
+            } catch (NoSuchFieldException ignored) {
+            }
+
+            if (field == null) {
+                currentClazz = currentClazz.getSuperclass();
+            }
+        }
+
+        if (field == null) {
+            throw new NoSuchFieldException(String.format("No such field by name '%s' in class '%s' and its parent class", fieldName, clazz.getName()));
+        } else {
+            return field;
+        }
+    }
+    
+    /**
+     * Get the declared method with the specified name from the specified class
+     */
+    @NonNull
+    private static Method getDeclaredMethodRecursive(@NonNull Class<?> clazz, @NonNull String methodName, @Nullable Class<?>... params) throws NoSuchMethodException {
+        Method method = null;
+
+        Class currentClazz = clazz;
+        while (method == null && currentClazz != null) {
+            try {
+                //noinspection unchecked
+                method = currentClazz.getDeclaredMethod(methodName, params);
+            } catch (NoSuchMethodException ignored) {
+            }
+
+            if (method == null) {
+                currentClazz = currentClazz.getSuperclass();
+            }
+        }
+
+        if (method == null) {
+            throw new NoSuchMethodException(String.format("No such method by name '%s' and params '%s' in class '%s' and its parent class", methodName, Arrays.toString(params), clazz.getName()));
+        } else {
+            return method;
+        }
+    }
+
+    /**
+     * Method of executing the specified name of the specified object
+     */
+    @Nullable
+    private static <T> T callMethod(@NonNull Object object, @NonNull String methodName, Object... params) throws NoSuchMethodException {
+        Class[] paramClazzArray = new Class[params.length];
+        for (int i = 0; i < params.length; i++) {
+            paramClazzArray[i] = params[i].getClass();
+        }
+        Method method = getDeclaredMethodRecursive(object.getClass(), methodName, paramClazzArray);
+        return callMethod(object, method, params);
+    }
+    
+    /**
+     * Method of executing of the specified object
+     */
+    @Nullable
+    private static <T> T callMethod(@NonNull Object object, @NonNull Method method, @Nullable Object... params) {
+        method.setAccessible(true);
+        try {
+            //noinspection unchecked
+            return (T) method.invoke(object, params);
+        } catch (Exception e) {
+            throw new IllegalStateException(e);
+        }
+    }
+    
+    /**
+     * Get the value of the specified field
+     */
+    @Nullable
+    private static <T> T getFieldValue(@NonNull Object object, @NonNull Field field) {
+        field.setAccessible(true);
+        try {
+            //noinspection unchecked
+            return (T) field.get(object);
+        } catch (IllegalAccessException e) {
+            throw new IllegalStateException(e);
+        }
     }
 }

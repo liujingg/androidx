@@ -25,8 +25,6 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
-import me.panpf.androidx.content.Contextx;
-import me.panpf.javax.lang.Stringx;
 
 /**
  * A tool class that determines the state of the network, which can satisfy whether there is a network and what type of network at one time.
@@ -41,7 +39,10 @@ public class NetworkState {
 
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
     private NetworkState(@NonNull Context context) {
-        this.connectivity = Contextx.connectivityManager(context);
+        ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity == null)
+            throw new IllegalArgumentException("Not found service '" + Context.CONNECTIVITY_SERVICE + "'");
+        this.connectivity = connectivity;
         this.networkInfo = this.connectivity.getActiveNetworkInfo();
     }
 
@@ -132,7 +133,8 @@ public class NetworkState {
      */
     @NonNull
     public String getTypeName() {
-        return Stringx.isNullOrEmptyOr(networkInfo != null ? networkInfo.getTypeName() : null, "unknown");
+        String value = networkInfo != null ? networkInfo.getTypeName() : null;
+        return value != null && !value.isEmpty() ? value : "unknown";
     }
 
     /**
@@ -140,7 +142,8 @@ public class NetworkState {
      */
     @NonNull
     public String getSubtypeName() {
-        return Stringx.isNullOrEmptyOr(networkInfo != null ? networkInfo.getSubtypeName() : null, "unknown");
+        String value = networkInfo != null ? networkInfo.getSubtypeName() : null;
+        return value != null && !value.isEmpty() ? value : "unknown";
     }
 
     /**
@@ -148,7 +151,8 @@ public class NetworkState {
      */
     @NonNull
     public String getExtraInfo() {
-        return Stringx.isNullOrEmptyOr(networkInfo != null ? networkInfo.getExtraInfo() : null, "unknown");
+        String value = networkInfo != null ? networkInfo.getExtraInfo() : null;
+        return value != null && !value.isEmpty() ? value : "unknown";
     }
 
     /**

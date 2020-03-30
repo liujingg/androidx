@@ -27,9 +27,12 @@ import android.net.wifi.WifiManager;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
+
+import java.lang.reflect.Method;
+import java.util.Arrays;
+
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.SystemPropertiesx;
-import me.panpf.javax.lang.Classx;
 
 public class Networkx {
 
@@ -204,9 +207,11 @@ public class Networkx {
     @RequiresPermission(Manifest.permission.CHANGE_NETWORK_STATE)
     public static boolean setMobileEnabled(@NonNull Context context, boolean enabled) {
         try {
-            Classx.callMethod(Contextx.connectivityManager(context), "setMobileDataEnabled", enabled);
-            return true;
-        } catch (NoSuchMethodException e) {
+            ConnectivityManager connectivityManager = Contextx.connectivityManager(context);
+            Method method = getDeclaredMethodRecursive(connectivityManager.getClass(), "setMobileDataEnabled", Boolean.class);
+            method.setAccessible(true);
+            return (boolean) method.invoke(connectivityManager, enabled);
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
@@ -224,11 +229,11 @@ public class Networkx {
         long longIPV4Value = dhcpInfo.gateway;
         return String.valueOf((int) (longIPV4Value & 0xff)) +
                 '.' +
-                String.valueOf((int) ((longIPV4Value >> 8) & 0xff)) +
+                (int) ((longIPV4Value >> 8) & 0xff) +
                 '.' +
-                String.valueOf((int) ((longIPV4Value >> 16) & 0xff)) +
+                (int) ((longIPV4Value >> 16) & 0xff) +
                 '.' +
-                String.valueOf((int) ((longIPV4Value >> 24) & 0xff));
+                (int) ((longIPV4Value >> 24) & 0xff);
     }
 
     /**
@@ -247,5 +252,32 @@ public class Networkx {
     @NonNull
     public static String getDNS2() {
         return SystemPropertiesx.get("net.dns2");
+    }
+
+    /**
+     * Get the declared method with the specified name from the specified class
+     */
+    @NonNull
+    private static Method getDeclaredMethodRecursive(@NonNull Class<?> clazz, @NonNull String methodName, @Nullable Class<?>... params) throws NoSuchMethodException {
+        Method method = null;
+
+        Class currentClazz = clazz;
+        while (method == null && currentClazz != null) {
+            try {
+                //noinspection unchecked
+                method = currentClazz.getDeclaredMethod(methodName, params);
+            } catch (NoSuchMethodException ignored) {
+            }
+
+            if (method == null) {
+                currentClazz = currentClazz.getSuperclass();
+            }
+        }
+
+        if (method == null) {
+            throw new NoSuchMethodException(String.format("No such method by name '%s' and params '%s' in class '%s' and its parent class", methodName, Arrays.toString(params), clazz.getName()));
+        } else {
+            return method;
+        }
     }
 }

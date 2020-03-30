@@ -26,17 +26,16 @@ import androidx.annotation.Nullable;
 import androidx.annotation.WorkerThread;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.EmptyStackException;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+import java.util.Stack;
 
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.os.StatFsx;
-import me.panpf.javax.collections.Arrayx;
-import me.panpf.javax.collections.Collectionx;
-import me.panpf.javax.io.Filex;
-import me.panpf.javax.util.Predicate;
-import me.panpf.javax.util.Transformer;
 
 /**
  * Storage related tool methods
@@ -173,12 +172,14 @@ public class Storagex {
      */
     @NonNull
     public static String[] getMountedVolumePaths(@NonNull final Context context) {
-        return Arrayx.filter(getVolumePaths(context), new Predicate<String>() {
-            @Override
-            public boolean accept(@NonNull String path) {
-                return isVolumeMounted(context, new File(path));
+        String[] paths = getVolumePaths(context);
+        List<String> filterPathLis = new LinkedList<>();
+        for (String path : paths) {
+            if (isVolumeMounted(context, new File(path))) {
+                filterPathLis.add(path);
             }
-        }).toArray(new String[0]);
+        }
+        return filterPathLis.toArray(new String[0]);
     }
 
 
@@ -187,13 +188,12 @@ public class Storagex {
      */
     @NonNull
     public static File[] getVolumeFiles(@NonNull Context context) {
-        return Arrayx.map(getVolumePaths(context), new Transformer<String, File>() {
-            @NonNull
-            @Override
-            public File transform(@NonNull String volumePath) {
-                return new File(volumePath);
-            }
-        }).toArray(new File[0]);
+        String[] paths = getVolumePaths(context);
+        List<File> fileList = new LinkedList<>();
+        for (String path : paths) {
+            fileList.add(new File(path));
+        }
+        return fileList.toArray(new File[0]);
     }
 
     /**
@@ -201,12 +201,15 @@ public class Storagex {
      */
     @NonNull
     public static File[] getMountedVolumeFiles(@NonNull final Context context) {
-        return Arrayx.filter(getVolumeFiles(context), new Predicate<File>() {
-            @Override
-            public boolean accept(@NonNull File file) {
-                return isVolumeMounted(context, file);
+        String[] paths = getVolumePaths(context);
+        List<File> fileList = new LinkedList<>();
+        for (String path : paths) {
+            File file = new File(path);
+            if (isVolumeMounted(context, file)) {
+                fileList.add(file);
             }
-        }).toArray(new File[0]);
+        }
+        return fileList.toArray(new File[0]);
     }
 
 
@@ -223,12 +226,14 @@ public class Storagex {
      */
     @NonNull
     public static List<StorageVolumeCompat> getMountedVolumeList(@NonNull final Context context) {
-        return Collectionx.filter(getVolumeList(context), new Predicate<StorageVolumeCompat>() {
-            @Override
-            public boolean accept(@NonNull StorageVolumeCompat storageVolumeCompat) {
-                return Environment.MEDIA_MOUNTED.equals(storageVolumeCompat.getState(context));
+        List<StorageVolumeCompat> volumeList = getVolumeList(context);
+        List<StorageVolumeCompat> filterVolumeList = new ArrayList<>();
+        for (StorageVolumeCompat volumeCompat : volumeList) {
+            if (Environment.MEDIA_MOUNTED.equals(volumeCompat.getState(context))) {
+                filterVolumeList.add(volumeCompat);
             }
-        });
+        }
+        return filterVolumeList;
     }
 
     /**
@@ -244,12 +249,14 @@ public class Storagex {
      */
     @NonNull
     public static StorageVolumeCompat[] getMountedVolumes(@NonNull final Context context) {
-        return Arrayx.filter(getVolumes(context), new Predicate<StorageVolumeCompat>() {
-            @Override
-            public boolean accept(@NonNull StorageVolumeCompat storageVolumeCompat) {
-                return Environment.MEDIA_MOUNTED.equals(storageVolumeCompat.getState(context));
+        StorageVolumeCompat[] volumes = getVolumes(context);
+        List<StorageVolumeCompat> filterVolumeList = new LinkedList<>();
+        for (StorageVolumeCompat volumeCompat : volumes) {
+            if (Environment.MEDIA_MOUNTED.equals(volumeCompat.getState(context))) {
+                filterVolumeList.add(volumeCompat);
             }
-        }).toArray(new StorageVolumeCompat[0]);
+        }
+        return filterVolumeList.toArray(new StorageVolumeCompat[0]);
     }
 
 
@@ -406,7 +413,7 @@ public class Storagex {
         if (dirs.isEmpty()) {
             File[] files = getVolumeFiles(context);
             if (files.length > 0) {
-                Collectionx.addAll(dirs, files);
+                Collections.addAll(dirs, files);
             }
         }
 
@@ -415,12 +422,13 @@ public class Storagex {
             dirs.add(primaryExternalStorageDirectory);
         }
 
-        return Collectionx.filter(dirs, new Predicate<File>() {
-            @Override
-            public boolean accept(@NonNull File file) {
-                return !ignorePrimary || !file.getPath().equals(primaryExternalStorageDirectory.getPath());
+        List<File> filterDirList = new LinkedList<>();
+        for (File dir : dirs) {
+            if (!ignorePrimary || !dir.getPath().equals(primaryExternalStorageDirectory.getPath())) {
+                filterDirList.add(dir);
             }
-        }).toArray(new File[0]);
+        }
+        return filterDirList.toArray(new File[0]);
     }
 
     /**
@@ -430,12 +438,14 @@ public class Storagex {
      */
     @NonNull
     public static File[] getMountedExternalStorageDirectorys(@NonNull final Context context, final boolean ignorePrimary) {
-        return Arrayx.filter(getExternalStorageDirectorys(context, ignorePrimary), new Predicate<File>() {
-            @Override
-            public boolean accept(@NonNull File file) {
-                return isExternalStorageMounted(context, file);
+        File[] directorys = getExternalStorageDirectorys(context, ignorePrimary);
+        List<File> fileList = new LinkedList<>();
+        for (File dir : directorys) {
+            if (isExternalStorageMounted(context, dir)) {
+                fileList.add(dir);
             }
-        }).toArray(new File[0]);
+        }
+        return fileList.toArray(new File[0]);
     }
 
 
@@ -463,13 +473,12 @@ public class Storagex {
      */
     @NonNull
     public static File[] getExternalStorageDirectorysWithPath(@NonNull Context context, @NonNull final String childPath, boolean ignorePrimary) {
-        return Arrayx.map(getExternalStorageDirectorys(context, ignorePrimary), new Transformer<File, File>() {
-            @NonNull
-            @Override
-            public File transform(@NonNull File file) {
-                return new File(file, childPath);
-            }
-        }).toArray(new File[0]);
+        File[] directorys = getExternalStorageDirectorys(context, ignorePrimary);
+        List<File> fileList = new LinkedList<>();
+        for (File dir : directorys) {
+            fileList.add(new File(dir, childPath));
+        }
+        return fileList.toArray(new File[0]);
     }
 
     /**
@@ -479,13 +488,12 @@ public class Storagex {
      */
     @NonNull
     public static File[] getMountedExternalStorageDirectorysWithPath(@NonNull Context context, @NonNull final String childPath, boolean ignorePrimary) {
-        return Arrayx.map(getMountedExternalStorageDirectorys(context, ignorePrimary), new Transformer<File, File>() {
-            @NonNull
-            @Override
-            public File transform(@NonNull File file) {
-                return new File(file, childPath);
-            }
-        }).toArray(new File[0]);
+        File[] directorys = getMountedExternalStorageDirectorys(context, ignorePrimary);
+        List<File> fileList = new LinkedList<>();
+        for (File dir : directorys) {
+            fileList.add(new File(dir, childPath));
+        }
+        return fileList.toArray(new File[0]);
     }
 
 
@@ -542,24 +550,12 @@ public class Storagex {
     public static File[] getAppExternalCacheDirs(@NonNull final Context context) {
         File[] externalCacheDirs = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            externalCacheDirs = Arrayx.filter(context.getExternalCacheDirs(), new Predicate<File>() {
-                @Override
-                public boolean accept(@NonNull File file) {
-                    //noinspection ConstantConditions
-                    return file != null;
-                }
-            }).toArray(new File[0]);
+            externalCacheDirs = context.getExternalCacheDirs();
         }
         if (externalCacheDirs != null && externalCacheDirs.length > 0) {
             return externalCacheDirs;
         } else {
-            return Arrayx.map(getMountedExternalStorageDirectorys(context), new Transformer<File, File>() {
-                @NonNull
-                @Override
-                public File transform(@NonNull File file) {
-                    return new File(file, "Android/data/" + context.getPackageName() + "/cache");
-                }
-            }).toArray(new File[0]);
+            return getMountedExternalStorageDirectorysWithPath(context, "Android/data/" + context.getPackageName() + "/cache");
         }
     }
 
@@ -570,13 +566,12 @@ public class Storagex {
      */
     @NonNull
     public static File[] getAppExternalCacheDirs(@NonNull final Context context, @NonNull final String packageName) {
-        return Arrayx.map(getAppExternalCacheDirs(context), new Transformer<File, File>() {
-            @NonNull
-            @Override
-            public File transform(@NonNull File file) {
-                return new File(file.getPath().replace(context.getPackageName(), packageName));
-            }
-        }).toArray(new File[0]);
+        File[] directorys = getAppExternalCacheDirs(context);
+        List<File> fileList = new LinkedList<>();
+        for (File dir : directorys) {
+            fileList.add(new File(dir.getPath().replace(context.getPackageName(), packageName)));
+        }
+        return fileList.toArray(new File[0]);
     }
 
 
@@ -633,7 +628,7 @@ public class Storagex {
     public static long lengthAppCacheDirs(@NonNull Context context) {
         long sum = 0;
         for (File file : getAppCacheDirs(context)) {
-            sum += Filex.lengthRecursively(file);
+            sum += lengthRecursively(file);
         }
         return sum;
     }
@@ -647,7 +642,7 @@ public class Storagex {
     public static long lengthAppCacheDirs(@NonNull Context context, @NonNull String packageName) {
         long sum = 0;
         for (File file : getAppCacheDirs(context, packageName)) {
-            sum += Filex.lengthRecursively(file);
+            sum += lengthRecursively(file);
         }
         return sum;
     }
@@ -658,7 +653,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppCacheDirs(@NonNull Context context) {
         for (File file : getAppCacheDirs(context)) {
-            Filex.cleanRecursively(file);
+            cleanRecursively(file);
         }
     }
 
@@ -670,7 +665,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppCacheDirs(@NonNull Context context, @NonNull String packageName) {
         for (File file : getAppCacheDirs(context, packageName)) {
-            Filex.cleanRecursively(file);
+            cleanRecursively(file);
         }
     }
 
@@ -711,24 +706,12 @@ public class Storagex {
     public static File[] getAppExternalFilesDirs(@NonNull final Context context) {
         File[] externalFilesDirs = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            externalFilesDirs = Arrayx.filter(context.getExternalFilesDirs(null), new Predicate<File>() {
-                @Override
-                public boolean accept(@NonNull File file) {
-                    //noinspection ConstantConditions
-                    return file != null;
-                }
-            }).toArray(new File[0]);
+            externalFilesDirs = context.getExternalFilesDirs(null);
         }
         if (externalFilesDirs != null && externalFilesDirs.length > 0) {
             return externalFilesDirs;
         } else {
-            return Arrayx.map(getMountedExternalStorageDirectorys(context), new Transformer<File, File>() {
-                @NonNull
-                @Override
-                public File transform(@NonNull File file) {
-                    return new File(file, "Android/data/" + context.getPackageName() + "/files");
-                }
-            }).toArray(new File[0]);
+            return getMountedExternalStorageDirectorysWithPath(context, "Android/data/" + context.getPackageName() + "/files");
         }
     }
 
@@ -739,13 +722,12 @@ public class Storagex {
      */
     @NonNull
     public static File[] getAppExternalFilesDirs(@NonNull final Context context, @NonNull final String packageName) {
-        return Arrayx.map(getAppExternalFilesDirs(context), new Transformer<File, File>() {
-            @NonNull
-            @Override
-            public File transform(@NonNull File file) {
-                return new File(file.getPath().replace(context.getPackageName(), packageName));
-            }
-        }).toArray(new File[0]);
+        File[] directorys = getAppExternalFilesDirs(context);
+        List<File> fileList = new LinkedList<>();
+        for (File dir : directorys) {
+            fileList.add(new File(dir.getPath().replace(context.getPackageName(), packageName)));
+        }
+        return fileList.toArray(new File[0]);
     }
 
 
@@ -802,7 +784,7 @@ public class Storagex {
     public static long lengthAppFilesDirs(@NonNull Context context) {
         long sum = 0;
         for (File file : getAppFilesDirs(context)) {
-            sum += Filex.lengthRecursively(file);
+            sum += lengthRecursively(file);
         }
         return sum;
     }
@@ -816,7 +798,7 @@ public class Storagex {
     public static long lengthAppFilesDirs(@NonNull Context context, @NonNull String packageName) {
         long sum = 0;
         for (File file : getAppFilesDirs(context, packageName)) {
-            sum += Filex.lengthRecursively(file);
+            sum += lengthRecursively(file);
         }
         return sum;
     }
@@ -827,7 +809,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppFilesDirs(@NonNull Context context) {
         for (File file : getAppFilesDirs(context)) {
-            Filex.cleanRecursively(file);
+            cleanRecursively(file);
         }
     }
 
@@ -839,7 +821,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppFilesDirs(@NonNull Context context, @NonNull String packageName) {
         for (File file : getAppFilesDirs(context, packageName)) {
-            Filex.cleanRecursively(file);
+            cleanRecursively(file);
         }
     }
 
@@ -880,24 +862,12 @@ public class Storagex {
     public static File[] getAppObbDirs(@NonNull final Context context) {
         File[] obbDirs = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-            obbDirs = Arrayx.filter(context.getObbDirs(), new Predicate<File>() {
-                @Override
-                public boolean accept(@NonNull File file) {
-                    //noinspection ConstantConditions
-                    return file != null;
-                }
-            }).toArray(new File[0]);
+            obbDirs = context.getObbDirs();
         }
         if (obbDirs != null && obbDirs.length > 0) {
             return obbDirs;
         } else {
-            return Arrayx.map(getMountedExternalStorageDirectorys(context), new Transformer<File, File>() {
-                @NonNull
-                @Override
-                public File transform(@NonNull File file) {
-                    return new File(file, "Android/obb/" + context.getPackageName());
-                }
-            }).toArray(new File[0]);
+            return getMountedExternalStorageDirectorysWithPath(context, "Android/obb/" + context.getPackageName());
         }
     }
 
@@ -908,13 +878,12 @@ public class Storagex {
      */
     @NonNull
     public static File[] getAppObbDirs(@NonNull final Context context, @NonNull final String packageName) {
-        return Arrayx.map(getAppObbDirs(context), new Transformer<File, File>() {
-            @NonNull
-            @Override
-            public File transform(@NonNull File file) {
-                return new File(file.getPath().replace(context.getPackageName(), packageName));
-            }
-        }).toArray(new File[0]);
+        File[] directorys = getAppObbDirs(context);
+        List<File> fileList = new LinkedList<>();
+        for (File dir : directorys) {
+            fileList.add(new File(dir.getPath().replace(context.getPackageName(), packageName)));
+        }
+        return fileList.toArray(new File[0]);
     }
 
 
@@ -925,7 +894,7 @@ public class Storagex {
     public static long lengthAppObbDirs(@NonNull Context context) {
         long sum = 0;
         for (File file : getAppObbDirs(context)) {
-            sum += Filex.lengthRecursively(file);
+            sum += lengthRecursively(file);
         }
         return sum;
     }
@@ -939,7 +908,7 @@ public class Storagex {
     public static long lengthAppObbDirs(@NonNull Context context, @NonNull String packageName) {
         long sum = 0;
         for (File file : getAppObbDirs(context, packageName)) {
-            sum += Filex.lengthRecursively(file);
+            sum += lengthRecursively(file);
         }
         return sum;
     }
@@ -950,7 +919,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppObbDirs(@NonNull Context context) {
         for (File file : getAppObbDirs(context)) {
-            Filex.cleanRecursively(file);
+            cleanRecursively(file);
         }
     }
 
@@ -962,7 +931,7 @@ public class Storagex {
     @WorkerThread
     public static void cleanAppObbDirs(@NonNull Context context, @NonNull String packageName) {
         for (File file : getAppObbDirs(context, packageName)) {
-            Filex.cleanRecursively(file);
+            cleanRecursively(file);
         }
     }
 
@@ -979,13 +948,16 @@ public class Storagex {
     @Nullable
     public static File filterByMinBytes(@Nullable File[] paths, final long minBytes) {
         if (paths == null || paths.length == 0) return null;
-        return Arrayx.find(paths, new Predicate<File>() {
-            @Override
-            public boolean accept(@NonNull File path1) {
-                Filex.mkdirsOrCheck(path1);
-                return path1.isDirectory() && getAvailableBytesOr(path1, 0) >= minBytes;
+        for (File dir : paths) {
+            if (!dir.exists()) {
+                //noinspection ResultOfMethodCallIgnored
+                dir.mkdirs();
             }
-        });
+            if (dir.isDirectory() && getAvailableBytesOr(dir, 0) >= minBytes) {
+                return dir;
+            }
+        }
+        return null;
     }
 
     /**
@@ -1028,5 +1000,87 @@ public class Storagex {
     @Nullable
     public static File getFileIn(@Nullable File[] dirs, @NonNull String fileName, long minBytes) {
         return getFileIn(dirs, fileName, minBytes, false);
+    }
+
+    /**
+     * Get the length of the file or dir, if it is a directory, it will superimpose the length of all subfiles
+     */
+    private static long lengthRecursively(@NonNull File file) {
+        if (!file.exists()) return 0;
+        if (file.isFile()) return file.length();
+
+        long length = 0;
+
+        Queue<File> fileQueue = new LinkedList<>();
+        fileQueue.add(file);
+
+        File childFile;
+        while (true) {
+            childFile = fileQueue.poll();
+            if (childFile == null || !childFile.exists()) {
+                break;
+            }
+
+            if (childFile.isFile()) {
+                length += childFile.length();
+            } else {
+                File[] childChildFiles = childFile.listFiles();
+                if (childChildFiles != null && childChildFiles.length > 0) {
+                    Collections.addAll(fileQueue, childChildFiles);
+                }
+            }
+        }
+        return length;
+    }
+
+    private static boolean cleanRecursively(@NonNull File dir) {
+        if (!dir.exists() || dir.isFile()) return true;
+
+        File[] childFiles = dir.listFiles();
+        if (childFiles == null || childFiles.length <= 0) return true;
+
+        boolean result = true;
+
+        Stack<File> fileStack = new Stack<>();
+        Stack<File> dirStack = new Stack<>();
+
+        Collections.addAll(fileStack, childFiles);
+
+        File childFile;
+        while (true) {
+            try {
+                childFile = fileStack.pop();
+            } catch (EmptyStackException e) {
+                break;
+            }
+
+            if (childFile != null && childFile.exists()) {
+                if (childFile.isFile()) {
+                    result = result && childFile.delete();
+                } else {
+                    dirStack.push(childFile);
+
+                    File[] childChildFiles = childFile.listFiles();
+                    if (childChildFiles != null && childChildFiles.length > 0) {
+                        Collections.addAll(fileStack, childChildFiles);
+                    }
+                }
+            }
+        }
+
+        File childDir;
+        while (true) {
+            try {
+                childDir = dirStack.pop();
+            } catch (EmptyStackException e) {
+                break;
+            }
+
+            if (childDir != null && childDir.exists()) {
+                result = result && dir.delete();
+            }
+        }
+
+        return result;
     }
 }

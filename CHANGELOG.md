@@ -1,5 +1,6 @@
 ## v...
 * remove: Removed androidx-kt-arch module
+* remove: Remove dependency on javax
 
 ## v1.0.0-alpha08
 

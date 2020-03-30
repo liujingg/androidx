@@ -16,13 +16,12 @@
 
 package me.panpf.androidx.os;
 
+import android.annotation.SuppressLint;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.lang.reflect.Method;
-
-import me.panpf.javax.lang.Classx;
-import me.panpf.javax.lang.Stringx;
 
 public class SystemPropertiesx {
 
@@ -34,8 +33,8 @@ public class SystemPropertiesx {
      */
     @NonNull
     public static String get(@NonNull String key) {
-        if (GetStringMethodHolder.METHOD == null) return "";
-        return Stringx.orEmpty((String) Classx.callStaticMethod(GetStringMethodHolder.METHOD, key));
+        String value = GetStringMethodHolder.get(key);
+        return value != null ? value : "";
     }
 
     /**
@@ -43,8 +42,8 @@ public class SystemPropertiesx {
      */
     @NonNull
     public static String getOr(@NonNull String key, @NonNull String defaultValue) {
-        if (GetStringDefMethodHolder.METHOD == null) return defaultValue;
-        return Stringx.orEmpty((String) Classx.callStaticMethod(GetStringDefMethodHolder.METHOD, key, defaultValue));
+        String value = GetStringDefMethodHolder.get(key, defaultValue);
+        return value != null ? value : "";
     }
 
 
@@ -52,53 +51,45 @@ public class SystemPropertiesx {
      * Get the system property according to the specified key and convert it to int
      */
     public static int getIntOr(@NonNull String key, int defaultValue) {
-        if (GetIntMethodHolder.METHOD == null) return defaultValue;
-        return (int) Classx.callStaticMethod(GetIntMethodHolder.METHOD, key, defaultValue);
+        return GetIntMethodHolder.getInt(key, defaultValue);
     }
 
     /**
      * Get the system property according to the specified key and convert it to long
      */
     public static long getLongOr(@NonNull String key, long defaultValue) {
-        if (GetLongMethodHolder.METHOD == null) return defaultValue;
-        return (long) Classx.callStaticMethod(GetLongMethodHolder.METHOD, key, defaultValue);
+        return GetLongMethodHolder.getLong(key, defaultValue);
     }
 
     /**
      * Get the system property according to the specified key and convert it to boolean
      */
     public static boolean getBooleanOr(@NonNull String key, boolean defaultValue) {
-        if (GetBooleanMethodHolder.METHOD == null) return defaultValue;
-        return (boolean) Classx.callStaticMethod(GetBooleanMethodHolder.METHOD, key, defaultValue);
+        return GetBooleanMethodHolder.getBoolean(key, defaultValue);
     }
 
     /**
      * Modify system properties based on the specified key
      */
-    @SuppressWarnings("unused")
     public static void set(@NonNull String key, @NonNull String value) {
-        if (SetMethodHolder.METHOD == null) return;
-        Classx.callStaticMethod(SetMethodHolder.METHOD, key, value);
+        SetMethodHolder.set(key, value);
     }
 
     /**
      * Add system property change callback
      */
-    @SuppressWarnings("unused")
     public static void addChangeCallback(@NonNull Runnable runnable) {
-        if (AddChangedCallbackMethodHolder.METHOD == null) return;
-        Classx.callStaticMethod(AddChangedCallbackMethodHolder.METHOD, runnable);
+        AddChangedCallbackMethodHolder.addChangeCallback(runnable);
     }
 
     /**
      * Callback all system property change callbacks
      */
-    @SuppressWarnings("unused")
     public static void callChangeCallbacks() {
-        if (CallChangeCallbacksMethodHolder.METHOD == null) return;
-        Classx.callStaticMethod(CallChangeCallbacksMethodHolder.METHOD);
+        CallChangeCallbacksMethodHolder.callChangeCallbacks();
     }
 
+    @SuppressLint("PrivateApi")
     private static class GetStringMethodHolder {
 
         @Nullable
@@ -109,122 +100,237 @@ public class SystemPropertiesx {
              * 为何不采用读取 /root/build.prop 文件的方式？
              * 因为在 MIUI 上没有读取这个文件的权限，在华为 EMUI 上读取的属性不全
              */
-            Method getMethod = null;
+            Method method = null;
             try {
-                getMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "get", String.class);
+                method = Class.forName("android.os.SystemProperties").getDeclaredMethod("get", String.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            METHOD = getMethod;
+            METHOD = method;
+        }
+
+        @Nullable
+        static String get(@NonNull String key) {
+            Method method = METHOD;
+            if (method != null) {
+                method.setAccessible(true);
+                try {
+                    return (String) method.invoke(null, key);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
+            } else {
+                return null;
+            }
         }
     }
 
+    @SuppressLint("PrivateApi")
     private static class GetStringDefMethodHolder {
 
         @Nullable
         private static final Method METHOD;
 
         static {
-            Method getDefMethod = null;
+            Method method = null;
             try {
-                getDefMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "get", String.class, String.class);
+                method = Class.forName("android.os.SystemProperties").getDeclaredMethod("get", String.class, String.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            METHOD = getDefMethod;
+            METHOD = method;
+        }
+
+        @Nullable
+        static String get(@NonNull String key, @NonNull String defaultValue) {
+            Method method = METHOD;
+            if (method != null) {
+                method.setAccessible(true);
+                try {
+                    return (String) method.invoke(null, key, defaultValue);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
+            } else {
+                return null;
+            }
         }
     }
 
+    @SuppressLint("PrivateApi")
     private static class GetIntMethodHolder {
         @Nullable
         private static final Method METHOD;
 
         static {
-            Method getIntMethod = null;
+            Method method = null;
             try {
-                getIntMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "getInt", String.class, int.class);
+                method = Class.forName("android.os.SystemProperties").getDeclaredMethod("getInt", String.class, int.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            METHOD = getIntMethod;
+            METHOD = method;
+        }
+
+        static int getInt(@NonNull String key, int defaultValue) {
+            Method method = METHOD;
+            if (method != null) {
+                method.setAccessible(true);
+                try {
+                    return (int) method.invoke(null, key, defaultValue);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
+            } else {
+                return defaultValue;
+            }
         }
     }
 
+    @SuppressLint("PrivateApi")
     private static class GetLongMethodHolder {
         @Nullable
         private static final Method METHOD;
 
         static {
-            Method getLongMethod = null;
+            Method method = null;
             try {
-                getLongMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "getLong", String.class, long.class);
+                method = Class.forName("android.os.SystemProperties").getDeclaredMethod("getLong", String.class, long.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            METHOD = getLongMethod;
+            METHOD = method;
+        }
+
+        static long getLong(@NonNull String key, long defaultValue) {
+            Method method = METHOD;
+            if (method != null) {
+                method.setAccessible(true);
+                try {
+                    return (long) method.invoke(null, key, defaultValue);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
+            } else {
+                return defaultValue;
+            }
         }
     }
 
+    @SuppressLint("PrivateApi")
     private static class GetBooleanMethodHolder {
         @Nullable
         private static final Method METHOD;
 
         static {
-            Method getBooleanMethod = null;
+            Method method = null;
             try {
-                getBooleanMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "getBoolean", String.class, boolean.class);
+                method = Class.forName("android.os.SystemProperties").getDeclaredMethod("getBoolean", String.class, boolean.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            METHOD = getBooleanMethod;
+            METHOD = method;
+        }
+
+        static boolean getBoolean(@NonNull String key, boolean defaultValue) {
+            Method method = METHOD;
+            if (method != null) {
+                method.setAccessible(true);
+                try {
+                    return (boolean) method.invoke(null, key, defaultValue);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
+            } else {
+                return defaultValue;
+            }
         }
     }
 
+    @SuppressLint({"PrivateApi", "DiscouragedPrivateApi"})
     private static class SetMethodHolder {
 
         @Nullable
         private static final Method METHOD;
 
         static {
-            Method getDefMethod = null;
+            Method method = null;
             try {
-                getDefMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "set", String.class, String.class);
+                method = Class.forName("android.os.SystemProperties").getDeclaredMethod("set", String.class, String.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            METHOD = getDefMethod;
+            METHOD = method;
+        }
+
+        static void set(@NonNull String key, @NonNull String value) {
+            Method method = METHOD;
+            if (method != null) {
+                method.setAccessible(true);
+                try {
+                    method.invoke(null, key, value);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
+            }
         }
     }
 
+    @SuppressLint({"PrivateApi", "DiscouragedPrivateApi"})
     private static class AddChangedCallbackMethodHolder {
 
         @Nullable
         private static final Method METHOD;
 
         static {
-            Method getDefMethod = null;
+            Method method = null;
             try {
-                getDefMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "addChangeCallback", Runnable.class);
+                method = Class.forName("android.os.SystemProperties").getDeclaredMethod("addChangeCallback", Runnable.class);
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            METHOD = getDefMethod;
+            METHOD = method;
+        }
+
+        static void addChangeCallback(@NonNull Runnable runnable) {
+            Method method = METHOD;
+            if (method != null) {
+                method.setAccessible(true);
+                try {
+                    method.invoke(null, runnable);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
+            }
         }
     }
 
+    @SuppressLint({"SoonBlockedPrivateApi", "PrivateApi"})
     private static class CallChangeCallbacksMethodHolder {
 
         @Nullable
         private static final Method METHOD;
 
         static {
-            Method getDefMethod = null;
+            Method method = null;
             try {
-                getDefMethod = Classx.getDeclaredMethodRecursive(Class.forName("android.os.SystemProperties"), "callChangeCallbacks");
+                method = Class.forName("android.os.SystemProperties").getDeclaredMethod("callChangeCallbacks");
             } catch (Exception e1) {
                 e1.printStackTrace();
             }
-            METHOD = getDefMethod;
+            METHOD = method;
+        }
+
+        static void callChangeCallbacks() {
+            Method method = METHOD;
+            if (method != null) {
+                method.setAccessible(true);
+                try {
+                    method.invoke(null);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
+            }
         }
     }
 }

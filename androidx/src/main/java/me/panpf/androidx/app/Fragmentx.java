@@ -30,8 +30,6 @@ import androidx.lifecycle.Lifecycle;
 
 import java.util.List;
 
-import me.panpf.javax.util.Premisex;
-
 public class Fragmentx {
 
     private Fragmentx() {
@@ -56,6 +54,17 @@ public class Fragmentx {
     }
 
     /**
+     * Get Activity from Fragment, throws an exception if null
+     */
+    @NonNull
+    public static Activity requireActivity(@NonNull android.app.Fragment fragment) {
+        Activity activity = fragment.getActivity();
+        if (activity == null)
+            throw new IllegalArgumentException("Fragment " + fragment + " not attached to Activity");
+        return activity;
+    }
+
+    /**
      * Get Application from Fragment, throws an exception if null
      */
     @NonNull
@@ -68,7 +77,10 @@ public class Fragmentx {
      */
     @NonNull
     public static Application requireApplication(@NonNull android.app.Fragment fragment) {
-        return Premisex.requireNotNull(fragment.getActivity()).getApplication();
+        Activity activity = fragment.getActivity();
+        if (activity == null)
+            throw new IllegalArgumentException("Fragment " + fragment + " not attached to Activity");
+        return activity.getApplication();
     }
 
     /**

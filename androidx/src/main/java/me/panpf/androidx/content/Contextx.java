@@ -98,7 +98,6 @@ import me.panpf.androidx.Androidx;
 import me.panpf.androidx.os.storage.StorageManagerCompat;
 import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.androidx.util.ResultRunnable;
-import me.panpf.javax.util.Premisex;
 
 @SuppressWarnings({"UnusedReturnValue"})
 public class Contextx {
@@ -167,12 +166,129 @@ public class Contextx {
     /* ******************************************* SystemService *******************************************/
 
 
+    /**
+     * @param serviceName The name of the desired service.
+     * @return The service or null if the name does not exist.
+     * @see Context#WINDOW_SERVICE
+     * @see android.view.WindowManager
+     * @see Context#LAYOUT_INFLATER_SERVICE
+     * @see android.view.LayoutInflater
+     * @see Context#ACTIVITY_SERVICE
+     * @see android.app.ActivityManager
+     * @see Context#POWER_SERVICE
+     * @see android.os.PowerManager
+     * @see Context#ALARM_SERVICE
+     * @see android.app.AlarmManager
+     * @see Context#NOTIFICATION_SERVICE
+     * @see android.app.NotificationManager
+     * @see Context#KEYGUARD_SERVICE
+     * @see android.app.KeyguardManager
+     * @see Context#LOCATION_SERVICE
+     * @see android.location.LocationManager
+     * @see Context#SEARCH_SERVICE
+     * @see android.app.SearchManager
+     * @see Context#SENSOR_SERVICE
+     * @see android.hardware.SensorManager
+     * @see Context#STORAGE_SERVICE
+     * @see android.os.storage.StorageManager
+     * @see Context#VIBRATOR_SERVICE
+     * @see android.os.Vibrator
+     * @see Context#CONNECTIVITY_SERVICE
+     * @see android.net.ConnectivityManager
+     * @see Context#WIFI_SERVICE
+     * @see android.net.wifi.WifiManager
+     * @see Context#AUDIO_SERVICE
+     * @see android.media.AudioManager
+     * @see Context#MEDIA_ROUTER_SERVICE
+     * @see android.media.MediaRouter
+     * @see Context#TELEPHONY_SERVICE
+     * @see android.telephony.TelephonyManager
+     * @see Context#TELEPHONY_SUBSCRIPTION_SERVICE
+     * @see android.telephony.SubscriptionManager
+     * @see Context#CARRIER_CONFIG_SERVICE
+     * @see android.telephony.CarrierConfigManager
+     * @see Context#INPUT_METHOD_SERVICE
+     * @see android.view.inputmethod.InputMethodManager
+     * @see Context#UI_MODE_SERVICE
+     * @see android.app.UiModeManager
+     * @see Context#DOWNLOAD_SERVICE
+     * @see android.app.DownloadManager
+     * @see Context#BATTERY_SERVICE
+     * @see android.os.BatteryManager
+     * @see Context#JOB_SCHEDULER_SERVICE
+     * @see android.app.job.JobScheduler
+     * @see Context#NETWORK_STATS_SERVICE
+     * @see android.app.usage.NetworkStatsManager
+     * @see android.os.HardwarePropertiesManager
+     * @see Context#HARDWARE_PROPERTIES_SERVICE
+     */
     @NonNull
     public static <T> T systemService(@NonNull Context context, @NonNull String serviceName) {
         //noinspection unchecked
-        return Premisex.requireNotNull((T) context.getSystemService(serviceName), serviceName);
+        T t = (T) context.getSystemService(serviceName);
+        if (t != null) {
+            return t;
+        } else {
+            throw new IllegalArgumentException("Not found service '" + serviceName + "'");
+        }
     }
 
+    /**
+     * @param serviceName The name of the desired service.
+     * @return The service or null if the name does not exist.
+     * @see Context#WINDOW_SERVICE
+     * @see android.view.WindowManager
+     * @see Context#LAYOUT_INFLATER_SERVICE
+     * @see android.view.LayoutInflater
+     * @see Context#ACTIVITY_SERVICE
+     * @see android.app.ActivityManager
+     * @see Context#POWER_SERVICE
+     * @see android.os.PowerManager
+     * @see Context#ALARM_SERVICE
+     * @see android.app.AlarmManager
+     * @see Context#NOTIFICATION_SERVICE
+     * @see android.app.NotificationManager
+     * @see Context#KEYGUARD_SERVICE
+     * @see android.app.KeyguardManager
+     * @see Context#LOCATION_SERVICE
+     * @see android.location.LocationManager
+     * @see Context#SEARCH_SERVICE
+     * @see android.app.SearchManager
+     * @see Context#SENSOR_SERVICE
+     * @see android.hardware.SensorManager
+     * @see Context#STORAGE_SERVICE
+     * @see android.os.storage.StorageManager
+     * @see Context#VIBRATOR_SERVICE
+     * @see android.os.Vibrator
+     * @see Context#CONNECTIVITY_SERVICE
+     * @see android.net.ConnectivityManager
+     * @see Context#WIFI_SERVICE
+     * @see android.net.wifi.WifiManager
+     * @see Context#AUDIO_SERVICE
+     * @see android.media.AudioManager
+     * @see Context#MEDIA_ROUTER_SERVICE
+     * @see android.media.MediaRouter
+     * @see Context#TELEPHONY_SERVICE
+     * @see android.telephony.TelephonyManager
+     * @see Context#TELEPHONY_SUBSCRIPTION_SERVICE
+     * @see android.telephony.SubscriptionManager
+     * @see Context#CARRIER_CONFIG_SERVICE
+     * @see android.telephony.CarrierConfigManager
+     * @see Context#INPUT_METHOD_SERVICE
+     * @see android.view.inputmethod.InputMethodManager
+     * @see Context#UI_MODE_SERVICE
+     * @see android.app.UiModeManager
+     * @see Context#DOWNLOAD_SERVICE
+     * @see android.app.DownloadManager
+     * @see Context#BATTERY_SERVICE
+     * @see android.os.BatteryManager
+     * @see Context#JOB_SCHEDULER_SERVICE
+     * @see android.app.job.JobScheduler
+     * @see Context#NETWORK_STATS_SERVICE
+     * @see android.app.usage.NetworkStatsManager
+     * @see android.os.HardwarePropertiesManager
+     * @see Context#HARDWARE_PROPERTIES_SERVICE
+     */
     @Nullable
     public static <T> T systemServiceOrNull(@NonNull Context context, @NonNull String serviceName) {
         //noinspection unchecked
@@ -181,12 +297,72 @@ public class Contextx {
 
     /**
      * All Managers need to be created when they are first acquired, and some Managers create Handlers when they are created, so if the current environment is executed on a non-main thread, it involves the problem of creating a Handler on a non-main thread.
+     *
+     * @param serviceName The name of the desired service.
+     * @return The service or null if the name does not exist.
+     * @see Context#WINDOW_SERVICE
+     * @see android.view.WindowManager
+     * @see Context#LAYOUT_INFLATER_SERVICE
+     * @see android.view.LayoutInflater
+     * @see Context#ACTIVITY_SERVICE
+     * @see android.app.ActivityManager
+     * @see Context#POWER_SERVICE
+     * @see android.os.PowerManager
+     * @see Context#ALARM_SERVICE
+     * @see android.app.AlarmManager
+     * @see Context#NOTIFICATION_SERVICE
+     * @see android.app.NotificationManager
+     * @see Context#KEYGUARD_SERVICE
+     * @see android.app.KeyguardManager
+     * @see Context#LOCATION_SERVICE
+     * @see android.location.LocationManager
+     * @see Context#SEARCH_SERVICE
+     * @see android.app.SearchManager
+     * @see Context#SENSOR_SERVICE
+     * @see android.hardware.SensorManager
+     * @see Context#STORAGE_SERVICE
+     * @see android.os.storage.StorageManager
+     * @see Context#VIBRATOR_SERVICE
+     * @see android.os.Vibrator
+     * @see Context#CONNECTIVITY_SERVICE
+     * @see android.net.ConnectivityManager
+     * @see Context#WIFI_SERVICE
+     * @see android.net.wifi.WifiManager
+     * @see Context#AUDIO_SERVICE
+     * @see android.media.AudioManager
+     * @see Context#MEDIA_ROUTER_SERVICE
+     * @see android.media.MediaRouter
+     * @see Context#TELEPHONY_SERVICE
+     * @see android.telephony.TelephonyManager
+     * @see Context#TELEPHONY_SUBSCRIPTION_SERVICE
+     * @see android.telephony.SubscriptionManager
+     * @see Context#CARRIER_CONFIG_SERVICE
+     * @see android.telephony.CarrierConfigManager
+     * @see Context#INPUT_METHOD_SERVICE
+     * @see android.view.inputmethod.InputMethodManager
+     * @see Context#UI_MODE_SERVICE
+     * @see android.app.UiModeManager
+     * @see Context#DOWNLOAD_SERVICE
+     * @see android.app.DownloadManager
+     * @see Context#BATTERY_SERVICE
+     * @see android.os.BatteryManager
+     * @see Context#JOB_SCHEDULER_SERVICE
+     * @see android.app.job.JobScheduler
+     * @see Context#NETWORK_STATS_SERVICE
+     * @see android.app.usage.NetworkStatsManager
+     * @see android.os.HardwarePropertiesManager
+     * @see Context#HARDWARE_PROPERTIES_SERVICE
      */
     @NonNull
     public static <T> T systemServiceInUI(@NonNull final Context context, @NonNull final String serviceName) {
         if (Androidx.isMainThread()) {
             //noinspection unchecked
-            return Premisex.requireNotNull((T) context.getSystemService(serviceName), serviceName);
+            T t = (T) context.getSystemService(serviceName);
+            if (t != null) {
+                return t;
+            } else {
+                throw new IllegalArgumentException("Not found service '" + serviceName + "'");
+            }
         } else {
             final WeakReference<Context> contextWeakReference = new WeakReference<>(context);
             return Androidx.waitRunInUIResult(new ResultRunnable<T>() {
@@ -196,7 +372,12 @@ public class Contextx {
                     Context nowContext = contextWeakReference.get();
                     if (nowContext == null) throw new IllegalStateException("Context has death");
                     //noinspection unchecked
-                    return Premisex.requireNotNull((T) nowContext.getSystemService(serviceName), serviceName);
+                    T t = (T) nowContext.getSystemService(serviceName);
+                    if (t != null) {
+                        return t;
+                    } else {
+                        throw new IllegalArgumentException("Not found service '" + serviceName + "'");
+                    }
                 }
             });
         }
@@ -204,6 +385,61 @@ public class Contextx {
 
     /**
      * All Managers need to be created when they are first acquired, and some Managers create Handlers when they are created, so if the current environment is executed on a non-main thread, it involves the problem of creating a Handler on a non-main thread.
+     *
+     * @param serviceName The name of the desired service.
+     * @return The service or null if the name does not exist.
+     * @see Context#WINDOW_SERVICE
+     * @see android.view.WindowManager
+     * @see Context#LAYOUT_INFLATER_SERVICE
+     * @see android.view.LayoutInflater
+     * @see Context#ACTIVITY_SERVICE
+     * @see android.app.ActivityManager
+     * @see Context#POWER_SERVICE
+     * @see android.os.PowerManager
+     * @see Context#ALARM_SERVICE
+     * @see android.app.AlarmManager
+     * @see Context#NOTIFICATION_SERVICE
+     * @see android.app.NotificationManager
+     * @see Context#KEYGUARD_SERVICE
+     * @see android.app.KeyguardManager
+     * @see Context#LOCATION_SERVICE
+     * @see android.location.LocationManager
+     * @see Context#SEARCH_SERVICE
+     * @see android.app.SearchManager
+     * @see Context#SENSOR_SERVICE
+     * @see android.hardware.SensorManager
+     * @see Context#STORAGE_SERVICE
+     * @see android.os.storage.StorageManager
+     * @see Context#VIBRATOR_SERVICE
+     * @see android.os.Vibrator
+     * @see Context#CONNECTIVITY_SERVICE
+     * @see android.net.ConnectivityManager
+     * @see Context#WIFI_SERVICE
+     * @see android.net.wifi.WifiManager
+     * @see Context#AUDIO_SERVICE
+     * @see android.media.AudioManager
+     * @see Context#MEDIA_ROUTER_SERVICE
+     * @see android.media.MediaRouter
+     * @see Context#TELEPHONY_SERVICE
+     * @see android.telephony.TelephonyManager
+     * @see Context#TELEPHONY_SUBSCRIPTION_SERVICE
+     * @see android.telephony.SubscriptionManager
+     * @see Context#CARRIER_CONFIG_SERVICE
+     * @see android.telephony.CarrierConfigManager
+     * @see Context#INPUT_METHOD_SERVICE
+     * @see android.view.inputmethod.InputMethodManager
+     * @see Context#UI_MODE_SERVICE
+     * @see android.app.UiModeManager
+     * @see Context#DOWNLOAD_SERVICE
+     * @see android.app.DownloadManager
+     * @see Context#BATTERY_SERVICE
+     * @see android.os.BatteryManager
+     * @see Context#JOB_SCHEDULER_SERVICE
+     * @see android.app.job.JobScheduler
+     * @see Context#NETWORK_STATS_SERVICE
+     * @see android.app.usage.NetworkStatsManager
+     * @see android.os.HardwarePropertiesManager
+     * @see Context#HARDWARE_PROPERTIES_SERVICE
      */
     @Nullable
     public static <T> T systemServiceOrNullInUI(@NonNull final Context context, @NonNull final String serviceName) {
@@ -226,7 +462,12 @@ public class Contextx {
 
     @NonNull
     public static PackageManager packageManager(@NonNull Context context) {
-        return Premisex.requireNotNull(context.getPackageManager(), "PackageManager");
+        PackageManager packageManager = context.getPackageManager();
+        if (packageManager != null) {
+            return packageManager;
+        } else {
+            throw new IllegalArgumentException("Not found service 'PackageManager'");
+        }
     }
 
     @NonNull
@@ -347,7 +588,7 @@ public class Contextx {
 
     @Nullable
     public static WifiManager wifiManagerOrNull(@NonNull Context context) {
-        return systemServiceOrNull(context, Context.WIFI_SERVICE);
+        return systemServiceOrNull(context.getApplicationContext(), Context.WIFI_SERVICE);
     }
 
     @NonNull

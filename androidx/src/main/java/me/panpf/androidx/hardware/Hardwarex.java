@@ -31,14 +31,8 @@ import androidx.annotation.RequiresPermission;
 import java.net.NetworkInterface;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.LinkedList;
 import java.util.List;
-
-import me.panpf.androidx.content.Contextx;
-import me.panpf.javax.collections.Arrayx;
-import me.panpf.javax.collections.Collectionx;
-import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.util.Predicate;
-import me.panpf.javax.util.Transformer;
 
 public class Hardwarex {
 
@@ -47,27 +41,32 @@ public class Hardwarex {
 
     @NonNull
     public static String getProduct() {
-        return Stringx.orEmpty(Build.PRODUCT);
+        String value = Build.PRODUCT;
+        return value != null ? value : "";
     }
 
     @NonNull
     public static String getBrand() {
-        return Stringx.orEmpty(Build.BRAND);
+        String value = Build.BRAND;
+        return value != null ? value : "";
     }
 
     @NonNull
     public static String getModel() {
-        return Stringx.orEmpty(Build.MODEL);
+        String value = Build.MODEL;
+        return value != null ? value : "";
     }
 
     @NonNull
     public static String getDevice() {
-        return Stringx.orEmpty(Build.DEVICE);
+        String value = Build.DEVICE;
+        return value != null ? value : "";
     }
 
     @NonNull
     public static String getHardware() {
-        return Stringx.orEmpty(Build.HARDWARE);
+        String value = Build.HARDWARE;
+        return value != null ? value : "";
     }
 
     @NonNull
@@ -76,13 +75,18 @@ public class Hardwarex {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 return Build.SUPPORTED_ABIS;
             } else {
+                LinkedList<String> abiList = new LinkedList<>();
                 //noinspection deprecation
-                return Collectionx.filter(Collectionx.mutableListOf(Build.CPU_ABI, Build.CPU_ABI2), new Predicate<String>() {
-                    @Override
-                    public boolean accept(@NonNull String s) {
-                        return Stringx.isNotEmpty(s) && !"unknown".equals(s);
-                    }
-                }).toArray(new String[0]);
+                String abi1 = Build.CPU_ABI;
+                if (abi1 != null && !abi1.isEmpty() && !"unknown".equals(abi1)) {
+                    abiList.add(abi1);
+                }
+                //noinspection deprecation
+                String abi2 = Build.CPU_ABI2;
+                if (abi2 != null && !abi2.isEmpty() && !"unknown".equals(abi2)) {
+                    abiList.add(abi2);
+                }
+                return abiList.toArray(new String[0]);
             }
         } catch (Throwable e) {
             e.printStackTrace();
@@ -95,11 +99,12 @@ public class Hardwarex {
     @RequiresPermission(anyOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
     public static String getPhoneNumber(@NonNull Context context) {
         try {
-            TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
-            return Stringx.isNotSafeOr(manager != null ? manager.getLine1Number() : null, "unknown");
+            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String value = manager != null ? manager.getLine1Number() : null;
+            return value != null && !value.isEmpty() ? value : "unknown";
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
+            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
         }
     }
 
@@ -108,18 +113,20 @@ public class Hardwarex {
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getDeviceId(@NonNull Context context) {
         try {
-            TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
-            return Stringx.isNotSafeOr(manager != null ? (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? manager.getImei() : manager.getDeviceId()) : null, "unknown");
+            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String value = manager != null ? (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? manager.getImei() : manager.getDeviceId()) : null;
+            return value != null && !value.isEmpty() ? value : "unknown";
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
+            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
         }
     }
 
     @NonNull
     @SuppressLint("HardwareIds")
     public static String getAndroidId(@NonNull Context context) {
-        return Stringx.isNotSafeOr(Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID), "unknown");
+        String value = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        return value != null && !value.isEmpty() ? value : "unknown";
     }
 
     /**
@@ -130,11 +137,12 @@ public class Hardwarex {
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getSubscriberId(@NonNull Context context) {
         try {
-            TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
-            return Stringx.isNotSafeOr(manager != null ? manager.getSubscriberId() : null, "unknown");
+            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String value = manager != null ? manager.getSubscriberId() : null;
+            return value != null && !value.isEmpty() ? value : "unknown";
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
+            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
         }
     }
 
@@ -146,11 +154,12 @@ public class Hardwarex {
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getSimSerialNumber(@NonNull Context context) {
         try {
-            TelephonyManager manager = Contextx.telephonyManagerOrNull(context);
-            return Stringx.isNotSafeOr(manager != null ? manager.getSimSerialNumber() : null, "unknown");
+            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String value = manager != null ? manager.getSimSerialNumber() : null;
+            return value != null && !value.isEmpty() ? value : "unknown";
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
+            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
         }
     }
 
@@ -159,10 +168,11 @@ public class Hardwarex {
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
     public static String getSerial() {
         try {
-            return Stringx.isNotSafeOr(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? Build.getSerial() : Build.SERIAL, "unknown");
+            String value = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? Build.getSerial() : Build.SERIAL;
+            return value != null && !value.isEmpty() ? value : "unknown";
         } catch (Throwable e) {
             e.printStackTrace();
-            return Stringx.isNotSafeOr(e instanceof SecurityException ? "PermissionDenied" : null, "unknown");
+            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
         }
     }
 
@@ -195,27 +205,29 @@ public class Hardwarex {
     public static String getMacAddress(@NonNull Context context) {
         String macAddress = null;
         try {
-            WifiManager wifiManager = Contextx.wifiManagerOrNull(context);
+            WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 Enumeration<NetworkInterface> interfaceEnumeration = NetworkInterface.getNetworkInterfaces();
                 List<NetworkInterface> nis = interfaceEnumeration != null ? Collections.list(interfaceEnumeration) : null;
                 if (nis != null && nis.size() > 0) {
-                    NetworkInterface networkInterface = Collectionx.find(nis, new Predicate<NetworkInterface>() {
-                        @Override
-                        public boolean accept(@NonNull NetworkInterface networkInterface) {
-                            return networkInterface.getName().equalsIgnoreCase("wlan0");
+                    NetworkInterface networkInterface = null;
+                    for (NetworkInterface ni : nis) {
+                        if ("wlan0".equalsIgnoreCase(ni != null ? ni.getName() : null)) {
+                            networkInterface = ni;
+                            break;
                         }
-                    });
+                    }
                     byte[] address = networkInterface != null ? networkInterface.getHardwareAddress() : null;
                     if (address != null) {
-                        macAddress = Arrayx.joinToString(address, ":", null, null, -1, null, new Transformer<Byte, CharSequence>() {
-                            @NonNull
-                            @Override
-                            public CharSequence transform(@NonNull Byte by) {
-                                String item = Integer.toHexString(by & 0xFF);
-                                return item.length() > 1 ? item : ("0" + item);
+                        StringBuilder macStringBuilder = new StringBuilder();
+                        for (byte b : address) {
+                            if (macStringBuilder.length() > 0) {
+                                macStringBuilder.append(":");
                             }
-                        });
+                            String item = Integer.toHexString(b & 0xFF);
+                            macStringBuilder.append(item.length() > 1 ? item : ("0" + item));
+                        }
+                        macAddress = macStringBuilder.toString();
                     }
                 } else {
                     WifiInfo wifiInfo = wifiManager != null ? wifiManager.getConnectionInfo() : null;

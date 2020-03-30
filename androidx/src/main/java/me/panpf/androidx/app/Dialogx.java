@@ -23,7 +23,8 @@ import android.app.ProgressDialog;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import me.panpf.javax.lang.Classx;
+
+import java.lang.reflect.Field;
 
 public class Dialogx {
 
@@ -35,9 +36,14 @@ public class Dialogx {
      */
     public static boolean setClickButtonClosable(@NonNull Dialog dialog, boolean closable) {
         try {
-            Classx.setFieldValue(dialog, "mShowing", closable);
+            Field field = getDeclaredFieldRecursive(dialog.getClass(), "mShowing");
+            field.setAccessible(true);
+            field.set(dialog, closable);
             return true;
         } catch (NoSuchFieldException e) {
+            e.printStackTrace();
+            return false;
+        } catch (IllegalAccessException e) {
             e.printStackTrace();
             return false;
         }
@@ -101,5 +107,31 @@ public class Dialogx {
     public static ProgressDialog showProgressDialog(@NonNull android.app.Fragment fragment, int messageId) {
         Activity activity = fragment.getActivity();
         return activity != null ? showProgressDialog(activity, messageId) : null;
+    }
+
+    /**
+     * Get the declared field with the specified name from the specified class
+     */
+    @NonNull
+    private static Field getDeclaredFieldRecursive(@NonNull Class<?> clazz, @NonNull String fieldName) throws NoSuchFieldException {
+        Field field = null;
+
+        Class currentClazz = clazz;
+        while (field == null && currentClazz != null) {
+            try {
+                field = currentClazz.getDeclaredField(fieldName);
+            } catch (NoSuchFieldException ignored) {
+            }
+
+            if (field == null) {
+                currentClazz = currentClazz.getSuperclass();
+            }
+        }
+
+        if (field == null) {
+            throw new NoSuchFieldException(String.format("No such field by name '%s' in class '%s' and its parent class", fieldName, clazz.getName()));
+        } else {
+            return field;
+        }
     }
 }

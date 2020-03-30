@@ -41,10 +41,7 @@ import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-
-import me.panpf.javax.io.Filex;
-import me.panpf.javax.io.Streamx;
-import me.panpf.javax.lang.Mathx;
+import java.math.BigDecimal;
 
 public class Bitmapx {
 
@@ -188,7 +185,19 @@ public class Bitmapx {
      * Save Bitmap to file
      */
     public static void writeToFile(@NonNull Bitmap bitmap, @NonNull File file, @NonNull Bitmap.CompressFormat format, int quality) throws IOException {
-        Filex.createNewFileOrThrow(file);
+        if (!file.exists()) {
+            File dir = file.getParentFile();
+            if (!dir.exists() && (!dir.mkdirs() || !dir.exists())) {
+                throw new IOException("Unable create dir: " + dir);
+            }
+            try {
+                //noinspection ResultOfMethodCallIgnored
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new IOException("Unable create file: " + file, e);
+            }
+            if (!file.exists()) throw new IOException("Unable create file: ");
+        }
         BufferedOutputStream bos;
         try {
             bos = new BufferedOutputStream(new FileOutputStream(file));
@@ -200,7 +209,8 @@ public class Bitmapx {
         try {
             bitmap.compress(format, quality, bos);
         } finally {
-            Streamx.closeQuietly(bos);
+            bos.flush();
+            bos.close();
         }
     }
 
@@ -317,7 +327,9 @@ public class Bitmapx {
      */
     @NonNull
     public static Bitmap cropTo(@NonNull Bitmap srcBitmap, @NonNull Rect srcRect, @NonNull Bitmap dstBitmap) {
-        if (Mathx.scale((float) srcRect.width() / srcRect.height(), 1) != Mathx.scale((float) dstBitmap.getWidth() / dstBitmap.getHeight(), 1)) {
+        float srcSizeScale = new BigDecimal((float) srcRect.width() / srcRect.height()).setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+        float destSizeScale = new BigDecimal((float) dstBitmap.getWidth() / dstBitmap.getHeight()).setScale(1, BigDecimal.ROUND_HALF_UP).floatValue();
+        if (srcSizeScale != destSizeScale) {
             throw new IllegalArgumentException(String.format("srcRect is inconsistent with dstBitmap's aspect ratio. srcRect=%s, dstBitmap=%dx%d",
                     srcRect.toShortString(), dstBitmap.getWidth(), dstBitmap.getHeight()));
         }

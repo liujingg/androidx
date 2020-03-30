@@ -16,23 +16,26 @@
 
 package me.panpf.androidx.os.storage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
 import android.os.storage.StorageVolume;
 
-import java.io.File;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.io.File;
+import java.lang.reflect.Method;
+
 import me.panpf.androidx.content.Contextx;
-import me.panpf.javax.lang.Classx;
 
 public class StorageVolumeCompat {
 
     @NonNull
     private StorageVolume storageVolume;
 
+    @SuppressWarnings("WeakerAccess")
     public StorageVolumeCompat(@NonNull StorageVolume storageVolume) {
         this.storageVolume = storageVolume;
     }
@@ -45,7 +48,15 @@ public class StorageVolumeCompat {
     @Nullable
     public String getPath() {
         try {
-            return (String) Classx.callMethod(storageVolume, "getPath");
+            //noinspection JavaReflectionMemberAccess
+            @SuppressLint("DiscouragedPrivateApi")
+            Method method = storageVolume.getClass().getDeclaredMethod("getPath");
+            method.setAccessible(true);
+            try {
+                return (String) method.invoke(storageVolume);
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             return null;
@@ -56,7 +67,15 @@ public class StorageVolumeCompat {
     public File getPathFile() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
             try {
-                return (File) Classx.callMethod(storageVolume, "getPathFile");
+                //noinspection JavaReflectionMemberAccess
+                @SuppressLint("DiscouragedPrivateApi")
+                Method method = storageVolume.getClass().getDeclaredMethod("getPathFile");
+                method.setAccessible(true);
+                try {
+                    return (File) method.invoke(storageVolume);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
             }
@@ -76,7 +95,14 @@ public class StorageVolumeCompat {
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 try {
-                    return (boolean) Classx.callMethod(storageVolume, "isPrimary");
+                    @SuppressLint("DiscouragedPrivateApi")
+                    Method method = storageVolume.getClass().getDeclaredMethod("isPrimary");
+                    method.setAccessible(true);
+                    try {
+                        return (boolean) method.invoke(storageVolume);
+                    } catch (Exception e) {
+                        throw new IllegalStateException(e);
+                    }
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
                 }
@@ -97,7 +123,14 @@ public class StorageVolumeCompat {
             return storageVolume.isRemovable();
         } else {
             try {
-                return (boolean) Classx.callMethod(storageVolume, "isRemovable");
+                @SuppressLint("DiscouragedPrivateApi")
+                Method method = storageVolume.getClass().getDeclaredMethod("isRemovable");
+                method.setAccessible(true);
+                try {
+                    return (boolean) method.invoke(storageVolume);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
                 return false;
@@ -115,7 +148,14 @@ public class StorageVolumeCompat {
             return storageVolume.isEmulated();
         } else {
             try {
-                return (boolean) Classx.callMethod(storageVolume, "isEmulated");
+                @SuppressLint("DiscouragedPrivateApi")
+                Method method = storageVolume.getClass().getDeclaredMethod("isEmulated");
+                method.setAccessible(true);
+                try {
+                    return (boolean) method.invoke(storageVolume);
+                } catch (Exception e) {
+                    throw new IllegalStateException(e);
+                }
             } catch (NoSuchMethodException e) {
                 e.printStackTrace();
                 return false;
@@ -130,7 +170,15 @@ public class StorageVolumeCompat {
      */
     public boolean allowMassStorage() {
         try {
-            return (boolean) Classx.callMethod(storageVolume, "allowMassStorage");
+            //noinspection JavaReflectionMemberAccess
+            @SuppressLint("DiscouragedPrivateApi")
+            Method method = storageVolume.getClass().getDeclaredMethod("allowMassStorage");
+            method.setAccessible(true);
+            try {
+                return (boolean) method.invoke(storageVolume);
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             return false;
@@ -144,7 +192,15 @@ public class StorageVolumeCompat {
      */
     public long getMaxFileSize() {
         try {
-            return (long) Classx.callMethod(storageVolume, "getMaxFileSize");
+            //noinspection JavaReflectionMemberAccess
+            @SuppressLint("DiscouragedPrivateApi")
+            Method method = storageVolume.getClass().getDeclaredMethod("getMaxFileSize");
+            method.setAccessible(true);
+            try {
+                return (long) method.invoke(storageVolume);
+            } catch (Exception e) {
+                throw new IllegalStateException(e);
+            }
         } catch (NoSuchMethodException e) {
             e.printStackTrace();
             return -1;
@@ -167,7 +223,15 @@ public class StorageVolumeCompat {
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 try {
-                    Object callResult = Classx.callMethod(storageVolume, "getState");
+                    @SuppressLint("DiscouragedPrivateApi")
+                    Method method = storageVolume.getClass().getDeclaredMethod("getState");
+                    method.setAccessible(true);
+                    Object callResult;
+                    try {
+                        callResult = method.invoke(storageVolume);
+                    } catch (Exception e) {
+                        throw new IllegalStateException(e);
+                    }
                     return callResult != null ? callResult.toString() : "unknown";
                 } catch (NoSuchMethodException e) {
                     e.printStackTrace();
@@ -179,6 +243,7 @@ public class StorageVolumeCompat {
         }
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object obj) {
         return storageVolume.equals(obj);
@@ -189,6 +254,7 @@ public class StorageVolumeCompat {
         return storageVolume.hashCode();
     }
 
+    @NonNull
     @Override
     public String toString() {
         return storageVolume.toString();

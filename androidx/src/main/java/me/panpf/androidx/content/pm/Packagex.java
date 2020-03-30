@@ -39,8 +39,6 @@ import java.util.List;
 import me.panpf.androidx.app.Activityx;
 import me.panpf.androidx.content.Intentx;
 import me.panpf.androidx.graphics.drawable.Drawablex;
-import me.panpf.javax.lang.Stringx;
-import me.panpf.javax.util.Premisex;
 
 public class Packagex {
 
@@ -431,11 +429,14 @@ public class Packagex {
 
     @NonNull
     public static AppPackage packageInfoToAppPackage(@NonNull PackageInfo packageInfo, @NonNull PackageManager packageManager) {
-        ApplicationInfo applicationInfo = Premisex.checkNotNull(packageInfo.applicationInfo, "applicationInfo");
+        ApplicationInfo applicationInfo = packageInfo.applicationInfo;
+        if (applicationInfo == null) throw new IllegalStateException("applicationInfo is null");
         CharSequence label = applicationInfo.loadLabel(packageManager);
         File packageFile = new File(applicationInfo.sourceDir);
-        return new AppPackage(label.toString(), Stringx.orEmpty(applicationInfo.packageName), packageInfo.versionCode,
-                Stringx.orEmpty(packageInfo.versionName), packageFile.getPath(), packageFile.length(),
+        final String packageName = applicationInfo.packageName;
+        final String versionName = packageInfo.versionName;
+        return new AppPackage(label.toString(), packageName != null ? packageName : "", packageInfo.versionCode,
+                versionName != null ? versionName : "", packageFile.getPath(), packageFile.length(),
                 packageFile.lastModified(), isSystemApp(applicationInfo), applicationInfo.enabled);
     }
 
