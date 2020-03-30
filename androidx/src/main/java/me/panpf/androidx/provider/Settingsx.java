@@ -20,13 +20,13 @@ import android.Manifest;
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.content.Intent;
-import android.media.AudioManager;
 import android.os.Build;
 import android.provider.Settings;
 
 import androidx.annotation.IntRange;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresPermission;
+
 import me.panpf.androidx.content.Contextx;
 
 /**
@@ -192,59 +192,5 @@ public class Settingsx {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Get the music max volume
-     */
-    // todo 删除 volume 系列方法
-    public static int getMediaMaxVolume(@NonNull Context context) {
-        return Contextx.audioManager(context).getStreamMaxVolume(AudioManager.STREAM_MUSIC);
-    }
-
-    /**
-     * Get the media volume
-     */
-    @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static int getMediaVolume(@NonNull Context context) {
-        return Contextx.audioManager(context).getStreamVolume(AudioManager.STREAM_MUSIC);
-    }
-
-    /**
-     * Set the media volume
-     */
-    @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setMediaVolume(@NonNull Context context, int mediaVolume) {
-        Contextx.audioManager(context).setStreamVolume(AudioManager.STREAM_MUSIC, mediaVolume, 0);
-        return true;
-    }
-
-
-    /**
-     * Get the ringer max volume
-     */
-    public static int getRingMaxVolume(@NonNull Context context) {
-        return Contextx.audioManager(context).getStreamMaxVolume(AudioManager.STREAM_RING);
-    }
-
-    /**
-     * Get the ringer volume
-     */
-    @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static int getRingVolume(@NonNull Context context) {
-        return Contextx.audioManager(context).getStreamVolume(AudioManager.STREAM_RING);
-    }
-
-    /**
-     * Set the ringer volume
-     */
-    @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-    public static boolean setRingVolume(@NonNull Context context, int ringVolume) {
-            Contextx.audioManager(context).setStreamVolume(AudioManager.STREAM_RING, ringVolume, 0);
-            return true;
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-//        } else {
-//            return Settings.System.putInt(context.getContentResolver(), "volume_ring", ringVolume);
-//        }
     }
 }

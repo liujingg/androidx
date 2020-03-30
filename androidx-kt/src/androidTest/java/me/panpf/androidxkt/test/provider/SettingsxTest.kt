@@ -153,60 +153,6 @@ class SettingsxTest {
         }
     }
 
-    @Test
-    fun testMediaVolume() {
-        val context = InstrumentationRegistry.getContext()
-        if (!context.canWrite()) {
-            val activity = requestPermissionActivityRule.activity
-            try {
-                activity.countDownLatch.await()
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-            }
-
-            if (!context.canWrite()) {
-                Assert.fail("No write settings permission")
-            }
-        }
-
-        val mediaVolume = context.getMediaVolume()
-        try {
-            val newMediaVolumeValue = 15 - mediaVolume
-            Assert.assertTrue(context.setMediaVolume(newMediaVolumeValue))
-            val newMediaVolumeValueFromSettings = context.getMediaVolume()
-            Assert.assertEquals(newMediaVolumeValue.toLong(), newMediaVolumeValueFromSettings.toLong())
-        } finally {
-            context.setMediaVolume(mediaVolume)
-        }
-    }
-
-    @Test
-    fun testRingVolume() {
-        val context = InstrumentationRegistry.getContext()
-        if (!context.isNotificationPolicyAccessGranted()) {
-            val activity = requestNotificationPolicyActivityRule.activity
-            try {
-                activity.countDownLatch.await()
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-            }
-
-            if (!context.isNotificationPolicyAccessGranted()) {
-                Assert.fail("No NotificationPolicy access permission")
-            }
-        }
-
-        val mediaVolume = context.getRingVolume()
-        try {
-            val newRingVolumeValue = 7 - mediaVolume
-            Assert.assertTrue(context.setRingVolume(newRingVolumeValue))
-            val newRingVolumeValueFromSettings = context.getRingVolume()
-            Assert.assertEquals(newRingVolumeValue.toLong(), newRingVolumeValueFromSettings.toLong())
-        } finally {
-            context.setRingVolume(mediaVolume)
-        }
-    }
-
     class RequestPermissionTestActivity : Activity() {
 
         val countDownLatch = CountDownLatch(1)

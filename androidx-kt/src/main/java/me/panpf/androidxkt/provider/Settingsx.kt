@@ -99,31 +99,3 @@ inline fun Context.isAirplaneModeOn(): Boolean = Settingsx.isAirplaneModeOn(this
  */
 @RequiresPermission(Manifest.permission.WRITE_SETTINGS)
 inline fun Context.setAirplaneModeOn(enable: Boolean): Boolean = Settingsx.setAirplaneModeOn(this, enable)
-
-
-/**
- * Get the media volume, the value range is 0-15
- */
-@IntRange(from = 0, to = 15)
-@RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-inline fun Context.getMediaVolume(): Int = Settingsx.getMediaVolume(this)
-
-/**
- * Set the media volume, the value range is 0-15
- */
-@RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-inline fun Context.setMediaVolume(@IntRange(from = 0, to = 15) mediaVolume: Int): Boolean = Settingsx.setMediaVolume(this, mediaVolume)
-
-
-/**
- * Get the ringer volume, the range is 0-7
- */
-@IntRange(from = 0, to = 7)
-@RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-inline fun Context.getRingVolume(): Int = Settingsx.getRingVolume(this)
-
-/**
- * Set the ringer volume, the range is 0-7
- */
-@RequiresPermission(Manifest.permission.WRITE_SETTINGS)
-inline fun Context.setRingVolume(@IntRange(from = 0, to = 7) ringVolume: Int): Boolean = Settingsx.setRingVolume(this, ringVolume)

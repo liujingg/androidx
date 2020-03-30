@@ -192,68 +192,6 @@ public class SettingsxTest {
         }
     }
 
-    @Test
-    public void testMediaVolume() {
-        Context context = InstrumentationRegistry.getContext();
-        if (!Settingsx.canWrite(context)) {
-            RequestPermissionTestActivity activity = requestPermissionActivityRule.getActivity();
-            try {
-                activity.countDownLatch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            if (!Settingsx.canWrite(context)) {
-                Assert.fail("No write settings permission");
-            }
-        }
-
-        int mediaVolume = Settingsx.getMediaVolume(context);
-        try {
-            int maxVolume = Settingsx.getMediaMaxVolume(context);
-            int newMediaVolumeValue = (int) (maxVolume * 0.3);
-            if (newMediaVolumeValue == mediaVolume) {
-                newMediaVolumeValue = (int) (maxVolume * 0.1);
-            }
-            Assert.assertTrue(Settingsx.setMediaVolume(context, newMediaVolumeValue));
-            int newMediaVolumeValueFromSettings = Settingsx.getMediaVolume(context);
-            Assert.assertEquals(newMediaVolumeValue, newMediaVolumeValueFromSettings);
-        } finally {
-            Settingsx.setMediaVolume(context, mediaVolume);
-        }
-    }
-
-    @Test
-    public void testRingVolume() {
-        Context context = InstrumentationRegistry.getContext();
-        if (!Settingsx.isNotificationPolicyAccessGranted(context)) {
-            RequestNotificationPolicyTestActivity activity = requestNotificationPolicyActivityRule.getActivity();
-            try {
-                activity.countDownLatch.await();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-            if (!Settingsx.isNotificationPolicyAccessGranted(context)) {
-                Assert.fail("No NotificationPolicy access permission");
-            }
-        }
-
-        int ringVolume = Settingsx.getRingVolume(context);
-        try {
-            int maxVolume = Settingsx.getMediaMaxVolume(context);
-            int newRingVolumeValue = (int) (maxVolume * 0.3);
-            if (newRingVolumeValue == ringVolume) {
-                newRingVolumeValue = (int) (maxVolume * 0.1);
-            }
-            Assert.assertTrue(Settingsx.setRingVolume(context, newRingVolumeValue));
-            int newRingVolumeValueFromSettings = Settingsx.getRingVolume(context);
-            Assert.assertEquals(newRingVolumeValue, newRingVolumeValueFromSettings);
-        } finally {
-            Settingsx.setRingVolume(context, ringVolume);
-        }
-    }
-
     public static class RequestPermissionTestActivity extends Activity {
 
         private CountDownLatch countDownLatch = new CountDownLatch(1);

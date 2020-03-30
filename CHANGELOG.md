@@ -1,6 +1,7 @@
 ## v...
 * remove: Removed androidx-kt-arch module
 * remove: Remove dependency on javax
+* remove: Remove Settingx.getMediaVolume(), setMediaVolume(), getRingVolume(), setRingVolume() method
 
 ## v1.0.0-alpha08
 
