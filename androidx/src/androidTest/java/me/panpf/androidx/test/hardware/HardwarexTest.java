@@ -19,12 +19,13 @@ package me.panpf.androidx.test.hardware;
 import android.Manifest;
 import android.content.Context;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Permissionx;
 import me.panpf.androidx.hardware.Hardwarex;
@@ -104,7 +105,6 @@ public class HardwarexTest {
             if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
                 String subscriberId = Hardwarex.getSubscriberId(context);
                 Assert.assertTrue("subscriberId: " + subscriberId, Stringx.isSafe(subscriberId)
-                        && !Comparisonx.areEqual(subscriberId, "unknown")
                         && !Comparisonx.areEqual(subscriberId, "PermissionDenied"));
             } else {
                 String subscriberId = Hardwarex.getSubscriberId(context);
@@ -123,7 +123,6 @@ public class HardwarexTest {
             if (Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE)) {
                 String simSerialNumber = Hardwarex.getSimSerialNumber(context);
                 Assert.assertTrue("simSerialNumber: " + simSerialNumber, Stringx.isSafe(simSerialNumber)
-                        && !Comparisonx.areEqual(simSerialNumber, "unknown")
                         && !Comparisonx.areEqual(simSerialNumber, "PermissionDenied"));
             } else {
                 String simSerialNumber = Hardwarex.getSimSerialNumber(context);
