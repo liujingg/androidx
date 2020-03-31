@@ -40,11 +40,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-import me.panpf.androidx.BuildConfig;
 import me.panpf.androidx.content.Intentx;
 import me.panpf.androidx.content.pm.PackageInfox;
 import me.panpf.androidx.content.pm.Packagex;
 import me.panpf.androidx.os.storage.Storagex;
+import me.panpf.androidx.test.BuildConfig;
 import me.panpf.javax.collections.Collectionx;
 import me.panpf.javax.io.Filex;
 import me.panpf.javax.io.Streamx;
@@ -72,7 +72,7 @@ public class IntentxTest {
                 try {
                     Intentx.getShareFileUri(context, file, BuildConfig.APPLICATION_ID + ".file.provider.test");
                     Assert.fail();
-                } catch (NullPointerException e) {
+                } catch (IllegalArgumentException e) {
                     e.printStackTrace();
                 }
             } else {

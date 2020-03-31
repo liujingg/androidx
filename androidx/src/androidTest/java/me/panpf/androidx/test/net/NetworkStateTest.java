@@ -20,12 +20,13 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.net.NetworkState;
 
@@ -186,17 +187,6 @@ public class NetworkStateTest {
             Assert.assertNotNull(networkState.getExtraInfo());
         } else {
             Assert.assertEquals("unknown", networkState.getExtraInfo());
-        }
-    }
-
-    @Test
-    public void testGetNetworkInfo() {
-        Context context = InstrumentationRegistry.getContext();
-        NetworkState networkState = NetworkState.get(context);
-        if (networkState.isActivated()) {
-            Assert.assertNotNull(networkState.getNetworkInfo());
-        } else {
-            Assert.assertNull(networkState.getNetworkInfo());
         }
     }
 

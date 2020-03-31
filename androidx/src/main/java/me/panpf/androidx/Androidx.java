@@ -438,6 +438,9 @@ public class Androidx {
             case Build.VERSION_CODES.P:
                 name = "9.0.0";
                 break;
+            case Build.VERSION_CODES.Q:
+                name = "10.0.0";
+                break;
             default:
                 name = "Unknown(" + sdkVersion + ')';
         }
@@ -509,6 +512,8 @@ public class Androidx {
                 return "OreoMR1";
             case Build.VERSION_CODES.P:
                 return "Pie";
+            case Build.VERSION_CODES.Q:
+                return "10";
             default:
                 return "Unknown(" + sdkVersion + ')';
         }

@@ -24,13 +24,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 
+import androidx.fragment.app.FragmentActivity;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.fragment.app.FragmentActivity;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.ClipContent;
 import me.panpf.androidx.content.ClipHtmlText;
 import me.panpf.androidx.content.ClipIntent;
@@ -88,7 +89,14 @@ public class ClipboardxTest {
         Context context = InstrumentationRegistry.getContext();
 
         Clipboardx.copyText(context, "clipLabel", TEST_TEXT);
-        Assert.assertEquals(Clipboardx.getLabel(context), "clipLabel");
+        CharSequence content = Clipboardx.getLabel(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(content);
+        } else if (content != null) {
+            Assert.assertEquals("clipLabel", content);
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
     }
 
     @Test
@@ -96,34 +104,60 @@ public class ClipboardxTest {
         Context context = InstrumentationRegistry.getContext();
 
         Clipboardx.copyText(context, TEST_TEXT);
-        Assert.assertEquals(Clipboardx.getText(context), TEST_TEXT);
+        CharSequence content = Clipboardx.getText(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(content);
+        } else if (content != null) {
+            Assert.assertEquals(TEST_TEXT, content);
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
 
         Clipboardx.copyText(context, new CharSequence[]{TEST_TEXT, TEST_TEXT2});
         CharSequence[] texts = Clipboardx.getTexts(context);
-        Assert.assertEquals(texts != null ? texts[0] : "null", TEST_TEXT);
-        Assert.assertEquals(texts != null ? texts[1] : "null", TEST_TEXT2);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(texts);
+        } else if (texts != null) {
+            Assert.assertEquals(TEST_TEXT, texts[0]);
+            Assert.assertEquals(TEST_TEXT2, texts[1]);
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
     }
 
     @Test
     public void testHtmlText() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            Context context = InstrumentationRegistry.getContext();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            return;
+        }
 
-            Clipboardx.copyHtmlText(context, TEST_HTML_TEXT, TEST_HTML_HTML);
-            ClipHtmlText clipHtmlText = Clipboardx.getHtmlText(context);
-            Assert.assertEquals(clipHtmlText != null ? clipHtmlText.text : "null", TEST_HTML_TEXT);
-            Assert.assertEquals(clipHtmlText != null ? clipHtmlText.htmlText : "null", TEST_HTML_HTML);
+        Context context = InstrumentationRegistry.getContext();
 
-            Clipboardx.copyHtmlText(context, new ClipHtmlText[]{new ClipHtmlText(TEST_HTML_TEXT, TEST_HTML_HTML), new ClipHtmlText(TEST_HTML_TEXT2, TEST_HTML_HTML2)});
-            ClipHtmlText[] htmlTexts = Clipboardx.getHtmlTexts(context);
+        Clipboardx.copyHtmlText(context, TEST_HTML_TEXT, TEST_HTML_HTML);
+        ClipHtmlText clipHtmlText = Clipboardx.getHtmlText(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(clipHtmlText);
+        } else if (clipHtmlText != null) {
+            Assert.assertEquals(TEST_HTML_TEXT, clipHtmlText.text);
+            Assert.assertEquals(TEST_HTML_HTML, clipHtmlText.htmlText);
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
 
-            ClipHtmlText clipHtmlText1 = htmlTexts != null ? htmlTexts[0] : null;
-            Assert.assertEquals(clipHtmlText1 != null ? clipHtmlText1.text : "null", TEST_HTML_TEXT);
-            Assert.assertEquals(clipHtmlText1 != null ? clipHtmlText1.htmlText : "null", TEST_HTML_HTML);
+        Clipboardx.copyHtmlText(context, new ClipHtmlText[]{new ClipHtmlText(TEST_HTML_TEXT, TEST_HTML_HTML), new ClipHtmlText(TEST_HTML_TEXT2, TEST_HTML_HTML2)});
+        ClipHtmlText[] htmlTexts = Clipboardx.getHtmlTexts(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(htmlTexts);
+        } else if (htmlTexts != null) {
+            ClipHtmlText clipHtmlText1 = htmlTexts[0];
+            Assert.assertEquals(TEST_HTML_TEXT, clipHtmlText1.text);
+            Assert.assertEquals(TEST_HTML_HTML, clipHtmlText1.htmlText);
 
-            ClipHtmlText clipHtmlText2 = htmlTexts != null ? htmlTexts[1] : null;
-            Assert.assertEquals(clipHtmlText2 != null ? clipHtmlText2.text : "null", TEST_HTML_TEXT2);
-            Assert.assertEquals(clipHtmlText2 != null ? clipHtmlText2.htmlText : "null", TEST_HTML_HTML2);
+            ClipHtmlText clipHtmlText2 = htmlTexts[1];
+            Assert.assertEquals(TEST_HTML_TEXT2, clipHtmlText2.text);
+            Assert.assertEquals(TEST_HTML_HTML2, clipHtmlText2.htmlText);
+        } else {
+            Assert.fail("Get clipboard content error");
         }
     }
 
@@ -133,16 +167,26 @@ public class ClipboardxTest {
 
         Intent intent = new Intent(context, Activity.class);
         Clipboardx.copyIntent(context, intent);
-
         Intent result = Clipboardx.getIntent(context);
-        Assert.assertEquals(result.getComponent().toString(), intent.getComponent().toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(result);
+        } else if (result != null) {
+            Assert.assertEquals(result.getComponent().toString(), intent.getComponent().toString());
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
 
         Intent intent2 = new Intent(context, FragmentActivity.class);
         Clipboardx.copyIntent(context, new Intent[]{intent, intent2});
-
         Intent[] results = Clipboardx.getIntents(context);
-        Assert.assertEquals(results[0].getComponent().toString(), intent.getComponent().toString());
-        Assert.assertEquals(results[1].getComponent().toString(), intent2.getComponent().toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(results);
+        } else if (results != null) {
+            Assert.assertEquals(results[0].getComponent().toString(), intent.getComponent().toString());
+            Assert.assertEquals(results[1].getComponent().toString(), intent2.getComponent().toString());
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
     }
 
     @Test
@@ -151,19 +195,29 @@ public class ClipboardxTest {
 
         Uri uri = Uri.parse("https://www.github.com");
         Clipboardx.copyRawUri(context, uri);
-
         ClipUri result = Clipboardx.getUri(context);
-        Assert.assertEquals(result.mimeType, ClipDescription.MIMETYPE_TEXT_URILIST);
-        Assert.assertEquals(result.uri.toString(), uri.toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(result);
+        } else if (result != null) {
+            Assert.assertEquals(result.mimeType, ClipDescription.MIMETYPE_TEXT_URILIST);
+            Assert.assertEquals(result.uri.toString(), uri.toString());
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
 
         Uri uri2 = Uri.parse("https://www.youtube.com");
         Clipboardx.copyRawUri(context, new Uri[]{uri, uri2});
-
         ClipUri[] results = Clipboardx.getUris(context);
-        Assert.assertEquals(results[0].mimeType, ClipDescription.MIMETYPE_TEXT_URILIST);
-        Assert.assertEquals(results[0].uri.toString(), uri.toString());
-        Assert.assertEquals(results[1].mimeType, ClipDescription.MIMETYPE_TEXT_URILIST);
-        Assert.assertEquals(results[1].uri.toString(), uri2.toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(results);
+        } else if (results != null) {
+            Assert.assertEquals(results[0].mimeType, ClipDescription.MIMETYPE_TEXT_URILIST);
+            Assert.assertEquals(results[0].uri.toString(), uri.toString());
+            Assert.assertEquals(results[1].mimeType, ClipDescription.MIMETYPE_TEXT_URILIST);
+            Assert.assertEquals(results[1].uri.toString(), uri2.toString());
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
     }
 
     @Test
@@ -172,19 +226,29 @@ public class ClipboardxTest {
 
         Uri uri = Uri.parse("https://www.github.com");
         Clipboardx.copyMimeTypeUri(context, "app/android", uri);
-
         ClipUri result = Clipboardx.getUri(context);
-        Assert.assertEquals(result.mimeType, "app/android");
-        Assert.assertEquals(result.uri.toString(), uri.toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(result);
+        } else if (result != null) {
+            Assert.assertEquals("app/android", result.mimeType);
+            Assert.assertEquals(uri.toString(), result.uri.toString());
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
 
         Uri uri2 = Uri.parse("https://www.youtube.com");
         Clipboardx.copyMimeTypeUri(context, "app/android", new Uri[]{uri, uri2});
-
         ClipUri[] results = Clipboardx.getUris(context);
-        Assert.assertEquals(results[0].mimeType, "app/android");
-        Assert.assertEquals(results[0].uri.toString(), uri.toString());
-        Assert.assertEquals(results[1].mimeType, "app/android");
-        Assert.assertEquals(results[1].uri.toString(), uri2.toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(results);
+        } else if (results != null) {
+            Assert.assertEquals("app/android", results[0].mimeType);
+            Assert.assertEquals(uri.toString(), results[0].uri.toString());
+            Assert.assertEquals("app/android", results[1].mimeType);
+            Assert.assertEquals(uri2.toString(), results[1].uri.toString());
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
     }
 
     @Test
@@ -193,19 +257,29 @@ public class ClipboardxTest {
 
         Uri uri = Uri.parse("https://www.github.com");
         Clipboardx.copyUri(context, uri);
-
         ClipUri result = Clipboardx.getUri(context);
-        Assert.assertEquals(result.mimeType, ClipDescription.MIMETYPE_TEXT_URILIST);
-        Assert.assertEquals(result.uri.toString(), uri.toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(result);
+        } else if (result != null) {
+            Assert.assertEquals(ClipDescription.MIMETYPE_TEXT_URILIST, result.mimeType);
+            Assert.assertEquals(uri.toString(), result.uri.toString());
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
 
         Uri uri2 = Uri.parse("https://www.youtube.com");
         Clipboardx.copyUri(context, new Uri[]{uri, uri2});
-
         ClipUri[] results = Clipboardx.getUris(context);
-        Assert.assertEquals(results[0].mimeType, ClipDescription.MIMETYPE_TEXT_URILIST);
-        Assert.assertEquals(results[0].uri.toString(), uri.toString());
-        Assert.assertEquals(results[1].mimeType, ClipDescription.MIMETYPE_TEXT_URILIST);
-        Assert.assertEquals(results[1].uri.toString(), uri2.toString());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(results);
+        } else if (results != null) {
+            Assert.assertEquals(ClipDescription.MIMETYPE_TEXT_URILIST, results[0].mimeType);
+            Assert.assertEquals(uri.toString(), results[0].uri.toString());
+            Assert.assertEquals(ClipDescription.MIMETYPE_TEXT_URILIST, results[1].mimeType);
+            Assert.assertEquals(uri2.toString(), results[1].uri.toString());
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
     }
 
     @Test
@@ -228,7 +302,11 @@ public class ClipboardxTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(result[0], "onPrimaryClipChanged");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(result[0]);
+        } else {
+            Assert.assertEquals("onPrimaryClipChanged", result[0]);
+        }
 
         result[0] = "None";
         Clipboardx.removePrimaryClipChangedListener(context, listener);
@@ -239,7 +317,7 @@ public class ClipboardxTest {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        Assert.assertEquals(result[0], "None");
+        Assert.assertEquals("None", result[0]);
     }
 
     @Test
@@ -254,20 +332,26 @@ public class ClipboardxTest {
         Clipboardx.copyContents(context, new ClipContent[]{text, htmlText, intent, uri});
 
         ClipContent[] results = Clipboardx.getContents(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            Assert.assertNull(results);
+        } else if (results != null) {
+            ClipPlainText textResult = (ClipPlainText) results[0];
+            Assert.assertEquals(textResult.text, text.text);
 
-        ClipPlainText textResult = (ClipPlainText) results[0];
-        Assert.assertEquals(textResult.text, text.text);
+            ClipHtmlText htmlTextResult = (ClipHtmlText) results[1];
+            Assert.assertEquals(htmlTextResult.text, htmlText.text);
+            Assert.assertEquals(htmlTextResult.htmlText, htmlText.htmlText);
 
-        ClipHtmlText htmlTextResult = (ClipHtmlText) results[1];
-        Assert.assertEquals(htmlTextResult.text, htmlText.text);
-        Assert.assertEquals(htmlTextResult.htmlText, htmlText.htmlText);
+            ClipIntent intentResult = (ClipIntent) results[2];
+            Assert.assertEquals(intentResult.intent.getComponent().toString(), intent.intent.getComponent().toString());
 
-        ClipIntent intentResult = (ClipIntent) results[2];
-        Assert.assertEquals(intentResult.intent.getComponent().toString(), intent.intent.getComponent().toString());
+            ClipUri uriResult = (ClipUri) results[3];
+            Assert.assertEquals(uriResult.mimeType, uri.mimeType);
+            Assert.assertEquals(uriResult.uri.toString(), uri.uri.toString());
+        } else {
+            Assert.fail("Get clipboard content error");
+        }
 
-        ClipUri uriResult = (ClipUri) results[3];
-        Assert.assertEquals(uriResult.mimeType, uri.mimeType);
-        Assert.assertEquals(uriResult.uri.toString(), uri.uri.toString());
     }
 
     @Test
@@ -276,7 +360,14 @@ public class ClipboardxTest {
             final Context context = InstrumentationRegistry.getContext();
 
             Clipboardx.copyText(context, "Hello Word");
-            Assert.assertEquals(Clipboardx.getText(context), "Hello Word");
+            CharSequence content = Clipboardx.getText(context);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                Assert.assertNull(content);
+            } else if (content != null) {
+                Assert.assertEquals("Hello Word", content);
+            } else {
+                Assert.fail("Get clipboard content error");
+            }
 
             Clipboardx.clear(context);
             Assert.assertNull(Clipboardx.getText(context));

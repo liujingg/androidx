@@ -31,6 +31,11 @@ android {
     androidExtensions {
         isExperimental = true
     }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
 }
 
 dependencies {
@@ -42,6 +47,7 @@ dependencies {
     androidTestImplementation("androidx.test:runner:${property("TEST_RUNNER")}")
     androidTestImplementation("androidx.test:rules:${property("TEST_RULES")}")
     androidTestImplementation("androidx.test.espresso:espresso-core:${property("TEST_ESPRESSO")}")
+    androidTestImplementation("me.panpf:javax:${property("JAVAX")}")
     androidTestImplementation("me.panpf:javax-kt:${property("JAVAX")}")
 }
 

@@ -21,12 +21,13 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.net.Networkx;
 import me.panpf.javax.ranges.Rangex;
@@ -81,8 +82,12 @@ public class NetworkxTest {
     public void testIsNoMeteredWifiActivated() {
         Context context = InstrumentationRegistry.getContext();
         NetworkInfo networkInfo = Contextx.connectivityManager(context).getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI && Contextx.connectivityManager(context).isActiveNetworkMetered()) {
-            Assert.assertTrue(Networkx.isNoMeteredWifiActivated(context));
+        if (networkInfo != null && networkInfo.isConnected() && networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+            if (!Contextx.connectivityManager(context).isActiveNetworkMetered()) {
+                Assert.assertTrue(Networkx.isNoMeteredWifiActivated(context));
+            } else {
+                Assert.assertFalse(Networkx.isNoMeteredWifiActivated(context));
+            }
         } else {
             Assert.assertFalse(Networkx.isNoMeteredWifiActivated(context));
         }
@@ -196,16 +201,6 @@ public class NetworkxTest {
             Assert.assertNotNull(Networkx.getExtraInfo(context));
         } else {
             Assert.assertEquals("unknown", Networkx.getExtraInfo(context));
-        }
-    }
-
-    @Test
-    public void testGetNetworkInfo() {
-        Context context = InstrumentationRegistry.getContext();
-        if (Networkx.isActivated(context)) {
-            Assert.assertNotNull(Networkx.getNetworkInfo(context));
-        } else {
-            Assert.assertNull(Networkx.getNetworkInfo(context));
         }
     }
 

@@ -20,6 +20,11 @@ import android.content.Context;
 import android.os.Build;
 import android.util.SparseArray;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,10 +32,6 @@ import org.junit.runner.RunWith;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.util.NullableResultRunnable;
 import me.panpf.androidx.util.ResultRunnable;
@@ -370,6 +371,7 @@ public class AndroidxTest {
         Assert.assertEquals(Androidx.getVersionName(Build.VERSION_CODES.O), "8.0.0");
         Assert.assertEquals(Androidx.getVersionName(Build.VERSION_CODES.O_MR1), "8.1.0");
         Assert.assertEquals(Androidx.getVersionName(Build.VERSION_CODES.P), "9.0.0");
+        Assert.assertEquals(Androidx.getVersionName(Build.VERSION_CODES.Q), "10.0.0");
 
         SparseArray<String> array = new SparseArray<>();
         array.append(Build.VERSION_CODES.BASE, "1.0.0");
@@ -400,6 +402,7 @@ public class AndroidxTest {
         array.append(Build.VERSION_CODES.O, "8.0.0");
         array.append(Build.VERSION_CODES.O_MR1, "8.1.0");
         array.append(Build.VERSION_CODES.P, "9.0.0");
+        array.append(Build.VERSION_CODES.Q, "10.0.0");
 
         Assert.assertEquals(Androidx.getVersionName(), array.get(Build.VERSION.SDK_INT));
         Assert.assertEquals(Androidx.getVersionName(Build.VERSION.SDK_INT), array.get(Build.VERSION.SDK_INT));
@@ -435,6 +438,7 @@ public class AndroidxTest {
         Assert.assertEquals(Androidx.getVersionCodeName(Build.VERSION_CODES.O), "Oreo");
         Assert.assertEquals(Androidx.getVersionCodeName(Build.VERSION_CODES.O_MR1), "OreoMR1");
         Assert.assertEquals(Androidx.getVersionCodeName(Build.VERSION_CODES.P), "Pie");
+        Assert.assertEquals(Androidx.getVersionCodeName(Build.VERSION_CODES.Q), "10");
 
         SparseArray<String> array = new SparseArray<>();
         array.append(Build.VERSION_CODES.BASE, "Base");
@@ -465,6 +469,7 @@ public class AndroidxTest {
         array.append(Build.VERSION_CODES.O, "Oreo");
         array.append(Build.VERSION_CODES.O_MR1, "OreoMR1");
         array.append(Build.VERSION_CODES.P, "Pie");
+        array.append(Build.VERSION_CODES.Q, "10");
 
         Assert.assertEquals(Androidx.getVersionCodeName(), array.get(Build.VERSION.SDK_INT));
         Assert.assertEquals(Androidx.getVersionCodeName(Build.VERSION.SDK_INT), array.get(Build.VERSION.SDK_INT));

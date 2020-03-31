@@ -4,12 +4,12 @@ import android.app.Activity
 import android.content.pm.PackageManager
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
+import me.panpf.androidx.content.pm.PackageInfox
 import me.panpf.androidxkt.content.pm.*
 import me.panpf.androidxkt.test.TestProvider
 import me.panpf.androidxkt.test.TestReceiver
 import me.panpf.androidxkt.test.TestService
 import me.panpf.javax.lang.Stringx
-import me.panpf.javax.util.Predicate
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +23,7 @@ class PackageInfoxTest {
         val context = InstrumentationRegistry.getContext()
         val activityName = TestActivity::class.java.name
 
-        val activityInfo1 = context.findActivityInfo(context.packageName, Predicate { activityInfo -> Stringx.equals(activityInfo.name, activityName) })
+        val activityInfo1 = context.findActivityInfo(context.packageName, PackageInfox.Predicate { activityInfo -> Stringx.equals(activityInfo.name, activityName) })
         Assert.assertNotNull(activityInfo1)
         Assert.assertEquals(activityName, activityInfo1!!.name)
 
@@ -31,7 +31,7 @@ class PackageInfoxTest {
         Assert.assertNotNull(activityInfo11)
         Assert.assertEquals(activityName, activityInfo11!!.name)
 
-        val activityInfo2 = context.findSelfActivityInfo(Predicate { activityInfo -> Stringx.equals(activityInfo.name, activityName) })
+        val activityInfo2 = context.findSelfActivityInfo(PackageInfox.Predicate { activityInfo -> Stringx.equals(activityInfo.name, activityName) })
         Assert.assertNotNull(activityInfo2)
         Assert.assertEquals(activityName, activityInfo2!!.name)
 
@@ -63,7 +63,7 @@ class PackageInfoxTest {
         val context = InstrumentationRegistry.getContext()
         val serviceName = TestService::class.java.name
 
-        val serviceInfo1 = context.findServiceInfo(context.packageName, Predicate { serviceInfo -> Stringx.equals(serviceInfo.name, serviceName) })
+        val serviceInfo1 = context.findServiceInfo(context.packageName, PackageInfox.Predicate { serviceInfo -> Stringx.equals(serviceInfo.name, serviceName) })
         Assert.assertNotNull(serviceInfo1)
         Assert.assertEquals(serviceName, serviceInfo1!!.name)
 
@@ -71,7 +71,7 @@ class PackageInfoxTest {
         Assert.assertNotNull(serviceInfo11)
         Assert.assertEquals(serviceName, serviceInfo11!!.name)
 
-        val serviceInfo2 = context.findSelfServiceInfo(Predicate { serviceInfo -> Stringx.equals(serviceInfo.name, serviceName) })
+        val serviceInfo2 = context.findSelfServiceInfo(PackageInfox.Predicate { serviceInfo -> Stringx.equals(serviceInfo.name, serviceName) })
         Assert.assertNotNull(serviceInfo2)
         Assert.assertEquals(serviceName, serviceInfo2!!.name)
 
@@ -103,7 +103,7 @@ class PackageInfoxTest {
         val context = InstrumentationRegistry.getContext()
         val receiverName = TestReceiver::class.java.name
 
-        val receiverInfo1 = context.findReceiverInfo(context.packageName, Predicate { receiverInfo -> Stringx.equals(receiverInfo.name, receiverName) })
+        val receiverInfo1 = context.findReceiverInfo(context.packageName, PackageInfox.Predicate { receiverInfo -> Stringx.equals(receiverInfo.name, receiverName) })
         Assert.assertNotNull(receiverInfo1)
         Assert.assertEquals(receiverName, receiverInfo1!!.name)
 
@@ -111,7 +111,7 @@ class PackageInfoxTest {
         Assert.assertNotNull(receiverInfo11)
         Assert.assertEquals(receiverName, receiverInfo11!!.name)
 
-        val receiverInfo2 = context.findSelfReceiverInfo(Predicate { receiverInfo -> Stringx.equals(receiverInfo.name, receiverName) })
+        val receiverInfo2 = context.findSelfReceiverInfo(PackageInfox.Predicate { receiverInfo -> Stringx.equals(receiverInfo.name, receiverName) })
         Assert.assertNotNull(receiverInfo2)
         Assert.assertEquals(receiverName, receiverInfo2!!.name)
 
@@ -143,7 +143,7 @@ class PackageInfoxTest {
         val context = InstrumentationRegistry.getContext()
         val providerName = TestProvider::class.java.name
 
-        val providerInfo1 = context.findProviderInfo(context.packageName, Predicate { providerInfo -> Stringx.equals(providerInfo.name, providerName) })
+        val providerInfo1 = context.findProviderInfo(context.packageName, PackageInfox.Predicate { providerInfo -> Stringx.equals(providerInfo.name, providerName) })
         Assert.assertNotNull(providerInfo1)
         Assert.assertEquals(providerName, providerInfo1!!.name)
 
@@ -151,7 +151,7 @@ class PackageInfoxTest {
         Assert.assertNotNull(providerInfo11)
         Assert.assertEquals(providerName, providerInfo11!!.name)
 
-        val providerInfo2 = context.findSelfProviderInfo(Predicate { providerInfo -> Stringx.equals(providerInfo.name, providerName) })
+        val providerInfo2 = context.findSelfProviderInfo(PackageInfox.Predicate { providerInfo -> Stringx.equals(providerInfo.name, providerName) })
         Assert.assertNotNull(providerInfo2)
         Assert.assertEquals(providerName, providerInfo2!!.name)
 
@@ -183,7 +183,7 @@ class PackageInfoxTest {
         val context = InstrumentationRegistry.getContext()
         val permissionName = "me.panpf.androidxkt.tes.share"
 
-        val permissionInfo1 = context.findPermissionInfo(context.packageName, Predicate { permissionInfo -> Stringx.equals(permissionInfo.name, permissionName) })
+        val permissionInfo1 = context.findPermissionInfo(context.packageName, PackageInfox.Predicate { permissionInfo -> Stringx.equals(permissionInfo.name, permissionName) })
         Assert.assertNotNull(permissionInfo1)
         Assert.assertEquals(permissionName, permissionInfo1!!.name)
 
@@ -191,7 +191,7 @@ class PackageInfoxTest {
         Assert.assertNotNull(permissionInfo11)
         Assert.assertEquals(permissionName, permissionInfo11!!.name)
 
-        val permissionInfo2 = context.findSelfPermissionInfo(Predicate { permissionInfo -> Stringx.equals(permissionInfo.name, permissionName) })
+        val permissionInfo2 = context.findSelfPermissionInfo(PackageInfox.Predicate { permissionInfo -> Stringx.equals(permissionInfo.name, permissionName) })
         Assert.assertNotNull(permissionInfo2)
         Assert.assertEquals(permissionName, permissionInfo2!!.name)
 
@@ -227,11 +227,11 @@ class PackageInfoxTest {
         Assert.assertNotNull(requestedPermission1)
         Assert.assertEquals(requestedPermissionName, requestedPermission1)
 
-        val requestedPermission11 = context.findRequestedPermission(context.packageName, Predicate { requestedPermission -> Stringx.equals(requestedPermission, requestedPermissionName) })
+        val requestedPermission11 = context.findRequestedPermission(context.packageName, PackageInfox.Predicate { requestedPermission -> Stringx.equals(requestedPermission, requestedPermissionName) })
         Assert.assertNotNull(requestedPermission11)
         Assert.assertEquals(requestedPermissionName, requestedPermission11)
 
-        val requestedPermission2 = context.findSelfRequestedPermission(Predicate { requestedPermission -> Stringx.equals(requestedPermission, requestedPermissionName) })
+        val requestedPermission2 = context.findSelfRequestedPermission(PackageInfox.Predicate { requestedPermission -> Stringx.equals(requestedPermission, requestedPermissionName) })
         Assert.assertNotNull(requestedPermission2)
         Assert.assertEquals(requestedPermissionName, requestedPermission2)
 
@@ -264,7 +264,7 @@ class PackageInfoxTest {
         val metaDataName = "meta_test_name"
         val metaDataValue = "meta_test_value"
 
-        val metaData1 = context.findMetaDataWithName(context.packageName, Predicate { s -> Stringx.equals(s, metaDataName) })
+        val metaData1 = context.findMetaDataWithName(context.packageName, PackageInfox.Predicate { s -> Stringx.equals(s, metaDataName) })
         Assert.assertNotNull(metaData1)
         Assert.assertEquals("$metaDataName/$metaDataValue", metaData1!!.first + "/" + metaData1.second)
 
@@ -272,7 +272,7 @@ class PackageInfoxTest {
         Assert.assertNotNull(metaData11)
         Assert.assertEquals("$metaDataName/$metaDataValue", metaData11!!.first + "/" + metaData11.second)
 
-        val metaData2 = context.findSelfMetaDataWithName(Predicate { s -> Stringx.equals(s, metaDataName) })
+        val metaData2 = context.findSelfMetaDataWithName(PackageInfox.Predicate { s -> Stringx.equals(s, metaDataName) })
         Assert.assertNotNull(metaData2)
         Assert.assertEquals("$metaDataName/$metaDataValue", metaData2!!.first + "/" + metaData2.second)
 
@@ -305,7 +305,7 @@ class PackageInfoxTest {
         val metaDataName = "meta_test_name"
         val metaDataValue = "meta_test_value"
 
-        val metaData1 = context.findMetaDataWithValue(context.packageName, Predicate { s -> Stringx.equals(s, metaDataValue) })
+        val metaData1 = context.findMetaDataWithValue(context.packageName, PackageInfox.Predicate { s -> Stringx.equals(s, metaDataValue) })
         Assert.assertNotNull(metaData1)
         Assert.assertEquals("$metaDataName/$metaDataValue", metaData1!!.first + "/" + metaData1.second)
 
@@ -313,7 +313,7 @@ class PackageInfoxTest {
         Assert.assertNotNull(metaData11)
         Assert.assertEquals("$metaDataName/$metaDataValue", metaData11!!.first + "/" + metaData11.second)
 
-        val metaData2 = context.findSelfMetaDataWithValue(Predicate { s -> Stringx.equals(s, metaDataValue) })
+        val metaData2 = context.findSelfMetaDataWithValue(PackageInfox.Predicate { s -> Stringx.equals(s, metaDataValue) })
         Assert.assertNotNull(metaData2)
         Assert.assertEquals("$metaDataName/$metaDataValue", metaData2!!.first + "/" + metaData2.second)
 
