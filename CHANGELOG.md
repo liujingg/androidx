@@ -1,8 +1,8 @@
-## v...
-* remove: Removed androidx-kt-arch module
+## v1.0.0-alpha09
 * remove: Remove dependency on javax
 * remove: Remove Settingx.getMediaVolume(), setMediaVolume(), getRingVolume(), setRingVolume() method
 * arrow_up: Fragment upgrade to 1.2.0
+* arrow_up: Lifecycle upgrade to 2.2.0
 * arrow_up: Kotlin stblib upgrade to 1.3.61
 * compatibility: Compatible with android 10
 

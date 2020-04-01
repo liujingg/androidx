@@ -7,6 +7,9 @@
 
 Extensions to the Android standard library and support libraries and some basic tools
 
+### Child module
+* [androidx-kt-arch]: Kotlin extension to Android Architecture related libraries
+
 ### Passed Test Device
 * Google Nexus 4;API 25/7.1.2;LineageOS/14.1-20180427-NIGHTLY-make
 * Lenovo K860;API 17/4.2.1
@@ -35,7 +38,7 @@ implementation "me.panpf:androidx-kt:$lastVersion"
 Please replace `$lastVersion` with the latest version: [![Download][version_kotlin_icon]][version_kotlin_link]
 
 Dependencies:
-* [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.3.21][kotlin_versions]
+* [org.jetbrains.kotlin:kotlin-stdlib-jdk7][kotlin_stdlib]: [1.3.61][kotlin_versions]
 * [androidx.fragment:fragment][fragment_home]: [1.2.0][fragment_versions]
 
 `androidx-kt is a androidx extension on the Kotlin platform that allows you to use androidx more comfortably on Kotlin`
@@ -239,6 +242,7 @@ Please view the [CHANGELOG.md] file
 [kotlin_versions]: https://blog.jetbrains.com/kotlin/
 [fragment_home]: https://developer.android.google.cn/guide/components/fragments
 [fragment_versions]: https://developer.android.google.cn/jetpack/androidx/releases/fragment
+[androidx-kt-arch]: androidx-kt-arch
 
 [CHANGELOG.md]: CHANGELOG.md
 

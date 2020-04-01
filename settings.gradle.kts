@@ -1,1 +1,1 @@
-include(":androidx", ":androidx-kt", "sample")
+include(":androidx", ":androidx-kt", ":androidx-kt-arch", "sample")
