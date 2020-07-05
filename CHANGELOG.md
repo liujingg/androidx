@@ -1,3 +1,6 @@
+## new
+* remove: Remove the androidx-kt-arch library, because the official lifecycle-viewmodel-ktx library already provides the same function
+
 ## v1.0.0-alpha09
 * remove: Remove dependency on javax
 * remove: Remove Settingx.getMediaVolume(), setMediaVolume(), getRingVolume(), setRingVolume() method

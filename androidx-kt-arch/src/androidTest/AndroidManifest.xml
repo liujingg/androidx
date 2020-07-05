@@ -1,7 +1,0 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="me.panpf.androidxkt.arch.test">
-
-    <application>
-        <activity android:name="me.panpf.androidxkt.arch.test.ViewModelBinderTest$TestActivity" />
-    </application>
-</manifest>
