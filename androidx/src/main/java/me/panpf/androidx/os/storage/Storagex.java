@@ -672,24 +672,31 @@ public class Storagex {
 
     /**
      * Clean up all app cache directories
+     *
+     * @return If it returns true, all the specified directories have been cleaned successfully
      */
     @WorkerThread
-    public static void cleanAppCacheDirs(@NonNull Context context) {
+    public static boolean cleanAppCacheDirs(@NonNull Context context) {
+        boolean allSuccess = true;
         for (File file : getAppCacheDirs(context)) {
-            cleanRecursively(file);
+            allSuccess &= cleanRecursively(file);
         }
+        return allSuccess;
     }
 
     /**
      * Clean up all cache directories of the specified app
      *
      * @param packageName App package name
+     * @return If it returns true, all the specified directories have been cleaned successfully
      */
     @WorkerThread
-    public static void cleanAppCacheDirs(@NonNull Context context, @NonNull String packageName) {
+    public static boolean cleanAppCacheDirs(@NonNull Context context, @NonNull String packageName) {
+        boolean allSuccess = true;
         for (File file : getAppCacheDirs(context, packageName)) {
-            cleanRecursively(file);
+            allSuccess &= cleanRecursively(file);
         }
+        return allSuccess;
     }
 
 
@@ -844,24 +851,31 @@ public class Storagex {
 
     /**
      * Clean up all app files directories
+     *
+     * @return If it returns true, all the specified directories have been cleaned successfully
      */
     @WorkerThread
-    public static void cleanAppFilesDirs(@NonNull Context context) {
+    public static boolean cleanAppFilesDirs(@NonNull Context context) {
+        boolean allSuccess = true;
         for (File file : getAppFilesDirs(context)) {
-            cleanRecursively(file);
+            allSuccess &= cleanRecursively(file);
         }
+        return allSuccess;
     }
 
     /**
      * Clean up all files directories of the specified app
      *
      * @param packageName App package name
+     * @return If it returns true, all the specified directories have been cleaned successfully
      */
     @WorkerThread
-    public static void cleanAppFilesDirs(@NonNull Context context, @NonNull String packageName) {
+    public static boolean cleanAppFilesDirs(@NonNull Context context, @NonNull String packageName) {
+        boolean allSuccess = true;
         for (File file : getAppFilesDirs(context, packageName)) {
-            cleanRecursively(file);
+            allSuccess &= cleanRecursively(file);
         }
+        return allSuccess;
     }
 
 
@@ -962,24 +976,31 @@ public class Storagex {
 
     /**
      * Clean up all app obb directories
+     *
+     * @return If it returns true, all the specified directories have been cleaned successfully
      */
     @WorkerThread
-    public static void cleanAppObbDirs(@NonNull Context context) {
+    public static boolean cleanAppObbDirs(@NonNull Context context) {
+        boolean allSuccess = true;
         for (File file : getAppObbDirs(context)) {
-            cleanRecursively(file);
+            allSuccess &= cleanRecursively(file);
         }
+        return allSuccess;
     }
 
     /**
      * Clean up all obb directories of the specified app
      *
      * @param packageName App package name
+     * @return If it returns true, all the specified directories have been cleaned successfully
      */
     @WorkerThread
-    public static void cleanAppObbDirs(@NonNull Context context, @NonNull String packageName) {
+    public static boolean cleanAppObbDirs(@NonNull Context context, @NonNull String packageName) {
+        boolean allSuccess = true;
         for (File file : getAppObbDirs(context, packageName)) {
-            cleanRecursively(file);
+            allSuccess &= cleanRecursively(file);
         }
+        return allSuccess;
     }
 
 

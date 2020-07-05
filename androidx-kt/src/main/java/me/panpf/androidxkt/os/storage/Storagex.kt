@@ -329,17 +329,19 @@ inline fun Context.lengthAppCacheDirs(packageName: String): Long = Storagex.leng
 
 /**
  * Clean up all app cache directories
+ * @return If it returns true, all the specified directories have been cleaned successfully
  */
 @WorkerThread
-inline fun Context.cleanAppCacheDirs() = Storagex.cleanAppCacheDirs(this)
+inline fun Context.cleanAppCacheDirs(): Boolean = Storagex.cleanAppCacheDirs(this)
 
 /**
  * Clean up all cache directories of the specified app
  *
  * @param packageName App package name
+ * @return If it returns true, all the specified directories have been cleaned successfully
  */
 @WorkerThread
-inline fun Context.cleanAppCacheDirs(packageName: String) = Storagex.cleanAppCacheDirs(this, packageName)
+inline fun Context.cleanAppCacheDirs(packageName: String): Boolean = Storagex.cleanAppCacheDirs(this, packageName)
 
 
 /* ******************************************* App Files Dir *******************************************/
@@ -412,17 +414,19 @@ inline fun Context.lengthAppFilesDirs(packageName: String): Long = Storagex.leng
 
 /**
  * Clean up all app files directories
+ * @return If it returns true, all the specified directories have been cleaned successfully
  */
 @WorkerThread
-inline fun Context.cleanAppFilesDirs() = Storagex.cleanAppFilesDirs(this)
+inline fun Context.cleanAppFilesDirs(): Boolean = Storagex.cleanAppFilesDirs(this)
 
 /**
  * Clean up all files directories of the specified app
  *
  * @param packageName App package name
+ * @return If it returns true, all the specified directories have been cleaned successfully
  */
 @WorkerThread
-inline fun Context.cleanAppFilesDirs(packageName: String) = Storagex.cleanAppFilesDirs(this, packageName)
+inline fun Context.cleanAppFilesDirs(packageName: String): Boolean = Storagex.cleanAppFilesDirs(this, packageName)
 
 
 /* ******************************************* App Obb Dir *******************************************/
@@ -469,17 +473,19 @@ inline fun Context.lengthAppObbDirs(packageName: String): Long = Storagex.length
 
 /**
  * Clean up all app obb directories
+ * @return If it returns true, all the specified directories have been cleaned successfully
  */
 @WorkerThread
-inline fun Context.cleanAppObbDirs() = Storagex.cleanAppObbDirs(this)
+inline fun Context.cleanAppObbDirs(): Boolean = Storagex.cleanAppObbDirs(this)
 
 /**
  * Clean up all obb directories of the specified app
  *
  * @param packageName App package name
+ * @return If it returns true, all the specified directories have been cleaned successfully
  */
 @WorkerThread
-inline fun Context.cleanAppObbDirs(packageName: String) = Storagex.cleanAppObbDirs(this, packageName)
+inline fun Context.cleanAppObbDirs(packageName: String): Boolean = Storagex.cleanAppObbDirs(this, packageName)
 
 
 /* ******************************************* Other *******************************************/
