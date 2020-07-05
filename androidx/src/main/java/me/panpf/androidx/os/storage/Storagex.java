@@ -419,12 +419,15 @@ public class Storagex {
 
         final File primaryExternalStorageDirectory = getExternalStorageDirectory();
         if (dirs.isEmpty()) {
-            dirs.add(primaryExternalStorageDirectory);
+            //noinspection ConstantConditions
+            if (primaryExternalStorageDirectory != null) {
+                dirs.add(primaryExternalStorageDirectory);
+            }
         }
 
         List<File> filterDirList = new LinkedList<>();
         for (File dir : dirs) {
-            if (!ignorePrimary || !dir.getPath().equals(primaryExternalStorageDirectory.getPath())) {
+            if (dir != null && (!ignorePrimary || !dir.getPath().equals(primaryExternalStorageDirectory.getPath()))) {
                 filterDirList.add(dir);
             }
         }
@@ -441,7 +444,7 @@ public class Storagex {
         File[] directorys = getExternalStorageDirectorys(context, ignorePrimary);
         List<File> fileList = new LinkedList<>();
         for (File dir : directorys) {
-            if (isExternalStorageMounted(context, dir)) {
+            if (dir != null && isExternalStorageMounted(context, dir)) {
                 fileList.add(dir);
             }
         }
@@ -476,7 +479,9 @@ public class Storagex {
         File[] directorys = getExternalStorageDirectorys(context, ignorePrimary);
         List<File> fileList = new LinkedList<>();
         for (File dir : directorys) {
-            fileList.add(new File(dir, childPath));
+            if (dir != null) {
+                fileList.add(new File(dir, childPath));
+            }
         }
         return fileList.toArray(new File[0]);
     }
@@ -491,7 +496,9 @@ public class Storagex {
         File[] directorys = getMountedExternalStorageDirectorys(context, ignorePrimary);
         List<File> fileList = new LinkedList<>();
         for (File dir : directorys) {
-            fileList.add(new File(dir, childPath));
+            if (dir != null) {
+                fileList.add(new File(dir, childPath));
+            }
         }
         return fileList.toArray(new File[0]);
     }
@@ -553,7 +560,13 @@ public class Storagex {
             externalCacheDirs = context.getExternalCacheDirs();
         }
         if (externalCacheDirs != null && externalCacheDirs.length > 0) {
-            return externalCacheDirs;
+            List<File> fileList = new LinkedList<>();
+            for (File externalCacheDir : externalCacheDirs) {
+                if (externalCacheDir != null) {
+                    fileList.add(externalCacheDir);
+                }
+            }
+            return fileList.toArray(new File[0]);
         } else {
             return getMountedExternalStorageDirectorysWithPath(context, "Android/data/" + context.getPackageName() + "/cache");
         }
@@ -569,7 +582,9 @@ public class Storagex {
         File[] directorys = getAppExternalCacheDirs(context);
         List<File> fileList = new LinkedList<>();
         for (File dir : directorys) {
-            fileList.add(new File(dir.getPath().replace(context.getPackageName(), packageName)));
+            if (dir != null) {
+                fileList.add(new File(dir.getPath().replace(context.getPackageName(), packageName)));
+            }
         }
         return fileList.toArray(new File[0]);
     }
@@ -601,7 +616,11 @@ public class Storagex {
     public static File[] getAppCacheDirs(@NonNull Context context) {
         List<File> fileList = new LinkedList<>();
         File[] externalCacheDirs = getAppExternalCacheDirs(context);
-        Collections.addAll(fileList, externalCacheDirs);
+        for (File externalCacheDir : externalCacheDirs) {
+            if (externalCacheDir != null) {
+                fileList.add(externalCacheDir);
+            }
+        }
         fileList.add(getAppInternalCacheDir(context));
         return fileList.toArray(new File[0]);
     }
@@ -615,7 +634,11 @@ public class Storagex {
     public static File[] getAppCacheDirs(@NonNull final Context context, @NonNull final String packageName) {
         List<File> fileList = new LinkedList<>();
         File[] externalCacheDirs = getAppExternalCacheDirs(context, packageName);
-        Collections.addAll(fileList, externalCacheDirs);
+        for (File externalCacheDir : externalCacheDirs) {
+            if (externalCacheDir != null) {
+                fileList.add(externalCacheDir);
+            }
+        }
         fileList.add(getAppInternalCacheDir(context, packageName));
         return fileList.toArray(new File[0]);
     }
@@ -709,7 +732,13 @@ public class Storagex {
             externalFilesDirs = context.getExternalFilesDirs(null);
         }
         if (externalFilesDirs != null && externalFilesDirs.length > 0) {
-            return externalFilesDirs;
+            List<File> fileList = new LinkedList<>();
+            for (File externalFileDir : externalFilesDirs) {
+                if (externalFileDir != null) {
+                    fileList.add(externalFileDir);
+                }
+            }
+            return fileList.toArray(new File[0]);
         } else {
             return getMountedExternalStorageDirectorysWithPath(context, "Android/data/" + context.getPackageName() + "/files");
         }
@@ -725,7 +754,9 @@ public class Storagex {
         File[] directorys = getAppExternalFilesDirs(context);
         List<File> fileList = new LinkedList<>();
         for (File dir : directorys) {
-            fileList.add(new File(dir.getPath().replace(context.getPackageName(), packageName)));
+            if (dir != null) {
+                fileList.add(new File(dir.getPath().replace(context.getPackageName(), packageName)));
+            }
         }
         return fileList.toArray(new File[0]);
     }
@@ -757,7 +788,11 @@ public class Storagex {
     public static File[] getAppFilesDirs(@NonNull Context context) {
         List<File> fileList = new LinkedList<>();
         File[] externalFilesDirs = getAppExternalFilesDirs(context);
-        Collections.addAll(fileList, externalFilesDirs);
+        for (File externalFileDir : externalFilesDirs) {
+            if (externalFileDir != null) {
+                fileList.add(externalFileDir);
+            }
+        }
         fileList.add(getAppInternalFilesDir(context));
         return fileList.toArray(new File[0]);
     }
@@ -771,7 +806,11 @@ public class Storagex {
     public static File[] getAppFilesDirs(@NonNull final Context context, @NonNull final String packageName) {
         List<File> fileList = new LinkedList<>();
         File[] externalFilesDirs = getAppExternalFilesDirs(context, packageName);
-        Collections.addAll(fileList, externalFilesDirs);
+        for (File externalFileDir : externalFilesDirs) {
+            if (externalFileDir != null) {
+                fileList.add(externalFileDir);
+            }
+        }
         fileList.add(getAppInternalFilesDir(context, packageName));
         return fileList.toArray(new File[0]);
     }
@@ -865,7 +904,13 @@ public class Storagex {
             obbDirs = context.getObbDirs();
         }
         if (obbDirs != null && obbDirs.length > 0) {
-            return obbDirs;
+            List<File> fileList = new LinkedList<>();
+            for (File obbDir : obbDirs) {
+                if (obbDir != null) {
+                    fileList.add(obbDir);
+                }
+            }
+            return fileList.toArray(new File[0]);
         } else {
             return getMountedExternalStorageDirectorysWithPath(context, "Android/obb/" + context.getPackageName());
         }
@@ -881,7 +926,9 @@ public class Storagex {
         File[] directorys = getAppObbDirs(context);
         List<File> fileList = new LinkedList<>();
         for (File dir : directorys) {
-            fileList.add(new File(dir.getPath().replace(context.getPackageName(), packageName)));
+            if (dir != null) {
+                fileList.add(new File(dir.getPath().replace(context.getPackageName(), packageName)));
+            }
         }
         return fileList.toArray(new File[0]);
     }
