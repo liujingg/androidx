@@ -204,7 +204,7 @@ Dependencies:
 
 ### widget
 * Toast: [Toastx.java] ([Test][ToastxTest.java]) | [Toastx.kt] ([Test][ToastxTest.kt])
-    * showLong, showShort, showLongWithView, showShortWithView
+    * showLong, showWithFormatLong, showShort, showWithFormatShort, showLongWithView, showShortWithView
 
 ## Change Log
 

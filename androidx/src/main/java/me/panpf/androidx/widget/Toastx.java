@@ -22,7 +22,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
+
 import me.panpf.androidx.Androidx;
+import me.panpf.androidx.app.Fragmentx;
 
 public class Toastx {
 
@@ -32,360 +34,227 @@ public class Toastx {
     /* ************************************* Context ***************************************** */
 
 
-    public static void showLong(@NonNull Context context, @NonNull final String message) {
+    public static void showLong(@NonNull Context context, @NonNull final CharSequence message) {
         final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, message, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public static void showLong(@NonNull Context context, @NonNull final String message, @NonNull final Object... params) {
-        final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_LONG).show();
-            }
-        });
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
     public static void showLong(@NonNull Context context, @StringRes final int messageResId) {
+        final CharSequence message = context.getResources().getText(messageResId);
         final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, messageResId, Toast.LENGTH_LONG).show();
-            }
-        });
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showLong(@NonNull Context context, @StringRes final int messageResId, @NonNull final Object... params) {
+    public static void showWithFormatLong(@NonNull Context context, @NonNull final String format, @NonNull final Object... params) {
+        final CharSequence message = String.format(format, params);
         final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_LONG).show();
-            }
-        });
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showShort(@NonNull Context context, @NonNull final String message) {
+    public static void showWithFormatLong(@NonNull Context context, @StringRes final int messageResId, @NonNull final Object... params) {
+        final CharSequence message = context.getString(messageResId, params);
         final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showShort(@NonNull Context context, @NonNull final String message, @NonNull final Object... params) {
+
+    public static void showShort(@NonNull Context context, @NonNull final CharSequence message) {
         final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_SHORT).show();
-            }
-        });
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
     public static void showShort(@NonNull Context context, @StringRes final int messageResId) {
+        final CharSequence message = context.getResources().getText(messageResId);
         final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, messageResId, Toast.LENGTH_SHORT).show();
-            }
-        });
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
-    public static void showShort(@NonNull Context context, @StringRes final int messageResId, @NonNull final Object... params) {
+    public static void showWithFormatShort(@NonNull Context context, @NonNull final String format, @NonNull final Object... params) {
+        final String message = String.format(format, params);
         final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_SHORT).show();
-            }
-        });
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
+    }
+
+    public static void showWithFormatShort(@NonNull Context context, @StringRes final int messageResId, @NonNull final Object... params) {
+        final CharSequence message = context.getResources().getString(messageResId, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
 
     /* ************************************ androidx.fragment.app.Fragment **************************************** */
 
 
-    public static void showLong(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String message) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, message, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public static void showLong(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_LONG).show();
-            }
-        });
+    public static void showLong(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final CharSequence message) {
+        final Context context = fragment.requireContext();
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
     public static void showLong(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, messageResId, Toast.LENGTH_LONG).show();
-            }
-        });
+        final Context context = fragment.requireContext();
+        final CharSequence message = context.getResources().getText(messageResId);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showLong(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_LONG).show();
-            }
-        });
+    public static void showWithFormatLong(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String format, @NonNull final Object... params) {
+        final Context context = fragment.requireContext();
+        final CharSequence message = String.format(format, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showShort(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String message) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+    public static void showWithFormatLong(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
+        final Context context = fragment.requireContext();
+        final CharSequence message = context.getResources().getString(messageResId, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showShort(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_SHORT).show();
-            }
-        });
+
+    public static void showShort(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final CharSequence message) {
+        final Context context = fragment.requireContext();
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
     public static void showShort(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, messageResId, Toast.LENGTH_SHORT).show();
-            }
-        });
+        final Context context = fragment.requireContext();
+        final CharSequence message = context.getResources().getText(messageResId);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
-    public static void showShort(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_SHORT).show();
-            }
-        });
+    public static void showWithFormatShort(@NonNull androidx.fragment.app.Fragment fragment, @NonNull final String format, @NonNull final Object... params) {
+        final Context context = fragment.requireContext();
+        final CharSequence message = String.format(format, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
+    }
+
+    public static void showWithFormatShort(@NonNull androidx.fragment.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
+        final Context context = fragment.requireContext();
+        final CharSequence message = context.getResources().getString(messageResId, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
 
     /* ************************************* android.app.Fragment ***************************************** */
 
 
-    public static void showLong(@NonNull android.app.Fragment fragment, @NonNull final String message) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, message, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public static void showLong(@NonNull android.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_LONG).show();
-            }
-        });
+    public static void showLong(@NonNull android.app.Fragment fragment, @NonNull final CharSequence message) {
+        final Context context = Fragmentx.requireActivity(fragment);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
     public static void showLong(@NonNull android.app.Fragment fragment, @StringRes final int messageResId) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, messageResId, Toast.LENGTH_LONG).show();
-            }
-        });
+        final Context context = Fragmentx.requireActivity(fragment);
+        final CharSequence message = context.getResources().getText(messageResId);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showLong(@NonNull android.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_LONG).show();
-            }
-        });
+    public static void showWithFormatLong(@NonNull android.app.Fragment fragment, @NonNull final String format, @NonNull final Object... params) {
+        final Context context = Fragmentx.requireActivity(fragment);
+        final CharSequence message = String.format(format, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showShort(@NonNull android.app.Fragment fragment, @NonNull final String message) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+    public static void showWithFormatLong(@NonNull android.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
+        final Context context = Fragmentx.requireActivity(fragment);
+        final CharSequence message = context.getResources().getString(messageResId, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showShort(@NonNull android.app.Fragment fragment, @NonNull final String message, @NonNull final Object... params) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_SHORT).show();
-            }
-        });
+    public static void showShort(@NonNull android.app.Fragment fragment, @NonNull final CharSequence message) {
+        final Context context = Fragmentx.requireActivity(fragment);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
     public static void showShort(@NonNull android.app.Fragment fragment, @StringRes final int messageResId) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, messageResId, Toast.LENGTH_SHORT).show();
-            }
-        });
+        final Context context = Fragmentx.requireActivity(fragment);
+        final CharSequence message = context.getResources().getText(messageResId);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
-    public static void showShort(@NonNull android.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
-        final Context appContext = fragment.getActivity() != null ? fragment.getActivity().getApplicationContext() : null;
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_SHORT).show();
-            }
-        });
+    public static void showWithFormatShort(@NonNull android.app.Fragment fragment, @NonNull final String format, @NonNull final Object... params) {
+        final Context context = Fragmentx.requireActivity(fragment);
+        final CharSequence message = String.format(format, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
+    }
+
+    public static void showWithFormatShort(@NonNull android.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
+        final Context context = Fragmentx.requireActivity(fragment);
+        final CharSequence message = context.getResources().getString(messageResId, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
 
     /* ************************************* View ***************************************** */
 
 
-    public static void showLong(@NonNull View view, @NonNull final String message) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, message, Toast.LENGTH_LONG).show();
-            }
-        });
-    }
-
-    public static void showLong(@NonNull View view, @NonNull final String message, @NonNull final Object... params) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_LONG).show();
-            }
-        });
+    public static void showLong(@NonNull View view, @NonNull final CharSequence message) {
+        final Context context = view.getContext();
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
     public static void showLong(@NonNull View view, @StringRes final int messageResId) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, messageResId, Toast.LENGTH_LONG).show();
-            }
-        });
+        final Context context = view.getContext();
+        final CharSequence message = context.getResources().getText(messageResId);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showLong(@NonNull View view, @StringRes final int messageResId, @NonNull final Object... params) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_LONG).show();
-            }
-        });
+    public static void showWithFormatLong(@NonNull View view, @NonNull final String format, @NonNull final Object... params) {
+        final Context context = view.getContext();
+        final CharSequence message = String.format(format, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showShort(@NonNull View view, @NonNull final String message) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show();
-            }
-        });
+    public static void showWithFormatLong(@NonNull View view, @StringRes final int messageResId, @NonNull final Object... params) {
+        final Context context = view.getContext();
+        final CharSequence message = context.getResources().getString(messageResId, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
     }
 
-    public static void showShort(@NonNull View view, @NonNull final String message, @NonNull final Object... params) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, String.format(message, params), Toast.LENGTH_SHORT).show();
-            }
-        });
+
+    public static void showShort(@NonNull View view, @NonNull final CharSequence message) {
+        final Context context = view.getContext();
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
     public static void showShort(@NonNull View view, @StringRes final int messageResId) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, messageResId, Toast.LENGTH_SHORT).show();
-            }
-        });
+        final Context context = view.getContext();
+        final CharSequence message = context.getResources().getText(messageResId);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
-    public static void showShort(@NonNull View view, @StringRes final int messageResId, @NonNull final Object... params) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast.makeText(appContext, appContext.getString(messageResId, params), Toast.LENGTH_SHORT).show();
-            }
-        });
+    public static void showWithFormatShort(@NonNull View view, @NonNull final String format, @NonNull final Object... params) {
+        final Context context = view.getContext();
+        final CharSequence message = String.format(format, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
+    }
+
+    public static void showWithFormatShort(@NonNull View view, @StringRes final int messageResId, @NonNull final Object... params) {
+        final Context context = view.getContext();
+        final CharSequence message = context.getResources().getString(messageResId, params);
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
     }
 
 
@@ -393,30 +262,24 @@ public class Toastx {
 
 
     public static void showLongWithView(@NonNull final View view) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast toast = new Toast(appContext);
-                toast.setView(view);
-                toast.setDuration(Toast.LENGTH_LONG);
-                toast.show();
-            }
+        final Context context = view.getContext();
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> {
+            Toast toast = new Toast(appContext);
+            toast.setView(view);
+            toast.setDuration(Toast.LENGTH_LONG);
+            toast.show();
         });
     }
 
     public static void showShortWithView(@NonNull final View view) {
-        final Context appContext = view.getContext().getApplicationContext();
-        if (appContext == null) return;
-        Androidx.runInUI(new Runnable() {
-            @Override
-            public void run() {
-                Toast toast = new Toast(appContext);
-                toast.setView(view);
-                toast.setDuration(Toast.LENGTH_SHORT);
-                toast.show();
-            }
+        final Context context = view.getContext();
+        final Context appContext = context.getApplicationContext();
+        Androidx.runInUI(() -> {
+            Toast toast = new Toast(appContext);
+            toast.setView(view);
+            toast.setDuration(Toast.LENGTH_SHORT);
+            toast.show();
         });
     }
 }

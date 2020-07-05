@@ -1,5 +1,8 @@
 ## new
 * remove: Remove the androidx-kt-arch library, because the official lifecycle-viewmodel-ktx library already provides the same function
+* change: Toastx.show\*(\*, \*, Object...) method rename to showWithFormat\*
+* change: Toastx.show\*(\*, String) method change to show\*(\*, CharSequence)
+* fix: Fix the bug that Toastx.show\*(\*, int) method may not get multilingual information
 
 ## v1.0.0-alpha09
 * remove: Remove dependency on javax
