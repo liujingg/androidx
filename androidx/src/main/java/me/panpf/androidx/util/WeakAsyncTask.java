@@ -65,6 +65,7 @@ public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends Async
         return getPage() != null;
     }
 
+    @Nullable
     private Page getPage() {
         Page page = reference.get();
         if (page == null) {
@@ -98,6 +99,7 @@ public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends Async
 
     }
 
+    @Nullable
     @Override
     protected final Result doInBackground(Param[] params) {
         Page page = getPage();

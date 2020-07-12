@@ -23,7 +23,6 @@ import android.graphics.Matrix;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 
 import androidx.annotation.LayoutRes;
@@ -42,12 +41,9 @@ public class Viewx {
      * Set a long press listener to the View to display the specified text when a long press is triggered
      */
     public static void setLongClickToastHint(@NonNull final View view, final String hintContent) {
-        view.setOnLongClickListener(new OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Toastx.showShort(view, hintContent);
-                return true;
-            }
+        view.setOnLongClickListener(v -> {
+            Toastx.showShort(view, hintContent);
+            return true;
         });
     }
 

@@ -54,7 +54,7 @@ public class Textx {
 
         if (leftIcon != null) {
             newBitmapWidth += leftIcon.getWidth();
-            newBitmapHeight = leftIcon.getHeight() > newBitmapHeight ? leftIcon.getHeight() : newBitmapHeight;
+            newBitmapHeight = Math.max(leftIcon.getHeight(), newBitmapHeight);
         }
 
         Bitmap bitmap = Bitmap.createBitmap(newBitmapWidth, newBitmapHeight, Bitmap.Config.ARGB_8888);
