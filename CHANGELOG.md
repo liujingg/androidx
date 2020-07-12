@@ -7,6 +7,7 @@
 * new: Storagex.clean\*Dirs() method now returns boolean
 * change: LifecycleBroadcastReceiver can now register multiple times
 * improve: Improved Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods
+* change: Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods 现在不会抛出 NumberFormatException
 
 ## v1.0.0-alpha09
 * remove: Remove dependency on javax

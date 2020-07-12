@@ -54,11 +54,17 @@ public class Argsx {
     public static byte readByteArgOr(@NonNull Activity activity, @NonNull String argName, byte defaultValue) {
         Intent intent = activity.getIntent();
         byte value = intent.getByteExtra(argName, Byte.MIN_VALUE);
-        if (value != Byte.MIN_VALUE || intent.getByteExtra(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE)
+        if (value != Byte.MIN_VALUE || intent.getByteExtra(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE){
             return value;
+        }
         String stringValue = intent.getStringExtra(argName);
-        if (stringValue != null)
-            return Byte.parseByte(stringValue);    // todo 捕获 NumberFormatException
+        if (stringValue != null){
+            try {
+                return Byte.parseByte(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -85,10 +91,17 @@ public class Argsx {
     public static short readShortArgOr(@NonNull Activity activity, @NonNull String argName, short defaultValue) {
         Intent intent = activity.getIntent();
         short value = intent.getShortExtra(argName, Short.MIN_VALUE);
-        if (value != Short.MIN_VALUE || intent.getShortExtra(argName, Short.MAX_VALUE) != Short.MAX_VALUE)
+        if (value != Short.MIN_VALUE || intent.getShortExtra(argName, Short.MAX_VALUE) != Short.MAX_VALUE){
             return value;
+        }
         String stringValue = intent.getStringExtra(argName);
-        if (stringValue != null) return Short.parseShort(stringValue);
+        if (stringValue != null) {
+            try {
+                return Short.parseShort(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -115,10 +128,17 @@ public class Argsx {
     public static int readIntArgOr(@NonNull Activity activity, @NonNull String argName, int defaultValue) {
         Intent intent = activity.getIntent();
         int value = intent.getIntExtra(argName, Integer.MIN_VALUE);
-        if (value != Integer.MIN_VALUE || intent.getIntExtra(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE)
+        if (value != Integer.MIN_VALUE || intent.getIntExtra(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE){
             return value;
+        }
         String stringValue = intent.getStringExtra(argName);
-        if (stringValue != null) return Integer.parseInt(stringValue);
+        if (stringValue != null) {
+            try {
+                return Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -164,10 +184,17 @@ public class Argsx {
     public static long readLongArgOr(@NonNull Activity activity, @NonNull String argName, long defaultValue) {
         Intent intent = activity.getIntent();
         long value = intent.getLongExtra(argName, Long.MIN_VALUE);
-        if (value != Long.MIN_VALUE || intent.getLongExtra(argName, Long.MAX_VALUE) != Long.MAX_VALUE)
+        if (value != Long.MIN_VALUE || intent.getLongExtra(argName, Long.MAX_VALUE) != Long.MAX_VALUE){
             return value;
+        }
         String stringValue = intent.getStringExtra(argName);
-        if (stringValue != null) return Long.parseLong(stringValue);
+        if (stringValue != null) {
+            try {
+                return Long.parseLong(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -194,10 +221,17 @@ public class Argsx {
     public static float readFloatArgOr(@NonNull Activity activity, @NonNull String argName, float defaultValue) {
         Intent intent = activity.getIntent();
         float value = intent.getFloatExtra(argName, Float.MIN_VALUE);
-        if (value != Float.MIN_VALUE || intent.getFloatExtra(argName, Float.MAX_VALUE) != Float.MAX_VALUE)
+        if (value != Float.MIN_VALUE || intent.getFloatExtra(argName, Float.MAX_VALUE) != Float.MAX_VALUE){
             return value;
+        }
         String stringValue = intent.getStringExtra(argName);
-        if (stringValue != null) return Float.parseFloat(stringValue);
+        if (stringValue != null) {
+            try {
+                return Float.parseFloat(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -224,10 +258,17 @@ public class Argsx {
     public static double readDoubleArgOr(@NonNull Activity activity, @NonNull String argName, double defaultValue) {
         Intent intent = activity.getIntent();
         double value = intent.getDoubleExtra(argName, Double.MIN_VALUE);
-        if (value != Double.MIN_VALUE || intent.getDoubleExtra(argName, Double.MAX_VALUE) != Double.MAX_VALUE)
+        if (value != Double.MIN_VALUE || intent.getDoubleExtra(argName, Double.MAX_VALUE) != Double.MAX_VALUE){
             return value;
+        }
         String stringValue = intent.getStringExtra(argName);
-        if (stringValue != null) return Double.parseDouble(stringValue);
+        if (stringValue != null) {
+            try {
+                return Double.parseDouble(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -256,7 +297,13 @@ public class Argsx {
         boolean value = intent.getBooleanExtra(argName, false);
         if (value || !intent.getBooleanExtra(argName, true)) return value;
         String stringValue = intent.getStringExtra(argName);
-        if (stringValue != null) return Boolean.parseBoolean(stringValue);
+        if (stringValue != null) {
+            try {
+                return Boolean.parseBoolean(stringValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -283,10 +330,17 @@ public class Argsx {
     public static char readCharArgOr(@NonNull Activity activity, @NonNull String argName, char defaultValue) {
         Intent intent = activity.getIntent();
         char value = intent.getCharExtra(argName, Character.MIN_VALUE);
-        if (value != Character.MIN_VALUE || intent.getCharExtra(argName, Character.MAX_VALUE) != Character.MAX_VALUE)
+        if (value != Character.MIN_VALUE || intent.getCharExtra(argName, Character.MAX_VALUE) != Character.MAX_VALUE){
             return value;
+        }
         String stringValue = intent.getStringExtra(argName);
-        if (stringValue != null) return (char) Integer.parseInt(stringValue);
+        if (stringValue != null) {
+            try {
+                return (char) Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -1533,10 +1587,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         byte value = arguments.getByte(argName, Byte.MIN_VALUE);
-        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE)
+        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Byte.parseByte(stringValue);
+        if (stringValue != null) {
+            try {
+                return Byte.parseByte(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -1567,10 +1628,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         short value = arguments.getShort(argName, Short.MIN_VALUE);
-        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE)
+        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Short.parseShort(stringValue);
+        if (stringValue != null) {
+            try {
+                return Short.parseShort(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -1601,10 +1669,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         int value = arguments.getInt(argName, Integer.MIN_VALUE);
-        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE)
+        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Integer.parseInt(stringValue);
+        if (stringValue != null) {
+            try {
+                return Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -1657,10 +1732,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         long value = arguments.getLong(argName, Long.MIN_VALUE);
-        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE)
+        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Long.parseLong(stringValue);
+        if (stringValue != null) {
+            try {
+                return Long.parseLong(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -1691,10 +1773,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         float value = arguments.getFloat(argName, Float.MIN_VALUE);
-        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE)
+        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Float.parseFloat(stringValue);
+        if (stringValue != null) {
+            try {
+                return Float.parseFloat(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -1725,10 +1814,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         double value = arguments.getDouble(argName, Double.MIN_VALUE);
-        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE)
+        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Double.parseDouble(stringValue);
+        if (stringValue != null) {
+            try {
+                return Double.parseDouble(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -1759,10 +1855,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         boolean value = arguments.getBoolean(argName, false);
-        if (value || !arguments.getBoolean(argName, true))
+        if (value || !arguments.getBoolean(argName, true)){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Boolean.parseBoolean(stringValue);
+        if (stringValue != null) {
+            try {
+                return Boolean.parseBoolean(stringValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -1793,10 +1896,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         char value = arguments.getChar(argName, Character.MIN_VALUE);
-        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE)
+        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return (char) Integer.parseInt(stringValue);
+        if (stringValue != null) {
+            try {
+                return (char) Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -2644,10 +2754,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         byte value = arguments.getByte(argName, Byte.MIN_VALUE);
-        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE)
+        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Byte.parseByte(stringValue);
+        if (stringValue != null) {
+            try {
+                return Byte.parseByte(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -2678,10 +2795,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         short value = arguments.getShort(argName, Short.MIN_VALUE);
-        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE)
+        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Short.parseShort(stringValue);
+        if (stringValue != null) {
+            try {
+                return Short.parseShort(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -2712,10 +2836,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         int value = arguments.getInt(argName, Integer.MIN_VALUE);
-        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE)
+        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Integer.parseInt(stringValue);
+        if (stringValue != null) {
+            try {
+                return Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -2768,10 +2899,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         long value = arguments.getLong(argName, Long.MIN_VALUE);
-        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE)
+        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Long.parseLong(stringValue);
+        if (stringValue != null) {
+            try {
+                return Long.parseLong(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -2802,10 +2940,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         float value = arguments.getFloat(argName, Float.MIN_VALUE);
-        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE)
+        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Float.parseFloat(stringValue);
+        if (stringValue != null) {
+            try {
+                return Float.parseFloat(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -2836,10 +2981,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         double value = arguments.getDouble(argName, Double.MIN_VALUE);
-        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE)
+        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Double.parseDouble(stringValue);
+        if (stringValue != null) {
+            try {
+                return Double.parseDouble(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -2870,10 +3022,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         boolean value = arguments.getBoolean(argName, false);
-        if (value || !arguments.getBoolean(argName, true))
+        if (value || !arguments.getBoolean(argName, true)){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return Boolean.parseBoolean(stringValue);
+        if (stringValue != null) {
+            try {
+                return Boolean.parseBoolean(stringValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
@@ -2904,10 +3063,17 @@ public class Argsx {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         char value = arguments.getChar(argName, Character.MIN_VALUE);
-        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE)
+        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE){
             return value;
+        }
         String stringValue = arguments.getString(argName);
-        if (stringValue != null) return (char) Integer.parseInt(stringValue);
+        if (stringValue != null) {
+            try {
+                return (char) Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
         return defaultValue;
     }
 
