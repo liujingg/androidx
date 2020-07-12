@@ -5,12 +5,11 @@ import android.content.Context;
 import android.content.IntentFilter;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+import androidx.core.app.ComponentActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.OnLifecycleEvent;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
 
 /**
  * Listening to Lifecycle implements automatic registration, anti-registration of the broadcast receiver, as follows:
@@ -27,84 +26,85 @@ public abstract class LifecycleBroadcastReceiver extends BroadcastReceiver {
     @NonNull
     private Context appContext;
     @NonNull
-    private Lifecycle lifecycle;
-    @Nullable
-    private LifecycleObserver lifecycleObserver;
+    private LifecycleOwner lifecycleOwner;
 
-    public LifecycleBroadcastReceiver(@NonNull Context context, @NonNull Lifecycle lifecycle) {
+    public LifecycleBroadcastReceiver(@NonNull Context context, @NonNull LifecycleOwner lifecycleOwner) {
         this.appContext = context.getApplicationContext();
-        this.lifecycle = lifecycle;
+        this.lifecycleOwner = lifecycleOwner;
     }
 
     public LifecycleBroadcastReceiver(@NonNull Fragment fragment) {
-        this(Contextx.requireContext(fragment), fragment.getLifecycle());
+        this(fragment.requireContext(), fragment);
     }
 
-    public LifecycleBroadcastReceiver(@NonNull FragmentActivity activity) {
-        this(activity, activity.getLifecycle());
+    public LifecycleBroadcastReceiver(@NonNull ComponentActivity activity) {
+        this(activity, activity);
     }
 
-    public synchronized boolean registerCreateDestroy(@NonNull IntentFilter filter) {
-        if (lifecycleObserver == null) {
-            try {
-                if (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.CREATED)) {
-                    appContext.registerReceiver(this, filter);
-                }
-                lifecycle.addObserver(lifecycleObserver = new CreateDestroyObserver(appContext, this, filter));
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public synchronized void registerCreateDestroy(@NonNull IntentFilter filter) {
+        final ReceiverLifecycleEventObserver receiverLifecycleEventObserver = new ReceiverLifecycleEventObserver(
+                appContext, this, filter, Lifecycle.Event.ON_CREATE, Lifecycle.Event.ON_DESTROY);
+        final Lifecycle lifecycle = lifecycleOwner.getLifecycle();
+        lifecycle.addObserver(receiverLifecycleEventObserver);
+        if (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.CREATED)) {
+            receiverLifecycleEventObserver.register();
         }
-        return false;
     }
 
-    public synchronized boolean registerStartStop(@NonNull IntentFilter filter) {
-        if (lifecycleObserver == null) {
-            try {
-                if (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
-                    appContext.registerReceiver(this, filter);
-                }
-                lifecycle.addObserver(lifecycleObserver = new StartStopObserver(appContext, this, filter));
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public synchronized void registerStartStop(@NonNull IntentFilter filter) {
+        final ReceiverLifecycleEventObserver receiverLifecycleEventObserver = new ReceiverLifecycleEventObserver(
+                appContext, this, filter, Lifecycle.Event.ON_START, Lifecycle.Event.ON_STOP);
+        final Lifecycle lifecycle = lifecycleOwner.getLifecycle();
+        lifecycle.addObserver(receiverLifecycleEventObserver);
+        if (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.STARTED)) {
+            receiverLifecycleEventObserver.register();
         }
-        return false;
     }
 
-    public synchronized boolean registerResumePause(@NonNull IntentFilter filter) {
-        if (lifecycleObserver == null) {
-            try {
-                if (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
-                    appContext.registerReceiver(this, filter);
-                }
-                lifecycle.addObserver(lifecycleObserver = new ResumePauseObserver(appContext, this, filter));
-                return true;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+    public synchronized void registerResumePause(@NonNull IntentFilter filter) {
+        final ReceiverLifecycleEventObserver receiverLifecycleEventObserver = new ReceiverLifecycleEventObserver(
+                appContext, this, filter, Lifecycle.Event.ON_RESUME, Lifecycle.Event.ON_PAUSE);
+        final Lifecycle lifecycle = lifecycleOwner.getLifecycle();
+        lifecycle.addObserver(receiverLifecycleEventObserver);
+        if (lifecycle.getCurrentState().isAtLeast(Lifecycle.State.RESUMED)) {
+            receiverLifecycleEventObserver.register();
         }
-        return false;
     }
 
-    private static class CreateDestroyObserver implements LifecycleObserver {
+    private static class ReceiverLifecycleEventObserver implements LifecycleEventObserver {
         @NonNull
         private Context appContext;
         @NonNull
         private LifecycleBroadcastReceiver receiver;
         @NonNull
         private IntentFilter filter;
+        @NonNull
+        private Lifecycle.Event registerEvent;
+        @NonNull
+        private Lifecycle.Event unregisterEvent;
 
-        CreateDestroyObserver(@NonNull Context context, @NonNull LifecycleBroadcastReceiver receiver, @NonNull IntentFilter filter) {
+        ReceiverLifecycleEventObserver(
+                @NonNull Context context, @NonNull LifecycleBroadcastReceiver receiver,
+                @NonNull IntentFilter filter, @NonNull Lifecycle.Event registerEvent,
+                @NonNull Lifecycle.Event unregisterEvent
+        ) {
             this.appContext = context.getApplicationContext();
             this.receiver = receiver;
             this.filter = filter;
+            this.registerEvent = registerEvent;
+            this.unregisterEvent = unregisterEvent;
         }
 
-        @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-        public void onCreate() {
+        @Override
+        public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
+            if (event == registerEvent) {
+                register();
+            } else if (event == unregisterEvent) {
+                unregister();
+            }
+        }
+
+        private void register() {
             try {
                 appContext.registerReceiver(receiver, filter);
             } catch (Exception e) {
@@ -112,74 +112,7 @@ public abstract class LifecycleBroadcastReceiver extends BroadcastReceiver {
             }
         }
 
-        @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
-        public void onDestroy() {
-            try {
-                appContext.unregisterReceiver(receiver);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private static class StartStopObserver implements LifecycleObserver {
-        @NonNull
-        private Context appContext;
-        @NonNull
-        private LifecycleBroadcastReceiver receiver;
-        @NonNull
-        private IntentFilter filter;
-
-        StartStopObserver(@NonNull Context context, @NonNull LifecycleBroadcastReceiver receiver, @NonNull IntentFilter filter) {
-            this.appContext = context.getApplicationContext();
-            this.receiver = receiver;
-            this.filter = filter;
-        }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_START)
-        public void onStart() {
-            try {
-                appContext.registerReceiver(receiver, filter);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-        public void onStop() {
-            try {
-                appContext.unregisterReceiver(receiver);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-    private static class ResumePauseObserver implements LifecycleObserver {
-        @NonNull
-        private Context appContext;
-        @NonNull
-        private LifecycleBroadcastReceiver receiver;
-        @NonNull
-        private IntentFilter filter;
-
-        ResumePauseObserver(@NonNull Context context, @NonNull LifecycleBroadcastReceiver receiver, @NonNull IntentFilter filter) {
-            this.appContext = context.getApplicationContext();
-            this.receiver = receiver;
-            this.filter = filter;
-        }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
-        public void onResume() {
-            try {
-                appContext.registerReceiver(receiver, filter);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-        @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
-        public void onPause() {
+        private void unregister() {
             try {
                 appContext.unregisterReceiver(receiver);
             } catch (Exception e) {

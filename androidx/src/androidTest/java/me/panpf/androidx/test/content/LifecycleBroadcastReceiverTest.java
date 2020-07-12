@@ -21,6 +21,13 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.test.rule.ActivityTestRule;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -29,12 +36,6 @@ import org.junit.runner.RunWith;
 import java.util.LinkedList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.content.LifecycleBroadcastReceiver;
 import me.panpf.androidx.test.BuildConfig;
 import me.panpf.javax.collections.Collectionx;
@@ -91,8 +92,7 @@ public class LifecycleBroadcastReceiverTest {
             super.onCreate(savedInstanceState);
 
             createReceiver = new TestBroadcastReceiver(this);
-            Assert.assertTrue(createReceiver.registerCreateDestroy(new IntentFilter(INTENT_ACTION)));
-            Assert.assertFalse(createReceiver.registerCreateDestroy(new IntentFilter(INTENT_ACTION)));
+            createReceiver.registerCreateDestroy(new IntentFilter(INTENT_ACTION));
 
             getSupportFragmentManager().beginTransaction()
                     .replace(android.R.id.content, new TestFragment())
@@ -104,8 +104,7 @@ public class LifecycleBroadcastReceiverTest {
             super.onStart();
 
             startReceiver = new TestBroadcastReceiver(this);
-            Assert.assertTrue(startReceiver.registerStartStop(new IntentFilter(INTENT_ACTION)));
-            Assert.assertFalse(startReceiver.registerStartStop(new IntentFilter(INTENT_ACTION)));
+            startReceiver.registerStartStop(new IntentFilter(INTENT_ACTION));
         }
 
         @Override
@@ -113,8 +112,7 @@ public class LifecycleBroadcastReceiverTest {
             super.onResume();
 
             resumeReceiver = new TestBroadcastReceiver(this);
-            Assert.assertTrue(resumeReceiver.registerResumePause(new IntentFilter(INTENT_ACTION)));
-            Assert.assertFalse(resumeReceiver.registerResumePause(new IntentFilter(INTENT_ACTION)));
+            resumeReceiver.registerResumePause(new IntentFilter(INTENT_ACTION));
         }
 
         @Nullable
@@ -132,8 +130,7 @@ public class LifecycleBroadcastReceiverTest {
             super.onCreate(savedInstanceState);
 
             createReceiver = new TestBroadcastReceiver(this);
-            Assert.assertTrue(createReceiver.registerCreateDestroy(new IntentFilter(INTENT_ACTION)));
-            Assert.assertFalse(createReceiver.registerCreateDestroy(new IntentFilter(INTENT_ACTION)));
+            createReceiver.registerCreateDestroy(new IntentFilter(INTENT_ACTION));
         }
     }
 
