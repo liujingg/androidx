@@ -6,6 +6,7 @@
 * fix: Fix the bug that there may be null elements in the array returned by Storagex.getAppExternal\*Dirs() method
 * new: Storagex.clean\*Dirs() method now returns boolean
 * change: LifecycleBroadcastReceiver can now register multiple times
+* improve: Improved Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods
 
 ## v1.0.0-alpha09
 * remove: Remove dependency on javax

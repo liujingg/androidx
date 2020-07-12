@@ -45,13 +45,21 @@ public class Argsx {
     private Argsx() {
     }
 
+    // todo 分成多个文件，按 Activity、Fragment 分，，去除 android.app.Fragment 的支持
+
     /* ************************************* Activity Intent Args ***************************************** */
 
 
+    // todo 增加 readByteArgOrThrow
     public static byte readByteArgOr(@NonNull Activity activity, @NonNull String argName, byte defaultValue) {
         Intent intent = activity.getIntent();
-        String value = intent.getStringExtra(argName);
-        return value != null ? Byte.parseByte(value) : intent.getByteExtra(argName, defaultValue);
+        byte value = intent.getByteExtra(argName, Byte.MIN_VALUE);
+        if (value != Byte.MIN_VALUE || intent.getByteExtra(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE)
+            return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null)
+            return Byte.parseByte(stringValue);    // todo 捕获 NumberFormatException
+        return defaultValue;
     }
 
 
@@ -76,8 +84,12 @@ public class Argsx {
 
     public static short readShortArgOr(@NonNull Activity activity, @NonNull String argName, short defaultValue) {
         Intent intent = activity.getIntent();
-        String value = intent.getStringExtra(argName);
-        return value != null ? Short.parseShort(value) : intent.getShortExtra(argName, defaultValue);
+        short value = intent.getShortExtra(argName, Short.MIN_VALUE);
+        if (value != Short.MIN_VALUE || intent.getShortExtra(argName, Short.MAX_VALUE) != Short.MAX_VALUE)
+            return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) return Short.parseShort(stringValue);
+        return defaultValue;
     }
 
 
@@ -102,8 +114,12 @@ public class Argsx {
 
     public static int readIntArgOr(@NonNull Activity activity, @NonNull String argName, int defaultValue) {
         Intent intent = activity.getIntent();
-        String value = intent.getStringExtra(argName);
-        return value != null ? Integer.parseInt(value) : intent.getIntExtra(argName, defaultValue);
+        int value = intent.getIntExtra(argName, Integer.MIN_VALUE);
+        if (value != Integer.MIN_VALUE || intent.getIntExtra(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE)
+            return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) return Integer.parseInt(stringValue);
+        return defaultValue;
     }
 
 
@@ -147,8 +163,12 @@ public class Argsx {
 
     public static long readLongArgOr(@NonNull Activity activity, @NonNull String argName, long defaultValue) {
         Intent intent = activity.getIntent();
-        String value = intent.getStringExtra(argName);
-        return value != null ? Long.parseLong(value) : intent.getLongExtra(argName, defaultValue);
+        long value = intent.getLongExtra(argName, Long.MIN_VALUE);
+        if (value != Long.MIN_VALUE || intent.getLongExtra(argName, Long.MAX_VALUE) != Long.MAX_VALUE)
+            return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) return Long.parseLong(stringValue);
+        return defaultValue;
     }
 
 
@@ -173,8 +193,12 @@ public class Argsx {
 
     public static float readFloatArgOr(@NonNull Activity activity, @NonNull String argName, float defaultValue) {
         Intent intent = activity.getIntent();
-        String value = intent.getStringExtra(argName);
-        return value != null ? Float.parseFloat(value) : intent.getFloatExtra(argName, defaultValue);
+        float value = intent.getFloatExtra(argName, Float.MIN_VALUE);
+        if (value != Float.MIN_VALUE || intent.getFloatExtra(argName, Float.MAX_VALUE) != Float.MAX_VALUE)
+            return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) return Float.parseFloat(stringValue);
+        return defaultValue;
     }
 
 
@@ -199,8 +223,12 @@ public class Argsx {
 
     public static double readDoubleArgOr(@NonNull Activity activity, @NonNull String argName, double defaultValue) {
         Intent intent = activity.getIntent();
-        String value = intent.getStringExtra(argName);
-        return value != null ? Double.parseDouble(value) : intent.getDoubleExtra(argName, defaultValue);
+        double value = intent.getDoubleExtra(argName, Double.MIN_VALUE);
+        if (value != Double.MIN_VALUE || intent.getDoubleExtra(argName, Double.MAX_VALUE) != Double.MAX_VALUE)
+            return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) return Double.parseDouble(stringValue);
+        return defaultValue;
     }
 
 
@@ -225,8 +253,11 @@ public class Argsx {
 
     public static boolean readBooleanArgOr(@NonNull Activity activity, @NonNull String argName, boolean defaultValue) {
         Intent intent = activity.getIntent();
-        String value = intent.getStringExtra(argName);
-        return value != null ? Boolean.parseBoolean(value) : intent.getBooleanExtra(argName, defaultValue);
+        boolean value = intent.getBooleanExtra(argName, false);
+        if (value || !intent.getBooleanExtra(argName, true)) return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) return Boolean.parseBoolean(stringValue);
+        return defaultValue;
     }
 
 
@@ -251,8 +282,12 @@ public class Argsx {
 
     public static char readCharArgOr(@NonNull Activity activity, @NonNull String argName, char defaultValue) {
         Intent intent = activity.getIntent();
-        String value = intent.getStringExtra(argName);
-        return value != null ? (char) Integer.parseInt(value) : intent.getCharExtra(argName, defaultValue);
+        char value = intent.getCharExtra(argName, Character.MIN_VALUE);
+        if (value != Character.MIN_VALUE || intent.getCharExtra(argName, Character.MAX_VALUE) != Character.MAX_VALUE)
+            return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) return (char) Integer.parseInt(stringValue);
+        return defaultValue;
     }
 
 
@@ -1497,8 +1532,12 @@ public class Argsx {
     public static byte readByteArgOr(@NonNull Fragment fragment, @NonNull String argName, byte defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Byte.parseByte(value) : arguments.getByte(argName, defaultValue);
+        byte value = arguments.getByte(argName, Byte.MIN_VALUE);
+        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Byte.parseByte(stringValue);
+        return defaultValue;
     }
 
 
@@ -1527,8 +1566,12 @@ public class Argsx {
     public static short readShortArgOr(@NonNull Fragment fragment, @NonNull String argName, short defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Short.parseShort(value) : arguments.getShort(argName, defaultValue);
+        short value = arguments.getShort(argName, Short.MIN_VALUE);
+        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Short.parseShort(stringValue);
+        return defaultValue;
     }
 
 
@@ -1557,8 +1600,12 @@ public class Argsx {
     public static int readIntArgOr(@NonNull Fragment fragment, @NonNull String argName, int defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Integer.parseInt(value) : arguments.getInt(argName, defaultValue);
+        int value = arguments.getInt(argName, Integer.MIN_VALUE);
+        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Integer.parseInt(stringValue);
+        return defaultValue;
     }
 
 
@@ -1609,8 +1656,12 @@ public class Argsx {
     public static long readLongArgOr(@NonNull Fragment fragment, @NonNull String argName, long defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Long.parseLong(value) : arguments.getLong(argName, defaultValue);
+        long value = arguments.getLong(argName, Long.MIN_VALUE);
+        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Long.parseLong(stringValue);
+        return defaultValue;
     }
 
 
@@ -1639,8 +1690,12 @@ public class Argsx {
     public static float readFloatArgOr(@NonNull Fragment fragment, @NonNull String argName, float defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Float.parseFloat(value) : arguments.getFloat(argName, defaultValue);
+        float value = arguments.getFloat(argName, Float.MIN_VALUE);
+        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Float.parseFloat(stringValue);
+        return defaultValue;
     }
 
 
@@ -1669,8 +1724,12 @@ public class Argsx {
     public static double readDoubleArgOr(@NonNull Fragment fragment, @NonNull String argName, double defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Double.parseDouble(value) : arguments.getDouble(argName, defaultValue);
+        double value = arguments.getDouble(argName, Double.MIN_VALUE);
+        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Double.parseDouble(stringValue);
+        return defaultValue;
     }
 
 
@@ -1699,8 +1758,12 @@ public class Argsx {
     public static boolean readBooleanArgOr(@NonNull Fragment fragment, @NonNull String argName, boolean defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Boolean.parseBoolean(value) : arguments.getBoolean(argName, defaultValue);
+        boolean value = arguments.getBoolean(argName, false);
+        if (value || !arguments.getBoolean(argName, true))
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Boolean.parseBoolean(stringValue);
+        return defaultValue;
     }
 
 
@@ -1729,8 +1792,12 @@ public class Argsx {
     public static char readCharArgOr(@NonNull Fragment fragment, @NonNull String argName, char defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? (char) Integer.parseInt(value) : arguments.getChar(argName, defaultValue);
+        char value = arguments.getChar(argName, Character.MIN_VALUE);
+        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return (char) Integer.parseInt(stringValue);
+        return defaultValue;
     }
 
 
@@ -2576,8 +2643,12 @@ public class Argsx {
     public static byte readByteArgOr(@NonNull android.app.Fragment fragment, @NonNull String argName, byte defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Byte.parseByte(value) : arguments.getByte(argName, defaultValue);
+        byte value = arguments.getByte(argName, Byte.MIN_VALUE);
+        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Byte.parseByte(stringValue);
+        return defaultValue;
     }
 
 
@@ -2606,8 +2677,12 @@ public class Argsx {
     public static short readShortArgOr(@NonNull android.app.Fragment fragment, @NonNull String argName, short defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Short.parseShort(value) : arguments.getShort(argName, defaultValue);
+        short value = arguments.getShort(argName, Short.MIN_VALUE);
+        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Short.parseShort(stringValue);
+        return defaultValue;
     }
 
 
@@ -2636,8 +2711,12 @@ public class Argsx {
     public static int readIntArgOr(@NonNull android.app.Fragment fragment, @NonNull String argName, int defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Integer.parseInt(value) : arguments.getInt(argName, defaultValue);
+        int value = arguments.getInt(argName, Integer.MIN_VALUE);
+        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Integer.parseInt(stringValue);
+        return defaultValue;
     }
 
 
@@ -2688,8 +2767,12 @@ public class Argsx {
     public static long readLongArgOr(@NonNull android.app.Fragment fragment, @NonNull String argName, long defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Long.parseLong(value) : arguments.getLong(argName, defaultValue);
+        long value = arguments.getLong(argName, Long.MIN_VALUE);
+        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Long.parseLong(stringValue);
+        return defaultValue;
     }
 
 
@@ -2718,8 +2801,12 @@ public class Argsx {
     public static float readFloatArgOr(@NonNull android.app.Fragment fragment, @NonNull String argName, float defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Float.parseFloat(value) : arguments.getFloat(argName, defaultValue);
+        float value = arguments.getFloat(argName, Float.MIN_VALUE);
+        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Float.parseFloat(stringValue);
+        return defaultValue;
     }
 
 
@@ -2748,8 +2835,12 @@ public class Argsx {
     public static double readDoubleArgOr(@NonNull android.app.Fragment fragment, @NonNull String argName, double defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Double.parseDouble(value) : arguments.getDouble(argName, defaultValue);
+        double value = arguments.getDouble(argName, Double.MIN_VALUE);
+        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Double.parseDouble(stringValue);
+        return defaultValue;
     }
 
 
@@ -2778,8 +2869,12 @@ public class Argsx {
     public static boolean readBooleanArgOr(@NonNull android.app.Fragment fragment, @NonNull String argName, boolean defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? Boolean.parseBoolean(value) : arguments.getBoolean(argName, defaultValue);
+        boolean value = arguments.getBoolean(argName, false);
+        if (value || !arguments.getBoolean(argName, true))
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return Boolean.parseBoolean(stringValue);
+        return defaultValue;
     }
 
 
@@ -2808,8 +2903,12 @@ public class Argsx {
     public static char readCharArgOr(@NonNull android.app.Fragment fragment, @NonNull String argName, char defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
-        String value = arguments.getString(argName);
-        return value != null ? (char) Integer.parseInt(value) : arguments.getChar(argName, defaultValue);
+        char value = arguments.getChar(argName, Character.MIN_VALUE);
+        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE)
+            return value;
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) return (char) Integer.parseInt(stringValue);
+        return defaultValue;
     }
 
 
