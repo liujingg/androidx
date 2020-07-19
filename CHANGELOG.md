@@ -10,6 +10,7 @@
 * change: Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods 现在不会抛出 NumberFormatException
 * change: The name of the method that throws exceptions in Argsx is unified with the suffix'OrThrow'
 * remove: Remove all support for android.app.Fragment
+* new: Argsx basic data types add read\*ArgOrThrow and read\*ArgOrNull methods
 
 ## v1.0.0-alpha09
 * remove: Remove dependency on javax

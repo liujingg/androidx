@@ -36,29 +36,39 @@ import androidx.fragment.app.Fragment;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-/**
- * 为什么 {@link #readByteArgOr} 等基础类型方法要先尝试从字符串类型解析
- * 因为在配和路由框架将 Uri 中的参数映射到 Bundle 中时只能全部以字符串的形式放进去，那么在读的时候就需要先尝试读取字符串，因此 Argsx 就提供此方案来兼容这种情况
- */
 public class Argsx {
 
     private Argsx() {
     }
 
-    // todo 分成多个文件，按 Activity、Fragment 分
-
     /* ************************************* Activity Intent Args ***************************************** */
 
 
-    // todo 增加 readByteArgOrThrow
-    public static byte readByteArgOr(@NonNull Activity activity, @NonNull String argName, byte defaultValue) {
+    public static byte readByteArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Intent intent = activity.getIntent();
         byte value = intent.getByteExtra(argName, Byte.MIN_VALUE);
-        if (value != Byte.MIN_VALUE || intent.getByteExtra(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE){
+        if (value != Byte.MIN_VALUE || intent.getByteExtra(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE) {
             return value;
         }
         String stringValue = intent.getStringExtra(argName);
-        if (stringValue != null){
+        if (stringValue != null) {
+            try {
+                return Byte.parseByte(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
+    public static byte readByteArgOr(@NonNull Activity activity, @NonNull String argName, byte defaultValue) {
+        Intent intent = activity.getIntent();
+        byte value = intent.getByteExtra(argName, Byte.MIN_VALUE);
+        if (value != Byte.MIN_VALUE || intent.getByteExtra(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
             try {
                 return Byte.parseByte(stringValue);
             } catch (NumberFormatException e) {
@@ -67,6 +77,25 @@ public class Argsx {
         }
         return defaultValue;
     }
+
+    @Nullable
+    public static Byte readByteArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        byte value = intent.getByteExtra(argName, Byte.MIN_VALUE);
+        if (value != Byte.MIN_VALUE || intent.getByteExtra(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Byte.parseByte(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 
     @NonNull
     public static byte[] readByteArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
@@ -87,10 +116,27 @@ public class Argsx {
     }
 
 
+    public static short readShortArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        short value = intent.getShortExtra(argName, Short.MIN_VALUE);
+        if (value != Short.MIN_VALUE || intent.getShortExtra(argName, Short.MAX_VALUE) != Short.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Short.parseShort(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static short readShortArgOr(@NonNull Activity activity, @NonNull String argName, short defaultValue) {
         Intent intent = activity.getIntent();
         short value = intent.getShortExtra(argName, Short.MIN_VALUE);
-        if (value != Short.MIN_VALUE || intent.getShortExtra(argName, Short.MAX_VALUE) != Short.MAX_VALUE){
+        if (value != Short.MIN_VALUE || intent.getShortExtra(argName, Short.MAX_VALUE) != Short.MAX_VALUE) {
             return value;
         }
         String stringValue = intent.getStringExtra(argName);
@@ -102,6 +148,24 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Short readShortArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        short value = intent.getShortExtra(argName, Short.MIN_VALUE);
+        if (value != Short.MIN_VALUE || intent.getShortExtra(argName, Short.MAX_VALUE) != Short.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Short.parseShort(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -124,10 +188,27 @@ public class Argsx {
     }
 
 
+    public static int readIntArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        int value = intent.getIntExtra(argName, Integer.MIN_VALUE);
+        if (value != Integer.MIN_VALUE || intent.getIntExtra(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static int readIntArgOr(@NonNull Activity activity, @NonNull String argName, int defaultValue) {
         Intent intent = activity.getIntent();
         int value = intent.getIntExtra(argName, Integer.MIN_VALUE);
-        if (value != Integer.MIN_VALUE || intent.getIntExtra(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE){
+        if (value != Integer.MIN_VALUE || intent.getIntExtra(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE) {
             return value;
         }
         String stringValue = intent.getStringExtra(argName);
@@ -139,6 +220,24 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Integer readIntArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        int value = intent.getIntExtra(argName, Integer.MIN_VALUE);
+        if (value != Integer.MIN_VALUE || intent.getIntExtra(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -180,10 +279,27 @@ public class Argsx {
     }
 
 
+    public static long readLongArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        long value = intent.getLongExtra(argName, Long.MIN_VALUE);
+        if (value != Long.MIN_VALUE || intent.getLongExtra(argName, Long.MAX_VALUE) != Long.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Long.parseLong(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static long readLongArgOr(@NonNull Activity activity, @NonNull String argName, long defaultValue) {
         Intent intent = activity.getIntent();
         long value = intent.getLongExtra(argName, Long.MIN_VALUE);
-        if (value != Long.MIN_VALUE || intent.getLongExtra(argName, Long.MAX_VALUE) != Long.MAX_VALUE){
+        if (value != Long.MIN_VALUE || intent.getLongExtra(argName, Long.MAX_VALUE) != Long.MAX_VALUE) {
             return value;
         }
         String stringValue = intent.getStringExtra(argName);
@@ -195,6 +311,24 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Long readLongArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        long value = intent.getLongExtra(argName, Long.MIN_VALUE);
+        if (value != Long.MIN_VALUE || intent.getLongExtra(argName, Long.MAX_VALUE) != Long.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Long.parseLong(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -217,10 +351,27 @@ public class Argsx {
     }
 
 
+    public static float readFloatArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        float value = intent.getFloatExtra(argName, Float.MIN_VALUE);
+        if (value != Float.MIN_VALUE || intent.getFloatExtra(argName, Float.MAX_VALUE) != Float.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Float.parseFloat(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static float readFloatArgOr(@NonNull Activity activity, @NonNull String argName, float defaultValue) {
         Intent intent = activity.getIntent();
         float value = intent.getFloatExtra(argName, Float.MIN_VALUE);
-        if (value != Float.MIN_VALUE || intent.getFloatExtra(argName, Float.MAX_VALUE) != Float.MAX_VALUE){
+        if (value != Float.MIN_VALUE || intent.getFloatExtra(argName, Float.MAX_VALUE) != Float.MAX_VALUE) {
             return value;
         }
         String stringValue = intent.getStringExtra(argName);
@@ -232,6 +383,24 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Float readFloatArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        float value = intent.getFloatExtra(argName, Float.MIN_VALUE);
+        if (value != Float.MIN_VALUE || intent.getFloatExtra(argName, Float.MAX_VALUE) != Float.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Float.parseFloat(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -254,10 +423,27 @@ public class Argsx {
     }
 
 
+    public static double readDoubleArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        double value = intent.getDoubleExtra(argName, Double.MIN_VALUE);
+        if (value != Double.MIN_VALUE || intent.getDoubleExtra(argName, Double.MAX_VALUE) != Double.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Double.parseDouble(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static double readDoubleArgOr(@NonNull Activity activity, @NonNull String argName, double defaultValue) {
         Intent intent = activity.getIntent();
         double value = intent.getDoubleExtra(argName, Double.MIN_VALUE);
-        if (value != Double.MIN_VALUE || intent.getDoubleExtra(argName, Double.MAX_VALUE) != Double.MAX_VALUE){
+        if (value != Double.MIN_VALUE || intent.getDoubleExtra(argName, Double.MAX_VALUE) != Double.MAX_VALUE) {
             return value;
         }
         String stringValue = intent.getStringExtra(argName);
@@ -269,6 +455,24 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Double readDoubleArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        double value = intent.getDoubleExtra(argName, Double.MIN_VALUE);
+        if (value != Double.MIN_VALUE || intent.getDoubleExtra(argName, Double.MAX_VALUE) != Double.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Double.parseDouble(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -291,6 +495,21 @@ public class Argsx {
     }
 
 
+    public static boolean readBooleanArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        boolean value = intent.getBooleanExtra(argName, false);
+        if (value || !intent.getBooleanExtra(argName, true)) return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Boolean.parseBoolean(stringValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static boolean readBooleanArgOr(@NonNull Activity activity, @NonNull String argName, boolean defaultValue) {
         Intent intent = activity.getIntent();
         boolean value = intent.getBooleanExtra(argName, false);
@@ -304,6 +523,22 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Boolean readBooleanArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        boolean value = intent.getBooleanExtra(argName, false);
+        if (value || !intent.getBooleanExtra(argName, true)) return value;
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return Boolean.parseBoolean(stringValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -326,10 +561,27 @@ public class Argsx {
     }
 
 
+    public static char readCharArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        char value = intent.getCharExtra(argName, Character.MIN_VALUE);
+        if (value != Character.MIN_VALUE || intent.getCharExtra(argName, Character.MAX_VALUE) != Character.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return (char) Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static char readCharArgOr(@NonNull Activity activity, @NonNull String argName, char defaultValue) {
         Intent intent = activity.getIntent();
         char value = intent.getCharExtra(argName, Character.MIN_VALUE);
-        if (value != Character.MIN_VALUE || intent.getCharExtra(argName, Character.MAX_VALUE) != Character.MAX_VALUE){
+        if (value != Character.MIN_VALUE || intent.getCharExtra(argName, Character.MAX_VALUE) != Character.MAX_VALUE) {
             return value;
         }
         String stringValue = intent.getStringExtra(argName);
@@ -341,6 +593,24 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Character readCharArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Intent intent = activity.getIntent();
+        char value = intent.getCharExtra(argName, Character.MIN_VALUE);
+        if (value != Character.MIN_VALUE || intent.getCharExtra(argName, Character.MAX_VALUE) != Character.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = intent.getStringExtra(argName);
+        if (stringValue != null) {
+            try {
+                return (char) Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -901,115 +1171,299 @@ public class Argsx {
     /* ************************************* Activity Uri Intent Args ***************************************** */
 
 
+    public static byte readByteUriIntentArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Byte value = readByteUriArgOrNull(activity, argName);
+        return value != null ? value : readByteArgOrThrow(activity, argName);
+    }
+
     public static byte readByteUriIntentArgOr(@NonNull Activity activity, @NonNull String argName, byte defaultValue) {
-        Byte uriValue = readByteUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readByteArgOr(activity, argName, defaultValue);
+        Byte value = readByteUriArgOrNull(activity, argName);
+        return value != null ? value : readByteArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Byte readByteUriIntentArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Byte value = readByteUriArgOrNull(activity, argName);
+        return value != null ? value : readByteArgOrNull(activity, argName);
+    }
+
+
+    public static short readShortUriIntentArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Short value = readShortUriArgOrNull(activity, argName);
+        return value != null ? value : readShortArgOrThrow(activity, argName);
     }
 
     public static short readShortUriIntentArgOr(@NonNull Activity activity, @NonNull String argName, short defaultValue) {
-        Short uriValue = readShortUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readShortArgOr(activity, argName, defaultValue);
+        Short value = readShortUriArgOrNull(activity, argName);
+        return value != null ? value : readShortArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Short readShortUriIntentArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Short value = readShortUriArgOrNull(activity, argName);
+        return value != null ? value : readShortArgOrNull(activity, argName);
+    }
+
+
+    public static int readIntUriIntentArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Integer value = readIntUriArgOrNull(activity, argName);
+        return value != null ? value : readIntArgOrThrow(activity, argName);
     }
 
     public static int readIntUriIntentArgOr(@NonNull Activity activity, @NonNull String argName, int defaultValue) {
-        Integer uriValue = readIntUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readIntArgOr(activity, argName, defaultValue);
+        Integer value = readIntUriArgOrNull(activity, argName);
+        return value != null ? value : readIntArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Integer readIntUriIntentArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Integer value = readIntUriArgOrNull(activity, argName);
+        return value != null ? value : readIntArgOrNull(activity, argName);
+    }
+
+
+    public static long readLongUriIntentArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Long value = readLongUriArgOrNull(activity, argName);
+        return value != null ? value : readLongArgOrThrow(activity, argName);
     }
 
     public static long readLongUriIntentArgOr(@NonNull Activity activity, @NonNull String argName, long defaultValue) {
-        Long uriValue = readLongUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readLongArgOr(activity, argName, defaultValue);
+        Long value = readLongUriArgOrNull(activity, argName);
+        return value != null ? value : readLongArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Long readLongUriIntentArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Long value = readLongUriArgOrNull(activity, argName);
+        return value != null ? value : readLongArgOrNull(activity, argName);
+    }
+
+
+    public static float readFloatUriIntentArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Float value = readFloatUriArgOrNull(activity, argName);
+        return value != null ? value : readFloatArgOrThrow(activity, argName);
     }
 
     public static float readFloatUriIntentArgOr(@NonNull Activity activity, @NonNull String argName, float defaultValue) {
-        Float uriValue = readFloatUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readFloatArgOr(activity, argName, defaultValue);
+        Float value = readFloatUriArgOrNull(activity, argName);
+        return value != null ? value : readFloatArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Float readFloatUriIntentArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Float value = readFloatUriArgOrNull(activity, argName);
+        return value != null ? value : readFloatArgOrNull(activity, argName);
+    }
+
+
+    public static double readDoubleUriIntentArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Double value = readDoubleUriArgOrNull(activity, argName);
+        return value != null ? value : readDoubleArgOrThrow(activity, argName);
     }
 
     public static double readDoubleUriIntentArgOr(@NonNull Activity activity, @NonNull String argName, double defaultValue) {
-        Double uriValue = readDoubleUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readDoubleArgOr(activity, argName, defaultValue);
+        Double value = readDoubleUriArgOrNull(activity, argName);
+        return value != null ? value : readDoubleArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Double readDoubleUriIntentArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Double value = readDoubleUriArgOrNull(activity, argName);
+        return value != null ? value : readDoubleArgOrNull(activity, argName);
+    }
+
+
+    public static boolean readBooleanUriIntentArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Boolean value = readBooleanUriArgOrNull(activity, argName);
+        return value != null ? value : readBooleanArgOrThrow(activity, argName);
     }
 
     public static boolean readBooleanUriIntentArgOr(@NonNull Activity activity, @NonNull String argName, boolean defaultValue) {
-        Boolean uriValue = readBooleanUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readBooleanArgOr(activity, argName, defaultValue);
+        Boolean value = readBooleanUriArgOrNull(activity, argName);
+        return value != null ? value : readBooleanArgOr(activity, argName, defaultValue);
     }
+
+    @Nullable
+    public static Boolean readBooleanUriIntentArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Boolean value = readBooleanUriArgOrNull(activity, argName);
+        return value != null ? value : readBooleanArgOrNull(activity, argName);
+    }
+
 
     @NonNull
     public static String readStringUriIntentArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
-        String uriValue = readStringUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readStringArgOrThrow(activity, argName);
+        String value = readStringUriArgOrNull(activity, argName);
+        return value != null ? value : readStringArgOrThrow(activity, argName);
     }
 
     @NonNull
     public static String readStringUriIntentArgOr(@NonNull Activity activity, @NonNull String argName, String defaultValue) {
-        String uriValue = readStringUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readStringArgOr(activity, argName, defaultValue);
+        String value = readStringUriArgOrNull(activity, argName);
+        return value != null ? value : readStringArgOr(activity, argName, defaultValue);
     }
 
     @Nullable
     public static String readStringUriIntentArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        String uriValue = readStringUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readStringArgOrNull(activity, argName);
+        String value = readStringUriArgOrNull(activity, argName);
+        return value != null ? value : readStringArgOrNull(activity, argName);
     }
 
 
     /* ************************************* Activity Intent Uri Args ***************************************** */
 
 
+    public static byte readByteIntentUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Byte value = readByteArgOrNull(activity, argName);
+        return value != null ? value : readByteUriArgOrThrow(activity, argName);
+    }
+
     public static byte readByteIntentUriArgOr(@NonNull Activity activity, @NonNull String argName, byte defaultValue) {
-        return activity.getIntent().hasExtra(argName) ? readByteArgOr(activity, argName, defaultValue) : readByteUriArgOr(activity, argName, defaultValue);
+        Byte value = readByteArgOrNull(activity, argName);
+        return value != null ? value : readByteUriArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Byte readByteIntentUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Byte value = readByteArgOrNull(activity, argName);
+        return value != null ? value : readByteUriArgOrNull(activity, argName);
+    }
+
+
+    public static short readShortIntentUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Short value = readShortArgOrNull(activity, argName);
+        return value != null ? value : readShortUriArgOrThrow(activity, argName);
     }
 
     public static short readShortIntentUriArgOr(@NonNull Activity activity, @NonNull String argName, short defaultValue) {
-        return activity.getIntent().hasExtra(argName) ? readShortArgOr(activity, argName, defaultValue) : readShortUriArgOr(activity, argName, defaultValue);
+        Short value = readShortArgOrNull(activity, argName);
+        return value != null ? value : readShortUriArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Short readShortIntentUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Short value = readShortArgOrNull(activity, argName);
+        return value != null ? value : readShortUriArgOrNull(activity, argName);
+    }
+
+
+    public static int readIntIntentUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Integer value = readIntArgOrNull(activity, argName);
+        return value != null ? value : readIntUriArgOrThrow(activity, argName);
     }
 
     public static int readIntIntentUriArgOr(@NonNull Activity activity, @NonNull String argName, int defaultValue) {
-        return activity.getIntent().hasExtra(argName) ? readIntArgOr(activity, argName, defaultValue) : readIntUriArgOr(activity, argName, defaultValue);
+        Integer value = readIntArgOrNull(activity, argName);
+        return value != null ? value : readIntUriArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Integer readIntIntentUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Integer value = readIntArgOrNull(activity, argName);
+        return value != null ? value : readIntUriArgOrNull(activity, argName);
+    }
+
+
+    public static long readLongIntentUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Long value = readLongArgOrNull(activity, argName);
+        return value != null ? value : readLongUriArgOrThrow(activity, argName);
     }
 
     public static long readLongIntentUriArgOr(@NonNull Activity activity, @NonNull String argName, long defaultValue) {
-        return activity.getIntent().hasExtra(argName) ? readLongArgOr(activity, argName, defaultValue) : readLongUriArgOr(activity, argName, defaultValue);
+        Long value = readLongArgOrNull(activity, argName);
+        return value != null ? value : readLongUriArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Long readLongIntentUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Long value = readLongArgOrNull(activity, argName);
+        return value != null ? value : readLongUriArgOrNull(activity, argName);
+    }
+
+
+    public static float readFloatIntentUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Float value = readFloatArgOrNull(activity, argName);
+        return value != null ? value : readFloatUriArgOrThrow(activity, argName);
     }
 
     public static float readFloatIntentUriArgOr(@NonNull Activity activity, @NonNull String argName, float defaultValue) {
-        return activity.getIntent().hasExtra(argName) ? readFloatArgOr(activity, argName, defaultValue) : readFloatUriArgOr(activity, argName, defaultValue);
+        Float value = readFloatArgOrNull(activity, argName);
+        return value != null ? value : readFloatUriArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Float readFloatIntentUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Float value = readFloatArgOrNull(activity, argName);
+        return value != null ? value : readFloatUriArgOrNull(activity, argName);
+    }
+
+
+    public static double readDoubleIntentUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Double value = readDoubleArgOrNull(activity, argName);
+        return value != null ? value : readDoubleUriArgOrThrow(activity, argName);
     }
 
     public static double readDoubleIntentUriArgOr(@NonNull Activity activity, @NonNull String argName, double defaultValue) {
-        return activity.getIntent().hasExtra(argName) ? readDoubleArgOr(activity, argName, defaultValue) : readDoubleUriArgOr(activity, argName, defaultValue);
+        Double value = readDoubleArgOrNull(activity, argName);
+        return value != null ? value : readDoubleUriArgOr(activity, argName, defaultValue);
+    }
+
+    @Nullable
+    public static Double readDoubleIntentUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Double value = readDoubleArgOrNull(activity, argName);
+        return value != null ? value : readDoubleUriArgOrNull(activity, argName);
+    }
+
+
+    public static boolean readBooleanIntentUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
+        Boolean value = readBooleanArgOrNull(activity, argName);
+        return value != null ? value : readBooleanUriArgOrThrow(activity, argName);
     }
 
     public static boolean readBooleanIntentUriArgOr(@NonNull Activity activity, @NonNull String argName, boolean defaultValue) {
-        return activity.getIntent().hasExtra(argName) ? readBooleanArgOr(activity, argName, defaultValue) : readBooleanUriArgOr(activity, argName, defaultValue);
+        Boolean value = readBooleanArgOrNull(activity, argName);
+        return value != null ? value : readBooleanUriArgOr(activity, argName, defaultValue);
     }
+
+    @Nullable
+    public static Boolean readBooleanIntentUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
+        Boolean value = readBooleanArgOrNull(activity, argName);
+        return value != null ? value : readBooleanUriArgOrNull(activity, argName);
+    }
+
 
     @NonNull
     public static String readStringIntentUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
-        String uriValue = readStringArgOrNull(activity, argName);
-        return uriValue != null && !uriValue.isEmpty() ? uriValue : readStringUriArgOrThrow(activity, argName);
+        String value = readStringArgOrNull(activity, argName);
+        return value != null && !value.isEmpty() ? value : readStringUriArgOrThrow(activity, argName);
     }
 
     @NonNull
     public static String readStringIntentUriArgOr(@NonNull Activity activity, @NonNull String argName, String defaultValue) {
-        String uriValue = readStringArgOrNull(activity, argName);
-        return uriValue != null && !uriValue.isEmpty() ? uriValue : readStringUriArgOr(activity, argName, defaultValue);
+        String value = readStringArgOrNull(activity, argName);
+        return value != null && !value.isEmpty() ? value : readStringUriArgOr(activity, argName, defaultValue);
     }
 
     @Nullable
     public static String readStringIntentUriArgOrNull(@NonNull Activity activity, @NonNull String argName) {
-        String uriValue = readStringArgOrNull(activity, argName);
-        return uriValue != null && !uriValue.isEmpty() ? uriValue : readStringUriArgOrNull(activity, argName);
+        String value = readStringArgOrNull(activity, argName);
+        return value != null && !value.isEmpty() ? value : readStringUriArgOrNull(activity, argName);
     }
 
 
     /* ************************************* Activity Intent Args ***************************************** */
 
 
+    public static byte readByteArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readByteArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static byte readByteArgOr(@NonNull Activity activity, @StringRes int argNameResId, byte defaultValue) {
         return Argsx.readByteArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Byte readByteArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readByteArgOrNull(activity, activity.getString(argNameResId));
     }
 
 
@@ -1029,8 +1483,17 @@ public class Argsx {
     }
 
 
+    public static short readShortArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readShortArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static short readShortArgOr(@NonNull Activity activity, @StringRes int argNameResId, short defaultValue) {
         return Argsx.readShortArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Short readShortArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readShortArgOrNull(activity, activity.getString(argNameResId));
     }
 
 
@@ -1050,8 +1513,17 @@ public class Argsx {
     }
 
 
+    public static int readIntArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readIntArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static int readIntArgOr(@NonNull Activity activity, @StringRes int argNameResId, int defaultValue) {
         return Argsx.readIntArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Integer readIntArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readIntArgOrNull(activity, activity.getString(argNameResId));
     }
 
 
@@ -1087,8 +1559,17 @@ public class Argsx {
     }
 
 
+    public static long readLongArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readLongArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static long readLongArgOr(@NonNull Activity activity, @StringRes int argNameResId, long defaultValue) {
         return Argsx.readLongArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Long readLongArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readLongArgOrNull(activity, activity.getString(argNameResId));
     }
 
 
@@ -1108,8 +1589,17 @@ public class Argsx {
     }
 
 
+    public static float readFloatArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readFloatArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static float readFloatArgOr(@NonNull Activity activity, @StringRes int argNameResId, float defaultValue) {
         return Argsx.readFloatArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Float readFloatArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readFloatArgOrNull(activity, activity.getString(argNameResId));
     }
 
 
@@ -1129,8 +1619,17 @@ public class Argsx {
     }
 
 
+    public static double readDoubleArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readDoubleArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static double readDoubleArgOr(@NonNull Activity activity, @StringRes int argNameResId, double defaultValue) {
         return Argsx.readDoubleArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Double readDoubleArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readDoubleArgOrNull(activity, activity.getString(argNameResId));
     }
 
 
@@ -1150,8 +1649,17 @@ public class Argsx {
     }
 
 
+    public static boolean readBooleanArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readBooleanArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static boolean readBooleanArgOr(@NonNull Activity activity, @StringRes int argNameResId, boolean defaultValue) {
         return Argsx.readBooleanArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Boolean readBooleanArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readBooleanArgOrNull(activity, activity.getString(argNameResId));
     }
 
 
@@ -1171,8 +1679,17 @@ public class Argsx {
     }
 
 
+    public static char readCharArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readCharArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static char readCharArgOr(@NonNull Activity activity, @StringRes int argNameResId, char defaultValue) {
         return Argsx.readCharArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Character readCharArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readCharArgOrNull(activity, activity.getString(argNameResId));
     }
 
 
@@ -1488,33 +2005,103 @@ public class Argsx {
     /* ************************************* Activity Uri Intent Args ***************************************** */
 
 
+    public static byte readByteUriIntentArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readByteUriIntentArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static byte readByteUriIntentArgOr(@NonNull Activity activity, @StringRes int argNameResId, byte defaultValue) {
         return Argsx.readByteUriIntentArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Byte readByteUriIntentArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readByteUriIntentArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static short readShortUriIntentArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readShortUriIntentArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static short readShortUriIntentArgOr(@NonNull Activity activity, @StringRes int argNameResId, short defaultValue) {
         return Argsx.readShortUriIntentArgOr(activity, activity.getString(argNameResId), defaultValue);
     }
 
+    @Nullable
+    public static Short readShortUriIntentArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readShortUriIntentArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static int readIntUriIntentArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readIntUriIntentArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static int readIntUriIntentArgOr(@NonNull Activity activity, @StringRes int argNameResId, int defaultValue) {
         return Argsx.readIntUriIntentArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Integer readIntUriIntentArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readIntUriIntentArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static long readLongUriIntentArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readLongUriIntentArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static long readLongUriIntentArgOr(@NonNull Activity activity, @StringRes int argNameResId, long defaultValue) {
         return Argsx.readLongUriIntentArgOr(activity, activity.getString(argNameResId), defaultValue);
     }
 
+    @Nullable
+    public static Long readLongUriIntentArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readLongUriIntentArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static float readFloatUriIntentArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readFloatUriIntentArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static float readFloatUriIntentArgOr(@NonNull Activity activity, @StringRes int argNameResId, float defaultValue) {
         return Argsx.readFloatUriIntentArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Float readFloatUriIntentArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readFloatUriIntentArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static double readDoubleUriIntentArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readDoubleUriIntentArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static double readDoubleUriIntentArgOr(@NonNull Activity activity, @StringRes int argNameResId, double defaultValue) {
         return Argsx.readDoubleUriIntentArgOr(activity, activity.getString(argNameResId), defaultValue);
     }
 
+    @Nullable
+    public static Double readDoubleUriIntentArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readDoubleUriIntentArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static boolean readBooleanUriIntentArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readBooleanUriIntentArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static boolean readBooleanUriIntentArgOr(@NonNull Activity activity, @StringRes int argNameResId, boolean defaultValue) {
         return Argsx.readBooleanUriIntentArgOr(activity, activity.getString(argNameResId), defaultValue);
     }
+
+    @Nullable
+    public static Boolean readBooleanUriIntentArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readBooleanUriIntentArgOrNull(activity, activity.getString(argNameResId));
+    }
+
 
     @NonNull
     public static String readStringUriIntentArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
@@ -1535,33 +2122,103 @@ public class Argsx {
     /* ************************************* Activity Intent Uri Args ***************************************** */
 
 
+    public static byte readByteIntentUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readByteIntentUriArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static byte readByteIntentUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, byte defaultValue) {
         return Argsx.readByteIntentUriArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Byte readByteIntentUriArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readByteIntentUriArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static short readShortIntentUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readShortIntentUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static short readShortIntentUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, short defaultValue) {
         return Argsx.readShortIntentUriArgOr(activity, activity.getString(argNameResId), defaultValue);
     }
 
+    @Nullable
+    public static Short readShortIntentUriArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readShortIntentUriArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static int readIntIntentUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readIntIntentUriArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static int readIntIntentUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, int defaultValue) {
         return Argsx.readIntIntentUriArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Integer readIntIntentUriArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readIntIntentUriArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static long readLongIntentUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readLongIntentUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static long readLongIntentUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, long defaultValue) {
         return Argsx.readLongIntentUriArgOr(activity, activity.getString(argNameResId), defaultValue);
     }
 
+    @Nullable
+    public static Long readLongIntentUriArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readLongIntentUriArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static float readFloatIntentUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readFloatIntentUriArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static float readFloatIntentUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, float defaultValue) {
         return Argsx.readFloatIntentUriArgOr(activity, activity.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Float readFloatIntentUriArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readFloatIntentUriArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static double readDoubleIntentUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readDoubleIntentUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static double readDoubleIntentUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, double defaultValue) {
         return Argsx.readDoubleIntentUriArgOr(activity, activity.getString(argNameResId), defaultValue);
     }
 
+    @Nullable
+    public static Double readDoubleIntentUriArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readDoubleIntentUriArgOrNull(activity, activity.getString(argNameResId));
+    }
+
+
+    public static boolean readBooleanIntentUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readBooleanIntentUriArgOrThrow(activity, activity.getString(argNameResId));
+    }
+
     public static boolean readBooleanIntentUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, boolean defaultValue) {
         return Argsx.readBooleanIntentUriArgOr(activity, activity.getString(argNameResId), defaultValue);
     }
+
+    @Nullable
+    public static Boolean readBooleanIntentUriArgOrNull(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readBooleanIntentUriArgOrNull(activity, activity.getString(argNameResId));
+    }
+
 
     @NonNull
     public static String readStringIntentUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
@@ -1582,11 +2239,30 @@ public class Argsx {
     /* ************************************* SupportFragment Args ***************************************** */
 
 
+    public static byte readByteArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null)
+            throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+        byte value = arguments.getByte(argName, Byte.MIN_VALUE);
+        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Byte.parseByte(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static byte readByteArgOr(@NonNull Fragment fragment, @NonNull String argName, byte defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         byte value = arguments.getByte(argName, Byte.MIN_VALUE);
-        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE){
+        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE) {
             return value;
         }
         String stringValue = arguments.getString(argName);
@@ -1598,6 +2274,25 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Byte readByteArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null) return null;
+        byte value = arguments.getByte(argName, Byte.MIN_VALUE);
+        if (value != Byte.MIN_VALUE || arguments.getByte(argName, Byte.MAX_VALUE) != Byte.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Byte.parseByte(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -1623,11 +2318,30 @@ public class Argsx {
     }
 
 
+    public static short readShortArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null)
+            throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+        short value = arguments.getShort(argName, Short.MIN_VALUE);
+        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Short.parseShort(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static short readShortArgOr(@NonNull Fragment fragment, @NonNull String argName, short defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         short value = arguments.getShort(argName, Short.MIN_VALUE);
-        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE){
+        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE) {
             return value;
         }
         String stringValue = arguments.getString(argName);
@@ -1639,6 +2353,25 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Short readShortArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null) return null;
+        short value = arguments.getShort(argName, Short.MIN_VALUE);
+        if (value != Short.MIN_VALUE || arguments.getShort(argName, Short.MAX_VALUE) != Short.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Short.parseShort(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -1664,11 +2397,30 @@ public class Argsx {
     }
 
 
+    public static int readIntArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null)
+            throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+        int value = arguments.getInt(argName, Integer.MIN_VALUE);
+        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static int readIntArgOr(@NonNull Fragment fragment, @NonNull String argName, int defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         int value = arguments.getInt(argName, Integer.MIN_VALUE);
-        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE){
+        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE) {
             return value;
         }
         String stringValue = arguments.getString(argName);
@@ -1680,6 +2432,25 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Integer readIntArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null) return null;
+        int value = arguments.getInt(argName, Integer.MIN_VALUE);
+        if (value != Integer.MIN_VALUE || arguments.getInt(argName, Integer.MAX_VALUE) != Integer.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -1727,11 +2498,30 @@ public class Argsx {
     }
 
 
+    public static long readLongArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null)
+            throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+        long value = arguments.getLong(argName, Long.MIN_VALUE);
+        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Long.parseLong(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static long readLongArgOr(@NonNull Fragment fragment, @NonNull String argName, long defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         long value = arguments.getLong(argName, Long.MIN_VALUE);
-        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE){
+        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE) {
             return value;
         }
         String stringValue = arguments.getString(argName);
@@ -1743,6 +2533,25 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Long readLongArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null) return null;
+        long value = arguments.getLong(argName, Long.MIN_VALUE);
+        if (value != Long.MIN_VALUE || arguments.getLong(argName, Long.MAX_VALUE) != Long.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Long.parseLong(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -1768,11 +2577,30 @@ public class Argsx {
     }
 
 
+    public static float readFloatArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null)
+            throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+        float value = arguments.getFloat(argName, Float.MIN_VALUE);
+        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Float.parseFloat(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static float readFloatArgOr(@NonNull Fragment fragment, @NonNull String argName, float defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         float value = arguments.getFloat(argName, Float.MIN_VALUE);
-        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE){
+        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE) {
             return value;
         }
         String stringValue = arguments.getString(argName);
@@ -1784,6 +2612,25 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Float readFloatArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null) return null;
+        float value = arguments.getFloat(argName, Float.MIN_VALUE);
+        if (value != Float.MIN_VALUE || arguments.getFloat(argName, Float.MAX_VALUE) != Float.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Float.parseFloat(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -1809,11 +2656,30 @@ public class Argsx {
     }
 
 
+    public static double readDoubleArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null)
+            throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+        double value = arguments.getDouble(argName, Double.MIN_VALUE);
+        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Double.parseDouble(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static double readDoubleArgOr(@NonNull Fragment fragment, @NonNull String argName, double defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         double value = arguments.getDouble(argName, Double.MIN_VALUE);
-        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE){
+        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE) {
             return value;
         }
         String stringValue = arguments.getString(argName);
@@ -1825,6 +2691,25 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Double readDoubleArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null) return null;
+        double value = arguments.getDouble(argName, Double.MIN_VALUE);
+        if (value != Double.MIN_VALUE || arguments.getDouble(argName, Double.MAX_VALUE) != Double.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Double.parseDouble(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -1850,11 +2735,30 @@ public class Argsx {
     }
 
 
+    public static boolean readBooleanArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null)
+            throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+        boolean value = arguments.getBoolean(argName, false);
+        if (value || !arguments.getBoolean(argName, true)) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Boolean.parseBoolean(stringValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static boolean readBooleanArgOr(@NonNull Fragment fragment, @NonNull String argName, boolean defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         boolean value = arguments.getBoolean(argName, false);
-        if (value || !arguments.getBoolean(argName, true)){
+        if (value || !arguments.getBoolean(argName, true)) {
             return value;
         }
         String stringValue = arguments.getString(argName);
@@ -1866,6 +2770,25 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Boolean readBooleanArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null) return null;
+        boolean value = arguments.getBoolean(argName, false);
+        if (value || !arguments.getBoolean(argName, true)) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return Boolean.parseBoolean(stringValue);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -1891,11 +2814,30 @@ public class Argsx {
     }
 
 
+    public static char readCharArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null)
+            throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+        char value = arguments.getChar(argName, Character.MIN_VALUE);
+        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return (char) Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
+    }
+
     public static char readCharArgOr(@NonNull Fragment fragment, @NonNull String argName, char defaultValue) {
         Bundle arguments = fragment.getArguments();
         if (arguments == null) return defaultValue;
         char value = arguments.getChar(argName, Character.MIN_VALUE);
-        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE){
+        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE) {
             return value;
         }
         String stringValue = arguments.getString(argName);
@@ -1907,6 +2849,25 @@ public class Argsx {
             }
         }
         return defaultValue;
+    }
+
+    @Nullable
+    public static Character readCharArgOrNull(@NonNull Fragment fragment, @NonNull String argName) {
+        Bundle arguments = fragment.getArguments();
+        if (arguments == null) return null;
+        char value = arguments.getChar(argName, Character.MIN_VALUE);
+        if (value != Character.MIN_VALUE || arguments.getChar(argName, Character.MAX_VALUE) != Character.MAX_VALUE) {
+            return value;
+        }
+        String stringValue = arguments.getString(argName);
+        if (stringValue != null) {
+            try {
+                return (char) Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
 
 
@@ -2313,435 +3274,507 @@ public class Argsx {
     /* ************************************* SupportFragment Args ***************************************** */
 
 
+    public static byte readByteArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readByteArgOrThrow(fragment, fragment.getString(argNameResId));
+    }
+
     public static byte readByteArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, byte defaultValue) {
-        return Argsx.readByteArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readByteArgOr(fragment, fragment.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Byte readByteArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readByteArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static byte[] readByteArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readByteArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readByteArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static byte[] readByteArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull byte[] defaultValue) {
-        return Argsx.readByteArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readByteArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static byte[] readByteArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readByteArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readByteArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
+    public static short readShortArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readShortArgOrThrow(fragment, fragment.getString(argNameResId));
+    }
+
     public static short readShortArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, short defaultValue) {
-        return Argsx.readShortArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readShortArgOr(fragment, fragment.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Short readShortArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readShortArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static short[] readShortArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readShortArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readShortArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static short[] readShortArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull short[] defaultValue) {
-        return Argsx.readShortArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readShortArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static short[] readShortArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readShortArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readShortArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
+    public static int readIntArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readIntArgOrThrow(fragment, fragment.getString(argNameResId));
+    }
+
     public static int readIntArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, int defaultValue) {
-        return Argsx.readIntArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readIntArgOr(fragment, fragment.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Integer readIntArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readIntArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static int[] readIntArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readIntArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readIntArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static int[] readIntArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull int[] defaultValue) {
-        return Argsx.readIntArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readIntArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static int[] readIntArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readIntArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readIntArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static ArrayList<Integer> readIntArrayListArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readIntArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readIntArrayListArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static ArrayList<Integer> readIntArrayListArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<Integer> defaultValue) {
-        return Argsx.readIntArrayListArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readIntArrayListArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static ArrayList<Integer> readIntArrayListArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readIntArrayListArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readIntArrayListArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
+    public static long readLongArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readLongArgOrThrow(fragment, fragment.getString(argNameResId));
+    }
+
     public static long readLongArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, long defaultValue) {
-        return Argsx.readLongArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readLongArgOr(fragment, fragment.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Long readLongArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readLongArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static long[] readLongArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readLongArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readLongArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static long[] readLongArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull long[] defaultValue) {
-        return Argsx.readLongArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readLongArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static long[] readLongArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readLongArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readLongArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
+    public static float readFloatArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readFloatArgOrThrow(fragment, fragment.getString(argNameResId));
+    }
+    
     public static float readFloatArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, float defaultValue) {
-        return Argsx.readFloatArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readFloatArgOr(fragment, fragment.getString(argNameResId), defaultValue);
+    }
+    
+    @Nullable
+    public static Float readFloatArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readFloatArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static float[] readFloatArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readFloatArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readFloatArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static float[] readFloatArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull float[] defaultValue) {
-        return Argsx.readFloatArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readFloatArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static float[] readFloatArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readFloatArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readFloatArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
+    public static double readDoubleArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readDoubleArgOrThrow(fragment, fragment.getString(argNameResId));
+    }
+
     public static double readDoubleArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, double defaultValue) {
-        return Argsx.readDoubleArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readDoubleArgOr(fragment, fragment.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Double readDoubleArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readDoubleArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static double[] readDoubleArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readDoubleArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readDoubleArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static double[] readDoubleArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull double[] defaultValue) {
-        return Argsx.readDoubleArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readDoubleArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static double[] readDoubleArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readDoubleArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readDoubleArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
+    public static boolean readBooleanArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readBooleanArgOrThrow(fragment, fragment.getString(argNameResId));
+    }
+
     public static boolean readBooleanArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, boolean defaultValue) {
-        return Argsx.readBooleanArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readBooleanArgOr(fragment, fragment.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Boolean readBooleanArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readBooleanArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static boolean[] readBooleanArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBooleanArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readBooleanArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static boolean[] readBooleanArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull boolean[] defaultValue) {
-        return Argsx.readBooleanArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readBooleanArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static boolean[] readBooleanArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBooleanArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readBooleanArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
+    public static char readCharArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharArgOrThrow(fragment, fragment.getString(argNameResId));
+    }
+
     public static char readCharArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, char defaultValue) {
-        return Argsx.readCharArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readCharArgOr(fragment, fragment.getString(argNameResId), defaultValue);
+    }
+
+    @Nullable
+    public static Character readCharArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static char[] readCharArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readCharArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static char[] readCharArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull char[] defaultValue) {
-        return Argsx.readCharArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readCharArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static char[] readCharArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readCharArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static CharSequence readCharSequenceArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readCharSequenceArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static CharSequence readCharSequenceArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull CharSequence defaultValue) {
-        return Argsx.readCharSequenceArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readCharSequenceArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static CharSequence readCharSequenceArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readCharSequenceArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static CharSequence[] readCharSequenceArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readCharSequenceArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static CharSequence[] readCharSequenceArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull CharSequence[] defaultValue) {
-        return Argsx.readCharSequenceArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readCharSequenceArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static CharSequence[] readCharSequenceArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readCharSequenceArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static ArrayList<CharSequence> readCharSequenceArrayListArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readCharSequenceArrayListArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static ArrayList<CharSequence> readCharSequenceArrayListArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<CharSequence> defaultValue) {
-        return Argsx.readCharSequenceArrayListArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readCharSequenceArrayListArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static ArrayList<CharSequence> readCharSequenceArrayListArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayListArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readCharSequenceArrayListArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static String readStringArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readStringArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static String readStringArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull String defaultValue) {
-        return Argsx.readStringArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readStringArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static String readStringArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readStringArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static String[] readStringArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readStringArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static String[] readStringArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull String[] defaultValue) {
-        return Argsx.readStringArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readStringArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static String[] readStringArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readStringArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static ArrayList<String> readStringArrayListArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readStringArrayListArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static ArrayList<String> readStringArrayListArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<String> defaultValue) {
-        return Argsx.readStringArrayListArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readStringArrayListArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static ArrayList<String> readStringArrayListArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArrayListArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readStringArrayListArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static <V extends Parcelable> V readParcelableArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readParcelableArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static <V extends Parcelable> V readParcelableArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull V defaultValue) {
-        return Argsx.readParcelableArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readParcelableArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static <V extends Parcelable> V readParcelableArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readParcelableArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static <V extends Parcelable> V[] readParcelableArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readParcelableArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static <V extends Parcelable> V[] readParcelableArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull V[] defaultValue) {
-        return Argsx.readParcelableArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readParcelableArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static <V extends Parcelable> V[] readParcelableArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readParcelableArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readParcelableArrayListArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull ArrayList<V> defaultValue) {
-        return Argsx.readParcelableArrayListArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readParcelableArrayListArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayListArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readParcelableArrayListArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSparseParcelableArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readSparseParcelableArrayArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull SparseArray<V> defaultValue) {
-        return Argsx.readSparseParcelableArrayArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readSparseParcelableArrayArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSparseParcelableArrayArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readSparseParcelableArrayArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static <V extends Serializable> V readSerializableArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSerializableArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readSerializableArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static <V extends Serializable> V readSerializableArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull V defaultValue) {
-        return Argsx.readSerializableArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readSerializableArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static <V extends Serializable> V readSerializableArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSerializableArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readSerializableArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     public static Bundle readBundleArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBundleArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readBundleArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     public static Bundle readBundleArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull Bundle defaultValue) {
-        return Argsx.readBundleArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readBundleArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     public static Bundle readBundleArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBundleArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readBundleArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static IBinder readBinderArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBinderArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readBinderArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static IBinder readBinderArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull IBinder defaultValue) {
-        return Argsx.readBinderArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readBinderArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     public static IBinder readBinderArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBinderArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readBinderArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public static Size readSizeArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSizeArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readSizeArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public static Size readSizeArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull Size defaultValue) {
-        return Argsx.readSizeArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readSizeArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public static Size readSizeArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSizeArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readSizeArgOrNull(fragment, fragment.getString(argNameResId));
     }
 
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public static SizeF readSizeFArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSizeFArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readSizeFArgOrThrow(fragment, fragment.getString(argNameResId));
     }
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public static SizeF readSizeFArgOr(@NonNull Fragment fragment, @StringRes int argNameResId, @NonNull SizeF defaultValue) {
-        return Argsx.readSizeFArgOr(fragment, fragment.getResources().getString(argNameResId), defaultValue);
+        return Argsx.readSizeFArgOr(fragment, fragment.getString(argNameResId), defaultValue);
     }
 
     @Nullable
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     public static SizeF readSizeFArgOrNull(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSizeFArgOrNull(fragment, fragment.getResources().getString(argNameResId));
+        return Argsx.readSizeFArgOrNull(fragment, fragment.getString(argNameResId));
     }
 }

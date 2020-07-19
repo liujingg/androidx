@@ -93,8 +93,14 @@ class OptionalArgLazy<in REF, out OUT>(private val initializer: (REF, KProperty<
 /* ************************************* Activity Intent Arg ***************************************** */
 
 
+fun Activity.bindByteArgOrThrow(argName: String): ReadOnlyProperty<Activity, Byte> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArgOrThrow(argName) }
+
 fun Activity.bindByteArgOr(argName: String, defaultValue: Byte = 0.toByte()): ReadOnlyProperty<Activity, Byte> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArgOr(argName, defaultValue) }
+
+fun Activity.bindByteArgOrNull(argName: String): ReadOnlyProperty<Activity, Byte?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArgOrNull(argName) }
 
 
 fun Activity.bindByteArrayArgOrThrow(argName: String): ReadOnlyProperty<Activity, ByteArray> =
@@ -107,8 +113,14 @@ fun Activity.bindByteArrayArgOrNull(argName: String): ReadOnlyProperty<Activity,
         OptionalArgLazy { _, _: KProperty<*> -> this.readByteArrayArgOrNull(argName) }
 
 
+fun Activity.bindShortArgOrThrow(argName: String): ReadOnlyProperty<Activity, Short> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArgOrThrow(argName) }
+
 fun Activity.bindShortArgOr(argName: String, defaultValue: Short = 0.toShort()): ReadOnlyProperty<Activity, Short> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArgOr(argName, defaultValue) }
+
+fun Activity.bindShortArgOrNull(argName: String): ReadOnlyProperty<Activity, Short?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArgOrNull(argName) }
 
 
 fun Activity.bindShortArrayArgOrThrow(argName: String): ReadOnlyProperty<Activity, ShortArray> =
@@ -121,8 +133,14 @@ fun Activity.bindShortArrayArgOrNull(argName: String): ReadOnlyProperty<Activity
         OptionalArgLazy { _, _: KProperty<*> -> this.readShortArrayArgOrNull(argName) }
 
 
+fun Activity.bindIntArgOrThrow(argName: String): ReadOnlyProperty<Activity, Int> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArgOrThrow(argName) }
+
 fun Activity.bindIntArgOr(argName: String, defaultValue: Int = 0): ReadOnlyProperty<Activity, Int> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArgOr(argName, defaultValue) }
+
+fun Activity.bindIntArgOrNull(argName: String): ReadOnlyProperty<Activity, Int?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArgOrNull(argName) }
 
 
 fun Activity.bindIntArrayArgOrThrow(argName: String): ReadOnlyProperty<Activity, IntArray> =
@@ -145,8 +163,14 @@ fun Activity.bindIntArrayListArgOrNull(argName: String): ReadOnlyProperty<Activi
         OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayListArgOrNull(argName) }
 
 
+fun Activity.bindLongArgOrThrow(argName: String): ReadOnlyProperty<Activity, Long> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArgOrThrow(argName) }
+
 fun Activity.bindLongArgOr(argName: String, defaultValue: Long = 0L): ReadOnlyProperty<Activity, Long> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArgOr(argName, defaultValue) }
+
+fun Activity.bindLongArgOrNull(argName: String): ReadOnlyProperty<Activity, Long?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArgOrNull(argName) }
 
 
 fun Activity.bindLongArrayArgOrThrow(argName: String): ReadOnlyProperty<Activity, LongArray> =
@@ -159,8 +183,14 @@ fun Activity.bindLongArrayArgOrNull(argName: String): ReadOnlyProperty<Activity,
         OptionalArgLazy { _, _: KProperty<*> -> this.readLongArrayArgOrNull(argName) }
 
 
+fun Activity.bindFloatArgOrThrow(argName: String): ReadOnlyProperty<Activity, Float> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArgOrThrow(argName) }
+
 fun Activity.bindFloatArgOr(argName: String, defaultValue: Float = 0.toFloat()): ReadOnlyProperty<Activity, Float> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArgOr(argName, defaultValue) }
+
+fun Activity.bindFloatArgOrNull(argName: String): ReadOnlyProperty<Activity, Float?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArgOrNull(argName) }
 
 
 fun Activity.bindFloatArrayArgOrThrow(argName: String): ReadOnlyProperty<Activity, FloatArray> =
@@ -173,8 +203,14 @@ fun Activity.bindFloatArrayArgOrNull(argName: String): ReadOnlyProperty<Activity
         OptionalArgLazy { _, _: KProperty<*> -> this.readFloatArrayArgOrNull(argName) }
 
 
+fun Activity.bindDoubleArgOrThrow(argName: String): ReadOnlyProperty<Activity, Double> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArgOrThrow(argName) }
+
 fun Activity.bindDoubleArgOr(argName: String, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<Activity, Double> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArgOr(argName, defaultValue) }
+
+fun Activity.bindDoubleArgOrNull(argName: String): ReadOnlyProperty<Activity, Double?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArgOrNull(argName) }
 
 
 fun Activity.bindDoubleArrayArgOrThrow(argName: String): ReadOnlyProperty<Activity, DoubleArray> =
@@ -187,8 +223,14 @@ fun Activity.bindDoubleArrayArgOrNull(argName: String): ReadOnlyProperty<Activit
         OptionalArgLazy { _, _: KProperty<*> -> this.readDoubleArrayArgOrNull(argName) }
 
 
+fun Activity.bindBooleanArgOrThrow(argName: String): ReadOnlyProperty<Activity, Boolean> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArgOrThrow(argName) }
+
 fun Activity.bindBooleanArgOr(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<Activity, Boolean> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArgOr(argName, defaultValue) }
+
+fun Activity.bindBooleanArgOrNull(argName: String): ReadOnlyProperty<Activity, Boolean?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArgOrNull(argName) }
 
 
 fun Activity.bindBooleanArrayArgOrThrow(argName: String): ReadOnlyProperty<Activity, BooleanArray> =
@@ -201,8 +243,14 @@ fun Activity.bindBooleanArrayArgOrNull(argName: String): ReadOnlyProperty<Activi
         OptionalArgLazy { _, _: KProperty<*> -> this.readBooleanArrayArgOrNull(argName) }
 
 
+fun Activity.bindCharArgOrThrow(argName: String): ReadOnlyProperty<Activity, Char> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArgOrThrow(argName) }
+
 fun Activity.bindCharArgOr(argName: String, defaultValue: Char = 0.toChar()): ReadOnlyProperty<Activity, Char> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArgOr(argName, defaultValue) }
+
+fun Activity.bindCharArgOrNull(argName: String): ReadOnlyProperty<Activity, Char?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArgOrNull(argName) }
 
 
 fun Activity.bindCharArrayArgOrThrow(argName: String): ReadOnlyProperty<Activity, CharArray> =
@@ -344,8 +392,14 @@ fun Activity.bindExtrasArgOrNull(): ReadOnlyProperty<Activity, Bundle?> =
 /* ************************************* Activity Intent Arg ***************************************** */
 
 
+fun Activity.bindByteArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Byte> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArgOrThrow(argNameResId) }
+
 fun Activity.bindByteArgOr(@StringRes argNameResId: Int, defaultValue: Byte = 0.toByte()): ReadOnlyProperty<Activity, Byte> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindByteArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Byte?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArgOrNull(argNameResId) }
 
 
 fun Activity.bindByteArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, ByteArray> =
@@ -358,8 +412,14 @@ fun Activity.bindByteArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyPrope
         OptionalArgLazy { _, _: KProperty<*> -> this.readByteArrayArgOrNull(argNameResId) }
 
 
+fun Activity.bindShortArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Short> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArgOrThrow(argNameResId) }
+
 fun Activity.bindShortArgOr(@StringRes argNameResId: Int, defaultValue: Short = 0.toShort()): ReadOnlyProperty<Activity, Short> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindShortArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Short?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArgOrNull(argNameResId) }
 
 
 fun Activity.bindShortArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, ShortArray> =
@@ -372,8 +432,14 @@ fun Activity.bindShortArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProp
         OptionalArgLazy { _, _: KProperty<*> -> this.readShortArrayArgOrNull(argNameResId) }
 
 
+fun Activity.bindIntArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Int> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArgOrThrow(argNameResId) }
+
 fun Activity.bindIntArgOr(@StringRes argNameResId: Int, defaultValue: Int = 0): ReadOnlyProperty<Activity, Int> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindIntArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Int?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArgOrNull(argNameResId) }
 
 
 fun Activity.bindIntArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, IntArray> =
@@ -396,8 +462,14 @@ fun Activity.bindIntArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyPr
         OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayListArgOrNull(argNameResId) }
 
 
+fun Activity.bindLongArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Long> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArgOrThrow(argNameResId) }
+
 fun Activity.bindLongArgOr(@StringRes argNameResId: Int, defaultValue: Long = 0L): ReadOnlyProperty<Activity, Long> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindLongArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Long?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArgOrNull(argNameResId) }
 
 
 fun Activity.bindLongArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, LongArray> =
@@ -410,8 +482,14 @@ fun Activity.bindLongArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyPrope
         OptionalArgLazy { _, _: KProperty<*> -> this.readLongArrayArgOrNull(argNameResId) }
 
 
+fun Activity.bindFloatArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Float> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArgOrThrow(argNameResId) }
+
 fun Activity.bindFloatArgOr(@StringRes argNameResId: Int, defaultValue: Float = 0.toFloat()): ReadOnlyProperty<Activity, Float> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindFloatArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Float?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArgOrNull(argNameResId) }
 
 
 fun Activity.bindFloatArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, FloatArray> =
@@ -424,8 +502,14 @@ fun Activity.bindFloatArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProp
         OptionalArgLazy { _, _: KProperty<*> -> this.readFloatArrayArgOrNull(argNameResId) }
 
 
+fun Activity.bindDoubleArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Double> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArgOrThrow(argNameResId) }
+
 fun Activity.bindDoubleArgOr(@StringRes argNameResId: Int, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<Activity, Double> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindDoubleArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Double?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArgOrNull(argNameResId) }
 
 
 fun Activity.bindDoubleArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, DoubleArray> =
@@ -438,8 +522,14 @@ fun Activity.bindDoubleArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyPro
         OptionalArgLazy { _, _: KProperty<*> -> this.readDoubleArrayArgOrNull(argNameResId) }
 
 
+fun Activity.bindBooleanArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Boolean> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArgOrThrow(argNameResId) }
+
 fun Activity.bindBooleanArgOr(@StringRes argNameResId: Int, defaultValue: Boolean = false): ReadOnlyProperty<Activity, Boolean> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindBooleanArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Boolean?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArgOrNull(argNameResId) }
 
 
 fun Activity.bindBooleanArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, BooleanArray> =
@@ -452,8 +542,14 @@ fun Activity.bindBooleanArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyPr
         OptionalArgLazy { _, _: KProperty<*> -> this.readBooleanArrayArgOrNull(argNameResId) }
 
 
+fun Activity.bindCharArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Char> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArgOrThrow(argNameResId) }
+
 fun Activity.bindCharArgOr(@StringRes argNameResId: Int, defaultValue: Char = 0.toChar()): ReadOnlyProperty<Activity, Char> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindCharArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Char?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArgOrNull(argNameResId) }
 
 
 fun Activity.bindCharArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, CharArray> =
@@ -585,26 +681,75 @@ fun Activity.bindBundleArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty
 /* ************************************* Activity Intent Uri Arg ***************************************** */
 
 
+fun Activity.bindByteIntentUriArgOrThrow(argName: String): ReadOnlyProperty<Activity, Byte> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteIntentUriArgOrThrow(argName) }
+
 fun Activity.bindByteIntentUriArgOr(argName: String, defaultValue: Byte): ReadOnlyProperty<Activity, Byte> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readByteIntentUriArgOr(argName, defaultValue) }
+
+fun Activity.bindByteIntentUriArgOrNull(argName: String): ReadOnlyProperty<Activity, Byte?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteIntentUriArgOrNull(argName) }
+
+
+fun Activity.bindShortIntentUriArgOrThrow(argName: String): ReadOnlyProperty<Activity, Short> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortIntentUriArgOrThrow(argName) }
 
 fun Activity.bindShortIntentUriArgOr(argName: String, defaultValue: Short): ReadOnlyProperty<Activity, Short> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readShortIntentUriArgOr(argName, defaultValue) }
 
+fun Activity.bindShortIntentUriArgOrNull(argName: String): ReadOnlyProperty<Activity, Short?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortIntentUriArgOrNull(argName) }
+
+
+fun Activity.bindIntIntentUriArgOrThrow(argName: String): ReadOnlyProperty<Activity, Int> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntIntentUriArgOrThrow(argName) }
+
 fun Activity.bindIntIntentUriArgOr(argName: String, defaultValue: Int): ReadOnlyProperty<Activity, Int> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntIntentUriArgOr(argName, defaultValue) }
+
+fun Activity.bindIntIntentUriArgOrNull(argName: String): ReadOnlyProperty<Activity, Int?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntIntentUriArgOrNull(argName) }
+
+
+fun Activity.bindLongIntentUriArgOrThrow(argName: String): ReadOnlyProperty<Activity, Long> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongIntentUriArgOrThrow(argName) }
 
 fun Activity.bindLongIntentUriArgOr(argName: String, defaultValue: Long): ReadOnlyProperty<Activity, Long> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readLongIntentUriArgOr(argName, defaultValue) }
 
+fun Activity.bindLongIntentUriArgOrNull(argName: String): ReadOnlyProperty<Activity, Long?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongIntentUriArgOrNull(argName) }
+
+
+fun Activity.bindFloatIntentUriArgOrThrow(argName: String): ReadOnlyProperty<Activity, Float> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatIntentUriArgOrThrow(argName) }
+
 fun Activity.bindFloatIntentUriArgOr(argName: String, defaultValue: Float): ReadOnlyProperty<Activity, Float> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatIntentUriArgOr(argName, defaultValue) }
+
+fun Activity.bindFloatIntentUriArgOrNull(argName: String): ReadOnlyProperty<Activity, Float?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatIntentUriArgOrNull(argName) }
+
+
+fun Activity.bindDoubleIntentUriArgOrThrow(argName: String): ReadOnlyProperty<Activity, Double> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleIntentUriArgOrThrow(argName) }
 
 fun Activity.bindDoubleIntentUriArgOr(argName: String, defaultValue: Double): ReadOnlyProperty<Activity, Double> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleIntentUriArgOr(argName, defaultValue) }
 
+fun Activity.bindDoubleIntentUriArgOrNull(argName: String): ReadOnlyProperty<Activity, Double?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleIntentUriArgOrNull(argName) }
+
+
+fun Activity.bindBooleanIntentUriArgOrThrow(argName: String): ReadOnlyProperty<Activity, Boolean> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanIntentUriArgOrThrow(argName) }
+
 fun Activity.bindBooleanIntentUriArgOr(argName: String, defaultValue: Boolean): ReadOnlyProperty<Activity, Boolean> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanIntentUriArgOr(argName, defaultValue) }
+
+fun Activity.bindBooleanIntentUriArgOrNull(argName: String): ReadOnlyProperty<Activity, Boolean?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanIntentUriArgOrNull(argName) }
+
 
 fun Activity.bindStringIntentUriArgOrThrow(argName: String): ReadOnlyProperty<Activity, String> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readStringIntentUriArgOrThrow(argName) }
@@ -616,26 +761,75 @@ fun Activity.bindStringIntentUriArgOrNull(argName: String): ReadOnlyProperty<Act
         OptionalArgLazy { _, _: KProperty<*> -> this.readStringIntentUriArgOrNull(argName) }
 
 
+fun Activity.bindByteIntentUriArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Byte> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteIntentUriArgOrThrow(argNameResId) }
+
 fun Activity.bindByteIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Byte): ReadOnlyProperty<Activity, Byte> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteIntentUriArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindByteIntentUriArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Byte?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteIntentUriArgOrNull(argNameResId) }
+
+
+fun Activity.bindShortIntentUriArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Short> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortIntentUriArgOrThrow(argNameResId) }
 
 fun Activity.bindShortIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Short): ReadOnlyProperty<Activity, Short> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortIntentUriArgOr(argNameResId, defaultValue) }
 
+fun Activity.bindShortIntentUriArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Short?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortIntentUriArgOrNull(argNameResId) }
+
+
+fun Activity.bindIntIntentUriArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Int> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntIntentUriArgOrThrow(argNameResId) }
+
 fun Activity.bindIntIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Int): ReadOnlyProperty<Activity, Int> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntIntentUriArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindIntIntentUriArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Int?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntIntentUriArgOrNull(argNameResId) }
+
+
+fun Activity.bindLongIntentUriArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Long> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongIntentUriArgOrThrow(argNameResId) }
 
 fun Activity.bindLongIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Long): ReadOnlyProperty<Activity, Long> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongIntentUriArgOr(argNameResId, defaultValue) }
 
+fun Activity.bindLongIntentUriArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Long?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongIntentUriArgOrNull(argNameResId) }
+
+
+fun Activity.bindFloatIntentUriArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Float> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatIntentUriArgOrThrow(argNameResId) }
+
 fun Activity.bindFloatIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Float): ReadOnlyProperty<Activity, Float> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatIntentUriArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindFloatIntentUriArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Float?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatIntentUriArgOrNull(argNameResId) }
+
+
+fun Activity.bindDoubleIntentUriArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Double> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleIntentUriArgOrThrow(argNameResId) }
 
 fun Activity.bindDoubleIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Double): ReadOnlyProperty<Activity, Double> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleIntentUriArgOr(argNameResId, defaultValue) }
 
+fun Activity.bindDoubleIntentUriArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Double?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleIntentUriArgOrNull(argNameResId) }
+
+
+fun Activity.bindBooleanIntentUriArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Boolean> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanIntentUriArgOrThrow(argNameResId) }
+
 fun Activity.bindBooleanIntentUriArgOr(@StringRes argNameResId: Int, defaultValue: Boolean): ReadOnlyProperty<Activity, Boolean> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanIntentUriArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindBooleanIntentUriArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Boolean?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanIntentUriArgOrNull(argNameResId) }
+
 
 fun Activity.bindStringIntentUriArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, String> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringIntentUriArgOrThrow(argNameResId) }
@@ -813,26 +1007,75 @@ fun Activity.bindStringUriArgOrNull(@StringRes argNameResId: Int): ReadOnlyPrope
 /* ************************************* Activity Uri Intent Arg ***************************************** */
 
 
+fun Activity.bindByteUriIntentArgOrThrow(argName: String): ReadOnlyProperty<Activity, Byte> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteUriIntentArgOrThrow(argName) }
+
 fun Activity.bindByteUriIntentArgOr(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<Activity, Byte> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readByteUriIntentArgOr(argName, defaultValue) }
+
+fun Activity.bindByteUriIntentArgOrNull(argName: String): ReadOnlyProperty<Activity, Byte?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteUriIntentArgOrNull(argName) }
+
+
+fun Activity.bindShortUriIntentArgOrThrow(argName: String): ReadOnlyProperty<Activity, Short> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortUriIntentArgOrThrow(argName) }
 
 fun Activity.bindShortUriIntentArgOr(argName: String, defaultValue: Short = 0): ReadOnlyProperty<Activity, Short> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readShortUriIntentArgOr(argName, defaultValue) }
 
+fun Activity.bindShortUriIntentArgOrNull(argName: String): ReadOnlyProperty<Activity, Short?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortUriIntentArgOrNull(argName) }
+
+
+fun Activity.bindIntUriIntentArgOrThrow(argName: String): ReadOnlyProperty<Activity, Int> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntUriIntentArgOrThrow(argName) }
+
 fun Activity.bindIntUriIntentArgOr(argName: String, defaultValue: Int = 0): ReadOnlyProperty<Activity, Int> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntUriIntentArgOr(argName, defaultValue) }
+
+fun Activity.bindIntUriIntentArgOrNull(argName: String): ReadOnlyProperty<Activity, Int?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntUriIntentArgOrNull(argName) }
+
+
+fun Activity.bindLongUriIntentArgOrThrow(argName: String): ReadOnlyProperty<Activity, Long> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongUriIntentArgOrThrow(argName) }
 
 fun Activity.bindLongUriIntentArgOr(argName: String, defaultValue: Long = 0): ReadOnlyProperty<Activity, Long> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readLongUriIntentArgOr(argName, defaultValue) }
 
+fun Activity.bindLongUriIntentArgOrNull(argName: String): ReadOnlyProperty<Activity, Long> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongUriIntentArgOrNull(argName) }
+
+
+fun Activity.bindFloatUriIntentArgOrThrow(argName: String): ReadOnlyProperty<Activity, Float> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatUriIntentArgOrThrow(argName) }
+
 fun Activity.bindFloatUriIntentArgOr(argName: String, defaultValue: Float): ReadOnlyProperty<Activity, Float> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatUriIntentArgOr(argName, defaultValue) }
+
+fun Activity.bindFloatUriIntentArgOrNull(argName: String): ReadOnlyProperty<Activity, Float?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatUriIntentArgOrNull(argName) }
+
+
+fun Activity.bindDoubleUriIntentArgOrThrow(argName: String): ReadOnlyProperty<Activity, Double> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleUriIntentArgOrThrow(argName) }
 
 fun Activity.bindDoubleUriIntentArgOr(argName: String, defaultValue: Double): ReadOnlyProperty<Activity, Double> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleUriIntentArgOr(argName, defaultValue) }
 
+fun Activity.bindDoubleUriIntentArgOrNull(argName: String): ReadOnlyProperty<Activity, Double?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleUriIntentArgOrNull(argName) }
+
+
+fun Activity.bindBooleanUriIntentArgOrThrow(argName: String): ReadOnlyProperty<Activity, Boolean> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanUriIntentArgOrThrow(argName) }
+
 fun Activity.bindBooleanUriIntentArgOr(argName: String, defaultValue: Boolean): ReadOnlyProperty<Activity, Boolean> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanUriIntentArgOr(argName, defaultValue) }
+
+fun Activity.bindBooleanUriIntentArgOrNull(argName: String): ReadOnlyProperty<Activity, Boolean?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanUriIntentArgOrNull(argName) }
+
 
 fun Activity.bindStringUriIntentArgOrThrow(argName: String): ReadOnlyProperty<Activity, String> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readStringUriIntentArgOrThrow(argName) }
@@ -844,26 +1087,75 @@ fun Activity.bindStringUriIntentArgOrNull(argName: String): ReadOnlyProperty<Act
         OptionalArgLazy { _, _: KProperty<*> -> this.readStringUriIntentArgOrNull(argName) }
 
 
+fun Activity.bindByteUriIntentArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Byte> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteUriIntentArgOrThrow(argNameResId) }
+
 fun Activity.bindByteUriIntentArgOr(@StringRes argNameResId: Int, defaultValue: Byte = 0): ReadOnlyProperty<Activity, Byte> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteUriIntentArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindByteUriIntentArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Byte?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteUriIntentArgOrNull(argNameResId) }
+
+
+fun Activity.bindShortUriIntentArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Short> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortUriIntentArgOrThrow(argNameResId) }
 
 fun Activity.bindShortUriIntentArgOr(@StringRes argNameResId: Int, defaultValue: Short = 0): ReadOnlyProperty<Activity, Short> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortUriIntentArgOr(argNameResId, defaultValue) }
 
+fun Activity.bindShortUriIntentArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Short?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortUriIntentArgOrNull(argNameResId) }
+
+
+fun Activity.bindIntUriIntentArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Int> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntUriIntentArgOrThrow(argNameResId) }
+
 fun Activity.bindIntUriIntentArgOr(@StringRes argNameResId: Int, defaultValue: Int = 0): ReadOnlyProperty<Activity, Int> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntUriIntentArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindIntUriIntentArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Int?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntUriIntentArgOrNull(argNameResId) }
+
+
+fun Activity.bindLongUriIntentArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Long> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongUriIntentArgOrThrow(argNameResId) }
 
 fun Activity.bindLongUriIntentArgOr(@StringRes argNameResId: Int, defaultValue: Long = 0): ReadOnlyProperty<Activity, Long> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongUriIntentArgOr(argNameResId, defaultValue) }
 
+fun Activity.bindLongUriIntentArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Long?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongUriIntentArgOrNull(argNameResId) }
+
+
+fun Activity.bindFloatUriIntentArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Float> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatUriIntentArgOrThrow(argNameResId) }
+
 fun Activity.bindFloatUriIntentArgOr(@StringRes argNameResId: Int, defaultValue: Float): ReadOnlyProperty<Activity, Float> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatUriIntentArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindFloatUriIntentArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Float?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatUriIntentArgOrNull(argNameResId) }
+
+
+fun Activity.bindDoubleUriIntentArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Double> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleUriIntentArgOrThrow(argNameResId) }
 
 fun Activity.bindDoubleUriIntentArgOr(@StringRes argNameResId: Int, defaultValue: Double): ReadOnlyProperty<Activity, Double> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleUriIntentArgOr(argNameResId, defaultValue) }
 
+fun Activity.bindDoubleUriIntentArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Double?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleUriIntentArgOrNull(argNameResId) }
+
+
+fun Activity.bindBooleanUriIntentArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Boolean> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanUriIntentArgOrThrow(argNameResId) }
+
 fun Activity.bindBooleanUriIntentArgOr(@StringRes argNameResId: Int, defaultValue: Boolean): ReadOnlyProperty<Activity, Boolean> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanUriIntentArgOr(argNameResId, defaultValue) }
+
+fun Activity.bindBooleanUriIntentArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, Boolean?> =
+        ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanUriIntentArgOrNull(argNameResId) }
+
 
 fun Activity.bindStringUriIntentArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Activity, String> =
         ActivityArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringUriIntentArgOrThrow(argNameResId) }
@@ -878,8 +1170,14 @@ fun Activity.bindStringUriIntentArgOrNull(@StringRes argNameResId: Int): ReadOnl
 /* ************************************* SupportFragment Arg ***************************************** */
 
 
+fun Fragment.bindByteArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Byte> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArgOrThrow(argName) }
+
 fun Fragment.bindByteArgOr(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<Fragment, Byte> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArgOr(argName, defaultValue) }
+
+fun Fragment.bindByteArgOrNull(argName: String): ReadOnlyProperty<Fragment, Byte?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArgOrNull(argName) }
 
 
 fun Fragment.bindByteArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, ByteArray> =
@@ -892,8 +1190,14 @@ fun Fragment.bindByteArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment,
         OptionalArgLazy { _, _: KProperty<*> -> this.readByteArrayArgOrNull(argName) }
 
 
+fun Fragment.bindShortArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Short?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArgOrThrow(argName) }
+
 fun Fragment.bindShortArgOr(argName: String, defaultValue: Short = 0): ReadOnlyProperty<Fragment, Short> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArgOr(argName, defaultValue) }
+
+fun Fragment.bindShortArgOrNull(argName: String): ReadOnlyProperty<Fragment, Short> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArgOrNull(argName) }
 
 
 fun Fragment.bindShortArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, ShortArray> =
@@ -906,8 +1210,14 @@ fun Fragment.bindShortArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment
         OptionalArgLazy { _, _: KProperty<*> -> this.readShortArrayArgOrNull(argName) }
 
 
+fun Fragment.bindIntArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Int> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArgOrThrow(argName) }
+
 fun Fragment.bindIntArgOr(argName: String, defaultValue: Int = 0): ReadOnlyProperty<Fragment, Int> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArgOr(argName, defaultValue) }
+
+fun Fragment.bindIntArgOrNull(argName: String): ReadOnlyProperty<Fragment, Int?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArgOrNull(argName) }
 
 
 fun Fragment.bindIntArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, IntArray> =
@@ -930,8 +1240,14 @@ fun Fragment.bindIntArrayListArgOrNull(argName: String): ReadOnlyProperty<Fragme
         OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayListArgOrNull(argName) }
 
 
+fun Fragment.bindLongArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Long> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArgOrThrow(argName) }
+
 fun Fragment.bindLongArgOr(argName: String, defaultValue: Long = 0L): ReadOnlyProperty<Fragment, Long> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArgOr(argName, defaultValue) }
+
+fun Fragment.bindLongArgOrNull(argName: String): ReadOnlyProperty<Fragment, Long?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArgOrNull(argName) }
 
 
 fun Fragment.bindLongArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, LongArray> =
@@ -944,8 +1260,14 @@ fun Fragment.bindLongArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment,
         OptionalArgLazy { _, _: KProperty<*> -> this.readLongArrayArgOrNull(argName) }
 
 
+fun Fragment.bindFloatArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Float> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArgOrThrow(argName) }
+
 fun Fragment.bindFloatArgOr(argName: String, defaultValue: Float = 0f): ReadOnlyProperty<Fragment, Float> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArgOr(argName, defaultValue) }
+
+fun Fragment.bindFloatArgOrNull(argName: String): ReadOnlyProperty<Fragment, Float?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArgOrNull(argName) }
 
 
 fun Fragment.bindFloatArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, FloatArray> =
@@ -958,8 +1280,14 @@ fun Fragment.bindFloatArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment
         OptionalArgLazy { _, _: KProperty<*> -> this.readFloatArrayArgOrNull(argName) }
 
 
+fun Fragment.bindDoubleArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Double> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArgOrThrow(argName) }
+
 fun Fragment.bindDoubleArgOr(argName: String, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<Fragment, Double> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArgOr(argName, defaultValue) }
+
+fun Fragment.bindDoubleArgOrNull(argName: String): ReadOnlyProperty<Fragment, Double?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArgOrNull(argName) }
 
 
 fun Fragment.bindDoubleArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, DoubleArray> =
@@ -972,8 +1300,14 @@ fun Fragment.bindDoubleArrayArgOrNull(argName: String): ReadOnlyProperty<Fragmen
         OptionalArgLazy { _, _: KProperty<*> -> this.readDoubleArrayArgOrNull(argName) }
 
 
+fun Fragment.bindBooleanArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Boolean> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArgOrThrow(argName) }
+
 fun Fragment.bindBooleanArgOr(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<Fragment, Boolean> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArgOr(argName, defaultValue) }
+
+fun Fragment.bindBooleanArgOrNull(argName: String): ReadOnlyProperty<Fragment, Boolean?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArgOrNull(argName) }
 
 
 fun Fragment.bindBooleanArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, BooleanArray> =
@@ -986,8 +1320,14 @@ fun Fragment.bindBooleanArrayArgOrNull(argName: String): ReadOnlyProperty<Fragme
         OptionalArgLazy { _, _: KProperty<*> -> this.readBooleanArrayArgOrNull(argName) }
 
 
+fun Fragment.bindCharArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Char> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArgOrThrow(argName) }
+
 fun Fragment.bindCharArgOr(argName: String, defaultValue: Char = 0.toChar()): ReadOnlyProperty<Fragment, Char> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArgOr(argName, defaultValue) }
+
+fun Fragment.bindCharArgOrNull(argName: String): ReadOnlyProperty<Fragment, Char?> =
+        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArgOrNull(argName) }
 
 
 fun Fragment.bindCharArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, CharArray> =
@@ -1168,8 +1508,14 @@ fun Fragment.bindSizeFArgOrNull(argName: String): ReadOnlyProperty<Fragment, Siz
 /* ************************************* SupportFragment Arg ***************************************** */
 
 
+fun Fragment.bindByteArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Byte> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArgOrThrow(argNameResId) }
+
 fun Fragment.bindByteArgOr(@StringRes argNameResId: Int, defaultValue: Byte = 0): ReadOnlyProperty<Fragment, Byte> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArgOr(argNameResId, defaultValue) }
+
+fun Fragment.bindByteArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Byte?> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArgOrNull(argNameResId) }
 
 
 fun Fragment.bindByteArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ByteArray> =
@@ -1182,8 +1528,14 @@ fun Fragment.bindByteArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyPrope
         OptionalArgLazy { _, _: KProperty<*> -> this.readByteArrayArgOrNull(argNameResId) }
 
 
+fun Fragment.bindShortArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Short> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArgOrThrow(argNameResId) }
+
 fun Fragment.bindShortArgOr(@StringRes argNameResId: Int, defaultValue: Short = 0): ReadOnlyProperty<Fragment, Short> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArgOr(argNameResId, defaultValue) }
+
+fun Fragment.bindShortArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Short?> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArgOrNull(argNameResId) }
 
 
 fun Fragment.bindShortArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ShortArray> =
@@ -1196,8 +1548,14 @@ fun Fragment.bindShortArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProp
         OptionalArgLazy { _, _: KProperty<*> -> this.readShortArrayArgOrNull(argNameResId) }
 
 
+fun Fragment.bindIntArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Int> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArgOrThrow(argNameResId) }
+
 fun Fragment.bindIntArgOr(@StringRes argNameResId: Int, defaultValue: Int = 0): ReadOnlyProperty<Fragment, Int> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArgOr(argNameResId, defaultValue) }
+
+fun Fragment.bindIntArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Int?> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArgOrNull(argNameResId) }
 
 
 fun Fragment.bindIntArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, IntArray> =
@@ -1220,8 +1578,14 @@ fun Fragment.bindIntArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyPr
         OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayListArgOrNull(argNameResId) }
 
 
+fun Fragment.bindLongArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Long> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArgOrThrow(argNameResId) }
+
 fun Fragment.bindLongArgOr(@StringRes argNameResId: Int, defaultValue: Long = 0L): ReadOnlyProperty<Fragment, Long> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArgOr(argNameResId, defaultValue) }
+
+fun Fragment.bindLongArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Long?> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArgOrNull(argNameResId) }
 
 
 fun Fragment.bindLongArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, LongArray> =
@@ -1234,8 +1598,14 @@ fun Fragment.bindLongArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyPrope
         OptionalArgLazy { _, _: KProperty<*> -> this.readLongArrayArgOrNull(argNameResId) }
 
 
+fun Fragment.bindFloatArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Float> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArgOrThrow(argNameResId) }
+
 fun Fragment.bindFloatArgOr(@StringRes argNameResId: Int, defaultValue: Float = 0f): ReadOnlyProperty<Fragment, Float> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArgOr(argNameResId, defaultValue) }
+
+fun Fragment.bindFloatArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Float?> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArgOrNull(argNameResId) }
 
 
 fun Fragment.bindFloatArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, FloatArray> =
@@ -1248,8 +1618,14 @@ fun Fragment.bindFloatArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProp
         OptionalArgLazy { _, _: KProperty<*> -> this.readFloatArrayArgOrNull(argNameResId) }
 
 
+fun Fragment.bindDoubleArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Double> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArgOrThrow(argNameResId) }
+
 fun Fragment.bindDoubleArgOr(@StringRes argNameResId: Int, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<Fragment, Double> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArgOr(argNameResId, defaultValue) }
+
+fun Fragment.bindDoubleArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Double?> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArgOrNull(argNameResId) }
 
 
 fun Fragment.bindDoubleArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, DoubleArray> =
@@ -1262,8 +1638,14 @@ fun Fragment.bindDoubleArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyPro
         OptionalArgLazy { _, _: KProperty<*> -> this.readDoubleArrayArgOrNull(argNameResId) }
 
 
+fun Fragment.bindBooleanArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Boolean> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArgOrThrow(argNameResId) }
+
 fun Fragment.bindBooleanArgOr(@StringRes argNameResId: Int, defaultValue: Boolean = false): ReadOnlyProperty<Fragment, Boolean> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArgOr(argNameResId, defaultValue) }
+
+fun Fragment.bindBooleanArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Boolean?> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArgOrNull(argNameResId) }
 
 
 fun Fragment.bindBooleanArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, BooleanArray> =
@@ -1276,8 +1658,14 @@ fun Fragment.bindBooleanArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyPr
         OptionalArgLazy { _, _: KProperty<*> -> this.readBooleanArrayArgOrNull(argNameResId) }
 
 
+fun Fragment.bindCharArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Char> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArgOrThrow(argNameResId) }
+
 fun Fragment.bindCharArgOr(@StringRes argNameResId: Int, defaultValue: Char = 0.toChar()): ReadOnlyProperty<Fragment, Char> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArgOr(argNameResId, defaultValue) }
+
+fun Fragment.bindCharArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Char?> =
+        SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArgOrNull(argNameResId) }
 
 
 fun Fragment.bindCharArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, CharArray> =
