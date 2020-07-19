@@ -19,12 +19,13 @@ package me.panpf.androidx.test.app;
 import android.Manifest;
 import android.content.Context;
 
+import androidx.test.InstrumentationRegistry;
+import androidx.test.runner.AndroidJUnit4;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import androidx.test.InstrumentationRegistry;
-import androidx.test.runner.AndroidJUnit4;
 import me.panpf.androidx.Androidx;
 import me.panpf.androidx.app.Permissionx;
 import me.panpf.androidx.hardware.Hardwarex;
@@ -42,8 +43,8 @@ public final class PermissionxTest {
     public final void testSingleNoPermission() {
         Context context = InstrumentationRegistry.getContext();
         if (Androidx.isAtLeastM()) {
-            String result = Hardwarex.getDeviceId(context);
-            if ("PermissionDenied".equals(result)) {
+            String result = Hardwarex.getDeviceIdOr(context, "defaultValue");
+            if ("defaultValue".equals(result)) {
                 Assert.assertFalse(Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE));
             } else {
                 Assert.assertTrue(Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE));
@@ -63,9 +64,9 @@ public final class PermissionxTest {
     public final void testMultiNoPermission() {
         Context context = InstrumentationRegistry.getContext();
         if (Androidx.isAtLeastM()) {
-            String deviceIdResult = Hardwarex.getDeviceId(context);
-            String macAddressResult = Hardwarex.getMacAddress(context);
-            if ("PermissionDenied".equals(deviceIdResult) || "PermissionDenied".equals(macAddressResult)) {
+            String deviceIdResult = Hardwarex.getDeviceIdOr(context, "defaultValue");
+            String macAddressResult = Hardwarex.getMacAddressOr(context, "defaultValue");
+            if ("defaultValue".equals(deviceIdResult) || "defaultValue".equals(macAddressResult)) {
                 Assert.assertFalse(Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_WIFI_STATE));
             } else {
                 Assert.assertTrue(Permissionx.isGrantPermissions(context, Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_WIFI_STATE));

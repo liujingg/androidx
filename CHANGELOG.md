@@ -11,6 +11,7 @@
 * change: The name of the method that throws exceptions in Argsx is unified with the suffix'OrThrow'
 * remove: Remove all support for android.app.Fragment
 * new: Argsx basic data types add read\*ArgOrThrow and read\*ArgOrNull methods
+* change: Hardwarex's getPhoneNumber(), getPhoneNumber() and other methods added orThrow, Or, OrNull overload methods
 
 ## v1.0.0-alpha09
 * remove: Remove dependency on javax

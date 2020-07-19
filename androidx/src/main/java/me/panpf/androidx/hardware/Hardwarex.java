@@ -26,6 +26,7 @@ import android.provider.Settings;
 import android.telephony.TelephonyManager;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresPermission;
 
 import java.net.NetworkInterface;
@@ -97,36 +98,120 @@ public class Hardwarex {
     @NonNull
     @SuppressLint({"HardwareIds", "InlinedApi"})
     @RequiresPermission(anyOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
-    public static String getPhoneNumber(@NonNull Context context) {
+    public static String getPhoneNumberOr(@NonNull Context context, @NonNull String defaultValue) {
         try {
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             String value = manager != null ? manager.getLine1Number() : null;
-            return value != null && !value.isEmpty() ? value : "unknown";
-        } catch (Throwable e) {
-            e.printStackTrace(); // todo 不打印异常，并且改为 getPhoneNumberOr 方法，默认只返回正确有效的，并且过滤掉 unknown
-            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : defaultValue;
+        } catch (SecurityException e) {
+            return defaultValue;
+        }
+    }
+
+    @NonNull
+    @SuppressLint({"HardwareIds", "InlinedApi"})
+    @RequiresPermission(anyOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
+    public static String getPhoneNumberOrThrow(@NonNull Context context) {
+        TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String value = manager != null ? manager.getLine1Number() : null;
+        if (value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value)) {
+            return value;
+        }
+        throw new IllegalStateException("Unable to get 'Line1Number' from TELEPHONY_SERVICE");
+    }
+
+    @Nullable
+    @SuppressLint({"HardwareIds", "InlinedApi"})
+    @RequiresPermission(anyOf = {Manifest.permission.READ_PHONE_STATE, Manifest.permission.READ_SMS, Manifest.permission.READ_PHONE_NUMBERS})
+    public static String getPhoneNumberOrNull(@NonNull Context context) {
+        try {
+            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String value = manager != null ? manager.getLine1Number() : null;
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : null;
+        } catch (SecurityException e) {
+            return null;
+        }
+    }
+
+
+    @NonNull
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getDeviceIdOr(@NonNull Context context, @NonNull String defaultValue) {
+        try {
+            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String value = manager != null ? (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? manager.getImei() : manager.getDeviceId()) : null;
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : defaultValue;
+        } catch (SecurityException e) {
+            return defaultValue;
         }
     }
 
     @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getDeviceId(@NonNull Context context) {
+    public static String getDeviceIdOrThrow(@NonNull Context context) {
+        TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String value = manager != null ? (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? manager.getImei() : manager.getDeviceId()) : null;
+        if (value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value)) {
+            return value;
+        }
+        throw new IllegalStateException("Unable to get 'DeviceId' from TELEPHONY_SERVICE");
+    }
+
+    @Nullable
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getDeviceIdOrNull(@NonNull Context context) {
         try {
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             String value = manager != null ? (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? manager.getImei() : manager.getDeviceId()) : null;
-            return value != null && !value.isEmpty() ? value : "unknown";
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : null;
+        } catch (SecurityException e) {
+            return null;
         }
+    }
+
+
+    @NonNull
+    @SuppressLint("HardwareIds")
+    public static String getAndroidIdOr(@NonNull Context context, @NonNull String defaultValue) {
+        String value = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : defaultValue;
     }
 
     @NonNull
     @SuppressLint("HardwareIds")
-    public static String getAndroidId(@NonNull Context context) {
+    public static String getAndroidIdOrThrow(@NonNull Context context) {
         String value = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        return value != null && !value.isEmpty() ? value : "unknown";
+        if (value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value)) {
+            return value;
+        }
+        throw new IllegalStateException("Unable to get 'AndroidId' from Settings");
+    }
+
+    @Nullable
+    @SuppressLint("HardwareIds")
+    public static String getAndroidIdOrNull(@NonNull Context context) {
+        String value = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : null;
+    }
+
+
+    /**
+     * 获取国际移动用户识别码
+     */
+    @NonNull
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getSubscriberIdOr(@NonNull Context context, @NonNull String defaultValue) {
+        try {
+            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String value = manager != null ? manager.getSubscriberId() : null;
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : defaultValue;
+        } catch (SecurityException e) {
+            return defaultValue;
+        }
     }
 
     /**
@@ -135,14 +220,45 @@ public class Hardwarex {
     @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getSubscriberId(@NonNull Context context) {
+    public static String getSubscriberIdOrThrow(@NonNull Context context) {
+        TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String value = manager != null ? manager.getSubscriberId() : null;
+        if (value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value)) {
+            return value;
+        }
+        throw new IllegalStateException("Unable to get 'SubscriberId' from TELEPHONY_SERVICE");
+    }
+
+    /**
+     * 获取国际移动用户识别码
+     */
+    @Nullable
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getSubscriberIdOrNull(@NonNull Context context) {
         try {
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             String value = manager != null ? manager.getSubscriberId() : null;
-            return value != null && !value.isEmpty() ? value : "unknown";
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : null;
+        } catch (SecurityException e) {
+            return null;
+        }
+    }
+
+
+    /**
+     * 获取 SIM 卡序列号
+     */
+    @NonNull
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getSimSerialNumberOr(@NonNull Context context, @NonNull String defaultValue) {
+        try {
+            TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+            String value = manager != null ? manager.getSimSerialNumber() : null;
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : defaultValue;
+        } catch (SecurityException e) {
+            return defaultValue;
         }
     }
 
@@ -152,28 +268,76 @@ public class Hardwarex {
     @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getSimSerialNumber(@NonNull Context context) {
+    public static String getSimSerialNumberOrThrow(@NonNull Context context) {
+        TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String value = manager != null ? manager.getSimSerialNumber() : null;
+        if (value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value)) {
+            return value;
+        }
+        throw new IllegalStateException("Unable to get 'SimSerialNumber' from TELEPHONY_SERVICE");
+    }
+
+    /**
+     * 获取 SIM 卡序列号
+     */
+    @Nullable
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getSimSerialNumberOrNull(@NonNull Context context) {
         try {
             TelephonyManager manager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
             String value = manager != null ? manager.getSimSerialNumber() : null;
-            return value != null && !value.isEmpty() ? value : "unknown";
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : null;
+        } catch (SecurityException e) {
+            return null;
+        }
+    }
+
+
+    @NonNull
+    @SuppressLint({"MissingPermission", "HardwareIds"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getSerialOr(@NonNull String defaultValue) {
+        try {
+            String value = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? Build.getSerial() : Build.SERIAL;
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : defaultValue;
+        } catch (SecurityException e) {
+            return defaultValue;
         }
     }
 
     @NonNull
     @SuppressLint({"MissingPermission", "HardwareIds"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getSerial() {
+    public static String getSerialOrThrow() {
+        String value = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? Build.getSerial() : Build.SERIAL;
+        if (value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value)) {
+            return value;
+        }
+        throw new IllegalStateException("Unable to get 'Serial' from Build");
+    }
+
+    @Nullable
+    @SuppressLint({"MissingPermission", "HardwareIds"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getSerialOrNull() {
         try {
             String value = Build.VERSION.SDK_INT >= Build.VERSION_CODES.O ? Build.getSerial() : Build.SERIAL;
-            return value != null && !value.isEmpty() ? value : "unknown";
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return e instanceof SecurityException ? "PermissionDenied" : "unknown";
+            return value != null && !value.isEmpty() && !"unknown".equalsIgnoreCase(value) ? value : null;
+        } catch (SecurityException e) {
+            return null;
         }
+    }
+
+
+    /**
+     * 获取国际移动设备身份码
+     */
+    @NonNull
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getIMEIOr(@NonNull Context context, @NonNull String defaultValue) {
+        return getDeviceIdOr(context, defaultValue);
     }
 
     /**
@@ -182,8 +346,29 @@ public class Hardwarex {
     @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getIMEI(@NonNull Context context) {
-        return getDeviceId(context);
+    public static String getIMEIOrThrow(@NonNull Context context) {
+        return getDeviceIdOrThrow(context);
+    }
+
+    /**
+     * 获取国际移动设备身份码
+     */
+    @Nullable
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getIMEIOrNull(@NonNull Context context) {
+        return getDeviceIdOrNull(context);
+    }
+
+
+    /**
+     * 获取国际移动用户识别码
+     */
+    @NonNull
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getIMSIOr(@NonNull Context context, @NonNull String defaultValue) {
+        return getSubscriberIdOr(context, defaultValue);
     }
 
     /**
@@ -192,9 +377,20 @@ public class Hardwarex {
     @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
-    public static String getIMSI(@NonNull Context context) {
-        return getSubscriberId(context);
+    public static String getIMSIOrThrow(@NonNull Context context) {
+        return getSubscriberIdOrThrow(context);
     }
+
+    /**
+     * 获取国际移动用户识别码
+     */
+    @Nullable
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.READ_PHONE_STATE)
+    public static String getIMSIOrNull(@NonNull Context context) {
+        return getSubscriberIdOrNull(context);
+    }
+
 
     /**
      * 获取 MAC 地址
@@ -202,7 +398,7 @@ public class Hardwarex {
     @NonNull
     @SuppressLint({"HardwareIds", "MissingPermission"})
     @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
-    public static String getMacAddress(@NonNull Context context) {
+    public static String getMacAddressOr(@NonNull Context context, @NonNull String defaultValue) {
         String macAddress = null;
         try {
             WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
@@ -239,8 +435,18 @@ public class Hardwarex {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            macAddress = e instanceof SecurityException ? "PermissionDenied" : null;
+            macAddress = null;
         }
-        return macAddress != null ? macAddress : "02:00:00:00:00:00";
+        return macAddress != null && !"unknown".equalsIgnoreCase(macAddress) ? macAddress : defaultValue;
+    }
+
+    /**
+     * 获取 MAC 地址
+     */
+    @NonNull
+    @SuppressLint({"HardwareIds", "MissingPermission"})
+    @RequiresPermission(Manifest.permission.ACCESS_WIFI_STATE)
+    public static String getMacAddress(@NonNull Context context) {
+        return getMacAddressOr(context, "02:00:00:00:00:00");
     }
 }

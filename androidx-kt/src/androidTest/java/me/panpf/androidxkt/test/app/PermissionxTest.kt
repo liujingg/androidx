@@ -20,11 +20,9 @@ import android.Manifest
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4
 import me.panpf.androidx.Androidx
-import me.panpf.androidx.Androidx.isAtLeastM
-import me.panpf.androidx.hardware.Hardwarex
 import me.panpf.androidxkt.app.filterDeniedPermissions
 import me.panpf.androidxkt.app.isGrantPermissions
-import me.panpf.androidxkt.hardware.getDeviceId
+import me.panpf.androidxkt.hardware.getDeviceIdOr
 import me.panpf.androidxkt.hardware.getMacAddress
 import org.junit.Assert
 import org.junit.Test
@@ -42,9 +40,9 @@ class PermissionxTest {
     @Test
     fun testSingleNoPermission() {
         val context = InstrumentationRegistry.getContext()
-        if (isAtLeastM()) {
-            val result = Hardwarex.getDeviceId(context)
-            if ("PermissionDenied" == result) {
+        if (Androidx.isAtLeastM()) {
+            val result = context.getDeviceIdOr("defaultValue")
+            if ("defaultValue" == result) {
                 Assert.assertFalse(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE))
             } else {
                 Assert.assertTrue(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE))
@@ -64,9 +62,9 @@ class PermissionxTest {
     fun testMultiNoPermission() {
         val context = InstrumentationRegistry.getContext()
         if (Androidx.isAtLeastM()) {
-            val deviceIdResult = context.getDeviceId()
+            val deviceIdResult = context.getDeviceIdOr("defaultValue")
             val macAddressResult = context.getMacAddress()
-            if ("PermissionDenied" == deviceIdResult || "PermissionDenied" == macAddressResult) {
+            if ("defaultValue" == deviceIdResult || "defaultValue" == macAddressResult) {
                 Assert.assertFalse(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_WIFI_STATE))
             } else {
                 Assert.assertTrue(context.isGrantPermissions(Manifest.permission.READ_PHONE_STATE, Manifest.permission.ACCESS_WIFI_STATE))
