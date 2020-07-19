@@ -92,24 +92,6 @@ public class Dialogx {
     }
 
     /**
-     * Display a progress dialog
-     */
-    @Nullable
-    public static ProgressDialog showProgressDialog(@NonNull android.app.Fragment fragment, @NonNull String message) {
-        Activity activity = fragment.getActivity();
-        return activity != null ? showProgressDialog(activity, message) : null;
-    }
-
-    /**
-     * Display a progress dialog
-     */
-    @Nullable
-    public static ProgressDialog showProgressDialog(@NonNull android.app.Fragment fragment, int messageId) {
-        Activity activity = fragment.getActivity();
-        return activity != null ? showProgressDialog(activity, messageId) : null;
-    }
-
-    /**
      * Get the declared field with the specified name from the specified class
      */
     @NonNull

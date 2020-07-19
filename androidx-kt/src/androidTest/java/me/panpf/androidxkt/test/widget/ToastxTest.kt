@@ -16,7 +16,6 @@
 
 package me.panpf.androidxkt.test.widget
 
-import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import androidx.test.InstrumentationRegistry
@@ -32,9 +31,6 @@ import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
 class ToastxTest {
-
-    @get:Rule
-    val activityRule: ActivityTestRule<TestActivity> = ActivityTestRule<TestActivity>(TestActivity::class.java)
 
     @get:Rule
     val fragmentActivityRule: ActivityTestRule<TestFragmentActivity> = ActivityTestRule<TestFragmentActivity>(TestFragmentActivity::class.java)
@@ -70,21 +66,6 @@ class ToastxTest {
     }
 
     @Test
-    fun testOriginFragmentToast() {
-        val fragment = activityRule.activity.fragment
-
-        fragment.showLongToast("今天是2018年10月18号")
-        fragment.showWithFormatLongToast("今天是%d年%d月%d号", 2018, 10, 18)
-        fragment.showLongToast(R.string.toast_test)
-        fragment.showWithFormatLongToast(R.string.toast_test_tp, 2018, 10, 18)
-
-        fragment.showShortToast("今天是2018年10月18号")
-        fragment.showWithFormatShortToast("今天是%d年%d月%d号", 2018, 10, 18)
-        fragment.showShortToast(R.string.toast_test)
-        fragment.showWithFormatShortToast(R.string.toast_test_tp, 2018, 10, 18)
-    }
-
-    @Test
     fun testViewToast() {
         val view = fragmentActivityRule.activity.view
 
@@ -104,20 +85,6 @@ class ToastxTest {
         InstrumentationRegistry.getContext().inflateLayout(R.layout.view_toast).showLongToastWithSelf()
 
         InstrumentationRegistry.getContext().inflateLayout(R.layout.view_toast).showShortToastWithSelf()
-    }
-
-    class TestActivity : Activity() {
-
-        val fragment: android.app.Fragment
-            get() = Premisex.requireNotNull(fragmentManager.findFragmentById(android.R.id.content))
-
-//        val view: View
-//            get() = findViewById(android.R.id.content)
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            this.fragmentManager.beginTransaction().replace(android.R.id.content, android.app.Fragment()).commit()
-        }
     }
 
     class TestFragmentActivity : androidx.fragment.app.FragmentActivity() {

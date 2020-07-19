@@ -41,7 +41,6 @@ import me.panpf.androidx.app.Argsx;
 import me.panpf.androidx.app.Fragmentx;
 import me.panpf.androidx.os.BundleBuilder;
 import me.panpf.androidx.test.R;
-import me.panpf.androidx.util.ResultRunnable;
 import me.panpf.javax.lang.Stringx;
 import me.panpf.javax.util.Premisex;
 
@@ -67,20 +66,11 @@ public class FragmentxTest {
 
     @Test
     public void testGetApplication() {
-        android.app.Fragment originFragment = activityTestRule.getActivity().getOriginFragment();
         Fragment supportFragment = activityTestRule.getActivity().getSupportFragment();
 
-        Assert.assertNotNull(Fragmentx.getApplication(originFragment));
         Assert.assertNotNull(Fragmentx.getApplication(supportFragment));
 
-        Assert.assertNull(Fragmentx.getApplication(new android.app.Fragment()));
         Assert.assertNull(Fragmentx.getApplication(new Fragment()));
-
-        try {
-            Fragmentx.requireApplication(new android.app.Fragment());
-            Assert.fail();
-        } catch (Exception ignored) {
-        }
 
         try {
             Fragmentx.requireApplication(new Fragment());
@@ -91,73 +81,38 @@ public class FragmentxTest {
 
     @Test
     public void testDestroyed() throws InterruptedException {
-        android.app.Fragment originFragment = activityTestRule.getActivity().getOriginFragment();
         Fragment supportFragment = activityTestRule.getActivity().getSupportFragment();
 
-        Assert.assertFalse(Fragmentx.isDestroyedCompat(originFragment));
         Assert.assertFalse(Fragmentx.isDestroyedCompat(supportFragment));
 
         activityTestRule.finishActivity();
         Thread.sleep(2000);
 
-        Assert.assertTrue(Fragmentx.isDestroyedCompat(originFragment));
         Assert.assertTrue(Fragmentx.isDestroyedCompat(supportFragment));
     }
 
     @Test
     public void testGetImplWithParent() {
-        TestImplOriginFragment originFragment = (TestImplOriginFragment) activityTestRule.getActivity().getOriginFragment();
         TestImplSupportFragment supportFragment = (TestImplSupportFragment) activityTestRule.getActivity().getSupportFragment();
 
-        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(originFragment, ImplTestInterface.class)).getClass(), TestImplOriginFragment.class);
         Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(supportFragment, ImplTestInterface.class)).getClass(), TestImplSupportFragment.class);
 
-        if (Androidx.isAtLeast17()) {
-            Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(originFragment.getChildFragment(), ImplTestInterface.class)).getClass(), TestImplOriginFragment.class);
-        }
         Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(supportFragment.getChildFragment(), ImplTestInterface.class)).getClass(), TestImplSupportFragment.class);
 
-        Androidx.waitRunInUI(new Runnable() {
-            @Override
-            public void run() {
-                activityTestRule.getActivity().convertChildFragment();
-            }
-        });
+        Androidx.waitRunInUI(() -> activityTestRule.getActivity().convertChildFragment());
 
-        TestImplOriginFragment2 originFragment2 = Androidx.waitRunInUIResult(new ResultRunnable<TestImplOriginFragment2>() {
-            @NonNull
-            @Override
-            public TestImplOriginFragment2 run() {
-                return (TestImplOriginFragment2) activityTestRule.getActivity().getOriginFragment();
-            }
-        });
-        TestImplSupportFragment2 supportFragment2 = Androidx.waitRunInUIResult(new ResultRunnable<TestImplSupportFragment2>() {
-            @NonNull
-            @Override
-            public TestImplSupportFragment2 run() {
-                return (TestImplSupportFragment2) activityTestRule.getActivity().getSupportFragment();
-            }
-        });
+        TestImplSupportFragment2 supportFragment2 = Androidx.waitRunInUIResult(() -> (TestImplSupportFragment2) activityTestRule.getActivity().getSupportFragment());
 
-        Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(originFragment2, ImplTestInterface.class)).getClass(), TestActivity.class);
         Assert.assertEquals(Premisex.requireNotNull(Fragmentx.getImplFromParent(supportFragment2, ImplTestInterface.class)).getClass(), TestActivity.class);
 
-        Assert.assertNull(Fragmentx.getImplFromParent(new TestImplOriginFragment2(), ImplTestInterface.class));
         Assert.assertNull(Fragmentx.getImplFromParent(new TestImplSupportFragment2(), ImplTestInterface.class));
     }
 
     @Test
     public void testInstantiate() {
-        android.app.Fragment originFragment = Fragmentx.instantiateOrigin(android.app.Fragment.class, new BundleBuilder().putString("key", "testInstantiate").build());
-        Assert.assertEquals(android.app.Fragment.class.getName(), originFragment.getClass().getName());
-        Assert.assertEquals("testInstantiate", Argsx.readStringArgOrThrow(originFragment, "key"));
-
         Fragment supportFragment = Fragmentx.instantiate(Fragment.class, new BundleBuilder().putString("key", "testInstantiate").build());
         Assert.assertEquals(Fragment.class.getName(), supportFragment.getClass().getName());
         Assert.assertEquals("testInstantiate", Argsx.readStringArgOrThrow(supportFragment, "key"));
-
-        android.app.Fragment originFragment2 = Fragmentx.instantiateOrigin(android.app.Fragment.class);
-        Assert.assertEquals(android.app.Fragment.class.getName(), originFragment2.getClass().getName());
 
         Fragment supportFragment2 = Fragmentx.instantiate(Fragment.class);
         Assert.assertEquals(Fragment.class.getName(), supportFragment2.getClass().getName());
@@ -211,18 +166,9 @@ public class FragmentxTest {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.at_multi_frame);
 
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, new TestImplOriginFragment())
-                    .commit();
-
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, new TestImplSupportFragment())
                     .commit();
-        }
-
-        @NonNull
-        public android.app.Fragment getOriginFragment() {
-            return getFragmentManager().findFragmentById(R.id.multiFrameAt_frame1);
         }
 
         @NonNull
@@ -231,37 +177,10 @@ public class FragmentxTest {
         }
 
         public final void convertChildFragment() {
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, new FragmentxTest.TestImplOriginFragment2())
-                    .commit();
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, new FragmentxTest.TestImplSupportFragment2())
                     .commit();
         }
-    }
-
-    public static final class TestImplOriginFragment extends android.app.Fragment implements FragmentxTest.ImplTestInterface {
-
-        @Nullable
-        public View onCreateView(@Nullable LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-            return inflater != null ? inflater.inflate(R.layout.at_test, container, false) : null;
-        }
-
-        public void onViewCreated(@Nullable View view, @Nullable Bundle savedInstanceState) {
-            super.onViewCreated(view, savedInstanceState);
-            if (Androidx.isAtLeast17()) {
-                this.getChildFragmentManager().beginTransaction().replace(R.id.testAt_frame, new FragmentxTest.TestImplOriginFragment2())
-                        .commit();
-            }
-        }
-
-        @NonNull
-        public final android.app.Fragment getChildFragment() {
-            return Premisex.requireNotNull(getChildFragmentManager().findFragmentById(R.id.testAt_frame));
-        }
-    }
-
-    public static final class TestImplOriginFragment2 extends android.app.Fragment {
     }
 
     public static final class TestImplSupportFragment extends Fragment implements FragmentxTest.ImplTestInterface {

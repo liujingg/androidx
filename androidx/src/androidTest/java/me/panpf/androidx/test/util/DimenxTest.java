@@ -70,24 +70,6 @@ public class DimenxTest {
     @Test
     public void testFragment() {
         Context context = InstrumentationRegistry.getContext();
-
-
-        android.app.Fragment originFragment = activityTestRule.getActivity().getOriginFragment();
-
-        Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(originFragment, 10f));
-        Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(originFragment, 10));
-
-        Assert.assertEquals(((float) 100) / context.getResources().getDisplayMetrics().density + 0.5f, Dimenx.px2dp(originFragment, 100), 0f);
-
-        Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().scaledDensity + 0.5f), Dimenx.sp2px(originFragment, 10f));
-        Assert.assertEquals((int) ((float) 10 * context.getResources().getDisplayMetrics().scaledDensity + 0.5f), Dimenx.sp2px(originFragment, 10));
-
-        Assert.assertEquals(((float) 100) / context.getResources().getDisplayMetrics().scaledDensity + 0.5f, Dimenx.px2sp(originFragment, 100), 0f);
-
-        Assert.assertEquals(10f * context.getResources().getDisplayMetrics().scaledDensity, Dimenx.applyDimension(originFragment, TypedValue.COMPLEX_UNIT_SP, 10f), 0f);
-        Assert.assertEquals(((float) 10) * context.getResources().getDisplayMetrics().scaledDensity, Dimenx.applyDimension(originFragment, TypedValue.COMPLEX_UNIT_SP, 10), 0f);
-
-
         Fragment supportFragment = activityTestRule.getActivity().getSupportFragment();
 
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(supportFragment, 10f));
@@ -131,18 +113,9 @@ public class DimenxTest {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.at_multi_frame);
 
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, new android.app.Fragment())
-                    .commit();
-
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, new Fragment())
                     .commit();
-        }
-
-        @NonNull
-        public android.app.Fragment getOriginFragment() {
-            return getFragmentManager().findFragmentById(R.id.multiFrameAt_frame1);
         }
 
         @NonNull

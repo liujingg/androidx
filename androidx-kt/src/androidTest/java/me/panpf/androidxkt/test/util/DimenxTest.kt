@@ -58,23 +58,6 @@ class DimenxTest {
     fun testFragment() {
         val context = InstrumentationRegistry.getContext()
 
-
-        val originFragment = activityTestRule.activity.originFragment
-
-        Assert.assertEquals((10f * context.resources.displayMetrics.density + 0.5f).toInt().toLong(), originFragment.dp2px(10f).toLong())
-        Assert.assertEquals((10f * context.resources.displayMetrics.density + 0.5f).toInt().toLong(), originFragment.dp2px(10).toLong())
-
-        Assert.assertEquals(100.toFloat() / context.resources.displayMetrics.density + 0.5f, originFragment.px2dp(100), 0f)
-
-        Assert.assertEquals((10f * context.resources.displayMetrics.scaledDensity + 0.5f).toInt().toLong(), originFragment.sp2px(10f).toLong())
-        Assert.assertEquals((10.toFloat() * context.resources.displayMetrics.scaledDensity + 0.5f).toInt().toLong(), originFragment.sp2px(10).toLong())
-
-        Assert.assertEquals(100.toFloat() / context.resources.displayMetrics.scaledDensity + 0.5f, originFragment.px2sp(100), 0f)
-
-        Assert.assertEquals(10f * context.resources.displayMetrics.scaledDensity, originFragment.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10f), 0f)
-        Assert.assertEquals(10.toFloat() * context.resources.displayMetrics.scaledDensity, originFragment.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10), 0f)
-
-
         val supportFragment = activityTestRule.activity.supportFragment
 
         Assert.assertEquals((10f * context.resources.displayMetrics.density + 0.5f).toInt().toLong(), supportFragment.dp2px(10f).toLong())
@@ -113,11 +96,8 @@ class DimenxTest {
 
     class TestActivity : androidx.fragment.app.FragmentActivity() {
 
-        val originFragment: android.app.Fragment
-            get() = fragmentManager.findFragmentById(R.id.multiFrameAt_frame1)
-
         val supportFragment: androidx.fragment.app.Fragment
-            get() = Premisex.requireNotNull<androidx.fragment.app.Fragment>(supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2))
+            get() = Premisex.requireNotNull(supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2))
 
         val view: View
             get() = findViewById(android.R.id.content)
@@ -125,10 +105,6 @@ class DimenxTest {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.at_multi_frame)
-
-            fragmentManager.beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, android.app.Fragment())
-                    .commit()
 
             supportFragmentManager.beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, androidx.fragment.app.Fragment())

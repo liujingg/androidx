@@ -29,25 +29,9 @@ import me.panpf.androidx.app.Fragmentx
 inline fun androidx.fragment.app.Fragment?.getApplication(): Application? = Fragmentx.getApplication(this)
 
 /**
- * Get Application from Fragment
- */
-inline fun android.app.Fragment?.getApplication(): Application? = Fragmentx.getApplication(this)
-
-/**
  * Get Application from Fragment, throws an exception if null
  */
 inline fun androidx.fragment.app.Fragment.requireApplication(): Application = Fragmentx.requireApplication(this)
-
-/**
- * Get Application from Fragment, throws an exception if null
- */
-inline fun android.app.Fragment.requireApplication(): Application = Fragmentx.requireApplication(this)
-
-
-/**
- * Return true if the fragment has been destroyed
- */
-inline fun android.app.Fragment.isDestroyedCompat(): Boolean = Fragmentx.isDestroyedCompat(this)
 
 /**
  * Return true if the fragment has been destroyed
@@ -60,11 +44,6 @@ inline fun androidx.fragment.app.Fragment.isDestroyedCompat(): Boolean = Fragmen
  */
 inline fun <T> androidx.fragment.app.Fragment.getImplFromParent(clazz: Class<T>): T? = Fragmentx.getImplFromParent(this, clazz)
 
-/**
- * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
- */
-inline fun <T> android.app.Fragment.getImplFromParent(clazz: Class<T>): T? = Fragmentx.getImplFromParent(this, clazz)
-
 
 /**
  * Instantiate a Fragment and set arguments
@@ -75,16 +54,6 @@ inline fun <T : androidx.fragment.app.Fragment> Class<out T>.instantiate(argumen
  * Instantiate a Fragment and set arguments
  */
 inline fun <T : androidx.fragment.app.Fragment> Class<out T>.instantiate(): T = Fragmentx.instantiate(this)
-
-/**
- * Instantiate a Fragment and set arguments
- */
-inline fun <T : android.app.Fragment> Class<out T>.instantiateOrigin(arguments: Bundle): T = Fragmentx.instantiateOrigin(this, arguments)
-
-/**
- * Instantiate a Fragment and set arguments
- */
-inline fun <T : android.app.Fragment> Class<out T>.instantiateOrigin(): T = Fragmentx.instantiateOrigin(this)
 
 
 /**

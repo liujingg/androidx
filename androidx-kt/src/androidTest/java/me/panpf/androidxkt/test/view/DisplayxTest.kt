@@ -100,13 +100,6 @@ class DisplayxTest {
         }
 
         when (Contextx.windowManager(activity).defaultDisplay.rotation) {
-            Surface.ROTATION_0 -> Assert.assertEquals(0, activity.originFragment.getDisplayRotation().toLong())
-            Surface.ROTATION_90 -> Assert.assertEquals(90, activity.originFragment.getDisplayRotation().toLong())
-            Surface.ROTATION_180 -> Assert.assertEquals(180, activity.originFragment.getDisplayRotation().toLong())
-            Surface.ROTATION_270 -> Assert.assertEquals(270, activity.originFragment.getDisplayRotation().toLong())
-        }
-
-        when (Contextx.windowManager(activity).defaultDisplay.rotation) {
             Surface.ROTATION_0 -> Assert.assertEquals(0, activity.supportFragment.getDisplayRotation().toLong())
             Surface.ROTATION_90 -> Assert.assertEquals(90, activity.supportFragment.getDisplayRotation().toLong())
             Surface.ROTATION_180 -> Assert.assertEquals(180, activity.supportFragment.getDisplayRotation().toLong())
@@ -125,46 +118,37 @@ class DisplayxTest {
     fun testGetOrientation() {
         val activity = activityRule.activity
 
-        when {
-            activity.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT -> {
+        when (activity.resources.configuration.orientation) {
+            Configuration.ORIENTATION_PORTRAIT -> {
                 Assert.assertTrue(activity.isOrientationPortrait())
-                Assert.assertTrue(activity.originFragment.isOrientationPortrait())
                 Assert.assertTrue(activity.supportFragment.isOrientationPortrait())
                 Assert.assertTrue(activity.view.isOrientationPortrait())
                 Assert.assertFalse(activity.isOrientationLandscape())
-                Assert.assertFalse(activity.originFragment.isOrientationLandscape())
                 Assert.assertFalse(activity.supportFragment.isOrientationLandscape())
                 Assert.assertFalse(activity.view.isOrientationLandscape())
                 Assert.assertFalse(activity.isOrientationUndefined())
-                Assert.assertFalse(activity.originFragment.isOrientationUndefined())
                 Assert.assertFalse(activity.supportFragment.isOrientationUndefined())
                 Assert.assertFalse(activity.view.isOrientationUndefined())
             }
-            activity.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE -> {
+            Configuration.ORIENTATION_LANDSCAPE -> {
                 Assert.assertFalse(activity.isOrientationPortrait())
-                Assert.assertFalse(activity.originFragment.isOrientationPortrait())
                 Assert.assertFalse(activity.supportFragment.isOrientationPortrait())
                 Assert.assertFalse(activity.view.isOrientationPortrait())
                 Assert.assertTrue(activity.isOrientationLandscape())
-                Assert.assertTrue(activity.originFragment.isOrientationLandscape())
                 Assert.assertTrue(activity.supportFragment.isOrientationLandscape())
                 Assert.assertTrue(activity.view.isOrientationLandscape())
                 Assert.assertFalse(activity.isOrientationUndefined())
-                Assert.assertFalse(activity.originFragment.isOrientationUndefined())
                 Assert.assertFalse(activity.supportFragment.isOrientationUndefined())
                 Assert.assertFalse(activity.view.isOrientationUndefined())
             }
             else -> {
                 Assert.assertFalse(activity.isOrientationPortrait())
-                Assert.assertFalse(activity.originFragment.isOrientationPortrait())
                 Assert.assertFalse(activity.supportFragment.isOrientationPortrait())
                 Assert.assertFalse(activity.view.isOrientationPortrait())
                 Assert.assertFalse(activity.isOrientationLandscape())
-                Assert.assertFalse(activity.originFragment.isOrientationLandscape())
                 Assert.assertFalse(activity.supportFragment.isOrientationLandscape())
                 Assert.assertFalse(activity.view.isOrientationLandscape())
                 Assert.assertTrue(activity.isOrientationUndefined())
-                Assert.assertTrue(activity.originFragment.isOrientationUndefined())
                 Assert.assertTrue(activity.supportFragment.isOrientationUndefined())
                 Assert.assertTrue(activity.view.isOrientationUndefined())
             }
@@ -194,9 +178,6 @@ class DisplayxTest {
 
     class TestActivity : androidx.fragment.app.FragmentActivity() {
 
-        val originFragment: android.app.Fragment
-            get() = fragmentManager.findFragmentById(R.id.multiFrameAt_frame1)
-
         val supportFragment: androidx.fragment.app.Fragment
             get() = Premisex.requireNotNull(supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2))
 
@@ -206,10 +187,6 @@ class DisplayxTest {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.at_multi_frame)
-
-            fragmentManager.beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, android.app.Fragment())
-                    .commit()
 
             supportFragmentManager.beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, androidx.fragment.app.Fragment())

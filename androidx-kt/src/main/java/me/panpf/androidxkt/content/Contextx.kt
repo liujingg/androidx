@@ -83,12 +83,6 @@ import me.panpf.androidx.os.storage.StorageManagerCompat
  */
 inline fun Activity.appContext(): Context = Contextx.appContext(this)
 
-
-/**
- * Get Context, Throw an exception if Fragment is dead
- */
-inline fun android.app.Fragment.requireContext(): Context = Contextx.requireContext(this)
-
 ///**
 // * Get Context, Throw an exception if Fragment is dead
 // */
@@ -99,11 +93,6 @@ inline fun android.app.Fragment.requireContext(): Context = Contextx.requireCont
  * Get Application Context, Throw an exception if Fragment is dead
  */
 inline fun androidx.fragment.app.Fragment.requireAppContext(): Context = Contextx.requireAppContext(this)
-
-/**
- * Get Application Context, Throw an exception if Fragment is dead
- */
-inline fun android.app.Fragment.requireAppContext(): Context = Contextx.requireAppContext(this)
 
 
 /**

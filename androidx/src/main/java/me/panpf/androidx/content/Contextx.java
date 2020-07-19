@@ -125,33 +125,12 @@ public class Contextx {
         return fragment.requireContext();
     }
 
-    /**
-     * Get Context, Throw an exception if Fragment is dead
-     */
-    @NonNull
-    public static Context requireContext(@NonNull android.app.Fragment fragment) {
-        Context context = fragment.getActivity();
-        if (context == null) {
-            throw new IllegalStateException("Fragment " + fragment + " not attached to a context.");
-        } else {
-            return context;
-        }
-    }
-
 
     /**
      * Get Application Context, Throw an exception if Fragment is dead
      */
     @NonNull
     public static Context requireAppContext(@NonNull Fragment fragment) {
-        return requireContext(fragment).getApplicationContext();
-    }
-
-    /**
-     * Get Application Context, Throw an exception if Fragment is dead
-     */
-    @NonNull
-    public static Context requireAppContext(@NonNull android.app.Fragment fragment) {
         return requireContext(fragment).getApplicationContext();
     }
 

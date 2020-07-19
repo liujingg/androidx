@@ -249,8 +249,8 @@ public class ArgsxTest {
         CharSequence[] charSequenceArrayOrDefault = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefault", arrayOf("array", "dft"));
         CharSequence[] charSequenceArrayOrDefaultErrKey = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefaultErrKey", arrayOf("error", "erk"));
         ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArgOrThrow(activity, "charSequenceArrayListRequired");
-        ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefault", Collectionx.<CharSequence>arrayListOf("list", "default"));
-        ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefaultErrKey", Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
+        ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefault", Collectionx.arrayListOf("list", "default"));
+        ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefaultErrKey", Collectionx.arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
         ArrayList<CharSequence> charSequenceArrayListOptional = Argsx.readCharSequenceArrayListArgOrNull(activity, "charSequenceArrayListOptional");
         ArrayList<CharSequence> charSequenceArrayListOptionalErrKey = Argsx.readCharSequenceArrayListArgOrNull(activity, "charSequenceArrayListOptionalErrKey");
 
@@ -263,8 +263,8 @@ public class ArgsxTest {
         Parcelable[] parcelableArrayOrDefault = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefault", arrayOf(new TestParcelable("array"), new TestParcelable("dft")));
         Parcelable[] parcelableArrayOrDefaultErrKey = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefaultErrKey", arrayOf(new TestParcelable("error"), new TestParcelable("erk")));
         ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArgOrThrow(activity, "parcelableArrayListRequired");
-        ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefault", Collectionx.<Parcelable>arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
-        ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefaultErrKey", Collectionx.<Parcelable>arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
+        ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefault", Collectionx.arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
+        ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefaultErrKey", Collectionx.arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
         ArrayList<Parcelable> parcelableArrayListOptional = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptional");
         ArrayList<Parcelable> parcelableArrayListOptionalErrKey = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptionalErrKey");
 
@@ -287,15 +287,15 @@ public class ArgsxTest {
         Bundle extrasDefault = Argsx.readExtrasArgOr(activity, new Bundle());
 
         //test start
-        Assert.assertTrue(extrasRequired.getString("extrasRequired").equals("extrasRequired"));
-        Assert.assertTrue(extrasOptional.getString("extrasOptional").equals("extrasOptional"));
-        Assert.assertTrue(extrasDefault.getString("extrasOrDefault").equals("extrasOrDefault"));
+        Assert.assertEquals("extrasRequired", extrasRequired.getString("extrasRequired"));
+        Assert.assertEquals("extrasOptional", extrasOptional.getString("extrasOptional"));
+        Assert.assertEquals("extrasOrDefault", extrasDefault.getString("extrasOrDefault"));
 
-        Assert.assertTrue(bundleRequired.getString("bundle").equals("bundleRequired"));
-        Assert.assertTrue(bundleOptional.getString("bundle").equals("bundleOptional"));
+        Assert.assertEquals("bundleRequired", bundleRequired.getString("bundle"));
+        Assert.assertEquals("bundleOptional", bundleOptional.getString("bundle"));
         Assert.assertNull(bundleOptionalErrKey);
-        Assert.assertTrue(bundleOrDefault.getString("bundle").equals("bundleOrDefault"));
-        Assert.assertTrue(bundleOrDefaultErrKey.getString("bundle").equals("bundleErrKey"));
+        Assert.assertEquals("bundleOrDefault", bundleOrDefault.getString("bundle"));
+        Assert.assertEquals("bundleErrKey", bundleOrDefaultErrKey.getString("bundle"));
 
 
         Assert.assertEquals(serializableRequired, new TestSerializable("serializableRequired"));
@@ -723,317 +723,6 @@ public class ArgsxTest {
     }
 
     @Test
-    public void fragmentArgsTest() {
-        TestActivity activityHost = mActivityTestRule.getActivity();
-        android.app.Fragment activity = activityHost.getFragmentManager().findFragmentById(android.R.id.content);
-
-        assert activity != null;
-
-        byte byteRequired = Argsx.readByteArgOr(activity, "byteRequired", (byte) 0);
-        byte byteRequiredErrKey = Argsx.readByteArgOr(activity, "byteRequiredErrKey", (byte) 0);
-        byte[] byteArrayRequired = Argsx.readByteArrayArgOrThrow(activity, "byteArrayRequired");
-        byte[] byteArrayOptional = Argsx.readByteArrayArgOrNull(activity, "byteArrayOptional");
-        byte[] byteArrayOptionalErrKey = Argsx.readByteArrayArgOrNull(activity, "byteArrayOptionalErrKey");
-        byte[] byteArrayOrDefault = Argsx.readByteArrayArgOr(activity, "byteArrayOrDefault", byteArrayOf((byte) 0, (byte) 0));
-        byte[] byteArrayOrDefaultErrKey = Argsx.readByteArrayArgOr(activity, "byteArrayOrDefaultErrKey", byteArrayOf((byte) 0, (byte) (-1)));
-
-        short shortRequired = Argsx.readShortArgOr(activity, "shortRequired", (short) 0);
-        short shortRequiredErrKey = Argsx.readShortArgOr(activity, "shortRequiredErrKey", (short) 0);
-        short[] shortArrayRequired = Argsx.readShortArrayArgOrThrow(activity, "shortArrayRequired");
-        short[] shortArrayOptional = Argsx.readShortArrayArgOrNull(activity, "shortArrayOptional");
-        short[] shortArrayOptionalErrKey = Argsx.readShortArrayArgOrNull(activity, "shortArrayOptionalErrKey");
-        short[] shortArrayOrDefault = Argsx.readShortArrayArgOr(activity, "shortArrayOrDefault", shortArrayOf((short) 0, (short) 0));
-        short[] shortArrayOrDefaultErrKey = Argsx.readShortArrayArgOr(activity, "shortArrayOrDefaultErrKey", shortArrayOf((short) 0, (short) (-1)));
-
-
-        int intRequired = Argsx.readIntArgOr(activity, "intRequired", 0);
-        int intRequiredErrKey = Argsx.readIntArgOr(activity, "intRequiredErrKey", 0);
-        int[] intArrayRequired = Argsx.readIntArrayArgOrThrow(activity, "intArrayRequired");
-        int[] intArrayOptional = Argsx.readIntArrayArgOrNull(activity, "intArrayOptional");
-        int[] intArrayOptionalErrKey = Argsx.readIntArrayArgOrNull(activity, "intArrayOptionalErrKey");
-        int[] intArrayOrDefault = Argsx.readIntArrayArgOr(activity, "intArrayOrDefault", intArrayOf(0, 0));
-        int[] intArrayOrDefaultErrKey = Argsx.readIntArrayArgOr(activity, "intArrayOrDefaultErrKey", intArrayOf(0, (-1)));
-        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArgOrThrow(activity, "intArrayListRequired");
-        ArrayList<Integer> intArrayListOrDefault = Argsx.readIntArrayListArgOr(activity, "intArrayListOrDefault", arrayListOf(0, 0));
-        ArrayList<Integer> intArrayListOrDefaultErrKey = Argsx.readIntArrayListArgOr(activity, "intArrayListOrDefaultErrKey", arrayListOf(0, 0));
-        ArrayList<Integer> intArrayListOptional = Argsx.readIntArrayListArgOrNull(activity, "intArrayListOptional");
-        ArrayList<Integer> intArrayListOptionalErrKey = Argsx.readIntArrayListArgOrNull(activity, "intArrayListOptionalErrKey");
-
-        long longRequired = Argsx.readLongArgOr(activity, "longRequired", 0);
-        long longRequiredErrKey = Argsx.readLongArgOr(activity, "longRequiredErrKey", 0);
-        long[] longArrayRequired = Argsx.readLongArrayArgOrThrow(activity, "longArrayRequired");
-        long[] longArrayOptional = Argsx.readLongArrayArgOrNull(activity, "longArrayOptional");
-        long[] longArrayOptionalErrKey = Argsx.readLongArrayArgOrNull(activity, "longArrayOptionalErrKey");
-        long[] longArrayOrDefault = Argsx.readLongArrayArgOr(activity, "longArrayOrDefault", longArrayOf(0, 0));
-        long[] longArrayOrDefaultErrKey = Argsx.readLongArrayArgOr(activity, "longArrayOrDefaultErrKey", longArrayOf(0, (-1)));
-
-        float floatRequired = Argsx.readFloatArgOr(activity, "floatRequired", 0f);
-        float floatRequiredErrKey = Argsx.readFloatArgOr(activity, "floatRequiredErrKey", 0f);
-        float[] floatArrayRequired = Argsx.readFloatArrayArgOrThrow(activity, "floatArrayRequired");
-        float[] floatArrayOptional = Argsx.readFloatArrayArgOrNull(activity, "floatArrayOptional");
-        float[] floatArrayOptionalErrKey = Argsx.readFloatArrayArgOrNull(activity, "DoubleArrayOptionalErrKey");
-        float[] floatArrayOrDefault = Argsx.readFloatArrayArgOr(activity, "floatArrayOrDefault", floatArrayOf(0f, 0f));
-        float[] floatArrayOrDefaultErrKey = Argsx.readFloatArrayArgOr(activity, "floatArrayOrDefaultErrKey", floatArrayOf(0f, (-1f)));
-
-        double doubleRequired = Argsx.readDoubleArgOr(activity, "doubleRequired", 0d);
-        double doubleRequiredErrKey = Argsx.readDoubleArgOr(activity, "doubleRequiredErrKey", 0d);
-        double[] doubleArrayRequired = Argsx.readDoubleArrayArgOrThrow(activity, "doubleArrayRequired");
-        double[] doubleArrayOptional = Argsx.readDoubleArrayArgOrNull(activity, "doubleArrayOptional");
-        double[] doubleArrayOptionalErrKey = Argsx.readDoubleArrayArgOrNull(activity, "doubleArrayOptionalErrKey");
-        double[] doubleArrayOrDefault = Argsx.readDoubleArrayArgOr(activity, "doubleArrayOrDefault", doubleArrayOf(0d, 0d));
-        double[] doubleArrayOrDefaultErrKey = Argsx.readDoubleArrayArgOr(activity, "doubleArrayOrDefaultErrKey", doubleArrayOf(0d, (-1d)));
-
-        boolean booleanRequired = Argsx.readBooleanArgOr(activity, "booleanRequired", false);
-        boolean booleanRequiredErrKey = Argsx.readBooleanArgOr(activity, "booleanRequiredErrKey", false);
-        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArgOrThrow(activity, "booleanArrayRequired");
-        boolean[] booleanArrayOptional = Argsx.readBooleanArrayArgOrNull(activity, "booleanArrayOptional");
-        boolean[] booleanArrayOptionalErrKey = Argsx.readBooleanArrayArgOrNull(activity, "booleanArrayOptionalErrKey");
-        boolean[] booleanArrayOrDefault = Argsx.readBooleanArrayArgOr(activity, "booleanArrayOrDefault", booleanArrayOf(true, false));
-        boolean[] booleanArrayOrDefaultErrKey = Argsx.readBooleanArrayArgOr(activity, "booleanArrayOrDefaultErrKey", booleanArrayOf(false, true));
-
-        char charRequired = Argsx.readCharArgOr(activity, "charRequired", 'a');
-        char charRequiredErrKey = Argsx.readCharArgOr(activity, "charRequiredErrKey", 'b');
-        char[] charArrayRequired = Argsx.readCharArrayArgOrThrow(activity, "charArrayRequired");
-        char[] charArrayOptional = Argsx.readCharArrayArgOrNull(activity, "charArrayOptional");
-        char[] charArrayOptionalErrKey = Argsx.readCharArrayArgOrNull(activity, "charArrayOptionalErrKey");
-        char[] charArrayOrDefault = Argsx.readCharArrayArgOr(activity, "charArrayOrDefault", charArrayOf('a', 'b'));
-        char[] charArrayOrDefaultErrKey = Argsx.readCharArrayArgOr(activity, "charArrayOrDefaultErrKey", charArrayOf('b', 'a'));
-
-        String stringRequired = Argsx.readStringArgOr(activity, "stringRequired", "stringRequired");
-        String stringRequiredErrKey = Argsx.readStringArgOr(activity, "stringRequiredErrKey", "stringRequiredErrKey");
-        String[] stringArrayRequired = Argsx.readStringArrayArgOrThrow(activity, "stringArrayRequired");
-        String[] stringArrayOptional = Argsx.readStringArrayArgOrNull(activity, "stringArrayOptional");
-        String[] stringArrayOptionalErrKey = Argsx.readStringArrayArgOrNull(activity, "stringArrayOptionalErrKey");
-        String[] stringArrayOrDefault = Argsx.readStringArrayArgOr(activity, "stringArrayOrDefault", arrayOf("array", "dft"));
-        String[] stringArrayOrDefaultErrKey = Argsx.readStringArrayArgOr(activity, "stringArrayOrDefaultErrKey", arrayOf("error", "erk"));
-        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArgOrThrow(activity, "stringArrayListRequired");
-        ArrayList<String> stringArrayListOrDefault = Argsx.readStringArrayListArgOr(activity, "stringArrayListOrDefault", arrayListOf("list", "default"));
-        ArrayList<String> stringArrayListOrDefaultErrKey = Argsx.readStringArrayListArgOr(activity, "stringArrayListOrDefaultErrKey", arrayListOf("stringArrayListOrDefaultErrKey", "errKey"));
-        ArrayList<String> stringArrayListOptional = Argsx.readStringArrayListArgOrNull(activity, "stringArrayListOptional");
-        ArrayList<String> stringArrayListOptionalErrKey = Argsx.readStringArrayListArgOrNull(activity, "stringArrayListOptionalErrKey");
-
-        CharSequence charSequenceRequired = Argsx.readCharSequenceArgOr(activity, "charSequenceRequired", "charSequenceRequired");
-        CharSequence charSequenceRequiredErrKey = Argsx.readCharSequenceArgOr(activity, "charSequenceRequiredErrKey", "charSequenceRequiredErrKey");
-        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArgOrThrow(activity, "charSequenceArrayRequired");
-        CharSequence[] charSequenceArrayOptional = Argsx.readCharSequenceArrayArgOrNull(activity, "charSequenceArrayOptional");
-        CharSequence[] charSequenceArrayOptionalErrKey = Argsx.readCharSequenceArrayArgOrNull(activity, "charSequenceArrayOptionalErrKey");
-        CharSequence[] charSequenceArrayOrDefault = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefault", arrayOf("array", "dft"));
-        CharSequence[] charSequenceArrayOrDefaultErrKey = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefaultErrKey", arrayOf("error", "erk"));
-        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArgOrThrow(activity, "charSequenceArrayListRequired");
-        ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefault", Collectionx.<CharSequence>arrayListOf("list", "default"));
-        ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefaultErrKey", Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
-        ArrayList<CharSequence> charSequenceArrayListOptional = Argsx.readCharSequenceArrayListArgOrNull(activity, "charSequenceArrayListOptional");
-        ArrayList<CharSequence> charSequenceArrayListOptionalErrKey = Argsx.readCharSequenceArrayListArgOrNull(activity, "charSequenceArrayListOptionalErrKey");
-
-
-        Parcelable parcelableRequired = Argsx.readParcelableArgOr(activity, "parcelableRequired", new TestParcelable("required"));
-        Parcelable parcelableRequiredErrKey = Argsx.readParcelableArgOr(activity, "parcelableRequiredErrKey", new TestParcelable("parcelableRequiredErrKey"));
-        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArgOrThrow(activity, "parcelableArrayRequired");
-        Parcelable[] parcelableArrayOptional = Argsx.readParcelableArrayArgOrNull(activity, "parcelableArrayOptional");
-        Parcelable[] parcelableArrayOptionalErrKey = Argsx.readParcelableArrayArgOrNull(activity, "parcelableArrayOptionalErrKey");
-        Parcelable[] parcelableArrayOrDefault = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefault", arrayOf(new TestParcelable("array"), new TestParcelable("dft")));
-        Parcelable[] parcelableArrayOrDefaultErrKey = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefaultErrKey", arrayOf(new TestParcelable("error"), new TestParcelable("erk")));
-        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArgOrThrow(activity, "parcelableArrayListRequired");
-        ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefault", Collectionx.<Parcelable>arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
-        ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefaultErrKey", Collectionx.<Parcelable>arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
-        ArrayList<Parcelable> parcelableArrayListOptional = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptional");
-        ArrayList<Parcelable> parcelableArrayListOptionalErrKey = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptionalErrKey");
-
-        TestSerializable serializableRequired = Argsx.readSerializableArgOrThrow(activity, "serializableRequired");
-        TestSerializable serializableOptional = Argsx.readSerializableArgOrNull(activity, "serializableOptional");
-        TestSerializable serializableOptionalErrKey = Argsx.readSerializableArgOrNull(activity, "serializableOptionalErrKey");
-        TestSerializable serializableOrDefault = Argsx.readSerializableArgOr(activity, "serializableOrDefault", new TestSerializable("default"));
-        TestSerializable serializableOrDefaultErrKey = Argsx.readSerializableArgOr(activity, "serializableOrDefaultErrKey", new TestSerializable("errKey"));
-
-        Bundle bundleRequired = Argsx.readBundleArgOrThrow(activity, "bundleRequired");
-        Bundle bundleOptional = Argsx.readBundleArgOrNull(activity, "bundleOptional");
-        Bundle bundleOptionalErrKey = Argsx.readBundleArgOrNull(activity, "bundleOptionalErrKey");
-        Bundle bundleOrDefault = Argsx.readBundleArgOr(activity, "bundleOrDefault", new Bundle());
-        Bundle defaultBundle = new Bundle();
-        defaultBundle.putString("bundle", "bundleErrKey");
-        Bundle bundleOrDefaultErrKey = Argsx.readBundleArgOr(activity, "bundleOrDefaultErrKey", defaultBundle);
-
-
-        SparseArray<Parcelable> sparseArrayDefault = new SparseArray<>();
-        sparseArrayDefault.put(0, new TestParcelable("0"));
-        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArgOrThrow(activity, "sparseParcelableArrayRequired");
-        SparseArray<Parcelable> sparseParcelableArrayOptional = Argsx.readSparseParcelableArrayArgOrNull(activity, "sparseParcelableArrayOptional");
-        SparseArray<Parcelable> sparseParcelableArrayOptionalErrKey = Argsx.readSparseParcelableArrayArgOrNull(activity, "sparseParcelableArrayOptionalErrKey");
-        SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefault", sparseArrayDefault);
-        SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefaultErrKey", sparseArrayDefault);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            IBinder binderRequired = Argsx.readBinderArgOrThrow(activity, "binderRequired");
-            IBinder binderOptional = Argsx.readBinderArgOrNull(activity, "binderOptional");
-            IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, "binderOptionalErrKey");
-            IBinder binderOrDefault = Argsx.readBinderArgOr(activity, "binderOrDefault", new TestBinder(""));
-            IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, "binderOrDefaultErrKey", new TestBinder("binderOrDefaultErrKey"));
-
-            Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
-            Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
-            Assert.assertNull(binderOptionalErrKey);
-            Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
-            Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            Size sizeRequired = Argsx.readSizeArgOrThrow(activity, "sizeRequired");
-            Size sizeOptional = Argsx.readSizeArgOrNull(activity, "sizeOptional");
-            Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, "sizeOptionalErrKey");
-            Size sizeOrDefault = Argsx.readSizeArgOr(activity, "sizeOrDefault", new Size(0, 0));
-            Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, "sizeOrDefaultErrKey", new Size(4, 4));
-
-            SizeF sizeFRequired = Argsx.readSizeFArgOrThrow(activity, "sizeFRequired");
-            SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, "sizeFOptional");
-            SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, "sizeFOptionalErrKey");
-            SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, "sizeFOrDefault", new SizeF(0f, 0f));
-            SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, "sizeFOrDefaultErrKey", new SizeF(4f, 4f));
-
-
-            Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
-            Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
-            Assert.assertNull(sizeFOptionalErrKey);
-            Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
-            Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
-
-            Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
-            Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
-            Assert.assertNull(sizeOptionalErrKey);
-            Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
-            Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
-        }
-
-
-        //test start
-        Assert.assertTrue(sparseParcelableArrayRequired.get(-1).equals(new TestParcelable("-1")) && sparseParcelableArrayRequired.get(1).equals(new TestParcelable("1")));
-        Assert.assertTrue(sparseParcelableArrayOptional.get(-2).equals(new TestParcelable("-2")) && sparseParcelableArrayOptional.get(2).equals(new TestParcelable("2")));
-        Assert.assertNull(sparseParcelableArrayOptionalErrKey);
-        Assert.assertTrue(sparseParcelableArrayOrDefault.get(-3).equals(new TestParcelable("-3")) && sparseParcelableArrayOrDefault.get(3).equals(new TestParcelable("3")));
-        Assert.assertTrue(sparseParcelableArrayOrDefaultErrKey.get(0).equals(new TestParcelable("0")));
-
-        Assert.assertTrue(bundleRequired.getString("bundle").equals("bundleRequired"));
-        Assert.assertTrue(bundleOptional.getString("bundle").equals("bundleOptional"));
-        Assert.assertNull(bundleOptionalErrKey);
-        Assert.assertTrue(bundleOrDefault.getString("bundle").equals("bundleOrDefault"));
-        Assert.assertTrue(bundleOrDefaultErrKey.getString("bundle").equals("bundleErrKey"));
-
-
-        Assert.assertEquals(serializableRequired, new TestSerializable("serializableRequired"));
-        Assert.assertEquals(serializableOptional, new TestSerializable("serializableOptional"));
-        Assert.assertNull(serializableOptionalErrKey);
-        Assert.assertEquals(serializableOrDefault, new TestSerializable("serializableOrDefault"));
-        Assert.assertEquals(serializableOrDefaultErrKey, new TestSerializable("errKey"));
-
-        Assert.assertEquals(parcelableRequired, new TestParcelable("parcelableRequired"));
-        Assert.assertEquals(parcelableRequiredErrKey, new TestParcelable("parcelableRequiredErrKey"));
-        Assert.assertTrue(parcelableArrayRequired[0].equals(new TestParcelable("parcelableRequired")) && parcelableArrayRequired[1].equals(new TestParcelable("parcelableOptional")));
-        Assert.assertTrue(parcelableArrayOptional[0].equals(new TestParcelable("parcelableOptional")) && parcelableArrayOptional[1].equals(new TestParcelable("parcelableRequired")));
-        Assert.assertNull(parcelableArrayOptionalErrKey);
-        Assert.assertTrue(parcelableArrayOrDefault[0].equals(new TestParcelable("parcelableArrayOrDefault")) && parcelableArrayOrDefault[1].equals(new TestParcelable("default")));
-        Assert.assertTrue(parcelableArrayOrDefaultErrKey[0].equals(new TestParcelable("error")) && parcelableArrayOrDefaultErrKey[1].equals(new TestParcelable("erk")));
-        Assert.assertTrue(parcelableArrayListRequired.get(0).equals(new TestParcelable("parcelableRequired")) && parcelableArrayListRequired.get(1).equals(new TestParcelable("parcelableOptional")));
-        Assert.assertTrue(parcelableArrayListOptional.get(0).equals(new TestParcelable("parcelableOptional")) && parcelableArrayListOptional.get(1).equals(new TestParcelable("parcelableRequired")));
-        Assert.assertNull(parcelableArrayListOptionalErrKey);
-        Assert.assertTrue(parcelableArrayListOrDefault.get(0).equals(new TestParcelable("parcelableArrayListOrDefault")) && parcelableArrayListOrDefault.get(1).equals(new TestParcelable("default")));
-        Assert.assertTrue(parcelableArrayListOrDefaultErrKey.get(0).equals(new TestParcelable("parcelableArrayListOrDefaultErrKey")) && parcelableArrayListOrDefaultErrKey.get(1).equals(new TestParcelable("errKey")));
-
-        Assert.assertTrue(charSequenceRequired.equals("stringRequired"));
-        Assert.assertTrue(charSequenceRequiredErrKey.equals("charSequenceRequiredErrKey"));
-        Assert.assertTrue(charSequenceArrayRequired[0].equals("stringRequired") && charSequenceArrayRequired[1].equals("stringOptional"));
-        Assert.assertTrue(charSequenceArrayOptional[0].equals("stringOptional") && charSequenceArrayOptional[1].equals("stringRequired"));
-        Assert.assertNull(charSequenceArrayOptionalErrKey);
-        Assert.assertTrue(charSequenceArrayOrDefault[0].equals("charSequence") && charSequenceArrayOrDefault[1].equals("default"));
-        Assert.assertTrue(charSequenceArrayOrDefaultErrKey[0].equals("error") && charSequenceArrayOrDefaultErrKey[1].equals("erk"));
-        Assert.assertTrue(charSequenceArrayListRequired.get(0).equals("charSequenceArrayListRequired") && charSequenceArrayListRequired.get(1).equals("required"));
-        Assert.assertTrue(charSequenceArrayListOrDefault.get(0).equals("charSequenceArrayListOrDefault") && charSequenceArrayListOrDefault.get(1).equals("default"));
-        Assert.assertTrue(charSequenceArrayListOrDefaultErrKey.get(0).equals("charSequenceArrayListOrDefaultErrKey") && charSequenceArrayListOrDefaultErrKey.get(1).equals("errKey"));
-        Assert.assertTrue(charSequenceArrayListOptional.get(0).equals("charSequenceArrayListOptional") && charSequenceArrayListOptional.get(1).equals("optional"));
-        Assert.assertNull(charSequenceArrayListOptionalErrKey);
-
-        Assert.assertTrue(stringRequired.equals("stringRequired"));
-        Assert.assertTrue(stringRequiredErrKey.equals("stringRequiredErrKey"));
-        Assert.assertTrue(stringArrayRequired[0].equals("stringRequired") && stringArrayRequired[1].equals("stringOptional"));
-        Assert.assertTrue(stringArrayOptional[0].equals("stringOptional") && stringArrayOptional[1].equals("stringRequired"));
-        Assert.assertNull(stringArrayOptionalErrKey);
-        Assert.assertTrue(stringArrayOrDefault[0].equals("stringArrayOrDefault") && stringArrayOrDefault[1].equals("default"));
-        Assert.assertTrue(stringArrayOrDefaultErrKey[0].equals("error") && stringArrayOrDefaultErrKey[1].equals("erk"));
-        Assert.assertTrue(stringArrayListRequired.get(0).equals("stringRequired") && stringArrayListRequired.get(1).equals("stringOptional"));
-        Assert.assertTrue(stringArrayListOrDefault.get(0).equals("stringArrayListOrDefault") && stringArrayListOrDefault.get(1).equals("default"));
-        Assert.assertTrue(stringArrayListOrDefaultErrKey.get(0).equals("stringArrayListOrDefaultErrKey") && stringArrayListOrDefaultErrKey.get(1).equals("errKey"));
-        Assert.assertTrue(stringArrayListOptional.get(0).equals("stringOptional") && stringArrayListOptional.get(1).equals("stringRequired"));
-        Assert.assertNull(stringArrayListOptionalErrKey);
-
-        Assert.assertTrue(byteRequired == (byte) 2);
-        Assert.assertTrue(byteRequiredErrKey == 0);
-        Assert.assertTrue(byteArrayRequired[0] == (byte) 2 && byteArrayRequired[1] == (byte) (-2));
-        Assert.assertTrue(byteArrayOptional[0] == (byte) (-2) && byteArrayOptional[1] == (byte) 2);
-        Assert.assertNull(byteArrayOptionalErrKey);
-        Assert.assertTrue(byteArrayOrDefault[0] == (byte) 2 && byteArrayOrDefault[1] == (byte) (-2));
-        Assert.assertTrue(byteArrayOrDefaultErrKey[0] == (byte) 0 && byteArrayOrDefaultErrKey[1] == (byte) (-1));
-
-        Assert.assertTrue(shortRequired == (short) 3);
-        Assert.assertTrue(shortRequiredErrKey == 0);
-        Assert.assertTrue(shortArrayRequired[0] == (short) 3 && shortArrayRequired[1] == (short) (-3));
-        Assert.assertTrue(shortArrayOptional[0] == (short) (-3) && shortArrayOptional[1] == (short) 3);
-        Assert.assertNull(shortArrayOptionalErrKey);
-        Assert.assertTrue(shortArrayOrDefault[0] == (short) 3 && shortArrayOrDefault[1] == (short) (-3));
-        Assert.assertTrue(shortArrayOrDefaultErrKey[0] == (short) 0 && shortArrayOrDefaultErrKey[1] == (short) (-1));
-
-        Assert.assertTrue(intRequired == 500);
-        Assert.assertTrue(intRequiredErrKey == 0);
-        Assert.assertTrue(intArrayRequired[0] == 500 && intArrayRequired[1] == (-500));
-        Assert.assertTrue(intArrayOptional[0] == (-500) && intArrayOptional[1] == 500);
-        Assert.assertNull(intArrayOptionalErrKey);
-        Assert.assertTrue(intArrayOrDefault[0] == 500 && intArrayOrDefault[1] == (-500));
-        Assert.assertTrue(intArrayOrDefaultErrKey[0] == 0 && intArrayOrDefaultErrKey[1] == (-1));
-        Assert.assertTrue(intArrayListRequired.get(0) == 500 && intArrayListRequired.get(1) == (-500));
-        Assert.assertTrue(intArrayListOrDefault.get(0) == 600 && intArrayListOrDefault.get(1) == (-600));
-        Assert.assertTrue(intArrayListOrDefaultErrKey.get(0) == 0 && intArrayListOrDefaultErrKey.get(1) == 0);
-        Assert.assertTrue(intArrayListOptional.get(0) == -500 && intArrayListOptional.get(1) == 500);
-        Assert.assertNull(intArrayListOptionalErrKey);
-
-        Assert.assertTrue(longRequired == 1000L);
-        Assert.assertTrue(longRequiredErrKey == 0);
-        Assert.assertTrue(longArrayRequired[0] == 1000L && longArrayRequired[1] == (-1000L));
-        Assert.assertTrue(longArrayOptional[0] == (-1000l) && longArrayOptional[1] == 1000L);
-        Assert.assertNull(longArrayOptionalErrKey);
-        Assert.assertTrue(longArrayOrDefault[0] == 1000L && longArrayOrDefault[1] == (-1000L));
-        Assert.assertTrue(longArrayOrDefaultErrKey[0] == 0 && longArrayOrDefaultErrKey[1] == (-1));
-
-        Assert.assertTrue(floatRequired == 4f);
-        Assert.assertTrue(floatRequiredErrKey == 0f);
-        Assert.assertTrue(floatArrayRequired[0] == 4f && floatArrayRequired[1] == (-4f));
-        Assert.assertTrue(floatArrayOptional[0] == (-4f) && floatArrayOptional[1] == 4f);
-        Assert.assertNull(floatArrayOptionalErrKey);
-        Assert.assertTrue(floatArrayOrDefault[0] == 4f && floatArrayOrDefault[1] == (-4f));
-        Assert.assertTrue(floatArrayOrDefaultErrKey[0] == 0 && floatArrayOrDefaultErrKey[1] == (-1f));
-
-        Assert.assertTrue(doubleRequired == 6d);
-        Assert.assertTrue(doubleRequiredErrKey == 0d);
-        Assert.assertTrue(doubleArrayRequired[0] == 6d && doubleArrayRequired[1] == (-6d));
-        Assert.assertTrue(doubleArrayOptional[0] == (-6d) && doubleArrayOptional[1] == 6d);
-        Assert.assertNull(doubleArrayOptionalErrKey);
-        Assert.assertTrue(doubleArrayOrDefault[0] == 6d && doubleArrayOrDefault[1] == (-6d));
-        Assert.assertTrue(doubleArrayOrDefaultErrKey[0] == 0 && doubleArrayOrDefaultErrKey[1] == (-1d));
-
-        Assert.assertTrue(booleanRequired);
-        Assert.assertTrue(!booleanRequiredErrKey);
-        Assert.assertTrue(booleanArrayRequired[0] && !booleanArrayRequired[1]);
-        Assert.assertTrue(!booleanArrayOptional[0] && booleanArrayOptional[1]);
-        Assert.assertNull(booleanArrayOptionalErrKey);
-        Assert.assertTrue(booleanArrayOrDefault[0] && !booleanArrayOrDefault[1]);
-        Assert.assertTrue(!booleanArrayOrDefaultErrKey[0] && booleanArrayOrDefaultErrKey[1]);
-
-        Assert.assertTrue(charRequired == 'a');
-        Assert.assertTrue(charRequiredErrKey == 'b');
-        Assert.assertTrue(charArrayRequired[0] == 'a' && charArrayRequired[1] == 'b');
-        Assert.assertTrue(charArrayOptional[0] == 'b' && charArrayOptional[1] == 'a');
-        Assert.assertNull(charArrayOptionalErrKey);
-        Assert.assertTrue(charArrayOrDefault[0] == 'a' && charArrayOrDefault[1] == 'b');
-        Assert.assertTrue(charArrayOrDefaultErrKey[0] == 'b' && charArrayOrDefaultErrKey[1] == 'a');
-    }
-
-    @Test
     public void noExtrasActivityTest() {
         Activity activity = mNoExtrasActivityTestRule.getActivity();
 
@@ -1044,7 +733,6 @@ public class ArgsxTest {
 
         Assert.assertNull(extrasOptional);
         Assert.assertTrue(extrasDefault.getString("errDefault").equals("default"));
-
     }
 
     //res
@@ -1486,315 +1174,6 @@ public class ArgsxTest {
             Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
         }
 
-
-        //test start
-
-        Assert.assertTrue(sparseParcelableArrayRequired.get(-1).equals(new TestParcelable("-1")) && sparseParcelableArrayRequired.get(1).equals(new TestParcelable("1")));
-        Assert.assertTrue(sparseParcelableArrayOptional.get(-2).equals(new TestParcelable("-2")) && sparseParcelableArrayOptional.get(2).equals(new TestParcelable("2")));
-        Assert.assertNull(sparseParcelableArrayOptionalErrKey);
-        Assert.assertTrue(sparseParcelableArrayOrDefault.get(-3).equals(new TestParcelable("-3")) && sparseParcelableArrayOrDefault.get(3).equals(new TestParcelable("3")));
-        Assert.assertTrue(sparseParcelableArrayOrDefaultErrKey.get(0).equals(new TestParcelable("0")));
-
-        Assert.assertTrue(bundleRequired.getString("bundle").equals("bundleRequired"));
-        Assert.assertTrue(bundleOptional.getString("bundle").equals("bundleOptional"));
-        Assert.assertNull(bundleOptionalErrKey);
-        Assert.assertTrue(bundleOrDefault.getString("bundle").equals("bundleOrDefault"));
-        Assert.assertTrue(bundleOrDefaultErrKey.getString("bundle").equals("bundleErrKey"));
-
-
-        Assert.assertEquals(serializableRequired, new TestSerializable("serializableRequired"));
-        Assert.assertEquals(serializableOptional, new TestSerializable("serializableOptional"));
-        Assert.assertNull(serializableOptionalErrKey);
-        Assert.assertEquals(serializableOrDefault, new TestSerializable("serializableOrDefault"));
-        Assert.assertEquals(serializableOrDefaultErrKey, new TestSerializable("errKey"));
-
-        Assert.assertEquals(parcelableRequired, new TestParcelable("parcelableRequired"));
-        Assert.assertEquals(parcelableRequiredErrKey, new TestParcelable("parcelableRequiredErrKey"));
-        Assert.assertTrue(parcelableArrayRequired[0].equals(new TestParcelable("parcelableRequired")) && parcelableArrayRequired[1].equals(new TestParcelable("parcelableOptional")));
-        Assert.assertTrue(parcelableArrayOptional[0].equals(new TestParcelable("parcelableOptional")) && parcelableArrayOptional[1].equals(new TestParcelable("parcelableRequired")));
-        Assert.assertNull(parcelableArrayOptionalErrKey);
-        Assert.assertTrue(parcelableArrayOrDefault[0].equals(new TestParcelable("parcelableArrayOrDefault")) && parcelableArrayOrDefault[1].equals(new TestParcelable("default")));
-        Assert.assertTrue(parcelableArrayOrDefaultErrKey[0].equals(new TestParcelable("error")) && parcelableArrayOrDefaultErrKey[1].equals(new TestParcelable("erk")));
-        Assert.assertTrue(parcelableArrayListRequired.get(0).equals(new TestParcelable("parcelableRequired")) && parcelableArrayListRequired.get(1).equals(new TestParcelable("parcelableOptional")));
-        Assert.assertTrue(parcelableArrayListOptional.get(0).equals(new TestParcelable("parcelableOptional")) && parcelableArrayListOptional.get(1).equals(new TestParcelable("parcelableRequired")));
-        Assert.assertNull(parcelableArrayListOptionalErrKey);
-        Assert.assertTrue(parcelableArrayListOrDefault.get(0).equals(new TestParcelable("parcelableArrayListOrDefault")) && parcelableArrayListOrDefault.get(1).equals(new TestParcelable("default")));
-        Assert.assertTrue(parcelableArrayListOrDefaultErrKey.get(0).equals(new TestParcelable("parcelableArrayListOrDefaultErrKey")) && parcelableArrayListOrDefaultErrKey.get(1).equals(new TestParcelable("errKey")));
-
-        Assert.assertTrue(charSequenceRequired.equals("stringRequired"));
-        Assert.assertTrue(charSequenceRequiredErrKey.equals("charSequenceRequiredErrKey"));
-        Assert.assertTrue(charSequenceArrayRequired[0].equals("stringRequired") && charSequenceArrayRequired[1].equals("stringOptional"));
-        Assert.assertTrue(charSequenceArrayOptional[0].equals("stringOptional") && charSequenceArrayOptional[1].equals("stringRequired"));
-        Assert.assertNull(charSequenceArrayOptionalErrKey);
-        Assert.assertTrue(charSequenceArrayOrDefault[0].equals("charSequence") && charSequenceArrayOrDefault[1].equals("default"));
-        Assert.assertTrue(charSequenceArrayOrDefaultErrKey[0].equals("error") && charSequenceArrayOrDefaultErrKey[1].equals("erk"));
-        Assert.assertTrue(charSequenceArrayListRequired.get(0).equals("charSequenceArrayListRequired") && charSequenceArrayListRequired.get(1).equals("required"));
-        Assert.assertTrue(charSequenceArrayListOrDefault.get(0).equals("charSequenceArrayListOrDefault") && charSequenceArrayListOrDefault.get(1).equals("default"));
-        Assert.assertTrue(charSequenceArrayListOrDefaultErrKey.get(0).equals("charSequenceArrayListOrDefaultErrKey") && charSequenceArrayListOrDefaultErrKey.get(1).equals("errKey"));
-        Assert.assertTrue(charSequenceArrayListOptional.get(0).equals("charSequenceArrayListOptional") && charSequenceArrayListOptional.get(1).equals("optional"));
-        Assert.assertNull(charSequenceArrayListOptionalErrKey);
-
-        Assert.assertTrue(stringRequired.equals("stringRequired"));
-        Assert.assertTrue(stringRequiredErrKey.equals("stringRequiredErrKey"));
-        Assert.assertTrue(stringArrayRequired[0].equals("stringRequired") && stringArrayRequired[1].equals("stringOptional"));
-        Assert.assertTrue(stringArrayOptional[0].equals("stringOptional") && stringArrayOptional[1].equals("stringRequired"));
-        Assert.assertNull(stringArrayOptionalErrKey);
-        Assert.assertTrue(stringArrayOrDefault[0].equals("stringArrayOrDefault") && stringArrayOrDefault[1].equals("default"));
-        Assert.assertTrue(stringArrayOrDefaultErrKey[0].equals("error") && stringArrayOrDefaultErrKey[1].equals("erk"));
-        Assert.assertTrue(stringArrayListRequired.get(0).equals("stringRequired") && stringArrayListRequired.get(1).equals("stringOptional"));
-        Assert.assertTrue(stringArrayListOrDefault.get(0).equals("stringArrayListOrDefault") && stringArrayListOrDefault.get(1).equals("default"));
-        Assert.assertTrue(stringArrayListOrDefaultErrKey.get(0).equals("stringArrayListOrDefaultErrKey") && stringArrayListOrDefaultErrKey.get(1).equals("errKey"));
-        Assert.assertTrue(stringArrayListOptional.get(0).equals("stringOptional") && stringArrayListOptional.get(1).equals("stringRequired"));
-        Assert.assertNull(stringArrayListOptionalErrKey);
-
-        Assert.assertTrue(byteRequired == (byte) 2);
-        Assert.assertTrue(byteRequiredErrKey == 0);
-        Assert.assertTrue(byteArrayRequired[0] == (byte) 2 && byteArrayRequired[1] == (byte) (-2));
-        Assert.assertTrue(byteArrayOptional[0] == (byte) (-2) && byteArrayOptional[1] == (byte) 2);
-        Assert.assertNull(byteArrayOptionalErrKey);
-        Assert.assertTrue(byteArrayOrDefault[0] == (byte) 2 && byteArrayOrDefault[1] == (byte) (-2));
-        Assert.assertTrue(byteArrayOrDefaultErrKey[0] == (byte) 0 && byteArrayOrDefaultErrKey[1] == (byte) (-1));
-
-        Assert.assertTrue(shortRequired == (short) 3);
-        Assert.assertTrue(shortRequiredErrKey == 0);
-        Assert.assertTrue(shortArrayRequired[0] == (short) 3 && shortArrayRequired[1] == (short) (-3));
-        Assert.assertTrue(shortArrayOptional[0] == (short) (-3) && shortArrayOptional[1] == (short) 3);
-        Assert.assertNull(shortArrayOptionalErrKey);
-        Assert.assertTrue(shortArrayOrDefault[0] == (short) 3 && shortArrayOrDefault[1] == (short) (-3));
-        Assert.assertTrue(shortArrayOrDefaultErrKey[0] == (short) 0 && shortArrayOrDefaultErrKey[1] == (short) (-1));
-
-        Assert.assertTrue(intRequired == 500);
-        Assert.assertTrue(intRequiredErrKey == 0);
-        Assert.assertTrue(intArrayRequired[0] == 500 && intArrayRequired[1] == (-500));
-        Assert.assertTrue(intArrayOptional[0] == (-500) && intArrayOptional[1] == 500);
-        Assert.assertNull(intArrayOptionalErrKey);
-        Assert.assertTrue(intArrayOrDefault[0] == 500 && intArrayOrDefault[1] == (-500));
-        Assert.assertTrue(intArrayOrDefaultErrKey[0] == 0 && intArrayOrDefaultErrKey[1] == (-1));
-        Assert.assertTrue(intArrayListRequired.get(0) == 500 && intArrayListRequired.get(1) == (-500));
-        Assert.assertTrue(intArrayListOrDefault.get(0) == 600 && intArrayListOrDefault.get(1) == (-600));
-        Assert.assertTrue(intArrayListOrDefaultErrKey.get(0) == 0 && intArrayListOrDefaultErrKey.get(1) == 0);
-        Assert.assertTrue(intArrayListOptional.get(0) == -500 && intArrayListOptional.get(1) == 500);
-        Assert.assertNull(intArrayListOptionalErrKey);
-
-        Assert.assertTrue(longRequired == 1000L);
-        Assert.assertTrue(longRequiredErrKey == 0);
-        Assert.assertTrue(longArrayRequired[0] == 1000L && longArrayRequired[1] == (-1000L));
-        Assert.assertTrue(longArrayOptional[0] == (-1000l) && longArrayOptional[1] == 1000L);
-        Assert.assertNull(longArrayOptionalErrKey);
-        Assert.assertTrue(longArrayOrDefault[0] == 1000L && longArrayOrDefault[1] == (-1000L));
-        Assert.assertTrue(longArrayOrDefaultErrKey[0] == 0 && longArrayOrDefaultErrKey[1] == (-1));
-
-        Assert.assertTrue(floatRequired == 4f);
-        Assert.assertTrue(floatRequiredErrKey == 0f);
-        Assert.assertTrue(floatArrayRequired[0] == 4f && floatArrayRequired[1] == (-4f));
-        Assert.assertTrue(floatArrayOptional[0] == (-4f) && floatArrayOptional[1] == 4f);
-        Assert.assertNull(floatArrayOptionalErrKey);
-        Assert.assertTrue(floatArrayOrDefault[0] == 4f && floatArrayOrDefault[1] == (-4f));
-        Assert.assertTrue(floatArrayOrDefaultErrKey[0] == 0 && floatArrayOrDefaultErrKey[1] == (-1f));
-
-        Assert.assertTrue(doubleRequired == 6d);
-        Assert.assertTrue(doubleRequiredErrKey == 0d);
-        Assert.assertTrue(doubleArrayRequired[0] == 6d && doubleArrayRequired[1] == (-6d));
-        Assert.assertTrue(doubleArrayOptional[0] == (-6d) && doubleArrayOptional[1] == 6d);
-        Assert.assertNull(doubleArrayOptionalErrKey);
-        Assert.assertTrue(doubleArrayOrDefault[0] == 6d && doubleArrayOrDefault[1] == (-6d));
-        Assert.assertTrue(doubleArrayOrDefaultErrKey[0] == 0 && doubleArrayOrDefaultErrKey[1] == (-1d));
-
-        Assert.assertTrue(booleanRequired);
-        Assert.assertTrue(!booleanRequiredErrKey);
-        Assert.assertTrue(booleanArrayRequired[0] && !booleanArrayRequired[1]);
-        Assert.assertTrue(!booleanArrayOptional[0] && booleanArrayOptional[1]);
-        Assert.assertNull(booleanArrayOptionalErrKey);
-        Assert.assertTrue(booleanArrayOrDefault[0] && !booleanArrayOrDefault[1]);
-        Assert.assertTrue(!booleanArrayOrDefaultErrKey[0] && booleanArrayOrDefaultErrKey[1]);
-
-        Assert.assertTrue(charRequired == 'a');
-        Assert.assertTrue(charRequiredErrKey == 'b');
-        Assert.assertTrue(charArrayRequired[0] == 'a' && charArrayRequired[1] == 'b');
-        Assert.assertTrue(charArrayOptional[0] == 'b' && charArrayOptional[1] == 'a');
-        Assert.assertNull(charArrayOptionalErrKey);
-        Assert.assertTrue(charArrayOrDefault[0] == 'a' && charArrayOrDefault[1] == 'b');
-        Assert.assertTrue(charArrayOrDefaultErrKey[0] == 'b' && charArrayOrDefaultErrKey[1] == 'a');
-    }
-
-    @Test
-    public void resFragmentArgsTest() {
-        ResTestActivity hostActivity = mResActivityTestRule.getActivity();
-        android.app.Fragment activity = hostActivity.getFragmentManager().findFragmentById(android.R.id.content);
-        assert activity != null;
-
-        byte byteRequired = Argsx.readByteArgOr(activity, R.string.byte_required, (byte) 0);
-        byte byteRequiredErrKey = Argsx.readByteArgOr(activity, R.string.not_exist_key, (byte) 0);
-        byte[] byteArrayRequired = Argsx.readByteArrayArgOrThrow(activity, R.string.byte_array_required);
-        byte[] byteArrayOptional = Argsx.readByteArrayArgOrNull(activity, R.string.byte_array_optional);
-        byte[] byteArrayOptionalErrKey = Argsx.readByteArrayArgOrNull(activity, R.string.not_exist_key);
-        byte[] byteArrayOrDefault = Argsx.readByteArrayArgOr(activity, R.string.byte_array_or_default, byteArrayOf((byte) 0, (byte) 0));
-        byte[] byteArrayOrDefaultErrKey = Argsx.readByteArrayArgOr(activity, R.string.not_exist_key, byteArrayOf((byte) 0, (byte) (-1)));
-
-        short shortRequired = Argsx.readShortArgOr(activity, R.string.short_required, (short) 0);
-        short shortRequiredErrKey = Argsx.readShortArgOr(activity, R.string.not_exist_key, (short) 0);
-        short[] shortArrayRequired = Argsx.readShortArrayArgOrThrow(activity, R.string.short_array_required);
-        short[] shortArrayOptional = Argsx.readShortArrayArgOrNull(activity, R.string.short_array_optional);
-        short[] shortArrayOptionalErrKey = Argsx.readShortArrayArgOrNull(activity, R.string.not_exist_key);
-        short[] shortArrayOrDefault = Argsx.readShortArrayArgOr(activity, R.string.short_array_or_default, shortArrayOf((short) 0, (short) 0));
-        short[] shortArrayOrDefaultErrKey = Argsx.readShortArrayArgOr(activity, R.string.not_exist_key, shortArrayOf((short) 0, (short) (-1)));
-
-
-        int intRequired = Argsx.readIntArgOr(activity, R.string.int_required, 0);
-        int intRequiredErrKey = Argsx.readIntArgOr(activity, R.string.not_exist_key, 0);
-        int[] intArrayRequired = Argsx.readIntArrayArgOrThrow(activity, R.string.int_array_required);
-        int[] intArrayOptional = Argsx.readIntArrayArgOrNull(activity, R.string.int_array_optional);
-        int[] intArrayOptionalErrKey = Argsx.readIntArrayArgOrNull(activity, R.string.not_exist_key);
-        int[] intArrayOrDefault = Argsx.readIntArrayArgOr(activity, R.string.int_array_or_default, intArrayOf(0, 0));
-        int[] intArrayOrDefaultErrKey = Argsx.readIntArrayArgOr(activity, R.string.not_exist_key, intArrayOf(0, (-1)));
-        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArgOrThrow(activity, R.string.int_array_list_required);
-        ArrayList<Integer> intArrayListOrDefault = Argsx.readIntArrayListArgOr(activity, R.string.int_array_list_or_default, arrayListOf(0, 0));
-        ArrayList<Integer> intArrayListOrDefaultErrKey = Argsx.readIntArrayListArgOr(activity, R.string.not_exist_key, arrayListOf(0, 0));
-        ArrayList<Integer> intArrayListOptional = Argsx.readIntArrayListArgOrNull(activity, R.string.int_array_list_optional);
-        ArrayList<Integer> intArrayListOptionalErrKey = Argsx.readIntArrayListArgOrNull(activity, R.string.not_exist_key);
-
-        long longRequired = Argsx.readLongArgOr(activity, R.string.long_required, 0);
-        long longRequiredErrKey = Argsx.readLongArgOr(activity, R.string.not_exist_key, 0);
-        long[] longArrayRequired = Argsx.readLongArrayArgOrThrow(activity, R.string.long_array_required);
-        long[] longArrayOptional = Argsx.readLongArrayArgOrNull(activity, R.string.long_array_optional);
-        long[] longArrayOptionalErrKey = Argsx.readLongArrayArgOrNull(activity, R.string.not_exist_key);
-        long[] longArrayOrDefault = Argsx.readLongArrayArgOr(activity, R.string.long_array_or_default, longArrayOf(0, 0));
-        long[] longArrayOrDefaultErrKey = Argsx.readLongArrayArgOr(activity, R.string.not_exist_key, longArrayOf(0, (-1)));
-
-        float floatRequired = Argsx.readFloatArgOr(activity, R.string.float_required, 0f);
-        float floatRequiredErrKey = Argsx.readFloatArgOr(activity, R.string.not_exist_key, 0f);
-        float[] floatArrayRequired = Argsx.readFloatArrayArgOrThrow(activity, R.string.float_array_required);
-        float[] floatArrayOptional = Argsx.readFloatArrayArgOrNull(activity, R.string.float_array_optional);
-        float[] floatArrayOptionalErrKey = Argsx.readFloatArrayArgOrNull(activity, R.string.not_exist_key);
-        float[] floatArrayOrDefault = Argsx.readFloatArrayArgOr(activity, R.string.float_array_or_default, floatArrayOf(0f, 0f));
-        float[] floatArrayOrDefaultErrKey = Argsx.readFloatArrayArgOr(activity, R.string.not_exist_key, floatArrayOf(0f, (-1f)));
-
-        double doubleRequired = Argsx.readDoubleArgOr(activity, R.string.double_required, 0d);
-        double doubleRequiredErrKey = Argsx.readDoubleArgOr(activity, R.string.not_exist_key, 0d);
-        double[] doubleArrayRequired = Argsx.readDoubleArrayArgOrThrow(activity, R.string.double_array_required);
-        double[] doubleArrayOptional = Argsx.readDoubleArrayArgOrNull(activity, R.string.double_array_optional);
-        double[] doubleArrayOptionalErrKey = Argsx.readDoubleArrayArgOrNull(activity, R.string.not_exist_key);
-        double[] doubleArrayOrDefault = Argsx.readDoubleArrayArgOr(activity, R.string.double_array_or_default, doubleArrayOf(0d, 0d));
-        double[] doubleArrayOrDefaultErrKey = Argsx.readDoubleArrayArgOr(activity, R.string.not_exist_key, doubleArrayOf(0d, (-1d)));
-
-        boolean booleanRequired = Argsx.readBooleanArgOr(activity, R.string.boolean_required, false);
-        boolean booleanRequiredErrKey = Argsx.readBooleanArgOr(activity, R.string.not_exist_key, false);
-        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArgOrThrow(activity, R.string.boolean_array_required);
-        boolean[] booleanArrayOptional = Argsx.readBooleanArrayArgOrNull(activity, R.string.boolean_array_optional);
-        boolean[] booleanArrayOptionalErrKey = Argsx.readBooleanArrayArgOrNull(activity, R.string.not_exist_key);
-        boolean[] booleanArrayOrDefault = Argsx.readBooleanArrayArgOr(activity, R.string.boolean_array_or_default, booleanArrayOf(true, false));
-        boolean[] booleanArrayOrDefaultErrKey = Argsx.readBooleanArrayArgOr(activity, R.string.not_exist_key, booleanArrayOf(false, true));
-
-        char charRequired = Argsx.readCharArgOr(activity, R.string.char_required, 'a');
-        char charRequiredErrKey = Argsx.readCharArgOr(activity, R.string.not_exist_key, 'b');
-        char[] charArrayRequired = Argsx.readCharArrayArgOrThrow(activity, R.string.char_array_required);
-        char[] charArrayOptional = Argsx.readCharArrayArgOrNull(activity, R.string.char_array_optional);
-        char[] charArrayOptionalErrKey = Argsx.readCharArrayArgOrNull(activity, R.string.not_exist_key);
-        char[] charArrayOrDefault = Argsx.readCharArrayArgOr(activity, R.string.char_array_or_default, charArrayOf('a', 'b'));
-        char[] charArrayOrDefaultErrKey = Argsx.readCharArrayArgOr(activity, R.string.not_exist_key, charArrayOf('b', 'a'));
-
-        String stringRequired = Argsx.readStringArgOr(activity, R.string.string_required, "stringRequired");
-        String stringRequiredErrKey = Argsx.readStringArgOr(activity, R.string.not_exist_key, "stringRequiredErrKey");
-        String[] stringArrayRequired = Argsx.readStringArrayArgOrThrow(activity, R.string.string_array_required);
-        String[] stringArrayOptional = Argsx.readStringArrayArgOrNull(activity, R.string.string_array_optional);
-        String[] stringArrayOptionalErrKey = Argsx.readStringArrayArgOrNull(activity, R.string.not_exist_key);
-        String[] stringArrayOrDefault = Argsx.readStringArrayArgOr(activity, R.string.string_array_or_default, arrayOf("array", "dft"));
-        String[] stringArrayOrDefaultErrKey = Argsx.readStringArrayArgOr(activity, R.string.not_exist_key, arrayOf("error", "erk"));
-        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArgOrThrow(activity, R.string.string_array_list_required);
-        ArrayList<String> stringArrayListOrDefault = Argsx.readStringArrayListArgOr(activity, R.string.string_array_list_or_default, arrayListOf("list", "default"));
-        ArrayList<String> stringArrayListOrDefaultErrKey = Argsx.readStringArrayListArgOr(activity, R.string.not_exist_key, arrayListOf("stringArrayListOrDefaultErrKey", "errKey"));
-        ArrayList<String> stringArrayListOptional = Argsx.readStringArrayListArgOrNull(activity, R.string.string_array_list_optional);
-        ArrayList<String> stringArrayListOptionalErrKey = Argsx.readStringArrayListArgOrNull(activity, R.string.not_exist_key);
-
-        CharSequence charSequenceRequired = Argsx.readCharSequenceArgOr(activity, R.string.char_sequence_required, "charSequenceRequired");
-        CharSequence charSequenceRequiredErrKey = Argsx.readCharSequenceArgOr(activity, R.string.not_exist_key, "charSequenceRequiredErrKey");
-        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArgOrThrow(activity, R.string.char_sequence_array_required);
-        CharSequence[] charSequenceArrayOptional = Argsx.readCharSequenceArrayArgOrNull(activity, R.string.char_sequence_array_optional);
-        CharSequence[] charSequenceArrayOptionalErrKey = Argsx.readCharSequenceArrayArgOrNull(activity, R.string.not_exist_key);
-        CharSequence[] charSequenceArrayOrDefault = Argsx.readCharSequenceArrayArgOr(activity, R.string.char_sequence_array_or_default, arrayOf("array", "dft"));
-        CharSequence[] charSequenceArrayOrDefaultErrKey = Argsx.readCharSequenceArrayArgOr(activity, R.string.not_exist_key, arrayOf("error", "erk"));
-        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArgOrThrow(activity, R.string.char_sequence_array_list_required);
-        ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, R.string.char_sequence_array_list_or_default, Collectionx.<CharSequence>arrayListOf("list", "default"));
-        ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, R.string.not_exist_key, Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
-        ArrayList<CharSequence> charSequenceArrayListOptional = Argsx.readCharSequenceArrayListArgOrNull(activity, R.string.char_sequence_array_list_optional);
-        ArrayList<CharSequence> charSequenceArrayListOptionalErrKey = Argsx.readCharSequenceArrayListArgOrNull(activity, R.string.not_exist_key);
-
-
-        Parcelable parcelableRequired = Argsx.readParcelableArgOr(activity, R.string.parcelable_required, new TestParcelable("required"));
-        Parcelable parcelableRequiredErrKey = Argsx.readParcelableArgOr(activity, R.string.not_exist_key, new TestParcelable("parcelableRequiredErrKey"));
-        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArgOrThrow(activity, R.string.parcelable_array_required);
-        Parcelable[] parcelableArrayOptional = Argsx.readParcelableArrayArgOrNull(activity, R.string.parcelable_array_optional);
-        Parcelable[] parcelableArrayOptionalErrKey = Argsx.readParcelableArrayArgOrNull(activity, R.string.not_exist_key);
-        Parcelable[] parcelableArrayOrDefault = Argsx.readParcelableArrayArgOr(activity, R.string.parcelable_array_or_default, arrayOf(new TestParcelable("array"), new TestParcelable("dft")));
-        Parcelable[] parcelableArrayOrDefaultErrKey = Argsx.readParcelableArrayArgOr(activity, R.string.not_exist_key, arrayOf(new TestParcelable("error"), new TestParcelable("erk")));
-        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArgOrThrow(activity, R.string.parcelable_array_list_required);
-        ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, R.string.parcelable_array_list_or_default, Collectionx.<Parcelable>arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
-        ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, R.string.not_exist_key, Collectionx.<Parcelable>arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
-        ArrayList<Parcelable> parcelableArrayListOptional = Argsx.readParcelableArrayListArgOrNull(activity, R.string.parcelable_array_list_optional);
-        ArrayList<Parcelable> parcelableArrayListOptionalErrKey = Argsx.readParcelableArrayListArgOrNull(activity, R.string.not_exist_key);
-
-        TestSerializable serializableRequired = Argsx.readSerializableArgOrThrow(activity, R.string.serializable_required);
-        TestSerializable serializableOptional = Argsx.readSerializableArgOrNull(activity, R.string.serializable_optional);
-        TestSerializable serializableOptionalErrKey = Argsx.readSerializableArgOrNull(activity, R.string.not_exist_key);
-        TestSerializable serializableOrDefault = Argsx.readSerializableArgOr(activity, R.string.serializable_or_default, new TestSerializable("default"));
-        TestSerializable serializableOrDefaultErrKey = Argsx.readSerializableArgOr(activity, R.string.not_exist_key, new TestSerializable("errKey"));
-
-        Bundle bundleRequired = Argsx.readBundleArgOrThrow(activity, R.string.bundle_required);
-        Bundle bundleOptional = Argsx.readBundleArgOrNull(activity, R.string.bundle_optional);
-        Bundle bundleOptionalErrKey = Argsx.readBundleArgOrNull(activity, R.string.not_exist_key);
-        Bundle bundleOrDefault = Argsx.readBundleArgOr(activity, R.string.bundle_or_default, new Bundle());
-        Bundle defaultBundle = new Bundle();
-        defaultBundle.putString("bundle", "bundleErrKey");
-        Bundle bundleOrDefaultErrKey = Argsx.readBundleArgOr(activity, R.string.not_exist_key, defaultBundle);
-
-
-        SparseArray<Parcelable> sparseArrayDefault = new SparseArray<>();
-        sparseArrayDefault.put(0, new TestParcelable("0"));
-        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArgOrThrow(activity, R.string.sparse_parcelable_array_required);
-        SparseArray<Parcelable> sparseParcelableArrayOptional = Argsx.readSparseParcelableArrayArgOrNull(activity, R.string.sparse_parcelable_array_optional);
-        SparseArray<Parcelable> sparseParcelableArrayOptionalErrKey = Argsx.readSparseParcelableArrayArgOrNull(activity, R.string.not_exist_key);
-        SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, R.string.sparse_parcelable_array_or_default, sparseArrayDefault);
-        SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, R.string.not_exist_key, sparseArrayDefault);
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            IBinder binderRequired = Argsx.readBinderArgOrThrow(activity, R.string.binder_required);
-            IBinder binderOptional = Argsx.readBinderArgOrNull(activity, R.string.binder_optional);
-            IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, R.string.not_exist_key);
-            IBinder binderOrDefault = Argsx.readBinderArgOr(activity, R.string.binder_or_default, new TestBinder(""));
-            IBinder binderOrDefaultErrKey = Argsx.readBinderArgOr(activity, R.string.not_exist_key, new TestBinder("binderOrDefaultErrKey"));
-
-            Assert.assertEquals(binderRequired, new TestBinder("binderRequired"));
-            Assert.assertEquals(binderOptional, new TestBinder("binderOptional"));
-            Assert.assertNull(binderOptionalErrKey);
-            Assert.assertEquals(binderOrDefault, new TestBinder("binderOrDefault"));
-            Assert.assertEquals(binderOrDefaultErrKey, new TestBinder("binderOrDefaultErrKey"));
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Size sizeRequired = Argsx.readSizeArgOrThrow(activity, R.string.size_required);
-            Size sizeOptional = Argsx.readSizeArgOrNull(activity, R.string.size_optional);
-            Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, R.string.not_exist_key);
-            Size sizeOrDefault = Argsx.readSizeArgOr(activity, R.string.size_or_default, new Size(0, 0));
-            Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, R.string.not_exist_key, new Size(4, 4));
-
-            SizeF sizeFRequired = Argsx.readSizeFArgOrThrow(activity, R.string.sizeF_required);
-            SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, R.string.sizeF_optional);
-            SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, R.string.not_exist_key);
-            SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, R.string.sizeF_or_default, new SizeF(0f, 0f));
-            SizeF sizeFOrDefaultErrKey = Argsx.readSizeFArgOr(activity, R.string.not_exist_key, new SizeF(4f, 4f));
-
-            Assert.assertTrue(sizeFRequired.getWidth() == 1f && sizeFRequired.getHeight() == 1f);
-            Assert.assertTrue(sizeFOptional.getWidth() == 2f && sizeFOptional.getHeight() == 2f);
-            Assert.assertNull(sizeFOptionalErrKey);
-            Assert.assertTrue(sizeFOrDefault.getWidth() == 3f && sizeFOrDefault.getHeight() == 3f);
-            Assert.assertTrue(sizeFOrDefaultErrKey.getWidth() == 4f && sizeFOrDefaultErrKey.getHeight() == 4f);
-
-            Assert.assertTrue(sizeRequired.getWidth() == 1 && sizeRequired.getHeight() == 1);
-            Assert.assertTrue(sizeOptional.getWidth() == 2 && sizeOptional.getHeight() == 2);
-            Assert.assertNull(sizeOptionalErrKey);
-            Assert.assertTrue(sizeOrDefault.getWidth() == 3 && sizeOrDefault.getHeight() == 3);
-            Assert.assertTrue(sizeOrDefaultErrKey.getWidth() == 4 && sizeOrDefaultErrKey.getHeight() == 4);
-        }
 
         //test start
 
@@ -2763,23 +2142,12 @@ public class ArgsxTest {
             setContentView(me.panpf.androidx.test.R.layout.at_test);
             TestSupportFragment supportFragment = TestSupportFragment.newInstance(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().replace(me.panpf.androidx.test.R.id.testAt_frame, supportFragment).commit();
-
-            TestFragment testFragment = TestFragment.newInstance(getIntent().getExtras());
-            getFragmentManager().beginTransaction().add(android.R.id.content, testFragment).commit();
         }
     }
 
     public static class TestSupportFragment extends Fragment {
         public static TestSupportFragment newInstance(Bundle args) {
             TestSupportFragment fragment = new TestSupportFragment();
-            fragment.setArguments(args);
-            return fragment;
-        }
-    }
-
-    public static class TestFragment extends android.app.Fragment {
-        public static TestFragment newInstance(Bundle args) {
-            TestFragment fragment = new TestFragment();
             fragment.setArguments(args);
             return fragment;
         }
@@ -2794,9 +2162,6 @@ public class ArgsxTest {
             setContentView(me.panpf.androidx.test.R.layout.at_test);
             ResTestSupportFragment supportFragment = ResTestSupportFragment.newInstance(getIntent().getExtras());
             getSupportFragmentManager().beginTransaction().replace(me.panpf.androidx.test.R.id.testAt_frame, supportFragment).commit();
-
-            ResTestFragment testFragment = ResTestFragment.newInstance(getIntent().getExtras());
-            getFragmentManager().beginTransaction().add(android.R.id.content, testFragment).commit();
         }
 
         public static Intent createIntent(Context context) {
@@ -2877,9 +2242,9 @@ public class ArgsxTest {
             starter.putExtra(context.getString(R.string.char_sequence_array_or_default), arrayOf("charSequence", "default"));
 
 
-            starter.putCharSequenceArrayListExtra(context.getString(R.string.char_sequence_array_list_required), Collectionx.<CharSequence>arrayListOf("charSequenceArrayListRequired", "required"));
-            starter.putCharSequenceArrayListExtra(context.getString(R.string.char_sequence_array_list_optional), Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOptional", "optional"));
-            starter.putCharSequenceArrayListExtra(context.getString(R.string.char_sequence_array_list_or_default), Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefault", "default"));
+            starter.putCharSequenceArrayListExtra(context.getString(R.string.char_sequence_array_list_required), Collectionx.arrayListOf("charSequenceArrayListRequired", "required"));
+            starter.putCharSequenceArrayListExtra(context.getString(R.string.char_sequence_array_list_optional), Collectionx.arrayListOf("charSequenceArrayListOptional", "optional"));
+            starter.putCharSequenceArrayListExtra(context.getString(R.string.char_sequence_array_list_or_default), Collectionx.arrayListOf("charSequenceArrayListOrDefault", "default"));
 
             starter.putExtra(context.getString(R.string.string_or_default), "stringOrDefault");
             starter.putExtra(context.getString(R.string.string_array_or_default), arrayOf("stringArrayOrDefault", "default"));
@@ -2955,54 +2320,42 @@ public class ArgsxTest {
         }
     }
 
-    public static class ResTestFragment extends android.app.Fragment {
-        public static ResTestFragment newInstance(Bundle args) {
-            ResTestFragment fragment = new ResTestFragment();
-            fragment.setArguments(args);
-            return fragment;
-        }
-    }
-
     //no extras
     public static class NoExtraActivity extends FragmentActivity {
         public static Intent createIntent(Context context) {
-            Intent starter = new Intent(context, NoExtraActivity.class);
-            return starter;
+            return new Intent(context, NoExtraActivity.class);
         }
     }
 
     //uri || intent
     public static class TestOnlyUriNoIntentActivity extends FragmentActivity {
         public static Intent createIntentWithUri() {
-            String params = new StringBuilder()
-                    .append("byteIntentUriOrDefault=").append(((byte) 1))
-                    .append("&shortIntentUriOrDefault=").append(((short) 2))
-                    .append("&intIntentUriOrDefault=").append(3)
-                    .append("&longIntentUriOrDefault=").append(4L)
-                    .append("&floatIntentUriOrDefault=").append(((float) 5))
-                    .append("&doubleIntentUriOrDefault=").append(((double) 6))
-                    .append("&booleanIntentUriOrDefault=").append(true)
-                    .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
-                    .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
-                    .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+            String params = "byteIntentUriOrDefault=" + ((byte) 1) +
+                    "&shortIntentUriOrDefault=" + ((short) 2) +
+                    "&intIntentUriOrDefault=" + 3 +
+                    "&longIntentUriOrDefault=" + 4L +
+                    "&floatIntentUriOrDefault=" + ((float) 5) +
+                    "&doubleIntentUriOrDefault=" + ((double) 6) +
+                    "&booleanIntentUriOrDefault=" + true +
+                    "&stringIntentUriRequired=" + "stringIntentUriRequired" +
+                    "&stringIntentUriOptional=" + "stringIntentUriOptional" +
+                    "&stringIntentUriOrDefault=" + "stringIntentUriOrDefault" +
 
                     //Activity Uri Intent
-                    .append("&byteUriIntentOrDefault=").append(((byte) 11))
-                    .append("&shortUriIntentOrDefault=").append(((short) 12))
-                    .append("&intUriIntentOrDefault=").append(13)
-                    .append("&longUriIntentOrDefault=").append(14L)
-                    .append("&floatUriIntentOrDefault=").append(((float) 15))
-                    .append("&doubleUriIntentOrDefault=").append(((double) 16))
-                    .append("&booleanUriIntentOrDefault=").append(true)
-                    .append("&stringUriIntentRequired=").append("stringUriIntentRequired")
-                    .append("&stringUriIntentOptional=").append("stringUriIntentOptional")
-                    .append("&stringUriIntentOrDefault=").append("stringUriIntentOrDefault")
-                    .toString();
+                    "&byteUriIntentOrDefault=" + ((byte) 11) +
+                    "&shortUriIntentOrDefault=" + ((short) 12) +
+                    "&intUriIntentOrDefault=" + 13 +
+                    "&longUriIntentOrDefault=" + 14L +
+                    "&floatUriIntentOrDefault=" + ((float) 15) +
+                    "&doubleUriIntentOrDefault=" + ((double) 16) +
+                    "&booleanUriIntentOrDefault=" + true +
+                    "&stringUriIntentRequired=" + "stringUriIntentRequired" +
+                    "&stringUriIntentOptional=" + "stringUriIntentOptional" +
+                    "&stringUriIntentOrDefault=" + "stringUriIntentOrDefault";
 
             Uri uri = Uri.parse("https://github.com/panpf/androidx/uri?" + params);
 
-            Intent starter = new Intent(Intent.ACTION_VIEW, uri);
-            return starter;
+            return new Intent(Intent.ACTION_VIEW, uri);
         }
     }
 
@@ -3041,30 +2394,28 @@ public class ArgsxTest {
 
         public static Intent createIntentWithUriAndExtras(Context context) {
 
-            String params = new StringBuilder()
-                    .append("byteIntentUriOrDefault=").append(((byte) 1))
-                    .append("&shortIntentUriOrDefault=").append(((short) 2))
-                    .append("&intIntentUriOrDefault=").append(3)
-                    .append("&longIntentUriOrDefault=").append(4L)
-                    .append("&floatIntentUriOrDefault=").append(((float) 5))
-                    .append("&doubleIntentUriOrDefault=").append(((double) 6))
-                    .append("&booleanIntentUriOrDefault=").append(true)
-                    .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
-                    .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
-                    .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+            String params = "byteIntentUriOrDefault=" + ((byte) 1) +
+                    "&shortIntentUriOrDefault=" + ((short) 2) +
+                    "&intIntentUriOrDefault=" + 3 +
+                    "&longIntentUriOrDefault=" + 4L +
+                    "&floatIntentUriOrDefault=" + ((float) 5) +
+                    "&doubleIntentUriOrDefault=" + ((double) 6) +
+                    "&booleanIntentUriOrDefault=" + true +
+                    "&stringIntentUriRequired=" + "stringIntentUriRequired" +
+                    "&stringIntentUriOptional=" + "stringIntentUriOptional" +
+                    "&stringIntentUriOrDefault=" + "stringIntentUriOrDefault" +
 
                     //Activity Uri Intent
-                    .append("&byteUriIntentOrDefault=").append(((byte) 11))
-                    .append("&shortUriIntentOrDefault=").append(((short) 12))
-                    .append("&intUriIntentOrDefault=").append(13)
-                    .append("&longUriIntentOrDefault=").append(14L)
-                    .append("&floatUriIntentOrDefault=").append(((float) 15))
-                    .append("&doubleUriIntentOrDefault=").append(((double) 16))
-                    .append("&booleanUriIntentOrDefault=").append(true)
-                    .append("&stringUriIntentRequired=").append("stringUriIntentRequired")
-                    .append("&stringUriIntentOptional=").append("stringUriIntentOptional")
-                    .append("&stringUriIntentOrDefault=").append("stringUriIntentOrDefault")
-                    .toString();
+                    "&byteUriIntentOrDefault=" + ((byte) 11) +
+                    "&shortUriIntentOrDefault=" + ((short) 12) +
+                    "&intUriIntentOrDefault=" + 13 +
+                    "&longUriIntentOrDefault=" + 14L +
+                    "&floatUriIntentOrDefault=" + ((float) 15) +
+                    "&doubleUriIntentOrDefault=" + ((double) 16) +
+                    "&booleanUriIntentOrDefault=" + true +
+                    "&stringUriIntentRequired=" + "stringUriIntentRequired" +
+                    "&stringUriIntentOptional=" + "stringUriIntentOptional" +
+                    "&stringUriIntentOrDefault=" + "stringUriIntentOrDefault";
 
             Uri uri = Uri.parse("https://github.com/panpf/androidx/uri/intent?" + params);
 
@@ -3109,35 +2460,32 @@ public class ArgsxTest {
     //res
     public static class ResTestOnlyUriNoIntentActivity extends FragmentActivity {
         public static Intent createIntentWithUri() {
-            String params = new StringBuilder()
-                    .append("byteIntentUriOrDefault=").append(((byte) 1))
-                    .append("&shortIntentUriOrDefault=").append(((short) 2))
-                    .append("&intIntentUriOrDefault=").append(3)
-                    .append("&longIntentUriOrDefault=").append(4L)
-                    .append("&floatIntentUriOrDefault=").append(((float) 5))
-                    .append("&doubleIntentUriOrDefault=").append(((double) 6))
-                    .append("&booleanIntentUriOrDefault=").append(true)
-                    .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
-                    .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
-                    .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+            String params = "byteIntentUriOrDefault=" + ((byte) 1) +
+                    "&shortIntentUriOrDefault=" + ((short) 2) +
+                    "&intIntentUriOrDefault=" + 3 +
+                    "&longIntentUriOrDefault=" + 4L +
+                    "&floatIntentUriOrDefault=" + ((float) 5) +
+                    "&doubleIntentUriOrDefault=" + ((double) 6) +
+                    "&booleanIntentUriOrDefault=" + true +
+                    "&stringIntentUriRequired=" + "stringIntentUriRequired" +
+                    "&stringIntentUriOptional=" + "stringIntentUriOptional" +
+                    "&stringIntentUriOrDefault=" + "stringIntentUriOrDefault" +
 
                     //Activity Uri Intent
-                    .append("&byteUriIntentOrDefault=").append(((byte) 11))
-                    .append("&shortUriIntentOrDefault=").append(((short) 12))
-                    .append("&intUriIntentOrDefault=").append(13)
-                    .append("&longUriIntentOrDefault=").append(14L)
-                    .append("&floatUriIntentOrDefault=").append(((float) 15))
-                    .append("&doubleUriIntentOrDefault=").append(((double) 16))
-                    .append("&booleanUriIntentOrDefault=").append(true)
-                    .append("&stringUriIntentRequired=").append("stringUriIntentRequired")
-                    .append("&stringUriIntentOptional=").append("stringUriIntentOptional")
-                    .append("&stringUriIntentOrDefault=").append("stringUriIntentOrDefault")
-                    .toString();
+                    "&byteUriIntentOrDefault=" + ((byte) 11) +
+                    "&shortUriIntentOrDefault=" + ((short) 12) +
+                    "&intUriIntentOrDefault=" + 13 +
+                    "&longUriIntentOrDefault=" + 14L +
+                    "&floatUriIntentOrDefault=" + ((float) 15) +
+                    "&doubleUriIntentOrDefault=" + ((double) 16) +
+                    "&booleanUriIntentOrDefault=" + true +
+                    "&stringUriIntentRequired=" + "stringUriIntentRequired" +
+                    "&stringUriIntentOptional=" + "stringUriIntentOptional" +
+                    "&stringUriIntentOrDefault=" + "stringUriIntentOrDefault";
 
             Uri uri = Uri.parse("https://github.com/panpf/androidx/res/uri?" + params);
 
-            Intent starter = new Intent(Intent.ACTION_VIEW, uri);
-            return starter;
+            return new Intent(Intent.ACTION_VIEW, uri);
         }
     }
 
@@ -3176,30 +2524,28 @@ public class ArgsxTest {
 
         public static Intent createIntentWithUriAndExtras(Context context) {
 
-            String params = new StringBuilder()
-                    .append("byteIntentUriOrDefault=").append(((byte) 1))
-                    .append("&shortIntentUriOrDefault=").append(((short) 2))
-                    .append("&intIntentUriOrDefault=").append(3)
-                    .append("&longIntentUriOrDefault=").append(4L)
-                    .append("&floatIntentUriOrDefault=").append(((float) 5))
-                    .append("&doubleIntentUriOrDefault=").append(((double) 6))
-                    .append("&booleanIntentUriOrDefault=").append(true)
-                    .append("&stringIntentUriRequired=").append("stringIntentUriRequired")
-                    .append("&stringIntentUriOptional=").append("stringIntentUriOptional")
-                    .append("&stringIntentUriOrDefault=").append("stringIntentUriOrDefault")
+            String params = "byteIntentUriOrDefault=" + ((byte) 1) +
+                    "&shortIntentUriOrDefault=" + ((short) 2) +
+                    "&intIntentUriOrDefault=" + 3 +
+                    "&longIntentUriOrDefault=" + 4L +
+                    "&floatIntentUriOrDefault=" + ((float) 5) +
+                    "&doubleIntentUriOrDefault=" + ((double) 6) +
+                    "&booleanIntentUriOrDefault=" + true +
+                    "&stringIntentUriRequired=" + "stringIntentUriRequired" +
+                    "&stringIntentUriOptional=" + "stringIntentUriOptional" +
+                    "&stringIntentUriOrDefault=" + "stringIntentUriOrDefault" +
 
                     //Activity Uri Intent
-                    .append("&byteUriIntentOrDefault=").append(((byte) 11))
-                    .append("&shortUriIntentOrDefault=").append(((short) 12))
-                    .append("&intUriIntentOrDefault=").append(13)
-                    .append("&longUriIntentOrDefault=").append(14L)
-                    .append("&floatUriIntentOrDefault=").append(((float) 15))
-                    .append("&doubleUriIntentOrDefault=").append(((double) 16))
-                    .append("&booleanUriIntentOrDefault=").append(true)
-                    .append("&stringUriIntentRequired=").append("stringUriIntentRequired")
-                    .append("&stringUriIntentOptional=").append("stringUriIntentOptional")
-                    .append("&stringUriIntentOrDefault=").append("stringUriIntentOrDefault")
-                    .toString();
+                    "&byteUriIntentOrDefault=" + ((byte) 11) +
+                    "&shortUriIntentOrDefault=" + ((short) 12) +
+                    "&intUriIntentOrDefault=" + 13 +
+                    "&longUriIntentOrDefault=" + 14L +
+                    "&floatUriIntentOrDefault=" + ((float) 15) +
+                    "&doubleUriIntentOrDefault=" + ((double) 16) +
+                    "&booleanUriIntentOrDefault=" + true +
+                    "&stringUriIntentRequired=" + "stringUriIntentRequired" +
+                    "&stringUriIntentOptional=" + "stringUriIntentOptional" +
+                    "&stringUriIntentOrDefault=" + "stringUriIntentOrDefault";
 
             Uri uri = Uri.parse("https://github.com/panpf/androidx/res/uri/intent?" + params);
 
@@ -3245,84 +2591,64 @@ public class ArgsxTest {
     public static class TestUriActivity extends FragmentActivity {
 
         public static Intent createIntent() {
-            String params = new StringBuilder()
-                    .append("byteUriRequired=").append(((byte) 1))
-                    .append("&byteUriOptional=").append(((byte) -1))
-                    .append("&byteUriOrDefault=").append(((byte) 2))
-
-                    .append("&shortUriRequired=").append(((short) 3))
-                    .append("&shortUriOptional=").append(((short) -3))
-                    .append("&shortUriOrDefault=").append(((short) 4))
-
-                    .append("&intUriRequired=").append(5)
-                    .append("&intUriOptional=").append(-5)
-                    .append("&intUriOrDefault=").append(6)
-
-                    .append("&longUriRequired=").append(7L)
-                    .append("&longUriOptional=").append((-7L))
-                    .append("&longUriOrDefault=").append(8L)
-
-                    .append("&floatUriRequired=").append(9f)
-                    .append("&floatUriOptional=").append(-9f)
-                    .append("&floatUriOrDefault=").append(10f)
-
-                    .append("&doubleUriRequired=").append(11d)
-                    .append("&doubleUriOptional=").append((-11d))
-                    .append("&doubleUriOrDefault=").append(12d)
-
-                    .append("&booleanUriRequired=").append(true)
-                    .append("&booleanUriOptional=").append(true)
-                    .append("&booleanUriOrDefault=").append(false)
-
-                    .append("&stringUriRequired=").append("stringUriRequired")
-                    .append("&stringUriOptional=").append("stringUriOptional")
-                    .append("&stringUriOrDefault=").append("stringUriOrDefault")
-                    .toString();
+            String params = "byteUriRequired=" + ((byte) 1) +
+                    "&byteUriOptional=" + ((byte) -1) +
+                    "&byteUriOrDefault=" + ((byte) 2) +
+                    "&shortUriRequired=" + ((short) 3) +
+                    "&shortUriOptional=" + ((short) -3) +
+                    "&shortUriOrDefault=" + ((short) 4) +
+                    "&intUriRequired=" + 5 +
+                    "&intUriOptional=" + -5 +
+                    "&intUriOrDefault=" + 6 +
+                    "&longUriRequired=" + 7L +
+                    "&longUriOptional=" + (-7L) +
+                    "&longUriOrDefault=" + 8L +
+                    "&floatUriRequired=" + 9f +
+                    "&floatUriOptional=" + -9f +
+                    "&floatUriOrDefault=" + 10f +
+                    "&doubleUriRequired=" + 11d +
+                    "&doubleUriOptional=" + (-11d) +
+                    "&doubleUriOrDefault=" + 12d +
+                    "&booleanUriRequired=" + true +
+                    "&booleanUriOptional=" + true +
+                    "&booleanUriOrDefault=" + false +
+                    "&stringUriRequired=" + "stringUriRequired" +
+                    "&stringUriOptional=" + "stringUriOptional" +
+                    "&stringUriOrDefault=" + "stringUriOrDefault";
             Uri uri = Uri.parse("https://github.com/panpf/androidx?" + params);
-            Intent starter = new Intent(Intent.ACTION_VIEW, uri);
-            return starter;
+            return new Intent(Intent.ACTION_VIEW, uri);
         }
     }
 
     public static class ResTestUriActivity extends FragmentActivity {
 
         public static Intent createIntent() {
-            String params = new StringBuilder()
-                    .append("byteUriRequired=").append(((byte) 1))
-                    .append("&byteUriOptional=").append(((byte) -1))
-                    .append("&byteUriOrDefault=").append(((byte) 2))
-
-                    .append("&shortUriRequired=").append(((short) 3))
-                    .append("&shortUriOptional=").append(((short) -3))
-                    .append("&shortUriOrDefault=").append(((short) 4))
-
-                    .append("&intUriRequired=").append(5)
-                    .append("&intUriOptional=").append(-5)
-                    .append("&intUriOrDefault=").append(6)
-
-                    .append("&longUriRequired=").append(7L)
-                    .append("&longUriOptional=").append((-7L))
-                    .append("&longUriOrDefault=").append(8L)
-
-                    .append("&floatUriRequired=").append(9f)
-                    .append("&floatUriOptional=").append(-9f)
-                    .append("&floatUriOrDefault=").append(10f)
-
-                    .append("&doubleUriRequired=").append(11d)
-                    .append("&doubleUriOptional=").append((-11d))
-                    .append("&doubleUriOrDefault=").append(12d)
-
-                    .append("&booleanUriRequired=").append(true)
-                    .append("&booleanUriOptional=").append(true)
-                    .append("&booleanUriOrDefault=").append(false)
-
-                    .append("&stringUriRequired=").append("stringUriRequired")
-                    .append("&stringUriOptional=").append("stringUriOptional")
-                    .append("&stringUriOrDefault=").append("stringUriOrDefault")
-                    .toString();
+            String params = "byteUriRequired=" + ((byte) 1) +
+                    "&byteUriOptional=" + ((byte) -1) +
+                    "&byteUriOrDefault=" + ((byte) 2) +
+                    "&shortUriRequired=" + ((short) 3) +
+                    "&shortUriOptional=" + ((short) -3) +
+                    "&shortUriOrDefault=" + ((short) 4) +
+                    "&intUriRequired=" + 5 +
+                    "&intUriOptional=" + -5 +
+                    "&intUriOrDefault=" + 6 +
+                    "&longUriRequired=" + 7L +
+                    "&longUriOptional=" + (-7L) +
+                    "&longUriOrDefault=" + 8L +
+                    "&floatUriRequired=" + 9f +
+                    "&floatUriOptional=" + -9f +
+                    "&floatUriOrDefault=" + 10f +
+                    "&doubleUriRequired=" + 11d +
+                    "&doubleUriOptional=" + (-11d) +
+                    "&doubleUriOrDefault=" + 12d +
+                    "&booleanUriRequired=" + true +
+                    "&booleanUriOptional=" + true +
+                    "&booleanUriOrDefault=" + false +
+                    "&stringUriRequired=" + "stringUriRequired" +
+                    "&stringUriOptional=" + "stringUriOptional" +
+                    "&stringUriOrDefault=" + "stringUriOrDefault";
             Uri uri = Uri.parse("https://github.com/panpf/androidx/res?" + params);
-            Intent starter = new Intent(Intent.ACTION_VIEW, uri);
-            return starter;
+            return new Intent(Intent.ACTION_VIEW, uri);
         }
 
     }
@@ -3330,9 +2656,6 @@ public class ArgsxTest {
     //bean for test
     static class TestParcelable implements Parcelable {
         String tag;
-
-        public TestParcelable() {
-        }
 
         public TestParcelable(String tag) {
             this.tag = tag;
@@ -3366,7 +2689,7 @@ public class ArgsxTest {
 
         @Override
         public boolean equals(@Nullable Object obj) {
-            if (obj != null && obj instanceof TestParcelable) {
+            if (obj instanceof TestParcelable) {
                 return Stringx.equals(((TestParcelable) obj).tag, this.tag);
             }
             return super.equals(obj);
@@ -3382,7 +2705,7 @@ public class ArgsxTest {
 
         @Override
         public boolean equals(@Nullable Object obj) {
-            if (obj != null && obj instanceof TestSerializable) {
+            if (obj instanceof TestSerializable) {
                 return Stringx.equals(((TestSerializable) obj).tag, this.tag);
             }
             return super.equals(obj);
@@ -3398,7 +2721,7 @@ public class ArgsxTest {
 
         @Override
         public boolean equals(@Nullable Object obj) {
-            if (obj != null && obj instanceof TestBinder) {
+            if (obj instanceof TestBinder) {
                 return Stringx.equals(((TestBinder) obj).tag, this.tag);
             }
             return super.equals(obj);

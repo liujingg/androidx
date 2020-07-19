@@ -45,49 +45,11 @@ public class Fragmentx {
     }
 
     /**
-     * Get Application from Fragment
-     */
-    @Nullable
-    public static Application getApplication(@Nullable android.app.Fragment fragment) {
-        Activity activity = fragment != null ? fragment.getActivity() : null;
-        return activity != null ? activity.getApplication() : null;
-    }
-
-    /**
-     * Get Activity from Fragment, throws an exception if null
-     */
-    @NonNull
-    public static Activity requireActivity(@NonNull android.app.Fragment fragment) {
-        Activity activity = fragment.getActivity();
-        if (activity == null)
-            throw new IllegalArgumentException("Fragment " + fragment + " not attached to Activity");
-        return activity;
-    }
-
-    /**
      * Get Application from Fragment, throws an exception if null
      */
     @NonNull
     public static Application requireApplication(@NonNull Fragment fragment) {
         return (Application) fragment.requireContext().getApplicationContext();
-    }
-
-    /**
-     * Get Application from Fragment, throws an exception if null
-     */
-    @NonNull
-    public static Application requireApplication(@NonNull android.app.Fragment fragment) {
-        Activity activity = fragment.getActivity();
-        if (activity == null)
-            throw new IllegalArgumentException("Fragment " + fragment + " not attached to Activity");
-        return activity.getApplication();
-    }
-
-    /**
-     * Return true if the fragment has been destroyed
-     */
-    public static boolean isDestroyedCompat(@NonNull android.app.Fragment fragment) {
-        return fragment.getActivity() == null;
     }
 
     /**
@@ -110,36 +72,6 @@ public class Fragmentx {
                 return (T) parent;
             } else {
                 parent = parent.getParentFragment();
-            }
-        }
-        Activity parentActivity = fragment.getActivity();
-        while (parentActivity != null) {
-            if (clazz.isAssignableFrom(parentActivity.getClass())) {
-                //noinspection unchecked
-                return (T) parentActivity;
-            } else {
-                parentActivity = parentActivity.getParent();
-            }
-        }
-        return null;
-    }
-
-    /**
-     * If the own or parent Fragment implements the specified [clazz], it returns its implementation.
-     */
-    @Nullable
-    public static <T> T getImplFromParent(@NonNull android.app.Fragment fragment, @NonNull Class<T> clazz) {
-        android.app.Fragment parent = fragment;
-        while (parent != null) {
-            if (clazz.isAssignableFrom(parent.getClass())) {
-                //noinspection unchecked
-                return (T) parent;
-            } else {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                    parent = parent.getParentFragment();
-                } else {
-                    parent = null;
-                }
             }
         }
         Activity parentActivity = fragment.getActivity();
@@ -178,31 +110,6 @@ public class Fragmentx {
      */
     public static <T extends Fragment> T instantiate(@NonNull Class<? extends T> clazz) {
         return instantiate(clazz, null);
-    }
-
-    /**
-     * Instantiate a Fragment and set arguments
-     */
-    public static <T extends android.app.Fragment> T instantiateOrigin(@NonNull Class<? extends T> clazz, @Nullable Bundle arguments) {
-        T fragment;
-        try {
-            fragment = clazz.newInstance();
-        } catch (InstantiationException e) {
-            throw new IllegalArgumentException(e);
-        } catch (IllegalAccessException e) {
-            throw new IllegalArgumentException(e);
-        }
-        if (arguments != null) {
-            fragment.setArguments(arguments);
-        }
-        return fragment;
-    }
-
-    /**
-     * Instantiate a Fragment and set arguments
-     */
-    public static <T extends android.app.Fragment> T instantiateOrigin(@NonNull Class<? extends T> clazz) {
-        return instantiateOrigin(clazz, null);
     }
 
 

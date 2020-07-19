@@ -56,7 +56,7 @@ public class InputMethodxTest {
     @Test
     public void testShowSoftInput() throws InterruptedException {
         final TestActivity activity = activityRule.getActivity();
-        final EditText originEditText = activity.getOriginFragmentEditTxt();
+        final EditText originEditText = activity.getSupportFragmentEditTxt();
 
         // ensure hide
         if (InputMethodx.isSoftInputShowing(activity)) {
@@ -74,7 +74,7 @@ public class InputMethodxTest {
     @Test
     public void testDelayShowSoftInput() throws InterruptedException {
         final TestActivity activity = activityRule.getActivity();
-        final EditText supportEditText = activity.getOriginFragmentEditTxt();
+        final EditText supportEditText = activity.getSupportFragmentEditTxt();
 
         // ensure hide
         if (InputMethodx.isSoftInputShowing(activity)) {
@@ -102,7 +102,6 @@ public class InputMethodxTest {
     @Test
     public void testHideSoftInput() throws InterruptedException {
         final TestActivity activity = activityRule.getActivity();
-        final EditText originEditText = activity.getOriginFragmentEditTxt();
         final EditText supportEditText = activity.getSupportFragmentEditTxt();
 
         // ensure hide
@@ -111,26 +110,6 @@ public class InputMethodxTest {
             Thread.sleep(500);
             Assert.assertFalse(InputMethodx.isSoftInputShowing(activity));
         }
-
-        // show
-        Androidx.runInUI(() -> InputMethodx.showSoftInput(originEditText));
-        Thread.sleep(500);
-        Assert.assertTrue(InputMethodx.isSoftInputShowing(activity));
-
-        // hide
-        Androidx.runInUI(() -> InputMethodx.hideSoftInput(activity));
-        Thread.sleep(500);
-        Assert.assertFalse(InputMethodx.isSoftInputShowing(activity));
-
-        // show
-        Androidx.runInUI(() -> InputMethodx.showSoftInput(originEditText));
-        Thread.sleep(500);
-        Assert.assertTrue(InputMethodx.isSoftInputShowing(activity));
-
-        // hide
-        Androidx.runInUI(() -> InputMethodx.hideSoftInput(activity.getOriginFragment()));
-        Thread.sleep(500);
-        Assert.assertFalse(InputMethodx.isSoftInputShowing(activity));
 
         // show
         Androidx.runInUI(() -> InputMethodx.showSoftInput(supportEditText));
@@ -156,7 +135,7 @@ public class InputMethodxTest {
     @Test
     public void testMoveCursor() throws InterruptedException {
         final TestActivity activity = activityRule.getActivity();
-        final EditText originEditText = activity.getOriginFragmentEditTxt();
+        final EditText originEditText = activity.getSupportFragmentEditTxt();
 
         Androidx.runInUI(() -> InputMethodx.moveCursorToEnd(originEditText));
         Thread.sleep(100);
@@ -181,24 +160,9 @@ public class InputMethodxTest {
 
             setContentView(R.layout.at_multi_frame);
 
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, new EditOriginFragment())
-                    .commit();
-
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, new EditSupportFragment())
                     .commit();
-        }
-
-        @NonNull
-        public android.app.Fragment getOriginFragment() {
-            return getFragmentManager().findFragmentById(R.id.multiFrameAt_frame1);
-        }
-
-        @NonNull
-        public EditText getOriginFragmentEditTxt() {
-            //noinspection ConstantConditions
-            return (EditText) getOriginFragment().getView();
         }
 
         @NonNull
@@ -214,17 +178,6 @@ public class InputMethodxTest {
 
         public View getView() {
             return findViewById(android.R.id.content);
-        }
-    }
-
-    @SuppressWarnings("deprecation")
-    public static class EditOriginFragment extends android.app.Fragment {
-        @NonNull
-        @Override
-        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-            EditText editText = new EditText(getActivity());
-            editText.setText("0123456789");
-            return editText;
         }
     }
 

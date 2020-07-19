@@ -25,6 +25,7 @@ import android.os.Build
 import android.os.Bundle
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.Fragment
 import me.panpf.androidx.app.Activityx
 
 /**
@@ -103,22 +104,12 @@ inline fun Context.startActivityByClass(clazz: Class<out Activity>) = Activityx.
 /**
  * Start the activity of the specified Class
  */
-inline fun androidx.fragment.app.Fragment.startActivityByClass(clazz: Class<out Activity>, args: Bundle?) = Activityx.startByClass(this, clazz, args)
+inline fun Fragment.startActivityByClass(clazz: Class<out Activity>, args: Bundle?) = Activityx.startByClass(this, clazz, args)
 
 /**
  * Start the activity of the specified Class
  */
-inline fun androidx.fragment.app.Fragment.startActivityByClass(clazz: Class<out Activity>) = Activityx.startByClass(this, clazz)
-
-/**
- * Start the activity of the specified Class
- */
-inline fun android.app.Fragment.startActivityByClass(clazz: Class<out Activity>, args: Bundle?) = Activityx.startByClass(this, clazz, args)
-
-/**
- * Start the activity of the specified Class
- */
-inline fun android.app.Fragment.startActivityByClass(clazz: Class<out Activity>) = Activityx.startByClass(this, clazz)
+inline fun Fragment.startActivityByClass(clazz: Class<out Activity>) = Activityx.startByClass(this, clazz)
 
 /**
  * Start the activity of the specified Class
@@ -142,12 +133,7 @@ inline fun Context.safeStartActivity(intent: Intent): Boolean = Activityx.safeSt
 /**
  * Safely launch an Activity, catch ActivityNotFoundException and return false
  */
-inline fun androidx.fragment.app.Fragment.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart(this, intent)
-
-/**
- * Safely launch an Activity, catch ActivityNotFoundException and return false
- */
-inline fun android.app.Fragment.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart(this, intent)
+inline fun Fragment.safeStartActivity(intent: Intent): Boolean = Activityx.safeStart(this, intent)
 
 /**
  * Safely launch an Activity, catch ActivityNotFoundException and return false
@@ -168,22 +154,12 @@ inline fun Context.safeStartActivityByClass(clazz: Class<out Activity>): Boolean
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun androidx.fragment.app.Fragment.safeStartActivityByClass(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStartByClass(this, clazz, args)
+inline fun Fragment.safeStartActivityByClass(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStartByClass(this, clazz, args)
 
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
  */
-inline fun androidx.fragment.app.Fragment.safeStartActivityByClass(clazz: Class<out Activity>): Boolean = Activityx.safeStartByClass(this, clazz)
-
-/**
- * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
- */
-inline fun android.app.Fragment.safeStartActivityByClass(clazz: Class<out Activity>, args: Bundle?): Boolean = Activityx.safeStartByClass(this, clazz, args)
-
-/**
- * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false
- */
-inline fun android.app.Fragment.safeStartActivityByClass(clazz: Class<out Activity>): Boolean = Activityx.safeStartByClass(this, clazz)
+inline fun Fragment.safeStartActivityByClass(clazz: Class<out Activity>): Boolean = Activityx.safeStartByClass(this, clazz)
 
 /**
  * Safely launch the activity of the specified Class, catch ActivityNotFoundException and return false

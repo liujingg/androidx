@@ -80,11 +80,6 @@ inline fun androidx.fragment.app.Fragment.getDisplayRotation(): Int = Displayx.g
 /**
  * Get the screen rotation angle, 0, 90, 180, 270
  */
-inline fun android.app.Fragment.getDisplayRotation(): Int = Displayx.getRotation(this)
-
-/**
- * Get the screen rotation angle, 0, 90, 180, 270
- */
 inline fun View.getDisplayRotation(): Int = Displayx.getRotation(this)
 
 
@@ -92,11 +87,6 @@ inline fun View.getDisplayRotation(): Int = Displayx.getRotation(this)
  * Return true if the current screen orientation is portrait
  */
 inline fun Context.isOrientationPortrait(): Boolean = Displayx.isOrientationPortrait(this)
-
-/**
- * Return true if the current screen orientation is portrait
- */
-inline fun android.app.Fragment.isOrientationPortrait(): Boolean = Displayx.isOrientationPortrait(this)
 
 /**
  * Return true if the current screen orientation is portrait
@@ -117,11 +107,6 @@ inline fun Context.isOrientationLandscape(): Boolean = Displayx.isOrientationLan
 /**
  * Return true if the current screen orientation is landscape
  */
-inline fun android.app.Fragment.isOrientationLandscape(): Boolean = Displayx.isOrientationLandscape(this)
-
-/**
- * Return true if the current screen orientation is landscape
- */
 inline fun androidx.fragment.app.Fragment.isOrientationLandscape(): Boolean = Displayx.isOrientationLandscape(this)
 
 /**
@@ -134,11 +119,6 @@ inline fun View.isOrientationLandscape(): Boolean = Displayx.isOrientationLandsc
  * Return true if the current screen orientation is undefined
  */
 inline fun Context.isOrientationUndefined(): Boolean = Displayx.isOrientationUndefined(this)
-
-/**
- * Return true if the current screen orientation is undefined
- */
-inline fun android.app.Fragment.isOrientationUndefined(): Boolean = Displayx.isOrientationUndefined(this)
 
 /**
  * Return true if the current screen orientation is undefined

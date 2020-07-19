@@ -117,14 +117,6 @@ public class InputMethodx {
     /**
      * Hide soft keyboard
      */
-    public static void hideSoftInput(@NonNull android.app.Fragment fragment) {
-        Activity activity = fragment.getActivity();
-        if (activity != null) hideSoftInput(activity);
-    }
-
-    /**
-     * Hide soft keyboard
-     */
     public static void hideSoftInput(@NonNull EditText editText) {
         if (editText.getWindowToken() == null) return;
         Contextx.inputMethodManager(editText.getContext()).hideSoftInputFromWindow(editText.getWindowToken(), 0);

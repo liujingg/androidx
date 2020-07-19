@@ -23,11 +23,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
-import org.junit.Assert;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -35,6 +30,12 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.test.InstrumentationRegistry;
 import androidx.test.rule.ActivityTestRule;
 import androidx.test.runner.AndroidJUnit4;
+
+import org.junit.Assert;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
 import me.panpf.androidx.content.Contextx;
 import me.panpf.androidx.test.R;
 import me.panpf.javax.util.Premisex;
@@ -58,16 +59,10 @@ public class ContextxTest {
         Assert.assertTrue(Contextx.appContext(activity) instanceof Application);
         Assert.assertFalse(Contextx.appContext(activity) instanceof Activity);
 
-        Assert.assertNotNull(Contextx.requireContext(activity.getOriginFragment()));
-        Assert.assertFalse(Contextx.requireContext(activity.getOriginFragment()) instanceof Application);
-        Assert.assertTrue(Contextx.requireContext(activity.getOriginFragment()) instanceof Activity);
         Assert.assertNotNull(Contextx.requireContext(activity.getSupportFragment()));
         Assert.assertFalse(Contextx.requireContext(activity.getSupportFragment()) instanceof Application);
         Assert.assertTrue(Contextx.requireContext(activity.getSupportFragment()) instanceof Activity);
 
-        Assert.assertNotNull(Contextx.requireAppContext(activity.getOriginFragment()));
-        Assert.assertTrue(Contextx.requireAppContext(activity.getOriginFragment()) instanceof Application);
-        Assert.assertFalse(Contextx.requireAppContext(activity.getOriginFragment()) instanceof Activity);
         Assert.assertNotNull(Contextx.requireAppContext(activity.getSupportFragment()));
         Assert.assertTrue(Contextx.requireAppContext(activity.getSupportFragment()) instanceof Application);
         Assert.assertFalse(Contextx.requireAppContext(activity.getSupportFragment()) instanceof Activity);
@@ -83,19 +78,7 @@ public class ContextxTest {
         }
 
         try {
-            Contextx.requireContext(activity.getOriginFragment());
-            Assert.fail();
-        } catch (Exception ignored) {
-        }
-
-        try {
             Contextx.requireContext(activity.getSupportFragment());
-            Assert.fail();
-        } catch (Exception ignored) {
-        }
-
-        try {
-            Contextx.requireAppContext(activity.getOriginFragment());
             Assert.fail();
         } catch (Exception ignored) {
         }
@@ -286,18 +269,9 @@ public class ContextxTest {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.at_multi_frame);
 
-            getFragmentManager().beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, new android.app.Fragment())
-                    .commit();
-
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, new Fragment())
                     .commit();
-        }
-
-        @NonNull
-        public android.app.Fragment getOriginFragment() {
-            return getFragmentManager().findFragmentById(R.id.multiFrameAt_frame1);
         }
 
         @NonNull

@@ -28,6 +28,7 @@ import android.util.SizeF
 import android.util.SparseArray
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
@@ -46,21 +47,7 @@ class ActivityArgLazy<in REF : Activity, out OUT : Any>(private val argNameResId
     }
 }
 
-class SupportFragmentArgLazy<in REF : androidx.fragment.app.Fragment, out OUT : Any>(private val argNameResId: Int, private val initializer: (REF, KProperty<*>) -> OUT?) : ReadOnlyProperty<REF, OUT> {
-    private object EMPTY
-
-    private var arg: Any = EMPTY
-
-    override fun getValue(thisRef: REF, property: KProperty<*>): OUT {
-        if (arg == EMPTY) {
-            arg = requireNotNull(initializer(thisRef, property)) { "Not found arg '${thisRef.resources.getString(argNameResId)}' from arguments." }
-        }
-        @Suppress("UNCHECKED_CAST")
-        return arg as OUT
-    }
-}
-
-class OriginFragmentArgLazy<in REF : android.app.Fragment, out OUT : Any>(private val argNameResId: Int, private val initializer: (REF, KProperty<*>) -> OUT?) : ReadOnlyProperty<REF, OUT> {
+class SupportFragmentArgLazy<in REF : Fragment, out OUT : Any>(private val argNameResId: Int, private val initializer: (REF, KProperty<*>) -> OUT?) : ReadOnlyProperty<REF, OUT> {
     private object EMPTY
 
     private var arg: Any = EMPTY
@@ -891,1159 +878,578 @@ fun Activity.bindStringUriIntentArgOrNull(@StringRes argNameResId: Int): ReadOnl
 /* ************************************* SupportFragment Arg ***************************************** */
 
 
-fun androidx.fragment.app.Fragment.bindByteArgOr(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<androidx.fragment.app.Fragment, Byte> =
+fun Fragment.bindByteArgOr(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<Fragment, Byte> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArgOr(argName, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindByteArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ByteArray> =
+fun Fragment.bindByteArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, ByteArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindByteArrayArgOr(argName: String, defaultValue: ByteArray): ReadOnlyProperty<androidx.fragment.app.Fragment, ByteArray> =
+fun Fragment.bindByteArrayArgOr(argName: String, defaultValue: ByteArray): ReadOnlyProperty<Fragment, ByteArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindByteArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ByteArray?> =
+fun Fragment.bindByteArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, ByteArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readByteArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindShortArgOr(argName: String, defaultValue: Short = 0): ReadOnlyProperty<androidx.fragment.app.Fragment, Short> =
+fun Fragment.bindShortArgOr(argName: String, defaultValue: Short = 0): ReadOnlyProperty<Fragment, Short> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArgOr(argName, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindShortArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ShortArray> =
+fun Fragment.bindShortArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, ShortArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindShortArrayArgOr(argName: String, defaultValue: ShortArray): ReadOnlyProperty<androidx.fragment.app.Fragment, ShortArray> =
+fun Fragment.bindShortArrayArgOr(argName: String, defaultValue: ShortArray): ReadOnlyProperty<Fragment, ShortArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindShortArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ShortArray?> =
+fun Fragment.bindShortArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, ShortArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readShortArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindIntArgOr(argName: String, defaultValue: Int = 0): ReadOnlyProperty<androidx.fragment.app.Fragment, Int> =
+fun Fragment.bindIntArgOr(argName: String, defaultValue: Int = 0): ReadOnlyProperty<Fragment, Int> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArgOr(argName, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindIntArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, IntArray> =
+fun Fragment.bindIntArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, IntArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindIntArrayArgOr(argName: String, defaultValue: IntArray): ReadOnlyProperty<androidx.fragment.app.Fragment, IntArray> =
+fun Fragment.bindIntArrayArgOr(argName: String, defaultValue: IntArray): ReadOnlyProperty<Fragment, IntArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindIntArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, IntArray?> =
+fun Fragment.bindIntArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, IntArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindIntArrayListArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<Int>> =
+fun Fragment.bindIntArrayListArgOrThrow(argName: String): ReadOnlyProperty<Fragment, ArrayList<Int>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArrayListArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindIntArrayListArgOr(argName: String, defaultValue: ArrayList<Int>): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<Int>> =
+fun Fragment.bindIntArrayListArgOr(argName: String, defaultValue: ArrayList<Int>): ReadOnlyProperty<Fragment, ArrayList<Int>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArrayListArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindIntArrayListArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<Int>?> =
+fun Fragment.bindIntArrayListArgOrNull(argName: String): ReadOnlyProperty<Fragment, ArrayList<Int>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayListArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindLongArgOr(argName: String, defaultValue: Long = 0L): ReadOnlyProperty<androidx.fragment.app.Fragment, Long> =
+fun Fragment.bindLongArgOr(argName: String, defaultValue: Long = 0L): ReadOnlyProperty<Fragment, Long> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArgOr(argName, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindLongArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, LongArray> =
+fun Fragment.bindLongArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, LongArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindLongArrayArgOr(argName: String, defaultValue: LongArray): ReadOnlyProperty<androidx.fragment.app.Fragment, LongArray> =
+fun Fragment.bindLongArrayArgOr(argName: String, defaultValue: LongArray): ReadOnlyProperty<Fragment, LongArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindLongArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, LongArray?> =
+fun Fragment.bindLongArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, LongArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readLongArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindFloatArgOr(argName: String, defaultValue: Float = 0f): ReadOnlyProperty<androidx.fragment.app.Fragment, Float> =
+fun Fragment.bindFloatArgOr(argName: String, defaultValue: Float = 0f): ReadOnlyProperty<Fragment, Float> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArgOr(argName, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindFloatArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, FloatArray> =
+fun Fragment.bindFloatArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, FloatArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindFloatArrayArgOr(argName: String, defaultValue: FloatArray): ReadOnlyProperty<androidx.fragment.app.Fragment, FloatArray> =
+fun Fragment.bindFloatArrayArgOr(argName: String, defaultValue: FloatArray): ReadOnlyProperty<Fragment, FloatArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindFloatArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, FloatArray?> =
+fun Fragment.bindFloatArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, FloatArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readFloatArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindDoubleArgOr(argName: String, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<androidx.fragment.app.Fragment, Double> =
+fun Fragment.bindDoubleArgOr(argName: String, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<Fragment, Double> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArgOr(argName, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindDoubleArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, DoubleArray> =
+fun Fragment.bindDoubleArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, DoubleArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindDoubleArrayArgOr(argName: String, defaultValue: DoubleArray): ReadOnlyProperty<androidx.fragment.app.Fragment, DoubleArray> =
+fun Fragment.bindDoubleArrayArgOr(argName: String, defaultValue: DoubleArray): ReadOnlyProperty<Fragment, DoubleArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindDoubleArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, DoubleArray?> =
+fun Fragment.bindDoubleArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, DoubleArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readDoubleArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindBooleanArgOr(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<androidx.fragment.app.Fragment, Boolean> =
+fun Fragment.bindBooleanArgOr(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<Fragment, Boolean> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArgOr(argName, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindBooleanArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, BooleanArray> =
+fun Fragment.bindBooleanArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, BooleanArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindBooleanArrayArgOr(argName: String, defaultValue: BooleanArray): ReadOnlyProperty<androidx.fragment.app.Fragment, BooleanArray> =
+fun Fragment.bindBooleanArrayArgOr(argName: String, defaultValue: BooleanArray): ReadOnlyProperty<Fragment, BooleanArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindBooleanArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, BooleanArray?> =
+fun Fragment.bindBooleanArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, BooleanArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readBooleanArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindCharArgOr(argName: String, defaultValue: Char = 0.toChar()): ReadOnlyProperty<androidx.fragment.app.Fragment, Char> =
+fun Fragment.bindCharArgOr(argName: String, defaultValue: Char = 0.toChar()): ReadOnlyProperty<Fragment, Char> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArgOr(argName, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindCharArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, CharArray> =
+fun Fragment.bindCharArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, CharArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindCharArrayArgOr(argName: String, defaultValue: CharArray): ReadOnlyProperty<androidx.fragment.app.Fragment, CharArray> =
+fun Fragment.bindCharArrayArgOr(argName: String, defaultValue: CharArray): ReadOnlyProperty<Fragment, CharArray> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindCharArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, CharArray?> =
+fun Fragment.bindCharArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, CharArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, CharSequence> =
+fun Fragment.bindCharSequenceArgOrThrow(argName: String): ReadOnlyProperty<Fragment, CharSequence> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArgOr(argName: String, defaultValue: CharSequence): ReadOnlyProperty<androidx.fragment.app.Fragment, CharSequence> =
+fun Fragment.bindCharSequenceArgOr(argName: String, defaultValue: CharSequence): ReadOnlyProperty<Fragment, CharSequence> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, CharSequence?> =
+fun Fragment.bindCharSequenceArgOrNull(argName: String): ReadOnlyProperty<Fragment, CharSequence?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<CharSequence>> =
+fun Fragment.bindCharSequenceArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Array<CharSequence>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayArgOr(argName: String, defaultValue: Array<CharSequence>): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<CharSequence>> =
+fun Fragment.bindCharSequenceArrayArgOr(argName: String, defaultValue: Array<CharSequence>): ReadOnlyProperty<Fragment, Array<CharSequence>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<CharSequence>?> =
+fun Fragment.bindCharSequenceArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, Array<CharSequence>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayListArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<CharSequence>> =
+fun Fragment.bindCharSequenceArrayListArgOrThrow(argName: String): ReadOnlyProperty<Fragment, ArrayList<CharSequence>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<CharSequence>> =
+fun Fragment.bindCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ReadOnlyProperty<Fragment, ArrayList<CharSequence>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayListArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<CharSequence>?> =
+fun Fragment.bindCharSequenceArrayListArgOrNull(argName: String): ReadOnlyProperty<Fragment, ArrayList<CharSequence>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindStringArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, String> =
+fun Fragment.bindStringArgOrThrow(argName: String): ReadOnlyProperty<Fragment, String> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindStringArgOr(argName: String, defaultValue: String): ReadOnlyProperty<androidx.fragment.app.Fragment, String> =
+fun Fragment.bindStringArgOr(argName: String, defaultValue: String): ReadOnlyProperty<Fragment, String> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindStringArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, String?> =
+fun Fragment.bindStringArgOrNull(argName: String): ReadOnlyProperty<Fragment, String?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readStringArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindStringArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<String>> =
+fun Fragment.bindStringArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Array<String>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArrayArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindStringArrayArgOr(argName: String, defaultValue: Array<String>): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<String>> =
+fun Fragment.bindStringArrayArgOr(argName: String, defaultValue: Array<String>): ReadOnlyProperty<Fragment, Array<String>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArrayArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindStringArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<String>?> =
+fun Fragment.bindStringArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, Array<String>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readStringArrayArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindStringArrayListArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<String>> =
+fun Fragment.bindStringArrayListArgOrThrow(argName: String): ReadOnlyProperty<Fragment, ArrayList<String>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArrayListArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindStringArrayListArgOr(argName: String, defaultValue: ArrayList<String>): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<String>> =
+fun Fragment.bindStringArrayListArgOr(argName: String, defaultValue: ArrayList<String>): ReadOnlyProperty<Fragment, ArrayList<String>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArrayListArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindStringArrayListArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<String>?> =
+fun Fragment.bindStringArrayListArgOrNull(argName: String): ReadOnlyProperty<Fragment, ArrayList<String>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readStringArrayListArgOrNull(argName) }
 
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, V> =
+fun <V : Parcelable> Fragment.bindParcelableArgOrThrow(argName: String): ReadOnlyProperty<Fragment, V> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArgOrThrow(argName) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArgOr(argName: String, defaultValue: V): ReadOnlyProperty<androidx.fragment.app.Fragment, V> =
+fun <V : Parcelable> Fragment.bindParcelableArgOr(argName: String, defaultValue: V): ReadOnlyProperty<Fragment, V> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArgOr(argName, defaultValue) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, V?> =
+fun <V : Parcelable> Fragment.bindParcelableArgOrNull(argName: String): ReadOnlyProperty<Fragment, V?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArgOrNull(argName) }
 
 
 @Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<V>> =
+fun <V : Parcelable> Fragment.bindParcelableArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Array<V>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArrayArgOrThrow(argName) }
 
 @Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayArgOr(argName: String, defaultValue: Array<V>): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<V>> =
+fun <V : Parcelable> Fragment.bindParcelableArrayArgOr(argName: String, defaultValue: Array<V>): ReadOnlyProperty<Fragment, Array<V>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArrayArgOr(argName, defaultValue) }
 
 @Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<V>?> =
+fun <V : Parcelable> Fragment.bindParcelableArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, Array<V>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArrayArgOrNull(argName) }
 
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayListArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<V>> =
+fun <V : Parcelable> Fragment.bindParcelableArrayListArgOrThrow(argName: String): ReadOnlyProperty<Fragment, ArrayList<V>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArrayListArgOrThrow(argName) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayListArgOr(argName: String, defaultValue: ArrayList<V>): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<V>> =
+fun <V : Parcelable> Fragment.bindParcelableArrayListArgOr(argName: String, defaultValue: ArrayList<V>): ReadOnlyProperty<Fragment, ArrayList<V>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArrayListArgOr(argName, defaultValue) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayListArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<V>?> =
+fun <V : Parcelable> Fragment.bindParcelableArrayListArgOrNull(argName: String): ReadOnlyProperty<Fragment, ArrayList<V>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArrayListArgOrNull(argName) }
 
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindSparseParcelableArrayArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, SparseArray<V>> =
+fun <V : Parcelable> Fragment.bindSparseParcelableArrayArgOrThrow(argName: String): ReadOnlyProperty<Fragment, SparseArray<V>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOrThrow(argName) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindSparseParcelableArrayArgOr(argName: String, defaultValue: SparseArray<V>): ReadOnlyProperty<androidx.fragment.app.Fragment, SparseArray<V>> =
+fun <V : Parcelable> Fragment.bindSparseParcelableArrayArgOr(argName: String, defaultValue: SparseArray<V>): ReadOnlyProperty<Fragment, SparseArray<V>> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOr(argName, defaultValue) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindSparseParcelableArrayArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, SparseArray<V>?> =
+fun <V : Parcelable> Fragment.bindSparseParcelableArrayArgOrNull(argName: String): ReadOnlyProperty<Fragment, SparseArray<V>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOrNull(argName) }
 
 
 @Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> androidx.fragment.app.Fragment.bindSerializableArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, V> =
+fun <V : java.io.Serializable> Fragment.bindSerializableArgOrThrow(argName: String): ReadOnlyProperty<Fragment, V> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readSerializableArgOrThrow(argName) }
 
 @Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> androidx.fragment.app.Fragment.bindSerializableArgOr(argName: String, defaultValue: V): ReadOnlyProperty<androidx.fragment.app.Fragment, V> =
+fun <V : java.io.Serializable> Fragment.bindSerializableArgOr(argName: String, defaultValue: V): ReadOnlyProperty<Fragment, V> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readSerializableArgOr(argName, defaultValue) }
 
 @Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> androidx.fragment.app.Fragment.bindSerializableArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, V?> =
+fun <V : java.io.Serializable> Fragment.bindSerializableArgOrNull(argName: String): ReadOnlyProperty<Fragment, V?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readSerializableArgOrNull(argName) }
 
 
-fun androidx.fragment.app.Fragment.bindBundleArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Bundle> =
+fun Fragment.bindBundleArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Bundle> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBundleArgOrThrow(argName) }
 
-fun androidx.fragment.app.Fragment.bindBundleArgOr(argName: String, defaultValue: Bundle): ReadOnlyProperty<androidx.fragment.app.Fragment, Bundle> =
+fun Fragment.bindBundleArgOr(argName: String, defaultValue: Bundle): ReadOnlyProperty<Fragment, Bundle> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBundleArgOr(argName, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindBundleArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Bundle?> =
+fun Fragment.bindBundleArgOrNull(argName: String): ReadOnlyProperty<Fragment, Bundle?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readBundleArgOrNull(argName) }
 
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun androidx.fragment.app.Fragment.bindBinderArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, IBinder> =
+fun Fragment.bindBinderArgOrThrow(argName: String): ReadOnlyProperty<Fragment, IBinder> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBinderArgOrThrow(argName) }
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun androidx.fragment.app.Fragment.bindBinderArgOr(argName: String, defaultValue: IBinder): ReadOnlyProperty<androidx.fragment.app.Fragment, IBinder> =
+fun Fragment.bindBinderArgOr(argName: String, defaultValue: IBinder): ReadOnlyProperty<Fragment, IBinder> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readBinderArgOr(argName, defaultValue) }
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun androidx.fragment.app.Fragment.bindBinderArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, IBinder?> =
+fun Fragment.bindBinderArgOrNull(argName: String): ReadOnlyProperty<Fragment, IBinder?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readBinderArgOrNull(argName) }
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Size> =
+fun Fragment.bindSizeArgOrThrow(argName: String): ReadOnlyProperty<Fragment, Size> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readSizeArgOrThrow(argName) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeArgOr(argName: String, defaultValue: Size): ReadOnlyProperty<androidx.fragment.app.Fragment, Size> =
+fun Fragment.bindSizeArgOr(argName: String, defaultValue: Size): ReadOnlyProperty<Fragment, Size> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readSizeArgOr(argName, defaultValue) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, Size?> =
+fun Fragment.bindSizeArgOrNull(argName: String): ReadOnlyProperty<Fragment, Size?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readSizeArgOrNull(argName) }
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeFArgOrThrow(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, SizeF> =
+fun Fragment.bindSizeFArgOrThrow(argName: String): ReadOnlyProperty<Fragment, SizeF> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readSizeFArgOrThrow(argName) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeFArgOr(argName: String, defaultValue: SizeF): ReadOnlyProperty<androidx.fragment.app.Fragment, SizeF> =
+fun Fragment.bindSizeFArgOr(argName: String, defaultValue: SizeF): ReadOnlyProperty<Fragment, SizeF> =
         ArgLazy(argName) { _, _: KProperty<*> -> this.readSizeFArgOr(argName, defaultValue) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeFArgOrNull(argName: String): ReadOnlyProperty<androidx.fragment.app.Fragment, SizeF?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readSizeFArgOrNull(argName) }
-
-
-/* ************************************* Origin Fragment Arg ***************************************** */
-
-
-fun android.app.Fragment.bindByteArgOr(argName: String, defaultValue: Byte = 0): ReadOnlyProperty<android.app.Fragment, Byte> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArgOr(argName, defaultValue) }
-
-
-fun android.app.Fragment.bindByteArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, ByteArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindByteArrayArgOr(argName: String, defaultValue: ByteArray): ReadOnlyProperty<android.app.Fragment, ByteArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readByteArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindByteArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, ByteArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readByteArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindShortArgOr(argName: String, defaultValue: Short = 0): ReadOnlyProperty<android.app.Fragment, Short> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArgOr(argName, defaultValue) }
-
-
-fun android.app.Fragment.bindShortArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, ShortArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindShortArrayArgOr(argName: String, defaultValue: ShortArray): ReadOnlyProperty<android.app.Fragment, ShortArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readShortArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindShortArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, ShortArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readShortArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindIntArgOr(argName: String, defaultValue: Int = 0): ReadOnlyProperty<android.app.Fragment, Int> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArgOr(argName, defaultValue) }
-
-
-fun android.app.Fragment.bindIntArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, IntArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindIntArrayArgOr(argName: String, defaultValue: IntArray): ReadOnlyProperty<android.app.Fragment, IntArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindIntArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, IntArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindIntArrayListArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, ArrayList<Int>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArrayListArgOrThrow(argName) }
-
-fun android.app.Fragment.bindIntArrayListArgOr(argName: String, defaultValue: ArrayList<Int>): ReadOnlyProperty<android.app.Fragment, ArrayList<Int>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readIntArrayListArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindIntArrayListArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, ArrayList<Int>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayListArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindLongArgOr(argName: String, defaultValue: Long = 0L): ReadOnlyProperty<android.app.Fragment, Long> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArgOr(argName, defaultValue) }
-
-
-fun android.app.Fragment.bindLongArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, LongArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindLongArrayArgOr(argName: String, defaultValue: LongArray): ReadOnlyProperty<android.app.Fragment, LongArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readLongArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindLongArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, LongArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readLongArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindFloatArgOr(argName: String, defaultValue: Float = 0f): ReadOnlyProperty<android.app.Fragment, Float> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArgOr(argName, defaultValue) }
-
-
-fun android.app.Fragment.bindFloatArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, FloatArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindFloatArrayArgOr(argName: String, defaultValue: FloatArray): ReadOnlyProperty<android.app.Fragment, FloatArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readFloatArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindFloatArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, FloatArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readFloatArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindDoubleArgOr(argName: String, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<android.app.Fragment, Double> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArgOr(argName, defaultValue) }
-
-
-fun android.app.Fragment.bindDoubleArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, DoubleArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindDoubleArrayArgOr(argName: String, defaultValue: DoubleArray): ReadOnlyProperty<android.app.Fragment, DoubleArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readDoubleArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindDoubleArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, DoubleArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readDoubleArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindBooleanArgOr(argName: String, defaultValue: Boolean = false): ReadOnlyProperty<android.app.Fragment, Boolean> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArgOr(argName, defaultValue) }
-
-
-fun android.app.Fragment.bindBooleanArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, BooleanArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindBooleanArrayArgOr(argName: String, defaultValue: BooleanArray): ReadOnlyProperty<android.app.Fragment, BooleanArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readBooleanArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindBooleanArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, BooleanArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readBooleanArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindCharArgOr(argName: String, defaultValue: Char = 0.toChar()): ReadOnlyProperty<android.app.Fragment, Char> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArgOr(argName, defaultValue) }
-
-
-fun android.app.Fragment.bindCharArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, CharArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindCharArrayArgOr(argName: String, defaultValue: CharArray): ReadOnlyProperty<android.app.Fragment, CharArray> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindCharArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, CharArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readCharArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindCharSequenceArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, CharSequence> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArgOrThrow(argName) }
-
-fun android.app.Fragment.bindCharSequenceArgOr(argName: String, defaultValue: CharSequence): ReadOnlyProperty<android.app.Fragment, CharSequence> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindCharSequenceArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, CharSequence?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindCharSequenceArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, Array<CharSequence>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindCharSequenceArrayArgOr(argName: String, defaultValue: Array<CharSequence>): ReadOnlyProperty<android.app.Fragment, Array<CharSequence>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindCharSequenceArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, Array<CharSequence>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindCharSequenceArrayListArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, ArrayList<CharSequence>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrThrow(argName) }
-
-fun android.app.Fragment.bindCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ReadOnlyProperty<android.app.Fragment, ArrayList<CharSequence>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindCharSequenceArrayListArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, ArrayList<CharSequence>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindStringArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, String> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArgOrThrow(argName) }
-
-fun android.app.Fragment.bindStringArgOr(argName: String, defaultValue: String): ReadOnlyProperty<android.app.Fragment, String> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindStringArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, String?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readStringArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindStringArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, Array<String>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArrayArgOrThrow(argName) }
-
-fun android.app.Fragment.bindStringArrayArgOr(argName: String, defaultValue: Array<String>): ReadOnlyProperty<android.app.Fragment, Array<String>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArrayArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindStringArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, Array<String>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readStringArrayArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindStringArrayListArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, ArrayList<String>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArrayListArgOrThrow(argName) }
-
-fun android.app.Fragment.bindStringArrayListArgOr(argName: String, defaultValue: ArrayList<String>): ReadOnlyProperty<android.app.Fragment, ArrayList<String>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readStringArrayListArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindStringArrayListArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, ArrayList<String>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readStringArrayListArgOrNull(argName) }
-
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, V> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArgOrThrow(argName) }
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArgOr(argName: String, defaultValue: V): ReadOnlyProperty<android.app.Fragment, V> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArgOr(argName, defaultValue) }
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, V?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArgOrNull(argName) }
-
-
-@Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, Array<V>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArrayArgOrThrow(argName) }
-
-@Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayArgOr(argName: String, defaultValue: Array<V>): ReadOnlyProperty<android.app.Fragment, Array<V>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArrayArgOr(argName, defaultValue) }
-
-@Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, Array<V>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArrayArgOrNull(argName) }
-
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayListArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, ArrayList<V>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArrayListArgOrThrow(argName) }
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayListArgOr(argName: String, defaultValue: ArrayList<V>): ReadOnlyProperty<android.app.Fragment, ArrayList<V>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readParcelableArrayListArgOr(argName, defaultValue) }
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayListArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, ArrayList<V>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArrayListArgOrNull(argName) }
-
-
-fun <V : Parcelable> android.app.Fragment.bindSparseParcelableArrayArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, SparseArray<V>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOrThrow(argName) }
-
-fun <V : Parcelable> android.app.Fragment.bindSparseParcelableArrayArgOr(argName: String, defaultValue: SparseArray<V>): ReadOnlyProperty<android.app.Fragment, SparseArray<V>> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOr(argName, defaultValue) }
-
-fun <V : Parcelable> android.app.Fragment.bindSparseParcelableArrayArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, SparseArray<V>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOrNull(argName) }
-
-
-@Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> android.app.Fragment.bindSerializableArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, V> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readSerializableArgOrThrow(argName) }
-
-@Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> android.app.Fragment.bindSerializableArgOr(argName: String, defaultValue: V): ReadOnlyProperty<android.app.Fragment, V> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readSerializableArgOr(argName, defaultValue) }
-
-@Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> android.app.Fragment.bindSerializableArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, V?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readSerializableArgOrNull(argName) }
-
-
-fun android.app.Fragment.bindBundleArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, Bundle> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readBundleArgOrThrow(argName) }
-
-fun android.app.Fragment.bindBundleArgOr(argName: String, defaultValue: Bundle): ReadOnlyProperty<android.app.Fragment, Bundle> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readBundleArgOr(argName, defaultValue) }
-
-fun android.app.Fragment.bindBundleArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, Bundle?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readBundleArgOrNull(argName) }
-
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun android.app.Fragment.bindBinderArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, IBinder> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readBinderArgOrThrow(argName) }
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun android.app.Fragment.bindBinderArgOr(argName: String, defaultValue: IBinder): ReadOnlyProperty<android.app.Fragment, IBinder> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readBinderArgOr(argName, defaultValue) }
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun android.app.Fragment.bindBinderArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, IBinder?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readBinderArgOrNull(argName) }
-
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, Size> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readSizeArgOrThrow(argName) }
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeArgOr(argName: String, defaultValue: Size): ReadOnlyProperty<android.app.Fragment, Size> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readSizeArgOr(argName, defaultValue) }
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, Size?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readSizeArgOrNull(argName) }
-
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeFArgOrThrow(argName: String): ReadOnlyProperty<android.app.Fragment, SizeF> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readSizeFArgOrThrow(argName) }
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeFArgOr(argName: String, defaultValue: SizeF): ReadOnlyProperty<android.app.Fragment, SizeF> =
-        ArgLazy(argName) { _, _: KProperty<*> -> this.readSizeFArgOr(argName, defaultValue) }
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeFArgOrNull(argName: String): ReadOnlyProperty<android.app.Fragment, SizeF?> =
+fun Fragment.bindSizeFArgOrNull(argName: String): ReadOnlyProperty<Fragment, SizeF?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readSizeFArgOrNull(argName) }
 
 
 /* ************************************* SupportFragment Arg ***************************************** */
 
 
-fun androidx.fragment.app.Fragment.bindByteArgOr(@StringRes argNameResId: Int, defaultValue: Byte = 0): ReadOnlyProperty<androidx.fragment.app.Fragment, Byte> =
+fun Fragment.bindByteArgOr(@StringRes argNameResId: Int, defaultValue: Byte = 0): ReadOnlyProperty<Fragment, Byte> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArgOr(argNameResId, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindByteArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ByteArray> =
+fun Fragment.bindByteArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ByteArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindByteArrayArgOr(@StringRes argNameResId: Int, defaultValue: ByteArray): ReadOnlyProperty<androidx.fragment.app.Fragment, ByteArray> =
+fun Fragment.bindByteArrayArgOr(@StringRes argNameResId: Int, defaultValue: ByteArray): ReadOnlyProperty<Fragment, ByteArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindByteArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ByteArray?> =
+fun Fragment.bindByteArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ByteArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readByteArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindShortArgOr(@StringRes argNameResId: Int, defaultValue: Short = 0): ReadOnlyProperty<androidx.fragment.app.Fragment, Short> =
+fun Fragment.bindShortArgOr(@StringRes argNameResId: Int, defaultValue: Short = 0): ReadOnlyProperty<Fragment, Short> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArgOr(argNameResId, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindShortArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ShortArray> =
+fun Fragment.bindShortArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ShortArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindShortArrayArgOr(@StringRes argNameResId: Int, defaultValue: ShortArray): ReadOnlyProperty<androidx.fragment.app.Fragment, ShortArray> =
+fun Fragment.bindShortArrayArgOr(@StringRes argNameResId: Int, defaultValue: ShortArray): ReadOnlyProperty<Fragment, ShortArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindShortArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ShortArray?> =
+fun Fragment.bindShortArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ShortArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readShortArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindIntArgOr(@StringRes argNameResId: Int, defaultValue: Int = 0): ReadOnlyProperty<androidx.fragment.app.Fragment, Int> =
+fun Fragment.bindIntArgOr(@StringRes argNameResId: Int, defaultValue: Int = 0): ReadOnlyProperty<Fragment, Int> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArgOr(argNameResId, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindIntArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, IntArray> =
+fun Fragment.bindIntArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, IntArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindIntArrayArgOr(@StringRes argNameResId: Int, defaultValue: IntArray): ReadOnlyProperty<androidx.fragment.app.Fragment, IntArray> =
+fun Fragment.bindIntArrayArgOr(@StringRes argNameResId: Int, defaultValue: IntArray): ReadOnlyProperty<Fragment, IntArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindIntArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, IntArray?> =
+fun Fragment.bindIntArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, IntArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindIntArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<Int>> =
+fun Fragment.bindIntArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ArrayList<Int>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArrayListArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindIntArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<Int>): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<Int>> =
+fun Fragment.bindIntArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<Int>): ReadOnlyProperty<Fragment, ArrayList<Int>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArrayListArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindIntArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<Int>?> =
+fun Fragment.bindIntArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ArrayList<Int>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayListArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindLongArgOr(@StringRes argNameResId: Int, defaultValue: Long = 0L): ReadOnlyProperty<androidx.fragment.app.Fragment, Long> =
+fun Fragment.bindLongArgOr(@StringRes argNameResId: Int, defaultValue: Long = 0L): ReadOnlyProperty<Fragment, Long> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArgOr(argNameResId, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindLongArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, LongArray> =
+fun Fragment.bindLongArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, LongArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindLongArrayArgOr(@StringRes argNameResId: Int, defaultValue: LongArray): ReadOnlyProperty<androidx.fragment.app.Fragment, LongArray> =
+fun Fragment.bindLongArrayArgOr(@StringRes argNameResId: Int, defaultValue: LongArray): ReadOnlyProperty<Fragment, LongArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindLongArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, LongArray?> =
+fun Fragment.bindLongArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, LongArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readLongArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindFloatArgOr(@StringRes argNameResId: Int, defaultValue: Float = 0f): ReadOnlyProperty<androidx.fragment.app.Fragment, Float> =
+fun Fragment.bindFloatArgOr(@StringRes argNameResId: Int, defaultValue: Float = 0f): ReadOnlyProperty<Fragment, Float> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArgOr(argNameResId, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindFloatArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, FloatArray> =
+fun Fragment.bindFloatArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, FloatArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindFloatArrayArgOr(@StringRes argNameResId: Int, defaultValue: FloatArray): ReadOnlyProperty<androidx.fragment.app.Fragment, FloatArray> =
+fun Fragment.bindFloatArrayArgOr(@StringRes argNameResId: Int, defaultValue: FloatArray): ReadOnlyProperty<Fragment, FloatArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindFloatArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, FloatArray?> =
+fun Fragment.bindFloatArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, FloatArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readFloatArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindDoubleArgOr(@StringRes argNameResId: Int, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<androidx.fragment.app.Fragment, Double> =
+fun Fragment.bindDoubleArgOr(@StringRes argNameResId: Int, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<Fragment, Double> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArgOr(argNameResId, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindDoubleArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, DoubleArray> =
+fun Fragment.bindDoubleArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, DoubleArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindDoubleArrayArgOr(@StringRes argNameResId: Int, defaultValue: DoubleArray): ReadOnlyProperty<androidx.fragment.app.Fragment, DoubleArray> =
+fun Fragment.bindDoubleArrayArgOr(@StringRes argNameResId: Int, defaultValue: DoubleArray): ReadOnlyProperty<Fragment, DoubleArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindDoubleArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, DoubleArray?> =
+fun Fragment.bindDoubleArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, DoubleArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readDoubleArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindBooleanArgOr(@StringRes argNameResId: Int, defaultValue: Boolean = false): ReadOnlyProperty<androidx.fragment.app.Fragment, Boolean> =
+fun Fragment.bindBooleanArgOr(@StringRes argNameResId: Int, defaultValue: Boolean = false): ReadOnlyProperty<Fragment, Boolean> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArgOr(argNameResId, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindBooleanArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, BooleanArray> =
+fun Fragment.bindBooleanArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, BooleanArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindBooleanArrayArgOr(@StringRes argNameResId: Int, defaultValue: BooleanArray): ReadOnlyProperty<androidx.fragment.app.Fragment, BooleanArray> =
+fun Fragment.bindBooleanArrayArgOr(@StringRes argNameResId: Int, defaultValue: BooleanArray): ReadOnlyProperty<Fragment, BooleanArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindBooleanArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, BooleanArray?> =
+fun Fragment.bindBooleanArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, BooleanArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readBooleanArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindCharArgOr(@StringRes argNameResId: Int, defaultValue: Char = 0.toChar()): ReadOnlyProperty<androidx.fragment.app.Fragment, Char> =
+fun Fragment.bindCharArgOr(@StringRes argNameResId: Int, defaultValue: Char = 0.toChar()): ReadOnlyProperty<Fragment, Char> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArgOr(argNameResId, defaultValue) }
 
 
-fun androidx.fragment.app.Fragment.bindCharArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, CharArray> =
+fun Fragment.bindCharArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, CharArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindCharArrayArgOr(@StringRes argNameResId: Int, defaultValue: CharArray): ReadOnlyProperty<androidx.fragment.app.Fragment, CharArray> =
+fun Fragment.bindCharArrayArgOr(@StringRes argNameResId: Int, defaultValue: CharArray): ReadOnlyProperty<Fragment, CharArray> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindCharArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, CharArray?> =
+fun Fragment.bindCharArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, CharArray?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, CharSequence> =
+fun Fragment.bindCharSequenceArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, CharSequence> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArgOr(@StringRes argNameResId: Int, defaultValue: CharSequence): ReadOnlyProperty<androidx.fragment.app.Fragment, CharSequence> =
+fun Fragment.bindCharSequenceArgOr(@StringRes argNameResId: Int, defaultValue: CharSequence): ReadOnlyProperty<Fragment, CharSequence> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, CharSequence?> =
+fun Fragment.bindCharSequenceArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, CharSequence?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<CharSequence>> =
+fun Fragment.bindCharSequenceArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Array<CharSequence>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<CharSequence>): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<CharSequence>> =
+fun Fragment.bindCharSequenceArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<CharSequence>): ReadOnlyProperty<Fragment, Array<CharSequence>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<CharSequence>?> =
+fun Fragment.bindCharSequenceArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Array<CharSequence>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<CharSequence>> =
+fun Fragment.bindCharSequenceArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ArrayList<CharSequence>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<CharSequence>): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<CharSequence>> =
+fun Fragment.bindCharSequenceArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<CharSequence>): ReadOnlyProperty<Fragment, ArrayList<CharSequence>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindCharSequenceArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<CharSequence>?> =
+fun Fragment.bindCharSequenceArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ArrayList<CharSequence>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindStringArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, String> =
+fun Fragment.bindStringArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, String> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindStringArgOr(@StringRes argNameResId: Int, defaultValue: String): ReadOnlyProperty<androidx.fragment.app.Fragment, String> =
+fun Fragment.bindStringArgOr(@StringRes argNameResId: Int, defaultValue: String): ReadOnlyProperty<Fragment, String> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindStringArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, String?> =
+fun Fragment.bindStringArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, String?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readStringArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindStringArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<String>> =
+fun Fragment.bindStringArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Array<String>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArrayArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindStringArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<String>): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<String>> =
+fun Fragment.bindStringArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<String>): ReadOnlyProperty<Fragment, Array<String>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArrayArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindStringArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<String>?> =
+fun Fragment.bindStringArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Array<String>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readStringArrayArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindStringArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<String>> =
+fun Fragment.bindStringArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ArrayList<String>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArrayListArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindStringArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<String>): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<String>> =
+fun Fragment.bindStringArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<String>): ReadOnlyProperty<Fragment, ArrayList<String>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArrayListArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindStringArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<String>?> =
+fun Fragment.bindStringArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ArrayList<String>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readStringArrayListArgOrNull(argNameResId) }
 
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, V> =
+fun <V : Parcelable> Fragment.bindParcelableArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, V> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArgOrThrow(argNameResId) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArgOr(@StringRes argNameResId: Int, defaultValue: V): ReadOnlyProperty<androidx.fragment.app.Fragment, V> =
+fun <V : Parcelable> Fragment.bindParcelableArgOr(@StringRes argNameResId: Int, defaultValue: V): ReadOnlyProperty<Fragment, V> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArgOr(argNameResId, defaultValue) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, V?> =
+fun <V : Parcelable> Fragment.bindParcelableArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, V?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArgOrNull(argNameResId) }
 
 
 @Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<V>> =
+fun <V : Parcelable> Fragment.bindParcelableArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Array<V>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArrayArgOrThrow(argNameResId) }
 
 @Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<V>): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<V>> =
+fun <V : Parcelable> Fragment.bindParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<V>): ReadOnlyProperty<Fragment, Array<V>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArrayArgOr(argNameResId, defaultValue) }
 
 @Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Array<V>?> =
+fun <V : Parcelable> Fragment.bindParcelableArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Array<V>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArrayArgOrNull(argNameResId) }
 
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<V>> =
+fun <V : Parcelable> Fragment.bindParcelableArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ArrayList<V>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArrayListArgOrThrow(argNameResId) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<V>): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<V>> =
+fun <V : Parcelable> Fragment.bindParcelableArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<V>): ReadOnlyProperty<Fragment, ArrayList<V>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArrayListArgOr(argNameResId, defaultValue) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindParcelableArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, ArrayList<V>?> =
+fun <V : Parcelable> Fragment.bindParcelableArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, ArrayList<V>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArrayListArgOrNull(argNameResId) }
 
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindSparseParcelableArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, SparseArray<V>> =
+fun <V : Parcelable> Fragment.bindSparseParcelableArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, SparseArray<V>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOrThrow(argNameResId) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindSparseParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: SparseArray<V>): ReadOnlyProperty<androidx.fragment.app.Fragment, SparseArray<V>> =
+fun <V : Parcelable> Fragment.bindSparseParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: SparseArray<V>): ReadOnlyProperty<Fragment, SparseArray<V>> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOr(argNameResId, defaultValue) }
 
-fun <V : Parcelable> androidx.fragment.app.Fragment.bindSparseParcelableArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, SparseArray<V>?> =
+fun <V : Parcelable> Fragment.bindSparseParcelableArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, SparseArray<V>?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOrNull(argNameResId) }
 
 
 @Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> androidx.fragment.app.Fragment.bindSerializableArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, V> =
+fun <V : java.io.Serializable> Fragment.bindSerializableArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, V> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSerializableArgOrThrow(argNameResId) }
 
 @Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> androidx.fragment.app.Fragment.bindSerializableArgOr(@StringRes argNameResId: Int, defaultValue: V): ReadOnlyProperty<androidx.fragment.app.Fragment, V> =
+fun <V : java.io.Serializable> Fragment.bindSerializableArgOr(@StringRes argNameResId: Int, defaultValue: V): ReadOnlyProperty<Fragment, V> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSerializableArgOr(argNameResId, defaultValue) }
 
 @Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> androidx.fragment.app.Fragment.bindSerializableArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, V?> =
+fun <V : java.io.Serializable> Fragment.bindSerializableArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, V?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readSerializableArgOrNull(argNameResId) }
 
 
-fun androidx.fragment.app.Fragment.bindBundleArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Bundle> =
+fun Fragment.bindBundleArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Bundle> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBundleArgOrThrow(argNameResId) }
 
-fun androidx.fragment.app.Fragment.bindBundleArgOr(@StringRes argNameResId: Int, defaultValue: Bundle): ReadOnlyProperty<androidx.fragment.app.Fragment, Bundle> =
+fun Fragment.bindBundleArgOr(@StringRes argNameResId: Int, defaultValue: Bundle): ReadOnlyProperty<Fragment, Bundle> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBundleArgOr(argNameResId, defaultValue) }
 
-fun androidx.fragment.app.Fragment.bindBundleArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Bundle?> =
+fun Fragment.bindBundleArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Bundle?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readBundleArgOrNull(argNameResId) }
 
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun androidx.fragment.app.Fragment.bindBinderArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, IBinder> =
+fun Fragment.bindBinderArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, IBinder> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBinderArgOrThrow(argNameResId) }
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun androidx.fragment.app.Fragment.bindBinderArgOr(@StringRes argNameResId: Int, defaultValue: IBinder): ReadOnlyProperty<androidx.fragment.app.Fragment, IBinder> =
+fun Fragment.bindBinderArgOr(@StringRes argNameResId: Int, defaultValue: IBinder): ReadOnlyProperty<Fragment, IBinder> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBinderArgOr(argNameResId, defaultValue) }
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun androidx.fragment.app.Fragment.bindBinderArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, IBinder?> =
+fun Fragment.bindBinderArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, IBinder?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readBinderArgOrNull(argNameResId) }
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Size> =
+fun Fragment.bindSizeArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Size> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSizeArgOrThrow(argNameResId) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeArgOr(@StringRes argNameResId: Int, defaultValue: Size): ReadOnlyProperty<androidx.fragment.app.Fragment, Size> =
+fun Fragment.bindSizeArgOr(@StringRes argNameResId: Int, defaultValue: Size): ReadOnlyProperty<Fragment, Size> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSizeArgOr(argNameResId, defaultValue) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, Size?> =
+fun Fragment.bindSizeArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, Size?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readSizeArgOrNull(argNameResId) }
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeFArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, SizeF> =
+fun Fragment.bindSizeFArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, SizeF> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSizeFArgOrThrow(argNameResId) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeFArgOr(@StringRes argNameResId: Int, defaultValue: SizeF): ReadOnlyProperty<androidx.fragment.app.Fragment, SizeF> =
+fun Fragment.bindSizeFArgOr(@StringRes argNameResId: Int, defaultValue: SizeF): ReadOnlyProperty<Fragment, SizeF> =
         SupportFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSizeFArgOr(argNameResId, defaultValue) }
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun androidx.fragment.app.Fragment.bindSizeFArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<androidx.fragment.app.Fragment, SizeF?> =
+fun Fragment.bindSizeFArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<Fragment, SizeF?> =
         OptionalArgLazy { _, _: KProperty<*> -> this.readSizeFArgOrNull(argNameResId) }
-
-
-/* ************************************* Origin Fragment Arg ***************************************** */
-
-
-fun android.app.Fragment.bindByteArgOr(@StringRes argNameResId: Int, defaultValue: Byte = 0): ReadOnlyProperty<android.app.Fragment, Byte> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArgOr(argNameResId, defaultValue) }
-
-
-fun android.app.Fragment.bindByteArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ByteArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindByteArrayArgOr(@StringRes argNameResId: Int, defaultValue: ByteArray): ReadOnlyProperty<android.app.Fragment, ByteArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readByteArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindByteArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ByteArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readByteArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindShortArgOr(@StringRes argNameResId: Int, defaultValue: Short = 0): ReadOnlyProperty<android.app.Fragment, Short> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArgOr(argNameResId, defaultValue) }
-
-
-fun android.app.Fragment.bindShortArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ShortArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindShortArrayArgOr(@StringRes argNameResId: Int, defaultValue: ShortArray): ReadOnlyProperty<android.app.Fragment, ShortArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readShortArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindShortArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ShortArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readShortArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindIntArgOr(@StringRes argNameResId: Int, defaultValue: Int = 0): ReadOnlyProperty<android.app.Fragment, Int> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArgOr(argNameResId, defaultValue) }
-
-
-fun android.app.Fragment.bindIntArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, IntArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindIntArrayArgOr(@StringRes argNameResId: Int, defaultValue: IntArray): ReadOnlyProperty<android.app.Fragment, IntArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindIntArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, IntArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindIntArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ArrayList<Int>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArrayListArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindIntArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<Int>): ReadOnlyProperty<android.app.Fragment, ArrayList<Int>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readIntArrayListArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindIntArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ArrayList<Int>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readIntArrayListArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindLongArgOr(@StringRes argNameResId: Int, defaultValue: Long = 0L): ReadOnlyProperty<android.app.Fragment, Long> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArgOr(argNameResId, defaultValue) }
-
-
-fun android.app.Fragment.bindLongArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, LongArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindLongArrayArgOr(@StringRes argNameResId: Int, defaultValue: LongArray): ReadOnlyProperty<android.app.Fragment, LongArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readLongArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindLongArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, LongArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readLongArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindFloatArgOr(@StringRes argNameResId: Int, defaultValue: Float = 0f): ReadOnlyProperty<android.app.Fragment, Float> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArgOr(argNameResId, defaultValue) }
-
-
-fun android.app.Fragment.bindFloatArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, FloatArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindFloatArrayArgOr(@StringRes argNameResId: Int, defaultValue: FloatArray): ReadOnlyProperty<android.app.Fragment, FloatArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readFloatArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindFloatArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, FloatArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readFloatArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindDoubleArgOr(@StringRes argNameResId: Int, defaultValue: Double = 0.toDouble()): ReadOnlyProperty<android.app.Fragment, Double> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArgOr(argNameResId, defaultValue) }
-
-
-fun android.app.Fragment.bindDoubleArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, DoubleArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindDoubleArrayArgOr(@StringRes argNameResId: Int, defaultValue: DoubleArray): ReadOnlyProperty<android.app.Fragment, DoubleArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readDoubleArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindDoubleArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, DoubleArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readDoubleArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindBooleanArgOr(@StringRes argNameResId: Int, defaultValue: Boolean = false): ReadOnlyProperty<android.app.Fragment, Boolean> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArgOr(argNameResId, defaultValue) }
-
-
-fun android.app.Fragment.bindBooleanArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, BooleanArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindBooleanArrayArgOr(@StringRes argNameResId: Int, defaultValue: BooleanArray): ReadOnlyProperty<android.app.Fragment, BooleanArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBooleanArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindBooleanArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, BooleanArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readBooleanArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindCharArgOr(@StringRes argNameResId: Int, defaultValue: Char = 0.toChar()): ReadOnlyProperty<android.app.Fragment, Char> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArgOr(argNameResId, defaultValue) }
-
-
-fun android.app.Fragment.bindCharArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, CharArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindCharArrayArgOr(@StringRes argNameResId: Int, defaultValue: CharArray): ReadOnlyProperty<android.app.Fragment, CharArray> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindCharArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, CharArray?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readCharArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindCharSequenceArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, CharSequence> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindCharSequenceArgOr(@StringRes argNameResId: Int, defaultValue: CharSequence): ReadOnlyProperty<android.app.Fragment, CharSequence> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindCharSequenceArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, CharSequence?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindCharSequenceArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Array<CharSequence>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindCharSequenceArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<CharSequence>): ReadOnlyProperty<android.app.Fragment, Array<CharSequence>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindCharSequenceArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Array<CharSequence>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindCharSequenceArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ArrayList<CharSequence>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindCharSequenceArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<CharSequence>): ReadOnlyProperty<android.app.Fragment, ArrayList<CharSequence>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindCharSequenceArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ArrayList<CharSequence>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readCharSequenceArrayListArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindStringArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, String> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindStringArgOr(@StringRes argNameResId: Int, defaultValue: String): ReadOnlyProperty<android.app.Fragment, String> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindStringArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, String?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readStringArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindStringArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Array<String>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArrayArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindStringArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<String>): ReadOnlyProperty<android.app.Fragment, Array<String>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArrayArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindStringArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Array<String>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readStringArrayArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindStringArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ArrayList<String>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArrayListArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindStringArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<String>): ReadOnlyProperty<android.app.Fragment, ArrayList<String>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readStringArrayListArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindStringArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ArrayList<String>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readStringArrayListArgOrNull(argNameResId) }
-
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, V> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArgOrThrow(argNameResId) }
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArgOr(@StringRes argNameResId: Int, defaultValue: V): ReadOnlyProperty<android.app.Fragment, V> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArgOr(argNameResId, defaultValue) }
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, V?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArgOrNull(argNameResId) }
-
-
-@Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Array<V>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArrayArgOrThrow(argNameResId) }
-
-@Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<V>): ReadOnlyProperty<android.app.Fragment, Array<V>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArrayArgOr(argNameResId, defaultValue) }
-
-@Suppress("UNCHECKED_CAST")
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Array<V>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArrayArgOrNull(argNameResId) }
-
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayListArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ArrayList<V>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArrayListArgOrThrow(argNameResId) }
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<V>): ReadOnlyProperty<android.app.Fragment, ArrayList<V>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readParcelableArrayListArgOr(argNameResId, defaultValue) }
-
-fun <V : Parcelable> android.app.Fragment.bindParcelableArrayListArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, ArrayList<V>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readParcelableArrayListArgOrNull(argNameResId) }
-
-
-fun <V : Parcelable> android.app.Fragment.bindSparseParcelableArrayArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, SparseArray<V>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOrThrow(argNameResId) }
-
-fun <V : Parcelable> android.app.Fragment.bindSparseParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: SparseArray<V>): ReadOnlyProperty<android.app.Fragment, SparseArray<V>> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOr(argNameResId, defaultValue) }
-
-fun <V : Parcelable> android.app.Fragment.bindSparseParcelableArrayArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, SparseArray<V>?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readSparseParcelableArrayArgOrNull(argNameResId) }
-
-
-@Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> android.app.Fragment.bindSerializableArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, V> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSerializableArgOrThrow(argNameResId) }
-
-@Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> android.app.Fragment.bindSerializableArgOr(@StringRes argNameResId: Int, defaultValue: V): ReadOnlyProperty<android.app.Fragment, V> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSerializableArgOr(argNameResId, defaultValue) }
-
-@Suppress("UNCHECKED_CAST")
-fun <V : java.io.Serializable> android.app.Fragment.bindSerializableArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, V?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readSerializableArgOrNull(argNameResId) }
-
-
-fun android.app.Fragment.bindBundleArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Bundle> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBundleArgOrThrow(argNameResId) }
-
-fun android.app.Fragment.bindBundleArgOr(@StringRes argNameResId: Int, defaultValue: Bundle): ReadOnlyProperty<android.app.Fragment, Bundle> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBundleArgOr(argNameResId, defaultValue) }
-
-fun android.app.Fragment.bindBundleArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Bundle?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readBundleArgOrNull(argNameResId) }
-
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun android.app.Fragment.bindBinderArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, IBinder> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBinderArgOrThrow(argNameResId) }
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun android.app.Fragment.bindBinderArgOr(@StringRes argNameResId: Int, defaultValue: IBinder): ReadOnlyProperty<android.app.Fragment, IBinder> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readBinderArgOr(argNameResId, defaultValue) }
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-fun android.app.Fragment.bindBinderArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, IBinder?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readBinderArgOrNull(argNameResId) }
-
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Size> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSizeArgOrThrow(argNameResId) }
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeArgOr(@StringRes argNameResId: Int, defaultValue: Size): ReadOnlyProperty<android.app.Fragment, Size> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSizeArgOr(argNameResId, defaultValue) }
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, Size?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readSizeArgOrNull(argNameResId) }
-
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeFArgOrThrow(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, SizeF> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSizeFArgOrThrow(argNameResId) }
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeFArgOr(@StringRes argNameResId: Int, defaultValue: SizeF): ReadOnlyProperty<android.app.Fragment, SizeF> =
-        OriginFragmentArgLazy(argNameResId) { _, _: KProperty<*> -> this.readSizeFArgOr(argNameResId, defaultValue) }
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-fun android.app.Fragment.bindSizeFArgOrNull(@StringRes argNameResId: Int): ReadOnlyProperty<android.app.Fragment, SizeF?> =
-        OptionalArgLazy { _, _: KProperty<*> -> this.readSizeFArgOrNull(argNameResId) }
-

@@ -141,64 +141,6 @@ public class Toastx {
     }
 
 
-    /* ************************************* android.app.Fragment ***************************************** */
-
-
-    public static void showLong(@NonNull android.app.Fragment fragment, @NonNull final CharSequence message) {
-        final Context context = Fragmentx.requireActivity(fragment);
-        final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
-    }
-
-    public static void showLong(@NonNull android.app.Fragment fragment, @StringRes final int messageResId) {
-        final Context context = Fragmentx.requireActivity(fragment);
-        final CharSequence message = context.getResources().getText(messageResId);
-        final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
-    }
-
-    public static void showWithFormatLong(@NonNull android.app.Fragment fragment, @NonNull final String format, @NonNull final Object... params) {
-        final Context context = Fragmentx.requireActivity(fragment);
-        final CharSequence message = String.format(format, params);
-        final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
-    }
-
-    public static void showWithFormatLong(@NonNull android.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
-        final Context context = Fragmentx.requireActivity(fragment);
-        final CharSequence message = context.getResources().getString(messageResId, params);
-        final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_LONG).show());
-    }
-
-    public static void showShort(@NonNull android.app.Fragment fragment, @NonNull final CharSequence message) {
-        final Context context = Fragmentx.requireActivity(fragment);
-        final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
-    }
-
-    public static void showShort(@NonNull android.app.Fragment fragment, @StringRes final int messageResId) {
-        final Context context = Fragmentx.requireActivity(fragment);
-        final CharSequence message = context.getResources().getText(messageResId);
-        final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
-    }
-
-    public static void showWithFormatShort(@NonNull android.app.Fragment fragment, @NonNull final String format, @NonNull final Object... params) {
-        final Context context = Fragmentx.requireActivity(fragment);
-        final CharSequence message = String.format(format, params);
-        final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
-    }
-
-    public static void showWithFormatShort(@NonNull android.app.Fragment fragment, @StringRes final int messageResId, @NonNull final Object... params) {
-        final Context context = Fragmentx.requireActivity(fragment);
-        final CharSequence message = context.getResources().getString(messageResId, params);
-        final Context appContext = context.getApplicationContext();
-        Androidx.runInUI(() -> Toast.makeText(appContext, message, Toast.LENGTH_SHORT).show());
-    }
-
-
     /* ************************************* View ***************************************** */
 
 

@@ -65,11 +65,6 @@ inline fun androidx.fragment.app.Fragment.hideSoftInput() = InputMethodx.hideSof
 /**
  * Hide soft keyboard
  */
-inline fun android.app.Fragment.hideSoftInput() = InputMethodx.hideSoftInput(this)
-
-/**
- * Hide soft keyboard
- */
 inline fun EditText.hideSoftInput() = InputMethodx.hideSoftInput(this)
 
 

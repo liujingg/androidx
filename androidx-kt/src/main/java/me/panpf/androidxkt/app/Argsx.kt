@@ -28,6 +28,7 @@ import android.util.SizeF
 import android.util.SparseArray
 import androidx.annotation.RequiresApi
 import androidx.annotation.StringRes
+import androidx.fragment.app.Fragment
 import me.panpf.androidx.app.Argsx
 import java.io.Serializable
 import java.util.*
@@ -601,898 +602,459 @@ inline fun Activity.readStringIntentUriArgOrNull(@StringRes argNameResId: Int): 
 /* ************************************* SupportFragment Args ***************************************** */
 
 
-inline fun androidx.fragment.app.Fragment.readByteArgOr(argName: String, defaultValue: Byte): Byte = Argsx.readByteArgOr(this, argName, defaultValue)
+inline fun Fragment.readByteArgOr(argName: String, defaultValue: Byte): Byte = Argsx.readByteArgOr(this, argName, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readByteArrayArgOrThrow(argName: String): ByteArray = Argsx.readByteArrayArgOrThrow(this, argName)
+inline fun Fragment.readByteArrayArgOrThrow(argName: String): ByteArray = Argsx.readByteArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readByteArrayArgOr(argName: String, defaultValue: ByteArray): ByteArray =
+inline fun Fragment.readByteArrayArgOr(argName: String, defaultValue: ByteArray): ByteArray =
         Argsx.readByteArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readByteArrayArgOrNull(argName: String): ByteArray? = Argsx.readByteArrayArgOrNull(this, argName)
+inline fun Fragment.readByteArrayArgOrNull(argName: String): ByteArray? = Argsx.readByteArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readShortArgOr(argName: String, defaultValue: Short): Short = Argsx.readShortArgOr(this, argName, defaultValue)
+inline fun Fragment.readShortArgOr(argName: String, defaultValue: Short): Short = Argsx.readShortArgOr(this, argName, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readShortArrayArgOrThrow(argName: String): ShortArray = Argsx.readShortArrayArgOrThrow(this, argName)
+inline fun Fragment.readShortArrayArgOrThrow(argName: String): ShortArray = Argsx.readShortArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readShortArrayArgOr(argName: String, defaultValue: ShortArray): ShortArray =
+inline fun Fragment.readShortArrayArgOr(argName: String, defaultValue: ShortArray): ShortArray =
         Argsx.readShortArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readShortArrayArgOrNull(argName: String): ShortArray? = Argsx.readShortArrayArgOrNull(this, argName)
+inline fun Fragment.readShortArrayArgOrNull(argName: String): ShortArray? = Argsx.readShortArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readIntArgOr(argName: String, defaultValue: Int): Int = Argsx.readIntArgOr(this, argName, defaultValue)
+inline fun Fragment.readIntArgOr(argName: String, defaultValue: Int): Int = Argsx.readIntArgOr(this, argName, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readIntArrayArgOrThrow(argName: String): IntArray = Argsx.readIntArrayArgOrThrow(this, argName)
+inline fun Fragment.readIntArrayArgOrThrow(argName: String): IntArray = Argsx.readIntArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readIntArrayArgOr(argName: String, defaultValue: IntArray): IntArray = Argsx.readIntArrayArgOr(this, argName, defaultValue)
+inline fun Fragment.readIntArrayArgOr(argName: String, defaultValue: IntArray): IntArray = Argsx.readIntArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readIntArrayArgOrNull(argName: String): IntArray? = Argsx.readIntArrayArgOrNull(this, argName)
+inline fun Fragment.readIntArrayArgOrNull(argName: String): IntArray? = Argsx.readIntArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readIntArrayListArgOrThrow(argName: String): ArrayList<Int> = Argsx.readIntArrayListArgOrThrow(this, argName)
+inline fun Fragment.readIntArrayListArgOrThrow(argName: String): ArrayList<Int> = Argsx.readIntArrayListArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readIntArrayListArgOr(argName: String, defaultValue: ArrayList<Int>): ArrayList<Int> =
+inline fun Fragment.readIntArrayListArgOr(argName: String, defaultValue: ArrayList<Int>): ArrayList<Int> =
         Argsx.readIntArrayListArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readIntArrayListArgOrNull(argName: String): ArrayList<Int>? = Argsx.readIntArrayListArgOrNull(this, argName)
+inline fun Fragment.readIntArrayListArgOrNull(argName: String): ArrayList<Int>? = Argsx.readIntArrayListArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readLongArgOr(argName: String, defaultValue: Long): Long = Argsx.readLongArgOr(this, argName, defaultValue)
+inline fun Fragment.readLongArgOr(argName: String, defaultValue: Long): Long = Argsx.readLongArgOr(this, argName, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readLongArrayArgOrThrow(argName: String): LongArray = Argsx.readLongArrayArgOrThrow(this, argName)
+inline fun Fragment.readLongArrayArgOrThrow(argName: String): LongArray = Argsx.readLongArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readLongArrayArgOr(argName: String, defaultValue: LongArray): LongArray =
+inline fun Fragment.readLongArrayArgOr(argName: String, defaultValue: LongArray): LongArray =
         Argsx.readLongArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readLongArrayArgOrNull(argName: String): LongArray? = Argsx.readLongArrayArgOrNull(this, argName)
+inline fun Fragment.readLongArrayArgOrNull(argName: String): LongArray? = Argsx.readLongArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readFloatArgOr(argName: String, defaultValue: Float): Float = Argsx.readFloatArgOr(this, argName, defaultValue)
+inline fun Fragment.readFloatArgOr(argName: String, defaultValue: Float): Float = Argsx.readFloatArgOr(this, argName, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readFloatArrayArgOrThrow(argName: String): FloatArray = Argsx.readFloatArrayArgOrThrow(this, argName)
+inline fun Fragment.readFloatArrayArgOrThrow(argName: String): FloatArray = Argsx.readFloatArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readFloatArrayArgOr(argName: String, defaultValue: FloatArray): FloatArray =
+inline fun Fragment.readFloatArrayArgOr(argName: String, defaultValue: FloatArray): FloatArray =
         Argsx.readFloatArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readFloatArrayArgOrNull(argName: String): FloatArray? = Argsx.readFloatArrayArgOrNull(this, argName)
+inline fun Fragment.readFloatArrayArgOrNull(argName: String): FloatArray? = Argsx.readFloatArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readDoubleArgOr(argName: String, defaultValue: Double): Double = Argsx.readDoubleArgOr(this, argName, defaultValue)
+inline fun Fragment.readDoubleArgOr(argName: String, defaultValue: Double): Double = Argsx.readDoubleArgOr(this, argName, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readDoubleArrayArgOrThrow(argName: String): DoubleArray = Argsx.readDoubleArrayArgOrThrow(this, argName)
+inline fun Fragment.readDoubleArrayArgOrThrow(argName: String): DoubleArray = Argsx.readDoubleArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readDoubleArrayArgOr(argName: String, defaultValue: DoubleArray): DoubleArray =
+inline fun Fragment.readDoubleArrayArgOr(argName: String, defaultValue: DoubleArray): DoubleArray =
         Argsx.readDoubleArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readDoubleArrayArgOrNull(argName: String): DoubleArray? = Argsx.readDoubleArrayArgOrNull(this, argName)
+inline fun Fragment.readDoubleArrayArgOrNull(argName: String): DoubleArray? = Argsx.readDoubleArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readBooleanArgOr(argName: String, defaultValue: Boolean): Boolean = Argsx.readBooleanArgOr(this, argName, defaultValue)
+inline fun Fragment.readBooleanArgOr(argName: String, defaultValue: Boolean): Boolean = Argsx.readBooleanArgOr(this, argName, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readBooleanArrayArgOrThrow(argName: String): BooleanArray = Argsx.readBooleanArrayArgOrThrow(this, argName)
+inline fun Fragment.readBooleanArrayArgOrThrow(argName: String): BooleanArray = Argsx.readBooleanArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readBooleanArrayArgOr(argName: String, defaultValue: BooleanArray): BooleanArray =
+inline fun Fragment.readBooleanArrayArgOr(argName: String, defaultValue: BooleanArray): BooleanArray =
         Argsx.readBooleanArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readBooleanArrayArgOrNull(argName: String): BooleanArray? = Argsx.readBooleanArrayArgOrNull(this, argName)
+inline fun Fragment.readBooleanArrayArgOrNull(argName: String): BooleanArray? = Argsx.readBooleanArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readCharArgOr(argName: String, defaultValue: Char): Char = Argsx.readCharArgOr(this, argName, defaultValue)
+inline fun Fragment.readCharArgOr(argName: String, defaultValue: Char): Char = Argsx.readCharArgOr(this, argName, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readCharArrayArgOrThrow(argName: String): CharArray = Argsx.readCharArrayArgOrThrow(this, argName)
+inline fun Fragment.readCharArrayArgOrThrow(argName: String): CharArray = Argsx.readCharArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readCharArrayArgOr(argName: String, defaultValue: CharArray): CharArray =
+inline fun Fragment.readCharArrayArgOr(argName: String, defaultValue: CharArray): CharArray =
         Argsx.readCharArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readCharArrayArgOrNull(argName: String): CharArray? = Argsx.readCharArrayArgOrNull(this, argName)
+inline fun Fragment.readCharArrayArgOrNull(argName: String): CharArray? = Argsx.readCharArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArgOrThrow(argName: String): CharSequence = Argsx.readCharSequenceArgOrThrow(this, argName)
+inline fun Fragment.readCharSequenceArgOrThrow(argName: String): CharSequence = Argsx.readCharSequenceArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArgOr(argName: String, defaultValue: CharSequence): CharSequence =
+inline fun Fragment.readCharSequenceArgOr(argName: String, defaultValue: CharSequence): CharSequence =
         Argsx.readCharSequenceArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArgOrNull(argName: String): CharSequence? = Argsx.readCharSequenceArgOrNull(this, argName)
+inline fun Fragment.readCharSequenceArgOrNull(argName: String): CharSequence? = Argsx.readCharSequenceArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayArgOrThrow(argName: String): Array<CharSequence> = Argsx.readCharSequenceArrayArgOrThrow(this, argName)
+inline fun Fragment.readCharSequenceArrayArgOrThrow(argName: String): Array<CharSequence> = Argsx.readCharSequenceArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayArgOr(argName: String, defaultValue: Array<CharSequence>): Array<CharSequence> =
+inline fun Fragment.readCharSequenceArrayArgOr(argName: String, defaultValue: Array<CharSequence>): Array<CharSequence> =
         Argsx.readCharSequenceArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayArgOrNull(argName: String): Array<CharSequence>? =
+inline fun Fragment.readCharSequenceArrayArgOrNull(argName: String): Array<CharSequence>? =
         Argsx.readCharSequenceArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayListArgOrThrow(argName: String): ArrayList<CharSequence> =
+inline fun Fragment.readCharSequenceArrayListArgOrThrow(argName: String): ArrayList<CharSequence> =
         Argsx.readCharSequenceArrayListArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> =
+inline fun Fragment.readCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> =
         Argsx.readCharSequenceArrayListArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayListArgOrNull(argName: String): ArrayList<CharSequence>? =
+inline fun Fragment.readCharSequenceArrayListArgOrNull(argName: String): ArrayList<CharSequence>? =
         Argsx.readCharSequenceArrayListArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readStringArgOrThrow(argName: String): String = Argsx.readStringArgOrThrow(this, argName)
+inline fun Fragment.readStringArgOrThrow(argName: String): String = Argsx.readStringArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readStringArgOr(argName: String, defaultValue: String): String = Argsx.readStringArgOr(this, argName, defaultValue)
+inline fun Fragment.readStringArgOr(argName: String, defaultValue: String): String = Argsx.readStringArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readStringArgOrNull(argName: String): String? = Argsx.readStringArgOrNull(this, argName)
+inline fun Fragment.readStringArgOrNull(argName: String): String? = Argsx.readStringArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readStringArrayArgOrThrow(argName: String): Array<String> = Argsx.readStringArrayArgOrThrow(this, argName)
+inline fun Fragment.readStringArrayArgOrThrow(argName: String): Array<String> = Argsx.readStringArrayArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readStringArrayArgOr(argName: String, defaultValue: Array<String>): Array<String> =
+inline fun Fragment.readStringArrayArgOr(argName: String, defaultValue: Array<String>): Array<String> =
         Argsx.readStringArrayArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readStringArrayArgOrNull(argName: String): Array<String>? = Argsx.readStringArrayArgOrNull(this, argName)
+inline fun Fragment.readStringArrayArgOrNull(argName: String): Array<String>? = Argsx.readStringArrayArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readStringArrayListArgOrThrow(argName: String): ArrayList<String> = Argsx.readStringArrayListArgOrThrow(this, argName)
+inline fun Fragment.readStringArrayListArgOrThrow(argName: String): ArrayList<String> = Argsx.readStringArrayListArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readStringArrayListArgOr(argName: String, defaultValue: ArrayList<String>): ArrayList<String> =
+inline fun Fragment.readStringArrayListArgOr(argName: String, defaultValue: ArrayList<String>): ArrayList<String> =
         Argsx.readStringArrayListArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readStringArrayListArgOrNull(argName: String): ArrayList<String>? = Argsx.readStringArrayListArgOrNull(this, argName)
+inline fun Fragment.readStringArrayListArgOrNull(argName: String): ArrayList<String>? = Argsx.readStringArrayListArgOrNull(this, argName)
 
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArgOrThrow(argName: String): V = Argsx.readParcelableArgOrThrow(this, argName)
+inline fun <V : Parcelable> Fragment.readParcelableArgOrThrow(argName: String): V = Argsx.readParcelableArgOrThrow(this, argName)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArgOr(argName: String, defaultValue: V): V =
+inline fun <V : Parcelable> Fragment.readParcelableArgOr(argName: String, defaultValue: V): V =
         Argsx.readParcelableArgOr(this, argName, defaultValue)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArgOrNull(argName: String): V? = Argsx.readParcelableArgOrNull(this, argName)
+inline fun <V : Parcelable> Fragment.readParcelableArgOrNull(argName: String): V? = Argsx.readParcelableArgOrNull(this, argName)
 
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayArgOrThrow(argName: String): Array<V> = Argsx.readParcelableArrayArgOrThrow(this, argName)
+inline fun <V : Parcelable> Fragment.readParcelableArrayArgOrThrow(argName: String): Array<V> = Argsx.readParcelableArrayArgOrThrow(this, argName)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayArgOr(argName: String, defaultValue: Array<V>): Array<V> =
+inline fun <V : Parcelable> Fragment.readParcelableArrayArgOr(argName: String, defaultValue: Array<V>): Array<V> =
         Argsx.readParcelableArrayArgOr(this, argName, defaultValue)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayArgOrNull(argName: String): Array<V>? =
+inline fun <V : Parcelable> Fragment.readParcelableArrayArgOrNull(argName: String): Array<V>? =
         Argsx.readParcelableArrayArgOrNull(this, argName)
 
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayListArgOrThrow(argName: String): ArrayList<V> =
+inline fun <V : Parcelable> Fragment.readParcelableArrayListArgOrThrow(argName: String): ArrayList<V> =
         Argsx.readParcelableArrayListArgOrThrow(this, argName)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayListArgOr(argName: String, defaultValue: ArrayList<V>): ArrayList<V> =
+inline fun <V : Parcelable> Fragment.readParcelableArrayListArgOr(argName: String, defaultValue: ArrayList<V>): ArrayList<V> =
         Argsx.readParcelableArrayListArgOr(this, argName, defaultValue)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayListArgOrNull(argName: String): ArrayList<V>? =
+inline fun <V : Parcelable> Fragment.readParcelableArrayListArgOrNull(argName: String): ArrayList<V>? =
         Argsx.readParcelableArrayListArgOrNull(this, argName)
 
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readSparseParcelableArrayArgOrThrow(argName: String): SparseArray<V> =
+inline fun <V : Parcelable> Fragment.readSparseParcelableArrayArgOrThrow(argName: String): SparseArray<V> =
         Argsx.readSparseParcelableArrayArgOrThrow(this, argName)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readSparseParcelableArrayArgOr(argName: String, defaultValue: SparseArray<V>): SparseArray<V> =
+inline fun <V : Parcelable> Fragment.readSparseParcelableArrayArgOr(argName: String, defaultValue: SparseArray<V>): SparseArray<V> =
         Argsx.readSparseParcelableArrayArgOr(this, argName, defaultValue)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readSparseParcelableArrayArgOrNull(argName: String): SparseArray<V>? =
+inline fun <V : Parcelable> Fragment.readSparseParcelableArrayArgOrNull(argName: String): SparseArray<V>? =
         Argsx.readSparseParcelableArrayArgOrNull(this, argName)
 
 
-inline fun <V : Serializable> androidx.fragment.app.Fragment.readSerializableArgOrThrow(argName: String): V = Argsx.readSerializableArgOrThrow(this, argName)
+inline fun <V : Serializable> Fragment.readSerializableArgOrThrow(argName: String): V = Argsx.readSerializableArgOrThrow(this, argName)
 
-inline fun <V : Serializable> androidx.fragment.app.Fragment.readSerializableArgOr(argName: String, defaultValue: V): V =
+inline fun <V : Serializable> Fragment.readSerializableArgOr(argName: String, defaultValue: V): V =
         Argsx.readSerializableArgOr(this, argName, defaultValue)
 
-inline fun <V : Serializable> androidx.fragment.app.Fragment.readSerializableArgOrNull(argName: String): V? = Argsx.readSerializableArgOrNull(this, argName)
+inline fun <V : Serializable> Fragment.readSerializableArgOrNull(argName: String): V? = Argsx.readSerializableArgOrNull(this, argName)
 
 
-inline fun androidx.fragment.app.Fragment.readBundleArgOrThrow(argName: String): Bundle = Argsx.readBundleArgOrThrow(this, argName)
+inline fun Fragment.readBundleArgOrThrow(argName: String): Bundle = Argsx.readBundleArgOrThrow(this, argName)
 
-inline fun androidx.fragment.app.Fragment.readBundleArgOr(argName: String, defaultValue: Bundle): Bundle = Argsx.readBundleArgOr(this, argName, defaultValue)
+inline fun Fragment.readBundleArgOr(argName: String, defaultValue: Bundle): Bundle = Argsx.readBundleArgOr(this, argName, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readBundleArgOrNull(argName: String): Bundle? = Argsx.readBundleArgOrNull(this, argName)
+inline fun Fragment.readBundleArgOrNull(argName: String): Bundle? = Argsx.readBundleArgOrNull(this, argName)
 
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun androidx.fragment.app.Fragment.readBinderArgOrThrow(argName: String): IBinder = Argsx.readBinderArgOrThrow(this, argName)
+inline fun Fragment.readBinderArgOrThrow(argName: String): IBinder = Argsx.readBinderArgOrThrow(this, argName)
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun androidx.fragment.app.Fragment.readBinderArgOr(argName: String, defaultValue: IBinder): IBinder = Argsx.readBinderArgOr(this, argName, defaultValue)
+inline fun Fragment.readBinderArgOr(argName: String, defaultValue: IBinder): IBinder = Argsx.readBinderArgOr(this, argName, defaultValue)
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun androidx.fragment.app.Fragment.readBinderArgOrNull(argName: String): IBinder? = Argsx.readBinderArgOrNull(this, argName)
+inline fun Fragment.readBinderArgOrNull(argName: String): IBinder? = Argsx.readBinderArgOrNull(this, argName)
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeArgOrThrow(argName: String): Size = Argsx.readSizeArgOrThrow(this, argName)
+inline fun Fragment.readSizeArgOrThrow(argName: String): Size = Argsx.readSizeArgOrThrow(this, argName)
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeArgOr(argName: String, defaultValue: Size): Size = Argsx.readSizeArgOr(this, argName, defaultValue)
+inline fun Fragment.readSizeArgOr(argName: String, defaultValue: Size): Size = Argsx.readSizeArgOr(this, argName, defaultValue)
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeArgOrNull(argName: String): Size? = Argsx.readSizeArgOrNull(this, argName)
-
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeFArgOrThrow(argName: String): SizeF = Argsx.readSizeFArgOrThrow(this, argName)
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeFArgOr(argName: String, defaultValue: SizeF): SizeF = Argsx.readSizeFArgOr(this, argName, defaultValue)
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeFArgOrNull(argName: String): SizeF? = Argsx.readSizeFArgOrNull(this, argName)
-
-
-/* ************************************* OriginFragment Args ***************************************** */
-
-
-inline fun android.app.Fragment.readByteArgOr(argName: String, defaultValue: Byte): Byte = Argsx.readByteArgOr(this, argName, defaultValue)
-
-
-inline fun android.app.Fragment.readByteArrayArgOrThrow(argName: String): ByteArray = Argsx.readByteArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readByteArrayArgOr(argName: String, defaultValue: ByteArray): ByteArray = Argsx.readByteArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readByteArrayArgOrNull(argName: String): ByteArray? = Argsx.readByteArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readShortArgOr(argName: String, defaultValue: Short): Short = Argsx.readShortArgOr(this, argName, defaultValue)
-
-
-inline fun android.app.Fragment.readShortArrayArgOrThrow(argName: String): ShortArray = Argsx.readShortArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readShortArrayArgOr(argName: String, defaultValue: ShortArray): ShortArray = Argsx.readShortArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readShortArrayArgOrNull(argName: String): ShortArray? = Argsx.readShortArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readIntArgOr(argName: String, defaultValue: Int): Int = Argsx.readIntArgOr(this, argName, defaultValue)
-
-
-inline fun android.app.Fragment.readIntArrayArgOrThrow(argName: String): IntArray = Argsx.readIntArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readIntArrayArgOr(argName: String, defaultValue: IntArray): IntArray = Argsx.readIntArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readIntArrayArgOrNull(argName: String): IntArray? = Argsx.readIntArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readIntArrayListArgOrThrow(argName: String): ArrayList<Int> = Argsx.readIntArrayListArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readIntArrayListArgOr(argName: String, defaultValue: ArrayList<Int>): ArrayList<Int> =
-        Argsx.readIntArrayListArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readIntArrayListArgOrNull(argName: String): ArrayList<Int>? = Argsx.readIntArrayListArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readLongArgOr(argName: String, defaultValue: Long): Long = Argsx.readLongArgOr(this, argName, defaultValue)
-
-
-inline fun android.app.Fragment.readLongArrayArgOrThrow(argName: String): LongArray = Argsx.readLongArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readLongArrayArgOr(argName: String, defaultValue: LongArray): LongArray = Argsx.readLongArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readLongArrayArgOrNull(argName: String): LongArray? = Argsx.readLongArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readFloatArgOr(argName: String, defaultValue: Float): Float = Argsx.readFloatArgOr(this, argName, defaultValue)
-
-
-inline fun android.app.Fragment.readFloatArrayArgOrThrow(argName: String): FloatArray = Argsx.readFloatArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readFloatArrayArgOr(argName: String, defaultValue: FloatArray): FloatArray =
-        Argsx.readFloatArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readFloatArrayArgOrNull(argName: String): FloatArray? = Argsx.readFloatArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readDoubleArgOr(argName: String, defaultValue: Double): Double = Argsx.readDoubleArgOr(this, argName, defaultValue)
-
-
-inline fun android.app.Fragment.readDoubleArrayArgOrThrow(argName: String): DoubleArray = Argsx.readDoubleArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readDoubleArrayArgOr(argName: String, defaultValue: DoubleArray): DoubleArray =
-        Argsx.readDoubleArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readDoubleArrayArgOrNull(argName: String): DoubleArray? = Argsx.readDoubleArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readBooleanArgOr(argName: String, defaultValue: Boolean): Boolean = Argsx.readBooleanArgOr(this, argName, defaultValue)
-
-
-inline fun android.app.Fragment.readBooleanArrayArgOrThrow(argName: String): BooleanArray = Argsx.readBooleanArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readBooleanArrayArgOr(argName: String, defaultValue: BooleanArray): BooleanArray =
-        Argsx.readBooleanArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readBooleanArrayArgOrNull(argName: String): BooleanArray? = Argsx.readBooleanArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readCharArgOr(argName: String, defaultValue: Char): Char = Argsx.readCharArgOr(this, argName, defaultValue)
-
-
-inline fun android.app.Fragment.readCharArrayArgOrThrow(argName: String): CharArray = Argsx.readCharArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readCharArrayArgOr(argName: String, defaultValue: CharArray): CharArray = Argsx.readCharArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readCharArrayArgOrNull(argName: String): CharArray? = Argsx.readCharArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readCharSequenceArgOrThrow(argName: String): CharSequence = Argsx.readCharSequenceArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readCharSequenceArgOr(argName: String, defaultValue: CharSequence): CharSequence =
-        Argsx.readCharSequenceArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readCharSequenceArgOrNull(argName: String): CharSequence? = Argsx.readCharSequenceArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readCharSequenceArrayArgOrThrow(argName: String): Array<CharSequence> = Argsx.readCharSequenceArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readCharSequenceArrayArgOr(argName: String, defaultValue: Array<CharSequence>): Array<CharSequence> =
-        Argsx.readCharSequenceArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readCharSequenceArrayArgOrNull(argName: String): Array<CharSequence>? = Argsx.readCharSequenceArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readCharSequenceArrayListArgOrThrow(argName: String): ArrayList<CharSequence> = Argsx.readCharSequenceArrayListArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readCharSequenceArrayListArgOr(argName: String, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> =
-        Argsx.readCharSequenceArrayListArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readCharSequenceArrayListArgOrNull(argName: String): ArrayList<CharSequence>? =
-        Argsx.readCharSequenceArrayListArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readStringArgOrThrow(argName: String): String = Argsx.readStringArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readStringArgOr(argName: String, defaultValue: String): String = Argsx.readStringArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readStringArgOrNull(argName: String): String? = Argsx.readStringArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readStringArrayArgOrThrow(argName: String): Array<String> = Argsx.readStringArrayArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readStringArrayArgOr(argName: String, defaultValue: Array<String>): Array<String> =
-        Argsx.readStringArrayArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readStringArrayArgOrNull(argName: String): Array<String>? = Argsx.readStringArrayArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readStringArrayListArgOrThrow(argName: String): ArrayList<String> = Argsx.readStringArrayListArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readStringArrayListArgOr(argName: String, defaultValue: ArrayList<String>): ArrayList<String> =
-        Argsx.readStringArrayListArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readStringArrayListArgOrNull(argName: String): ArrayList<String>? = Argsx.readStringArrayListArgOrNull(this, argName)
-
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArgOrThrow(argName: String): V = Argsx.readParcelableArgOrThrow(this, argName)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArgOr(argName: String, defaultValue: V): V = Argsx.readParcelableArgOr(this, argName, defaultValue)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArgOrNull(argName: String): V? = Argsx.readParcelableArgOrNull(this, argName)
-
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayArgOrThrow(argName: String): Array<V> = Argsx.readParcelableArrayArgOrThrow(this, argName)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayArgOr(argName: String, defaultValue: Array<V>): Array<V> =
-        Argsx.readParcelableArrayArgOr(this, argName, defaultValue)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayArgOrNull(argName: String): Array<V>? = Argsx.readParcelableArrayArgOrNull(this, argName)
-
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayListArgOrThrow(argName: String): ArrayList<V> = Argsx.readParcelableArrayListArgOrThrow(this, argName)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayListArgOr(argName: String, defaultValue: ArrayList<V>): ArrayList<V> =
-        Argsx.readParcelableArrayListArgOr(this, argName, defaultValue)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayListArgOrNull(argName: String): ArrayList<V>? =
-        Argsx.readParcelableArrayListArgOrNull(this, argName)
-
-
-inline fun <V : Parcelable> android.app.Fragment.readSparseParcelableArrayArgOrThrow(argName: String): SparseArray<V> = Argsx.readSparseParcelableArrayArgOrThrow(this, argName)
-
-inline fun <V : Parcelable> android.app.Fragment.readSparseParcelableArrayArgOr(argName: String, defaultValue: SparseArray<V>): SparseArray<V> =
-        Argsx.readSparseParcelableArrayArgOr(this, argName, defaultValue)
-
-inline fun <V : Parcelable> android.app.Fragment.readSparseParcelableArrayArgOrNull(argName: String): SparseArray<V>? =
-        Argsx.readSparseParcelableArrayArgOrNull(this, argName)
-
-
-inline fun <V : Serializable> android.app.Fragment.readSerializableArgOrThrow(argName: String): V = Argsx.readSerializableArgOrThrow(this, argName)
-
-inline fun <V : Serializable> android.app.Fragment.readSerializableArgOr(argName: String, defaultValue: V): V =
-        Argsx.readSerializableArgOr(this, argName, defaultValue)
-
-inline fun <V : Serializable> android.app.Fragment.readSerializableArgOrNull(argName: String): V? = Argsx.readSerializableArgOrNull(this, argName)
-
-
-inline fun android.app.Fragment.readBundleArgOrThrow(argName: String): Bundle = Argsx.readBundleArgOrThrow(this, argName)
-
-inline fun android.app.Fragment.readBundleArgOr(argName: String, defaultValue: Bundle): Bundle = Argsx.readBundleArgOr(this, argName, defaultValue)
-
-inline fun android.app.Fragment.readBundleArgOrNull(argName: String): Bundle? = Argsx.readBundleArgOrNull(this, argName)
-
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun android.app.Fragment.readBinderArgOrThrow(argName: String): IBinder = Argsx.readBinderArgOrThrow(this, argName)
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun android.app.Fragment.readBinderArgOr(argName: String, defaultValue: IBinder): IBinder = Argsx.readBinderArgOr(this, argName, defaultValue)
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun android.app.Fragment.readBinderArgOrNull(argName: String): IBinder? = Argsx.readBinderArgOrNull(this, argName)
+inline fun Fragment.readSizeArgOrNull(argName: String): Size? = Argsx.readSizeArgOrNull(this, argName)
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeArgOrThrow(argName: String): Size = Argsx.readSizeArgOrThrow(this, argName)
+inline fun Fragment.readSizeFArgOrThrow(argName: String): SizeF = Argsx.readSizeFArgOrThrow(this, argName)
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeArgOr(argName: String, defaultValue: Size): Size = Argsx.readSizeArgOr(this, argName, defaultValue)
+inline fun Fragment.readSizeFArgOr(argName: String, defaultValue: SizeF): SizeF = Argsx.readSizeFArgOr(this, argName, defaultValue)
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeArgOrNull(argName: String): Size? = Argsx.readSizeArgOrNull(this, argName)
+inline fun Fragment.readSizeFArgOrNull(argName: String): SizeF? = Argsx.readSizeFArgOrNull(this, argName)
 
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeFArgOrThrow(argName: String): SizeF = Argsx.readSizeFArgOrThrow(this, argName)
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeFArgOr(argName: String, defaultValue: SizeF): SizeF = Argsx.readSizeFArgOr(this, argName, defaultValue)
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeFArgOrNull(argName: String): SizeF? = Argsx.readSizeFArgOrNull(this, argName)
 
 
 /* ************************************* SupportFragment Args ***************************************** */
 
 
-inline fun androidx.fragment.app.Fragment.readByteArgOr(@StringRes argNameResId: Int, defaultValue: Byte): Byte = Argsx.readByteArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readByteArgOr(@StringRes argNameResId: Int, defaultValue: Byte): Byte = Argsx.readByteArgOr(this, argNameResId, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readByteArrayArgOrThrow(@StringRes argNameResId: Int): ByteArray = Argsx.readByteArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readByteArrayArgOrThrow(@StringRes argNameResId: Int): ByteArray = Argsx.readByteArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readByteArrayArgOr(@StringRes argNameResId: Int, defaultValue: ByteArray): ByteArray =
+inline fun Fragment.readByteArrayArgOr(@StringRes argNameResId: Int, defaultValue: ByteArray): ByteArray =
         Argsx.readByteArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readByteArrayArgOrNull(@StringRes argNameResId: Int): ByteArray? = Argsx.readByteArrayArgOrNull(this, argNameResId)
+inline fun Fragment.readByteArrayArgOrNull(@StringRes argNameResId: Int): ByteArray? = Argsx.readByteArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readShortArgOr(@StringRes argNameResId: Int, defaultValue: Short): Short = Argsx.readShortArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readShortArgOr(@StringRes argNameResId: Int, defaultValue: Short): Short = Argsx.readShortArgOr(this, argNameResId, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readShortArrayArgOrThrow(@StringRes argNameResId: Int): ShortArray = Argsx.readShortArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readShortArrayArgOrThrow(@StringRes argNameResId: Int): ShortArray = Argsx.readShortArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readShortArrayArgOr(@StringRes argNameResId: Int, defaultValue: ShortArray): ShortArray =
+inline fun Fragment.readShortArrayArgOr(@StringRes argNameResId: Int, defaultValue: ShortArray): ShortArray =
         Argsx.readShortArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readShortArrayArgOrNull(@StringRes argNameResId: Int): ShortArray? = Argsx.readShortArrayArgOrNull(this, argNameResId)
+inline fun Fragment.readShortArrayArgOrNull(@StringRes argNameResId: Int): ShortArray? = Argsx.readShortArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readIntArgOr(@StringRes argNameResId: Int, defaultValue: Int): Int = Argsx.readIntArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readIntArgOr(@StringRes argNameResId: Int, defaultValue: Int): Int = Argsx.readIntArgOr(this, argNameResId, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readIntArrayArgOrThrow(@StringRes argNameResId: Int): IntArray = Argsx.readIntArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readIntArrayArgOrThrow(@StringRes argNameResId: Int): IntArray = Argsx.readIntArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readIntArrayArgOr(@StringRes argNameResId: Int, defaultValue: IntArray): IntArray = Argsx.readIntArrayArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readIntArrayArgOr(@StringRes argNameResId: Int, defaultValue: IntArray): IntArray = Argsx.readIntArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readIntArrayArgOrNull(@StringRes argNameResId: Int): IntArray? = Argsx.readIntArrayArgOrNull(this, argNameResId)
+inline fun Fragment.readIntArrayArgOrNull(@StringRes argNameResId: Int): IntArray? = Argsx.readIntArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readIntArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<Int> = Argsx.readIntArrayListArgOrThrow(this, argNameResId)
+inline fun Fragment.readIntArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<Int> = Argsx.readIntArrayListArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readIntArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<Int>): ArrayList<Int> =
+inline fun Fragment.readIntArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<Int>): ArrayList<Int> =
         Argsx.readIntArrayListArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readIntArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<Int>? = Argsx.readIntArrayListArgOrNull(this, argNameResId)
+inline fun Fragment.readIntArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<Int>? = Argsx.readIntArrayListArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readLongArgOr(@StringRes argNameResId: Int, defaultValue: Long): Long = Argsx.readLongArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readLongArgOr(@StringRes argNameResId: Int, defaultValue: Long): Long = Argsx.readLongArgOr(this, argNameResId, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readLongArrayArgOrThrow(@StringRes argNameResId: Int): LongArray = Argsx.readLongArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readLongArrayArgOrThrow(@StringRes argNameResId: Int): LongArray = Argsx.readLongArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readLongArrayArgOr(@StringRes argNameResId: Int, defaultValue: LongArray): LongArray =
+inline fun Fragment.readLongArrayArgOr(@StringRes argNameResId: Int, defaultValue: LongArray): LongArray =
         Argsx.readLongArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readLongArrayArgOrNull(@StringRes argNameResId: Int): LongArray? = Argsx.readLongArrayArgOrNull(this, argNameResId)
+inline fun Fragment.readLongArrayArgOrNull(@StringRes argNameResId: Int): LongArray? = Argsx.readLongArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readFloatArgOr(@StringRes argNameResId: Int, defaultValue: Float): Float = Argsx.readFloatArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readFloatArgOr(@StringRes argNameResId: Int, defaultValue: Float): Float = Argsx.readFloatArgOr(this, argNameResId, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readFloatArrayArgOrThrow(@StringRes argNameResId: Int): FloatArray = Argsx.readFloatArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readFloatArrayArgOrThrow(@StringRes argNameResId: Int): FloatArray = Argsx.readFloatArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readFloatArrayArgOr(@StringRes argNameResId: Int, defaultValue: FloatArray): FloatArray =
+inline fun Fragment.readFloatArrayArgOr(@StringRes argNameResId: Int, defaultValue: FloatArray): FloatArray =
         Argsx.readFloatArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readFloatArrayArgOrNull(@StringRes argNameResId: Int): FloatArray? = Argsx.readFloatArrayArgOrNull(this, argNameResId)
+inline fun Fragment.readFloatArrayArgOrNull(@StringRes argNameResId: Int): FloatArray? = Argsx.readFloatArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readDoubleArgOr(@StringRes argNameResId: Int, defaultValue: Double): Double = Argsx.readDoubleArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readDoubleArgOr(@StringRes argNameResId: Int, defaultValue: Double): Double = Argsx.readDoubleArgOr(this, argNameResId, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readDoubleArrayArgOrThrow(@StringRes argNameResId: Int): DoubleArray = Argsx.readDoubleArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readDoubleArrayArgOrThrow(@StringRes argNameResId: Int): DoubleArray = Argsx.readDoubleArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readDoubleArrayArgOr(@StringRes argNameResId: Int, defaultValue: DoubleArray): DoubleArray =
+inline fun Fragment.readDoubleArrayArgOr(@StringRes argNameResId: Int, defaultValue: DoubleArray): DoubleArray =
         Argsx.readDoubleArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readDoubleArrayArgOrNull(@StringRes argNameResId: Int): DoubleArray? = Argsx.readDoubleArrayArgOrNull(this, argNameResId)
+inline fun Fragment.readDoubleArrayArgOrNull(@StringRes argNameResId: Int): DoubleArray? = Argsx.readDoubleArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readBooleanArgOr(@StringRes argNameResId: Int, defaultValue: Boolean): Boolean = Argsx.readBooleanArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readBooleanArgOr(@StringRes argNameResId: Int, defaultValue: Boolean): Boolean = Argsx.readBooleanArgOr(this, argNameResId, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readBooleanArrayArgOrThrow(@StringRes argNameResId: Int): BooleanArray = Argsx.readBooleanArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readBooleanArrayArgOrThrow(@StringRes argNameResId: Int): BooleanArray = Argsx.readBooleanArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readBooleanArrayArgOr(@StringRes argNameResId: Int, defaultValue: BooleanArray): BooleanArray =
+inline fun Fragment.readBooleanArrayArgOr(@StringRes argNameResId: Int, defaultValue: BooleanArray): BooleanArray =
         Argsx.readBooleanArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readBooleanArrayArgOrNull(@StringRes argNameResId: Int): BooleanArray? = Argsx.readBooleanArrayArgOrNull(this, argNameResId)
+inline fun Fragment.readBooleanArrayArgOrNull(@StringRes argNameResId: Int): BooleanArray? = Argsx.readBooleanArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readCharArgOr(@StringRes argNameResId: Int, defaultValue: Char): Char = Argsx.readCharArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readCharArgOr(@StringRes argNameResId: Int, defaultValue: Char): Char = Argsx.readCharArgOr(this, argNameResId, defaultValue)
 
 
-inline fun androidx.fragment.app.Fragment.readCharArrayArgOrThrow(@StringRes argNameResId: Int): CharArray = Argsx.readCharArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readCharArrayArgOrThrow(@StringRes argNameResId: Int): CharArray = Argsx.readCharArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readCharArrayArgOr(@StringRes argNameResId: Int, defaultValue: CharArray): CharArray =
+inline fun Fragment.readCharArrayArgOr(@StringRes argNameResId: Int, defaultValue: CharArray): CharArray =
         Argsx.readCharArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readCharArrayArgOrNull(@StringRes argNameResId: Int): CharArray? = Argsx.readCharArrayArgOrNull(this, argNameResId)
+inline fun Fragment.readCharArrayArgOrNull(@StringRes argNameResId: Int): CharArray? = Argsx.readCharArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArgOrThrow(@StringRes argNameResId: Int): CharSequence = Argsx.readCharSequenceArgOrThrow(this, argNameResId)
+inline fun Fragment.readCharSequenceArgOrThrow(@StringRes argNameResId: Int): CharSequence = Argsx.readCharSequenceArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArgOr(@StringRes argNameResId: Int, defaultValue: CharSequence): CharSequence =
+inline fun Fragment.readCharSequenceArgOr(@StringRes argNameResId: Int, defaultValue: CharSequence): CharSequence =
         Argsx.readCharSequenceArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArgOrNull(@StringRes argNameResId: Int): CharSequence? = Argsx.readCharSequenceArgOrNull(this, argNameResId)
+inline fun Fragment.readCharSequenceArgOrNull(@StringRes argNameResId: Int): CharSequence? = Argsx.readCharSequenceArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayArgOrThrow(@StringRes argNameResId: Int): Array<CharSequence> = Argsx.readCharSequenceArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readCharSequenceArrayArgOrThrow(@StringRes argNameResId: Int): Array<CharSequence> = Argsx.readCharSequenceArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<CharSequence>): Array<CharSequence> =
+inline fun Fragment.readCharSequenceArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<CharSequence>): Array<CharSequence> =
         Argsx.readCharSequenceArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayArgOrNull(@StringRes argNameResId: Int): Array<CharSequence>? =
+inline fun Fragment.readCharSequenceArrayArgOrNull(@StringRes argNameResId: Int): Array<CharSequence>? =
         Argsx.readCharSequenceArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<CharSequence> =
+inline fun Fragment.readCharSequenceArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<CharSequence> =
         Argsx.readCharSequenceArrayListArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> =
+inline fun Fragment.readCharSequenceArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> =
         Argsx.readCharSequenceArrayListArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readCharSequenceArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<CharSequence>? =
+inline fun Fragment.readCharSequenceArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<CharSequence>? =
         Argsx.readCharSequenceArrayListArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readStringArgOrThrow(@StringRes argNameResId: Int): String = Argsx.readStringArgOrThrow(this, argNameResId)
+inline fun Fragment.readStringArgOrThrow(@StringRes argNameResId: Int): String = Argsx.readStringArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readStringArgOr(@StringRes argNameResId: Int, defaultValue: String): String = Argsx.readStringArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readStringArgOr(@StringRes argNameResId: Int, defaultValue: String): String = Argsx.readStringArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readStringArgOrNull(@StringRes argNameResId: Int): String? = Argsx.readStringArgOrNull(this, argNameResId)
+inline fun Fragment.readStringArgOrNull(@StringRes argNameResId: Int): String? = Argsx.readStringArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readStringArrayArgOrThrow(@StringRes argNameResId: Int): Array<String> = Argsx.readStringArrayArgOrThrow(this, argNameResId)
+inline fun Fragment.readStringArrayArgOrThrow(@StringRes argNameResId: Int): Array<String> = Argsx.readStringArrayArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readStringArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<String>): Array<String> =
+inline fun Fragment.readStringArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<String>): Array<String> =
         Argsx.readStringArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readStringArrayArgOrNull(@StringRes argNameResId: Int): Array<String>? = Argsx.readStringArrayArgOrNull(this, argNameResId)
+inline fun Fragment.readStringArrayArgOrNull(@StringRes argNameResId: Int): Array<String>? = Argsx.readStringArrayArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readStringArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<String> = Argsx.readStringArrayListArgOrThrow(this, argNameResId)
+inline fun Fragment.readStringArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<String> = Argsx.readStringArrayListArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readStringArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<String>): ArrayList<String> =
+inline fun Fragment.readStringArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<String>): ArrayList<String> =
         Argsx.readStringArrayListArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readStringArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<String>? = Argsx.readStringArrayListArgOrNull(this, argNameResId)
+inline fun Fragment.readStringArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<String>? = Argsx.readStringArrayListArgOrNull(this, argNameResId)
 
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArgOrThrow(@StringRes argNameResId: Int): V = Argsx.readParcelableArgOrThrow(this, argNameResId)
+inline fun <V : Parcelable> Fragment.readParcelableArgOrThrow(@StringRes argNameResId: Int): V = Argsx.readParcelableArgOrThrow(this, argNameResId)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArgOr(@StringRes argNameResId: Int, defaultValue: V): V =
+inline fun <V : Parcelable> Fragment.readParcelableArgOr(@StringRes argNameResId: Int, defaultValue: V): V =
         Argsx.readParcelableArgOr(this, argNameResId, defaultValue)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArgOrNull(@StringRes argNameResId: Int): V? = Argsx.readParcelableArgOrNull(this, argNameResId)
+inline fun <V : Parcelable> Fragment.readParcelableArgOrNull(@StringRes argNameResId: Int): V? = Argsx.readParcelableArgOrNull(this, argNameResId)
 
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayArgOrThrow(@StringRes argNameResId: Int): Array<V> = Argsx.readParcelableArrayArgOrThrow(this, argNameResId)
+inline fun <V : Parcelable> Fragment.readParcelableArrayArgOrThrow(@StringRes argNameResId: Int): Array<V> = Argsx.readParcelableArrayArgOrThrow(this, argNameResId)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<V>): Array<V> =
+inline fun <V : Parcelable> Fragment.readParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<V>): Array<V> =
         Argsx.readParcelableArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayArgOrNull(@StringRes argNameResId: Int): Array<V>? =
+inline fun <V : Parcelable> Fragment.readParcelableArrayArgOrNull(@StringRes argNameResId: Int): Array<V>? =
         Argsx.readParcelableArrayArgOrNull(this, argNameResId)
 
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<V> =
+inline fun <V : Parcelable> Fragment.readParcelableArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<V> =
         Argsx.readParcelableArrayListArgOrThrow(this, argNameResId)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<V>): ArrayList<V> =
+inline fun <V : Parcelable> Fragment.readParcelableArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<V>): ArrayList<V> =
         Argsx.readParcelableArrayListArgOr(this, argNameResId, defaultValue)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readParcelableArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<V>? =
+inline fun <V : Parcelable> Fragment.readParcelableArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<V>? =
         Argsx.readParcelableArrayListArgOrNull(this, argNameResId)
 
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readSparseParcelableArrayArgOrThrow(@StringRes argNameResId: Int): SparseArray<V> =
+inline fun <V : Parcelable> Fragment.readSparseParcelableArrayArgOrThrow(@StringRes argNameResId: Int): SparseArray<V> =
         Argsx.readSparseParcelableArrayArgOrThrow(this, argNameResId)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readSparseParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: SparseArray<V>): SparseArray<V> =
+inline fun <V : Parcelable> Fragment.readSparseParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: SparseArray<V>): SparseArray<V> =
         Argsx.readSparseParcelableArrayArgOr(this, argNameResId, defaultValue)
 
-inline fun <V : Parcelable> androidx.fragment.app.Fragment.readSparseParcelableArrayArgOrNull(@StringRes argNameResId: Int): SparseArray<V>? =
+inline fun <V : Parcelable> Fragment.readSparseParcelableArrayArgOrNull(@StringRes argNameResId: Int): SparseArray<V>? =
         Argsx.readSparseParcelableArrayArgOrNull(this, argNameResId)
 
 
-inline fun <V : Serializable> androidx.fragment.app.Fragment.readSerializableArgOrThrow(@StringRes argNameResId: Int): V = Argsx.readSerializableArgOrThrow(this, argNameResId)
+inline fun <V : Serializable> Fragment.readSerializableArgOrThrow(@StringRes argNameResId: Int): V = Argsx.readSerializableArgOrThrow(this, argNameResId)
 
-inline fun <V : Serializable> androidx.fragment.app.Fragment.readSerializableArgOr(@StringRes argNameResId: Int, defaultValue: V): V =
+inline fun <V : Serializable> Fragment.readSerializableArgOr(@StringRes argNameResId: Int, defaultValue: V): V =
         Argsx.readSerializableArgOr(this, argNameResId, defaultValue)
 
-inline fun <V : Serializable> androidx.fragment.app.Fragment.readSerializableArgOrNull(@StringRes argNameResId: Int): V? = Argsx.readSerializableArgOrNull(this, argNameResId)
+inline fun <V : Serializable> Fragment.readSerializableArgOrNull(@StringRes argNameResId: Int): V? = Argsx.readSerializableArgOrNull(this, argNameResId)
 
 
-inline fun androidx.fragment.app.Fragment.readBundleArgOrThrow(@StringRes argNameResId: Int): Bundle = Argsx.readBundleArgOrThrow(this, argNameResId)
+inline fun Fragment.readBundleArgOrThrow(@StringRes argNameResId: Int): Bundle = Argsx.readBundleArgOrThrow(this, argNameResId)
 
-inline fun androidx.fragment.app.Fragment.readBundleArgOr(@StringRes argNameResId: Int, defaultValue: Bundle): Bundle = Argsx.readBundleArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readBundleArgOr(@StringRes argNameResId: Int, defaultValue: Bundle): Bundle = Argsx.readBundleArgOr(this, argNameResId, defaultValue)
 
-inline fun androidx.fragment.app.Fragment.readBundleArgOrNull(@StringRes argNameResId: Int): Bundle? = Argsx.readBundleArgOrNull(this, argNameResId)
+inline fun Fragment.readBundleArgOrNull(@StringRes argNameResId: Int): Bundle? = Argsx.readBundleArgOrNull(this, argNameResId)
 
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun androidx.fragment.app.Fragment.readBinderArgOrThrow(@StringRes argNameResId: Int): IBinder = Argsx.readBinderArgOrThrow(this, argNameResId)
+inline fun Fragment.readBinderArgOrThrow(@StringRes argNameResId: Int): IBinder = Argsx.readBinderArgOrThrow(this, argNameResId)
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun androidx.fragment.app.Fragment.readBinderArgOr(@StringRes argNameResId: Int, defaultValue: IBinder): IBinder = Argsx.readBinderArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readBinderArgOr(@StringRes argNameResId: Int, defaultValue: IBinder): IBinder = Argsx.readBinderArgOr(this, argNameResId, defaultValue)
 
 @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun androidx.fragment.app.Fragment.readBinderArgOrNull(@StringRes argNameResId: Int): IBinder? = Argsx.readBinderArgOrNull(this, argNameResId)
+inline fun Fragment.readBinderArgOrNull(@StringRes argNameResId: Int): IBinder? = Argsx.readBinderArgOrNull(this, argNameResId)
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeArgOrThrow(@StringRes argNameResId: Int): Size = Argsx.readSizeArgOrThrow(this, argNameResId)
+inline fun Fragment.readSizeArgOrThrow(@StringRes argNameResId: Int): Size = Argsx.readSizeArgOrThrow(this, argNameResId)
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeArgOr(@StringRes argNameResId: Int, defaultValue: Size): Size = Argsx.readSizeArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readSizeArgOr(@StringRes argNameResId: Int, defaultValue: Size): Size = Argsx.readSizeArgOr(this, argNameResId, defaultValue)
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeArgOrNull(@StringRes argNameResId: Int): Size? = Argsx.readSizeArgOrNull(this, argNameResId)
-
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeFArgOrThrow(@StringRes argNameResId: Int): SizeF = Argsx.readSizeFArgOrThrow(this, argNameResId)
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeFArgOr(@StringRes argNameResId: Int, defaultValue: SizeF): SizeF = Argsx.readSizeFArgOr(this, argNameResId, defaultValue)
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun androidx.fragment.app.Fragment.readSizeFArgOrNull(@StringRes argNameResId: Int): SizeF? = Argsx.readSizeFArgOrNull(this, argNameResId)
-
-
-/* ************************************* OriginFragment Args ***************************************** */
-
-
-inline fun android.app.Fragment.readByteArgOr(@StringRes argNameResId: Int, defaultValue: Byte): Byte = Argsx.readByteArgOr(this, argNameResId, defaultValue)
-
-
-inline fun android.app.Fragment.readByteArrayArgOrThrow(@StringRes argNameResId: Int): ByteArray = Argsx.readByteArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readByteArrayArgOr(@StringRes argNameResId: Int, defaultValue: ByteArray): ByteArray = Argsx.readByteArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readByteArrayArgOrNull(@StringRes argNameResId: Int): ByteArray? = Argsx.readByteArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readShortArgOr(@StringRes argNameResId: Int, defaultValue: Short): Short = Argsx.readShortArgOr(this, argNameResId, defaultValue)
-
-
-inline fun android.app.Fragment.readShortArrayArgOrThrow(@StringRes argNameResId: Int): ShortArray = Argsx.readShortArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readShortArrayArgOr(@StringRes argNameResId: Int, defaultValue: ShortArray): ShortArray = Argsx.readShortArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readShortArrayArgOrNull(@StringRes argNameResId: Int): ShortArray? = Argsx.readShortArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readIntArgOr(@StringRes argNameResId: Int, defaultValue: Int): Int = Argsx.readIntArgOr(this, argNameResId, defaultValue)
-
-
-inline fun android.app.Fragment.readIntArrayArgOrThrow(@StringRes argNameResId: Int): IntArray = Argsx.readIntArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readIntArrayArgOr(@StringRes argNameResId: Int, defaultValue: IntArray): IntArray = Argsx.readIntArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readIntArrayArgOrNull(@StringRes argNameResId: Int): IntArray? = Argsx.readIntArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readIntArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<Int> = Argsx.readIntArrayListArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readIntArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<Int>): ArrayList<Int> =
-        Argsx.readIntArrayListArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readIntArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<Int>? = Argsx.readIntArrayListArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readLongArgOr(@StringRes argNameResId: Int, defaultValue: Long): Long = Argsx.readLongArgOr(this, argNameResId, defaultValue)
-
-
-inline fun android.app.Fragment.readLongArrayArgOrThrow(@StringRes argNameResId: Int): LongArray = Argsx.readLongArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readLongArrayArgOr(@StringRes argNameResId: Int, defaultValue: LongArray): LongArray = Argsx.readLongArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readLongArrayArgOrNull(@StringRes argNameResId: Int): LongArray? = Argsx.readLongArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readFloatArgOr(@StringRes argNameResId: Int, defaultValue: Float): Float = Argsx.readFloatArgOr(this, argNameResId, defaultValue)
-
-
-inline fun android.app.Fragment.readFloatArrayArgOrThrow(@StringRes argNameResId: Int): FloatArray = Argsx.readFloatArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readFloatArrayArgOr(@StringRes argNameResId: Int, defaultValue: FloatArray): FloatArray =
-        Argsx.readFloatArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readFloatArrayArgOrNull(@StringRes argNameResId: Int): FloatArray? = Argsx.readFloatArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readDoubleArgOr(@StringRes argNameResId: Int, defaultValue: Double): Double = Argsx.readDoubleArgOr(this, argNameResId, defaultValue)
-
-
-inline fun android.app.Fragment.readDoubleArrayArgOrThrow(@StringRes argNameResId: Int): DoubleArray = Argsx.readDoubleArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readDoubleArrayArgOr(@StringRes argNameResId: Int, defaultValue: DoubleArray): DoubleArray =
-        Argsx.readDoubleArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readDoubleArrayArgOrNull(@StringRes argNameResId: Int): DoubleArray? = Argsx.readDoubleArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readBooleanArgOr(@StringRes argNameResId: Int, defaultValue: Boolean): Boolean = Argsx.readBooleanArgOr(this, argNameResId, defaultValue)
-
-
-inline fun android.app.Fragment.readBooleanArrayArgOrThrow(@StringRes argNameResId: Int): BooleanArray = Argsx.readBooleanArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readBooleanArrayArgOr(@StringRes argNameResId: Int, defaultValue: BooleanArray): BooleanArray =
-        Argsx.readBooleanArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readBooleanArrayArgOrNull(@StringRes argNameResId: Int): BooleanArray? = Argsx.readBooleanArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readCharArgOr(@StringRes argNameResId: Int, defaultValue: Char): Char = Argsx.readCharArgOr(this, argNameResId, defaultValue)
-
-
-inline fun android.app.Fragment.readCharArrayArgOrThrow(@StringRes argNameResId: Int): CharArray = Argsx.readCharArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readCharArrayArgOr(@StringRes argNameResId: Int, defaultValue: CharArray): CharArray = Argsx.readCharArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readCharArrayArgOrNull(@StringRes argNameResId: Int): CharArray? = Argsx.readCharArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readCharSequenceArgOrThrow(@StringRes argNameResId: Int): CharSequence = Argsx.readCharSequenceArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readCharSequenceArgOr(@StringRes argNameResId: Int, defaultValue: CharSequence): CharSequence =
-        Argsx.readCharSequenceArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readCharSequenceArgOrNull(@StringRes argNameResId: Int): CharSequence? = Argsx.readCharSequenceArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readCharSequenceArrayArgOrThrow(@StringRes argNameResId: Int): Array<CharSequence> = Argsx.readCharSequenceArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readCharSequenceArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<CharSequence>): Array<CharSequence> =
-        Argsx.readCharSequenceArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readCharSequenceArrayArgOrNull(@StringRes argNameResId: Int): Array<CharSequence>? = Argsx.readCharSequenceArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readCharSequenceArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<CharSequence> = Argsx.readCharSequenceArrayListArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readCharSequenceArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<CharSequence>): ArrayList<CharSequence> =
-        Argsx.readCharSequenceArrayListArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readCharSequenceArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<CharSequence>? =
-        Argsx.readCharSequenceArrayListArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readStringArgOrThrow(@StringRes argNameResId: Int): String = Argsx.readStringArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readStringArgOr(@StringRes argNameResId: Int, defaultValue: String): String = Argsx.readStringArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readStringArgOrNull(@StringRes argNameResId: Int): String? = Argsx.readStringArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readStringArrayArgOrThrow(@StringRes argNameResId: Int): Array<String> = Argsx.readStringArrayArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readStringArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<String>): Array<String> =
-        Argsx.readStringArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readStringArrayArgOrNull(@StringRes argNameResId: Int): Array<String>? = Argsx.readStringArrayArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readStringArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<String> = Argsx.readStringArrayListArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readStringArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<String>): ArrayList<String> =
-        Argsx.readStringArrayListArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readStringArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<String>? = Argsx.readStringArrayListArgOrNull(this, argNameResId)
-
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArgOrThrow(@StringRes argNameResId: Int): V = Argsx.readParcelableArgOrThrow(this, argNameResId)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArgOr(@StringRes argNameResId: Int, defaultValue: V): V = Argsx.readParcelableArgOr(this, argNameResId, defaultValue)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArgOrNull(@StringRes argNameResId: Int): V? = Argsx.readParcelableArgOrNull(this, argNameResId)
-
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayArgOrThrow(@StringRes argNameResId: Int): Array<V> = Argsx.readParcelableArrayArgOrThrow(this, argNameResId)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: Array<V>): Array<V> =
-        Argsx.readParcelableArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayArgOrNull(@StringRes argNameResId: Int): Array<V>? = Argsx.readParcelableArrayArgOrNull(this, argNameResId)
-
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayListArgOrThrow(@StringRes argNameResId: Int): ArrayList<V> = Argsx.readParcelableArrayListArgOrThrow(this, argNameResId)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayListArgOr(@StringRes argNameResId: Int, defaultValue: ArrayList<V>): ArrayList<V> =
-        Argsx.readParcelableArrayListArgOr(this, argNameResId, defaultValue)
-
-inline fun <V : Parcelable> android.app.Fragment.readParcelableArrayListArgOrNull(@StringRes argNameResId: Int): ArrayList<V>? =
-        Argsx.readParcelableArrayListArgOrNull(this, argNameResId)
-
-
-inline fun <V : Parcelable> android.app.Fragment.readSparseParcelableArrayArgOrThrow(@StringRes argNameResId: Int): SparseArray<V> = Argsx.readSparseParcelableArrayArgOrThrow(this, argNameResId)
-
-inline fun <V : Parcelable> android.app.Fragment.readSparseParcelableArrayArgOr(@StringRes argNameResId: Int, defaultValue: SparseArray<V>): SparseArray<V> =
-        Argsx.readSparseParcelableArrayArgOr(this, argNameResId, defaultValue)
-
-inline fun <V : Parcelable> android.app.Fragment.readSparseParcelableArrayArgOrNull(@StringRes argNameResId: Int): SparseArray<V>? =
-        Argsx.readSparseParcelableArrayArgOrNull(this, argNameResId)
-
-
-inline fun <V : Serializable> android.app.Fragment.readSerializableArgOrThrow(@StringRes argNameResId: Int): V = Argsx.readSerializableArgOrThrow(this, argNameResId)
-
-inline fun <V : Serializable> android.app.Fragment.readSerializableArgOr(@StringRes argNameResId: Int, defaultValue: V): V =
-        Argsx.readSerializableArgOr(this, argNameResId, defaultValue)
-
-inline fun <V : Serializable> android.app.Fragment.readSerializableArgOrNull(@StringRes argNameResId: Int): V? = Argsx.readSerializableArgOrNull(this, argNameResId)
-
-
-inline fun android.app.Fragment.readBundleArgOrThrow(@StringRes argNameResId: Int): Bundle = Argsx.readBundleArgOrThrow(this, argNameResId)
-
-inline fun android.app.Fragment.readBundleArgOr(@StringRes argNameResId: Int, defaultValue: Bundle): Bundle = Argsx.readBundleArgOr(this, argNameResId, defaultValue)
-
-inline fun android.app.Fragment.readBundleArgOrNull(@StringRes argNameResId: Int): Bundle? = Argsx.readBundleArgOrNull(this, argNameResId)
-
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun android.app.Fragment.readBinderArgOrThrow(@StringRes argNameResId: Int): IBinder = Argsx.readBinderArgOrThrow(this, argNameResId)
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun android.app.Fragment.readBinderArgOr(@StringRes argNameResId: Int, defaultValue: IBinder): IBinder = Argsx.readBinderArgOr(this, argNameResId, defaultValue)
-
-@RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-inline fun android.app.Fragment.readBinderArgOrNull(@StringRes argNameResId: Int): IBinder? = Argsx.readBinderArgOrNull(this, argNameResId)
+inline fun Fragment.readSizeArgOrNull(@StringRes argNameResId: Int): Size? = Argsx.readSizeArgOrNull(this, argNameResId)
 
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeArgOrThrow(@StringRes argNameResId: Int): Size = Argsx.readSizeArgOrThrow(this, argNameResId)
+inline fun Fragment.readSizeFArgOrThrow(@StringRes argNameResId: Int): SizeF = Argsx.readSizeFArgOrThrow(this, argNameResId)
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeArgOr(@StringRes argNameResId: Int, defaultValue: Size): Size = Argsx.readSizeArgOr(this, argNameResId, defaultValue)
+inline fun Fragment.readSizeFArgOr(@StringRes argNameResId: Int, defaultValue: SizeF): SizeF = Argsx.readSizeFArgOr(this, argNameResId, defaultValue)
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeArgOrNull(@StringRes argNameResId: Int): Size? = Argsx.readSizeArgOrNull(this, argNameResId)
-
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeFArgOrThrow(@StringRes argNameResId: Int): SizeF = Argsx.readSizeFArgOrThrow(this, argNameResId)
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeFArgOr(@StringRes argNameResId: Int, defaultValue: SizeF): SizeF = Argsx.readSizeFArgOr(this, argNameResId, defaultValue)
-
-@RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-inline fun android.app.Fragment.readSizeFArgOrNull(@StringRes argNameResId: Int): SizeF? = Argsx.readSizeFArgOrNull(this, argNameResId)
+inline fun Fragment.readSizeFArgOrNull(@StringRes argNameResId: Int): SizeF? = Argsx.readSizeFArgOrNull(this, argNameResId)

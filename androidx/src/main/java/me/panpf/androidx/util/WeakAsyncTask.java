@@ -78,10 +78,6 @@ public abstract class WeakAsyncTask<Page, Param, Progress, Result> extends Async
             if (Activityx.isDestroyedCompat((Activity) page)) {
                 return null;
             }
-        } else if (page instanceof android.app.Fragment) {
-            if (Fragmentx.isDestroyedCompat((android.app.Fragment) page)) {
-                return null;
-            }
         }
         return page;
     }

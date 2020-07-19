@@ -26,7 +26,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.test.rule.ActivityTestRule
 import androidx.test.runner.AndroidJUnit4
-import me.panpf.androidx.Androidx
 import me.panpf.androidx.app.Argsx
 import me.panpf.androidx.os.BundleBuilder
 import me.panpf.androidxkt.app.*
@@ -50,20 +49,11 @@ class FragmentxTest {
 
     @Test
     fun testGetApplication() {
-        val originFragment = activityTestRule.activity.getOriginFragment()
         val supportFragment = activityTestRule.activity.getSupportFragment()
 
-        Assert.assertNotNull(originFragment.getApplication())
         Assert.assertNotNull(supportFragment.getApplication())
 
-        Assert.assertNull(android.app.Fragment().getApplication())
         Assert.assertNull(Fragment().getApplication())
-
-        try {
-            android.app.Fragment().requireApplication()
-            Assert.fail()
-        } catch (ignored: Exception) {
-        }
 
         try {
             Fragment().requireApplication()
@@ -75,65 +65,45 @@ class FragmentxTest {
 
     @Test
     fun testDestroyed() {
-        val originFragment = activityTestRule.activity.getOriginFragment()
         val supportFragment = activityTestRule.activity.getSupportFragment()
 
-        Assert.assertFalse(originFragment.isDestroyedCompat())
         Assert.assertFalse(supportFragment.isDestroyedCompat())
 
         activityTestRule.finishActivity()
         Thread.sleep(2000)
 
-        Assert.assertTrue(originFragment.isDestroyedCompat())
         Assert.assertTrue(supportFragment.isDestroyedCompat())
     }
 
     @Test
     fun testGetImplWithParent() {
-        val originFragment = activityTestRule.activity.getOriginFragment() as TestImplOriginFragment
         val supportFragment = activityTestRule.activity.getSupportFragment() as TestImplSupportFragment
 
-        Assert.assertEquals(originFragment.getImplFromParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestImplOriginFragment::class.java)
         Assert.assertEquals(supportFragment.getImplFromParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestImplSupportFragment::class.java)
 
-        if (Androidx.isAtLeast17()) {
-            Assert.assertEquals(originFragment.getChildFragment().getImplFromParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestImplOriginFragment::class.java)
-        }
         Assert.assertEquals(supportFragment.getChildFragment().getImplFromParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestImplSupportFragment::class.java)
 
         waitRunInUI {
             activityTestRule.activity.convertChildFragment()
         }
 
-        val originFragment2 = waitRunInUIResult { activityTestRule.activity.getOriginFragment() as TestImplOriginFragment2 }
         val supportFragment2 = waitRunInUIResult { activityTestRule.activity.getSupportFragment() as TestImplSupportFragment2 }
 
-        Assert.assertEquals(originFragment2.getImplFromParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestActivity::class.java)
         Assert.assertEquals(supportFragment2.getImplFromParent(ImplTestInterface::class.java).requireNotNull()::class.java, TestActivity::class.java)
 
-        Assert.assertNull(TestImplOriginFragment2().getImplFromParent(ImplTestInterface::class.java))
         Assert.assertNull(TestImplSupportFragment2().getImplFromParent(ImplTestInterface::class.java))
     }
 
     @Test
     fun testInstantiate() {
-        val originFragment = android.app.Fragment::class.java.instantiateOrigin(Bundle().apply {
+        val supportFragment = Fragment::class.java.instantiate(Bundle().apply {
             putString("key", "testInstantiate")
         })
-        Assert.assertEquals(android.app.Fragment::class.java.name, originFragment::class.java.name)
-        Assert.assertEquals("testInstantiate", Argsx.readStringArgOrThrow(originFragment, "key"))
-
-        val supportFragment = androidx.fragment.app.Fragment::class.java.instantiate(Bundle().apply {
-            putString("key", "testInstantiate")
-        })
-        Assert.assertEquals(androidx.fragment.app.Fragment::class.java.name, supportFragment::class.java.name)
+        Assert.assertEquals(Fragment::class.java.name, supportFragment::class.java.name)
         Assert.assertEquals("testInstantiate", Argsx.readStringArgOrThrow(supportFragment, "key"))
 
-        val originFragment2 = android.app.Fragment::class.java.instantiateOrigin()
-        Assert.assertEquals(android.app.Fragment::class.java.name, originFragment2::class.java.name)
-
-        val supportFragment2 = androidx.fragment.app.Fragment::class.java.instantiate()
-        Assert.assertEquals(androidx.fragment.app.Fragment::class.java.name, supportFragment2::class.java.name)
+        val supportFragment2 = Fragment::class.java.instantiate()
+        Assert.assertEquals(Fragment::class.java.name, supportFragment2::class.java.name)
     }
 
     @Test
@@ -180,24 +150,15 @@ class FragmentxTest {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.at_multi_frame)
 
-            fragmentManager.beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, TestImplOriginFragment())
-                    .commit()
             supportFragmentManager.beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, TestImplSupportFragment())
                     .commit()
         }
 
-        fun getOriginFragment(): android.app.Fragment =
-                fragmentManager.findFragmentById(R.id.multiFrameAt_frame1).requireNotNull()
-
-        fun getSupportFragment(): androidx.fragment.app.Fragment =
+        fun getSupportFragment(): Fragment =
                 supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2).requireNotNull()
 
         fun convertChildFragment() {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, TestImplOriginFragment2())
-                    .commit()
             supportFragmentManager.beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, TestImplSupportFragment2())
                     .commit()
@@ -206,27 +167,7 @@ class FragmentxTest {
 
     interface ImplTestInterface
 
-    class TestImplOriginFragment : android.app.Fragment(), ImplTestInterface {
-        override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-            return inflater?.inflate(R.layout.at_test, container, false)
-        }
-
-        override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
-            if (Androidx.isAtLeast17()) {
-                childFragmentManager.beginTransaction()
-                        .replace(R.id.testAt_frame, TestImplOriginFragment2())
-                        .commit()
-            }
-        }
-
-        fun getChildFragment(): android.app.Fragment =
-                childFragmentManager.findFragmentById(R.id.testAt_frame).requireNotNull()
-    }
-
-    class TestImplOriginFragment2 : android.app.Fragment()
-
-    class TestImplSupportFragment : androidx.fragment.app.Fragment(), ImplTestInterface {
+    class TestImplSupportFragment : Fragment(), ImplTestInterface {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             return inflater.inflate(R.layout.at_test, container, false)
         }
@@ -238,11 +179,11 @@ class FragmentxTest {
                     .commit()
         }
 
-        fun getChildFragment(): androidx.fragment.app.Fragment =
+        fun getChildFragment(): Fragment =
                 childFragmentManager.findFragmentById(R.id.testAt_frame).requireNotNull()
     }
 
-    class TestImplSupportFragment2 : androidx.fragment.app.Fragment()
+    class TestImplSupportFragment2 : Fragment()
 
     class TestFindUserVisibleChildActivity : androidx.fragment.app.FragmentActivity() {
         override fun onCreate(savedInstanceState: Bundle?) {
@@ -251,7 +192,7 @@ class FragmentxTest {
 
             val viewPager = findViewById<androidx.viewpager.widget.ViewPager>(R.id.viewPagerAt_viewPager)
             viewPager.adapter = object : androidx.fragment.app.FragmentPagerAdapter(supportFragmentManager) {
-                override fun getItem(p0: Int): androidx.fragment.app.Fragment {
+                override fun getItem(p0: Int): Fragment {
                     return if (p0 == 2) {
                         TestFindUserVisibleChildFragment::class.java.instantiate(BundleBuilder().putString("position", p0.toString()).build())
                     } else {
@@ -265,7 +206,7 @@ class FragmentxTest {
         }
     }
 
-    class TestFindUserVisibleChildFragment : androidx.fragment.app.Fragment() {
+    class TestFindUserVisibleChildFragment : Fragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             return inflater.inflate(R.layout.at_view_pager, container, false)
         }
@@ -275,7 +216,7 @@ class FragmentxTest {
 
             val viewPager = view.findViewById<androidx.viewpager.widget.ViewPager>(R.id.viewPagerAt_viewPager)
             viewPager.adapter = object : androidx.fragment.app.FragmentPagerAdapter(childFragmentManager) {
-                override fun getItem(p0: Int): androidx.fragment.app.Fragment =
+                override fun getItem(p0: Int): Fragment =
                         TestFindUserVisibleChildFragment2::class.java.instantiate(BundleBuilder().putString("position", p0.toString()).build())
 
                 override fun getCount(): Int = 5
@@ -284,7 +225,7 @@ class FragmentxTest {
         }
     }
 
-    class TestFindUserVisibleChildFragment2 : androidx.fragment.app.Fragment() {
+    class TestFindUserVisibleChildFragment2 : Fragment() {
         override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
             return TextView(context)
         }

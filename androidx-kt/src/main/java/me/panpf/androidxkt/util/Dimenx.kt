@@ -70,30 +70,6 @@ inline fun androidx.fragment.app.Fragment.applyDimension(@Dimenx.DimenUnit unit:
 inline fun androidx.fragment.app.Fragment.applyDimension(@Dimenx.DimenUnit unit: Int, value: Int): Float = Dimenx.applyDimension(this, unit, value)
 
 
-/* ************************************* android.app.Fragment ***************************************** */
-
-
-inline fun android.app.Fragment.dp2px(dpValue: Float): Int = Dimenx.dp2px(this, dpValue)
-
-inline fun android.app.Fragment.dp2px(dpValue: Int): Int = Dimenx.dp2px(this, dpValue)
-
-
-inline fun android.app.Fragment.px2dp(px: Int): Float = Dimenx.px2dp(this, px)
-
-
-inline fun android.app.Fragment.sp2px(dpValue: Float): Int = Dimenx.sp2px(this, dpValue)
-
-inline fun android.app.Fragment.sp2px(dpValue: Int): Int = Dimenx.sp2px(this, dpValue)
-
-
-inline fun android.app.Fragment.px2sp(px: Int): Float = Dimenx.px2sp(this, px)
-
-
-inline fun android.app.Fragment.applyDimension(@Dimenx.DimenUnit unit: Int, value: Float): Float = Dimenx.applyDimension(this, unit, value)
-
-inline fun android.app.Fragment.applyDimension(@Dimenx.DimenUnit unit: Int, value: Int): Float = Dimenx.applyDimension(this, unit, value)
-
-
 /* ************************************* View ***************************************** */
 
 

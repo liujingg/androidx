@@ -103,7 +103,7 @@ public class Hardwarex {
             String value = manager != null ? manager.getLine1Number() : null;
             return value != null && !value.isEmpty() ? value : "unknown";
         } catch (Throwable e) {
-            e.printStackTrace();
+            e.printStackTrace(); // todo 不打印异常，并且改为 getPhoneNumberOr 方法，默认只返回正确有效的，并且过滤掉 unknown
             return e instanceof SecurityException ? "PermissionDenied" : "unknown";
         }
     }

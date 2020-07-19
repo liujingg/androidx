@@ -51,16 +51,10 @@ class ContextxTest {
         Assert.assertTrue(activity.appContext() is Application)
         Assert.assertFalse(activity.appContext() is Activity)
 
-        Assert.assertNotNull(activity.originFragment.requireContext())
-        Assert.assertFalse(activity.originFragment.requireContext() is Application)
-        Assert.assertTrue(activity.originFragment.requireContext() is Activity)
         Assert.assertNotNull(activity.supportFragment.requireContext())
         Assert.assertFalse(activity.supportFragment.requireContext() is Application)
         Assert.assertTrue(activity.supportFragment.requireContext() is Activity)
 
-        Assert.assertNotNull(activity.originFragment.requireAppContext())
-        Assert.assertTrue(activity.originFragment.requireAppContext() is Application)
-        Assert.assertFalse(activity.originFragment.requireAppContext() is Activity)
         Assert.assertNotNull(activity.supportFragment.requireAppContext())
         Assert.assertTrue(activity.supportFragment.requireAppContext() is Application)
         Assert.assertFalse(activity.supportFragment.requireAppContext() is Activity)
@@ -76,19 +70,7 @@ class ContextxTest {
         }
 
         try {
-            activity.originFragment.requireContext()
-            Assert.fail()
-        } catch (ignored: Exception) {
-        }
-
-        try {
             activity.supportFragment.requireContext()
-            Assert.fail()
-        } catch (ignored: Exception) {
-        }
-
-        try {
-            activity.originFragment.requireAppContext()
             Assert.fail()
         } catch (ignored: Exception) {
         }
@@ -277,9 +259,6 @@ class ContextxTest {
 
     class TestActivity : androidx.fragment.app.FragmentActivity() {
 
-        val originFragment: android.app.Fragment
-            get() = fragmentManager.findFragmentById(R.id.multiFrameAt_frame1)
-
         val supportFragment: androidx.fragment.app.Fragment
             get() =
                 Premisex.requireNotNull(supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2))
@@ -290,10 +269,6 @@ class ContextxTest {
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
             setContentView(R.layout.at_multi_frame)
-
-            fragmentManager.beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, android.app.Fragment())
-                    .commit()
 
             supportFragmentManager.beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, androidx.fragment.app.Fragment())

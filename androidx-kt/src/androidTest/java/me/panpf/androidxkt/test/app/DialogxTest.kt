@@ -2,7 +2,6 @@
 
 package me.panpf.androidxkt.test.app
 
-import android.app.Activity
 import android.app.Dialog
 import android.os.Bundle
 import androidx.test.rule.ActivityTestRule
@@ -19,15 +18,12 @@ import org.junit.runner.RunWith
 class DialogxTest {
 
     @get:Rule
-    val mActivityTestRule = ActivityTestRule(TestActivity::class.java)
-
-    @get:Rule
     val mFragmentActivityTestRule = ActivityTestRule(TestFragmentActivity::class.java)
 
     @Test
     fun testSetClickButtonClosable() {
         waitRunInUI {
-            val activity = mActivityTestRule.activity
+            val activity = mFragmentActivityTestRule.activity
             Assert.assertTrue(activity.dialog.setClickButtonClosable(true))
             Assert.assertTrue(activity.dialog.setClickButtonClosable(false))
         }
@@ -36,8 +32,7 @@ class DialogxTest {
     @Test
     fun testShowProgressDialog() {
         waitRunInUI {
-            val activity = mActivityTestRule.activity
-            val fragment = activity.fragmentManager.findFragmentById(android.R.id.content)
+            val activity = mFragmentActivityTestRule.activity
             val supportFragment = mFragmentActivityTestRule.activity.supportFragmentManager.findFragmentById(android.R.id.content)
 
             Assert.assertNotNull(activity.showProgressDialog("by activity"))
@@ -45,24 +40,6 @@ class DialogxTest {
 
             Assert.assertNotNull(supportFragment?.showProgressDialog("by supportFragment"))
             Assert.assertNotNull(supportFragment?.showProgressDialog(android.R.string.yes))
-
-            Assert.assertNotNull(fragment.showProgressDialog("by fragment"))
-            Assert.assertNotNull(fragment.showProgressDialog(android.R.string.yes))
-        }
-    }
-
-
-    class TestActivity : Activity() {
-
-        val dialog: Dialog
-            get() = Dialog(this)
-
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-
-            fragmentManager.beginTransaction()
-                    .replace(android.R.id.content, android.app.Fragment())
-                    .commit()
         }
     }
 
@@ -75,5 +52,8 @@ class DialogxTest {
                     .replace(android.R.id.content, androidx.fragment.app.Fragment())
                     .commit()
         }
+
+        val dialog: Dialog
+            get() = Dialog(this)
     }
 }

@@ -50,7 +50,7 @@ class InputMethodxTest {
     @Throws(InterruptedException::class)
     fun testShowSoftInput() {
         val activity = activityRule.activity
-        val originEditText = activity.originFragmentEditTxt
+        val originEditText = activity.supportFragmentEditTxt
 
         // ensure hide
         if (activity.isSoftInputShowing()) {
@@ -69,7 +69,7 @@ class InputMethodxTest {
     @Throws(InterruptedException::class)
     fun testDelayShowSoftInput() {
         val activity = activityRule.activity
-        val supportEditText = activity.originFragmentEditTxt
+        val supportEditText = activity.supportFragmentEditTxt
 
         // ensure hide
         if (activity.isSoftInputShowing()) {
@@ -98,7 +98,6 @@ class InputMethodxTest {
     @Throws(InterruptedException::class)
     fun testHideSoftInput() {
         val activity = activityRule.activity
-        val originEditText = activity.originFragmentEditTxt
         val supportEditText = activity.supportFragmentEditTxt
 
         // ensure hide
@@ -107,26 +106,6 @@ class InputMethodxTest {
             Thread.sleep(500)
             Assert.assertFalse(activity.isSoftInputShowing())
         }
-
-        // show
-        runInUI { originEditText.showSoftInput() }
-        Thread.sleep(500)
-        Assert.assertTrue(activity.isSoftInputShowing())
-
-        // hide
-        runInUI { activity.hideSoftInput() }
-        Thread.sleep(500)
-        Assert.assertFalse(activity.isSoftInputShowing())
-
-        // show
-        runInUI { originEditText.showSoftInput() }
-        Thread.sleep(500)
-        Assert.assertTrue(activity.isSoftInputShowing())
-
-        // hide
-        runInUI { activity.originFragment.hideSoftInput() }
-        Thread.sleep(500)
-        Assert.assertFalse(activity.isSoftInputShowing())
 
         // show
         runInUI { supportEditText.showSoftInput() }
@@ -153,7 +132,7 @@ class InputMethodxTest {
     @Throws(InterruptedException::class)
     fun testMoveCursor() {
         val activity = activityRule.activity
-        val originEditText = activity.originFragmentEditTxt
+        val originEditText = activity.supportFragmentEditTxt
 
         runInUI { originEditText.moveCursorToEnd() }
         Thread.sleep(100)
@@ -169,12 +148,6 @@ class InputMethodxTest {
     }
 
     class TestActivity : androidx.fragment.app.FragmentActivity() {
-
-        val originFragment: android.app.Fragment
-            get() = fragmentManager.findFragmentById(R.id.multiFrameAt_frame1)
-
-        val originFragmentEditTxt: EditText
-            get() = originFragment.view as EditText
 
         val supportFragment: androidx.fragment.app.Fragment
             get() = supportFragmentManager.findFragmentById(R.id.multiFrameAt_frame2).requireNotNull()
@@ -192,21 +165,9 @@ class InputMethodxTest {
 
             setContentView(R.layout.at_multi_frame)
 
-            fragmentManager.beginTransaction()
-                    .replace(R.id.multiFrameAt_frame1, EditOriginFragment())
-                    .commit()
-
             supportFragmentManager.beginTransaction()
                     .replace(R.id.multiFrameAt_frame2, EditSupportFragment())
                     .commit()
-        }
-    }
-
-    class EditOriginFragment : android.app.Fragment() {
-        override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-            val editText = EditText(activity)
-            editText.setText("0123456789")
-            return editText
         }
     }
 

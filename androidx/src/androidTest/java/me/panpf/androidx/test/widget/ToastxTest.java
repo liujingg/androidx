@@ -40,16 +40,7 @@ import me.panpf.javax.util.Premisex;
 public class ToastxTest {
 
     @NonNull
-    private final ActivityTestRule<TestActivity> activityRule = new ActivityTestRule<>(TestActivity.class);
-
-    @NonNull
     private final ActivityTestRule<TestFragmentActivity> fragmentActivityRule = new ActivityTestRule<>(TestFragmentActivity.class);
-
-    @Rule
-    @NonNull
-    public final ActivityTestRule getActivityRule() {
-        return this.activityRule;
-    }
 
     @Rule
     @NonNull
@@ -59,7 +50,7 @@ public class ToastxTest {
 
     @Test
     public final void testContextToast() {
-        Activity activity = this.activityRule.getActivity();
+        Activity activity = this.fragmentActivityRule.getActivity();
 
         Toastx.showLong(activity, "今天是2018年10月18号");
         Toastx.showLong(activity, R.string.toast_test);
@@ -88,23 +79,8 @@ public class ToastxTest {
     }
 
     @Test
-    public final void testOriginFragmentToast() {
-        android.app.Fragment fragment = activityRule.getActivity().getFragment();
-
-        Toastx.showLong(fragment, "今天是2018年10月18号");
-        Toastx.showLong(fragment, R.string.toast_test);
-        Toastx.showWithFormatLong(fragment, "今天是%d年%d月%d号", 2018, 10, 18);
-        Toastx.showWithFormatLong(fragment, R.string.toast_test_tp, 2018, 10, 18);
-
-        Toastx.showShort(fragment, "今天是2018年10月18号");
-        Toastx.showShort(fragment, R.string.toast_test);
-        Toastx.showWithFormatShort(fragment, "今天是%d年%d月%d号", 2018, 10, 18);
-        Toastx.showWithFormatShort(fragment, R.string.toast_test_tp, 2018, 10, 18);
-    }
-
-    @Test
     public final void testViewToast() {
-        View view = this.activityRule.getActivity().getView();
+        View view = this.fragmentActivityRule.getActivity().getView();
 
         Toastx.showLong(view, "今天是2018年10月18号");
         Toastx.showLong(view, R.string.toast_test);
@@ -121,23 +97,6 @@ public class ToastxTest {
     public final void testWithViewToast() {
         Toastx.showLongWithView(Viewx.inflateLayout(InstrumentationRegistry.getContext(), R.layout.view_toast));
         Toastx.showShortWithView(Viewx.inflateLayout(InstrumentationRegistry.getContext(), R.layout.view_toast));
-    }
-
-    public static class TestActivity extends Activity {
-
-        protected void onCreate(@Nullable Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            this.getFragmentManager().beginTransaction().replace(android.R.id.content, new android.app.Fragment()).commit();
-        }
-
-        @NonNull
-        public android.app.Fragment getFragment() {
-            return Premisex.requireNotNull(getFragmentManager().findFragmentById(android.R.id.content));
-        }
-
-        public View getView() {
-            return findViewById(android.R.id.content);
-        }
     }
 
     public static class TestFragmentActivity extends FragmentActivity {
