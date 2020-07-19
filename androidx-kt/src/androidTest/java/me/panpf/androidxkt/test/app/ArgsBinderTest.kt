@@ -328,62 +328,62 @@ class ArgsBinderTest {
             }
         }
 
-        private val stringRequired by bindStringArg(R.string.string_required)
+        private val stringRequired by bindStringArgOrThrow(R.string.string_required)
         private val stringOptional by bindStringArgOrNull(R.string.string_optional)
-        private val stringArrayRequired by bindStringArrayArg(R.string.string_array_required)
+        private val stringArrayRequired by bindStringArrayArgOrThrow(R.string.string_array_required)
         private val stringArrayOptional by bindStringArrayArgOrNull(R.string.string_array_optional)
-        private val stringArrayListRequired by bindStringArrayListArg(R.string.string_array_list_required)
+        private val stringArrayListRequired by bindStringArrayListArgOrThrow(R.string.string_array_list_required)
         private val stringArrayListOptional by bindStringArrayListArgOrNull(R.string.string_array_list_optional)
 
         private val byteRequired by bindByteArgOr(R.string.byte_required)
-        private val byteArrayRequired by bindByteArrayArg(R.string.byte_array_required)
+        private val byteArrayRequired by bindByteArrayArgOrThrow(R.string.byte_array_required)
         private val byteArrayOptional by bindByteArrayArgOrNull(R.string.byte_array_optional)
 
         private val shortRequired by bindShortArgOr(R.string.short_required)
-        private val shortArrayRequired by bindShortArrayArg(R.string.short_array_required)
+        private val shortArrayRequired by bindShortArrayArgOrThrow(R.string.short_array_required)
         private val shortArrayOptional by bindShortArrayArgOrNull(R.string.short_array_optional)
 
         private val intRequired by bindIntArgOr(R.string.int_required)
-        private val intArrayRequired by bindIntArrayArg(R.string.int_array_required)
+        private val intArrayRequired by bindIntArrayArgOrThrow(R.string.int_array_required)
         private val intArrayOptional by bindIntArrayArgOrNull(R.string.int_array_optional)
-        private val intArrayListRequired by bindIntArrayListArg(R.string.int_array_list_required)
+        private val intArrayListRequired by bindIntArrayListArgOrThrow(R.string.int_array_list_required)
         private val intArrayListOptional by bindIntArrayListArgOrNull(R.string.int_array_list_optional)
 
         private val longRequired by bindLongArgOr(R.string.long_required)
-        private val longArrayRequired by bindLongArrayArg(R.string.long_array_required)
+        private val longArrayRequired by bindLongArrayArgOrThrow(R.string.long_array_required)
         private val longArrayOptional by bindLongArrayArgOrNull(R.string.long_array_optional)
 
         private val floatRequired by bindFloatArgOr(R.string.float_required)
-        private val floatArrayRequired by bindFloatArrayArg(R.string.float_array_required)
+        private val floatArrayRequired by bindFloatArrayArgOrThrow(R.string.float_array_required)
         private val floatArrayOptional by bindFloatArrayArgOrNull(R.string.float_array_optional)
 
         private val doubleRequired by bindDoubleArgOr(R.string.double_required)
-        private val doubleArrayRequired by bindDoubleArrayArg(R.string.double_array_required)
+        private val doubleArrayRequired by bindDoubleArrayArgOrThrow(R.string.double_array_required)
         private val doubleArrayOptional by bindDoubleArrayArgOrNull(R.string.double_array_optional)
 
         private val booleanRequired by bindBooleanArgOr(R.string.boolean_required)
-        private val booleanArrayRequired by bindBooleanArrayArg(R.string.boolean_array_required)
+        private val booleanArrayRequired by bindBooleanArrayArgOrThrow(R.string.boolean_array_required)
         private val booleanArrayOptional by bindBooleanArrayArgOrNull(R.string.boolean_array_optional)
 
         private val charRequired by bindCharArgOr(R.string.char_required)
-        private val charArrayRequired by bindCharArrayArg(R.string.char_array_required)
+        private val charArrayRequired by bindCharArrayArgOrThrow(R.string.char_array_required)
         private val charArrayOptional by bindCharArrayArgOrNull(R.string.char_array_optional)
 
-        private val charSequenceRequired by bindCharSequenceArg(R.string.char_sequence_required)
+        private val charSequenceRequired by bindCharSequenceArgOrThrow(R.string.char_sequence_required)
         private val charSequenceOptional by bindCharSequenceArgOrNull(R.string.char_sequence_optional)
-        private val charSequenceArrayRequired by bindCharSequenceArrayArg(R.string.char_sequence_array_required)
+        private val charSequenceArrayRequired by bindCharSequenceArrayArgOrThrow(R.string.char_sequence_array_required)
         private val charSequenceArrayOptional by bindCharSequenceArrayArgOrNull(R.string.char_sequence_array_optional)
 
-        private val parcelableRequired by bindParcelableArg<TestParcelable>(R.string.parcelable_required)
+        private val parcelableRequired by bindParcelableArgOrThrow<TestParcelable>(R.string.parcelable_required)
         private val parcelableOptional by bindParcelableArgOrNull<TestParcelable>(R.string.parcelable_optional)
-        private val parcelableArrayRequired by bindParcelableArrayArg<Parcelable>(R.string.parcelable_array_required)
+        private val parcelableArrayRequired by bindParcelableArrayArgOrThrow<Parcelable>(R.string.parcelable_array_required)
         private val parcelableArrayOptional by bindParcelableArrayArgOrNull<Parcelable>(R.string.parcelable_array_optional)
-        private val parcelableArrayListRequired by bindParcelableArrayListArg<TestParcelable>(R.string.parcelable_array_list_required)
+        private val parcelableArrayListRequired by bindParcelableArrayListArgOrThrow<TestParcelable>(R.string.parcelable_array_list_required)
         private val parcelableArrayListOptional by bindParcelableArrayListArgOrNull<TestParcelable>(R.string.parcelable_array_list_optional)
 
-        private val serializableRequired by bindSerializableArg<TestSerializable>(R.string.serializable_required)
+        private val serializableRequired by bindSerializableArgOrThrow<TestSerializable>(R.string.serializable_required)
         private val serializableOptional by bindSerializableArgOrNull<TestSerializable>(R.string.serializable_optional)
-        private val bundleRequired by bindBundleArg(R.string.bundle_required)
+        private val bundleRequired by bindBundleArgOrThrow(R.string.bundle_required)
         private val bundleOptional by bindBundleArgOrNull(R.string.bundle_optional)
 
 
@@ -409,7 +409,7 @@ class ArgsBinderTest {
 
         private val charSequenceArrayOrDefault by bindCharSequenceArrayArgOr(R.string.char_sequence_array_or_default, arrayOf())
 
-        private val charSequenceArrayListRequired by bindCharSequenceArrayListArg(R.string.char_sequence_array_list_required)
+        private val charSequenceArrayListRequired by bindCharSequenceArrayListArgOrThrow(R.string.char_sequence_array_list_required)
         private val charSequenceArrayListOptional by bindCharSequenceArrayListArgOrNull(R.string.char_sequence_array_list_optional)
         private val charSequenceArrayListOrDefault by bindCharSequenceArrayListArgOr(R.string.char_sequence_array_list_or_default, arrayListOf())
 
@@ -620,64 +620,64 @@ class ArgsBinderTest {
 
     class ResTestSupportFragment : androidx.fragment.app.Fragment() {
 
-        private val stringRequired by bindStringArg(me.panpf.androidxkt.test.R.string.string_required)
+        private val stringRequired by bindStringArgOrThrow(me.panpf.androidxkt.test.R.string.string_required)
         private val stringOptional by bindStringArgOrNull(me.panpf.androidxkt.test.R.string.string_optional)
-        private val stringArrayRequired by bindStringArrayArg(me.panpf.androidxkt.test.R.string.string_array_required)
+        private val stringArrayRequired by bindStringArrayArgOrThrow(me.panpf.androidxkt.test.R.string.string_array_required)
         private val stringArrayOptional by bindStringArrayArgOrNull(me.panpf.androidxkt.test.R.string.string_array_optional)
-        private val stringArrayListRequired by bindStringArrayListArg(me.panpf.androidxkt.test.R.string.string_array_list_required)
+        private val stringArrayListRequired by bindStringArrayListArgOrThrow(me.panpf.androidxkt.test.R.string.string_array_list_required)
         private val stringArrayListOptional by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.string_array_list_optional)
 
         private val byteRequired by bindByteArgOr(R.string.byte_required)
-        private val byteArrayRequired by bindByteArrayArg(R.string.byte_array_required)
+        private val byteArrayRequired by bindByteArrayArgOrThrow(R.string.byte_array_required)
         private val byteArrayOptional by bindByteArrayArgOrNull(R.string.byte_array_optional)
 
         private val shortRequired by bindShortArgOr(R.string.short_required)
-        private val shortArrayRequired by bindShortArrayArg(R.string.short_array_required)
+        private val shortArrayRequired by bindShortArrayArgOrThrow(R.string.short_array_required)
         private val shortArrayOptional by bindShortArrayArgOrNull(R.string.short_array_optional)
 
         private val intRequired by bindIntArgOr(R.string.int_required)
-        private val intArrayRequired by bindIntArrayArg(R.string.int_array_required)
+        private val intArrayRequired by bindIntArrayArgOrThrow(R.string.int_array_required)
         private val intArrayOptional by bindIntArrayArgOrNull(R.string.int_array_optional)
-        private val intArrayListRequired by bindIntArrayListArg(R.string.int_array_list_required)
+        private val intArrayListRequired by bindIntArrayListArgOrThrow(R.string.int_array_list_required)
         private val intArrayListOptional by bindIntArrayListArgOrNull(R.string.int_array_list_optional)
 
         private val longRequired by bindLongArgOr(R.string.long_required)
-        private val longArrayRequired by bindLongArrayArg(R.string.long_array_required)
+        private val longArrayRequired by bindLongArrayArgOrThrow(R.string.long_array_required)
         private val longArrayOptional by bindLongArrayArgOrNull(R.string.long_array_optional)
 
         private val floatRequired by bindFloatArgOr(R.string.float_required)
-        private val floatArrayRequired by bindFloatArrayArg(R.string.float_array_required)
+        private val floatArrayRequired by bindFloatArrayArgOrThrow(R.string.float_array_required)
         private val floatArrayOptional by bindFloatArrayArgOrNull(R.string.float_array_optional)
 
         private val doubleRequired by bindDoubleArgOr(R.string.double_required)
-        private val doubleArrayRequired by bindDoubleArrayArg(R.string.double_array_required)
+        private val doubleArrayRequired by bindDoubleArrayArgOrThrow(R.string.double_array_required)
         private val doubleArrayOptional by bindDoubleArrayArgOrNull(R.string.double_array_optional)
 
         private val booleanRequired by bindBooleanArgOr(R.string.boolean_required)
-        private val booleanArrayRequired by bindBooleanArrayArg(R.string.boolean_array_required)
+        private val booleanArrayRequired by bindBooleanArrayArgOrThrow(R.string.boolean_array_required)
         private val booleanArrayOptional by bindBooleanArrayArgOrNull(R.string.boolean_array_optional)
 
         private val charRequired by bindCharArgOr(R.string.char_required)
-        private val charArrayRequired by bindCharArrayArg(R.string.char_array_required)
+        private val charArrayRequired by bindCharArrayArgOrThrow(R.string.char_array_required)
         private val charArrayOptional by bindCharArrayArgOrNull(R.string.char_array_optional)
 
-        private val charSequenceRequired by bindCharSequenceArg(R.string.char_sequence_required)
+        private val charSequenceRequired by bindCharSequenceArgOrThrow(R.string.char_sequence_required)
         private val charSequenceOptional by bindCharSequenceArgOrNull(R.string.char_sequence_optional)
-        private val charSequenceArrayRequired by bindCharSequenceArrayArg(R.string.char_sequence_array_required)
+        private val charSequenceArrayRequired by bindCharSequenceArrayArgOrThrow(R.string.char_sequence_array_required)
         private val charSequenceArrayOptional by bindCharSequenceArrayArgOrNull(R.string.char_sequence_array_optional)
 
 
-        private val parcelableRequired by bindParcelableArg<TestParcelable>(R.string.parcelable_required)
+        private val parcelableRequired by bindParcelableArgOrThrow<TestParcelable>(R.string.parcelable_required)
         private val parcelableOptional by bindParcelableArgOrNull<TestParcelable>(R.string.parcelable_optional)
-        private val parcelableArrayRequired by bindParcelableArrayArg<Parcelable>(R.string.parcelable_array_required)
+        private val parcelableArrayRequired by bindParcelableArrayArgOrThrow<Parcelable>(R.string.parcelable_array_required)
         private val parcelableArrayOptional by bindParcelableArrayArgOrNull<Parcelable>(R.string.parcelable_array_optional)
-        private val parcelableArrayListRequired by bindParcelableArrayListArg<TestParcelable>(R.string.parcelable_array_list_required)
+        private val parcelableArrayListRequired by bindParcelableArrayListArgOrThrow<TestParcelable>(R.string.parcelable_array_list_required)
         private val parcelableArrayListOptional by bindParcelableArrayListArgOrNull<TestParcelable>(R.string.parcelable_array_list_optional)
 
-        private val serializableRequired by bindSerializableArg<TestSerializable>(R.string.serializable_required)
+        private val serializableRequired by bindSerializableArgOrThrow<TestSerializable>(R.string.serializable_required)
         private val serializableOptional by bindSerializableArgOrNull<TestSerializable>(R.string.serializable_optional)
 
-        private val bundleRequired by bindBundleArg(R.string.bundle_required)
+        private val bundleRequired by bindBundleArgOrThrow(R.string.bundle_required)
         private val bundleOptional by bindBundleArgOrNull(R.string.bundle_optional)
 
         private val byteArrayOrDefault by bindByteArrayArgOr(R.string.byte_array_or_default, byteArrayOf())
@@ -702,7 +702,7 @@ class ArgsBinderTest {
 
         private val charSequenceArrayOrDefault by bindCharSequenceArrayArgOr(R.string.char_sequence_array_or_default, arrayOf())
 
-        private val charSequenceArrayListRequired by bindCharSequenceArrayListArg(R.string.char_sequence_array_list_required)
+        private val charSequenceArrayListRequired by bindCharSequenceArrayListArgOrThrow(R.string.char_sequence_array_list_required)
         private val charSequenceArrayListOptional by bindCharSequenceArrayListArgOrNull(R.string.char_sequence_array_list_optional)
         private val charSequenceArrayListOrDefault by bindCharSequenceArrayListArgOr(R.string.char_sequence_array_list_or_default, arrayListOf())
 
@@ -722,7 +722,7 @@ class ArgsBinderTest {
 
         private val bundleOrDefault by bindBundleArgOr(R.string.bundle_or_default, Bundle())
 
-        private val sparseParcelableArrayRequired by bindSparseParcelableArrayArg<TestParcelable>(R.string.sparse_parcelable_array_required)
+        private val sparseParcelableArrayRequired by bindSparseParcelableArrayArgOrThrow<TestParcelable>(R.string.sparse_parcelable_array_required)
         private val sparseParcelableArrayOptional by bindSparseParcelableArrayArgOrNull<TestParcelable>(R.string.sparse_parcelable_array_optional)
         private val sparseParcelableArrayOrDefault by bindSparseParcelableArrayArgOr<TestParcelable>(R.string.sparse_parcelable_array_or_default, SparseArray())
         private val sparseParcelableArrayOrDefaultErrKey by bindSparseParcelableArrayArgOr(R.string.not_exist_key,
@@ -1021,64 +1021,64 @@ class ArgsBinderTest {
 
     class ResTestFragment : android.app.Fragment() {
 
-        private val stringRequired by bindStringArg(me.panpf.androidxkt.test.R.string.string_required)
+        private val stringRequired by bindStringArgOrThrow(me.panpf.androidxkt.test.R.string.string_required)
         private val stringOptional by bindStringArgOrNull(me.panpf.androidxkt.test.R.string.string_optional)
-        private val stringArrayRequired by bindStringArrayArg(me.panpf.androidxkt.test.R.string.string_array_required)
+        private val stringArrayRequired by bindStringArrayArgOrThrow(me.panpf.androidxkt.test.R.string.string_array_required)
         private val stringArrayOptional by bindStringArrayArgOrNull(me.panpf.androidxkt.test.R.string.string_array_optional)
-        private val stringArrayListRequired by bindStringArrayListArg(me.panpf.androidxkt.test.R.string.string_array_list_required)
+        private val stringArrayListRequired by bindStringArrayListArgOrThrow(me.panpf.androidxkt.test.R.string.string_array_list_required)
         private val stringArrayListOptional by bindStringArrayListArgOrNull(me.panpf.androidxkt.test.R.string.string_array_list_optional)
 
         private val byteRequired by bindByteArgOr(R.string.byte_required)
-        private val byteArrayRequired by bindByteArrayArg(R.string.byte_array_required)
+        private val byteArrayRequired by bindByteArrayArgOrThrow(R.string.byte_array_required)
         private val byteArrayOptional by bindByteArrayArgOrNull(R.string.byte_array_optional)
 
         private val shortRequired by bindShortArgOr(R.string.short_required)
-        private val shortArrayRequired by bindShortArrayArg(R.string.short_array_required)
+        private val shortArrayRequired by bindShortArrayArgOrThrow(R.string.short_array_required)
         private val shortArrayOptional by bindShortArrayArgOrNull(R.string.short_array_optional)
 
         private val intRequired by bindIntArgOr(R.string.int_required)
-        private val intArrayRequired by bindIntArrayArg(R.string.int_array_required)
+        private val intArrayRequired by bindIntArrayArgOrThrow(R.string.int_array_required)
         private val intArrayOptional by bindIntArrayArgOrNull(R.string.int_array_optional)
-        private val intArrayListRequired by bindIntArrayListArg(R.string.int_array_list_required)
+        private val intArrayListRequired by bindIntArrayListArgOrThrow(R.string.int_array_list_required)
         private val intArrayListOptional by bindIntArrayListArgOrNull(R.string.int_array_list_optional)
 
         private val longRequired by bindLongArgOr(R.string.long_required)
-        private val longArrayRequired by bindLongArrayArg(R.string.long_array_required)
+        private val longArrayRequired by bindLongArrayArgOrThrow(R.string.long_array_required)
         private val longArrayOptional by bindLongArrayArgOrNull(R.string.long_array_optional)
 
         private val floatRequired by bindFloatArgOr(R.string.float_required)
-        private val floatArrayRequired by bindFloatArrayArg(R.string.float_array_required)
+        private val floatArrayRequired by bindFloatArrayArgOrThrow(R.string.float_array_required)
         private val floatArrayOptional by bindFloatArrayArgOrNull(R.string.float_array_optional)
 
         private val doubleRequired by bindDoubleArgOr(R.string.double_required)
-        private val doubleArrayRequired by bindDoubleArrayArg(R.string.double_array_required)
+        private val doubleArrayRequired by bindDoubleArrayArgOrThrow(R.string.double_array_required)
         private val doubleArrayOptional by bindDoubleArrayArgOrNull(R.string.double_array_optional)
 
         private val booleanRequired by bindBooleanArgOr(R.string.boolean_required)
-        private val booleanArrayRequired by bindBooleanArrayArg(R.string.boolean_array_required)
+        private val booleanArrayRequired by bindBooleanArrayArgOrThrow(R.string.boolean_array_required)
         private val booleanArrayOptional by bindBooleanArrayArgOrNull(R.string.boolean_array_optional)
 
         private val charRequired by bindCharArgOr(R.string.char_required)
-        private val charArrayRequired by bindCharArrayArg(R.string.char_array_required)
+        private val charArrayRequired by bindCharArrayArgOrThrow(R.string.char_array_required)
         private val charArrayOptional by bindCharArrayArgOrNull(R.string.char_array_optional)
 
-        private val charSequenceRequired by bindCharSequenceArg(R.string.char_sequence_required)
+        private val charSequenceRequired by bindCharSequenceArgOrThrow(R.string.char_sequence_required)
         private val charSequenceOptional by bindCharSequenceArgOrNull(R.string.char_sequence_optional)
-        private val charSequenceArrayRequired by bindCharSequenceArrayArg(R.string.char_sequence_array_required)
+        private val charSequenceArrayRequired by bindCharSequenceArrayArgOrThrow(R.string.char_sequence_array_required)
         private val charSequenceArrayOptional by bindCharSequenceArrayArgOrNull(R.string.char_sequence_array_optional)
 
 
-        private val parcelableRequired by bindParcelableArg<TestParcelable>(R.string.parcelable_required)
+        private val parcelableRequired by bindParcelableArgOrThrow<TestParcelable>(R.string.parcelable_required)
         private val parcelableOptional by bindParcelableArgOrNull<TestParcelable>(R.string.parcelable_optional)
-        private val parcelableArrayRequired by bindParcelableArrayArg<Parcelable>(R.string.parcelable_array_required)
+        private val parcelableArrayRequired by bindParcelableArrayArgOrThrow<Parcelable>(R.string.parcelable_array_required)
         private val parcelableArrayOptional by bindParcelableArrayArgOrNull<Parcelable>(R.string.parcelable_array_optional)
-        private val parcelableArrayListRequired by bindParcelableArrayListArg<TestParcelable>(R.string.parcelable_array_list_required)
+        private val parcelableArrayListRequired by bindParcelableArrayListArgOrThrow<TestParcelable>(R.string.parcelable_array_list_required)
         private val parcelableArrayListOptional by bindParcelableArrayListArgOrNull<TestParcelable>(R.string.parcelable_array_list_optional)
 
-        private val serializableRequired by bindSerializableArg<TestSerializable>(R.string.serializable_required)
+        private val serializableRequired by bindSerializableArgOrThrow<TestSerializable>(R.string.serializable_required)
         private val serializableOptional by bindSerializableArgOrNull<TestSerializable>(R.string.serializable_optional)
 
-        private val bundleRequired by bindBundleArg(R.string.bundle_required)
+        private val bundleRequired by bindBundleArgOrThrow(R.string.bundle_required)
         private val bundleOptional by bindBundleArgOrNull(R.string.bundle_optional)
 
         private val byteArrayOrDefault by bindByteArrayArgOr(R.string.byte_array_or_default, byteArrayOf())
@@ -1103,7 +1103,7 @@ class ArgsBinderTest {
 
         private val charSequenceArrayOrDefault by bindCharSequenceArrayArgOr(R.string.char_sequence_array_or_default, arrayOf())
 
-        private val charSequenceArrayListRequired by bindCharSequenceArrayListArg(R.string.char_sequence_array_list_required)
+        private val charSequenceArrayListRequired by bindCharSequenceArrayListArgOrThrow(R.string.char_sequence_array_list_required)
         private val charSequenceArrayListOptional by bindCharSequenceArrayListArgOrNull(R.string.char_sequence_array_list_optional)
         private val charSequenceArrayListOrDefault by bindCharSequenceArrayListArgOr(R.string.char_sequence_array_list_or_default, arrayListOf())
 
@@ -1123,7 +1123,7 @@ class ArgsBinderTest {
 
         private val bundleOrDefault by bindBundleArgOr(R.string.bundle_or_default, Bundle())
 
-        private val sparseParcelableArrayRequired by bindSparseParcelableArrayArg<TestParcelable>(R.string.sparse_parcelable_array_required)
+        private val sparseParcelableArrayRequired by bindSparseParcelableArrayArgOrThrow<TestParcelable>(R.string.sparse_parcelable_array_required)
         private val sparseParcelableArrayOptional by bindSparseParcelableArrayArgOrNull<TestParcelable>(R.string.sparse_parcelable_array_optional)
         private val sparseParcelableArrayOrDefault by bindSparseParcelableArrayArgOr<TestParcelable>(R.string.sparse_parcelable_array_or_default, SparseArray())
         private val sparseParcelableArrayOrDefaultErrKey by bindSparseParcelableArrayArgOr(R.string.not_exist_key,
@@ -1426,62 +1426,62 @@ class ArgsBinderTest {
     class TestActivity : androidx.fragment.app.FragmentActivity() {
 
         val byteRequired by bindByteArgOr("byteRequired")
-        val byteArrayRequired by bindByteArrayArg("byteArrayRequired")
+        val byteArrayRequired by bindByteArrayArgOrThrow("byteArrayRequired")
         val byteArrayOptional by bindByteArrayArgOrNull("byteArrayOptional")
 
         val shortRequired by bindShortArgOr("shortRequired")
-        val shortArrayRequired by bindShortArrayArg("shortArrayRequired")
+        val shortArrayRequired by bindShortArrayArgOrThrow("shortArrayRequired")
         val shortArrayOptional by bindShortArrayArgOrNull("shortArrayOptional")
 
         val intRequired by bindIntArgOr("intRequired")
-        val intArrayRequired by bindIntArrayArg("intArrayRequired")
+        val intArrayRequired by bindIntArrayArgOrThrow("intArrayRequired")
         val intArrayOptional by bindIntArrayArgOrNull("intArrayOptional")
-        val intArrayListRequired by bindIntArrayListArg("intArrayListRequired")
+        val intArrayListRequired by bindIntArrayListArgOrThrow("intArrayListRequired")
         val intArrayListOptional by bindIntArrayListArgOrNull("intArrayListOptional")
 
         val longRequired by bindLongArgOr("longRequired")
-        val longArrayRequired by bindLongArrayArg("longArrayRequired")
+        val longArrayRequired by bindLongArrayArgOrThrow("longArrayRequired")
         val longArrayOptional by bindLongArrayArgOrNull("longArrayOptional")
 
         val floatRequired by bindFloatArgOr("floatRequired")
-        val floatArrayRequired by bindFloatArrayArg("floatArrayRequired")
+        val floatArrayRequired by bindFloatArrayArgOrThrow("floatArrayRequired")
         val floatArrayOptional by bindFloatArrayArgOrNull("floatArrayOptional")
 
         val doubleRequired by bindDoubleArgOr("doubleRequired")
-        val doubleArrayRequired by bindDoubleArrayArg("doubleArrayRequired")
+        val doubleArrayRequired by bindDoubleArrayArgOrThrow("doubleArrayRequired")
         val doubleArrayOptional by bindDoubleArrayArgOrNull("doubleArrayOptional")
 
         val booleanRequired by bindBooleanArgOr("booleanRequired")
-        val booleanArrayRequired by bindBooleanArrayArg("booleanArrayRequired")
+        val booleanArrayRequired by bindBooleanArrayArgOrThrow("booleanArrayRequired")
         val booleanArrayOptional by bindBooleanArrayArgOrNull("booleanArrayOptional")
 
         val charRequired by bindCharArgOr("charRequired")
-        val charArrayRequired by bindCharArrayArg("charArrayRequired")
+        val charArrayRequired by bindCharArrayArgOrThrow("charArrayRequired")
         val charArrayOptional by bindCharArrayArgOrNull("charArrayOptional")
 
-        val charSequenceRequired by bindCharSequenceArg("charSequenceRequired")
+        val charSequenceRequired by bindCharSequenceArgOrThrow("charSequenceRequired")
         val charSequenceOptional by bindCharSequenceArgOrNull("charSequenceOptional")
-        val charSequenceArrayRequired by bindCharSequenceArrayArg("charSequenceArrayRequired")
+        val charSequenceArrayRequired by bindCharSequenceArrayArgOrThrow("charSequenceArrayRequired")
         val charSequenceArrayOptional by bindCharSequenceArrayArgOrNull("charSequenceArrayOptional")
 
-        val stringRequired by bindStringArg("stringRequired")
+        val stringRequired by bindStringArgOrThrow("stringRequired")
         val stringOptional by bindStringArgOrNull("stringOptional")
-        val stringArrayRequired by bindStringArrayArg("stringArrayRequired")
+        val stringArrayRequired by bindStringArrayArgOrThrow("stringArrayRequired")
         val stringArrayOptional by bindStringArrayArgOrNull("stringArrayOptional")
-        val stringArrayListRequired by bindStringArrayListArg("stringArrayListRequired")
+        val stringArrayListRequired by bindStringArrayListArgOrThrow("stringArrayListRequired")
         val stringArrayListOptional by bindStringArrayListArgOrNull("stringArrayListOptional")
 
-        val parcelableRequired by bindParcelableArg<TestParcelable>("parcelableRequired")
+        val parcelableRequired by bindParcelableArgOrThrow<TestParcelable>("parcelableRequired")
         val parcelableOptional by bindParcelableArgOrNull<TestParcelable>("parcelableOptional")
-        val parcelableArrayRequired by bindParcelableArrayArg<Parcelable>("parcelableArrayRequired")
+        val parcelableArrayRequired by bindParcelableArrayArgOrThrow<Parcelable>("parcelableArrayRequired")
         val parcelableArrayOptional by bindParcelableArrayArgOrNull<Parcelable>("parcelableArrayOptional")
-        val parcelableArrayListRequired by bindParcelableArrayListArg<TestParcelable>("parcelableArrayListRequired")
+        val parcelableArrayListRequired by bindParcelableArrayListArgOrThrow<TestParcelable>("parcelableArrayListRequired")
         val parcelableArrayListOptional by bindParcelableArrayListArgOrNull<TestParcelable>("parcelableArrayListOptional")
 
-        val serializableRequired by bindSerializableArg<TestSerializable>("serializableRequired")
+        val serializableRequired by bindSerializableArgOrThrow<TestSerializable>("serializableRequired")
         val serializableOptional by bindSerializableArgOrNull<TestSerializable>("serializableOptional")
 
-        val bundleRequired by bindBundleArg("bundleRequired")
+        val bundleRequired by bindBundleArgOrThrow("bundleRequired")
         val bundleOptional by bindBundleArgOrNull("bundleOptional")
 
         val byteArrayOrDefault by bindByteArrayArgOr("byteArrayOrDefault", byteArrayOf())
@@ -1506,7 +1506,7 @@ class ArgsBinderTest {
 
         val charSequenceArrayOrDefault by bindCharSequenceArrayArgOr("charSequenceArrayOrDefault", arrayOf())
 
-        val charSequenceArrayListRequired by bindCharSequenceArrayListArg("charSequenceArrayListRequired")
+        val charSequenceArrayListRequired by bindCharSequenceArrayListArgOrThrow("charSequenceArrayListRequired")
         val charSequenceArrayListOptional by bindCharSequenceArrayListArgOrNull("charSequenceArrayListOptional")
         val charSequenceArrayListOrDefault by bindCharSequenceArrayListArgOr("charSequenceArrayListOrDefault", arrayListOf())
 
@@ -1526,7 +1526,7 @@ class ArgsBinderTest {
 
         val bundleOrDefault by bindBundleArgOr("bundleOrDefault", Bundle())
 
-        private val extrasRequired by bindExtrasArg()
+        private val extrasRequired by bindExtrasArgOrThrow()
         private val extrasOptional by bindExtrasArgOrNull()
         private val extrasOrDefault by bindExtrasArgOr(Bundle())
 
@@ -1828,62 +1828,62 @@ class ArgsBinderTest {
     class TestSupportFragment : androidx.fragment.app.Fragment() {
 
         private val byteRequired by bindByteArgOr("byteRequired")
-        private val byteArrayRequired by bindByteArrayArg("byteArrayRequired")
+        private val byteArrayRequired by bindByteArrayArgOrThrow("byteArrayRequired")
         private val byteArrayOptional by bindByteArrayArgOrNull("byteArrayOptional")
 
         private val shortRequired by bindShortArgOr("shortRequired")
-        private val shortArrayRequired by bindShortArrayArg("shortArrayRequired")
+        private val shortArrayRequired by bindShortArrayArgOrThrow("shortArrayRequired")
         private val shortArrayOptional by bindShortArrayArgOrNull("shortArrayOptional")
 
         private val intRequired by bindIntArgOr("intRequired")
-        private val intArrayRequired by bindIntArrayArg("intArrayRequired")
+        private val intArrayRequired by bindIntArrayArgOrThrow("intArrayRequired")
         private val intArrayOptional by bindIntArrayArgOrNull("intArrayOptional")
-        private val intArrayListRequired by bindIntArrayListArg("intArrayListRequired")
+        private val intArrayListRequired by bindIntArrayListArgOrThrow("intArrayListRequired")
         private val intArrayListOptional by bindIntArrayListArgOrNull("intArrayListOptional")
 
         private val longRequired by bindLongArgOr("longRequired")
-        private val longArrayRequired by bindLongArrayArg("longArrayRequired")
+        private val longArrayRequired by bindLongArrayArgOrThrow("longArrayRequired")
         private val longArrayOptional by bindLongArrayArgOrNull("longArrayOptional")
 
         private val floatRequired by bindFloatArgOr("floatRequired")
-        private val floatArrayRequired by bindFloatArrayArg("floatArrayRequired")
+        private val floatArrayRequired by bindFloatArrayArgOrThrow("floatArrayRequired")
         private val floatArrayOptional by bindFloatArrayArgOrNull("floatArrayOptional")
 
         private val doubleRequired by bindDoubleArgOr("doubleRequired")
-        private val doubleArrayRequired by bindDoubleArrayArg("doubleArrayRequired")
+        private val doubleArrayRequired by bindDoubleArrayArgOrThrow("doubleArrayRequired")
         private val doubleArrayOptional by bindDoubleArrayArgOrNull("doubleArrayOptional")
 
         private val booleanRequired by bindBooleanArgOr("booleanRequired")
-        private val booleanArrayRequired by bindBooleanArrayArg("booleanArrayRequired")
+        private val booleanArrayRequired by bindBooleanArrayArgOrThrow("booleanArrayRequired")
         private val booleanArrayOptional by bindBooleanArrayArgOrNull("booleanArrayOptional")
 
         private val charRequired by bindCharArgOr("charRequired")
-        private val charArrayRequired by bindCharArrayArg("charArrayRequired")
+        private val charArrayRequired by bindCharArrayArgOrThrow("charArrayRequired")
         private val charArrayOptional by bindCharArrayArgOrNull("charArrayOptional")
 
-        private val charSequenceRequired by bindCharSequenceArg("charSequenceRequired")
+        private val charSequenceRequired by bindCharSequenceArgOrThrow("charSequenceRequired")
         private val charSequenceOptional by bindCharSequenceArgOrNull("charSequenceOptional")
-        private val charSequenceArrayRequired by bindCharSequenceArrayArg("charSequenceArrayRequired")
+        private val charSequenceArrayRequired by bindCharSequenceArrayArgOrThrow("charSequenceArrayRequired")
         private val charSequenceArrayOptional by bindCharSequenceArrayArgOrNull("charSequenceArrayOptional")
 
-        private val stringRequired by bindStringArg("stringRequired")
+        private val stringRequired by bindStringArgOrThrow("stringRequired")
         private val stringOptional by bindStringArgOrNull("stringOptional")
-        private val stringArrayRequired by bindStringArrayArg("stringArrayRequired")
+        private val stringArrayRequired by bindStringArrayArgOrThrow("stringArrayRequired")
         private val stringArrayOptional by bindStringArrayArgOrNull("stringArrayOptional")
-        private val stringArrayListRequired by bindStringArrayListArg("stringArrayListRequired")
+        private val stringArrayListRequired by bindStringArrayListArgOrThrow("stringArrayListRequired")
         private val stringArrayListOptional by bindStringArrayListArgOrNull("stringArrayListOptional")
 
-        private val parcelableRequired by bindParcelableArg<TestParcelable>("parcelableRequired")
+        private val parcelableRequired by bindParcelableArgOrThrow<TestParcelable>("parcelableRequired")
         private val parcelableOptional by bindParcelableArgOrNull<TestParcelable>("parcelableOptional")
-        private val parcelableArrayRequired by bindParcelableArrayArg<Parcelable>("parcelableArrayRequired")
+        private val parcelableArrayRequired by bindParcelableArrayArgOrThrow<Parcelable>("parcelableArrayRequired")
         private val parcelableArrayOptional by bindParcelableArrayArgOrNull<Parcelable>("parcelableArrayOptional")
-        private val parcelableArrayListRequired by bindParcelableArrayListArg<TestParcelable>("parcelableArrayListRequired")
+        private val parcelableArrayListRequired by bindParcelableArrayListArgOrThrow<TestParcelable>("parcelableArrayListRequired")
         private val parcelableArrayListOptional by bindParcelableArrayListArgOrNull<TestParcelable>("parcelableArrayListOptional")
 
-        private val serializableRequired by bindSerializableArg<TestSerializable>("serializableRequired")
+        private val serializableRequired by bindSerializableArgOrThrow<TestSerializable>("serializableRequired")
         private val serializableOptional by bindSerializableArgOrNull<TestSerializable>("serializableOptional")
 
-        private val bundleRequired by bindBundleArg("bundleRequired")
+        private val bundleRequired by bindBundleArgOrThrow("bundleRequired")
         private val bundleOptional by bindBundleArgOrNull("bundleOptional")
 
         private val byteArrayOrDefault by bindByteArrayArgOr("byteArrayOrDefault", byteArrayOf())
@@ -1908,7 +1908,7 @@ class ArgsBinderTest {
 
         private val charSequenceArrayOrDefault by bindCharSequenceArrayArgOr("charSequenceArrayOrDefault", arrayOf())
 
-        private val charSequenceArrayListRequired by bindCharSequenceArrayListArg("charSequenceArrayListRequired")
+        private val charSequenceArrayListRequired by bindCharSequenceArrayListArgOrThrow("charSequenceArrayListRequired")
         private val charSequenceArrayListOptional by bindCharSequenceArrayListArgOrNull("charSequenceArrayListOptional")
         private val charSequenceArrayListOrDefault by bindCharSequenceArrayListArgOr("charSequenceArrayListOrDefault", arrayListOf())
 
@@ -1928,7 +1928,7 @@ class ArgsBinderTest {
 
         private val bundleOrDefault by bindBundleArgOr("bundleOrDefault", Bundle())
 
-        private val sparseParcelableArrayRequired by bindSparseParcelableArrayArg<TestParcelable>("sparseParcelableArrayRequired")
+        private val sparseParcelableArrayRequired by bindSparseParcelableArrayArgOrThrow<TestParcelable>("sparseParcelableArrayRequired")
         private val sparseParcelableArrayOptional by bindSparseParcelableArrayArgOrNull<TestParcelable>("sparseParcelableArrayOptional")
         private val sparseParcelableArrayOrDefault by bindSparseParcelableArrayArgOr<TestParcelable>("sparseParcelableArrayOrDefault", SparseArray())
         private val sparseParcelableArrayOrDefaultErrKey by bindSparseParcelableArrayArgOr("sparseParcelableArrayOrDefaultErrKey",
@@ -2228,62 +2228,62 @@ class ArgsBinderTest {
     class TestFragment : android.app.Fragment() {
 
         private val byteRequired by bindByteArgOr("byteRequired")
-        private val byteArrayRequired by bindByteArrayArg("byteArrayRequired")
+        private val byteArrayRequired by bindByteArrayArgOrThrow("byteArrayRequired")
         private val byteArrayOptional by bindByteArrayArgOrNull("byteArrayOptional")
 
         private val shortRequired by bindShortArgOr("shortRequired")
-        private val shortArrayRequired by bindShortArrayArg("shortArrayRequired")
+        private val shortArrayRequired by bindShortArrayArgOrThrow("shortArrayRequired")
         private val shortArrayOptional by bindShortArrayArgOrNull("shortArrayOptional")
 
         private val intRequired by bindIntArgOr("intRequired")
-        private val intArrayRequired by bindIntArrayArg("intArrayRequired")
+        private val intArrayRequired by bindIntArrayArgOrThrow("intArrayRequired")
         private val intArrayOptional by bindIntArrayArgOrNull("intArrayOptional")
-        private val intArrayListRequired by bindIntArrayListArg("intArrayListRequired")
+        private val intArrayListRequired by bindIntArrayListArgOrThrow("intArrayListRequired")
         private val intArrayListOptional by bindIntArrayListArgOrNull("intArrayListOptional")
 
         private val longRequired by bindLongArgOr("longRequired")
-        private val longArrayRequired by bindLongArrayArg("longArrayRequired")
+        private val longArrayRequired by bindLongArrayArgOrThrow("longArrayRequired")
         private val longArrayOptional by bindLongArrayArgOrNull("longArrayOptional")
 
         private val floatRequired by bindFloatArgOr("floatRequired")
-        private val floatArrayRequired by bindFloatArrayArg("floatArrayRequired")
+        private val floatArrayRequired by bindFloatArrayArgOrThrow("floatArrayRequired")
         private val floatArrayOptional by bindFloatArrayArgOrNull("floatArrayOptional")
 
         private val doubleRequired by bindDoubleArgOr("doubleRequired")
-        private val doubleArrayRequired by bindDoubleArrayArg("doubleArrayRequired")
+        private val doubleArrayRequired by bindDoubleArrayArgOrThrow("doubleArrayRequired")
         private val doubleArrayOptional by bindDoubleArrayArgOrNull("doubleArrayOptional")
 
         private val booleanRequired by bindBooleanArgOr("booleanRequired")
-        private val booleanArrayRequired by bindBooleanArrayArg("booleanArrayRequired")
+        private val booleanArrayRequired by bindBooleanArrayArgOrThrow("booleanArrayRequired")
         private val booleanArrayOptional by bindBooleanArrayArgOrNull("booleanArrayOptional")
 
         private val charRequired by bindCharArgOr("charRequired")
-        private val charArrayRequired by bindCharArrayArg("charArrayRequired")
+        private val charArrayRequired by bindCharArrayArgOrThrow("charArrayRequired")
         private val charArrayOptional by bindCharArrayArgOrNull("charArrayOptional")
 
-        private val charSequenceRequired by bindCharSequenceArg("charSequenceRequired")
+        private val charSequenceRequired by bindCharSequenceArgOrThrow("charSequenceRequired")
         private val charSequenceOptional by bindCharSequenceArgOrNull("charSequenceOptional")
-        private val charSequenceArrayRequired by bindCharSequenceArrayArg("charSequenceArrayRequired")
+        private val charSequenceArrayRequired by bindCharSequenceArrayArgOrThrow("charSequenceArrayRequired")
         private val charSequenceArrayOptional by bindCharSequenceArrayArgOrNull("charSequenceArrayOptional")
 
-        private val stringRequired by bindStringArg("stringRequired")
+        private val stringRequired by bindStringArgOrThrow("stringRequired")
         private val stringOptional by bindStringArgOrNull("stringOptional")
-        private val stringArrayRequired by bindStringArrayArg("stringArrayRequired")
+        private val stringArrayRequired by bindStringArrayArgOrThrow("stringArrayRequired")
         private val stringArrayOptional by bindStringArrayArgOrNull("stringArrayOptional")
-        private val stringArrayListRequired by bindStringArrayListArg("stringArrayListRequired")
+        private val stringArrayListRequired by bindStringArrayListArgOrThrow("stringArrayListRequired")
         private val stringArrayListOptional by bindStringArrayListArgOrNull("stringArrayListOptional")
 
-        private val parcelableRequired by bindParcelableArg<TestParcelable>("parcelableRequired")
+        private val parcelableRequired by bindParcelableArgOrThrow<TestParcelable>("parcelableRequired")
         private val parcelableOptional by bindParcelableArgOrNull<TestParcelable>("parcelableOptional")
-        private val parcelableArrayRequired by bindParcelableArrayArg<Parcelable>("parcelableArrayRequired")
+        private val parcelableArrayRequired by bindParcelableArrayArgOrThrow<Parcelable>("parcelableArrayRequired")
         private val parcelableArrayOptional by bindParcelableArrayArgOrNull<Parcelable>("parcelableArrayOptional")
-        private val parcelableArrayListRequired by bindParcelableArrayListArg<TestParcelable>("parcelableArrayListRequired")
+        private val parcelableArrayListRequired by bindParcelableArrayListArgOrThrow<TestParcelable>("parcelableArrayListRequired")
         private val parcelableArrayListOptional by bindParcelableArrayListArgOrNull<TestParcelable>("parcelableArrayListOptional")
 
-        private val serializableRequired by bindSerializableArg<TestSerializable>("serializableRequired")
+        private val serializableRequired by bindSerializableArgOrThrow<TestSerializable>("serializableRequired")
         private val serializableOptional by bindSerializableArgOrNull<TestSerializable>("serializableOptional")
 
-        private val bundleRequired by bindBundleArg("bundleRequired")
+        private val bundleRequired by bindBundleArgOrThrow("bundleRequired")
         private val bundleOptional by bindBundleArgOrNull("bundleOptional")
 
         private val byteArrayOrDefault by bindByteArrayArgOr("byteArrayOrDefault", byteArrayOf())
@@ -2308,7 +2308,7 @@ class ArgsBinderTest {
 
         private val charSequenceArrayOrDefault by bindCharSequenceArrayArgOr("charSequenceArrayOrDefault", arrayOf())
 
-        private val charSequenceArrayListRequired by bindCharSequenceArrayListArg("charSequenceArrayListRequired")
+        private val charSequenceArrayListRequired by bindCharSequenceArrayListArgOrThrow("charSequenceArrayListRequired")
         private val charSequenceArrayListOptional by bindCharSequenceArrayListArgOrNull("charSequenceArrayListOptional")
         private val charSequenceArrayListOrDefault by bindCharSequenceArrayListArgOr("charSequenceArrayListOrDefault", arrayListOf())
 
@@ -2328,7 +2328,7 @@ class ArgsBinderTest {
 
         private val bundleOrDefault by bindBundleArgOr("bundleOrDefault", Bundle())
 
-        private val sparseParcelableArrayRequired by bindSparseParcelableArrayArg<TestParcelable>("sparseParcelableArrayRequired")
+        private val sparseParcelableArrayRequired by bindSparseParcelableArrayArgOrThrow<TestParcelable>("sparseParcelableArrayRequired")
         private val sparseParcelableArrayOptional by bindSparseParcelableArrayArgOrNull<TestParcelable>("sparseParcelableArrayOptional")
         private val sparseParcelableArrayOrDefault by bindSparseParcelableArrayArgOr<TestParcelable>("sparseParcelableArrayOrDefault", SparseArray())
         private val sparseParcelableArrayOrDefaultErrKey by bindSparseParcelableArrayArgOr("sparseParcelableArrayOrDefaultErrKey",
@@ -2732,42 +2732,42 @@ class ArgsBinderTest {
 
     class TestUriActivity : androidx.fragment.app.FragmentActivity() {
 
-        private val byteUriRequired by bindByteUriArg("byteUriRequired")
+        private val byteUriRequired by bindByteUriArgOrThrow("byteUriRequired")
         private val byteUriOptional by bindByteUriArgOrNull("byteUriOptional")
         private val byteUriOrDefault by bindByteUriArgOr("byteUriOrDefault")
         private val byteUriOrDefaultErrKey by bindByteUriArgOr("byteUriOrDefaultErrKey")
 
-        private val shortUriRequired by bindShortUriArg("shortUriRequired")
+        private val shortUriRequired by bindShortUriArgOrThrow("shortUriRequired")
         private val shortUriOptional by bindShortUriArgOrNull("shortUriOptional")
         private val shortUriOrDefault by bindShortUriArgOr("shortUriOrDefault")
         private val shortUriOrDefaultErrKey by bindShortUriArgOr("shortUriOrDefaultErrKey")
 
-        private val intUriRequired by bindIntUriArg("intUriRequired")
+        private val intUriRequired by bindIntUriArgOrThrow("intUriRequired")
         private val intUriOptional by bindIntUriArgOrNull("intUriOptional")
         private val intUriOrDefault by bindIntUriArgOr("intUriOrDefault")
         private val intUriOrDefaultErrKey by bindIntUriArgOr("intUriOrDefaultErrKey")
 
-        private val longUriRequired by bindLongUriArg("longUriRequired")
+        private val longUriRequired by bindLongUriArgOrThrow("longUriRequired")
         private val longUriOptional by bindLongUriArgOrNull("longUriOptional")
         private val longUriOrDefault by bindLongUriArgOr("longUriOrDefault")
         private val longUriOrDefaultErrKey by bindLongUriArgOr("longUriOrDefaultErrKey")
 
-        private val floatUriRequired by bindFloatUriArg("floatUriRequired")
+        private val floatUriRequired by bindFloatUriArgOrThrow("floatUriRequired")
         private val floatUriOptional by bindFloatUriArgOrNull("floatUriOptional")
         private val floatUriOrDefault by bindFloatUriArgOr("floatUriOrDefault", 0f)
         private val floatUriOrDefaultErrKey by bindFloatUriArgOr("floatUriOrDefaultErrKey", -1f)
 
-        private val doubleUriRequired by bindDoubleUriArg("doubleUriRequired")
+        private val doubleUriRequired by bindDoubleUriArgOrThrow("doubleUriRequired")
         private val doubleUriOptional by bindDoubleUriArgOrNull("doubleUriOptional")
         private val doubleUriOrDefault by bindDoubleUriArgOr("doubleUriOrDefault", 1.toDouble())
         private val doubleUriOrDefaultErrKey by bindDoubleUriArgOr("doubleUriOrDefaultErrKey", (-1).toDouble())
 
-        private val booleanUriRequired by bindBooleanUriArg("booleanUriRequired")
+        private val booleanUriRequired by bindBooleanUriArgOrThrow("booleanUriRequired")
         private val booleanUriOptional by bindBooleanUriArgOrNull("booleanUriOptional")
         private val booleanUriOrDefault by bindBooleanUriArgOr("booleanUriOrDefault", true)
         private val booleanUriOrDefaultErrKey by bindBooleanUriArgOr("booleanUriOrDefaultErrKey", false)
 
-        private val stringUriRequired by bindStringUriArg("stringUriRequired")
+        private val stringUriRequired by bindStringUriArgOrThrow("stringUriRequired")
         private val stringUriOptional by bindStringUriArgOrNull("stringUriOptional")
         private val stringUriOrDefault by bindStringUriArgOr("stringUriOrDefault", "")
         private val stringUriOrDefaultErrKey by bindStringUriArgOr("stringUriOrDefaultErrKey", "stringUriOrDefaultErrKey")
@@ -2874,42 +2874,42 @@ class ArgsBinderTest {
 
     class ResTestUriActivity : androidx.fragment.app.FragmentActivity() {
 
-        private val byteUriRequired by bindByteUriArg(R.string.byte_uri_required)
+        private val byteUriRequired by bindByteUriArgOrThrow(R.string.byte_uri_required)
         private val byteUriOptional by bindByteUriArgOrNull(R.string.byte_uri_optional)
         private val byteUriOrDefault by bindByteUriArgOr(R.string.byte_uri_or_default)
         private val byteUriOrDefaultErrKey by bindByteUriArgOr(R.string.not_exist_key)
 
-        private val shortUriRequired by bindShortUriArg(R.string.short_uri_required)
+        private val shortUriRequired by bindShortUriArgOrThrow(R.string.short_uri_required)
         private val shortUriOptional by bindShortUriArgOrNull(R.string.short_uri_optional)
         private val shortUriOrDefault by bindShortUriArgOr(R.string.short_uri_or_default)
         private val shortUriOrDefaultErrKey by bindShortUriArgOr(R.string.not_exist_key)
 
-        private val intUriRequired by bindIntUriArg(R.string.int_uri_required)
+        private val intUriRequired by bindIntUriArgOrThrow(R.string.int_uri_required)
         private val intUriOptional by bindIntUriArgOrNull(R.string.int_uri_optional)
         private val intUriOrDefault by bindIntUriArgOr(R.string.int_uri_or_default)
         private val intUriOrDefaultErrKey by bindIntUriArgOr(R.string.not_exist_key)
 
-        private val longUriRequired by bindLongUriArg(R.string.long_uri_required)
+        private val longUriRequired by bindLongUriArgOrThrow(R.string.long_uri_required)
         private val longUriOptional by bindLongUriArgOrNull(R.string.long_uri_optional)
         private val longUriOrDefault by bindLongUriArgOr(R.string.long_uri_or_default)
         private val longUriOrDefaultErrKey by bindLongUriArgOr(R.string.not_exist_key)
 
-        private val floatUriRequired by bindFloatUriArg(R.string.float_uri_required)
+        private val floatUriRequired by bindFloatUriArgOrThrow(R.string.float_uri_required)
         private val floatUriOptional by bindFloatUriArgOrNull(R.string.float_uri_optional)
         private val floatUriOrDefault by bindFloatUriArgOr(R.string.float_uri_or_default, 0f)
         private val floatUriOrDefaultErrKey by bindFloatUriArgOr(R.string.not_exist_key, -1f)
 
-        private val doubleUriRequired by bindDoubleUriArg(R.string.double_uri_required)
+        private val doubleUriRequired by bindDoubleUriArgOrThrow(R.string.double_uri_required)
         private val doubleUriOptional by bindDoubleUriArgOrNull(R.string.double_uri_optional)
         private val doubleUriOrDefault by bindDoubleUriArgOr(R.string.double_uri_or_default, 1.toDouble())
         private val doubleUriOrDefaultErrKey by bindDoubleUriArgOr(R.string.not_exist_key, (-1).toDouble())
 
-        private val booleanUriRequired by bindBooleanUriArg(R.string.boolean_uri_required)
+        private val booleanUriRequired by bindBooleanUriArgOrThrow(R.string.boolean_uri_required)
         private val booleanUriOptional by bindBooleanUriArgOrNull(R.string.boolean_uri_optional)
         private val booleanUriOrDefault by bindBooleanUriArgOr(R.string.boolean_uri_or_default, true)
         private val booleanUriOrDefaultErrKey by bindBooleanUriArgOr(R.string.not_exist_key, false)
 
-        private val stringUriRequired by bindStringUriArg(R.string.string_uri_required)
+        private val stringUriRequired by bindStringUriArgOrThrow(R.string.string_uri_required)
         private val stringUriOptional by bindStringUriArgOrNull(R.string.string_uri_optional)
         private val stringUriOrDefault by bindStringUriArgOr(R.string.string_uri_or_default, "")
         private val stringUriOrDefaultErrKey by bindStringUriArgOr(R.string.not_exist_key, "stringUriOrDefaultErrKey")
@@ -3024,7 +3024,7 @@ class ArgsBinderTest {
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr("doubleIntentUriOrDefault", 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr("booleanIntentUriOrDefault", false)
 
-        private val stringIntentUriRequired by bindStringIntentUriArg("stringIntentUriRequired")
+        private val stringIntentUriRequired by bindStringIntentUriArgOrThrow("stringIntentUriRequired")
         private val stringIntentUriOptional by bindStringIntentUriArgOrNull("stringIntentUriOptional")
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr("stringIntentUriOrDefault", "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr("stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey")
@@ -3039,7 +3039,7 @@ class ArgsBinderTest {
         private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr("doubleUriIntentOrDefault", 0.toDouble())
         private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr("booleanUriIntentOrDefault", false)
 
-        private val stringUriIntentRequired by bindStringUriIntentArg("stringUriIntentRequired")
+        private val stringUriIntentRequired by bindStringUriIntentArgOrThrow("stringUriIntentRequired")
         private val stringUriIntentOptional by bindStringUriIntentArgOrNull("stringUriIntentOptional")
         private val stringUriIntentOrDefault by bindStringIntentUriArgOr("stringUriIntentOrDefault", "default")
         private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr("stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey")
@@ -3122,7 +3122,7 @@ class ArgsBinderTest {
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr("doubleIntentUriOrDefault", 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr("booleanIntentUriOrDefault", false)
 
-        private val stringIntentUriRequired by bindStringIntentUriArg("stringIntentUriRequired")
+        private val stringIntentUriRequired by bindStringIntentUriArgOrThrow("stringIntentUriRequired")
         private val stringIntentUriOptional by bindStringIntentUriArgOrNull("stringIntentUriOptional")
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr("stringIntentUriOrDefault", "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr("stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey")
@@ -3136,7 +3136,7 @@ class ArgsBinderTest {
         private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr("doubleUriIntentOrDefault", 0.toDouble())
         private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr("booleanUriIntentOrDefault", false)
 
-        private val stringUriIntentRequired by bindStringUriIntentArg("stringUriIntentRequired")
+        private val stringUriIntentRequired by bindStringUriIntentArgOrThrow("stringUriIntentRequired")
         private val stringUriIntentOptional by bindStringUriIntentArgOrNull("stringUriIntentOptional")
         private val stringUriIntentOrDefault by bindStringIntentUriArgOr("stringUriIntentOrDefault", "default")
         private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr("stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey")
@@ -3221,7 +3221,7 @@ class ArgsBinderTest {
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr("doubleIntentUriOrDefault", 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr("booleanIntentUriOrDefault", false)
 
-        private val stringIntentUriRequired by bindStringIntentUriArg("stringIntentUriRequired")
+        private val stringIntentUriRequired by bindStringIntentUriArgOrThrow("stringIntentUriRequired")
         private val stringIntentUriOptional by bindStringIntentUriArgOrNull("stringIntentUriOptional")
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr("stringIntentUriOrDefault", "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr("stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey")
@@ -3235,7 +3235,7 @@ class ArgsBinderTest {
         private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr("doubleUriIntentOrDefault", 0.toDouble())
         private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr("booleanUriIntentOrDefault", false)
 
-        private val stringUriIntentRequired by bindStringUriIntentArg("stringUriIntentRequired")
+        private val stringUriIntentRequired by bindStringUriIntentArgOrThrow("stringUriIntentRequired")
         private val stringUriIntentOptional by bindStringUriIntentArgOrNull("stringUriIntentOptional")
         private val stringUriIntentOrDefault by bindStringIntentUriArgOr("stringUriIntentOrDefault", "default")
         private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr("stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey")
@@ -3349,7 +3349,7 @@ class ArgsBinderTest {
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr("doubleIntentUriOrDefault", 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr("booleanIntentUriOrDefault", false)
 
-        //private val stringIntentUriRequired by bindStringIntentUriArg("stringIntentUriRequired")
+        //private val stringIntentUriRequired by bindStringIntentUriArgOrThrow("stringIntentUriRequired")
         private val stringIntentUriOptional by bindStringIntentUriArgOrNull("stringIntentUriOptional")
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr("stringIntentUriOrDefault", "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr("stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey")
@@ -3363,7 +3363,7 @@ class ArgsBinderTest {
         private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr("doubleUriIntentOrDefault", 0.toDouble())
         private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr("booleanUriIntentOrDefault", false)
 
-        //        private val stringUriIntentRequired by bindStringUriIntentArg("stringUriIntentRequired")
+        //        private val stringUriIntentRequired by bindStringUriIntentArgOrThrow("stringUriIntentRequired")
         private val stringUriIntentOptional by bindStringUriIntentArgOrNull("stringUriIntentOptional")
         private val stringUriIntentOrDefault by bindStringIntentUriArgOr("stringUriIntentOrDefault", "default")
         private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr("stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey")
@@ -3416,7 +3416,7 @@ class ArgsBinderTest {
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr(R.string.double_intent_uri_or_default, 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr(R.string.boolean_intent_uri_or_default, false)
 
-        private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
+        private val stringIntentUriRequired by bindStringIntentUriArgOrThrow(R.string.string_intent_uri_required)
         private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
@@ -3430,7 +3430,7 @@ class ArgsBinderTest {
         private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr(R.string.double_uri_intent_or_default, 0.toDouble())
         private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr(R.string.boolean_uri_intent_or_default, false)
 
-        private val stringUriIntentRequired by bindStringUriIntentArg(R.string.string_uri_intent_required)
+        private val stringUriIntentRequired by bindStringUriIntentArgOrThrow(R.string.string_uri_intent_required)
         private val stringUriIntentOptional by bindStringUriIntentArgOrNull(R.string.string_uri_intent_optional)
         private val stringUriIntentOrDefault by bindStringUriIntentArgOr(R.string.string_uri_intent_or_default, "default")
         private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr(R.string.not_exist_key, "stringUriIntentOrDefaultErrKey")
@@ -3515,7 +3515,7 @@ class ArgsBinderTest {
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr(R.string.double_intent_uri_or_default, 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr(R.string.boolean_intent_uri_or_default, false)
 
-        private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
+        private val stringIntentUriRequired by bindStringIntentUriArgOrThrow(R.string.string_intent_uri_required)
         private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
@@ -3529,7 +3529,7 @@ class ArgsBinderTest {
         private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr(R.string.double_uri_intent_or_default, 0.toDouble())
         private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr(R.string.boolean_uri_intent_or_default, false)
 
-        private val stringUriIntentRequired by bindStringUriIntentArg(R.string.string_uri_intent_required)
+        private val stringUriIntentRequired by bindStringUriIntentArgOrThrow(R.string.string_uri_intent_required)
         private val stringUriIntentOptional by bindStringUriIntentArgOrNull(R.string.string_uri_intent_optional)
         private val stringUriIntentOrDefault by bindStringUriIntentArgOr(R.string.string_uri_intent_or_default, "default")
         private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr(R.string.not_exist_key, "stringUriIntentOrDefaultErrKey")
@@ -3613,7 +3613,7 @@ class ArgsBinderTest {
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr(R.string.double_intent_uri_or_default, 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr(R.string.boolean_intent_uri_or_default, false)
 
-        private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
+        private val stringIntentUriRequired by bindStringIntentUriArgOrThrow(R.string.string_intent_uri_required)
         private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
@@ -3627,7 +3627,7 @@ class ArgsBinderTest {
         private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr(R.string.double_uri_intent_or_default, 0.toDouble())
         private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr(R.string.boolean_uri_intent_or_default, false)
 
-        private val stringUriIntentRequired by bindStringUriIntentArg(R.string.string_uri_intent_required)
+        private val stringUriIntentRequired by bindStringUriIntentArgOrThrow(R.string.string_uri_intent_required)
         private val stringUriIntentOptional by bindStringUriIntentArgOrNull(R.string.string_uri_intent_optional)
         private val stringUriIntentOrDefault by bindStringUriIntentArgOr(R.string.string_uri_intent_or_default, "default")
         private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr(R.string.not_exist_key, "stringUriIntentOrDefaultErrKey")
@@ -3738,7 +3738,7 @@ class ArgsBinderTest {
         private val doubleIntentUriOrDefault by bindDoubleIntentUriArgOr(R.string.double_intent_uri_or_default, 0.toDouble())
         private val booleanIntentUriOrDefault by bindBooleanIntentUriArgOr(R.string.boolean_intent_uri_or_default, false)
 
-        //                private val stringIntentUriRequired by bindStringIntentUriArg(R.string.string_intent_uri_required)
+        //                private val stringIntentUriRequired by bindStringIntentUriArgOrThrow(R.string.string_intent_uri_required)
         private val stringIntentUriOptional by bindStringIntentUriArgOrNull(R.string.string_intent_uri_optional)
         private val stringIntentUriOrDefault by bindStringIntentUriArgOr(R.string.string_intent_uri_or_default, "default")
         private val stringIntentUriOrDefaultErrKey by bindStringIntentUriArgOr(R.string.not_exist_key, "stringIntentUriOrDefaultErrKey")
@@ -3752,7 +3752,7 @@ class ArgsBinderTest {
         private val doubleUriIntentOrDefault by bindDoubleUriIntentArgOr(R.string.double_uri_intent_or_default, 0.toDouble())
         private val booleanUriIntentOrDefault by bindBooleanUriIntentArgOr(R.string.boolean_uri_intent_or_default, false)
 
-        //        private val stringUriIntentRequired by bindStringIntentUriArg(R.string.string_uri_intent_required)
+        //        private val stringUriIntentRequired by bindStringIntentUriArgOrThrow(R.string.string_uri_intent_required)
         private val stringUriIntentOptional by bindStringUriIntentArgOrNull(R.string.string_uri_intent_optional)
         private val stringUriIntentOrDefault by bindStringUriIntentArgOr(R.string.string_uri_intent_or_default, "default")
         private val stringUriIntentOrDefaultErrKey by bindStringUriIntentArgOr(R.string.not_exist_key, "stringUriIntentOrDefaultErrKey")
@@ -3887,7 +3887,7 @@ class ArgsBinderTest18 {
     }
 
     class TestFragment18 : android.app.Fragment() {
-        private val binderRequired by bindBinderArg("binderRequired")
+        private val binderRequired by bindBinderArgOrThrow("binderRequired")
         private val binderOptional by bindBinderArgOrNull("binderOptional")
         private val binderOrDefault by bindBinderArgOr("binderOrDefault", TestBinder())
         private val binderOrDefaultErrKey by bindBinderArgOr("binderOrDefaultErrKey", TestBinder("error"))
@@ -3911,7 +3911,7 @@ class ArgsBinderTest18 {
     }
 
     class TestSupportFragment18 : androidx.fragment.app.Fragment() {
-        private val binderRequired by bindBinderArg("binderRequired")
+        private val binderRequired by bindBinderArgOrThrow("binderRequired")
         private val binderOptional by bindBinderArgOrNull("binderOptional")
         private val binderOrDefault by bindBinderArgOr("binderOrDefault", TestBinder())
         private val binderOrDefaultErrKey by bindBinderArgOr("binderOrDefaultErrKey", TestBinder("error"))
@@ -3936,7 +3936,7 @@ class ArgsBinderTest18 {
 
     class ResTestFragment18 : android.app.Fragment() {
 
-        private val binderRequired by bindBinderArg(R.string.binder_required)
+        private val binderRequired by bindBinderArgOrThrow(R.string.binder_required)
         private val binderOptional by bindBinderArgOrNull(R.string.binder_optional)
         private val binderOrDefault by bindBinderArgOr(R.string.binder_or_default, TestBinder())
         private val binderOrDefaultErrKey by bindBinderArgOr(R.string.not_exist_key, TestBinder("error"))
@@ -3963,7 +3963,7 @@ class ArgsBinderTest18 {
 
     class ResTestSupportFragment18 : androidx.fragment.app.Fragment() {
 
-        private val binderRequired by bindBinderArg(R.string.binder_required)
+        private val binderRequired by bindBinderArgOrThrow(R.string.binder_required)
         private val binderOptional by bindBinderArgOrNull(R.string.binder_optional)
         private val binderOrDefault by bindBinderArgOr(R.string.binder_or_default, TestBinder())
         private val binderOrDefaultErrKey by bindBinderArgOr(R.string.not_exist_key, TestBinder("error"))
@@ -4076,12 +4076,12 @@ class ArgsBinderTest21 {
     }
 
     class TestFragment21 : android.app.Fragment() {
-        private val sizeRequired by bindSizeArg("sizeRequired")
+        private val sizeRequired by bindSizeArgOrThrow("sizeRequired")
         private val sizeOptional by bindSizeArgOrNull("sizeOptional")
         private val sizeOrDefault by bindSizeArgOr("sizeOrDefault", Size(0, 0))
         private val sizeOrDefaultErrKey by bindSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
 
-        private val sizeFRequired by bindSizeFArg("sizeFRequired")
+        private val sizeFRequired by bindSizeFArgOrThrow("sizeFRequired")
         private val sizeFOptional by bindSizeFArgOrNull("sizeFOptional")
         private val sizeFOrDefault by bindSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
         private val sizeFOrDefaultErrKey by bindSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
@@ -4117,12 +4117,12 @@ class ArgsBinderTest21 {
 
     class TestSupportFragment21 : androidx.fragment.app.Fragment() {
 
-        private val sizeRequired by bindSizeArg("sizeRequired")
+        private val sizeRequired by bindSizeArgOrThrow("sizeRequired")
         private val sizeOptional by bindSizeArgOrNull("sizeOptional")
         private val sizeOrDefault by bindSizeArgOr("sizeOrDefault", Size(0, 0))
         private val sizeOrDefaultErrKey by bindSizeArgOr("sizeOrDefaultErrKey", Size(4, 4))
 
-        private val sizeFRequired by bindSizeFArg("sizeFRequired")
+        private val sizeFRequired by bindSizeFArgOrThrow("sizeFRequired")
         private val sizeFOptional by bindSizeFArgOrNull("sizeFOptional")
         private val sizeFOrDefault by bindSizeFArgOr("sizeFOrDefault", SizeF(0f, 0f))
         private val sizeFOrDefaultErrKey by bindSizeFArgOr("sizeFOrDefaultErrKey", SizeF(4f, 4f))
@@ -4158,12 +4158,12 @@ class ArgsBinderTest21 {
 
     class ResTestFragment21 : android.app.Fragment() {
 
-        private val sizeRequired by bindSizeArg(R.string.size_required)
+        private val sizeRequired by bindSizeArgOrThrow(R.string.size_required)
         private val sizeOptional by bindSizeArgOrNull(R.string.size_optional)
         private val sizeOrDefault by bindSizeArgOr(R.string.size_or_default, Size(0, 0))
         private val sizeOrDefaultErrKey by bindSizeArgOr(R.string.not_exist_key, Size(4, 4))
 
-        private val sizeFRequired by bindSizeFArg(R.string.sizeF_required)
+        private val sizeFRequired by bindSizeFArgOrThrow(R.string.sizeF_required)
         private val sizeFOptional by bindSizeFArgOrNull(R.string.sizeF_optional)
         private val sizeFOrDefault by bindSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
         private val sizeFOrDefaultErrKey by bindSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))
@@ -4200,12 +4200,12 @@ class ArgsBinderTest21 {
 
     class ResTestSupportFragment21 : androidx.fragment.app.Fragment() {
 
-        private val sizeRequired by bindSizeArg(R.string.size_required)
+        private val sizeRequired by bindSizeArgOrThrow(R.string.size_required)
         private val sizeOptional by bindSizeArgOrNull(R.string.size_optional)
         private val sizeOrDefault by bindSizeArgOr(R.string.size_or_default, Size(0, 0))
         private val sizeOrDefaultErrKey by bindSizeArgOr(R.string.not_exist_key, Size(4, 4))
 
-        private val sizeFRequired by bindSizeFArg(R.string.sizeF_required)
+        private val sizeFRequired by bindSizeFArgOrThrow(R.string.sizeF_required)
         private val sizeFOptional by bindSizeFArgOrNull(R.string.sizeF_optional)
         private val sizeFOrDefault by bindSizeFArgOr(R.string.sizeF_or_default, SizeF(0f, 0f))
         private val sizeFOrDefaultErrKey by bindSizeFArgOr(R.string.not_exist_key, SizeF(4f, 4f))

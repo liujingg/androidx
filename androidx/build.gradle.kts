@@ -50,6 +50,7 @@ Properties().apply { project.file("local.properties").takeIf { it.exists() }?.in
     apply { plugin("com.novoda.bintray-release") }
 
     configure<PublishExtension> {
+        // todo 改为 com.github.panpf
         groupId = "me.panpf"
         artifactId = "androidx"
         publishVersion = property("VERSION_NAME").toString()

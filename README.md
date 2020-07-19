@@ -52,8 +52,10 @@ Dependencies:
     * isDestroyedCompat, convertToTranslucentCompat, convertFromTranslucentCompat, getImplFromParent
     * appContext, canStart, start, startByClass, safeStart, safeStartByClass
 * Args: [Argsx.java] ([Test][ArgsxTest.java]) | [Argsx.kt] ([Test][ArgsxTest.kt])
-    * read\*Arg, read\*ArgOr, read\*UriArg, read\*UriArgOr, read\*IntentUriArg, read\*IntentUriArgOr,
-    * read\*UriIntentArg, read\*UriIntentArgOr
+    * read\*ArgOrThrow, read\*ArgOr, read\*ArgOrNull, 
+    * read\*UriArgOrThrow, read\*UriArgOr, read\*UriArgOrNull, 
+    * read\*IntentUriArgOrThrow, read\*IntentUriArgOr,read\*IntentUriArgOrNull,
+    * read\*UriIntentArgOrThrow, read\*UriIntentArgOr, read\*UriIntentArgOrNull
 * ArgsBinder: [ArgsBinder.kt] ([Test][ArgsBinderTest.kt])
     * bind\*Arg, bind\*ArgOr, bind\*UriArg, bind\*UriArgOr, bind\*IntentUriArg, bind\*IntentUriArgOr,
     * bind\*UriIntentArg, bind\*UriIntentArgOr

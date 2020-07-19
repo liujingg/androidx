@@ -8,6 +8,7 @@
 * change: LifecycleBroadcastReceiver can now register multiple times
 * improve: Improved Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods
 * change: Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods 现在不会抛出 NumberFormatException
+* change: The name of the method that throws exceptions in Argsx is unified with the suffix'OrThrow'
 
 ## v1.0.0-alpha09
 * remove: Remove dependency on javax

@@ -1,3 +1,4 @@
 <manifest package="me.panpf.androidx">
+    <!-- todo 改为 com.github.panpf.androidx -->
     <application />
 </manifest>

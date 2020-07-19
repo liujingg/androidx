@@ -150,11 +150,11 @@ public class FragmentxTest {
     public void testInstantiate() {
         android.app.Fragment originFragment = Fragmentx.instantiateOrigin(android.app.Fragment.class, new BundleBuilder().putString("key", "testInstantiate").build());
         Assert.assertEquals(android.app.Fragment.class.getName(), originFragment.getClass().getName());
-        Assert.assertEquals("testInstantiate", Argsx.readStringArg(originFragment, "key"));
+        Assert.assertEquals("testInstantiate", Argsx.readStringArgOrThrow(originFragment, "key"));
 
         Fragment supportFragment = Fragmentx.instantiate(Fragment.class, new BundleBuilder().putString("key", "testInstantiate").build());
         Assert.assertEquals(Fragment.class.getName(), supportFragment.getClass().getName());
-        Assert.assertEquals("testInstantiate", Argsx.readStringArg(supportFragment, "key"));
+        Assert.assertEquals("testInstantiate", Argsx.readStringArgOrThrow(supportFragment, "key"));
 
         android.app.Fragment originFragment2 = Fragmentx.instantiateOrigin(android.app.Fragment.class);
         Assert.assertEquals(android.app.Fragment.class.getName(), originFragment2.getClass().getName());
@@ -351,7 +351,7 @@ public class FragmentxTest {
         public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
             super.onViewCreated(view, savedInstanceState);
 
-            ((TextView) view).setText("position: " + Argsx.readStringArg(this, "position"));
+            ((TextView) view).setText("position: " + Argsx.readStringArgOrThrow(this, "position"));
         }
     }
 }

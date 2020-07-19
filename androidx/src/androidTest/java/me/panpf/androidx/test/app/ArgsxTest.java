@@ -160,7 +160,7 @@ public class ArgsxTest {
 
         byte byteRequired = Argsx.readByteArgOr(activity, "byteRequired", (byte) 0);
         byte byteRequiredErrKey = Argsx.readByteArgOr(activity, "byteRequiredErrKey", (byte) 0);
-        byte[] byteArrayRequired = Argsx.readByteArrayArg(activity, "byteArrayRequired");
+        byte[] byteArrayRequired = Argsx.readByteArrayArgOrThrow(activity, "byteArrayRequired");
         byte[] byteArrayOptional = Argsx.readByteArrayArgOrNull(activity, "byteArrayOptional");
         byte[] byteArrayOptionalErrKey = Argsx.readByteArrayArgOrNull(activity, "byteArrayOptionalErrKey");
         byte[] byteArrayOrDefault = Argsx.readByteArrayArgOr(activity, "byteArrayOrDefault", byteArrayOf((byte) 0, (byte) 0));
@@ -168,7 +168,7 @@ public class ArgsxTest {
 
         short shortRequired = Argsx.readShortArgOr(activity, "shortRequired", (short) 0);
         short shortRequiredErrKey = Argsx.readShortArgOr(activity, "shortRequiredErrKey", (short) 0);
-        short[] shortArrayRequired = Argsx.readShortArrayArg(activity, "shortArrayRequired");
+        short[] shortArrayRequired = Argsx.readShortArrayArgOrThrow(activity, "shortArrayRequired");
         short[] shortArrayOptional = Argsx.readShortArrayArgOrNull(activity, "shortArrayOptional");
         short[] shortArrayOptionalErrKey = Argsx.readShortArrayArgOrNull(activity, "shortArrayOptionalErrKey");
         short[] shortArrayOrDefault = Argsx.readShortArrayArgOr(activity, "shortArrayOrDefault", shortArrayOf((short) 0, (short) 0));
@@ -177,12 +177,12 @@ public class ArgsxTest {
 
         int intRequired = Argsx.readIntArgOr(activity, "intRequired", 0);
         int intRequiredErrKey = Argsx.readIntArgOr(activity, "intRequiredErrKey", 0);
-        int[] intArrayRequired = Argsx.readIntArrayArg(activity, "intArrayRequired");
+        int[] intArrayRequired = Argsx.readIntArrayArgOrThrow(activity, "intArrayRequired");
         int[] intArrayOptional = Argsx.readIntArrayArgOrNull(activity, "intArrayOptional");
         int[] intArrayOptionalErrKey = Argsx.readIntArrayArgOrNull(activity, "intArrayOptionalErrKey");
         int[] intArrayOrDefault = Argsx.readIntArrayArgOr(activity, "intArrayOrDefault", intArrayOf(0, 0));
         int[] intArrayOrDefaultErrKey = Argsx.readIntArrayArgOr(activity, "intArrayOrDefaultErrKey", intArrayOf(0, (-1)));
-        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArg(activity, "intArrayListRequired");
+        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArgOrThrow(activity, "intArrayListRequired");
         ArrayList<Integer> intArrayListOrDefault = Argsx.readIntArrayListArgOr(activity, "intArrayListOrDefault", arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOrDefaultErrKey = Argsx.readIntArrayListArgOr(activity, "intArrayListOrDefaultErrKey", arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOptional = Argsx.readIntArrayListArgOrNull(activity, "intArrayListOptional");
@@ -190,7 +190,7 @@ public class ArgsxTest {
 
         long longRequired = Argsx.readLongArgOr(activity, "longRequired", 0);
         long longRequiredErrKey = Argsx.readLongArgOr(activity, "longRequiredErrKey", 0);
-        long[] longArrayRequired = Argsx.readLongArrayArg(activity, "longArrayRequired");
+        long[] longArrayRequired = Argsx.readLongArrayArgOrThrow(activity, "longArrayRequired");
         long[] longArrayOptional = Argsx.readLongArrayArgOrNull(activity, "longArrayOptional");
         long[] longArrayOptionalErrKey = Argsx.readLongArrayArgOrNull(activity, "longArrayOptionalErrKey");
         long[] longArrayOrDefault = Argsx.readLongArrayArgOr(activity, "longArrayOrDefault", longArrayOf(0, 0));
@@ -198,7 +198,7 @@ public class ArgsxTest {
 
         float floatRequired = Argsx.readFloatArgOr(activity, "floatRequired", 0f);
         float floatRequiredErrKey = Argsx.readFloatArgOr(activity, "floatRequiredErrKey", 0f);
-        float[] floatArrayRequired = Argsx.readFloatArrayArg(activity, "floatArrayRequired");
+        float[] floatArrayRequired = Argsx.readFloatArrayArgOrThrow(activity, "floatArrayRequired");
         float[] floatArrayOptional = Argsx.readFloatArrayArgOrNull(activity, "floatArrayOptional");
         float[] floatArrayOptionalErrKey = Argsx.readFloatArrayArgOrNull(activity, "DoubleArrayOptionalErrKey");
         float[] floatArrayOrDefault = Argsx.readFloatArrayArgOr(activity, "floatArrayOrDefault", floatArrayOf(0f, 0f));
@@ -206,7 +206,7 @@ public class ArgsxTest {
 
         double doubleRequired = Argsx.readDoubleArgOr(activity, "doubleRequired", 0d);
         double doubleRequiredErrKey = Argsx.readDoubleArgOr(activity, "doubleRequiredErrKey", 0d);
-        double[] doubleArrayRequired = Argsx.readDoubleArrayArg(activity, "doubleArrayRequired");
+        double[] doubleArrayRequired = Argsx.readDoubleArrayArgOrThrow(activity, "doubleArrayRequired");
         double[] doubleArrayOptional = Argsx.readDoubleArrayArgOrNull(activity, "doubleArrayOptional");
         double[] doubleArrayOptionalErrKey = Argsx.readDoubleArrayArgOrNull(activity, "doubleArrayOptionalErrKey");
         double[] doubleArrayOrDefault = Argsx.readDoubleArrayArgOr(activity, "doubleArrayOrDefault", doubleArrayOf(0d, 0d));
@@ -214,7 +214,7 @@ public class ArgsxTest {
 
         boolean booleanRequired = Argsx.readBooleanArgOr(activity, "booleanRequired", false);
         boolean booleanRequiredErrKey = Argsx.readBooleanArgOr(activity, "booleanRequiredErrKey", false);
-        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArg(activity, "booleanArrayRequired");
+        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArgOrThrow(activity, "booleanArrayRequired");
         boolean[] booleanArrayOptional = Argsx.readBooleanArrayArgOrNull(activity, "booleanArrayOptional");
         boolean[] booleanArrayOptionalErrKey = Argsx.readBooleanArrayArgOrNull(activity, "booleanArrayOptionalErrKey");
         boolean[] booleanArrayOrDefault = Argsx.readBooleanArrayArgOr(activity, "booleanArrayOrDefault", booleanArrayOf(true, false));
@@ -222,7 +222,7 @@ public class ArgsxTest {
 
         char charRequired = Argsx.readCharArgOr(activity, "charRequired", 'a');
         char charRequiredErrKey = Argsx.readCharArgOr(activity, "charRequiredErrKey", 'b');
-        char[] charArrayRequired = Argsx.readCharArrayArg(activity, "charArrayRequired");
+        char[] charArrayRequired = Argsx.readCharArrayArgOrThrow(activity, "charArrayRequired");
         char[] charArrayOptional = Argsx.readCharArrayArgOrNull(activity, "charArrayOptional");
         char[] charArrayOptionalErrKey = Argsx.readCharArrayArgOrNull(activity, "charArrayOptionalErrKey");
         char[] charArrayOrDefault = Argsx.readCharArrayArgOr(activity, "charArrayOrDefault", charArrayOf('a', 'b'));
@@ -230,12 +230,12 @@ public class ArgsxTest {
 
         String stringRequired = Argsx.readStringArgOr(activity, "stringRequired", "stringRequired");
         String stringRequiredErrKey = Argsx.readStringArgOr(activity, "stringRequiredErrKey", "stringRequiredErrKey");
-        String[] stringArrayRequired = Argsx.readStringArrayArg(activity, "stringArrayRequired");
+        String[] stringArrayRequired = Argsx.readStringArrayArgOrThrow(activity, "stringArrayRequired");
         String[] stringArrayOptional = Argsx.readStringArrayArgOrNull(activity, "stringArrayOptional");
         String[] stringArrayOptionalErrKey = Argsx.readStringArrayArgOrNull(activity, "stringArrayOptionalErrKey");
         String[] stringArrayOrDefault = Argsx.readStringArrayArgOr(activity, "stringArrayOrDefault", arrayOf("array", "dft"));
         String[] stringArrayOrDefaultErrKey = Argsx.readStringArrayArgOr(activity, "stringArrayOrDefaultErrKey", arrayOf("error", "erk"));
-        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArg(activity, "stringArrayListRequired");
+        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArgOrThrow(activity, "stringArrayListRequired");
         ArrayList<String> stringArrayListOrDefault = Argsx.readStringArrayListArgOr(activity, "stringArrayListOrDefault", arrayListOf("list", "default"));
         ArrayList<String> stringArrayListOrDefaultErrKey = Argsx.readStringArrayListArgOr(activity, "stringArrayListOrDefaultErrKey", arrayListOf("stringArrayListOrDefaultErrKey", "errKey"));
         ArrayList<String> stringArrayListOptional = Argsx.readStringArrayListArgOrNull(activity, "stringArrayListOptional");
@@ -243,12 +243,12 @@ public class ArgsxTest {
 
         CharSequence charSequenceRequired = Argsx.readCharSequenceArgOr(activity, "charSequenceRequired", "charSequenceRequired");
         CharSequence charSequenceRequiredErrKey = Argsx.readCharSequenceArgOr(activity, "charSequenceRequiredErrKey", "charSequenceRequiredErrKey");
-        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArg(activity, "charSequenceArrayRequired");
+        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArgOrThrow(activity, "charSequenceArrayRequired");
         CharSequence[] charSequenceArrayOptional = Argsx.readCharSequenceArrayArgOrNull(activity, "charSequenceArrayOptional");
         CharSequence[] charSequenceArrayOptionalErrKey = Argsx.readCharSequenceArrayArgOrNull(activity, "charSequenceArrayOptionalErrKey");
         CharSequence[] charSequenceArrayOrDefault = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefault", arrayOf("array", "dft"));
         CharSequence[] charSequenceArrayOrDefaultErrKey = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefaultErrKey", arrayOf("error", "erk"));
-        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArg(activity, "charSequenceArrayListRequired");
+        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArgOrThrow(activity, "charSequenceArrayListRequired");
         ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefault", Collectionx.<CharSequence>arrayListOf("list", "default"));
         ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefaultErrKey", Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
         ArrayList<CharSequence> charSequenceArrayListOptional = Argsx.readCharSequenceArrayListArgOrNull(activity, "charSequenceArrayListOptional");
@@ -257,24 +257,24 @@ public class ArgsxTest {
 
         Parcelable parcelableRequired = Argsx.readParcelableArgOr(activity, "parcelableRequired", new TestParcelable("required"));
         Parcelable parcelableRequiredErrKey = Argsx.readParcelableArgOr(activity, "parcelableRequiredErrKey", new TestParcelable("parcelableRequiredErrKey"));
-        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArg(activity, "parcelableArrayRequired");
+        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArgOrThrow(activity, "parcelableArrayRequired");
         Parcelable[] parcelableArrayOptional = Argsx.readParcelableArrayArgOrNull(activity, "parcelableArrayOptional");
         Parcelable[] parcelableArrayOptionalErrKey = Argsx.readParcelableArrayArgOrNull(activity, "parcelableArrayOptionalErrKey");
         Parcelable[] parcelableArrayOrDefault = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefault", arrayOf(new TestParcelable("array"), new TestParcelable("dft")));
         Parcelable[] parcelableArrayOrDefaultErrKey = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefaultErrKey", arrayOf(new TestParcelable("error"), new TestParcelable("erk")));
-        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArg(activity, "parcelableArrayListRequired");
+        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArgOrThrow(activity, "parcelableArrayListRequired");
         ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefault", Collectionx.<Parcelable>arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
         ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefaultErrKey", Collectionx.<Parcelable>arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
         ArrayList<Parcelable> parcelableArrayListOptional = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptional");
         ArrayList<Parcelable> parcelableArrayListOptionalErrKey = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptionalErrKey");
 
-        TestSerializable serializableRequired = Argsx.readSerializableArg(activity, "serializableRequired");
+        TestSerializable serializableRequired = Argsx.readSerializableArgOrThrow(activity, "serializableRequired");
         TestSerializable serializableOptional = Argsx.readSerializableArgOrNull(activity, "serializableOptional");
         TestSerializable serializableOptionalErrKey = Argsx.readSerializableArgOrNull(activity, "serializableOptionalErrKey");
         TestSerializable serializableOrDefault = Argsx.readSerializableArgOr(activity, "serializableOrDefault", new TestSerializable("default"));
         TestSerializable serializableOrDefaultErrKey = Argsx.readSerializableArgOr(activity, "serializableOrDefaultErrKey", new TestSerializable("errKey"));
 
-        Bundle bundleRequired = Argsx.readBundleArg(activity, "bundleRequired");
+        Bundle bundleRequired = Argsx.readBundleArgOrThrow(activity, "bundleRequired");
         Bundle bundleOptional = Argsx.readBundleArgOrNull(activity, "bundleOptional");
         Bundle bundleOptionalErrKey = Argsx.readBundleArgOrNull(activity, "bundleOptionalErrKey");
         Bundle bundleOrDefault = Argsx.readBundleArgOr(activity, "bundleOrDefault", new Bundle());
@@ -282,7 +282,7 @@ public class ArgsxTest {
         defaultBundle.putString("bundle", "bundleErrKey");
         Bundle bundleOrDefaultErrKey = Argsx.readBundleArgOr(activity, "bundleOrDefaultErrKey", defaultBundle);
 
-        Bundle extrasRequired = Argsx.readExtrasArg(activity);
+        Bundle extrasRequired = Argsx.readExtrasArgOrThrow(activity);
         Bundle extrasOptional = Argsx.readExtrasArgOrNull(activity);
         Bundle extrasDefault = Argsx.readExtrasArgOr(activity, new Bundle());
 
@@ -422,7 +422,7 @@ public class ArgsxTest {
 
         byte byteRequired = Argsx.readByteArgOr(activity, "byteRequired", (byte) 0);
         byte byteRequiredErrKey = Argsx.readByteArgOr(activity, "byteRequiredErrKey", (byte) 0);
-        byte[] byteArrayRequired = Argsx.readByteArrayArg(activity, "byteArrayRequired");
+        byte[] byteArrayRequired = Argsx.readByteArrayArgOrThrow(activity, "byteArrayRequired");
         byte[] byteArrayOptional = Argsx.readByteArrayArgOrNull(activity, "byteArrayOptional");
         byte[] byteArrayOptionalErrKey = Argsx.readByteArrayArgOrNull(activity, "byteArrayOptionalErrKey");
         byte[] byteArrayOrDefault = Argsx.readByteArrayArgOr(activity, "byteArrayOrDefault", byteArrayOf((byte) 0, (byte) 0));
@@ -430,7 +430,7 @@ public class ArgsxTest {
 
         short shortRequired = Argsx.readShortArgOr(activity, "shortRequired", (short) 0);
         short shortRequiredErrKey = Argsx.readShortArgOr(activity, "shortRequiredErrKey", (short) 0);
-        short[] shortArrayRequired = Argsx.readShortArrayArg(activity, "shortArrayRequired");
+        short[] shortArrayRequired = Argsx.readShortArrayArgOrThrow(activity, "shortArrayRequired");
         short[] shortArrayOptional = Argsx.readShortArrayArgOrNull(activity, "shortArrayOptional");
         short[] shortArrayOptionalErrKey = Argsx.readShortArrayArgOrNull(activity, "shortArrayOptionalErrKey");
         short[] shortArrayOrDefault = Argsx.readShortArrayArgOr(activity, "shortArrayOrDefault", shortArrayOf((short) 0, (short) 0));
@@ -439,12 +439,12 @@ public class ArgsxTest {
 
         int intRequired = Argsx.readIntArgOr(activity, "intRequired", 0);
         int intRequiredErrKey = Argsx.readIntArgOr(activity, "intRequiredErrKey", 0);
-        int[] intArrayRequired = Argsx.readIntArrayArg(activity, "intArrayRequired");
+        int[] intArrayRequired = Argsx.readIntArrayArgOrThrow(activity, "intArrayRequired");
         int[] intArrayOptional = Argsx.readIntArrayArgOrNull(activity, "intArrayOptional");
         int[] intArrayOptionalErrKey = Argsx.readIntArrayArgOrNull(activity, "intArrayOptionalErrKey");
         int[] intArrayOrDefault = Argsx.readIntArrayArgOr(activity, "intArrayOrDefault", intArrayOf(0, 0));
         int[] intArrayOrDefaultErrKey = Argsx.readIntArrayArgOr(activity, "intArrayOrDefaultErrKey", intArrayOf(0, (-1)));
-        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArg(activity, "intArrayListRequired");
+        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArgOrThrow(activity, "intArrayListRequired");
         ArrayList<Integer> intArrayListOrDefault = Argsx.readIntArrayListArgOr(activity, "intArrayListOrDefault", arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOrDefaultErrKey = Argsx.readIntArrayListArgOr(activity, "intArrayListOrDefaultErrKey", arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOptional = Argsx.readIntArrayListArgOrNull(activity, "intArrayListOptional");
@@ -452,7 +452,7 @@ public class ArgsxTest {
 
         long longRequired = Argsx.readLongArgOr(activity, "longRequired", 0);
         long longRequiredErrKey = Argsx.readLongArgOr(activity, "longRequiredErrKey", 0);
-        long[] longArrayRequired = Argsx.readLongArrayArg(activity, "longArrayRequired");
+        long[] longArrayRequired = Argsx.readLongArrayArgOrThrow(activity, "longArrayRequired");
         long[] longArrayOptional = Argsx.readLongArrayArgOrNull(activity, "longArrayOptional");
         long[] longArrayOptionalErrKey = Argsx.readLongArrayArgOrNull(activity, "longArrayOptionalErrKey");
         long[] longArrayOrDefault = Argsx.readLongArrayArgOr(activity, "longArrayOrDefault", longArrayOf(0, 0));
@@ -460,7 +460,7 @@ public class ArgsxTest {
 
         float floatRequired = Argsx.readFloatArgOr(activity, "floatRequired", 0f);
         float floatRequiredErrKey = Argsx.readFloatArgOr(activity, "floatRequiredErrKey", 0f);
-        float[] floatArrayRequired = Argsx.readFloatArrayArg(activity, "floatArrayRequired");
+        float[] floatArrayRequired = Argsx.readFloatArrayArgOrThrow(activity, "floatArrayRequired");
         float[] floatArrayOptional = Argsx.readFloatArrayArgOrNull(activity, "floatArrayOptional");
         float[] floatArrayOptionalErrKey = Argsx.readFloatArrayArgOrNull(activity, "DoubleArrayOptionalErrKey");
         float[] floatArrayOrDefault = Argsx.readFloatArrayArgOr(activity, "floatArrayOrDefault", floatArrayOf(0f, 0f));
@@ -468,7 +468,7 @@ public class ArgsxTest {
 
         double doubleRequired = Argsx.readDoubleArgOr(activity, "doubleRequired", 0d);
         double doubleRequiredErrKey = Argsx.readDoubleArgOr(activity, "doubleRequiredErrKey", 0d);
-        double[] doubleArrayRequired = Argsx.readDoubleArrayArg(activity, "doubleArrayRequired");
+        double[] doubleArrayRequired = Argsx.readDoubleArrayArgOrThrow(activity, "doubleArrayRequired");
         double[] doubleArrayOptional = Argsx.readDoubleArrayArgOrNull(activity, "doubleArrayOptional");
         double[] doubleArrayOptionalErrKey = Argsx.readDoubleArrayArgOrNull(activity, "doubleArrayOptionalErrKey");
         double[] doubleArrayOrDefault = Argsx.readDoubleArrayArgOr(activity, "doubleArrayOrDefault", doubleArrayOf(0d, 0d));
@@ -476,7 +476,7 @@ public class ArgsxTest {
 
         boolean booleanRequired = Argsx.readBooleanArgOr(activity, "booleanRequired", false);
         boolean booleanRequiredErrKey = Argsx.readBooleanArgOr(activity, "booleanRequiredErrKey", false);
-        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArg(activity, "booleanArrayRequired");
+        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArgOrThrow(activity, "booleanArrayRequired");
         boolean[] booleanArrayOptional = Argsx.readBooleanArrayArgOrNull(activity, "booleanArrayOptional");
         boolean[] booleanArrayOptionalErrKey = Argsx.readBooleanArrayArgOrNull(activity, "booleanArrayOptionalErrKey");
         boolean[] booleanArrayOrDefault = Argsx.readBooleanArrayArgOr(activity, "booleanArrayOrDefault", booleanArrayOf(true, false));
@@ -484,7 +484,7 @@ public class ArgsxTest {
 
         char charRequired = Argsx.readCharArgOr(activity, "charRequired", 'a');
         char charRequiredErrKey = Argsx.readCharArgOr(activity, "charRequiredErrKey", 'b');
-        char[] charArrayRequired = Argsx.readCharArrayArg(activity, "charArrayRequired");
+        char[] charArrayRequired = Argsx.readCharArrayArgOrThrow(activity, "charArrayRequired");
         char[] charArrayOptional = Argsx.readCharArrayArgOrNull(activity, "charArrayOptional");
         char[] charArrayOptionalErrKey = Argsx.readCharArrayArgOrNull(activity, "charArrayOptionalErrKey");
         char[] charArrayOrDefault = Argsx.readCharArrayArgOr(activity, "charArrayOrDefault", charArrayOf('a', 'b'));
@@ -492,12 +492,12 @@ public class ArgsxTest {
 
         String stringRequired = Argsx.readStringArgOr(activity, "stringRequired", "stringRequired");
         String stringRequiredErrKey = Argsx.readStringArgOr(activity, "stringRequiredErrKey", "stringRequiredErrKey");
-        String[] stringArrayRequired = Argsx.readStringArrayArg(activity, "stringArrayRequired");
+        String[] stringArrayRequired = Argsx.readStringArrayArgOrThrow(activity, "stringArrayRequired");
         String[] stringArrayOptional = Argsx.readStringArrayArgOrNull(activity, "stringArrayOptional");
         String[] stringArrayOptionalErrKey = Argsx.readStringArrayArgOrNull(activity, "stringArrayOptionalErrKey");
         String[] stringArrayOrDefault = Argsx.readStringArrayArgOr(activity, "stringArrayOrDefault", arrayOf("array", "dft"));
         String[] stringArrayOrDefaultErrKey = Argsx.readStringArrayArgOr(activity, "stringArrayOrDefaultErrKey", arrayOf("error", "erk"));
-        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArg(activity, "stringArrayListRequired");
+        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArgOrThrow(activity, "stringArrayListRequired");
         ArrayList<String> stringArrayListOrDefault = Argsx.readStringArrayListArgOr(activity, "stringArrayListOrDefault", arrayListOf("list", "default"));
         ArrayList<String> stringArrayListOrDefaultErrKey = Argsx.readStringArrayListArgOr(activity, "stringArrayListOrDefaultErrKey", arrayListOf("stringArrayListOrDefaultErrKey", "errKey"));
         ArrayList<String> stringArrayListOptional = Argsx.readStringArrayListArgOrNull(activity, "stringArrayListOptional");
@@ -505,12 +505,12 @@ public class ArgsxTest {
 
         CharSequence charSequenceRequired = Argsx.readCharSequenceArgOr(activity, "charSequenceRequired", "charSequenceRequired");
         CharSequence charSequenceRequiredErrKey = Argsx.readCharSequenceArgOr(activity, "charSequenceRequiredErrKey", "charSequenceRequiredErrKey");
-        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArg(activity, "charSequenceArrayRequired");
+        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArgOrThrow(activity, "charSequenceArrayRequired");
         CharSequence[] charSequenceArrayOptional = Argsx.readCharSequenceArrayArgOrNull(activity, "charSequenceArrayOptional");
         CharSequence[] charSequenceArrayOptionalErrKey = Argsx.readCharSequenceArrayArgOrNull(activity, "charSequenceArrayOptionalErrKey");
         CharSequence[] charSequenceArrayOrDefault = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefault", arrayOf("array", "dft"));
         CharSequence[] charSequenceArrayOrDefaultErrKey = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefaultErrKey", arrayOf("error", "erk"));
-        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArg(activity, "charSequenceArrayListRequired");
+        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArgOrThrow(activity, "charSequenceArrayListRequired");
         ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefault", Collectionx.<CharSequence>arrayListOf("list", "default"));
         ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefaultErrKey", Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
         ArrayList<CharSequence> charSequenceArrayListOptional = Argsx.readCharSequenceArrayListArgOrNull(activity, "charSequenceArrayListOptional");
@@ -519,24 +519,24 @@ public class ArgsxTest {
 
         Parcelable parcelableRequired = Argsx.readParcelableArgOr(activity, "parcelableRequired", new TestParcelable("required"));
         Parcelable parcelableRequiredErrKey = Argsx.readParcelableArgOr(activity, "parcelableRequiredErrKey", new TestParcelable("parcelableRequiredErrKey"));
-        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArg(activity, "parcelableArrayRequired");
+        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArgOrThrow(activity, "parcelableArrayRequired");
         Parcelable[] parcelableArrayOptional = Argsx.readParcelableArrayArgOrNull(activity, "parcelableArrayOptional");
         Parcelable[] parcelableArrayOptionalErrKey = Argsx.readParcelableArrayArgOrNull(activity, "parcelableArrayOptionalErrKey");
         Parcelable[] parcelableArrayOrDefault = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefault", arrayOf(new TestParcelable("array"), new TestParcelable("dft")));
         Parcelable[] parcelableArrayOrDefaultErrKey = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefaultErrKey", arrayOf(new TestParcelable("error"), new TestParcelable("erk")));
-        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArg(activity, "parcelableArrayListRequired");
+        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArgOrThrow(activity, "parcelableArrayListRequired");
         ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefault", Collectionx.<Parcelable>arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
         ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefaultErrKey", Collectionx.<Parcelable>arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
         ArrayList<Parcelable> parcelableArrayListOptional = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptional");
         ArrayList<Parcelable> parcelableArrayListOptionalErrKey = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptionalErrKey");
 
-        TestSerializable serializableRequired = Argsx.readSerializableArg(activity, "serializableRequired");
+        TestSerializable serializableRequired = Argsx.readSerializableArgOrThrow(activity, "serializableRequired");
         TestSerializable serializableOptional = Argsx.readSerializableArgOrNull(activity, "serializableOptional");
         TestSerializable serializableOptionalErrKey = Argsx.readSerializableArgOrNull(activity, "serializableOptionalErrKey");
         TestSerializable serializableOrDefault = Argsx.readSerializableArgOr(activity, "serializableOrDefault", new TestSerializable("default"));
         TestSerializable serializableOrDefaultErrKey = Argsx.readSerializableArgOr(activity, "serializableOrDefaultErrKey", new TestSerializable("errKey"));
 
-        Bundle bundleRequired = Argsx.readBundleArg(activity, "bundleRequired");
+        Bundle bundleRequired = Argsx.readBundleArgOrThrow(activity, "bundleRequired");
         Bundle bundleOptional = Argsx.readBundleArgOrNull(activity, "bundleOptional");
         Bundle bundleOptionalErrKey = Argsx.readBundleArgOrNull(activity, "bundleOptionalErrKey");
         Bundle bundleOrDefault = Argsx.readBundleArgOr(activity, "bundleOrDefault", new Bundle());
@@ -547,14 +547,14 @@ public class ArgsxTest {
 
         SparseArray<Parcelable> sparseArrayDefault = new SparseArray<>();
         sparseArrayDefault.put(0, new TestParcelable("0"));
-        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArg(activity, "sparseParcelableArrayRequired");
+        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArgOrThrow(activity, "sparseParcelableArrayRequired");
         SparseArray<Parcelable> sparseParcelableArrayOptional = Argsx.readSparseParcelableArrayArgOrNull(activity, "sparseParcelableArrayOptional");
         SparseArray<Parcelable> sparseParcelableArrayOptionalErrKey = Argsx.readSparseParcelableArrayArgOrNull(activity, "sparseParcelableArrayOptionalErrKey");
         SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefault", sparseArrayDefault);
         SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefaultErrKey", sparseArrayDefault);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            IBinder binderRequired = Argsx.readBinderArg(activity, "binderRequired");
+            IBinder binderRequired = Argsx.readBinderArgOrThrow(activity, "binderRequired");
             IBinder binderOptional = Argsx.readBinderArgOrNull(activity, "binderOptional");
             IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, "binderOptionalErrKey");
             IBinder binderOrDefault = Argsx.readBinderArgOr(activity, "binderOrDefault", new TestBinder(""));
@@ -568,13 +568,13 @@ public class ArgsxTest {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Size sizeRequired = Argsx.readSizeArg(activity, "sizeRequired");
+            Size sizeRequired = Argsx.readSizeArgOrThrow(activity, "sizeRequired");
             Size sizeOptional = Argsx.readSizeArgOrNull(activity, "sizeOptional");
             Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, "sizeOptionalErrKey");
             Size sizeOrDefault = Argsx.readSizeArgOr(activity, "sizeOrDefault", new Size(0, 0));
             Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, "sizeOrDefaultErrKey", new Size(4, 4));
 
-            SizeF sizeFRequired = Argsx.readSizeFArg(activity, "sizeFRequired");
+            SizeF sizeFRequired = Argsx.readSizeFArgOrThrow(activity, "sizeFRequired");
             SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, "sizeFOptional");
             SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, "sizeFOptionalErrKey");
             SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, "sizeFOrDefault", new SizeF(0f, 0f));
@@ -731,7 +731,7 @@ public class ArgsxTest {
 
         byte byteRequired = Argsx.readByteArgOr(activity, "byteRequired", (byte) 0);
         byte byteRequiredErrKey = Argsx.readByteArgOr(activity, "byteRequiredErrKey", (byte) 0);
-        byte[] byteArrayRequired = Argsx.readByteArrayArg(activity, "byteArrayRequired");
+        byte[] byteArrayRequired = Argsx.readByteArrayArgOrThrow(activity, "byteArrayRequired");
         byte[] byteArrayOptional = Argsx.readByteArrayArgOrNull(activity, "byteArrayOptional");
         byte[] byteArrayOptionalErrKey = Argsx.readByteArrayArgOrNull(activity, "byteArrayOptionalErrKey");
         byte[] byteArrayOrDefault = Argsx.readByteArrayArgOr(activity, "byteArrayOrDefault", byteArrayOf((byte) 0, (byte) 0));
@@ -739,7 +739,7 @@ public class ArgsxTest {
 
         short shortRequired = Argsx.readShortArgOr(activity, "shortRequired", (short) 0);
         short shortRequiredErrKey = Argsx.readShortArgOr(activity, "shortRequiredErrKey", (short) 0);
-        short[] shortArrayRequired = Argsx.readShortArrayArg(activity, "shortArrayRequired");
+        short[] shortArrayRequired = Argsx.readShortArrayArgOrThrow(activity, "shortArrayRequired");
         short[] shortArrayOptional = Argsx.readShortArrayArgOrNull(activity, "shortArrayOptional");
         short[] shortArrayOptionalErrKey = Argsx.readShortArrayArgOrNull(activity, "shortArrayOptionalErrKey");
         short[] shortArrayOrDefault = Argsx.readShortArrayArgOr(activity, "shortArrayOrDefault", shortArrayOf((short) 0, (short) 0));
@@ -748,12 +748,12 @@ public class ArgsxTest {
 
         int intRequired = Argsx.readIntArgOr(activity, "intRequired", 0);
         int intRequiredErrKey = Argsx.readIntArgOr(activity, "intRequiredErrKey", 0);
-        int[] intArrayRequired = Argsx.readIntArrayArg(activity, "intArrayRequired");
+        int[] intArrayRequired = Argsx.readIntArrayArgOrThrow(activity, "intArrayRequired");
         int[] intArrayOptional = Argsx.readIntArrayArgOrNull(activity, "intArrayOptional");
         int[] intArrayOptionalErrKey = Argsx.readIntArrayArgOrNull(activity, "intArrayOptionalErrKey");
         int[] intArrayOrDefault = Argsx.readIntArrayArgOr(activity, "intArrayOrDefault", intArrayOf(0, 0));
         int[] intArrayOrDefaultErrKey = Argsx.readIntArrayArgOr(activity, "intArrayOrDefaultErrKey", intArrayOf(0, (-1)));
-        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArg(activity, "intArrayListRequired");
+        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArgOrThrow(activity, "intArrayListRequired");
         ArrayList<Integer> intArrayListOrDefault = Argsx.readIntArrayListArgOr(activity, "intArrayListOrDefault", arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOrDefaultErrKey = Argsx.readIntArrayListArgOr(activity, "intArrayListOrDefaultErrKey", arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOptional = Argsx.readIntArrayListArgOrNull(activity, "intArrayListOptional");
@@ -761,7 +761,7 @@ public class ArgsxTest {
 
         long longRequired = Argsx.readLongArgOr(activity, "longRequired", 0);
         long longRequiredErrKey = Argsx.readLongArgOr(activity, "longRequiredErrKey", 0);
-        long[] longArrayRequired = Argsx.readLongArrayArg(activity, "longArrayRequired");
+        long[] longArrayRequired = Argsx.readLongArrayArgOrThrow(activity, "longArrayRequired");
         long[] longArrayOptional = Argsx.readLongArrayArgOrNull(activity, "longArrayOptional");
         long[] longArrayOptionalErrKey = Argsx.readLongArrayArgOrNull(activity, "longArrayOptionalErrKey");
         long[] longArrayOrDefault = Argsx.readLongArrayArgOr(activity, "longArrayOrDefault", longArrayOf(0, 0));
@@ -769,7 +769,7 @@ public class ArgsxTest {
 
         float floatRequired = Argsx.readFloatArgOr(activity, "floatRequired", 0f);
         float floatRequiredErrKey = Argsx.readFloatArgOr(activity, "floatRequiredErrKey", 0f);
-        float[] floatArrayRequired = Argsx.readFloatArrayArg(activity, "floatArrayRequired");
+        float[] floatArrayRequired = Argsx.readFloatArrayArgOrThrow(activity, "floatArrayRequired");
         float[] floatArrayOptional = Argsx.readFloatArrayArgOrNull(activity, "floatArrayOptional");
         float[] floatArrayOptionalErrKey = Argsx.readFloatArrayArgOrNull(activity, "DoubleArrayOptionalErrKey");
         float[] floatArrayOrDefault = Argsx.readFloatArrayArgOr(activity, "floatArrayOrDefault", floatArrayOf(0f, 0f));
@@ -777,7 +777,7 @@ public class ArgsxTest {
 
         double doubleRequired = Argsx.readDoubleArgOr(activity, "doubleRequired", 0d);
         double doubleRequiredErrKey = Argsx.readDoubleArgOr(activity, "doubleRequiredErrKey", 0d);
-        double[] doubleArrayRequired = Argsx.readDoubleArrayArg(activity, "doubleArrayRequired");
+        double[] doubleArrayRequired = Argsx.readDoubleArrayArgOrThrow(activity, "doubleArrayRequired");
         double[] doubleArrayOptional = Argsx.readDoubleArrayArgOrNull(activity, "doubleArrayOptional");
         double[] doubleArrayOptionalErrKey = Argsx.readDoubleArrayArgOrNull(activity, "doubleArrayOptionalErrKey");
         double[] doubleArrayOrDefault = Argsx.readDoubleArrayArgOr(activity, "doubleArrayOrDefault", doubleArrayOf(0d, 0d));
@@ -785,7 +785,7 @@ public class ArgsxTest {
 
         boolean booleanRequired = Argsx.readBooleanArgOr(activity, "booleanRequired", false);
         boolean booleanRequiredErrKey = Argsx.readBooleanArgOr(activity, "booleanRequiredErrKey", false);
-        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArg(activity, "booleanArrayRequired");
+        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArgOrThrow(activity, "booleanArrayRequired");
         boolean[] booleanArrayOptional = Argsx.readBooleanArrayArgOrNull(activity, "booleanArrayOptional");
         boolean[] booleanArrayOptionalErrKey = Argsx.readBooleanArrayArgOrNull(activity, "booleanArrayOptionalErrKey");
         boolean[] booleanArrayOrDefault = Argsx.readBooleanArrayArgOr(activity, "booleanArrayOrDefault", booleanArrayOf(true, false));
@@ -793,7 +793,7 @@ public class ArgsxTest {
 
         char charRequired = Argsx.readCharArgOr(activity, "charRequired", 'a');
         char charRequiredErrKey = Argsx.readCharArgOr(activity, "charRequiredErrKey", 'b');
-        char[] charArrayRequired = Argsx.readCharArrayArg(activity, "charArrayRequired");
+        char[] charArrayRequired = Argsx.readCharArrayArgOrThrow(activity, "charArrayRequired");
         char[] charArrayOptional = Argsx.readCharArrayArgOrNull(activity, "charArrayOptional");
         char[] charArrayOptionalErrKey = Argsx.readCharArrayArgOrNull(activity, "charArrayOptionalErrKey");
         char[] charArrayOrDefault = Argsx.readCharArrayArgOr(activity, "charArrayOrDefault", charArrayOf('a', 'b'));
@@ -801,12 +801,12 @@ public class ArgsxTest {
 
         String stringRequired = Argsx.readStringArgOr(activity, "stringRequired", "stringRequired");
         String stringRequiredErrKey = Argsx.readStringArgOr(activity, "stringRequiredErrKey", "stringRequiredErrKey");
-        String[] stringArrayRequired = Argsx.readStringArrayArg(activity, "stringArrayRequired");
+        String[] stringArrayRequired = Argsx.readStringArrayArgOrThrow(activity, "stringArrayRequired");
         String[] stringArrayOptional = Argsx.readStringArrayArgOrNull(activity, "stringArrayOptional");
         String[] stringArrayOptionalErrKey = Argsx.readStringArrayArgOrNull(activity, "stringArrayOptionalErrKey");
         String[] stringArrayOrDefault = Argsx.readStringArrayArgOr(activity, "stringArrayOrDefault", arrayOf("array", "dft"));
         String[] stringArrayOrDefaultErrKey = Argsx.readStringArrayArgOr(activity, "stringArrayOrDefaultErrKey", arrayOf("error", "erk"));
-        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArg(activity, "stringArrayListRequired");
+        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArgOrThrow(activity, "stringArrayListRequired");
         ArrayList<String> stringArrayListOrDefault = Argsx.readStringArrayListArgOr(activity, "stringArrayListOrDefault", arrayListOf("list", "default"));
         ArrayList<String> stringArrayListOrDefaultErrKey = Argsx.readStringArrayListArgOr(activity, "stringArrayListOrDefaultErrKey", arrayListOf("stringArrayListOrDefaultErrKey", "errKey"));
         ArrayList<String> stringArrayListOptional = Argsx.readStringArrayListArgOrNull(activity, "stringArrayListOptional");
@@ -814,12 +814,12 @@ public class ArgsxTest {
 
         CharSequence charSequenceRequired = Argsx.readCharSequenceArgOr(activity, "charSequenceRequired", "charSequenceRequired");
         CharSequence charSequenceRequiredErrKey = Argsx.readCharSequenceArgOr(activity, "charSequenceRequiredErrKey", "charSequenceRequiredErrKey");
-        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArg(activity, "charSequenceArrayRequired");
+        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArgOrThrow(activity, "charSequenceArrayRequired");
         CharSequence[] charSequenceArrayOptional = Argsx.readCharSequenceArrayArgOrNull(activity, "charSequenceArrayOptional");
         CharSequence[] charSequenceArrayOptionalErrKey = Argsx.readCharSequenceArrayArgOrNull(activity, "charSequenceArrayOptionalErrKey");
         CharSequence[] charSequenceArrayOrDefault = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefault", arrayOf("array", "dft"));
         CharSequence[] charSequenceArrayOrDefaultErrKey = Argsx.readCharSequenceArrayArgOr(activity, "charSequenceArrayOrDefaultErrKey", arrayOf("error", "erk"));
-        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArg(activity, "charSequenceArrayListRequired");
+        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArgOrThrow(activity, "charSequenceArrayListRequired");
         ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefault", Collectionx.<CharSequence>arrayListOf("list", "default"));
         ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, "charSequenceArrayListOrDefaultErrKey", Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
         ArrayList<CharSequence> charSequenceArrayListOptional = Argsx.readCharSequenceArrayListArgOrNull(activity, "charSequenceArrayListOptional");
@@ -828,24 +828,24 @@ public class ArgsxTest {
 
         Parcelable parcelableRequired = Argsx.readParcelableArgOr(activity, "parcelableRequired", new TestParcelable("required"));
         Parcelable parcelableRequiredErrKey = Argsx.readParcelableArgOr(activity, "parcelableRequiredErrKey", new TestParcelable("parcelableRequiredErrKey"));
-        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArg(activity, "parcelableArrayRequired");
+        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArgOrThrow(activity, "parcelableArrayRequired");
         Parcelable[] parcelableArrayOptional = Argsx.readParcelableArrayArgOrNull(activity, "parcelableArrayOptional");
         Parcelable[] parcelableArrayOptionalErrKey = Argsx.readParcelableArrayArgOrNull(activity, "parcelableArrayOptionalErrKey");
         Parcelable[] parcelableArrayOrDefault = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefault", arrayOf(new TestParcelable("array"), new TestParcelable("dft")));
         Parcelable[] parcelableArrayOrDefaultErrKey = Argsx.readParcelableArrayArgOr(activity, "parcelableArrayOrDefaultErrKey", arrayOf(new TestParcelable("error"), new TestParcelable("erk")));
-        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArg(activity, "parcelableArrayListRequired");
+        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArgOrThrow(activity, "parcelableArrayListRequired");
         ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefault", Collectionx.<Parcelable>arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
         ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, "parcelableArrayListOrDefaultErrKey", Collectionx.<Parcelable>arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
         ArrayList<Parcelable> parcelableArrayListOptional = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptional");
         ArrayList<Parcelable> parcelableArrayListOptionalErrKey = Argsx.readParcelableArrayListArgOrNull(activity, "parcelableArrayListOptionalErrKey");
 
-        TestSerializable serializableRequired = Argsx.readSerializableArg(activity, "serializableRequired");
+        TestSerializable serializableRequired = Argsx.readSerializableArgOrThrow(activity, "serializableRequired");
         TestSerializable serializableOptional = Argsx.readSerializableArgOrNull(activity, "serializableOptional");
         TestSerializable serializableOptionalErrKey = Argsx.readSerializableArgOrNull(activity, "serializableOptionalErrKey");
         TestSerializable serializableOrDefault = Argsx.readSerializableArgOr(activity, "serializableOrDefault", new TestSerializable("default"));
         TestSerializable serializableOrDefaultErrKey = Argsx.readSerializableArgOr(activity, "serializableOrDefaultErrKey", new TestSerializable("errKey"));
 
-        Bundle bundleRequired = Argsx.readBundleArg(activity, "bundleRequired");
+        Bundle bundleRequired = Argsx.readBundleArgOrThrow(activity, "bundleRequired");
         Bundle bundleOptional = Argsx.readBundleArgOrNull(activity, "bundleOptional");
         Bundle bundleOptionalErrKey = Argsx.readBundleArgOrNull(activity, "bundleOptionalErrKey");
         Bundle bundleOrDefault = Argsx.readBundleArgOr(activity, "bundleOrDefault", new Bundle());
@@ -856,14 +856,14 @@ public class ArgsxTest {
 
         SparseArray<Parcelable> sparseArrayDefault = new SparseArray<>();
         sparseArrayDefault.put(0, new TestParcelable("0"));
-        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArg(activity, "sparseParcelableArrayRequired");
+        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArgOrThrow(activity, "sparseParcelableArrayRequired");
         SparseArray<Parcelable> sparseParcelableArrayOptional = Argsx.readSparseParcelableArrayArgOrNull(activity, "sparseParcelableArrayOptional");
         SparseArray<Parcelable> sparseParcelableArrayOptionalErrKey = Argsx.readSparseParcelableArrayArgOrNull(activity, "sparseParcelableArrayOptionalErrKey");
         SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefault", sparseArrayDefault);
         SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, "sparseParcelableArrayOrDefaultErrKey", sparseArrayDefault);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            IBinder binderRequired = Argsx.readBinderArg(activity, "binderRequired");
+            IBinder binderRequired = Argsx.readBinderArgOrThrow(activity, "binderRequired");
             IBinder binderOptional = Argsx.readBinderArgOrNull(activity, "binderOptional");
             IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, "binderOptionalErrKey");
             IBinder binderOrDefault = Argsx.readBinderArgOr(activity, "binderOrDefault", new TestBinder(""));
@@ -877,13 +877,13 @@ public class ArgsxTest {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            Size sizeRequired = Argsx.readSizeArg(activity, "sizeRequired");
+            Size sizeRequired = Argsx.readSizeArgOrThrow(activity, "sizeRequired");
             Size sizeOptional = Argsx.readSizeArgOrNull(activity, "sizeOptional");
             Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, "sizeOptionalErrKey");
             Size sizeOrDefault = Argsx.readSizeArgOr(activity, "sizeOrDefault", new Size(0, 0));
             Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, "sizeOrDefaultErrKey", new Size(4, 4));
 
-            SizeF sizeFRequired = Argsx.readSizeFArg(activity, "sizeFRequired");
+            SizeF sizeFRequired = Argsx.readSizeFArgOrThrow(activity, "sizeFRequired");
             SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, "sizeFOptional");
             SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, "sizeFOptionalErrKey");
             SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, "sizeFOrDefault", new SizeF(0f, 0f));
@@ -1054,7 +1054,7 @@ public class ArgsxTest {
 
         byte byteRequired = Argsx.readByteArgOr(activity, R.string.byte_required, (byte) 0);
         byte byteRequiredErrKey = Argsx.readByteArgOr(activity, R.string.not_exist_key, (byte) 0);
-        byte[] byteArrayRequired = Argsx.readByteArrayArg(activity, R.string.byte_array_required);
+        byte[] byteArrayRequired = Argsx.readByteArrayArgOrThrow(activity, R.string.byte_array_required);
         byte[] byteArrayOptional = Argsx.readByteArrayArgOrNull(activity, R.string.byte_array_optional);
         byte[] byteArrayOptionalErrKey = Argsx.readByteArrayArgOrNull(activity, R.string.not_exist_key);
         byte[] byteArrayOrDefault = Argsx.readByteArrayArgOr(activity, R.string.byte_array_or_default, byteArrayOf((byte) 0, (byte) 0));
@@ -1062,7 +1062,7 @@ public class ArgsxTest {
 
         short shortRequired = Argsx.readShortArgOr(activity, R.string.short_required, (short) 0);
         short shortRequiredErrKey = Argsx.readShortArgOr(activity, R.string.not_exist_key, (short) 0);
-        short[] shortArrayRequired = Argsx.readShortArrayArg(activity, R.string.short_array_required);
+        short[] shortArrayRequired = Argsx.readShortArrayArgOrThrow(activity, R.string.short_array_required);
         short[] shortArrayOptional = Argsx.readShortArrayArgOrNull(activity, R.string.short_array_optional);
         short[] shortArrayOptionalErrKey = Argsx.readShortArrayArgOrNull(activity, R.string.not_exist_key);
         short[] shortArrayOrDefault = Argsx.readShortArrayArgOr(activity, R.string.short_array_or_default, shortArrayOf((short) 0, (short) 0));
@@ -1071,12 +1071,12 @@ public class ArgsxTest {
 
         int intRequired = Argsx.readIntArgOr(activity, R.string.int_required, 0);
         int intRequiredErrKey = Argsx.readIntArgOr(activity, R.string.not_exist_key, 0);
-        int[] intArrayRequired = Argsx.readIntArrayArg(activity, R.string.int_array_required);
+        int[] intArrayRequired = Argsx.readIntArrayArgOrThrow(activity, R.string.int_array_required);
         int[] intArrayOptional = Argsx.readIntArrayArgOrNull(activity, R.string.int_array_optional);
         int[] intArrayOptionalErrKey = Argsx.readIntArrayArgOrNull(activity, R.string.not_exist_key);
         int[] intArrayOrDefault = Argsx.readIntArrayArgOr(activity, R.string.int_array_or_default, intArrayOf(0, 0));
         int[] intArrayOrDefaultErrKey = Argsx.readIntArrayArgOr(activity, R.string.not_exist_key, intArrayOf(0, (-1)));
-        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArg(activity, R.string.int_array_list_required);
+        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArgOrThrow(activity, R.string.int_array_list_required);
         ArrayList<Integer> intArrayListOrDefault = Argsx.readIntArrayListArgOr(activity, R.string.int_array_list_or_default, arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOrDefaultErrKey = Argsx.readIntArrayListArgOr(activity, R.string.not_exist_key, arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOptional = Argsx.readIntArrayListArgOrNull(activity, R.string.int_array_list_optional);
@@ -1084,7 +1084,7 @@ public class ArgsxTest {
 
         long longRequired = Argsx.readLongArgOr(activity, R.string.long_required, 0);
         long longRequiredErrKey = Argsx.readLongArgOr(activity, R.string.not_exist_key, 0);
-        long[] longArrayRequired = Argsx.readLongArrayArg(activity, R.string.long_array_required);
+        long[] longArrayRequired = Argsx.readLongArrayArgOrThrow(activity, R.string.long_array_required);
         long[] longArrayOptional = Argsx.readLongArrayArgOrNull(activity, R.string.long_array_optional);
         long[] longArrayOptionalErrKey = Argsx.readLongArrayArgOrNull(activity, R.string.not_exist_key);
         long[] longArrayOrDefault = Argsx.readLongArrayArgOr(activity, R.string.long_array_or_default, longArrayOf(0, 0));
@@ -1092,7 +1092,7 @@ public class ArgsxTest {
 
         float floatRequired = Argsx.readFloatArgOr(activity, R.string.float_required, 0f);
         float floatRequiredErrKey = Argsx.readFloatArgOr(activity, R.string.not_exist_key, 0f);
-        float[] floatArrayRequired = Argsx.readFloatArrayArg(activity, R.string.float_array_required);
+        float[] floatArrayRequired = Argsx.readFloatArrayArgOrThrow(activity, R.string.float_array_required);
         float[] floatArrayOptional = Argsx.readFloatArrayArgOrNull(activity, R.string.float_array_optional);
         float[] floatArrayOptionalErrKey = Argsx.readFloatArrayArgOrNull(activity, R.string.not_exist_key);
         float[] floatArrayOrDefault = Argsx.readFloatArrayArgOr(activity, R.string.float_array_or_default, floatArrayOf(0f, 0f));
@@ -1100,7 +1100,7 @@ public class ArgsxTest {
 
         double doubleRequired = Argsx.readDoubleArgOr(activity, R.string.double_required, 0d);
         double doubleRequiredErrKey = Argsx.readDoubleArgOr(activity, R.string.not_exist_key, 0d);
-        double[] doubleArrayRequired = Argsx.readDoubleArrayArg(activity, R.string.double_array_required);
+        double[] doubleArrayRequired = Argsx.readDoubleArrayArgOrThrow(activity, R.string.double_array_required);
         double[] doubleArrayOptional = Argsx.readDoubleArrayArgOrNull(activity, R.string.double_array_optional);
         double[] doubleArrayOptionalErrKey = Argsx.readDoubleArrayArgOrNull(activity, R.string.not_exist_key);
         double[] doubleArrayOrDefault = Argsx.readDoubleArrayArgOr(activity, R.string.double_array_or_default, doubleArrayOf(0d, 0d));
@@ -1108,7 +1108,7 @@ public class ArgsxTest {
 
         boolean booleanRequired = Argsx.readBooleanArgOr(activity, R.string.boolean_required, false);
         boolean booleanRequiredErrKey = Argsx.readBooleanArgOr(activity, R.string.not_exist_key, false);
-        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArg(activity, R.string.boolean_array_required);
+        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArgOrThrow(activity, R.string.boolean_array_required);
         boolean[] booleanArrayOptional = Argsx.readBooleanArrayArgOrNull(activity, R.string.boolean_array_optional);
         boolean[] booleanArrayOptionalErrKey = Argsx.readBooleanArrayArgOrNull(activity, R.string.not_exist_key);
         boolean[] booleanArrayOrDefault = Argsx.readBooleanArrayArgOr(activity, R.string.boolean_array_or_default, booleanArrayOf(true, false));
@@ -1116,7 +1116,7 @@ public class ArgsxTest {
 
         char charRequired = Argsx.readCharArgOr(activity, R.string.char_required, 'a');
         char charRequiredErrKey = Argsx.readCharArgOr(activity, R.string.not_exist_key, 'b');
-        char[] charArrayRequired = Argsx.readCharArrayArg(activity, R.string.char_array_required);
+        char[] charArrayRequired = Argsx.readCharArrayArgOrThrow(activity, R.string.char_array_required);
         char[] charArrayOptional = Argsx.readCharArrayArgOrNull(activity, R.string.char_array_optional);
         char[] charArrayOptionalErrKey = Argsx.readCharArrayArgOrNull(activity, R.string.not_exist_key);
         char[] charArrayOrDefault = Argsx.readCharArrayArgOr(activity, R.string.char_array_or_default, charArrayOf('a', 'b'));
@@ -1124,12 +1124,12 @@ public class ArgsxTest {
 
         String stringRequired = Argsx.readStringArgOr(activity, R.string.string_required, "stringRequired");
         String stringRequiredErrKey = Argsx.readStringArgOr(activity, R.string.not_exist_key, "stringRequiredErrKey");
-        String[] stringArrayRequired = Argsx.readStringArrayArg(activity, R.string.string_array_required);
+        String[] stringArrayRequired = Argsx.readStringArrayArgOrThrow(activity, R.string.string_array_required);
         String[] stringArrayOptional = Argsx.readStringArrayArgOrNull(activity, R.string.string_array_optional);
         String[] stringArrayOptionalErrKey = Argsx.readStringArrayArgOrNull(activity, R.string.not_exist_key);
         String[] stringArrayOrDefault = Argsx.readStringArrayArgOr(activity, R.string.string_array_or_default, arrayOf("array", "dft"));
         String[] stringArrayOrDefaultErrKey = Argsx.readStringArrayArgOr(activity, R.string.not_exist_key, arrayOf("error", "erk"));
-        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArg(activity, R.string.string_array_list_required);
+        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArgOrThrow(activity, R.string.string_array_list_required);
         ArrayList<String> stringArrayListOrDefault = Argsx.readStringArrayListArgOr(activity, R.string.string_array_list_or_default, arrayListOf("list", "default"));
         ArrayList<String> stringArrayListOrDefaultErrKey = Argsx.readStringArrayListArgOr(activity, R.string.not_exist_key, arrayListOf("stringArrayListOrDefaultErrKey", "errKey"));
         ArrayList<String> stringArrayListOptional = Argsx.readStringArrayListArgOrNull(activity, R.string.string_array_list_optional);
@@ -1137,12 +1137,12 @@ public class ArgsxTest {
 
         CharSequence charSequenceRequired = Argsx.readCharSequenceArgOr(activity, R.string.char_sequence_required, "charSequenceRequired");
         CharSequence charSequenceRequiredErrKey = Argsx.readCharSequenceArgOr(activity, R.string.not_exist_key, "charSequenceRequiredErrKey");
-        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArg(activity, R.string.char_sequence_array_required);
+        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArgOrThrow(activity, R.string.char_sequence_array_required);
         CharSequence[] charSequenceArrayOptional = Argsx.readCharSequenceArrayArgOrNull(activity, R.string.char_sequence_array_optional);
         CharSequence[] charSequenceArrayOptionalErrKey = Argsx.readCharSequenceArrayArgOrNull(activity, R.string.not_exist_key);
         CharSequence[] charSequenceArrayOrDefault = Argsx.readCharSequenceArrayArgOr(activity, R.string.char_sequence_array_or_default, arrayOf("array", "dft"));
         CharSequence[] charSequenceArrayOrDefaultErrKey = Argsx.readCharSequenceArrayArgOr(activity, R.string.not_exist_key, arrayOf("error", "erk"));
-        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArg(activity, R.string.char_sequence_array_list_required);
+        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArgOrThrow(activity, R.string.char_sequence_array_list_required);
         ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, R.string.char_sequence_array_list_or_default, Collectionx.<CharSequence>arrayListOf("list", "default"));
         ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, R.string.not_exist_key, Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
         ArrayList<CharSequence> charSequenceArrayListOptional = Argsx.readCharSequenceArrayListArgOrNull(activity, R.string.char_sequence_array_list_optional);
@@ -1151,24 +1151,24 @@ public class ArgsxTest {
 
         Parcelable parcelableRequired = Argsx.readParcelableArgOr(activity, R.string.parcelable_required, new TestParcelable("required"));
         Parcelable parcelableRequiredErrKey = Argsx.readParcelableArgOr(activity, R.string.not_exist_key, new TestParcelable("parcelableRequiredErrKey"));
-        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArg(activity, R.string.parcelable_array_required);
+        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArgOrThrow(activity, R.string.parcelable_array_required);
         Parcelable[] parcelableArrayOptional = Argsx.readParcelableArrayArgOrNull(activity, R.string.parcelable_array_optional);
         Parcelable[] parcelableArrayOptionalErrKey = Argsx.readParcelableArrayArgOrNull(activity, R.string.not_exist_key);
         Parcelable[] parcelableArrayOrDefault = Argsx.readParcelableArrayArgOr(activity, R.string.parcelable_array_or_default, arrayOf(new TestParcelable("array"), new TestParcelable("dft")));
         Parcelable[] parcelableArrayOrDefaultErrKey = Argsx.readParcelableArrayArgOr(activity, R.string.not_exist_key, arrayOf(new TestParcelable("error"), new TestParcelable("erk")));
-        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArg(activity, R.string.parcelable_array_list_required);
+        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArgOrThrow(activity, R.string.parcelable_array_list_required);
         ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, R.string.parcelable_array_list_or_default, Collectionx.<Parcelable>arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
         ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, R.string.not_exist_key, Collectionx.<Parcelable>arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
         ArrayList<Parcelable> parcelableArrayListOptional = Argsx.readParcelableArrayListArgOrNull(activity, R.string.parcelable_array_list_optional);
         ArrayList<Parcelable> parcelableArrayListOptionalErrKey = Argsx.readParcelableArrayListArgOrNull(activity, R.string.not_exist_key);
 
-        TestSerializable serializableRequired = Argsx.readSerializableArg(activity, R.string.serializable_required);
+        TestSerializable serializableRequired = Argsx.readSerializableArgOrThrow(activity, R.string.serializable_required);
         TestSerializable serializableOptional = Argsx.readSerializableArgOrNull(activity, R.string.serializable_optional);
         TestSerializable serializableOptionalErrKey = Argsx.readSerializableArgOrNull(activity, R.string.not_exist_key);
         TestSerializable serializableOrDefault = Argsx.readSerializableArgOr(activity, R.string.serializable_or_default, new TestSerializable("default"));
         TestSerializable serializableOrDefaultErrKey = Argsx.readSerializableArgOr(activity, R.string.not_exist_key, new TestSerializable("errKey"));
 
-        Bundle bundleRequired = Argsx.readBundleArg(activity, R.string.bundle_required);
+        Bundle bundleRequired = Argsx.readBundleArgOrThrow(activity, R.string.bundle_required);
         Bundle bundleOptional = Argsx.readBundleArgOrNull(activity, R.string.bundle_optional);
         Bundle bundleOptionalErrKey = Argsx.readBundleArgOrNull(activity, R.string.not_exist_key);
         Bundle bundleOrDefault = Argsx.readBundleArgOr(activity, R.string.bundle_or_default, new Bundle());
@@ -1176,7 +1176,7 @@ public class ArgsxTest {
         defaultBundle.putString("bundle", "bundleErrKey");
         Bundle bundleOrDefaultErrKey = Argsx.readBundleArgOr(activity, R.string.not_exist_key, defaultBundle);
 
-        Bundle extrasRequired = Argsx.readExtrasArg(activity);
+        Bundle extrasRequired = Argsx.readExtrasArgOrThrow(activity);
         Bundle extrasOptional = Argsx.readExtrasArgOrNull(activity);
         Bundle extrasDefault = Argsx.readExtrasArgOr(activity, new Bundle());
 
@@ -1315,7 +1315,7 @@ public class ArgsxTest {
 
         byte byteRequired = Argsx.readByteArgOr(activity, R.string.byte_required, (byte) 0);
         byte byteRequiredErrKey = Argsx.readByteArgOr(activity, R.string.not_exist_key, (byte) 0);
-        byte[] byteArrayRequired = Argsx.readByteArrayArg(activity, R.string.byte_array_required);
+        byte[] byteArrayRequired = Argsx.readByteArrayArgOrThrow(activity, R.string.byte_array_required);
         byte[] byteArrayOptional = Argsx.readByteArrayArgOrNull(activity, R.string.byte_array_optional);
         byte[] byteArrayOptionalErrKey = Argsx.readByteArrayArgOrNull(activity, R.string.not_exist_key);
         byte[] byteArrayOrDefault = Argsx.readByteArrayArgOr(activity, R.string.byte_array_or_default, byteArrayOf((byte) 0, (byte) 0));
@@ -1323,7 +1323,7 @@ public class ArgsxTest {
 
         short shortRequired = Argsx.readShortArgOr(activity, R.string.short_required, (short) 0);
         short shortRequiredErrKey = Argsx.readShortArgOr(activity, R.string.not_exist_key, (short) 0);
-        short[] shortArrayRequired = Argsx.readShortArrayArg(activity, R.string.short_array_required);
+        short[] shortArrayRequired = Argsx.readShortArrayArgOrThrow(activity, R.string.short_array_required);
         short[] shortArrayOptional = Argsx.readShortArrayArgOrNull(activity, R.string.short_array_optional);
         short[] shortArrayOptionalErrKey = Argsx.readShortArrayArgOrNull(activity, R.string.not_exist_key);
         short[] shortArrayOrDefault = Argsx.readShortArrayArgOr(activity, R.string.short_array_or_default, shortArrayOf((short) 0, (short) 0));
@@ -1332,12 +1332,12 @@ public class ArgsxTest {
 
         int intRequired = Argsx.readIntArgOr(activity, R.string.int_required, 0);
         int intRequiredErrKey = Argsx.readIntArgOr(activity, R.string.not_exist_key, 0);
-        int[] intArrayRequired = Argsx.readIntArrayArg(activity, R.string.int_array_required);
+        int[] intArrayRequired = Argsx.readIntArrayArgOrThrow(activity, R.string.int_array_required);
         int[] intArrayOptional = Argsx.readIntArrayArgOrNull(activity, R.string.int_array_optional);
         int[] intArrayOptionalErrKey = Argsx.readIntArrayArgOrNull(activity, R.string.not_exist_key);
         int[] intArrayOrDefault = Argsx.readIntArrayArgOr(activity, R.string.int_array_or_default, intArrayOf(0, 0));
         int[] intArrayOrDefaultErrKey = Argsx.readIntArrayArgOr(activity, R.string.not_exist_key, intArrayOf(0, (-1)));
-        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArg(activity, R.string.int_array_list_required);
+        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArgOrThrow(activity, R.string.int_array_list_required);
         ArrayList<Integer> intArrayListOrDefault = Argsx.readIntArrayListArgOr(activity, R.string.int_array_list_or_default, arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOrDefaultErrKey = Argsx.readIntArrayListArgOr(activity, R.string.not_exist_key, arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOptional = Argsx.readIntArrayListArgOrNull(activity, R.string.int_array_list_optional);
@@ -1345,7 +1345,7 @@ public class ArgsxTest {
 
         long longRequired = Argsx.readLongArgOr(activity, R.string.long_required, 0);
         long longRequiredErrKey = Argsx.readLongArgOr(activity, R.string.not_exist_key, 0);
-        long[] longArrayRequired = Argsx.readLongArrayArg(activity, R.string.long_array_required);
+        long[] longArrayRequired = Argsx.readLongArrayArgOrThrow(activity, R.string.long_array_required);
         long[] longArrayOptional = Argsx.readLongArrayArgOrNull(activity, R.string.long_array_optional);
         long[] longArrayOptionalErrKey = Argsx.readLongArrayArgOrNull(activity, R.string.not_exist_key);
         long[] longArrayOrDefault = Argsx.readLongArrayArgOr(activity, R.string.long_array_or_default, longArrayOf(0, 0));
@@ -1353,7 +1353,7 @@ public class ArgsxTest {
 
         float floatRequired = Argsx.readFloatArgOr(activity, R.string.float_required, 0f);
         float floatRequiredErrKey = Argsx.readFloatArgOr(activity, R.string.not_exist_key, 0f);
-        float[] floatArrayRequired = Argsx.readFloatArrayArg(activity, R.string.float_array_required);
+        float[] floatArrayRequired = Argsx.readFloatArrayArgOrThrow(activity, R.string.float_array_required);
         float[] floatArrayOptional = Argsx.readFloatArrayArgOrNull(activity, R.string.float_array_optional);
         float[] floatArrayOptionalErrKey = Argsx.readFloatArrayArgOrNull(activity, R.string.not_exist_key);
         float[] floatArrayOrDefault = Argsx.readFloatArrayArgOr(activity, R.string.float_array_or_default, floatArrayOf(0f, 0f));
@@ -1361,7 +1361,7 @@ public class ArgsxTest {
 
         double doubleRequired = Argsx.readDoubleArgOr(activity, R.string.double_required, 0d);
         double doubleRequiredErrKey = Argsx.readDoubleArgOr(activity, R.string.not_exist_key, 0d);
-        double[] doubleArrayRequired = Argsx.readDoubleArrayArg(activity, R.string.double_array_required);
+        double[] doubleArrayRequired = Argsx.readDoubleArrayArgOrThrow(activity, R.string.double_array_required);
         double[] doubleArrayOptional = Argsx.readDoubleArrayArgOrNull(activity, R.string.double_array_optional);
         double[] doubleArrayOptionalErrKey = Argsx.readDoubleArrayArgOrNull(activity, R.string.not_exist_key);
         double[] doubleArrayOrDefault = Argsx.readDoubleArrayArgOr(activity, R.string.double_array_or_default, doubleArrayOf(0d, 0d));
@@ -1369,7 +1369,7 @@ public class ArgsxTest {
 
         boolean booleanRequired = Argsx.readBooleanArgOr(activity, R.string.boolean_required, false);
         boolean booleanRequiredErrKey = Argsx.readBooleanArgOr(activity, R.string.not_exist_key, false);
-        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArg(activity, R.string.boolean_array_required);
+        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArgOrThrow(activity, R.string.boolean_array_required);
         boolean[] booleanArrayOptional = Argsx.readBooleanArrayArgOrNull(activity, R.string.boolean_array_optional);
         boolean[] booleanArrayOptionalErrKey = Argsx.readBooleanArrayArgOrNull(activity, R.string.not_exist_key);
         boolean[] booleanArrayOrDefault = Argsx.readBooleanArrayArgOr(activity, R.string.boolean_array_or_default, booleanArrayOf(true, false));
@@ -1377,7 +1377,7 @@ public class ArgsxTest {
 
         char charRequired = Argsx.readCharArgOr(activity, R.string.char_required, 'a');
         char charRequiredErrKey = Argsx.readCharArgOr(activity, R.string.not_exist_key, 'b');
-        char[] charArrayRequired = Argsx.readCharArrayArg(activity, R.string.char_array_required);
+        char[] charArrayRequired = Argsx.readCharArrayArgOrThrow(activity, R.string.char_array_required);
         char[] charArrayOptional = Argsx.readCharArrayArgOrNull(activity, R.string.char_array_optional);
         char[] charArrayOptionalErrKey = Argsx.readCharArrayArgOrNull(activity, R.string.not_exist_key);
         char[] charArrayOrDefault = Argsx.readCharArrayArgOr(activity, R.string.char_array_or_default, charArrayOf('a', 'b'));
@@ -1385,12 +1385,12 @@ public class ArgsxTest {
 
         String stringRequired = Argsx.readStringArgOr(activity, R.string.string_required, "stringRequired");
         String stringRequiredErrKey = Argsx.readStringArgOr(activity, R.string.not_exist_key, "stringRequiredErrKey");
-        String[] stringArrayRequired = Argsx.readStringArrayArg(activity, R.string.string_array_required);
+        String[] stringArrayRequired = Argsx.readStringArrayArgOrThrow(activity, R.string.string_array_required);
         String[] stringArrayOptional = Argsx.readStringArrayArgOrNull(activity, R.string.string_array_optional);
         String[] stringArrayOptionalErrKey = Argsx.readStringArrayArgOrNull(activity, R.string.not_exist_key);
         String[] stringArrayOrDefault = Argsx.readStringArrayArgOr(activity, R.string.string_array_or_default, arrayOf("array", "dft"));
         String[] stringArrayOrDefaultErrKey = Argsx.readStringArrayArgOr(activity, R.string.not_exist_key, arrayOf("error", "erk"));
-        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArg(activity, R.string.string_array_list_required);
+        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArgOrThrow(activity, R.string.string_array_list_required);
         ArrayList<String> stringArrayListOrDefault = Argsx.readStringArrayListArgOr(activity, R.string.string_array_list_or_default, arrayListOf("list", "default"));
         ArrayList<String> stringArrayListOrDefaultErrKey = Argsx.readStringArrayListArgOr(activity, R.string.not_exist_key, arrayListOf("stringArrayListOrDefaultErrKey", "errKey"));
         ArrayList<String> stringArrayListOptional = Argsx.readStringArrayListArgOrNull(activity, R.string.string_array_list_optional);
@@ -1398,12 +1398,12 @@ public class ArgsxTest {
 
         CharSequence charSequenceRequired = Argsx.readCharSequenceArgOr(activity, R.string.char_sequence_required, "charSequenceRequired");
         CharSequence charSequenceRequiredErrKey = Argsx.readCharSequenceArgOr(activity, R.string.not_exist_key, "charSequenceRequiredErrKey");
-        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArg(activity, R.string.char_sequence_array_required);
+        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArgOrThrow(activity, R.string.char_sequence_array_required);
         CharSequence[] charSequenceArrayOptional = Argsx.readCharSequenceArrayArgOrNull(activity, R.string.char_sequence_array_optional);
         CharSequence[] charSequenceArrayOptionalErrKey = Argsx.readCharSequenceArrayArgOrNull(activity, R.string.not_exist_key);
         CharSequence[] charSequenceArrayOrDefault = Argsx.readCharSequenceArrayArgOr(activity, R.string.char_sequence_array_or_default, arrayOf("array", "dft"));
         CharSequence[] charSequenceArrayOrDefaultErrKey = Argsx.readCharSequenceArrayArgOr(activity, R.string.not_exist_key, arrayOf("error", "erk"));
-        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArg(activity, R.string.char_sequence_array_list_required);
+        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArgOrThrow(activity, R.string.char_sequence_array_list_required);
         ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, R.string.char_sequence_array_list_or_default, Collectionx.<CharSequence>arrayListOf("list", "default"));
         ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, R.string.not_exist_key, Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
         ArrayList<CharSequence> charSequenceArrayListOptional = Argsx.readCharSequenceArrayListArgOrNull(activity, R.string.char_sequence_array_list_optional);
@@ -1412,24 +1412,24 @@ public class ArgsxTest {
 
         Parcelable parcelableRequired = Argsx.readParcelableArgOr(activity, R.string.parcelable_required, new TestParcelable("required"));
         Parcelable parcelableRequiredErrKey = Argsx.readParcelableArgOr(activity, R.string.not_exist_key, new TestParcelable("parcelableRequiredErrKey"));
-        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArg(activity, R.string.parcelable_array_required);
+        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArgOrThrow(activity, R.string.parcelable_array_required);
         Parcelable[] parcelableArrayOptional = Argsx.readParcelableArrayArgOrNull(activity, R.string.parcelable_array_optional);
         Parcelable[] parcelableArrayOptionalErrKey = Argsx.readParcelableArrayArgOrNull(activity, R.string.not_exist_key);
         Parcelable[] parcelableArrayOrDefault = Argsx.readParcelableArrayArgOr(activity, R.string.parcelable_array_or_default, arrayOf(new TestParcelable("array"), new TestParcelable("dft")));
         Parcelable[] parcelableArrayOrDefaultErrKey = Argsx.readParcelableArrayArgOr(activity, R.string.not_exist_key, arrayOf(new TestParcelable("error"), new TestParcelable("erk")));
-        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArg(activity, R.string.parcelable_array_list_required);
+        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArgOrThrow(activity, R.string.parcelable_array_list_required);
         ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, R.string.parcelable_array_list_or_default, Collectionx.<Parcelable>arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
         ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, R.string.not_exist_key, Collectionx.<Parcelable>arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
         ArrayList<Parcelable> parcelableArrayListOptional = Argsx.readParcelableArrayListArgOrNull(activity, R.string.parcelable_array_list_optional);
         ArrayList<Parcelable> parcelableArrayListOptionalErrKey = Argsx.readParcelableArrayListArgOrNull(activity, R.string.not_exist_key);
 
-        TestSerializable serializableRequired = Argsx.readSerializableArg(activity, R.string.serializable_required);
+        TestSerializable serializableRequired = Argsx.readSerializableArgOrThrow(activity, R.string.serializable_required);
         TestSerializable serializableOptional = Argsx.readSerializableArgOrNull(activity, R.string.serializable_optional);
         TestSerializable serializableOptionalErrKey = Argsx.readSerializableArgOrNull(activity, R.string.not_exist_key);
         TestSerializable serializableOrDefault = Argsx.readSerializableArgOr(activity, R.string.serializable_or_default, new TestSerializable("default"));
         TestSerializable serializableOrDefaultErrKey = Argsx.readSerializableArgOr(activity, R.string.not_exist_key, new TestSerializable("errKey"));
 
-        Bundle bundleRequired = Argsx.readBundleArg(activity, R.string.bundle_required);
+        Bundle bundleRequired = Argsx.readBundleArgOrThrow(activity, R.string.bundle_required);
         Bundle bundleOptional = Argsx.readBundleArgOrNull(activity, R.string.bundle_optional);
         Bundle bundleOptionalErrKey = Argsx.readBundleArgOrNull(activity, R.string.not_exist_key);
         Bundle bundleOrDefault = Argsx.readBundleArgOr(activity, R.string.bundle_or_default, new Bundle());
@@ -1440,14 +1440,14 @@ public class ArgsxTest {
 
         SparseArray<Parcelable> sparseArrayDefault = new SparseArray<>();
         sparseArrayDefault.put(0, new TestParcelable("0"));
-        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArg(activity, R.string.sparse_parcelable_array_required);
+        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArgOrThrow(activity, R.string.sparse_parcelable_array_required);
         SparseArray<Parcelable> sparseParcelableArrayOptional = Argsx.readSparseParcelableArrayArgOrNull(activity, R.string.sparse_parcelable_array_optional);
         SparseArray<Parcelable> sparseParcelableArrayOptionalErrKey = Argsx.readSparseParcelableArrayArgOrNull(activity, R.string.not_exist_key);
         SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, R.string.sparse_parcelable_array_or_default, sparseArrayDefault);
         SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, R.string.not_exist_key, sparseArrayDefault);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            IBinder binderRequired = Argsx.readBinderArg(activity, R.string.binder_required);
+            IBinder binderRequired = Argsx.readBinderArgOrThrow(activity, R.string.binder_required);
             IBinder binderOptional = Argsx.readBinderArgOrNull(activity, R.string.binder_optional);
             IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, R.string.not_exist_key);
             IBinder binderOrDefault = Argsx.readBinderArgOr(activity, R.string.binder_or_default, new TestBinder(""));
@@ -1461,13 +1461,13 @@ public class ArgsxTest {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Size sizeRequired = Argsx.readSizeArg(activity, R.string.size_required);
+            Size sizeRequired = Argsx.readSizeArgOrThrow(activity, R.string.size_required);
             Size sizeOptional = Argsx.readSizeArgOrNull(activity, R.string.size_optional);
             Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, R.string.not_exist_key);
             Size sizeOrDefault = Argsx.readSizeArgOr(activity, R.string.size_or_default, new Size(0, 0));
             Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, R.string.not_exist_key, new Size(4, 4));
 
-            SizeF sizeFRequired = Argsx.readSizeFArg(activity, R.string.sizeF_required);
+            SizeF sizeFRequired = Argsx.readSizeFArgOrThrow(activity, R.string.sizeF_required);
             SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, R.string.sizeF_optional);
             SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, R.string.not_exist_key);
             SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, R.string.sizeF_or_default, new SizeF(0f, 0f));
@@ -1625,7 +1625,7 @@ public class ArgsxTest {
 
         byte byteRequired = Argsx.readByteArgOr(activity, R.string.byte_required, (byte) 0);
         byte byteRequiredErrKey = Argsx.readByteArgOr(activity, R.string.not_exist_key, (byte) 0);
-        byte[] byteArrayRequired = Argsx.readByteArrayArg(activity, R.string.byte_array_required);
+        byte[] byteArrayRequired = Argsx.readByteArrayArgOrThrow(activity, R.string.byte_array_required);
         byte[] byteArrayOptional = Argsx.readByteArrayArgOrNull(activity, R.string.byte_array_optional);
         byte[] byteArrayOptionalErrKey = Argsx.readByteArrayArgOrNull(activity, R.string.not_exist_key);
         byte[] byteArrayOrDefault = Argsx.readByteArrayArgOr(activity, R.string.byte_array_or_default, byteArrayOf((byte) 0, (byte) 0));
@@ -1633,7 +1633,7 @@ public class ArgsxTest {
 
         short shortRequired = Argsx.readShortArgOr(activity, R.string.short_required, (short) 0);
         short shortRequiredErrKey = Argsx.readShortArgOr(activity, R.string.not_exist_key, (short) 0);
-        short[] shortArrayRequired = Argsx.readShortArrayArg(activity, R.string.short_array_required);
+        short[] shortArrayRequired = Argsx.readShortArrayArgOrThrow(activity, R.string.short_array_required);
         short[] shortArrayOptional = Argsx.readShortArrayArgOrNull(activity, R.string.short_array_optional);
         short[] shortArrayOptionalErrKey = Argsx.readShortArrayArgOrNull(activity, R.string.not_exist_key);
         short[] shortArrayOrDefault = Argsx.readShortArrayArgOr(activity, R.string.short_array_or_default, shortArrayOf((short) 0, (short) 0));
@@ -1642,12 +1642,12 @@ public class ArgsxTest {
 
         int intRequired = Argsx.readIntArgOr(activity, R.string.int_required, 0);
         int intRequiredErrKey = Argsx.readIntArgOr(activity, R.string.not_exist_key, 0);
-        int[] intArrayRequired = Argsx.readIntArrayArg(activity, R.string.int_array_required);
+        int[] intArrayRequired = Argsx.readIntArrayArgOrThrow(activity, R.string.int_array_required);
         int[] intArrayOptional = Argsx.readIntArrayArgOrNull(activity, R.string.int_array_optional);
         int[] intArrayOptionalErrKey = Argsx.readIntArrayArgOrNull(activity, R.string.not_exist_key);
         int[] intArrayOrDefault = Argsx.readIntArrayArgOr(activity, R.string.int_array_or_default, intArrayOf(0, 0));
         int[] intArrayOrDefaultErrKey = Argsx.readIntArrayArgOr(activity, R.string.not_exist_key, intArrayOf(0, (-1)));
-        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArg(activity, R.string.int_array_list_required);
+        ArrayList<Integer> intArrayListRequired = Argsx.readIntArrayListArgOrThrow(activity, R.string.int_array_list_required);
         ArrayList<Integer> intArrayListOrDefault = Argsx.readIntArrayListArgOr(activity, R.string.int_array_list_or_default, arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOrDefaultErrKey = Argsx.readIntArrayListArgOr(activity, R.string.not_exist_key, arrayListOf(0, 0));
         ArrayList<Integer> intArrayListOptional = Argsx.readIntArrayListArgOrNull(activity, R.string.int_array_list_optional);
@@ -1655,7 +1655,7 @@ public class ArgsxTest {
 
         long longRequired = Argsx.readLongArgOr(activity, R.string.long_required, 0);
         long longRequiredErrKey = Argsx.readLongArgOr(activity, R.string.not_exist_key, 0);
-        long[] longArrayRequired = Argsx.readLongArrayArg(activity, R.string.long_array_required);
+        long[] longArrayRequired = Argsx.readLongArrayArgOrThrow(activity, R.string.long_array_required);
         long[] longArrayOptional = Argsx.readLongArrayArgOrNull(activity, R.string.long_array_optional);
         long[] longArrayOptionalErrKey = Argsx.readLongArrayArgOrNull(activity, R.string.not_exist_key);
         long[] longArrayOrDefault = Argsx.readLongArrayArgOr(activity, R.string.long_array_or_default, longArrayOf(0, 0));
@@ -1663,7 +1663,7 @@ public class ArgsxTest {
 
         float floatRequired = Argsx.readFloatArgOr(activity, R.string.float_required, 0f);
         float floatRequiredErrKey = Argsx.readFloatArgOr(activity, R.string.not_exist_key, 0f);
-        float[] floatArrayRequired = Argsx.readFloatArrayArg(activity, R.string.float_array_required);
+        float[] floatArrayRequired = Argsx.readFloatArrayArgOrThrow(activity, R.string.float_array_required);
         float[] floatArrayOptional = Argsx.readFloatArrayArgOrNull(activity, R.string.float_array_optional);
         float[] floatArrayOptionalErrKey = Argsx.readFloatArrayArgOrNull(activity, R.string.not_exist_key);
         float[] floatArrayOrDefault = Argsx.readFloatArrayArgOr(activity, R.string.float_array_or_default, floatArrayOf(0f, 0f));
@@ -1671,7 +1671,7 @@ public class ArgsxTest {
 
         double doubleRequired = Argsx.readDoubleArgOr(activity, R.string.double_required, 0d);
         double doubleRequiredErrKey = Argsx.readDoubleArgOr(activity, R.string.not_exist_key, 0d);
-        double[] doubleArrayRequired = Argsx.readDoubleArrayArg(activity, R.string.double_array_required);
+        double[] doubleArrayRequired = Argsx.readDoubleArrayArgOrThrow(activity, R.string.double_array_required);
         double[] doubleArrayOptional = Argsx.readDoubleArrayArgOrNull(activity, R.string.double_array_optional);
         double[] doubleArrayOptionalErrKey = Argsx.readDoubleArrayArgOrNull(activity, R.string.not_exist_key);
         double[] doubleArrayOrDefault = Argsx.readDoubleArrayArgOr(activity, R.string.double_array_or_default, doubleArrayOf(0d, 0d));
@@ -1679,7 +1679,7 @@ public class ArgsxTest {
 
         boolean booleanRequired = Argsx.readBooleanArgOr(activity, R.string.boolean_required, false);
         boolean booleanRequiredErrKey = Argsx.readBooleanArgOr(activity, R.string.not_exist_key, false);
-        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArg(activity, R.string.boolean_array_required);
+        boolean[] booleanArrayRequired = Argsx.readBooleanArrayArgOrThrow(activity, R.string.boolean_array_required);
         boolean[] booleanArrayOptional = Argsx.readBooleanArrayArgOrNull(activity, R.string.boolean_array_optional);
         boolean[] booleanArrayOptionalErrKey = Argsx.readBooleanArrayArgOrNull(activity, R.string.not_exist_key);
         boolean[] booleanArrayOrDefault = Argsx.readBooleanArrayArgOr(activity, R.string.boolean_array_or_default, booleanArrayOf(true, false));
@@ -1687,7 +1687,7 @@ public class ArgsxTest {
 
         char charRequired = Argsx.readCharArgOr(activity, R.string.char_required, 'a');
         char charRequiredErrKey = Argsx.readCharArgOr(activity, R.string.not_exist_key, 'b');
-        char[] charArrayRequired = Argsx.readCharArrayArg(activity, R.string.char_array_required);
+        char[] charArrayRequired = Argsx.readCharArrayArgOrThrow(activity, R.string.char_array_required);
         char[] charArrayOptional = Argsx.readCharArrayArgOrNull(activity, R.string.char_array_optional);
         char[] charArrayOptionalErrKey = Argsx.readCharArrayArgOrNull(activity, R.string.not_exist_key);
         char[] charArrayOrDefault = Argsx.readCharArrayArgOr(activity, R.string.char_array_or_default, charArrayOf('a', 'b'));
@@ -1695,12 +1695,12 @@ public class ArgsxTest {
 
         String stringRequired = Argsx.readStringArgOr(activity, R.string.string_required, "stringRequired");
         String stringRequiredErrKey = Argsx.readStringArgOr(activity, R.string.not_exist_key, "stringRequiredErrKey");
-        String[] stringArrayRequired = Argsx.readStringArrayArg(activity, R.string.string_array_required);
+        String[] stringArrayRequired = Argsx.readStringArrayArgOrThrow(activity, R.string.string_array_required);
         String[] stringArrayOptional = Argsx.readStringArrayArgOrNull(activity, R.string.string_array_optional);
         String[] stringArrayOptionalErrKey = Argsx.readStringArrayArgOrNull(activity, R.string.not_exist_key);
         String[] stringArrayOrDefault = Argsx.readStringArrayArgOr(activity, R.string.string_array_or_default, arrayOf("array", "dft"));
         String[] stringArrayOrDefaultErrKey = Argsx.readStringArrayArgOr(activity, R.string.not_exist_key, arrayOf("error", "erk"));
-        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArg(activity, R.string.string_array_list_required);
+        ArrayList<String> stringArrayListRequired = Argsx.readStringArrayListArgOrThrow(activity, R.string.string_array_list_required);
         ArrayList<String> stringArrayListOrDefault = Argsx.readStringArrayListArgOr(activity, R.string.string_array_list_or_default, arrayListOf("list", "default"));
         ArrayList<String> stringArrayListOrDefaultErrKey = Argsx.readStringArrayListArgOr(activity, R.string.not_exist_key, arrayListOf("stringArrayListOrDefaultErrKey", "errKey"));
         ArrayList<String> stringArrayListOptional = Argsx.readStringArrayListArgOrNull(activity, R.string.string_array_list_optional);
@@ -1708,12 +1708,12 @@ public class ArgsxTest {
 
         CharSequence charSequenceRequired = Argsx.readCharSequenceArgOr(activity, R.string.char_sequence_required, "charSequenceRequired");
         CharSequence charSequenceRequiredErrKey = Argsx.readCharSequenceArgOr(activity, R.string.not_exist_key, "charSequenceRequiredErrKey");
-        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArg(activity, R.string.char_sequence_array_required);
+        CharSequence[] charSequenceArrayRequired = Argsx.readCharSequenceArrayArgOrThrow(activity, R.string.char_sequence_array_required);
         CharSequence[] charSequenceArrayOptional = Argsx.readCharSequenceArrayArgOrNull(activity, R.string.char_sequence_array_optional);
         CharSequence[] charSequenceArrayOptionalErrKey = Argsx.readCharSequenceArrayArgOrNull(activity, R.string.not_exist_key);
         CharSequence[] charSequenceArrayOrDefault = Argsx.readCharSequenceArrayArgOr(activity, R.string.char_sequence_array_or_default, arrayOf("array", "dft"));
         CharSequence[] charSequenceArrayOrDefaultErrKey = Argsx.readCharSequenceArrayArgOr(activity, R.string.not_exist_key, arrayOf("error", "erk"));
-        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArg(activity, R.string.char_sequence_array_list_required);
+        ArrayList<CharSequence> charSequenceArrayListRequired = Argsx.readCharSequenceArrayListArgOrThrow(activity, R.string.char_sequence_array_list_required);
         ArrayList<CharSequence> charSequenceArrayListOrDefault = Argsx.readCharSequenceArrayListArgOr(activity, R.string.char_sequence_array_list_or_default, Collectionx.<CharSequence>arrayListOf("list", "default"));
         ArrayList<CharSequence> charSequenceArrayListOrDefaultErrKey = Argsx.readCharSequenceArrayListArgOr(activity, R.string.not_exist_key, Collectionx.<CharSequence>arrayListOf("charSequenceArrayListOrDefaultErrKey", "errKey"));
         ArrayList<CharSequence> charSequenceArrayListOptional = Argsx.readCharSequenceArrayListArgOrNull(activity, R.string.char_sequence_array_list_optional);
@@ -1722,24 +1722,24 @@ public class ArgsxTest {
 
         Parcelable parcelableRequired = Argsx.readParcelableArgOr(activity, R.string.parcelable_required, new TestParcelable("required"));
         Parcelable parcelableRequiredErrKey = Argsx.readParcelableArgOr(activity, R.string.not_exist_key, new TestParcelable("parcelableRequiredErrKey"));
-        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArg(activity, R.string.parcelable_array_required);
+        Parcelable[] parcelableArrayRequired = Argsx.readParcelableArrayArgOrThrow(activity, R.string.parcelable_array_required);
         Parcelable[] parcelableArrayOptional = Argsx.readParcelableArrayArgOrNull(activity, R.string.parcelable_array_optional);
         Parcelable[] parcelableArrayOptionalErrKey = Argsx.readParcelableArrayArgOrNull(activity, R.string.not_exist_key);
         Parcelable[] parcelableArrayOrDefault = Argsx.readParcelableArrayArgOr(activity, R.string.parcelable_array_or_default, arrayOf(new TestParcelable("array"), new TestParcelable("dft")));
         Parcelable[] parcelableArrayOrDefaultErrKey = Argsx.readParcelableArrayArgOr(activity, R.string.not_exist_key, arrayOf(new TestParcelable("error"), new TestParcelable("erk")));
-        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArg(activity, R.string.parcelable_array_list_required);
+        ArrayList<Parcelable> parcelableArrayListRequired = Argsx.readParcelableArrayListArgOrThrow(activity, R.string.parcelable_array_list_required);
         ArrayList<Parcelable> parcelableArrayListOrDefault = Argsx.readParcelableArrayListArgOr(activity, R.string.parcelable_array_list_or_default, Collectionx.<Parcelable>arrayListOf(new TestParcelable("list"), new TestParcelable("default")));
         ArrayList<Parcelable> parcelableArrayListOrDefaultErrKey = Argsx.readParcelableArrayListArgOr(activity, R.string.not_exist_key, Collectionx.<Parcelable>arrayListOf(new TestParcelable("parcelableArrayListOrDefaultErrKey"), new TestParcelable("errKey")));
         ArrayList<Parcelable> parcelableArrayListOptional = Argsx.readParcelableArrayListArgOrNull(activity, R.string.parcelable_array_list_optional);
         ArrayList<Parcelable> parcelableArrayListOptionalErrKey = Argsx.readParcelableArrayListArgOrNull(activity, R.string.not_exist_key);
 
-        TestSerializable serializableRequired = Argsx.readSerializableArg(activity, R.string.serializable_required);
+        TestSerializable serializableRequired = Argsx.readSerializableArgOrThrow(activity, R.string.serializable_required);
         TestSerializable serializableOptional = Argsx.readSerializableArgOrNull(activity, R.string.serializable_optional);
         TestSerializable serializableOptionalErrKey = Argsx.readSerializableArgOrNull(activity, R.string.not_exist_key);
         TestSerializable serializableOrDefault = Argsx.readSerializableArgOr(activity, R.string.serializable_or_default, new TestSerializable("default"));
         TestSerializable serializableOrDefaultErrKey = Argsx.readSerializableArgOr(activity, R.string.not_exist_key, new TestSerializable("errKey"));
 
-        Bundle bundleRequired = Argsx.readBundleArg(activity, R.string.bundle_required);
+        Bundle bundleRequired = Argsx.readBundleArgOrThrow(activity, R.string.bundle_required);
         Bundle bundleOptional = Argsx.readBundleArgOrNull(activity, R.string.bundle_optional);
         Bundle bundleOptionalErrKey = Argsx.readBundleArgOrNull(activity, R.string.not_exist_key);
         Bundle bundleOrDefault = Argsx.readBundleArgOr(activity, R.string.bundle_or_default, new Bundle());
@@ -1750,14 +1750,14 @@ public class ArgsxTest {
 
         SparseArray<Parcelable> sparseArrayDefault = new SparseArray<>();
         sparseArrayDefault.put(0, new TestParcelable("0"));
-        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArg(activity, R.string.sparse_parcelable_array_required);
+        SparseArray<Parcelable> sparseParcelableArrayRequired = Argsx.readSparseParcelableArrayArgOrThrow(activity, R.string.sparse_parcelable_array_required);
         SparseArray<Parcelable> sparseParcelableArrayOptional = Argsx.readSparseParcelableArrayArgOrNull(activity, R.string.sparse_parcelable_array_optional);
         SparseArray<Parcelable> sparseParcelableArrayOptionalErrKey = Argsx.readSparseParcelableArrayArgOrNull(activity, R.string.not_exist_key);
         SparseArray<Parcelable> sparseParcelableArrayOrDefault = Argsx.readSparseParcelableArrayArgOr(activity, R.string.sparse_parcelable_array_or_default, sparseArrayDefault);
         SparseArray<Parcelable> sparseParcelableArrayOrDefaultErrKey = Argsx.readSparseParcelableArrayArgOr(activity, R.string.not_exist_key, sparseArrayDefault);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            IBinder binderRequired = Argsx.readBinderArg(activity, R.string.binder_required);
+            IBinder binderRequired = Argsx.readBinderArgOrThrow(activity, R.string.binder_required);
             IBinder binderOptional = Argsx.readBinderArgOrNull(activity, R.string.binder_optional);
             IBinder binderOptionalErrKey = Argsx.readBinderArgOrNull(activity, R.string.not_exist_key);
             IBinder binderOrDefault = Argsx.readBinderArgOr(activity, R.string.binder_or_default, new TestBinder(""));
@@ -1771,13 +1771,13 @@ public class ArgsxTest {
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Size sizeRequired = Argsx.readSizeArg(activity, R.string.size_required);
+            Size sizeRequired = Argsx.readSizeArgOrThrow(activity, R.string.size_required);
             Size sizeOptional = Argsx.readSizeArgOrNull(activity, R.string.size_optional);
             Size sizeOptionalErrKey = Argsx.readSizeArgOrNull(activity, R.string.not_exist_key);
             Size sizeOrDefault = Argsx.readSizeArgOr(activity, R.string.size_or_default, new Size(0, 0));
             Size sizeOrDefaultErrKey = Argsx.readSizeArgOr(activity, R.string.not_exist_key, new Size(4, 4));
 
-            SizeF sizeFRequired = Argsx.readSizeFArg(activity, R.string.sizeF_required);
+            SizeF sizeFRequired = Argsx.readSizeFArgOrThrow(activity, R.string.sizeF_required);
             SizeF sizeFOptional = Argsx.readSizeFArgOrNull(activity, R.string.sizeF_optional);
             SizeF sizeFOptionalErrKey = Argsx.readSizeFArgOrNull(activity, R.string.not_exist_key);
             SizeF sizeFOrDefault = Argsx.readSizeFArgOr(activity, R.string.sizeF_or_default, new SizeF(0f, 0f));
@@ -1938,7 +1938,7 @@ public class ArgsxTest {
         float floatIntentUriOrDefault = Argsx.readFloatIntentUriArgOr(activity, "floatIntentUriOrDefault", ((float) 0));
         double doubleIntentUriOrDefault = Argsx.readDoubleIntentUriArgOr(activity, "doubleIntentUriOrDefault", ((double) 0));
         boolean booleanIntentUriOrDefault = Argsx.readBooleanIntentUriArgOr(activity, "booleanIntentUriOrDefault", false);
-        String stringIntentUriRequired = Argsx.readStringIntentUriArg(activity, "stringIntentUriRequired");
+        String stringIntentUriRequired = Argsx.readStringIntentUriArgOrThrow(activity, "stringIntentUriRequired");
         String stringIntentUriOrDefault = Argsx.readStringIntentUriArgOr(activity, "stringIntentUriOrDefault", "default");
         String stringIntentUriOrDefaultErrKey = Argsx.readStringIntentUriArgOr(activity, "stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey");
         String stringIntentUriOptional = Argsx.readStringIntentUriArgOrNull(activity, "stringIntentUriOptional");
@@ -1952,7 +1952,7 @@ public class ArgsxTest {
         float floatUriIntentOrDefault = Argsx.readFloatUriIntentArgOr(activity, "floatUriIntentOrDefault", ((float) 0));
         double doubleUriIntentOrDefault = Argsx.readDoubleUriIntentArgOr(activity, "doubleUriIntentOrDefault", ((double) 0));
         boolean booleanUriIntentOrDefault = Argsx.readBooleanUriIntentArgOr(activity, "booleanUriIntentOrDefault", false);
-        String stringUriIntentRequired = Argsx.readStringUriIntentArg(activity, "stringUriIntentRequired");
+        String stringUriIntentRequired = Argsx.readStringUriIntentArgOrThrow(activity, "stringUriIntentRequired");
         String stringUriIntentOrDefault = Argsx.readStringUriIntentArgOr(activity, "stringUriIntentOrDefault", "default");
         String stringUriIntentOrDefaultErrKey = Argsx.readStringUriIntentArgOr(activity, "stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey");
         String stringUriIntentOptional = Argsx.readStringUriIntentArgOrNull(activity, "stringUriIntentOptional");
@@ -1997,7 +1997,7 @@ public class ArgsxTest {
         float floatIntentUriOrDefault = Argsx.readFloatIntentUriArgOr(activity, "floatIntentUriOrDefault", ((float) 0));
         double doubleIntentUriOrDefault = Argsx.readDoubleIntentUriArgOr(activity, "doubleIntentUriOrDefault", ((double) 0));
         boolean booleanIntentUriOrDefault = Argsx.readBooleanIntentUriArgOr(activity, "booleanIntentUriOrDefault", false);
-        String stringIntentUriRequired = Argsx.readStringIntentUriArg(activity, "stringIntentUriRequired");
+        String stringIntentUriRequired = Argsx.readStringIntentUriArgOrThrow(activity, "stringIntentUriRequired");
         String stringIntentUriOrDefault = Argsx.readStringIntentUriArgOr(activity, "stringIntentUriOrDefault", "default");
         String stringIntentUriOrDefaultErrKey = Argsx.readStringIntentUriArgOr(activity, "stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey");
         String stringIntentUriOptional = Argsx.readStringIntentUriArgOrNull(activity, "stringIntentUriOptional");
@@ -2011,7 +2011,7 @@ public class ArgsxTest {
         float floatUriIntentOrDefault = Argsx.readFloatUriIntentArgOr(activity, "floatUriIntentOrDefault", ((float) 0));
         double doubleUriIntentOrDefault = Argsx.readDoubleUriIntentArgOr(activity, "doubleUriIntentOrDefault", ((double) 0));
         boolean booleanUriIntentOrDefault = Argsx.readBooleanUriIntentArgOr(activity, "booleanUriIntentOrDefault", false);
-        String stringUriIntentRequired = Argsx.readStringUriIntentArg(activity, "stringUriIntentRequired");
+        String stringUriIntentRequired = Argsx.readStringUriIntentArgOrThrow(activity, "stringUriIntentRequired");
         String stringUriIntentOrDefault = Argsx.readStringUriIntentArgOr(activity, "stringUriIntentOrDefault", "default");
         String stringUriIntentOrDefaultErrKey = Argsx.readStringUriIntentArgOr(activity, "stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey");
         String stringUriIntentOptional = Argsx.readStringUriIntentArgOrNull(activity, "stringUriIntentOptional");
@@ -2056,7 +2056,7 @@ public class ArgsxTest {
         float floatIntentUriOrDefault = Argsx.readFloatIntentUriArgOr(activity, "floatIntentUriOrDefault", ((float) 0));
         double doubleIntentUriOrDefault = Argsx.readDoubleIntentUriArgOr(activity, "doubleIntentUriOrDefault", ((double) 0));
         boolean booleanIntentUriOrDefault = Argsx.readBooleanIntentUriArgOr(activity, "booleanIntentUriOrDefault", false);
-        String stringIntentUriRequired = Argsx.readStringIntentUriArg(activity, "stringIntentUriRequired");
+        String stringIntentUriRequired = Argsx.readStringIntentUriArgOrThrow(activity, "stringIntentUriRequired");
         String stringIntentUriOrDefault = Argsx.readStringIntentUriArgOr(activity, "stringIntentUriOrDefault", "default");
         String stringIntentUriOrDefaultErrKey = Argsx.readStringIntentUriArgOr(activity, "stringIntentUriOrDefaultErrKey", "stringIntentUriOrDefaultErrKey");
         String stringIntentUriOptional = Argsx.readStringIntentUriArgOrNull(activity, "stringIntentUriOptional");
@@ -2070,7 +2070,7 @@ public class ArgsxTest {
         float floatUriIntentOrDefault = Argsx.readFloatUriIntentArgOr(activity, "floatUriIntentOrDefault", ((float) 0));
         double doubleUriIntentOrDefault = Argsx.readDoubleUriIntentArgOr(activity, "doubleUriIntentOrDefault", ((double) 0));
         boolean booleanUriIntentOrDefault = Argsx.readBooleanUriIntentArgOr(activity, "booleanUriIntentOrDefault", false);
-        String stringUriIntentRequired = Argsx.readStringUriIntentArg(activity, "stringUriIntentRequired");
+        String stringUriIntentRequired = Argsx.readStringUriIntentArgOrThrow(activity, "stringUriIntentRequired");
         String stringUriIntentOrDefault = Argsx.readStringUriIntentArgOr(activity, "stringUriIntentOrDefault", "default");
         String stringUriIntentOrDefaultErrKey = Argsx.readStringUriIntentArgOr(activity, "stringUriIntentOrDefaultErrKey", "stringUriIntentOrDefaultErrKey");
         String stringUriIntentOptional = Argsx.readStringUriIntentArgOrNull(activity, "stringUriIntentOptional");
@@ -2173,7 +2173,7 @@ public class ArgsxTest {
         float floatIntentUriOrDefault = Argsx.readFloatIntentUriArgOr(activity, R.string.float_intent_uri_or_default, ((float) 0));
         double doubleIntentUriOrDefault = Argsx.readDoubleIntentUriArgOr(activity, R.string.double_intent_uri_or_default, ((double) 0));
         boolean booleanIntentUriOrDefault = Argsx.readBooleanIntentUriArgOr(activity, R.string.boolean_intent_uri_or_default, false);
-        String stringIntentUriRequired = Argsx.readStringIntentUriArg(activity, R.string.string_intent_uri_required);
+        String stringIntentUriRequired = Argsx.readStringIntentUriArgOrThrow(activity, R.string.string_intent_uri_required);
         String stringIntentUriOrDefault = Argsx.readStringIntentUriArgOr(activity, R.string.string_intent_uri_or_default, "default");
         String stringIntentUriOrDefaultErrKey = Argsx.readStringIntentUriArgOr(activity, R.string.not_exist_key, "stringIntentUriOrDefaultErrKey");
         String stringIntentUriOptional = Argsx.readStringIntentUriArgOrNull(activity, R.string.string_intent_uri_optional);
@@ -2187,7 +2187,7 @@ public class ArgsxTest {
         float floatUriIntentOrDefault = Argsx.readFloatUriIntentArgOr(activity, R.string.float_uri_intent_or_default, ((float) 0));
         double doubleUriIntentOrDefault = Argsx.readDoubleUriIntentArgOr(activity, R.string.double_uri_intent_or_default, ((double) 0));
         boolean booleanUriIntentOrDefault = Argsx.readBooleanUriIntentArgOr(activity, R.string.boolean_uri_intent_or_default, false);
-        String stringUriIntentRequired = Argsx.readStringUriIntentArg(activity, R.string.string_uri_intent_required);
+        String stringUriIntentRequired = Argsx.readStringUriIntentArgOrThrow(activity, R.string.string_uri_intent_required);
         String stringUriIntentOrDefault = Argsx.readStringUriIntentArgOr(activity, R.string.string_uri_intent_or_default, "default");
         String stringUriIntentOrDefaultErrKey = Argsx.readStringUriIntentArgOr(activity, R.string.not_exist_key, "stringUriIntentOrDefaultErrKey");
         String stringUriIntentOptional = Argsx.readStringUriIntentArgOrNull(activity, R.string.string_uri_intent_optional);
@@ -2232,7 +2232,7 @@ public class ArgsxTest {
         float floatIntentUriOrDefault = Argsx.readFloatIntentUriArgOr(activity, R.string.float_intent_uri_or_default, ((float) 0));
         double doubleIntentUriOrDefault = Argsx.readDoubleIntentUriArgOr(activity, R.string.double_intent_uri_or_default, ((double) 0));
         boolean booleanIntentUriOrDefault = Argsx.readBooleanIntentUriArgOr(activity, R.string.boolean_intent_uri_or_default, false);
-        String stringIntentUriRequired = Argsx.readStringIntentUriArg(activity, R.string.string_intent_uri_required);
+        String stringIntentUriRequired = Argsx.readStringIntentUriArgOrThrow(activity, R.string.string_intent_uri_required);
         String stringIntentUriOrDefault = Argsx.readStringIntentUriArgOr(activity, R.string.string_intent_uri_or_default, "default");
         String stringIntentUriOrDefaultErrKey = Argsx.readStringIntentUriArgOr(activity, R.string.not_exist_key, "stringIntentUriOrDefaultErrKey");
         String stringIntentUriOptional = Argsx.readStringIntentUriArgOrNull(activity, R.string.string_intent_uri_optional);
@@ -2246,7 +2246,7 @@ public class ArgsxTest {
         float floatUriIntentOrDefault = Argsx.readFloatUriIntentArgOr(activity, R.string.float_uri_intent_or_default, ((float) 0));
         double doubleUriIntentOrDefault = Argsx.readDoubleUriIntentArgOr(activity, R.string.double_uri_intent_or_default, ((double) 0));
         boolean booleanUriIntentOrDefault = Argsx.readBooleanUriIntentArgOr(activity, R.string.boolean_uri_intent_or_default, false);
-        String stringUriIntentRequired = Argsx.readStringUriIntentArg(activity, R.string.string_uri_intent_required);
+        String stringUriIntentRequired = Argsx.readStringUriIntentArgOrThrow(activity, R.string.string_uri_intent_required);
         String stringUriIntentOrDefault = Argsx.readStringUriIntentArgOr(activity, R.string.string_uri_intent_or_default, "default");
         String stringUriIntentOrDefaultErrKey = Argsx.readStringUriIntentArgOr(activity, R.string.not_exist_key, "stringUriIntentOrDefaultErrKey");
         String stringUriIntentOptional = Argsx.readStringUriIntentArgOrNull(activity, R.string.string_uri_intent_optional);
@@ -2291,7 +2291,7 @@ public class ArgsxTest {
         float floatIntentUriOrDefault = Argsx.readFloatIntentUriArgOr(activity, R.string.float_intent_uri_or_default, ((float) 0));
         double doubleIntentUriOrDefault = Argsx.readDoubleIntentUriArgOr(activity, R.string.double_intent_uri_or_default, ((double) 0));
         boolean booleanIntentUriOrDefault = Argsx.readBooleanIntentUriArgOr(activity, R.string.boolean_intent_uri_or_default, false);
-        String stringIntentUriRequired = Argsx.readStringIntentUriArg(activity, R.string.string_intent_uri_required);
+        String stringIntentUriRequired = Argsx.readStringIntentUriArgOrThrow(activity, R.string.string_intent_uri_required);
         String stringIntentUriOrDefault = Argsx.readStringIntentUriArgOr(activity, R.string.string_intent_uri_or_default, "default");
         String stringIntentUriOrDefaultErrKey = Argsx.readStringIntentUriArgOr(activity, R.string.not_exist_key, "stringIntentUriOrDefaultErrKey");
         String stringIntentUriOptional = Argsx.readStringIntentUriArgOrNull(activity, R.string.string_intent_uri_optional);
@@ -2305,7 +2305,7 @@ public class ArgsxTest {
         float floatUriIntentOrDefault = Argsx.readFloatUriIntentArgOr(activity, R.string.float_uri_intent_or_default, ((float) 0));
         double doubleUriIntentOrDefault = Argsx.readDoubleUriIntentArgOr(activity, R.string.double_uri_intent_or_default, ((double) 0));
         boolean booleanUriIntentOrDefault = Argsx.readBooleanUriIntentArgOr(activity, R.string.boolean_uri_intent_or_default, false);
-        String stringUriIntentRequired = Argsx.readStringUriIntentArg(activity, R.string.string_uri_intent_required);
+        String stringUriIntentRequired = Argsx.readStringUriIntentArgOrThrow(activity, R.string.string_uri_intent_required);
         String stringUriIntentOrDefault = Argsx.readStringUriIntentArgOr(activity, R.string.string_uri_intent_or_default, "default");
         String stringUriIntentOrDefaultErrKey = Argsx.readStringUriIntentArgOr(activity, R.string.not_exist_key, "stringUriIntentOrDefaultErrKey");
         String stringUriIntentOptional = Argsx.readStringUriIntentArgOrNull(activity, R.string.string_uri_intent_optional);
@@ -2401,49 +2401,49 @@ public class ArgsxTest {
     public void uriActivityTest() {
         Activity activity = uriActivityTestRule.getActivity();
 
-        byte byteUriRequired = Argsx.readByteUriArg(activity, "byteUriRequired");
+        byte byteUriRequired = Argsx.readByteUriArgOrThrow(activity, "byteUriRequired");
         Byte byteUriOptional = Argsx.readByteUriArgOrNull(activity, "byteUriOptional");
         Byte byteUriOptionalErrKey = Argsx.readByteUriArgOrNull(activity, "byteUriOptionalErrKey");
         byte byteUriOrDefault = Argsx.readByteUriArgOr(activity, "byteUriOrDefault", ((byte) 0));
         byte byteUriOrDefaultErrKey = Argsx.readByteUriArgOr(activity, "byteUriOrDefaultErrKey", ((byte) 0));
 
-        short shortUriRequired = Argsx.readShortUriArg(activity, "shortUriRequired");
+        short shortUriRequired = Argsx.readShortUriArgOrThrow(activity, "shortUriRequired");
         Short shortUriOptional = Argsx.readShortUriArgOrNull(activity, "shortUriOptional");
         Short shortUriOptionalErrKey = Argsx.readShortUriArgOrNull(activity, "shortUriOptionalErrKey");
         short shortUriOrDefault = Argsx.readShortUriArgOr(activity, "shortUriOrDefault", ((short) 0));
         short shortUriOrDefaultErrKey = Argsx.readShortUriArgOr(activity, "shortUriOrDefaultErrKey", ((short) 0));
 
-        int intUriRequired = Argsx.readIntUriArg(activity, "intUriRequired");
+        int intUriRequired = Argsx.readIntUriArgOrThrow(activity, "intUriRequired");
         Integer intUriOptional = Argsx.readIntUriArgOrNull(activity, "intUriOptional");
         Integer intUriOptionalErrKey = Argsx.readIntUriArgOrNull(activity, "intUriOptionalErrKey");
         int intUriOrDefault = Argsx.readIntUriArgOr(activity, "intUriOrDefault", 0);
         int intUriOrDefaultErrKey = Argsx.readIntUriArgOr(activity, "intUriOrDefaultErrKey", 0);
 
-        long longUriRequired = Argsx.readLongUriArg(activity, "longUriRequired");
+        long longUriRequired = Argsx.readLongUriArgOrThrow(activity, "longUriRequired");
         Long longUriOptional = Argsx.readLongUriArgOrNull(activity, "longUriOptional");
         Long longUriOptionalErrKey = Argsx.readLongUriArgOrNull(activity, "longUriOptionalErrKey");
         long longUriOrDefault = Argsx.readLongUriArgOr(activity, "longUriOrDefault", 0L);
         long longUriOrDefaultErrKey = Argsx.readLongUriArgOr(activity, "longUriOrDefaultErrKey", 0L);
 
-        float floatUriRequired = Argsx.readFloatUriArg(activity, "floatUriRequired");
+        float floatUriRequired = Argsx.readFloatUriArgOrThrow(activity, "floatUriRequired");
         Float floatUriOptional = Argsx.readFloatUriArgOrNull(activity, "floatUriOptional");
         Float floatUriOptionalErrKey = Argsx.readFloatUriArgOrNull(activity, "floatUriOptionalErrKey");
         float floatUriOrDefault = Argsx.readFloatUriArgOr(activity, "floatUriOrDefault", 0f);
         float floatUriOrDefaultErrKey = Argsx.readFloatUriArgOr(activity, "floatUriOrDefaultErrKey", -1f);
 
-        double doubleUriRequired = Argsx.readDoubleUriArg(activity, "doubleUriRequired");
+        double doubleUriRequired = Argsx.readDoubleUriArgOrThrow(activity, "doubleUriRequired");
         Double doubleUriOptional = Argsx.readDoubleUriArgOrNull(activity, "doubleUriOptional");
         Double doubleUriOptionalErrKey = Argsx.readDoubleUriArgOrNull(activity, "doubleUriOptionalErrKey");
         double doubleUriOrDefault = Argsx.readDoubleUriArgOr(activity, "doubleUriOrDefault", 1d);
         double doubleUriOrDefaultErrKey = Argsx.readDoubleUriArgOr(activity, "doubleUriOrDefaultErrKey", -1d);
 
-        boolean booleanUriRequired = Argsx.readBooleanUriArg(activity, "booleanUriRequired");
+        boolean booleanUriRequired = Argsx.readBooleanUriArgOrThrow(activity, "booleanUriRequired");
         Boolean booleanUriOptional = Argsx.readBooleanUriArgOrNull(activity, "booleanUriOptional");
         Boolean booleanUriOptionalErrKey = Argsx.readBooleanUriArgOrNull(activity, "booleanUriOptionalErrKey");
         boolean booleanUriOrDefault = Argsx.readBooleanUriArgOr(activity, "booleanUriOrDefault", true);
         boolean booleanUriOrDefaultErrKey = Argsx.readBooleanUriArgOr(activity, "booleanUriOrDefaultErrKey", false);
 
-        String stringUriRequired = Argsx.readStringUriArg(activity, "stringUriRequired");
+        String stringUriRequired = Argsx.readStringUriArgOrThrow(activity, "stringUriRequired");
         String stringUriOptional = Argsx.readStringUriArgOrNull(activity, "stringUriOptional");
         String stringUriOptionalErrKey = Argsx.readStringUriArgOrNull(activity, "stringUriOptionalErrKey");
         String stringUriOrDefault = Argsx.readStringUriArgOr(activity, "stringUriOrDefault", "");
@@ -2504,49 +2504,49 @@ public class ArgsxTest {
     public void resUriActivityTest() {
         Activity activity = resUriActivityTestRule.getActivity();
 
-        byte byteUriRequired = Argsx.readByteUriArg(activity, R.string.byte_uri_required);
+        byte byteUriRequired = Argsx.readByteUriArgOrThrow(activity, R.string.byte_uri_required);
         Byte byteUriOptional = Argsx.readByteUriArgOrNull(activity, R.string.byte_uri_optional);
         Byte byteUriOptionalErrKey = Argsx.readByteUriArgOrNull(activity, R.string.not_exist_key);
         byte byteUriOrDefault = Argsx.readByteUriArgOr(activity, R.string.byte_uri_or_default, ((byte) 0));
         byte byteUriOrDefaultErrKey = Argsx.readByteUriArgOr(activity, R.string.not_exist_key, ((byte) 0));
 
-        short shortUriRequired = Argsx.readShortUriArg(activity, R.string.short_uri_required);
+        short shortUriRequired = Argsx.readShortUriArgOrThrow(activity, R.string.short_uri_required);
         Short shortUriOptional = Argsx.readShortUriArgOrNull(activity, R.string.short_uri_optional);
         Short shortUriOptionalErrKey = Argsx.readShortUriArgOrNull(activity, R.string.not_exist_key);
         short shortUriOrDefault = Argsx.readShortUriArgOr(activity, R.string.short_uri_or_default, ((short) 0));
         short shortUriOrDefaultErrKey = Argsx.readShortUriArgOr(activity, R.string.not_exist_key, ((short) 0));
 
-        int intUriRequired = Argsx.readIntUriArg(activity, R.string.int_uri_required);
+        int intUriRequired = Argsx.readIntUriArgOrThrow(activity, R.string.int_uri_required);
         Integer intUriOptional = Argsx.readIntUriArgOrNull(activity, R.string.int_uri_optional);
         Integer intUriOptionalErrKey = Argsx.readIntUriArgOrNull(activity, R.string.not_exist_key);
         int intUriOrDefault = Argsx.readIntUriArgOr(activity, R.string.int_uri_or_default, 0);
         int intUriOrDefaultErrKey = Argsx.readIntUriArgOr(activity, R.string.not_exist_key, 0);
 
-        long longUriRequired = Argsx.readLongUriArg(activity, R.string.long_uri_required);
+        long longUriRequired = Argsx.readLongUriArgOrThrow(activity, R.string.long_uri_required);
         Long longUriOptional = Argsx.readLongUriArgOrNull(activity, R.string.long_uri_optional);
         Long longUriOptionalErrKey = Argsx.readLongUriArgOrNull(activity, R.string.not_exist_key);
         long longUriOrDefault = Argsx.readLongUriArgOr(activity, R.string.long_uri_or_default, 0L);
         long longUriOrDefaultErrKey = Argsx.readLongUriArgOr(activity, R.string.not_exist_key, 0L);
 
-        float floatUriRequired = Argsx.readFloatUriArg(activity, R.string.float_uri_required);
+        float floatUriRequired = Argsx.readFloatUriArgOrThrow(activity, R.string.float_uri_required);
         Float floatUriOptional = Argsx.readFloatUriArgOrNull(activity, R.string.float_uri_optional);
         Float floatUriOptionalErrKey = Argsx.readFloatUriArgOrNull(activity, R.string.not_exist_key);
         float floatUriOrDefault = Argsx.readFloatUriArgOr(activity, R.string.float_uri_or_default, 0f);
         float floatUriOrDefaultErrKey = Argsx.readFloatUriArgOr(activity, R.string.not_exist_key, -1f);
 
-        double doubleUriRequired = Argsx.readDoubleUriArg(activity, R.string.double_uri_required);
+        double doubleUriRequired = Argsx.readDoubleUriArgOrThrow(activity, R.string.double_uri_required);
         Double doubleUriOptional = Argsx.readDoubleUriArgOrNull(activity, R.string.double_uri_optional);
         Double doubleUriOptionalErrKey = Argsx.readDoubleUriArgOrNull(activity, R.string.not_exist_key);
         double doubleUriOrDefault = Argsx.readDoubleUriArgOr(activity, R.string.double_uri_or_default, 1d);
         double doubleUriOrDefaultErrKey = Argsx.readDoubleUriArgOr(activity, R.string.not_exist_key, -1d);
 
-        boolean booleanUriRequired = Argsx.readBooleanUriArg(activity, R.string.boolean_uri_required);
+        boolean booleanUriRequired = Argsx.readBooleanUriArgOrThrow(activity, R.string.boolean_uri_required);
         Boolean booleanUriOptional = Argsx.readBooleanUriArgOrNull(activity, R.string.boolean_uri_optional);
         Boolean booleanUriOptionalErrKey = Argsx.readBooleanUriArgOrNull(activity, R.string.not_exist_key);
         boolean booleanUriOrDefault = Argsx.readBooleanUriArgOr(activity, R.string.boolean_uri_or_default, true);
         boolean booleanUriOrDefaultErrKey = Argsx.readBooleanUriArgOr(activity, R.string.not_exist_key, false);
 
-        String stringUriRequired = Argsx.readStringUriArg(activity, R.string.string_uri_required);
+        String stringUriRequired = Argsx.readStringUriArgOrThrow(activity, R.string.string_uri_required);
         String stringUriOptional = Argsx.readStringUriArgOrNull(activity, R.string.string_uri_optional);
         String stringUriOptionalErrKey = Argsx.readStringUriArgOrNull(activity, R.string.not_exist_key);
         String stringUriOrDefault = Argsx.readStringUriArgOr(activity, R.string.string_uri_or_default, "");

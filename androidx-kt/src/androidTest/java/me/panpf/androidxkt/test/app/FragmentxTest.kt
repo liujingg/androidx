@@ -121,13 +121,13 @@ class FragmentxTest {
             putString("key", "testInstantiate")
         })
         Assert.assertEquals(android.app.Fragment::class.java.name, originFragment::class.java.name)
-        Assert.assertEquals("testInstantiate", Argsx.readStringArg(originFragment, "key"))
+        Assert.assertEquals("testInstantiate", Argsx.readStringArgOrThrow(originFragment, "key"))
 
         val supportFragment = androidx.fragment.app.Fragment::class.java.instantiate(Bundle().apply {
             putString("key", "testInstantiate")
         })
         Assert.assertEquals(androidx.fragment.app.Fragment::class.java.name, supportFragment::class.java.name)
-        Assert.assertEquals("testInstantiate", Argsx.readStringArg(supportFragment, "key"))
+        Assert.assertEquals("testInstantiate", Argsx.readStringArgOrThrow(supportFragment, "key"))
 
         val originFragment2 = android.app.Fragment::class.java.instantiateOrigin()
         Assert.assertEquals(android.app.Fragment::class.java.name, originFragment2::class.java.name)
@@ -292,7 +292,7 @@ class FragmentxTest {
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
             super.onViewCreated(view, savedInstanceState)
 
-            (view as TextView).text = "position: ${readStringArg("position")}"
+            (view as TextView).text = "position: ${readStringArgOrThrow("position")}"
         }
     }
 }

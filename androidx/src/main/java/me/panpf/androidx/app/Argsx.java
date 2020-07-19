@@ -68,9 +68,8 @@ public class Argsx {
         return defaultValue;
     }
 
-
     @NonNull
-    public static byte[] readByteArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static byte[] readByteArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         byte[] bytes = activity.getIntent().getByteArrayExtra(argName);
         if (bytes != null) return bytes;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -107,7 +106,7 @@ public class Argsx {
 
 
     @NonNull
-    public static short[] readShortArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static short[] readShortArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         short[] shorts = activity.getIntent().getShortArrayExtra(argName);
         if (shorts != null) return shorts;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -144,7 +143,7 @@ public class Argsx {
 
 
     @NonNull
-    public static int[] readIntArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static int[] readIntArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         int[] ints = activity.getIntent().getIntArrayExtra(argName);
         if (ints != null) return ints;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -163,7 +162,7 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArg(@NonNull Activity activity, @NonNull String argName) {
+    public static ArrayList<Integer> readIntArrayListArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         ArrayList<Integer> integers = activity.getIntent().getIntegerArrayListExtra(argName);
         if (integers != null) return integers;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -200,7 +199,7 @@ public class Argsx {
 
 
     @NonNull
-    public static long[] readLongArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static long[] readLongArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         long[] longs = activity.getIntent().getLongArrayExtra(argName);
         if (longs != null) return longs;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -237,7 +236,7 @@ public class Argsx {
 
 
     @NonNull
-    public static float[] readFloatArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static float[] readFloatArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         float[] floats = activity.getIntent().getFloatArrayExtra(argName);
         if (floats != null) return floats;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -274,7 +273,7 @@ public class Argsx {
 
 
     @NonNull
-    public static double[] readDoubleArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static double[] readDoubleArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         double[] doubles = activity.getIntent().getDoubleArrayExtra(argName);
         if (doubles != null) return doubles;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -309,7 +308,7 @@ public class Argsx {
 
 
     @NonNull
-    public static boolean[] readBooleanArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static boolean[] readBooleanArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         boolean[] booleans = activity.getIntent().getBooleanArrayExtra(argName);
         if (booleans != null) return booleans;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -346,7 +345,7 @@ public class Argsx {
 
 
     @NonNull
-    public static char[] readCharArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static char[] readCharArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         char[] chars = activity.getIntent().getCharArrayExtra(argName);
         if (chars != null) return chars;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -365,7 +364,7 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence readCharSequenceArg(@NonNull Activity activity, @NonNull String argName) {
+    public static CharSequence readCharSequenceArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         CharSequence charSequence = activity.getIntent().getCharSequenceExtra(argName);
         if (charSequence != null) return charSequence;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -384,7 +383,7 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static CharSequence[] readCharSequenceArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         CharSequence[] charSequences = activity.getIntent().getCharSequenceArrayExtra(argName);
         if (charSequences != null) return charSequences;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -403,7 +402,7 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull Activity activity, @NonNull String argName) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         ArrayList<CharSequence> charSequences = activity.getIntent().getCharSequenceArrayListExtra(argName);
         if (charSequences != null) return charSequences;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -422,7 +421,7 @@ public class Argsx {
 
 
     @NonNull
-    public static String readStringArg(@NonNull Activity activity, @NonNull String argName) {
+    public static String readStringArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         String string = activity.getIntent().getStringExtra(argName);
         if (string != null) return string;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -441,7 +440,7 @@ public class Argsx {
 
 
     @NonNull
-    public static String[] readStringArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static String[] readStringArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         String[] strings = activity.getIntent().getStringArrayExtra(argName);
         if (strings != null) return strings;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -460,7 +459,7 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArg(@NonNull Activity activity, @NonNull String argName) {
+    public static ArrayList<String> readStringArrayListArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         ArrayList<String> strings = activity.getIntent().getStringArrayListExtra(argName);
         if (strings != null) return strings;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -479,7 +478,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArg(@NonNull Activity activity, @NonNull String argName) {
+    public static <V extends Parcelable> V readParcelableArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         V parcelable = activity.getIntent().getParcelableExtra(argName);
         if (parcelable != null) return parcelable;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -498,7 +497,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull Activity activity, @NonNull String argName) {
+    public static <V extends Parcelable> V[] readParcelableArrayArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         //noinspection unchecked
         V[] parcelables = (V[]) activity.getIntent().getParcelableArrayExtra(argName);
         if (parcelables != null) return parcelables;
@@ -520,7 +519,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull Activity activity, @NonNull String argName) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         ArrayList<V> parcelables = activity.getIntent().getParcelableArrayListExtra(argName);
         if (parcelables != null) return parcelables;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -539,7 +538,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArg(@NonNull Activity activity, @NonNull String argName) {
+    public static <V extends Serializable> V readSerializableArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         //noinspection unchecked
         V serializable = (V) activity.getIntent().getSerializableExtra(argName);
         if (serializable != null) return serializable;
@@ -561,7 +560,7 @@ public class Argsx {
 
 
     @NonNull
-    public static Bundle readBundleArg(@NonNull Activity activity, @NonNull String argName) {
+    public static Bundle readBundleArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Bundle bundle = activity.getIntent().getBundleExtra(argName);
         if (bundle != null) return bundle;
         throw new IllegalArgumentException(String.format("Param '%s' not found", argName));
@@ -580,7 +579,7 @@ public class Argsx {
 
 
     @NonNull
-    public static Bundle readExtrasArg(@NonNull Activity activity) {
+    public static Bundle readExtrasArgOrThrow(@NonNull Activity activity) {
         Bundle extras = activity.getIntent().getExtras();
         if (extras != null) return extras;
         throw (new IllegalArgumentException("Not found 'extras'"));
@@ -601,7 +600,7 @@ public class Argsx {
     /* ************************************* Activity Uri Args ***************************************** */
 
 
-    public static byte readByteUriArg(@NonNull Activity activity, @NonNull String argName) {
+    public static byte readByteUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Uri uri = activity.getIntent().getData();
         if (uri == null) throw new IllegalArgumentException("Intent data is null");
         String value = uri.getQueryParameter(argName);
@@ -638,7 +637,7 @@ public class Argsx {
     }
 
 
-    public static short readShortUriArg(@NonNull Activity activity, @NonNull String argName) {
+    public static short readShortUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Uri uri = activity.getIntent().getData();
         if (uri == null) throw new IllegalArgumentException("Intent data is null");
         String value = uri.getQueryParameter(argName);
@@ -675,7 +674,7 @@ public class Argsx {
     }
 
 
-    public static int readIntUriArg(@NonNull Activity activity, @NonNull String argName) {
+    public static int readIntUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Uri uri = activity.getIntent().getData();
         if (uri == null) throw new IllegalArgumentException("Intent data is null");
         String value = uri.getQueryParameter(argName);
@@ -712,7 +711,7 @@ public class Argsx {
     }
 
 
-    public static long readLongUriArg(@NonNull Activity activity, @NonNull String argName) {
+    public static long readLongUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Uri uri = activity.getIntent().getData();
         if (uri == null) throw new IllegalArgumentException("Intent data is null");
         String value = uri.getQueryParameter(argName);
@@ -749,7 +748,7 @@ public class Argsx {
     }
 
 
-    public static float readFloatUriArg(@NonNull Activity activity, @NonNull String argName) {
+    public static float readFloatUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Uri uri = activity.getIntent().getData();
         if (uri == null) throw new IllegalArgumentException("Intent data is null");
         String value = uri.getQueryParameter(argName);
@@ -786,7 +785,7 @@ public class Argsx {
     }
 
 
-    public static double readDoubleUriArg(@NonNull Activity activity, @NonNull String argName) {
+    public static double readDoubleUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Uri uri = activity.getIntent().getData();
         if (uri == null) throw new IllegalArgumentException("Intent data is null");
         String value = uri.getQueryParameter(argName);
@@ -823,7 +822,7 @@ public class Argsx {
     }
 
 
-    public static boolean readBooleanUriArg(@NonNull Activity activity, @NonNull String argName) {
+    public static boolean readBooleanUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Uri uri = activity.getIntent().getData();
         if (uri == null) throw new IllegalArgumentException("Intent data is null");
         String value = uri.getQueryParameter(argName);
@@ -861,7 +860,7 @@ public class Argsx {
 
 
     @NonNull
-    public static String readStringUriArg(@NonNull Activity activity, @NonNull String argName) {
+    public static String readStringUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         Uri uri = activity.getIntent().getData();
         if (uri == null) throw new IllegalArgumentException("Intent data is null");
         String value = uri.getQueryParameter(argName);
@@ -938,9 +937,9 @@ public class Argsx {
     }
 
     @NonNull
-    public static String readStringUriIntentArg(@NonNull Activity activity, @NonNull String argName) {
+    public static String readStringUriIntentArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         String uriValue = readStringUriArgOrNull(activity, argName);
-        return uriValue != null ? uriValue : readStringArg(activity, argName);
+        return uriValue != null ? uriValue : readStringArgOrThrow(activity, argName);
     }
 
     @NonNull
@@ -988,9 +987,9 @@ public class Argsx {
     }
 
     @NonNull
-    public static String readStringIntentUriArg(@NonNull Activity activity, @NonNull String argName) {
+    public static String readStringIntentUriArgOrThrow(@NonNull Activity activity, @NonNull String argName) {
         String uriValue = readStringArgOrNull(activity, argName);
-        return uriValue != null && !uriValue.isEmpty() ? uriValue : readStringUriArg(activity, argName);
+        return uriValue != null && !uriValue.isEmpty() ? uriValue : readStringUriArgOrThrow(activity, argName);
     }
 
     @NonNull
@@ -1015,8 +1014,8 @@ public class Argsx {
 
 
     @NonNull
-    public static byte[] readByteArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readByteArrayArg(activity, activity.getString(argNameResId));
+    public static byte[] readByteArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readByteArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1036,8 +1035,8 @@ public class Argsx {
 
 
     @NonNull
-    public static short[] readShortArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readShortArrayArg(activity, activity.getString(argNameResId));
+    public static short[] readShortArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readShortArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1057,8 +1056,8 @@ public class Argsx {
 
 
     @NonNull
-    public static int[] readIntArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readIntArrayArg(activity, activity.getString(argNameResId));
+    public static int[] readIntArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readIntArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1073,8 +1072,8 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readIntArrayListArg(activity, activity.getString(argNameResId));
+    public static ArrayList<Integer> readIntArrayListArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readIntArrayListArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1094,8 +1093,8 @@ public class Argsx {
 
 
     @NonNull
-    public static long[] readLongArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readLongArrayArg(activity, activity.getString(argNameResId));
+    public static long[] readLongArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readLongArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1115,8 +1114,8 @@ public class Argsx {
 
 
     @NonNull
-    public static float[] readFloatArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readFloatArrayArg(activity, activity.getString(argNameResId));
+    public static float[] readFloatArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readFloatArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1136,8 +1135,8 @@ public class Argsx {
 
 
     @NonNull
-    public static double[] readDoubleArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readDoubleArrayArg(activity, activity.getString(argNameResId));
+    public static double[] readDoubleArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readDoubleArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1157,8 +1156,8 @@ public class Argsx {
 
 
     @NonNull
-    public static boolean[] readBooleanArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readBooleanArrayArg(activity, activity.getString(argNameResId));
+    public static boolean[] readBooleanArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readBooleanArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1178,8 +1177,8 @@ public class Argsx {
 
 
     @NonNull
-    public static char[] readCharArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readCharArrayArg(activity, activity.getString(argNameResId));
+    public static char[] readCharArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readCharArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1194,8 +1193,8 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence readCharSequenceArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArg(activity, activity.getString(argNameResId));
+    public static CharSequence readCharSequenceArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readCharSequenceArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1210,8 +1209,8 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayArg(activity, activity.getString(argNameResId));
+    public static CharSequence[] readCharSequenceArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readCharSequenceArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1226,8 +1225,8 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayListArg(activity, activity.getString(argNameResId));
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readCharSequenceArrayListArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1242,8 +1241,8 @@ public class Argsx {
 
 
     @NonNull
-    public static String readStringArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readStringArg(activity, activity.getString(argNameResId));
+    public static String readStringArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readStringArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1258,8 +1257,8 @@ public class Argsx {
 
 
     @NonNull
-    public static String[] readStringArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readStringArrayArg(activity, activity.getString(argNameResId));
+    public static String[] readStringArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readStringArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1274,8 +1273,8 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readStringArrayListArg(activity, activity.getString(argNameResId));
+    public static ArrayList<String> readStringArrayListArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readStringArrayListArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1290,8 +1289,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readParcelableArg(activity, activity.getString(argNameResId));
+    public static <V extends Parcelable> V readParcelableArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readParcelableArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1306,8 +1305,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayArg(activity, activity.getString(argNameResId));
+    public static <V extends Parcelable> V[] readParcelableArrayArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readParcelableArrayArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1322,8 +1321,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayListArg(activity, activity.getString(argNameResId));
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readParcelableArrayListArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1338,8 +1337,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readSerializableArg(activity, activity.getString(argNameResId));
+    public static <V extends Serializable> V readSerializableArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readSerializableArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1354,8 +1353,8 @@ public class Argsx {
 
 
     @NonNull
-    public static Bundle readBundleArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readBundleArg(activity, activity.getString(argNameResId));
+    public static Bundle readBundleArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readBundleArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1372,8 +1371,8 @@ public class Argsx {
     /* ************************************* Activity Uri Args ***************************************** */
 
 
-    public static byte readByteUriArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readByteUriArg(activity, activity.getString(argNameResId));
+    public static byte readByteUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readByteUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static byte readByteUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, byte defaultValue) {
@@ -1386,8 +1385,8 @@ public class Argsx {
     }
 
 
-    public static short readShortUriArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readShortUriArg(activity, activity.getString(argNameResId));
+    public static short readShortUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readShortUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static short readShortUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, short defaultValue) {
@@ -1400,8 +1399,8 @@ public class Argsx {
     }
 
 
-    public static int readIntUriArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readIntUriArg(activity, activity.getString(argNameResId));
+    public static int readIntUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readIntUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static int readIntUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, int defaultValue) {
@@ -1414,8 +1413,8 @@ public class Argsx {
     }
 
 
-    public static long readLongUriArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readLongUriArg(activity, activity.getString(argNameResId));
+    public static long readLongUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readLongUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static long readLongUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, long defaultValue) {
@@ -1428,8 +1427,8 @@ public class Argsx {
     }
 
 
-    public static float readFloatUriArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readFloatUriArg(activity, activity.getString(argNameResId));
+    public static float readFloatUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readFloatUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static float readFloatUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, float defaultValue) {
@@ -1442,8 +1441,8 @@ public class Argsx {
     }
 
 
-    public static double readDoubleUriArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readDoubleUriArg(activity, activity.getString(argNameResId));
+    public static double readDoubleUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readDoubleUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static double readDoubleUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, double defaultValue) {
@@ -1456,8 +1455,8 @@ public class Argsx {
     }
 
 
-    public static boolean readBooleanUriArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readBooleanUriArg(activity, activity.getString(argNameResId));
+    public static boolean readBooleanUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readBooleanUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     public static boolean readBooleanUriArgOr(@NonNull Activity activity, @StringRes int argNameResId, boolean defaultValue) {
@@ -1471,8 +1470,8 @@ public class Argsx {
 
 
     @NonNull
-    public static String readStringUriArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readStringUriArg(activity, activity.getString(argNameResId));
+    public static String readStringUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readStringUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1518,8 +1517,8 @@ public class Argsx {
     }
 
     @NonNull
-    public static String readStringUriIntentArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readStringUriIntentArg(activity, activity.getString(argNameResId));
+    public static String readStringUriIntentArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readStringUriIntentArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1565,8 +1564,8 @@ public class Argsx {
     }
 
     @NonNull
-    public static String readStringIntentUriArg(@NonNull Activity activity, @StringRes int argNameResId) {
-        return Argsx.readStringIntentUriArg(activity, activity.getString(argNameResId));
+    public static String readStringIntentUriArgOrThrow(@NonNull Activity activity, @StringRes int argNameResId) {
+        return Argsx.readStringIntentUriArgOrThrow(activity, activity.getString(argNameResId));
     }
 
     @NonNull
@@ -1603,7 +1602,7 @@ public class Argsx {
 
 
     @NonNull
-    public static byte[] readByteArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static byte[] readByteArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         byte[] bytes = arguments != null ? arguments.getByteArray(argName) : null;
         if (bytes != null) return bytes;
@@ -1644,7 +1643,7 @@ public class Argsx {
 
 
     @NonNull
-    public static short[] readShortArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static short[] readShortArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         short[] shorts = arguments != null ? arguments.getShortArray(argName) : null;
         if (shorts != null) return shorts;
@@ -1685,7 +1684,7 @@ public class Argsx {
 
 
     @NonNull
-    public static int[] readIntArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static int[] readIntArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         int[] ints = arguments != null ? arguments.getIntArray(argName) : null;
         if (ints != null) return ints;
@@ -1707,7 +1706,7 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static ArrayList<Integer> readIntArrayListArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         ArrayList<Integer> ints = arguments != null ? arguments.getIntegerArrayList(argName) : null;
         if (ints != null) return ints;
@@ -1748,7 +1747,7 @@ public class Argsx {
 
 
     @NonNull
-    public static long[] readLongArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static long[] readLongArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         long[] longs = arguments != null ? arguments.getLongArray(argName) : null;
         if (longs != null) return longs;
@@ -1789,7 +1788,7 @@ public class Argsx {
 
 
     @NonNull
-    public static float[] readFloatArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static float[] readFloatArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         float[] floats = arguments != null ? arguments.getFloatArray(argName) : null;
         if (floats != null) return floats;
@@ -1830,7 +1829,7 @@ public class Argsx {
 
 
     @NonNull
-    public static double[] readDoubleArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static double[] readDoubleArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         double[] doubles = arguments != null ? arguments.getDoubleArray(argName) : null;
         if (doubles != null) return doubles;
@@ -1871,7 +1870,7 @@ public class Argsx {
 
 
     @NonNull
-    public static boolean[] readBooleanArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static boolean[] readBooleanArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         boolean[] booleans = arguments != null ? arguments.getBooleanArray(argName) : null;
         if (booleans != null) return booleans;
@@ -1912,7 +1911,7 @@ public class Argsx {
 
 
     @NonNull
-    public static char[] readCharArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static char[] readCharArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         char[] chars = arguments != null ? arguments.getCharArray(argName) : null;
         if (chars != null) return chars;
@@ -1934,7 +1933,7 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence readCharSequenceArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static CharSequence readCharSequenceArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         CharSequence charSequence = arguments != null ? arguments.getCharSequence(argName) : null;
         if (charSequence != null) return charSequence;
@@ -1956,7 +1955,7 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static CharSequence[] readCharSequenceArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         CharSequence[] charSequences = arguments != null ? arguments.getCharSequenceArray(argName) : null;
         if (charSequences != null) return charSequences;
@@ -1978,7 +1977,7 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         ArrayList<CharSequence> charSequences = arguments != null ? arguments.getCharSequenceArrayList(argName) : null;
         if (charSequences != null) return charSequences;
@@ -2000,7 +1999,7 @@ public class Argsx {
 
 
     @NonNull
-    public static String readStringArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static String readStringArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         String string = arguments != null ? arguments.getString(argName) : null;
         if (string != null) return string;
@@ -2022,7 +2021,7 @@ public class Argsx {
 
 
     @NonNull
-    public static String[] readStringArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static String[] readStringArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         String[] strings = arguments != null ? arguments.getStringArray(argName) : null;
         if (strings != null) return strings;
@@ -2044,7 +2043,7 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static ArrayList<String> readStringArrayListArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         ArrayList<String> strings = arguments != null ? arguments.getStringArrayList(argName) : null;
         if (strings != null) return strings;
@@ -2066,7 +2065,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> V readParcelableArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -2097,7 +2096,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> V[] readParcelableArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -2128,7 +2127,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -2159,7 +2158,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -2190,7 +2189,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static <V extends Serializable> V readSerializableArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         //noinspection unchecked
         V serializable = arguments != null ? (V) arguments.getSerializable(argName) : null;
@@ -2215,7 +2214,7 @@ public class Argsx {
 
 
     @NonNull
-    public static Bundle readBundleArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static Bundle readBundleArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         Bundle bundle = arguments != null ? arguments.getBundle(argName) : null;
         if (bundle != null) return bundle;
@@ -2238,7 +2237,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static IBinder readBinderArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         IBinder iBinder = arguments != null ? arguments.getBinder(argName) : null;
         if (iBinder != null) return iBinder;
@@ -2263,7 +2262,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static Size readSizeArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         Size size = arguments != null ? arguments.getSize(argName) : null;
         if (size != null) return size;
@@ -2288,7 +2287,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArg(@NonNull Fragment fragment, @NonNull String argName) {
+    public static SizeF readSizeFArgOrThrow(@NonNull Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         SizeF sizeF = arguments != null ? arguments.getSizeF(argName) : null;
         if (sizeF != null) return sizeF;
@@ -2320,8 +2319,8 @@ public class Argsx {
 
 
     @NonNull
-    public static byte[] readByteArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readByteArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static byte[] readByteArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readByteArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2341,8 +2340,8 @@ public class Argsx {
 
 
     @NonNull
-    public static short[] readShortArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readShortArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static short[] readShortArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readShortArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2362,8 +2361,8 @@ public class Argsx {
 
 
     @NonNull
-    public static int[] readIntArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readIntArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static int[] readIntArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readIntArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2378,8 +2377,8 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readIntArrayListArg(fragment, fragment.getResources().getString(argNameResId));
+    public static ArrayList<Integer> readIntArrayListArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readIntArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2399,8 +2398,8 @@ public class Argsx {
 
 
     @NonNull
-    public static long[] readLongArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readLongArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static long[] readLongArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readLongArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2420,8 +2419,8 @@ public class Argsx {
 
 
     @NonNull
-    public static float[] readFloatArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readFloatArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static float[] readFloatArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readFloatArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2441,8 +2440,8 @@ public class Argsx {
 
 
     @NonNull
-    public static double[] readDoubleArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readDoubleArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static double[] readDoubleArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readDoubleArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2462,8 +2461,8 @@ public class Argsx {
 
 
     @NonNull
-    public static boolean[] readBooleanArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBooleanArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static boolean[] readBooleanArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readBooleanArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2483,8 +2482,8 @@ public class Argsx {
 
 
     @NonNull
-    public static char[] readCharArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static char[] readCharArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2499,8 +2498,8 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence readCharSequenceArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArg(fragment, fragment.getResources().getString(argNameResId));
+    public static CharSequence readCharSequenceArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharSequenceArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2515,8 +2514,8 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static CharSequence[] readCharSequenceArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharSequenceArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2531,8 +2530,8 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayListArg(fragment, fragment.getResources().getString(argNameResId));
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharSequenceArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2547,8 +2546,8 @@ public class Argsx {
 
 
     @NonNull
-    public static String readStringArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArg(fragment, fragment.getResources().getString(argNameResId));
+    public static String readStringArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readStringArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2563,8 +2562,8 @@ public class Argsx {
 
 
     @NonNull
-    public static String[] readStringArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static String[] readStringArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readStringArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2579,8 +2578,8 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArrayListArg(fragment, fragment.getResources().getString(argNameResId));
+    public static ArrayList<String> readStringArrayListArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readStringArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2595,8 +2594,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Parcelable> V readParcelableArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readParcelableArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2611,8 +2610,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Parcelable> V[] readParcelableArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readParcelableArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2627,8 +2626,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayListArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readParcelableArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2643,8 +2642,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSparseParcelableArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readSparseParcelableArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2659,8 +2658,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSerializableArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Serializable> V readSerializableArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readSerializableArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2675,8 +2674,8 @@ public class Argsx {
 
 
     @NonNull
-    public static Bundle readBundleArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBundleArg(fragment, fragment.getResources().getString(argNameResId));
+    public static Bundle readBundleArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readBundleArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2692,8 +2691,8 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBinderArg(fragment, fragment.getResources().getString(argNameResId));
+    public static IBinder readBinderArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readBinderArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2711,8 +2710,8 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSizeArg(fragment, fragment.getResources().getString(argNameResId));
+    public static Size readSizeArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readSizeArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2730,8 +2729,8 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArg(@NonNull Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSizeFArg(fragment, fragment.getResources().getString(argNameResId));
+    public static SizeF readSizeFArgOrThrow(@NonNull Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readSizeFArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -2770,7 +2769,7 @@ public class Argsx {
 
 
     @NonNull
-    public static byte[] readByteArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static byte[] readByteArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         byte[] bytes = arguments != null ? arguments.getByteArray(argName) : null;
         if (bytes != null) return bytes;
@@ -2811,7 +2810,7 @@ public class Argsx {
 
 
     @NonNull
-    public static short[] readShortArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static short[] readShortArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         short[] shorts = arguments != null ? arguments.getShortArray(argName) : null;
         if (shorts != null) return shorts;
@@ -2852,7 +2851,7 @@ public class Argsx {
 
 
     @NonNull
-    public static int[] readIntArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static int[] readIntArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         int[] ints = arguments != null ? arguments.getIntArray(argName) : null;
         if (ints != null) return ints;
@@ -2874,7 +2873,7 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static ArrayList<Integer> readIntArrayListArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         ArrayList<Integer> ints = arguments != null ? arguments.getIntegerArrayList(argName) : null;
         if (ints != null) return ints;
@@ -2915,7 +2914,7 @@ public class Argsx {
 
 
     @NonNull
-    public static long[] readLongArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static long[] readLongArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         long[] longs = arguments != null ? arguments.getLongArray(argName) : null;
         if (longs != null) return longs;
@@ -2956,7 +2955,7 @@ public class Argsx {
 
 
     @NonNull
-    public static float[] readFloatArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static float[] readFloatArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         float[] floats = arguments != null ? arguments.getFloatArray(argName) : null;
         if (floats != null) return floats;
@@ -2997,7 +2996,7 @@ public class Argsx {
 
 
     @NonNull
-    public static double[] readDoubleArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static double[] readDoubleArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         double[] doubles = arguments != null ? arguments.getDoubleArray(argName) : null;
         if (doubles != null) return doubles;
@@ -3038,7 +3037,7 @@ public class Argsx {
 
 
     @NonNull
-    public static boolean[] readBooleanArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static boolean[] readBooleanArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         boolean[] booleans = arguments != null ? arguments.getBooleanArray(argName) : null;
         if (booleans != null) return booleans;
@@ -3079,7 +3078,7 @@ public class Argsx {
 
 
     @NonNull
-    public static char[] readCharArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static char[] readCharArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         char[] chars = arguments != null ? arguments.getCharArray(argName) : null;
         if (chars != null) return chars;
@@ -3101,7 +3100,7 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence readCharSequenceArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static CharSequence readCharSequenceArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         CharSequence charSequence = arguments != null ? arguments.getCharSequence(argName) : null;
         if (charSequence != null) return charSequence;
@@ -3123,7 +3122,7 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static CharSequence[] readCharSequenceArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         CharSequence[] charSequences = arguments != null ? arguments.getCharSequenceArray(argName) : null;
         if (charSequences != null) return charSequences;
@@ -3145,7 +3144,7 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         ArrayList<CharSequence> charSequences = arguments != null ? arguments.getCharSequenceArrayList(argName) : null;
         if (charSequences != null) return charSequences;
@@ -3167,7 +3166,7 @@ public class Argsx {
 
 
     @NonNull
-    public static String readStringArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static String readStringArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         String string = arguments != null ? arguments.getString(argName) : null;
         if (string != null) return string;
@@ -3189,7 +3188,7 @@ public class Argsx {
 
 
     @NonNull
-    public static String[] readStringArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static String[] readStringArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         String[] strings = arguments != null ? arguments.getStringArray(argName) : null;
         if (strings != null) return strings;
@@ -3211,7 +3210,7 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static ArrayList<String> readStringArrayListArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         ArrayList<String> strings = arguments != null ? arguments.getStringArrayList(argName) : null;
         if (strings != null) return strings;
@@ -3233,7 +3232,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> V readParcelableArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -3264,7 +3263,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> V[] readParcelableArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -3295,7 +3294,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -3326,7 +3325,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         // Because the ClassLoader may be lost when the Bundle is passed in the Bundle, you need to restore it to deserialize the custom Parcelable.
         if (arguments != null) arguments.setClassLoader(Fragmentx.class.getClassLoader());
@@ -3357,7 +3356,7 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static <V extends Serializable> V readSerializableArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         //noinspection unchecked
         V serializable = arguments != null ? (V) arguments.getSerializable(argName) : null;
@@ -3382,7 +3381,7 @@ public class Argsx {
 
 
     @NonNull
-    public static Bundle readBundleArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static Bundle readBundleArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         Bundle bundle = arguments != null ? arguments.getBundle(argName) : null;
         if (bundle != null) return bundle;
@@ -3405,7 +3404,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static IBinder readBinderArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         IBinder iBinder = arguments != null ? arguments.getBinder(argName) : null;
         if (iBinder != null) return iBinder;
@@ -3430,7 +3429,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static Size readSizeArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         Size size = arguments != null ? arguments.getSize(argName) : null;
         if (size != null) return size;
@@ -3455,7 +3454,7 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArg(@NonNull android.app.Fragment fragment, @NonNull String argName) {
+    public static SizeF readSizeFArgOrThrow(@NonNull android.app.Fragment fragment, @NonNull String argName) {
         Bundle arguments = fragment.getArguments();
         SizeF sizeF = arguments != null ? arguments.getSizeF(argName) : null;
         if (sizeF != null) return sizeF;
@@ -3487,8 +3486,8 @@ public class Argsx {
 
 
     @NonNull
-    public static byte[] readByteArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readByteArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static byte[] readByteArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readByteArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3508,8 +3507,8 @@ public class Argsx {
 
 
     @NonNull
-    public static short[] readShortArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readShortArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static short[] readShortArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readShortArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3529,8 +3528,8 @@ public class Argsx {
 
 
     @NonNull
-    public static int[] readIntArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readIntArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static int[] readIntArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readIntArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3545,8 +3544,8 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<Integer> readIntArrayListArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readIntArrayListArg(fragment, fragment.getResources().getString(argNameResId));
+    public static ArrayList<Integer> readIntArrayListArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readIntArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3566,8 +3565,8 @@ public class Argsx {
 
 
     @NonNull
-    public static long[] readLongArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readLongArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static long[] readLongArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readLongArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3587,8 +3586,8 @@ public class Argsx {
 
 
     @NonNull
-    public static float[] readFloatArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readFloatArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static float[] readFloatArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readFloatArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3608,8 +3607,8 @@ public class Argsx {
 
 
     @NonNull
-    public static double[] readDoubleArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readDoubleArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static double[] readDoubleArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readDoubleArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3629,8 +3628,8 @@ public class Argsx {
 
 
     @NonNull
-    public static boolean[] readBooleanArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBooleanArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static boolean[] readBooleanArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readBooleanArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3650,8 +3649,8 @@ public class Argsx {
 
 
     @NonNull
-    public static char[] readCharArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static char[] readCharArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3666,8 +3665,8 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence readCharSequenceArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArg(fragment, fragment.getResources().getString(argNameResId));
+    public static CharSequence readCharSequenceArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharSequenceArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3682,8 +3681,8 @@ public class Argsx {
 
 
     @NonNull
-    public static CharSequence[] readCharSequenceArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static CharSequence[] readCharSequenceArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharSequenceArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3698,8 +3697,8 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<CharSequence> readCharSequenceArrayListArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readCharSequenceArrayListArg(fragment, fragment.getResources().getString(argNameResId));
+    public static ArrayList<CharSequence> readCharSequenceArrayListArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readCharSequenceArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3714,8 +3713,8 @@ public class Argsx {
 
 
     @NonNull
-    public static String readStringArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArg(fragment, fragment.getResources().getString(argNameResId));
+    public static String readStringArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readStringArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3730,8 +3729,8 @@ public class Argsx {
 
 
     @NonNull
-    public static String[] readStringArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static String[] readStringArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readStringArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3746,8 +3745,8 @@ public class Argsx {
 
 
     @NonNull
-    public static ArrayList<String> readStringArrayListArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readStringArrayListArg(fragment, fragment.getResources().getString(argNameResId));
+    public static ArrayList<String> readStringArrayListArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readStringArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3762,8 +3761,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V readParcelableArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Parcelable> V readParcelableArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readParcelableArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3778,8 +3777,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> V[] readParcelableArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Parcelable> V[] readParcelableArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readParcelableArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3794,8 +3793,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readParcelableArrayListArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Parcelable> ArrayList<V> readParcelableArrayListArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readParcelableArrayListArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3810,8 +3809,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSparseParcelableArrayArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Parcelable> SparseArray<V> readSparseParcelableArrayArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readSparseParcelableArrayArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3826,8 +3825,8 @@ public class Argsx {
 
 
     @NonNull
-    public static <V extends Serializable> V readSerializableArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSerializableArg(fragment, fragment.getResources().getString(argNameResId));
+    public static <V extends Serializable> V readSerializableArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readSerializableArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3842,8 +3841,8 @@ public class Argsx {
 
 
     @NonNull
-    public static Bundle readBundleArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBundleArg(fragment, fragment.getResources().getString(argNameResId));
+    public static Bundle readBundleArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readBundleArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3859,8 +3858,8 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public static IBinder readBinderArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readBinderArg(fragment, fragment.getResources().getString(argNameResId));
+    public static IBinder readBinderArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readBinderArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3878,8 +3877,8 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static Size readSizeArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSizeArg(fragment, fragment.getResources().getString(argNameResId));
+    public static Size readSizeArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readSizeArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
@@ -3897,8 +3896,8 @@ public class Argsx {
 
     @NonNull
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    public static SizeF readSizeFArg(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
-        return Argsx.readSizeFArg(fragment, fragment.getResources().getString(argNameResId));
+    public static SizeF readSizeFArgOrThrow(@NonNull android.app.Fragment fragment, @StringRes int argNameResId) {
+        return Argsx.readSizeFArgOrThrow(fragment, fragment.getResources().getString(argNameResId));
     }
 
     @NonNull
