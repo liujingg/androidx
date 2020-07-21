@@ -1,17 +1,18 @@
 ## new
 * remove: Remove the androidx-kt-arch library, because the official lifecycle-viewmodel-ktx library already provides the same function
+* remove: Remove all support for android.app.Fragment
 * change: Toastx.show\*(\*, \*, Object...) method rename to showWithFormat\*
 * change: Toastx.show\*(\*, String) method change to show\*(\*, CharSequence)
+* change: LifecycleBroadcastReceiver can now register multiple times
+* change: The name of the method that throws exceptions in Argsx is unified with the suffix'OrThrow'
+* change: Hardwarex's getPhoneNumber(), getPhoneNumber() and other methods added orThrow, Or, OrNull overload methods
+* change: Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods no NumberFormatException will now be thrown
+* change: Storagex.clean\*Dirs() method now returns boolean
+* improve: Improved Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods
 * fix: Fix the bug that Toastx.show\*(\*, int) method may not get multilingual information
 * fix: Fix the bug that there may be null elements in the array returned by Storagex.getAppExternal\*Dirs() method
-* new: Storagex.clean\*Dirs() method now returns boolean
-* change: LifecycleBroadcastReceiver can now register multiple times
-* improve: Improved Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods
-* change: Argsx's readByteArgOr, readShortArgOr, readIntArgOr, readLongArgOr, readFloatArgOr, readDoubleArgOr, readBooleanArgOr, readCharArgOr methods 现在不会抛出 NumberFormatException
-* change: The name of the method that throws exceptions in Argsx is unified with the suffix'OrThrow'
-* remove: Remove all support for android.app.Fragment
+* fix: Fix the bug that Dimenx's px2dp() and px2Sp() methods return 0.5f when the input parameter is 0
 * new: Argsx basic data types add read\*ArgOrThrow and read\*ArgOrNull methods
-* change: Hardwarex's getPhoneNumber(), getPhoneNumber() and other methods added orThrow, Or, OrNull overload methods
 
 ## v1.0.0-alpha09
 * remove: Remove dependency on javax

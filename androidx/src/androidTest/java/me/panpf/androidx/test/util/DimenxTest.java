@@ -55,13 +55,19 @@ public class DimenxTest {
 
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(context, 10f));
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(context, 10));
+        Assert.assertEquals(0, Dimenx.dp2px(context, 0f));
+        Assert.assertEquals(0, Dimenx.dp2px(context, 0));
 
         Assert.assertEquals(((float) 100) / context.getResources().getDisplayMetrics().density + 0.5f, Dimenx.px2dp(context, 100), 0f);
+        Assert.assertEquals(0f, Dimenx.px2dp(context, 0), 0f);
 
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().scaledDensity + 0.5f), Dimenx.sp2px(context, 10f));
         Assert.assertEquals((int) ((float) 10 * context.getResources().getDisplayMetrics().scaledDensity + 0.5f), Dimenx.sp2px(context, 10));
+        Assert.assertEquals(0, Dimenx.sp2px(context, 0f));
+        Assert.assertEquals(0, Dimenx.sp2px(context, 0));
 
         Assert.assertEquals(((float) 100) / context.getResources().getDisplayMetrics().scaledDensity + 0.5f, Dimenx.px2sp(context, 100), 0f);
+        Assert.assertEquals(0f, Dimenx.px2sp(context, 0), 0f);
 
         Assert.assertEquals(10f * context.getResources().getDisplayMetrics().scaledDensity, Dimenx.applyDimension(context, TypedValue.COMPLEX_UNIT_SP, 10f), 0f);
         Assert.assertEquals(((float) 10) * context.getResources().getDisplayMetrics().scaledDensity, Dimenx.applyDimension(context, TypedValue.COMPLEX_UNIT_SP, 10), 0f);
@@ -74,13 +80,19 @@ public class DimenxTest {
 
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(supportFragment, 10f));
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(supportFragment, 10));
+        Assert.assertEquals(0, Dimenx.dp2px(supportFragment, 0f));
+        Assert.assertEquals(0, Dimenx.dp2px(supportFragment, 0));
 
         Assert.assertEquals(((float) 100) / context.getResources().getDisplayMetrics().density + 0.5f, Dimenx.px2dp(supportFragment, 100), 0f);
+        Assert.assertEquals(0f, Dimenx.px2dp(supportFragment, 0), 0f);
 
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().scaledDensity + 0.5f), Dimenx.sp2px(supportFragment, 10f));
         Assert.assertEquals((int) ((float) 10 * context.getResources().getDisplayMetrics().scaledDensity + 0.5f), Dimenx.sp2px(supportFragment, 10));
+        Assert.assertEquals(0, Dimenx.sp2px(supportFragment, 0f));
+        Assert.assertEquals(0, Dimenx.sp2px(supportFragment, 0));
 
         Assert.assertEquals(((float) 100) / context.getResources().getDisplayMetrics().scaledDensity + 0.5f, Dimenx.px2sp(supportFragment, 100), 0f);
+        Assert.assertEquals(0f, Dimenx.px2sp(supportFragment, 0), 0f);
 
         Assert.assertEquals(10f * context.getResources().getDisplayMetrics().scaledDensity, Dimenx.applyDimension(supportFragment, TypedValue.COMPLEX_UNIT_SP, 10f), 0f);
         Assert.assertEquals(((float) 10) * context.getResources().getDisplayMetrics().scaledDensity, Dimenx.applyDimension(supportFragment, TypedValue.COMPLEX_UNIT_SP, 10), 0f);
@@ -94,13 +106,19 @@ public class DimenxTest {
 
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(view, 10f));
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().density + 0.5f), Dimenx.dp2px(view, 10));
+        Assert.assertEquals(0, Dimenx.dp2px(view, 0f));
+        Assert.assertEquals(0, Dimenx.dp2px(view, 0));
 
         Assert.assertEquals(((float) 100) / context.getResources().getDisplayMetrics().density + 0.5f, Dimenx.px2dp(view, 100), 0f);
+        Assert.assertEquals(0f, Dimenx.px2dp(view, 0), 0f);
 
         Assert.assertEquals((int) (10f * context.getResources().getDisplayMetrics().scaledDensity + 0.5f), Dimenx.sp2px(view, 10f));
         Assert.assertEquals((int) ((float) 10 * context.getResources().getDisplayMetrics().scaledDensity + 0.5f), Dimenx.sp2px(view, 10));
+        Assert.assertEquals(0, Dimenx.sp2px(view, 0f));
+        Assert.assertEquals(0, Dimenx.sp2px(view, 0));
 
         Assert.assertEquals(((float) 100) / context.getResources().getDisplayMetrics().scaledDensity + 0.5f, Dimenx.px2sp(view, 100), 0f);
+        Assert.assertEquals(0f, Dimenx.px2sp(view, 0), 0f);
 
         Assert.assertEquals(10f * context.getResources().getDisplayMetrics().scaledDensity, Dimenx.applyDimension(view, TypedValue.COMPLEX_UNIT_SP, 10f), 0f);
         Assert.assertEquals(((float) 10) * context.getResources().getDisplayMetrics().scaledDensity, Dimenx.applyDimension(view, TypedValue.COMPLEX_UNIT_SP, 10), 0f);

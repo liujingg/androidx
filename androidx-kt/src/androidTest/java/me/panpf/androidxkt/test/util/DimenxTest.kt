@@ -42,13 +42,19 @@ class DimenxTest {
 
         Assert.assertEquals((10f * context.resources.displayMetrics.density + 0.5f).toInt().toLong(), context.dp2px(10f).toLong())
         Assert.assertEquals((10f * context.resources.displayMetrics.density + 0.5f).toInt().toLong(), context.dp2px(10).toLong())
+        Assert.assertEquals(0.toLong(), context.dp2px(0f).toLong())
+        Assert.assertEquals(0.toLong(), context.dp2px(0).toLong())
 
         Assert.assertEquals(100.toFloat() / context.resources.displayMetrics.density + 0.5f, context.px2dp(100), 0f)
+        Assert.assertEquals(0f, context.px2dp(0), 0f)
 
         Assert.assertEquals((10f * context.resources.displayMetrics.scaledDensity + 0.5f).toInt().toLong(), context.sp2px(10f).toLong())
         Assert.assertEquals((10.toFloat() * context.resources.displayMetrics.scaledDensity + 0.5f).toInt().toLong(), context.sp2px(10).toLong())
+        Assert.assertEquals(0.toLong(), context.sp2px(0f).toLong())
+        Assert.assertEquals(0.toLong(), context.sp2px(0).toLong())
 
         Assert.assertEquals(100.toFloat() / context.resources.displayMetrics.scaledDensity + 0.5f, context.px2sp(100), 0f)
+        Assert.assertEquals(0f, context.px2sp(0), 0f)
 
         Assert.assertEquals(10f * context.resources.displayMetrics.scaledDensity, context.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10f), 0f)
         Assert.assertEquals(10.toFloat() * context.resources.displayMetrics.scaledDensity, context.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10), 0f)
@@ -62,13 +68,19 @@ class DimenxTest {
 
         Assert.assertEquals((10f * context.resources.displayMetrics.density + 0.5f).toInt().toLong(), supportFragment.dp2px(10f).toLong())
         Assert.assertEquals((10f * context.resources.displayMetrics.density + 0.5f).toInt().toLong(), supportFragment.dp2px(10).toLong())
+        Assert.assertEquals(0.toLong(), supportFragment.dp2px(0f).toLong())
+        Assert.assertEquals(0.toLong(), supportFragment.dp2px(0).toLong())
 
         Assert.assertEquals(100.toFloat() / context.resources.displayMetrics.density + 0.5f, supportFragment.px2dp(100), 0f)
+        Assert.assertEquals(0f, supportFragment.px2dp(0), 0f)
 
         Assert.assertEquals((10f * context.resources.displayMetrics.scaledDensity + 0.5f).toInt().toLong(), supportFragment.sp2px(10f).toLong())
         Assert.assertEquals((10.toFloat() * context.resources.displayMetrics.scaledDensity + 0.5f).toInt().toLong(), supportFragment.sp2px(10).toLong())
+        Assert.assertEquals(0.toLong(), supportFragment.sp2px(0f).toLong())
+        Assert.assertEquals(0.toLong(), supportFragment.sp2px(0).toLong())
 
         Assert.assertEquals(100.toFloat() / context.resources.displayMetrics.scaledDensity + 0.5f, supportFragment.px2sp(100), 0f)
+        Assert.assertEquals(0f, supportFragment.px2sp(0), 0f)
 
         Assert.assertEquals(10f * context.resources.displayMetrics.scaledDensity, supportFragment.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10f), 0f)
         Assert.assertEquals(10.toFloat() * context.resources.displayMetrics.scaledDensity, supportFragment.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10), 0f)
@@ -82,13 +94,18 @@ class DimenxTest {
 
         Assert.assertEquals((10f * context.resources.displayMetrics.density + 0.5f).toInt().toLong(), view.dp2px(10f).toLong())
         Assert.assertEquals((10f * context.resources.displayMetrics.density + 0.5f).toInt().toLong(), view.dp2px(10).toLong())
+        Assert.assertEquals(0.toLong(), view.dp2px(0f).toLong())
+        Assert.assertEquals(0.toLong(), view.dp2px(0).toLong())
 
         Assert.assertEquals(100.toFloat() / context.resources.displayMetrics.density + 0.5f, view.px2dp(100), 0f)
+        Assert.assertEquals(0f, view.px2dp(0), 0f)
 
         Assert.assertEquals((10f * context.resources.displayMetrics.scaledDensity + 0.5f).toInt().toLong(), view.sp2px(10f).toLong())
-        Assert.assertEquals((10.toFloat() * context.resources.displayMetrics.scaledDensity + 0.5f).toInt().toLong(), view.sp2px(10).toLong())
+        Assert.assertEquals(0.toLong(), view.sp2px(0f).toLong())
+        Assert.assertEquals(0.toLong(), view.sp2px(0).toLong())
 
         Assert.assertEquals(100.toFloat() / context.resources.displayMetrics.scaledDensity + 0.5f, view.px2sp(100), 0f)
+        Assert.assertEquals(0f, view.px2sp(0), 0f)
 
         Assert.assertEquals(10f * context.resources.displayMetrics.scaledDensity, view.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10f), 0f)
         Assert.assertEquals(10.toFloat() * context.resources.displayMetrics.scaledDensity, view.applyDimension(TypedValue.COMPLEX_UNIT_SP, 10), 0f)

@@ -37,30 +37,30 @@ public class Dimenx {
 
 
     public static int dp2px(@NonNull Context context, float dpValue) {
-        return (int) (dpValue * context.getResources().getDisplayMetrics().density + 0.5f);
+        return dpValue != 0 ? (int) (dpValue * context.getResources().getDisplayMetrics().density + 0.5f) : 0;
     }
 
     public static int dp2px(@NonNull Context context, int dpValue) {
-        return (int) ((float) dpValue * context.getResources().getDisplayMetrics().density + 0.5f);
+        return dpValue != 0 ? (int) ((float) dpValue * context.getResources().getDisplayMetrics().density + 0.5f) : 0;
     }
 
 
     public static float px2dp(@NonNull Context context, int px) {
-        return ((float) px) / context.getResources().getDisplayMetrics().density + 0.5f;
+        return px != 0f ? ((float) px) / context.getResources().getDisplayMetrics().density + 0.5f : 0f;
     }
 
 
     public static int sp2px(@NonNull Context context, float dpValue) {
-        return (int) (dpValue * context.getResources().getDisplayMetrics().scaledDensity + 0.5f);
+        return dpValue != 0 ? (int) (dpValue * context.getResources().getDisplayMetrics().scaledDensity + 0.5f) : 0;
     }
 
     public static int sp2px(@NonNull Context context, int dpValue) {
-        return (int) ((float) dpValue * context.getResources().getDisplayMetrics().scaledDensity + 0.5f);
+        return dpValue != 0 ? (int) ((float) dpValue * context.getResources().getDisplayMetrics().scaledDensity + 0.5f) : 0;
     }
 
 
     public static float px2sp(@NonNull Context context, int px) {
-        return ((float) px) / context.getResources().getDisplayMetrics().scaledDensity + 0.5f;
+        return px != 0f ? ((float) px) / context.getResources().getDisplayMetrics().scaledDensity + 0.5f : 0f;
     }
 
 
@@ -77,30 +77,30 @@ public class Dimenx {
 
 
     public static int dp2px(@NonNull androidx.fragment.app.Fragment fragment, float dpValue) {
-        return (int) (dpValue * fragment.getResources().getDisplayMetrics().density + 0.5f);
+        return dpValue != 0 ? (int) (dpValue * fragment.getResources().getDisplayMetrics().density + 0.5f) : 0;
     }
 
     public static int dp2px(@NonNull androidx.fragment.app.Fragment fragment, int dpValue) {
-        return (int) ((float) dpValue * fragment.getResources().getDisplayMetrics().density + 0.5f);
+        return dpValue != 0 ? (int) ((float) dpValue * fragment.getResources().getDisplayMetrics().density + 0.5f) : 0;
     }
 
 
     public static float px2dp(@NonNull androidx.fragment.app.Fragment fragment, int px) {
-        return ((float) px) / fragment.getResources().getDisplayMetrics().density + 0.5f;
+        return px != 0f ? ((float) px) / fragment.getResources().getDisplayMetrics().density + 0.5f : 0f;
     }
 
 
     public static int sp2px(@NonNull androidx.fragment.app.Fragment fragment, float dpValue) {
-        return (int) (dpValue * fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f);
+        return dpValue != 0 ? (int) (dpValue * fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f) : 0;
     }
 
     public static int sp2px(@NonNull androidx.fragment.app.Fragment fragment, int dpValue) {
-        return (int) ((float) dpValue * fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f);
+        return dpValue != 0 ? (int) ((float) dpValue * fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f) : 0;
     }
 
 
     public static float px2sp(@NonNull androidx.fragment.app.Fragment fragment, int px) {
-        return ((float) px) / fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f;
+        return px != 0f ? ((float) px) / fragment.getResources().getDisplayMetrics().scaledDensity + 0.5f : 0f;
     }
 
 
@@ -117,30 +117,30 @@ public class Dimenx {
 
 
     public static int dp2px(@NonNull View view, float dpValue) {
-        return (int) (dpValue * view.getResources().getDisplayMetrics().density + 0.5f);
+        return dpValue != 0 ? (int) (dpValue * view.getResources().getDisplayMetrics().density + 0.5f) : 0;
     }
 
     public static int dp2px(@NonNull View view, int dpValue) {
-        return (int) ((float) dpValue * view.getResources().getDisplayMetrics().density + 0.5f);
+        return dpValue != 0 ? (int) ((float) dpValue * view.getResources().getDisplayMetrics().density + 0.5f) : 0;
     }
 
 
     public static float px2dp(@NonNull View view, int px) {
-        return ((float) px) / view.getResources().getDisplayMetrics().density + 0.5f;
+        return px != 0f ? ((float) px) / view.getResources().getDisplayMetrics().density + 0.5f : 0f;
     }
 
 
     public static int sp2px(@NonNull View view, float dpValue) {
-        return (int) (dpValue * view.getResources().getDisplayMetrics().scaledDensity + 0.5f);
+        return dpValue != 0 ? (int) (dpValue * view.getResources().getDisplayMetrics().scaledDensity + 0.5f) : 0;
     }
 
     public static int sp2px(@NonNull View view, int dpValue) {
-        return (int) ((float) dpValue * view.getResources().getDisplayMetrics().scaledDensity + 0.5f);
+        return dpValue != 0 ? (int) ((float) dpValue * view.getResources().getDisplayMetrics().scaledDensity + 0.5f) : 0;
     }
 
 
     public static float px2sp(@NonNull View view, int px) {
-        return ((float) px) / view.getResources().getDisplayMetrics().scaledDensity + 0.5f;
+        return px != 0f ? ((float) px) / view.getResources().getDisplayMetrics().scaledDensity + 0.5f : 0f;
     }
 
 
