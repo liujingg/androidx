@@ -176,16 +176,12 @@ public class Romx {
 
     @Nullable
     private static String[] checkH2OS() {
-        if (SystemPropertiesx.get("ro.build.user").toLowerCase().contains("oneplus")) {
-            String versionName = SystemPropertiesx.get("ro.rom.version");
-            if (versionName.toLowerCase().startsWith("H2OS V".toLowerCase())) {
-                versionName = versionName.substring("H2OS V".length());
-            }
-            String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
-            return Arrayx.arrayOf(versionName, "", versionIncremental);
-        } else {
-            return null;
+        String versionName = SystemPropertiesx.get("ro.rom.version");
+        if (versionName.toLowerCase().startsWith("Hydrogen OS ".toLowerCase())) {
+            versionName = versionName.substring("Hydrogen OS ".length());
         }
+        String versionIncremental = SystemPropertiesx.get("ro.build.version.incremental");
+        return Arrayx.arrayOf(versionName, "", versionIncremental);
     }
 
     @Nullable
